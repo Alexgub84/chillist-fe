@@ -43,6 +43,24 @@ npm run build
 
 ## Git Workflow
 
+### Branch Strategy
+
+**Never push directly to `main`.** Always create a feature branch for your work.
+
+```bash
+# Create and switch to a new branch
+git checkout -b feature/your-feature-name
+
+# Make your changes and commit
+git add .
+git commit -m "feat: add new feature"
+
+# Push to your branch
+git push origin feature/your-feature-name
+```
+
+After pushing, create a Pull Request on GitHub for review.
+
 ### Pre-commit Hooks (Husky)
 
 Before each commit, Husky automatically runs the following checks:
@@ -67,6 +85,17 @@ npm run lint:fix
 # Run tests
 npm run test:run
 ```
+
+### Commit Messages
+
+Use [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation changes
+- `refactor:` - Code refactoring
+- `test:` - Adding or updating tests
+- `chore:` - Maintenance tasks
 
 ## Tailwind CSS Customization
 
