@@ -1,0 +1,5 @@
+{
+  "watch": ["api/mock.ts", "api/mock-data.json", "src/core/types"],
+  "ext": "ts,json",
+  "exec": "tsx api/mock.ts"
+}

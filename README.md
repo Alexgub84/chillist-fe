@@ -1,101 +1,131 @@
 # Chillist
 
 A simple plan management app built with React, TypeScript, and Tailwind CSS.
+`chillist_mvp_specs_v_1.md` – full product specification for the MVP.
 
-## Development
+## Setup
 
 ### Install dependencies
 
-```bash
-npm install
-```
+- Run `npm install`.
 
-### Run development server
+### Configure environment variables
 
-```bash
-npm run dev
-```
+Copy the provided example and adjust as needed. The example binds the mock server to `0.0.0.0` (suitable for production containers); your local `.env` can keep `localhost` instead.
 
-### Run tests
+- Duplicate the template with `cp .env.example .env`.
 
-```bash
-npm run test
-```
+Key variables:
+
+- `MOCK_SERVER_HOST`: host binding for the dev mock server (`0.0.0.0` in the example; set `localhost` for local-only).
+- `MOCK_SERVER_PORT`: port for the dev mock server (`3333`).
+
+## Running Locally
+
+### Start the Vite dev server
+
+- `npm run dev`
+
+### Run unit tests
+
+- `npm run test`
 
 ### Type check
 
-```bash
-npm run typecheck
-```
-
-### Lint and format
-
-```bash
-npm run lint
-npm run lint:fix
-```
+- `npm run typecheck`
 
 ### Build for production
 
-```bash
-npm run build
+- `npm run build`
+
+## Mock Data Toolkit
+
+### Watch mock dataset with Nodemon
+
+Use the lightweight mock loader to validate JSON fixtures and preview dataset summaries while developing against the planned API contract.
+
+- `npm run mock:watch`
+
+This spins up Nodemon with `tsx`, reloading whenever files in `api/mock-data.json` or `api/mock.ts` change. You will see console output similar to:
+
+```
+[mock] dataset loaded { plans: 1, participants: 3, items: 10 }
 ```
 
-## Git Workflow
+Update the JSON payloads, save, and Nodemon will automatically re-run and print the refreshed counts, making it easy to iterate on future route shapes.
 
-### Branch Strategy
+### Run the mock API server
 
-**Never push directly to `main`.** Always create a feature branch for your work.
+Expose the JSON dataset over Fastify while you prototype the frontend against REST endpoints.
 
-```bash
-# Create and switch to a new branch
-git checkout -b feature/your-feature-name
+- `npm run mock:server`
 
-# Make your changes and commit
-git add .
-git commit -m "feat: add new feature"
+The server watches the same `api/` sources and reloads on change. By default it listens on `http://localhost:3333`; use the routes below to interact:
 
-# Push to your branch
-git push origin feature/your-feature-name
-```
+- `GET /plans`
+- `POST /plans`
+- `PATCH /plans/:planId`
+- `DELETE /plans/:planId`
+- `GET /plans/:planId`
+- `GET /plans/:planId/participants`
+- `POST /plans/:planId/participants`
+- `GET /participants/:participantId`
+- `PATCH /participants/:participantId`
+- `DELETE /participants/:participantId`
+- `GET /plans/:planId/items`
+- `POST /plans/:planId/items`
+- `GET /items/:itemId`
+- `PATCH /items/:itemId`
+- `DELETE /items/:itemId`
 
-After pushing, create a Pull Request on GitHub for review.
+All write operations update `api/mock-data.json`, so you can keep iterating with realistic data.
 
-### Pre-commit Hooks (Husky)
+## Linting & Husky
 
-Before each commit, Husky automatically runs the following checks:
+### Manual linting and formatting
 
-1. **TypeScript Type Check** - Ensures no type errors (`npm run typecheck`)
-2. **Lint Staged Files** - Runs ESLint and Prettier on staged files only
-3. **Run Tests** - Executes all unit tests (`npm run test:run`)
+- `npm run lint`
+- `npm run lint:fix`
 
-If any check fails, the commit will be blocked until issues are fixed.
+### Husky pre-commit hooks
 
-### Before Committing
+Every commit triggers Husky, which runs:
 
-While Husky handles checks automatically, you can manually run:
+1. `npm run typecheck` – fails on TypeScript errors.
+2. ESLint + Prettier on staged files (`lint-staged`).
+3. `npm run test:run` – executes unit tests in CI mode.
 
-```bash
-# Type check
-npm run typecheck
+Fix any reported issues before committing; Husky will block the commit if a step fails.
 
-# Fix linting and formatting
-npm run lint:fix
+### Recommended manual checks before commit
 
-# Run tests
-npm run test:run
-```
+- `npm run typecheck`
+- `npm run lint:fix`
+- `npm run test:run`
 
-### Commit Messages
+## Working with Git
 
-Use [Conventional Commits](https://www.conventionalcommits.org/) format:
+### Branch strategy
 
-- `feat:` - New feature
-- `fix:` - Bug fix
-- `docs:` - Documentation changes
-- `refactor:` - Code refactoring
-- `test:` - Adding or updating tests
-- `chore:` - Maintenance tasks
+**Never push directly to `main`.** Always branch for your work.
+
+- `git checkout -b feature/your-feature-name`
+- Make changes, then `git add .`
+- Commit with a Conventional Commit message, for example `git commit -m "feat: add new feature"`
+- `git push origin feature/your-feature-name`
+
+Open a Pull Request for review once your branch is pushed.
+
+### Commit messages
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `feat:` – New feature
+- `fix:` – Bug fix
+- `docs:` – Documentation changes
+- `refactor:` – Code refactoring
+- `test:` – Adding or updating tests
+- `chore:` – Maintenance tasks
 
 ## Tailwind CSS Customization
 
@@ -125,3 +155,6 @@ See [Tailwind CSS v4 documentation](https://tailwindcss.com/docs) for more custo
 - Vitest + React Testing Library
 - ESLint + Prettier
 - Husky (pre-commit hooks)
+
+
+

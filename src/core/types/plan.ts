@@ -15,6 +15,7 @@ export interface Plan {
   startDate?: string;
   endDate?: string;
   tags?: string[];
+  participantIds?: string[];
   createdAt: string;
   updatedAt: string;
 }
