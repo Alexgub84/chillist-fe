@@ -1,10 +1,7 @@
-interface Plan {
-  id: string;
-  title: string;
-}
+import type { Plan } from '../core/types/plan';
 
 interface PlansListProps {
-  plans: Plan[];
+  plans: Array<Pick<Plan, 'planId' | 'title'>>;
 }
 
 export function PlansList({ plans }: PlansListProps) {
@@ -16,7 +13,10 @@ export function PlansList({ plans }: PlansListProps) {
         className="bg-white rounded-lg shadow-md divide-y divide-gray-200"
       >
         {plans.map((plan) => (
-          <li key={plan.id} className="px-6 py-4 hover:bg-gray-50 transition">
+          <li
+            key={plan.planId}
+            className="px-6 py-4 hover:bg-gray-50 transition"
+          >
             <span className="text-lg text-gray-700">{plan.title}</span>
           </li>
         ))}

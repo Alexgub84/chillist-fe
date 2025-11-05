@@ -5,9 +5,9 @@ import { PlansList } from '../../../components/PlansList';
 describe('PlansList', () => {
   it('renders all plans in the list', () => {
     const plans = [
-      { id: '1', title: 'Camping' },
-      { id: '2', title: 'Family Dinner' },
-      { id: '3', title: 'Road Trip' },
+      { planId: '1', title: 'Camping' },
+      { planId: '2', title: 'Family Dinner' },
+      { planId: '3', title: 'Road Trip' },
     ];
 
     render(<PlansList plans={plans} />);
@@ -30,9 +30,9 @@ describe('PlansList', () => {
 
   it('renders correct number of list items', () => {
     const plans = [
-      { id: '1', title: 'Plan 1' },
-      { id: '2', title: 'Plan 2' },
-      { id: '3', title: 'Plan 3' },
+      { planId: '1', title: 'Plan 1' },
+      { planId: '2', title: 'Plan 2' },
+      { planId: '3', title: 'Plan 3' },
     ];
 
     render(<PlansList plans={plans} />);
