@@ -2,9 +2,9 @@ import { PlansList } from './components/PlansList';
 
 export const App = () => {
   const plans = [
-    { id: '1', title: 'Camping' },
-    { id: '2', title: 'Family Dinner' },
-    { id: '3', title: 'Road Trip' },
+    { planId: '1', title: 'Camping' },
+    { planId: '2', title: 'Family Dinner' },
+    { planId: '3', title: 'Road Trip' },
   ];
 
   return (
