@@ -99,7 +99,7 @@ describe('mock server', () => {
     try {
       const response = await server.inject({
         method: 'POST',
-        url: '/plans/plan-1/participants',
+        url: '/plan/plan-1/participants',
         payload: {
           displayName: 'Jamie',
           role: 'participant',
@@ -113,7 +113,7 @@ describe('mock server', () => {
 
       const planResponse = await server.inject({
         method: 'GET',
-        url: '/plans/plan-1',
+        url: '/plan/plan-1',
       });
       const plan = planResponse.json() as { participantIds?: string[] };
       expect(plan.participantIds).toEqual(
@@ -132,7 +132,7 @@ describe('mock server', () => {
     try {
       const response = await server.inject({
         method: 'POST',
-        url: '/plans/plan-1/items',
+        url: '/plan/plan-1/items',
         payload: {
           name: 'Lantern',
           category: 'equipment',
@@ -157,7 +157,7 @@ describe('mock server', () => {
     try {
       const response = await server.inject({
         method: 'GET',
-        url: '/plans/unknown',
+        url: '/plan/unknown',
       });
       expect(response.statusCode).toBe(404);
     } finally {

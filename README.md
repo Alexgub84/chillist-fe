@@ -64,16 +64,16 @@ The server watches the same `api/` sources and reloads on change. By default it 
 
 - `GET /plans`
 - `POST /plans`
-- `PATCH /plans/:planId`
-- `DELETE /plans/:planId`
-- `GET /plans/:planId`
-- `GET /plans/:planId/participants`
-- `POST /plans/:planId/participants`
+- `PATCH /plan/:planId`
+- `DELETE /plan/:planId`
+- `GET /plan/:planId`
+- `GET /plan/:planId/participants`
+- `POST /plan/:planId/participants`
 - `GET /participants/:participantId`
 - `PATCH /participants/:participantId`
 - `DELETE /participants/:participantId`
-- `GET /plans/:planId/items`
-- `POST /plans/:planId/items`
+- `GET /plan/:planId/items`
+- `POST /plan/:planId/items`
 - `GET /items/:itemId`
 - `PATCH /items/:itemId`
 - `DELETE /items/:itemId`
