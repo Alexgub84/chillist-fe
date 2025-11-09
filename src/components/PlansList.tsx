@@ -1,7 +1,7 @@
 import type { Plan } from '../core/types/plan';
 
 interface PlansListProps {
-  plans: Array<Pick<Plan, 'planId' | 'title'>>;
+  plans: Plan[];
 }
 
 export function PlansList({ plans }: PlansListProps) {
