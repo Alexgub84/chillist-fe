@@ -88,31 +88,31 @@
 
 ### 6.2 Plans
 - `GET /plans` → `Plan[]`
-- `GET /plans/:planId` → `Plan`
+- `GET /plan/:planId` → `Plan`
 - `POST /plans` → create → `201 Plan`
   - Body: `{ title: string, description?: string, startDate?: string, endDate?: string, location?: Location, status?: PlanStatus }`
-- `PATCH /plans/:planId` → update → `Plan`
-- `DELETE /plans/:planId` → `{ ok: true }`
+- `PATCH /plan/:planId` → update → `Plan`
+- `DELETE /plan/:planId` → `{ ok: true }`
 
 ### 6.3 Participants
-- `GET /plans/:planId/participants` → `Participant[]`
-- `POST /plans/:planId/participants` → `201 Participant`
+- `GET /plan/:planId/participants` → `Participant[]`
+- `POST /plan/:planId/participants` → `201 Participant`
   - Body: `{ displayName: string, role?: "owner"|"participant"|"viewer" }`
 - `GET /participants/:participantId` → `Participant`
 - `PATCH /participants/:participantId` → `Participant`
 - `DELETE /participants/:participantId` → `{ ok: true }`
 
 ### 6.4 Items
-- `GET /plans/:planId/items` → `Item[]`
-- `POST /plans/:planId/items` → `201 Item`
+- `GET /plan/:planId/items` → `Item[]`
+- `POST /plan/:planId/items` → `201 Item`
   - Body: `{ name: string, category: "equipment"|"food", quantity: number, unit: Unit, status?: ItemStatus, notes?: string }`
 - `GET /items/:itemId` → `Item`
 - `PATCH /items/:itemId` → `Item`
 - `DELETE /items/:itemId` → `{ ok: true }`
 
 ### 6.5 Assignments (Optional for MVP; include if quick)
-- `GET /plans/:planId/assignments` → `ItemAssignment[]`
-- `POST /plans/:planId/assignments` → `201 ItemAssignment`
+- `GET /plan/:planId/assignments` → `ItemAssignment[]`
+- `POST /plan/:planId/assignments` → `201 ItemAssignment`
   - Body: `{ itemId: string, participantId: string, quantityAssigned?: number, notes?: string }`
 - `PATCH /assignments/:assignmentId` → `ItemAssignment`
 - `DELETE /assignments/:assignmentId` → `{ ok: true }`
