@@ -15,7 +15,7 @@ import { Route as rootRouteImport } from './routes/__root';
 const PlansLazyRouteImport = createFileRoute('/plans')();
 const AboutLazyRouteImport = createFileRoute('/about')();
 const IndexLazyRouteImport = createFileRoute('/')();
-const PlansPlanIdLazyRouteImport = createFileRoute('/plans/$planId')();
+const PlanPlanIdLazyRouteImport = createFileRoute('/plan/$planId')();
 
 const PlansLazyRoute = PlansLazyRouteImport.update({
   id: '/plans',
@@ -32,45 +32,44 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
-const PlansPlanIdLazyRoute = PlansPlanIdLazyRouteImport.update({
-  id: '/$planId',
-  path: '/$planId',
-  getParentRoute: () => PlansLazyRoute,
-} as any).lazy(() =>
-  import('./routes/plans.$planId.lazy').then((d) => d.Route)
-);
+const PlanPlanIdLazyRoute = PlanPlanIdLazyRouteImport.update({
+  id: '/plan/$planId',
+  path: '/plan/$planId',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/plan.$planId.lazy').then((d) => d.Route));
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute;
   '/about': typeof AboutLazyRoute;
-  '/plans': typeof PlansLazyRouteWithChildren;
-  '/plans/$planId': typeof PlansPlanIdLazyRoute;
+  '/plans': typeof PlansLazyRoute;
+  '/plan/$planId': typeof PlanPlanIdLazyRoute;
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute;
   '/about': typeof AboutLazyRoute;
-  '/plans': typeof PlansLazyRouteWithChildren;
-  '/plans/$planId': typeof PlansPlanIdLazyRoute;
+  '/plans': typeof PlansLazyRoute;
+  '/plan/$planId': typeof PlanPlanIdLazyRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   '/': typeof IndexLazyRoute;
   '/about': typeof AboutLazyRoute;
-  '/plans': typeof PlansLazyRouteWithChildren;
-  '/plans/$planId': typeof PlansPlanIdLazyRoute;
+  '/plans': typeof PlansLazyRoute;
+  '/plan/$planId': typeof PlanPlanIdLazyRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/about' | '/plans' | '/plans/$planId';
+  fullPaths: '/' | '/about' | '/plans' | '/plan/$planId';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/about' | '/plans' | '/plans/$planId';
-  id: '__root__' | '/' | '/about' | '/plans' | '/plans/$planId';
+  to: '/' | '/about' | '/plans' | '/plan/$planId';
+  id: '__root__' | '/' | '/about' | '/plans' | '/plan/$planId';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute;
   AboutLazyRoute: typeof AboutLazyRoute;
-  PlansLazyRoute: typeof PlansLazyRouteWithChildren;
+  PlansLazyRoute: typeof PlansLazyRoute;
+  PlanPlanIdLazyRoute: typeof PlanPlanIdLazyRoute;
 }
 
 declare module '@tanstack/react-router' {
@@ -96,32 +95,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    '/plans/$planId': {
-      id: '/plans/$planId';
-      path: '/$planId';
-      fullPath: '/plans/$planId';
-      preLoaderRoute: typeof PlansPlanIdLazyRouteImport;
-      parentRoute: typeof PlansLazyRoute;
+    '/plan/$planId': {
+      id: '/plan/$planId';
+      path: '/plan/$planId';
+      fullPath: '/plan/$planId';
+      preLoaderRoute: typeof PlanPlanIdLazyRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
   }
 }
 
-interface PlansLazyRouteChildren {
-  PlansPlanIdLazyRoute: typeof PlansPlanIdLazyRoute;
-}
-
-const PlansLazyRouteChildren: PlansLazyRouteChildren = {
-  PlansPlanIdLazyRoute: PlansPlanIdLazyRoute,
-};
-
-const PlansLazyRouteWithChildren = PlansLazyRoute._addFileChildren(
-  PlansLazyRouteChildren
-);
-
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutLazyRoute: AboutLazyRoute,
-  PlansLazyRoute: PlansLazyRouteWithChildren,
+  PlansLazyRoute: PlansLazyRoute,
+  PlanPlanIdLazyRoute: PlanPlanIdLazyRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

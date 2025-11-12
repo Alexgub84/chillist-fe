@@ -2,12 +2,12 @@ import { createLazyFileRoute } from '@tanstack/react-router';
 import { Link, useParams } from '@tanstack/react-router';
 import { usePlan } from '../hooks/usePlan';
 
-export const Route = createLazyFileRoute('/plans/$planId')({
+export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanDetails,
 });
 
 function PlanDetails() {
-  const { planId } = useParams('/plans/$planId');
+  const { planId } = useParams('/plan/$planId');
   const { data: plan, isLoading, error } = usePlan(planId);
 
   if (isLoading) {

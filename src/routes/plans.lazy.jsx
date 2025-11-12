@@ -27,7 +27,5 @@ function Plans() {
     );
   }
 
-  return (
-    <div>{isPlansList ? <PlansList plans={plans ?? []} /> : <Outlet />}</div>
-  );
+  return <PlansList plans={plans ?? []} />;
 }

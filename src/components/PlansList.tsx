@@ -19,7 +19,7 @@ export function PlansList({ plans }: PlansListProps) {
             className="px-6 py-4 hover:bg-gray-50 transition"
           >
             <Link
-              to="/plans/$planId"
+              to="/plan/$planId"
               params={{ planId: plan.planId }}
               className="block text-lg text-gray-700 hover:text-blue-600 transition-colors"
             >
