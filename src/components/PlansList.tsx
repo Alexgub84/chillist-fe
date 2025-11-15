@@ -1,4 +1,5 @@
 import type { Plan } from '../core/types/plan';
+import { Link } from '@tanstack/react-router';
 
 interface PlansListProps {
   plans: Array<Pick<Plan, 'planId' | 'title'>>;
@@ -17,7 +18,14 @@ export function PlansList({ plans }: PlansListProps) {
             key={plan.planId}
             className="px-6 py-4 hover:bg-gray-50 transition"
           >
-            <span className="text-lg text-gray-700">{plan.title}</span>
+            <Link
+              to="/plan/$planId"
+              params={{ planId: plan.planId }}
+              className="block text-lg text-gray-700 hover:text-blue-600 transition-colors"
+            >
+              {plan.title}
+              <span className="text-gray-400 text-sm ml-2">{plan.planId}</span>
+            </Link>
           </li>
         ))}
       </ul>

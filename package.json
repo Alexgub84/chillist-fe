@@ -13,13 +13,18 @@
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
     "mock:watch": "nodemon --config nodemon.json",
-    "mock:server": "tsx watch api/server.ts"
+    "mock:server": "tsx watch api/server.ts",
+    "routes": "npx @tanstack/router-cli@latest generate"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",
+    "@tanstack/react-query": "^5.90.7",
+    "@tanstack/react-router": "^1.134.15",
+    "@tanstack/router": "^0.0.1-beta.53",
     "fastify": "^5.1.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
