@@ -53,7 +53,6 @@ vi.mock('@tanstack/react-router', () => ({
 }));
 
 describe('PlansList', () => {
-  // Skips all tests in this describe block
   it('renders all plans in the list', () => {
     const mockPlans = [
       {
