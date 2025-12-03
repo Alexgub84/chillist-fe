@@ -1,7 +1,10 @@
-import React from 'react';
 import { Link } from '@tanstack/react-router';
 
-export function ErrorPage({ error }) {
+interface ErrorPageProps {
+  error?: Error | null;
+}
+
+export function ErrorPage({ error }: ErrorPageProps) {
   return (
     <div
       className="error-page"

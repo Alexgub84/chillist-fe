@@ -8,7 +8,7 @@ import ErrorPage from './ErrorPage';
 import NotFound from './not-found.lazy';
 
 export const Route = createRootRoute({
-  loader: ({ context, location }) => {
+  loader: ({ location }) => {
     // Redirect to /plans only if we're at the exact root path
     if (location.pathname === '/' || location.pathname === '') {
       throw redirect({
