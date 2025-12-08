@@ -4,8 +4,8 @@ export const Route = createLazyFileRoute('/')({
   loader: () => {
     throw redirect({
       to: '/plans',
-      replace: true
+      replace: true,
     });
   },
-  component: () => null
+  component: () => null,
 });
