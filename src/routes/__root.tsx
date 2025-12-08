@@ -4,7 +4,6 @@ import {
   Link,
   redirect,
 } from '@tanstack/react-router';
-import ErrorPage from './ErrorPage';
 import NotFound from './not-found.lazy';
 
 export const Route = createRootRoute({
@@ -17,7 +16,6 @@ export const Route = createRootRoute({
       });
     }
   },
-  errorElement: ErrorPage,
   notFoundComponent: NotFound,
   component: () => {
     return (

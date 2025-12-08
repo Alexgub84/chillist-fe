@@ -9,7 +9,7 @@ export const Route = createLazyFileRoute('/plan/$planId')({
 });
 
 function PlanDetails() {
-  const { planId } = useParams('/plan/$planId');
+  const { planId } = useParams({ from: '/plan/$planId' });
   const { data: plan, isLoading, error } = usePlan(planId);
 
   if (isLoading) {
