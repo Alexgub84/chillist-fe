@@ -30,3 +30,28 @@ export async function fetchPlan(planId: string): Promise<Plan> {
   const data = await get<unknown>(`/plan/${planId}`);
   return planSchema.parse(data);
 }
+
+export async function createPlan(payload: unknown): Promise<Plan> {
+  const response = await fetch(`${API_BASE_URL}/plans`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const error = new Error('API request failed') as Error & {
+      status?: number;
+    };
+    error.status = response.status;
+    try {
+      const data = await response.json();
+      if (data?.message) error.message = data.message;
+    } catch {
+      // ignore
+    }
+    throw error;
+  }
+
+  const data = await response.json();
+  return planSchema.parse(data);
+}
