@@ -2,6 +2,7 @@ import { createLazyFileRoute } from '@tanstack/react-router';
 import { Link, useParams } from '@tanstack/react-router';
 import { usePlan } from '../hooks/usePlan';
 import ErrorPage from './ErrorPage';
+import { Plan } from '../components/Plan';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanDetails,
@@ -9,7 +10,7 @@ export const Route = createLazyFileRoute('/plan/$planId')({
 });
 
 function PlanDetails() {
-  const { planId } = useParams('/plan/$planId');
+  const { planId } = useParams({ from: '/plan/$planId' });
   const { data: plan, isLoading, error } = usePlan(planId);
 
   if (isLoading) {
@@ -31,9 +32,7 @@ function PlanDetails() {
           ← Back to Plans
         </Link>
       </div>
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">{plan.title}</h1>
-      </div>
+      <Plan plan={plan} />
     </div>
   );
 }
