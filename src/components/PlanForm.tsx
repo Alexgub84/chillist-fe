@@ -5,6 +5,8 @@ import { v5 as uuidv5 } from 'uuid';
 
 import { createPlan as apiCreatePlan } from '../core/api';
 import { planSchema } from '../core/schemas/plan';
+import { FormLabel } from './shared/FormLabel';
+import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 
 // Derive a payload schema from the canonical planSchema by omitting server-generated
 // fields (planId, createdAt, updatedAt). This keeps validation consistent.
@@ -123,7 +125,6 @@ export default function PlanForm() {
   };
 
   async function onSubmit(values: FormValues): Promise<void> {
-    console.log('Submitting plan form with values:', values);
     const payload: PlanCreatePayload = {
       title: values.title,
       description: values.description,
@@ -166,14 +167,8 @@ export default function PlanForm() {
       >
         {/* Title */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Title *
-          </label>
-          <input
-            {...register('title')}
-            placeholder="Enter plan title"
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-          />
+          <FormLabel>Title *</FormLabel>
+          <FormInput {...register('title')} placeholder="Enter plan title" />
           {errors.title && (
             <p className="text-sm text-red-600 mt-1">{errors.title.message}</p>
           )}
@@ -181,31 +176,23 @@ export default function PlanForm() {
 
         {/* Description */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Description
-          </label>
-          <textarea
+          <FormLabel>Description</FormLabel>
+          <FormTextarea
             {...register('description')}
             placeholder="Add details about your plan"
             rows={4}
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
           />
         </div>
 
         {/* Status and Visibility */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Status
-            </label>
-            <select
-              {...register('status')}
-              className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-white"
-            >
+            <FormLabel>Status</FormLabel>
+            <FormSelect {...register('status')}>
               <option value="draft">Draft</option>
               <option value="active">Active</option>
               <option value="archived">Archived</option>
-            </select>
+            </FormSelect>
             {errors.status && (
               <p className="text-sm text-red-600 mt-1">
                 {errors.status.message}
@@ -214,29 +201,21 @@ export default function PlanForm() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Visibility
-            </label>
-            <select
-              {...register('visibility')}
-              className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-white"
-            >
+            <FormLabel>Visibility</FormLabel>
+            <FormSelect {...register('visibility')}>
               <option value="public">Public</option>
               <option value="unlisted">Unlisted</option>
               <option value="private">Private</option>
-            </select>
+            </FormSelect>
           </div>
         </div>
 
         {/* Owner Name */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Owner Name *
-          </label>
-          <input
+          <FormLabel>Owner Name *</FormLabel>
+          <FormInput
             {...register('ownerName')}
             placeholder="Enter your full name"
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
           />
           {errors.ownerName && (
             <p className="text-sm text-red-600 mt-1">
@@ -252,45 +231,37 @@ export default function PlanForm() {
           </legend>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
-                Name
-              </label>
-              <input
+              <FormLabel>Name</FormLabel>
+              <FormInput
                 {...register('location.name' as const)}
                 placeholder="Location name"
-                className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                compact
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  City
-                </label>
-                <input
+                <FormLabel>City</FormLabel>
+                <FormInput
                   {...register('location.city' as const)}
                   placeholder="City"
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  compact
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600 mb-2">
-                  Country
-                </label>
-                <input
+                <FormLabel>Country</FormLabel>
+                <FormInput
                   {...register('location.country' as const)}
                   placeholder="Country"
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  compact
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
-                Region
-              </label>
-              <input
+              <FormLabel>Region</FormLabel>
+              <FormInput
                 {...register('location.region' as const)}
                 placeholder="Region/Province"
-                className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                compact
               />
             </div>
           </div>
@@ -316,14 +287,8 @@ export default function PlanForm() {
           {oneDay ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-blue-50 p-4 rounded-lg">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Date *
-                </label>
-                <input
-                  type="date"
-                  {...register('singleDate')}
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                />
+                <FormLabel>Date *</FormLabel>
+                <FormInput type="date" {...register('singleDate')} compact />
                 {errors.singleDate && (
                   <p className="text-sm text-red-600 mt-1">
                     {errors.singleDate.message}
@@ -331,37 +296,23 @@ export default function PlanForm() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Start time
-                </label>
-                <input
+                <FormLabel>Start time</FormLabel>
+                <FormInput
                   type="time"
                   {...register('singleStartTime')}
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  compact
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  End time
-                </label>
-                <input
-                  type="time"
-                  {...register('singleEndTime')}
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                />
+                <FormLabel>End time</FormLabel>
+                <FormInput type="time" {...register('singleEndTime')} compact />
               </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-blue-50 p-4 rounded-lg">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Start date *
-                </label>
-                <input
-                  type="date"
-                  {...register('startDateDate')}
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                />
+                <FormLabel>Start date *</FormLabel>
+                <FormInput type="date" {...register('startDateDate')} compact />
                 {errors.startDateDate && (
                   <p className="text-sm text-red-600 mt-1">
                     {errors.startDateDate.message}
@@ -369,24 +320,12 @@ export default function PlanForm() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Start time
-                </label>
-                <input
-                  type="time"
-                  {...register('startDateTime')}
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                />
+                <FormLabel>Start time</FormLabel>
+                <FormInput type="time" {...register('startDateTime')} compact />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  End date *
-                </label>
-                <input
-                  type="date"
-                  {...register('endDateDate')}
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                />
+                <FormLabel>End date *</FormLabel>
+                <FormInput type="date" {...register('endDateDate')} compact />
                 {errors.endDateDate && (
                   <p className="text-sm text-red-600 mt-1">
                     {errors.endDateDate.message}
@@ -394,14 +333,8 @@ export default function PlanForm() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  End time
-                </label>
-                <input
-                  type="time"
-                  {...register('endDateTime')}
-                  className="w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                />
+                <FormLabel>End time</FormLabel>
+                <FormInput type="time" {...register('endDateTime')} compact />
               </div>
             </div>
           )}
@@ -409,25 +342,19 @@ export default function PlanForm() {
 
         {/* Tags */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Tags (comma separated)
-          </label>
-          <input
+          <FormLabel>Tags (comma separated)</FormLabel>
+          <FormInput
             {...register('tagsCsv')}
             placeholder="e.g. picnic, friends, summer"
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
           />
         </div>
 
         {/* Participants */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Participants (comma separated names)
-          </label>
-          <input
+          <FormLabel>Participants (comma separated names)</FormLabel>
+          <FormInput
             {...register('participantsCsv')}
             placeholder="Alice, Bob, Charlie"
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
           />
         </div>
 
