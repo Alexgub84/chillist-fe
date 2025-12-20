@@ -1,16 +1,34 @@
 import type { Plan as PlanType } from '../core/types/plan';
 
 export function Plan({ plan }: { plan: PlanType }) {
+  const {
+    title,
+    description,
+    status,
+    visibility,
+    ownerParticipantId,
+    startDate,
+    endDate,
+  } = plan;
+
+  const NA = 'N/A';
+  const formattedStartDate = startDate
+    ? new Date(startDate).toLocaleDateString()
+    : NA;
+  const formattedEndDate = endDate
+    ? new Date(endDate).toLocaleDateString()
+    : NA;
+
   return (
     <div className="w-full">
       <div className="bg-white rounded-lg shadow-sm">
         <div className="px-3 sm:px-6 lg:px-8 py-3 sm:py-6 border-b border-gray-200">
           <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 line-clamp-2">
-            {plan.title}
+            {title}
           </h1>
-          {plan.description && (
+          {description && (
             <p className="text-gray-600 text-sm sm:text-base lg:text-lg mt-2 line-clamp-3">
-              {plan.description}
+              {description}
             </p>
           )}
         </div>
@@ -25,7 +43,7 @@ export function Plan({ plan }: { plan: PlanType }) {
                 Status
               </p>
               <p className="text-sm sm:text-base text-gray-700 font-medium capitalize">
-                {plan.status}
+                {status}
               </p>
             </div>
             <div className="space-y-1">
@@ -33,7 +51,7 @@ export function Plan({ plan }: { plan: PlanType }) {
                 Visibility
               </p>
               <p className="text-sm sm:text-base text-gray-700 font-medium capitalize">
-                {plan.visibility || 'N/A'}
+                {visibility || NA}
               </p>
             </div>
             <div className="space-y-1">
@@ -41,7 +59,7 @@ export function Plan({ plan }: { plan: PlanType }) {
                 Owner ID
               </p>
               <p className="text-xs sm:text-sm text-gray-700 font-mono break-all">
-                {plan.ownerParticipantId}
+                {ownerParticipantId}
               </p>
             </div>
             <div className="space-y-1">
@@ -49,9 +67,7 @@ export function Plan({ plan }: { plan: PlanType }) {
                 Start Date
               </p>
               <p className="text-sm sm:text-base text-gray-700">
-                {plan.startDate
-                  ? new Date(plan.startDate).toLocaleDateString()
-                  : 'N/A'}
+                {formattedStartDate}
               </p>
             </div>
             <div className="space-y-1">
@@ -59,9 +75,7 @@ export function Plan({ plan }: { plan: PlanType }) {
                 End Date
               </p>
               <p className="text-sm sm:text-base text-gray-700">
-                {plan.endDate
-                  ? new Date(plan.endDate).toLocaleDateString()
-                  : 'N/A'}
+                {formattedEndDate}
               </p>
             </div>
           </div>
