@@ -8,20 +8,14 @@ import { planSchema } from '../core/schemas/plan';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 
-// Derive a payload schema from the canonical planSchema by omitting server-generated
-// fields (planId, createdAt, updatedAt). This keeps validation consistent.
 const planCreatePayloadSchema = planSchema.omit({
   planId: true,
   createdAt: true,
   updatedAt: true,
 });
 
-// Strongly-typed payload derived from the payload schema so we don't use `unknown`.
 type PlanCreatePayload = z.infer<typeof planCreatePayloadSchema>;
 
-// For the form we prefer CSV strings for arrays, so derive a form schema from the
-// payload schema but replace `tags` and `participantIds` with `tagsCsv` and
-// `participantsCsv` string fields.
 const createPlanFormSchema = planCreatePayloadSchema
   .omit({
     tags: true,
@@ -32,16 +26,11 @@ const createPlanFormSchema = planCreatePayloadSchema
     title: true,
   })
   .extend({
-    // Required fields with custom messages
     title: z.string().min(1, 'Title is required'),
-    // CSV helpers
     tagsCsv: z.string().optional(),
     participantsCsv: z.string().optional(),
-    // Owner name (text input since there's no auth)
     ownerName: z.string().min(1, 'Owner name is required'),
-    // One-day vs range
     oneDay: z.boolean().optional(),
-    // Single-day fields
     singleDate: z
       .string()
       .min(1, 'Date is required')
@@ -49,7 +38,6 @@ const createPlanFormSchema = planCreatePayloadSchema
       .or(z.literal('')),
     singleStartTime: z.string().optional(),
     singleEndTime: z.string().optional(),
-    // Multi-day fields (separate date & time parts)
     startDateDate: z
       .string()
       .min(1, 'Start date is required')
@@ -145,7 +133,6 @@ export default function PlanForm() {
     };
 
     try {
-      // Validate/normalize payload against the payload schema before sending
       const validated = planCreatePayloadSchema.parse(payload);
       const created = await apiCreatePlan(validated);
       if (created?.planId) {
@@ -154,7 +141,6 @@ export default function PlanForm() {
         window.location.href = '/plans';
       }
     } catch (err) {
-      // Keep error handling simple here; callers may choose to wrap or mock.
       alert('Failed to create plan:' + err);
     }
   }

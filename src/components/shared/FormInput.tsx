@@ -5,13 +5,11 @@ import {
   type TextareaHTMLAttributes,
 } from 'react';
 
-// Base input styling
 const baseInputStyles =
   'w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition';
 const compactInputStyles =
   'w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition';
 
-// Form Input component
 export const FormInput = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement> & { compact?: boolean }
@@ -28,7 +26,6 @@ export const FormInput = forwardRef<
 
 FormInput.displayName = 'FormInput';
 
-// Form Textarea component
 export const FormTextarea = forwardRef<
   HTMLTextAreaElement,
   TextareaHTMLAttributes<HTMLTextAreaElement>
@@ -44,7 +41,6 @@ export const FormTextarea = forwardRef<
 
 FormTextarea.displayName = 'FormTextarea';
 
-// Form Select component
 export const FormSelect = forwardRef<
   HTMLSelectElement,
   SelectHTMLAttributes<HTMLSelectElement> & { compact?: boolean }
