@@ -9,7 +9,7 @@ export const planSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
   status: planStatusSchema,
-  visibility: planVisibilitySchema.optional(),
+  visibility: planVisibilitySchema,
   ownerParticipantId: z.string(),
   location: locationSchema.optional(),
   startDate: z.string().optional(),

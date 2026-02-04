@@ -1,10 +1,6 @@
-import {
-  createRootRoute,
-  Outlet,
-  Link,
-  redirect,
-} from '@tanstack/react-router';
+import { createRootRoute, Outlet, redirect } from '@tanstack/react-router';
 import NotFound from './not-found.lazy';
+import Header from '../components/Header';
 
 export const Route = createRootRoute({
   loader: ({ location }) => {
@@ -19,29 +15,9 @@ export const Route = createRootRoute({
   notFoundComponent: NotFound,
   component: () => {
     return (
-      <div className="root-layout">
-        <header>
-          <nav>
-            <ul
-              style={{
-                display: 'flex',
-                gap: '1rem',
-                listStyle: 'none',
-                padding: '1rem',
-                backgroundColor: '#f5f5f5',
-                margin: 0,
-              }}
-            >
-              <li>
-                <Link to="/plans">Plans</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <main style={{ padding: '1rem' }}>
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Header />
+        <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-6 lg:py-8">
           <Outlet />
         </main>
       </div>

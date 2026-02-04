@@ -101,12 +101,13 @@ describe('PlansList', () => {
     });
   });
 
-  it('renders empty list when no plans provided', () => {
+  it('renders empty state when no plans provided', () => {
     render(<PlansList plans={[]} />);
 
-    const listElement = screen.getByTestId('plans-list');
-    expect(listElement).toBeInTheDocument();
-    expect(listElement.children).toHaveLength(0);
+    const emptyMessage = screen.getByText(
+      /no plans yet\. create one to get started!/i
+    );
+    expect(emptyMessage).toBeInTheDocument();
   });
 
   it('renders correct number of list items', () => {

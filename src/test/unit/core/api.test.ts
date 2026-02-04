@@ -35,6 +35,7 @@ describe('API Client', () => {
     planId: 'plan-1',
     title: 'Test Plan',
     status: 'draft',
+    visibility: 'private',
     ownerParticipantId: 'p-1',
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
@@ -107,6 +108,8 @@ describe('API Client', () => {
 
       const newPlan = {
         title: 'Test Plan',
+        status: 'draft' as const,
+        visibility: 'private' as const,
         ownerParticipantId: 'p-1',
       };
 
