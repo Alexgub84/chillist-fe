@@ -6,9 +6,15 @@ export interface UserFriendlyError {
   canRetry: boolean;
 }
 
+interface ErrorWithStatus extends Error {
+  status?: number;
+}
+
 export function getApiErrorMessage(error: Error): UserFriendlyError {
-  if (error instanceof ApiError) {
-    return getApiErrorByStatus(error.status, error.message);
+  // Check for ApiError or any error with a status property (from api.ts)
+  const errorWithStatus = error as ErrorWithStatus;
+  if (error instanceof ApiError || typeof errorWithStatus.status === 'number') {
+    return getApiErrorByStatus(errorWithStatus.status!, error.message);
   }
 
   if (
