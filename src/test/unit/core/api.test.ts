@@ -21,6 +21,22 @@ import {
 const fetchMock = vi.fn();
 global.fetch = fetchMock;
 
+function mockResponse(
+  body: unknown,
+  options: { ok?: boolean; status?: number; contentType?: string } = {}
+) {
+  const { ok = true, status = 200, contentType = 'application/json' } = options;
+  return {
+    ok,
+    status,
+    headers: {
+      get: (name: string) =>
+        name.toLowerCase() === 'content-type' ? contentType : null,
+    },
+    json: async () => body,
+  };
+}
+
 describe('API Client', () => {
   beforeEach(() => {
     fetchMock.mockClear();
@@ -65,10 +81,7 @@ describe('API Client', () => {
 
   describe('Plans', () => {
     it('fetches all plans', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => [mockPlan],
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse([mockPlan]));
 
       const plans = await fetchPlans();
       expect(plans).toEqual([mockPlan]);
@@ -83,10 +96,7 @@ describe('API Client', () => {
     });
 
     it('fetches a single plan', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockPlan,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse(mockPlan));
 
       const plan = await fetchPlan('plan-1');
       expect(plan).toEqual(mockPlan);
@@ -101,10 +111,7 @@ describe('API Client', () => {
     });
 
     it('creates a plan', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockPlan,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse(mockPlan));
 
       const newPlan = {
         title: 'Test Plan',
@@ -128,10 +135,9 @@ describe('API Client', () => {
     });
 
     it('updates a plan', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ ...mockPlan, title: 'Updated' }),
-      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({ ...mockPlan, title: 'Updated' })
+      );
 
       const updates = { title: 'Updated' };
       const plan = await updatePlan('plan-1', updates);
@@ -149,10 +155,7 @@ describe('API Client', () => {
     });
 
     it('deletes a plan', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        status: 204,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse({}, { status: 204 }));
 
       await deletePlan('plan-1');
       expect(fetchMock).toHaveBeenCalledWith(
@@ -169,10 +172,7 @@ describe('API Client', () => {
 
   describe('Participants', () => {
     it('fetches participants for a plan', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => [mockParticipant],
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse([mockParticipant]));
 
       const participants = await fetchParticipants('plan-1');
       expect(participants).toEqual([mockParticipant]);
@@ -187,10 +187,7 @@ describe('API Client', () => {
     });
 
     it('creates a participant', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockParticipant,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse(mockParticipant));
 
       const newParticipant = {
         displayName: 'Test User',
@@ -212,10 +209,7 @@ describe('API Client', () => {
     });
 
     it('fetches a single participant', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockParticipant,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse(mockParticipant));
 
       const participant = await fetchParticipant('p-1');
       expect(participant).toEqual(mockParticipant);
@@ -230,10 +224,9 @@ describe('API Client', () => {
     });
 
     it('updates a participant', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ ...mockParticipant, displayName: 'Updated' }),
-      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({ ...mockParticipant, displayName: 'Updated' })
+      );
 
       const updates = { displayName: 'Updated' };
       const participant = await updateParticipant('p-1', updates);
@@ -251,10 +244,7 @@ describe('API Client', () => {
     });
 
     it('deletes a participant', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        status: 204,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse({}, { status: 204 }));
 
       await deleteParticipant('p-1');
       expect(fetchMock).toHaveBeenCalledWith(
@@ -271,10 +261,7 @@ describe('API Client', () => {
 
   describe('Items', () => {
     it('fetches items for a plan', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => [mockItem],
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse([mockItem]));
 
       const items = await fetchItems('plan-1');
       expect(items).toEqual([mockItem]);
@@ -289,10 +276,7 @@ describe('API Client', () => {
     });
 
     it('creates an item', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockItem,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse(mockItem));
 
       const newItem = {
         name: 'Tent',
@@ -314,10 +298,7 @@ describe('API Client', () => {
     });
 
     it('fetches a single item', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockItem,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse(mockItem));
 
       const item = await fetchItem('item-1');
       expect(item).toEqual(mockItem);
@@ -332,10 +313,9 @@ describe('API Client', () => {
     });
 
     it('updates an item', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ ...mockItem, quantity: 2 }),
-      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({ ...mockItem, quantity: 2 })
+      );
 
       const updates = { quantity: 2 };
       const item = await updateItem('item-1', updates);
@@ -353,10 +333,7 @@ describe('API Client', () => {
     });
 
     it('deletes an item', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: true,
-        status: 204,
-      });
+      fetchMock.mockResolvedValueOnce(mockResponse({}, { status: 204 }));
 
       await deleteItem('item-1');
       expect(fetchMock).toHaveBeenCalledWith(
@@ -373,25 +350,33 @@ describe('API Client', () => {
 
   describe('Error Handling', () => {
     it('throws error when response is not ok', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: false,
-        status: 404,
-        json: async () => ({ message: 'Not Found' }),
-      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({ message: 'Not Found' }, { ok: false, status: 404 })
+      );
 
       await expect(fetchPlan('unknown')).rejects.toThrow('Not Found');
     });
 
     it('handles non-JSON error response', async () => {
-      fetchMock.mockResolvedValueOnce({
-        ok: false,
-        status: 500,
-        json: async () => {
-          throw new Error('Parse error');
-        },
-      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse(null, {
+          ok: false,
+          status: 500,
+          contentType: 'text/html',
+        })
+      );
 
-      await expect(fetchPlan('plan-1')).rejects.toThrow('API request failed');
+      await expect(fetchPlan('plan-1')).rejects.toThrow('API returned 500');
+    });
+
+    it('throws clear error when API returns HTML instead of JSON', async () => {
+      fetchMock.mockResolvedValueOnce(
+        mockResponse(null, { ok: true, status: 200, contentType: 'text/html' })
+      );
+
+      await expect(fetchPlans()).rejects.toThrow(
+        'Invalid API response: Expected JSON'
+      );
     });
   });
 });

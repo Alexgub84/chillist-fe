@@ -14,7 +14,14 @@
     "prepare": "husky",
     "mock:watch": "nodemon --config nodemon.json",
     "mock:server": "tsx watch api/server.ts",
-    "routes": "npx @tanstack/router-cli@latest generate"
+    "mock:server:ci": "tsx api/server.ts",
+    "routes": "npx @tanstack/router-cli@latest generate",
+    "api:fetch": "curl -s -o src/core/openapi.json https://raw.githubusercontent.com/Alexgub84/chillist-be/main/docs/openapi.json",
+    "api:types": "openapi-typescript src/core/openapi.json -o src/core/api.generated.ts && prettier --write src/core/api.generated.ts",
+    "api:sync": "npm run api:fetch && npm run api:types",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:headed": "playwright test --headed"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",
@@ -23,6 +30,7 @@
     "@tanstack/react-router": "^1.134.15",
     "@tanstack/router": "^0.0.1-beta.53",
     "fastify": "^5.1.0",
+    "openapi-fetch": "^0.15.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.68.0",
@@ -31,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@playwright/test": "^1.58.1",
     "@tailwindcss/vite": "^4.1.16",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -50,6 +59,7 @@
     "jsdom": "^27.1.0",
     "lint-staged": "^16.2.6",
     "nodemon": "^3.1.9",
+    "openapi-typescript": "^7.10.1",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.16",
     "tsx": "^4.19.2",

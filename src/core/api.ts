@@ -26,30 +26,65 @@ function getApiBaseUrl() {
   return import.meta.env.VITE_API_URL || 'http://localhost:3333';
 }
 
+function getApiKey() {
+  return import.meta.env.VITE_API_KEY || '';
+}
+
 async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const baseUrl = getApiBaseUrl();
-  const response = await fetch(`${baseUrl}${endpoint}`, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-  });
+  const apiKey = getApiKey();
+  const url = `${baseUrl}${endpoint}`;
+
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+    ...options?.headers,
+  };
+
+  if (apiKey) {
+    (headers as Record<string, string>)['x-api-key'] = apiKey;
+  }
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      ...options,
+      headers,
+    });
+  } catch (err) {
+    throw new Error(
+      `Network error: Unable to reach API at ${baseUrl}. ${err instanceof Error ? err.message : ''}`
+    );
+  }
+
+  const contentType = response.headers.get('content-type') || '';
+  const isJson = contentType.includes('application/json');
 
   if (!response.ok) {
-    const error = new Error('API request failed') as Error & { status: number };
+    const error = new Error('API request failed') as Error & {
+      status: number;
+    };
     error.status = response.status;
-    try {
-      const data = await response.json();
-      if (data.message) error.message = data.message;
-    } catch {
-      // Ignore JSON parsing errors
+    if (isJson) {
+      try {
+        const data = await response.json();
+        if (data.message) error.message = data.message;
+      } catch {
+        // Ignore JSON parsing errors
+      }
+    } else {
+      error.message = `API returned ${response.status}: Expected JSON response from ${url} but received ${contentType || 'unknown content type'}`;
     }
     throw error;
   }
 
   if (response.status === 204) {
     return {} as T;
+  }
+
+  if (!isJson) {
+    throw new Error(
+      `Invalid API response: Expected JSON from ${url} but received ${contentType || 'unknown content type'}. This usually means the API URL is misconfigured.`
+    );
   }
 
   return response.json();
