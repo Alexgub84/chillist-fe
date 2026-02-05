@@ -43,25 +43,25 @@ const unitSchema = z.enum([
 
 const locationSchema = z.object({
   locationId: z.string().optional(),
-  name: z.string().optional(),
-  timezone: z.string().optional(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
-  country: z.string().optional(),
-  region: z.string().optional(),
-  city: z.string().optional(),
+  name: z.string(),
+  timezone: z.string().nullable().optional(),
+  latitude: z.number().nullable().optional(),
+  longitude: z.number().nullable().optional(),
+  country: z.string().nullable().optional(),
+  region: z.string().nullable().optional(),
+  city: z.string().nullable().optional(),
 });
 
 const planCreateSchema = z.object({
   title: z.string().min(1),
-  description: z.string().optional(),
+  description: z.string().nullable().optional(),
   status: planStatusSchema.default('draft'),
-  visibility: planVisibilitySchema.optional(),
-  ownerParticipantId: z.string().min(1),
-  location: locationSchema.optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  tags: z.array(z.string()).optional(),
+  visibility: planVisibilitySchema.default('private'),
+  ownerParticipantId: z.string().nullable().optional(),
+  location: locationSchema.nullable().optional(),
+  startDate: z.string().nullable().optional(),
+  endDate: z.string().nullable().optional(),
+  tags: z.array(z.string()).nullable().optional(),
   participantIds: z.array(z.string()).optional(),
 });
 
