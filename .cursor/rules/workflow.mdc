@@ -38,8 +38,14 @@ alwaysApply: true
 - Stop on test/build failures - do not proceed
 - Analyze root cause before fixing, don't randomly patch
 
+## Git Branch Policy
+- NEVER push directly to main
+- Always create a feature branch and push to that branch
+- Use PRs to merge into main
+
 ## Finalization
 1. Run validation (build, lint, test)
 2. Fix any failures automatically
 3. Ask for user confirmation
-4. Create commit and PR linked to the issue
+4. Create commit on the feature branch and push to origin
+5. Create PR linked to the issue
