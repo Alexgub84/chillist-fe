@@ -1,0 +1,45 @@
+---
+description: Global workflow rules for planning, implementation, and code quality
+alwaysApply: true
+---
+
+# Workflow Rules
+
+## Issue-Driven Development (Source of Truth)
+- GitHub Issues are the single source of truth for all planned work
+- Every feature, enhancement, or task must have a corresponding GitHub issue before work begins
+- Every bug must be filed as a GitHub issue before fixing
+- Do NOT start coding without an issue to reference
+
+## Starting Work
+1. Fetch the GitHub issue assigned to this task: `gh issue view <number>`
+2. Confirm with user which issue we're working on
+3. Assign yourself and add "in progress" label
+4. Create a feature branch from up-to-date main: `git checkout main && git pull origin main && git checkout -b <branch>`
+5. Implement the feature/fix per the issue description
+
+## Planning Mode
+- Output a concise plan before writing code
+- Identify components/hooks affected and design patterns to use
+- If less than 90% sure about intent, ask clarifying questions
+
+## Implementation Flow
+1. Structure First: Break tasks into small components/functions, show signatures only
+2. Wait for Approval: Do not implement until reviewed
+3. One by One: Implement each component individually, not large blocks
+
+## Code Standards
+- No comments in code (exception: complex "why" logic)
+- No lazy coding: never use `// ... rest of code` placeholders
+- Read target file's imports, types, and style before generating code
+- Pin dependency versions exactly (no `^` or `~` ranges)
+
+## Debugging
+- Stop on test/build failures - do not proceed
+- Analyze root cause before fixing, don't randomly patch
+
+## Finalization
+1. Run validation (build, lint, test)
+2. Fix any failures automatically
+3. Ask for user confirmation
+4. Create commit and PR linked to the issue
