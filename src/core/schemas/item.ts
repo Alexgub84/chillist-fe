@@ -23,12 +23,12 @@ const baseItemSchema = z.object({
   itemId: z.string(),
   planId: z.string(),
   name: z.string(),
-  quantity: z.number(),
+  quantity: z.number().int(),
   unit: unitSchema,
-  notes: z.string().optional(),
+  notes: z.string().nullish(),
   status: itemStatusSchema,
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
 });
 
 export const equipmentItemSchema = baseItemSchema.extend({

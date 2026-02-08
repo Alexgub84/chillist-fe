@@ -16,6 +16,15 @@ const planCreatePayloadSchema = planSchema.omit({
 
 type PlanCreatePayload = z.infer<typeof planCreatePayloadSchema>;
 
+const locationFormSchema = z
+  .object({
+    name: z.string().optional(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    region: z.string().optional(),
+  })
+  .optional();
+
 const createPlanFormSchema = planCreatePayloadSchema
   .omit({
     tags: true,
@@ -24,6 +33,7 @@ const createPlanFormSchema = planCreatePayloadSchema
     endDate: true,
     ownerParticipantId: true,
     title: true,
+    location: true,
   })
   .extend({
     title: z.string().min(1, 'Title is required'),
@@ -46,6 +56,7 @@ const createPlanFormSchema = planCreatePayloadSchema
     startDateTime: z.string().optional(),
     endDateDate: z.string().optional(),
     endDateTime: z.string().optional(),
+    location: locationFormSchema,
   })
   .refine(
     (data) => {
@@ -103,8 +114,8 @@ export default function PlanForm() {
 
   const makeDateTime = (date?: string, time?: string) => {
     if (!date) return undefined;
-    const hhmm = time ?? '00:00';
-    return `${date}T${hhmm}:00`;
+    const hhmm = time || '00:00';
+    return `${date}T${hhmm}:00Z`;
   };
 
   const UUID_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';

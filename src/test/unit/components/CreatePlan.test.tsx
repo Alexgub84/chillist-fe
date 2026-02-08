@@ -179,8 +179,8 @@ describe('CreatePlan - PlanForm', () => {
         description: 'A fun day out',
         status: 'draft',
         ownerParticipantId: 'uuid-alice',
-        startDate: '2025-12-20T10:00:00',
-        endDate: '2025-12-20T16:00:00',
+        startDate: '2025-12-20T10:00:00Z',
+        endDate: '2025-12-20T16:00:00Z',
         tags: ['outdoor', 'fun'],
         participantIds: ['uuid-alice', 'uuid-bob'],
         createdAt: '2025-12-12T00:00:00Z',
@@ -233,12 +233,17 @@ describe('CreatePlan - PlanForm', () => {
             description: 'A fun day out',
             status: 'draft',
             ownerParticipantId: 'uuid-alice',
-            startDate: '2025-12-20T10:00:00',
-            endDate: '2025-12-20T16:00:00',
+            startDate: '2025-12-20T10:00:00Z',
+            endDate: '2025-12-20T16:00:00Z',
             tags: ['outdoor', 'fun'],
             participantIds: ['uuid-alice', 'uuid-bob'],
           })
         );
+
+        const payload = mockCreatePlan.mock.calls[0][0];
+        const iso8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
+        expect(payload.startDate).toMatch(iso8601);
+        expect(payload.endDate).toMatch(iso8601);
       });
 
       // Check redirect
@@ -256,8 +261,8 @@ describe('CreatePlan - PlanForm', () => {
         description: 'Two day adventure',
         status: 'active',
         ownerParticipantId: 'uuid-charlie',
-        startDate: '2025-12-20T09:00:00',
-        endDate: '2025-12-22T18:00:00',
+        startDate: '2025-12-20T09:00:00Z',
+        endDate: '2025-12-22T18:00:00Z',
         tags: ['travel'],
         participantIds: ['uuid-charlie', 'uuid-dave'],
         createdAt: '2025-12-12T00:00:00Z',
@@ -302,12 +307,17 @@ describe('CreatePlan - PlanForm', () => {
             description: 'Two day adventure',
             status: 'active',
             ownerParticipantId: 'uuid-charlie',
-            startDate: '2025-12-20T09:00:00',
-            endDate: '2025-12-22T18:00:00',
+            startDate: '2025-12-20T09:00:00Z',
+            endDate: '2025-12-22T18:00:00Z',
             tags: ['travel'],
             participantIds: ['uuid-charlie', 'uuid-dave'],
           })
         );
+
+        const payload = mockCreatePlan.mock.calls[0][0];
+        const iso8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
+        expect(payload.startDate).toMatch(iso8601);
+        expect(payload.endDate).toMatch(iso8601);
       });
 
       expect(window.location.href).toBe('/plan/plan-456');
@@ -323,7 +333,7 @@ describe('CreatePlan - PlanForm', () => {
         title: 'No Location Plan',
         status: 'draft',
         ownerParticipantId: 'uuid-owner',
-        startDate: '2025-12-20T00:00:00',
+        startDate: '2025-12-20T00:00:00Z',
         createdAt: '2025-12-12T00:00:00Z',
         updatedAt: '2025-12-12T00:00:00Z',
         visibility: 'public',
@@ -361,7 +371,7 @@ describe('CreatePlan - PlanForm', () => {
         title: 'Park Hangout',
         status: 'draft',
         ownerParticipantId: 'uuid-owner',
-        startDate: '2025-12-20T00:00:00',
+        startDate: '2025-12-20T00:00:00Z',
         createdAt: '2025-12-12T00:00:00Z',
         updatedAt: '2025-12-12T00:00:00Z',
         visibility: 'public',
@@ -408,6 +418,8 @@ describe('CreatePlan - PlanForm', () => {
             country: 'US',
           })
         );
+        expect(payload.location!.locationId).toBeTruthy();
+        expect(payload.location!.name).toBeTruthy();
       });
     });
 
@@ -419,7 +431,7 @@ describe('CreatePlan - PlanForm', () => {
         title: 'Beach Trip',
         status: 'draft',
         ownerParticipantId: 'uuid-owner',
-        startDate: '2025-12-20T00:00:00',
+        startDate: '2025-12-20T00:00:00Z',
         createdAt: '2025-12-12T00:00:00Z',
         updatedAt: '2025-12-12T00:00:00Z',
         visibility: 'public',
@@ -472,7 +484,7 @@ describe('CreatePlan - PlanForm', () => {
         title: 'Test',
         status: 'draft',
         ownerParticipantId: 'uuid-test-owner',
-        startDate: '2025-12-20T00:00:00',
+        startDate: '2025-12-20T00:00:00Z',
         createdAt: '2025-12-12T00:00:00Z',
         updatedAt: '2025-12-12T00:00:00Z',
         visibility: 'public',
@@ -512,7 +524,7 @@ describe('CreatePlan - PlanForm', () => {
         title: 'Test',
         status: 'draft',
         ownerParticipantId: 'uuid-owner',
-        startDate: '2025-12-20T00:00:00',
+        startDate: '2025-12-20T00:00:00Z',
         participantIds: ['uuid-anna', 'uuid-beth', 'uuid-carol'],
         createdAt: '2025-12-12T00:00:00Z',
         updatedAt: '2025-12-12T00:00:00Z',

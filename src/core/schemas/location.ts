@@ -1,14 +1,14 @@
 import { z } from 'zod';
 
 export const locationSchema = z.object({
-  locationId: z.string().optional(),
-  name: z.string().optional(),
-  timezone: z.string().optional(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
-  country: z.string().optional(),
-  region: z.string().optional(),
-  city: z.string().optional(),
+  locationId: z.string(),
+  name: z.string(),
+  timezone: z.string().nullish(),
+  latitude: z.number().nullish(),
+  longitude: z.number().nullish(),
+  country: z.string().nullish(),
+  region: z.string().nullish(),
+  city: z.string().nullish(),
 });
 
 export type Location = z.infer<typeof locationSchema>;

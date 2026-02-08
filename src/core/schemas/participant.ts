@@ -9,11 +9,11 @@ export const participantSchema = z.object({
   displayName: z.string(),
   role: participantRoleSchema,
   isOwner: z.boolean().optional(),
-  avatarUrl: z.string().url().optional(),
-  contactEmail: z.string().email().optional(),
-  contactPhone: z.string().optional(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  avatarUrl: z.string().url().nullish(),
+  contactEmail: z.string().email().nullish(),
+  contactPhone: z.string().nullish(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
 });
 
 export const participantCreateSchema = z.object({

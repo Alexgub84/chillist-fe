@@ -12,11 +12,12 @@ alwaysApply: true
 - Do NOT start coding without an issue to reference
 
 ## Starting Work
-1. Fetch the GitHub issue assigned to this task: `gh issue view <number>`
-2. Confirm with user which issue we're working on
-3. Assign yourself and add "in progress" label
-4. Create a feature branch from up-to-date main: `git checkout main && git pull origin main && git checkout -b <branch>`
-5. Implement the feature/fix per the issue description
+1. If working on a bug and no issue exists yet, create one first: `gh issue create --title "<title>" --label "bug" --body "<description>"`
+2. Fetch the GitHub issue assigned to this task: `gh issue view <number>`
+3. Confirm with user which issue we're working on
+4. Assign yourself and add "in progress" label
+5. Create a feature branch from up-to-date main: `git checkout main && git pull origin main && git checkout -b <branch>`
+6. Implement the feature/fix per the issue description
 
 ## Planning Mode
 - Output a concise plan before writing code
@@ -33,6 +34,21 @@ alwaysApply: true
 - No lazy coding: never use `// ... rest of code` placeholders
 - Read target file's imports, types, and style before generating code
 - Pin dependency versions exactly (no `^` or `~` ranges)
+
+## OpenAPI Schema Alignment (Mandatory on Every Schema Change)
+When the OpenAPI spec (`src/core/openapi.json`) or any Zod schema changes, verify alignment across ALL four layers:
+1. **OpenAPI spec** (`src/core/openapi.json`) — the contract
+2. **Frontend Zod schemas** (`src/core/schemas/`) — must mirror OpenAPI format constraints (`date-time` → `.datetime()`, `nullable` → `.nullish()`, `integer` → `.int()`, `maxLength` → `.max()`)
+3. **Mock server schemas** (`api/server.ts` request validation, `api/mock.ts` data loading) — must match the same constraints
+4. **Mock data** (`api/mock-data.json`) — all values must satisfy the schemas above
+5. **Tests** — all mock data in tests must use valid formats (e.g. RFC 3339 dates with `Z` suffix)
+
+Checklist per schema field:
+- `format: "date-time"` → `z.string().datetime()` everywhere (frontend, mock server, mock loader)
+- `nullable: true` + not required → `.nullish()` in frontend, `.nullable().optional()` in mock server
+- `type: "integer"` → `.int()` everywhere
+- `minLength` / `maxLength` → `.min()` / `.max()` everywhere
+- Required fields in OpenAPI → NOT `.optional()` in Zod
 
 ## Debugging
 - Stop on test/build failures - do not proceed

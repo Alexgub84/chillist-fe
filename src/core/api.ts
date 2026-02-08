@@ -16,6 +16,8 @@ import {
   type ParticipantPatch,
 } from './schemas/participant';
 import {
+  planCreateSchema,
+  planPatchSchema,
   planSchema,
   planWithItemsSchema,
   type Plan,
@@ -105,9 +107,11 @@ export async function fetchPlan(planId: string): Promise<PlanWithItems> {
 }
 
 export async function createPlan(plan: PlanCreate): Promise<Plan> {
+  const validPlan = planCreateSchema.parse(plan);
+
   const data = await request<unknown>('/plans', {
     method: 'POST',
-    body: JSON.stringify(plan),
+    body: JSON.stringify(validPlan),
   });
   return planSchema.parse(data);
 }
@@ -116,9 +120,11 @@ export async function updatePlan(
   planId: string,
   updates: PlanPatch
 ): Promise<Plan> {
+  const validUpdates = planPatchSchema.parse(updates);
+
   const data = await request<unknown>(`/plans/${planId}`, {
     method: 'PATCH',
-    body: JSON.stringify(updates),
+    body: JSON.stringify(validUpdates),
   });
   return planSchema.parse(data);
 }
