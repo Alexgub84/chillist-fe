@@ -1,1 +1,6 @@
-export type { Plan, PlanStatus, PlanVisibility } from '../schemas/plan';
+export type {
+  Plan,
+  PlanWithItems,
+  PlanStatus,
+  PlanVisibility,
+} from '../schemas/plan';

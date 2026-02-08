@@ -17,7 +17,9 @@ import {
 } from './schemas/participant';
 import {
   planSchema,
+  planWithItemsSchema,
   type Plan,
+  type PlanWithItems,
   type PlanCreate,
   type PlanPatch,
 } from './schemas/plan';
@@ -97,9 +99,9 @@ export async function fetchPlans(): Promise<Plan[]> {
   return z.array(planSchema).parse(data);
 }
 
-export async function fetchPlan(planId: string): Promise<Plan> {
-  const data = await request<unknown>(`/plan/${planId}`);
-  return planSchema.parse(data);
+export async function fetchPlan(planId: string): Promise<PlanWithItems> {
+  const data = await request<unknown>(`/plans/${planId}`);
+  return planWithItemsSchema.parse(data);
 }
 
 export async function createPlan(plan: PlanCreate): Promise<Plan> {
@@ -114,7 +116,7 @@ export async function updatePlan(
   planId: string,
   updates: PlanPatch
 ): Promise<Plan> {
-  const data = await request<unknown>(`/plan/${planId}`, {
+  const data = await request<unknown>(`/plans/${planId}`, {
     method: 'PATCH',
     body: JSON.stringify(updates),
   });
@@ -122,7 +124,7 @@ export async function updatePlan(
 }
 
 export async function deletePlan(planId: string): Promise<void> {
-  await request(`/plan/${planId}`, {
+  await request(`/plans/${planId}`, {
     method: 'DELETE',
   });
 }
@@ -132,7 +134,7 @@ export async function deletePlan(planId: string): Promise<void> {
 export async function fetchParticipants(
   planId: string
 ): Promise<Participant[]> {
-  const data = await request<unknown>(`/plan/${planId}/participants`);
+  const data = await request<unknown>(`/plans/${planId}/participants`);
   return z.array(participantSchema).parse(data);
 }
 
@@ -140,10 +142,9 @@ export async function createParticipant(
   planId: string,
   participant: ParticipantCreate
 ): Promise<Participant> {
-  // Validate input before sending
   const validParticipant = participantCreateSchema.parse(participant);
 
-  const data = await request<unknown>(`/plan/${planId}/participants`, {
+  const data = await request<unknown>(`/plans/${planId}/participants`, {
     method: 'POST',
     body: JSON.stringify(validParticipant),
   });
@@ -180,7 +181,7 @@ export async function deleteParticipant(participantId: string): Promise<void> {
 // --- Items ---
 
 export async function fetchItems(planId: string): Promise<Item[]> {
-  const data = await request<unknown>(`/plan/${planId}/items`);
+  const data = await request<unknown>(`/plans/${planId}/items`);
   return z.array(itemSchema).parse(data);
 }
 
@@ -188,10 +189,9 @@ export async function createItem(
   planId: string,
   item: ItemCreate
 ): Promise<Item> {
-  // Validate input before sending
   const validItem = itemCreateSchema.parse(item);
 
-  const data = await request<unknown>(`/plan/${planId}/items`, {
+  const data = await request<unknown>(`/plans/${planId}/items`, {
     method: 'POST',
     body: JSON.stringify(validItem),
   });

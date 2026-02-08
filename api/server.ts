@@ -246,15 +246,18 @@ export async function buildServer(
   });
 
   app.get<{ Params: { planId: string } }>(
-    '/plan/:planId',
+    '/plans/:planId',
     async (request, reply) => {
       const plan = ensurePlan(store, request.params.planId);
-      void reply.send(plan);
+      const planItems = store.items.filter(
+        (item) => item.planId === plan.planId
+      );
+      void reply.send({ ...plan, items: planItems });
     }
   );
 
   app.patch<{ Params: { planId: string } }>(
-    '/plan/:planId',
+    '/plans/:planId',
     async (request, reply) => {
       const plan = ensurePlan(store, request.params.planId);
       const updates = planPatchSchema.parse(request.body ?? {});
@@ -290,7 +293,7 @@ export async function buildServer(
   );
 
   app.delete<{ Params: { planId: string } }>(
-    '/plan/:planId',
+    '/plans/:planId',
     async (request, reply) => {
       const index = store.plans.findIndex(
         (entry) => entry.planId === request.params.planId
@@ -311,7 +314,7 @@ export async function buildServer(
   );
 
   app.get<{ Params: { planId: string } }>(
-    '/plan/:planId/participants',
+    '/plans/:planId/participants',
     async (request, reply) => {
       const plan = ensurePlan(store, request.params.planId);
       const participantIds = new Set(plan.participantIds ?? []);
@@ -324,7 +327,7 @@ export async function buildServer(
   );
 
   app.post<{ Params: { planId: string } }>(
-    '/plan/:planId/participants',
+    '/plans/:planId/participants',
     async (request, reply) => {
       const plan = ensurePlan(store, request.params.planId);
       const parsed = participantCreateSchema.parse(request.body);
@@ -432,7 +435,7 @@ export async function buildServer(
   );
 
   app.get<{ Params: { planId: string } }>(
-    '/plan/:planId/items',
+    '/plans/:planId/items',
     async (request, reply) => {
       ensurePlan(store, request.params.planId);
       const planItems = store.items.filter(
@@ -443,7 +446,7 @@ export async function buildServer(
   );
 
   app.post<{ Params: { planId: string } }>(
-    '/plan/:planId/items',
+    '/plans/:planId/items',
     async (request, reply) => {
       ensurePlan(store, request.params.planId);
       const parsed = itemCreateSchema.parse(request.body);

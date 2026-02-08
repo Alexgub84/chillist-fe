@@ -91,6 +91,31 @@ describe('mock server', () => {
     }
   });
 
+  it('fetches a single plan with items', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/plans/plan-1',
+      });
+      expect(response.statusCode).toBe(200);
+
+      const payload = response.json() as Record<string, unknown>;
+      expect(payload.planId).toBe('plan-1');
+      expect(payload.title).toBe('Test Plan');
+      expect(Array.isArray(payload.items)).toBe(true);
+      expect((payload.items as Array<Record<string, unknown>>).length).toBe(1);
+      expect((payload.items as Array<Record<string, unknown>>)[0].itemId).toBe(
+        'item-1'
+      );
+    } finally {
+      await server.close();
+    }
+  });
+
   it('adds a participant to a plan', async () => {
     const server = await buildServer({
       initialData: createTestData(),
@@ -99,7 +124,7 @@ describe('mock server', () => {
     try {
       const response = await server.inject({
         method: 'POST',
-        url: '/plan/plan-1/participants',
+        url: '/plans/plan-1/participants',
         payload: {
           displayName: 'Jamie',
           role: 'participant',
@@ -113,7 +138,7 @@ describe('mock server', () => {
 
       const planResponse = await server.inject({
         method: 'GET',
-        url: '/plan/plan-1',
+        url: '/plans/plan-1',
       });
       const plan = planResponse.json() as { participantIds?: string[] };
       expect(plan.participantIds).toEqual(
@@ -132,7 +157,7 @@ describe('mock server', () => {
     try {
       const response = await server.inject({
         method: 'POST',
-        url: '/plan/plan-1/items',
+        url: '/plans/plan-1/items',
         payload: {
           name: 'Lantern',
           category: 'equipment',
@@ -157,7 +182,7 @@ describe('mock server', () => {
     try {
       const response = await server.inject({
         method: 'GET',
-        url: '/plan/unknown',
+        url: '/plans/unknown',
       });
       expect(response.statusCode).toBe(404);
     } finally {

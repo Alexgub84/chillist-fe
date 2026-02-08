@@ -93,6 +93,137 @@ export interface paths {
       };
     };
     put?: never;
+    /**
+     * Create a new plan
+     * @description Create a new plan with the provided details
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-7'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-5'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/plans/{planId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get plan by ID
+     * @description Retrieve a single plan by its ID with associated items
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-12'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
     post?: never;
     delete?: never;
     options?: never;
@@ -198,6 +329,52 @@ export interface components {
     'def-9': {
       /** Format: uuid */
       planId: string;
+    };
+    /** Item */
+    'def-10': {
+      /** Format: uuid */
+      itemId: string;
+      /** Format: uuid */
+      planId: string;
+      name: string;
+      /** @enum {string} */
+      category: 'equipment' | 'food';
+      quantity: number;
+      /** @enum {string} */
+      unit: 'pcs' | 'kg' | 'g' | 'lb' | 'oz' | 'l' | 'ml' | 'pack' | 'set';
+      /** @enum {string} */
+      status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      notes?: string | null;
+      /** Format: date-time */
+      createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
+    };
+    /** ItemList */
+    'def-11': components['schemas']['def-10'][];
+    /** PlanWithItems */
+    'def-12': {
+      /** Format: uuid */
+      planId: string;
+      title: string;
+      description?: string | null;
+      /** @enum {string} */
+      status: 'draft' | 'active' | 'archived';
+      /** @enum {string} */
+      visibility: 'public' | 'unlisted' | 'private';
+      /** Format: uuid */
+      ownerParticipantId?: string | null;
+      location?: components['schemas']['def-4'] | null;
+      /** Format: date-time */
+      startDate?: string | null;
+      /** Format: date-time */
+      endDate?: string | null;
+      tags?: string[] | null;
+      /** Format: date-time */
+      createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
+      items: components['schemas']['def-11'];
     };
   };
   responses: never;
