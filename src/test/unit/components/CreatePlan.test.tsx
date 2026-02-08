@@ -314,6 +314,155 @@ describe('CreatePlan - PlanForm', () => {
     });
   });
 
+  describe('Location handling', () => {
+    it('should omit location from payload when no location fields are filled', async () => {
+      const user = userEvent.setup();
+      const mockCreatePlan = vi.mocked(apiModule.createPlan);
+      mockCreatePlan.mockResolvedValue({
+        planId: 'plan-loc-1',
+        title: 'No Location Plan',
+        status: 'draft',
+        ownerParticipantId: 'uuid-owner',
+        startDate: '2025-12-20T00:00:00',
+        createdAt: '2025-12-12T00:00:00Z',
+        updatedAt: '2025-12-12T00:00:00Z',
+        visibility: 'public',
+      });
+
+      delete (window as any).location;
+      window.location = { href: '' } as any;
+
+      renderForm();
+
+      await user.type(getInputByLabel(/title/i), 'No Location Plan');
+      await user.type(getInputByLabel(/owner name/i), 'Owner');
+      await user.click(getInputByLabel(/one-day plan/i));
+
+      await waitFor(() => {
+        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+      });
+
+      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
+
+      await waitFor(() => {
+        expect(mockCreatePlan).toHaveBeenCalledTimes(1);
+        const payload = mockCreatePlan.mock.calls[0][0];
+        expect(payload.location).toBeUndefined();
+      });
+    });
+
+    it('should include location with generated locationId when location name is provided', async () => {
+      const user = userEvent.setup();
+      const mockCreatePlan = vi.mocked(apiModule.createPlan);
+      mockCreatePlan.mockResolvedValue({
+        planId: 'plan-loc-2',
+        title: 'Park Hangout',
+        status: 'draft',
+        ownerParticipantId: 'uuid-owner',
+        startDate: '2025-12-20T00:00:00',
+        createdAt: '2025-12-12T00:00:00Z',
+        updatedAt: '2025-12-12T00:00:00Z',
+        visibility: 'public',
+        location: {
+          locationId: 'uuid-central-park',
+          name: 'Central Park',
+          city: 'New York',
+          country: 'US',
+        },
+      });
+
+      delete (window as any).location;
+      window.location = { href: '' } as any;
+
+      renderForm();
+
+      await user.type(getInputByLabel(/title/i), 'Park Hangout');
+      await user.type(getInputByLabel(/owner name/i), 'Owner');
+      await user.click(getInputByLabel(/one-day plan/i));
+
+      await waitFor(() => {
+        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+      });
+
+      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+
+      await user.type(
+        screen.getByPlaceholderText(/location name/i),
+        'Central Park'
+      );
+      await user.type(screen.getByPlaceholderText(/^city$/i), 'New York');
+      await user.type(screen.getByPlaceholderText(/^country$/i), 'US');
+
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
+
+      await waitFor(() => {
+        expect(mockCreatePlan).toHaveBeenCalledTimes(1);
+        const payload = mockCreatePlan.mock.calls[0][0];
+        expect(payload.location).toEqual(
+          expect.objectContaining({
+            locationId: 'uuid-central-park',
+            name: 'Central Park',
+            city: 'New York',
+            country: 'US',
+          })
+        );
+      });
+    });
+
+    it('should fall back to plan title for locationId and name when location name is empty but other fields are filled', async () => {
+      const user = userEvent.setup();
+      const mockCreatePlan = vi.mocked(apiModule.createPlan);
+      mockCreatePlan.mockResolvedValue({
+        planId: 'plan-loc-3',
+        title: 'Beach Trip',
+        status: 'draft',
+        ownerParticipantId: 'uuid-owner',
+        startDate: '2025-12-20T00:00:00',
+        createdAt: '2025-12-12T00:00:00Z',
+        updatedAt: '2025-12-12T00:00:00Z',
+        visibility: 'public',
+        location: {
+          locationId: 'uuid-beach-trip',
+          name: 'Beach Trip',
+          city: 'Miami',
+        },
+      });
+
+      delete (window as any).location;
+      window.location = { href: '' } as any;
+
+      renderForm();
+
+      await user.type(getInputByLabel(/title/i), 'Beach Trip');
+      await user.type(getInputByLabel(/owner name/i), 'Owner');
+      await user.click(getInputByLabel(/one-day plan/i));
+
+      await waitFor(() => {
+        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+      });
+
+      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+
+      await user.type(screen.getByPlaceholderText(/^city$/i), 'Miami');
+
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
+
+      await waitFor(() => {
+        expect(mockCreatePlan).toHaveBeenCalledTimes(1);
+        const payload = mockCreatePlan.mock.calls[0][0];
+        expect(payload.location).toEqual(
+          expect.objectContaining({
+            locationId: 'uuid-beach-trip',
+            name: 'Beach Trip',
+            city: 'Miami',
+          })
+        );
+      });
+    });
+  });
+
   describe('ID generation from names', () => {
     it('should generate ownerParticipantId from owner name using uuid v5', async () => {
       const user = userEvent.setup();

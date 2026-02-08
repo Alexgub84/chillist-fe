@@ -112,6 +112,18 @@ export default function PlanForm() {
     return uuidv5(name, UUID_NAMESPACE);
   };
 
+  const hasLocationData = (loc?: {
+    name?: string;
+    city?: string;
+    country?: string;
+    region?: string;
+  }) => {
+    if (!loc) return false;
+    return [loc.name, loc.city, loc.country, loc.region].some(
+      (v) => v && v.trim().length > 0
+    );
+  };
+
   async function onSubmit(values: FormValues): Promise<void> {
     const payload: PlanCreatePayload = {
       title: values.title,
@@ -129,7 +141,13 @@ export default function PlanForm() {
       participantIds: parseTags(values.participantsCsv)?.map((n) =>
         generateId(n)
       ),
-      location: values.location ?? undefined,
+      location: hasLocationData(values.location)
+        ? {
+            ...values.location,
+            locationId: generateId(values.location!.name || values.title),
+            name: values.location!.name || values.title,
+          }
+        : undefined,
     };
 
     try {
