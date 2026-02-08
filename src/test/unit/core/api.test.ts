@@ -57,6 +57,23 @@ describe('API Client', () => {
     updatedAt: '2025-01-01T00:00:00Z',
   };
 
+  const mockPlanWithItems = {
+    ...mockPlan,
+    items: [
+      {
+        itemId: 'item-1',
+        planId: 'plan-1',
+        name: 'Tent',
+        quantity: 1,
+        unit: 'pcs',
+        status: 'pending',
+        category: 'equipment',
+        createdAt: '2025-01-01T00:00:00Z',
+        updatedAt: '2025-01-01T00:00:00Z',
+      },
+    ],
+  };
+
   const mockParticipant = {
     participantId: 'p-1',
     displayName: 'Test User',
@@ -95,13 +112,14 @@ describe('API Client', () => {
       );
     });
 
-    it('fetches a single plan', async () => {
-      fetchMock.mockResolvedValueOnce(mockResponse(mockPlan));
+    it('fetches a single plan with items', async () => {
+      fetchMock.mockResolvedValueOnce(mockResponse(mockPlanWithItems));
 
       const plan = await fetchPlan('plan-1');
-      expect(plan).toEqual(mockPlan);
+      expect(plan).toEqual(mockPlanWithItems);
+      expect(plan.items).toHaveLength(1);
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plan/plan-1',
+        'http://api.test/plans/plan-1',
         expect.objectContaining({
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
@@ -143,7 +161,7 @@ describe('API Client', () => {
       const plan = await updatePlan('plan-1', updates);
       expect(plan.title).toBe('Updated');
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plan/plan-1',
+        'http://api.test/plans/plan-1',
         expect.objectContaining({
           method: 'PATCH',
           body: JSON.stringify(updates),
@@ -159,7 +177,7 @@ describe('API Client', () => {
 
       await deletePlan('plan-1');
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plan/plan-1',
+        'http://api.test/plans/plan-1',
         expect.objectContaining({
           method: 'DELETE',
           headers: expect.objectContaining({
@@ -177,7 +195,7 @@ describe('API Client', () => {
       const participants = await fetchParticipants('plan-1');
       expect(participants).toEqual([mockParticipant]);
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plan/plan-1/participants',
+        'http://api.test/plans/plan-1/participants',
         expect.objectContaining({
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
@@ -197,7 +215,7 @@ describe('API Client', () => {
       const participant = await createParticipant('plan-1', newParticipant);
       expect(participant).toEqual(mockParticipant);
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plan/plan-1/participants',
+        'http://api.test/plans/plan-1/participants',
         expect.objectContaining({
           method: 'POST',
           body: JSON.stringify(newParticipant),
@@ -266,7 +284,7 @@ describe('API Client', () => {
       const items = await fetchItems('plan-1');
       expect(items).toEqual([mockItem]);
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plan/plan-1/items',
+        'http://api.test/plans/plan-1/items',
         expect.objectContaining({
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
@@ -286,7 +304,7 @@ describe('API Client', () => {
       const item = await createItem('plan-1', newItem);
       expect(item).toEqual(mockItem);
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plan/plan-1/items',
+        'http://api.test/plans/plan-1/items',
         expect.objectContaining({
           method: 'POST',
           body: JSON.stringify(newItem),
@@ -366,7 +384,7 @@ describe('API Client', () => {
         })
       );
 
-      await expect(fetchPlan('plan-1')).rejects.toThrow('API returned 500');
+      await expect(fetchPlans()).rejects.toThrow('API returned 500');
     });
 
     it('throws clear error when API returns HTML instead of JSON', async () => {

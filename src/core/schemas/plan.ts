@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { locationSchema } from './location';
+import { itemSchema } from './item';
 
 export const planStatusSchema = z.enum(['draft', 'active', 'archived']);
 export const planVisibilitySchema = z.enum(['public', 'unlisted', 'private']);
@@ -20,6 +21,10 @@ export const planSchema = z.object({
   updatedAt: z.string(),
 });
 
+export const planWithItemsSchema = planSchema.extend({
+  items: z.array(itemSchema),
+});
+
 export const planCreateSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
@@ -38,5 +43,6 @@ export const planPatchSchema = planCreateSchema.partial();
 export type PlanStatus = z.infer<typeof planStatusSchema>;
 export type PlanVisibility = z.infer<typeof planVisibilitySchema>;
 export type Plan = z.infer<typeof planSchema>;
+export type PlanWithItems = z.infer<typeof planWithItemsSchema>;
 export type PlanCreate = z.infer<typeof planCreateSchema>;
 export type PlanPatch = z.infer<typeof planPatchSchema>;

@@ -14,7 +14,7 @@ describe.skip('Production API - Smoke Tests', () => {
   });
 
   it('should return 404 for non-existent plan', async () => {
-    const response = await fetch(`${PROD_API_URL}/plan/non-existent-plan-id`);
+    const response = await fetch(`${PROD_API_URL}/plans/non-existent-plan-id`);
 
     expect(response.status).toBe(404);
   });
