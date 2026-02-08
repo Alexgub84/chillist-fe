@@ -8,17 +8,17 @@ export const planVisibilitySchema = z.enum(['public', 'unlisted', 'private']);
 export const planSchema = z.object({
   planId: z.string(),
   title: z.string(),
-  description: z.string().optional(),
+  description: z.string().nullish(),
   status: planStatusSchema,
   visibility: planVisibilitySchema,
-  ownerParticipantId: z.string(),
-  location: locationSchema.optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  participantIds: z.array(z.string()).optional(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  ownerParticipantId: z.string().nullish(),
+  location: locationSchema.nullish(),
+  startDate: z.string().datetime().nullish(),
+  endDate: z.string().datetime().nullish(),
+  tags: z.array(z.string()).nullish(),
+  participantIds: z.array(z.string()).nullish(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
 });
 
 export const planWithItemsSchema = planSchema.extend({
@@ -26,16 +26,16 @@ export const planWithItemsSchema = planSchema.extend({
 });
 
 export const planCreateSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  description: z.string().optional(),
+  title: z.string().min(1, 'Title is required').max(255),
+  description: z.string().nullish(),
   status: planStatusSchema.default('draft'),
   visibility: planVisibilitySchema.default('private'),
   ownerParticipantId: z.string().min(1),
-  location: locationSchema.optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  participantIds: z.array(z.string()).optional(),
+  location: locationSchema.nullish(),
+  startDate: z.string().datetime().nullish(),
+  endDate: z.string().datetime().nullish(),
+  tags: z.array(z.string()).nullish(),
+  participantIds: z.array(z.string()).nullish(),
 });
 
 export const planPatchSchema = planCreateSchema.partial();

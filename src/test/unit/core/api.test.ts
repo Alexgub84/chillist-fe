@@ -172,6 +172,28 @@ describe('API Client', () => {
       );
     });
 
+    it('rejects plan creation with invalid startDate format', async () => {
+      const invalidPlan = {
+        title: 'Bad Dates Plan',
+        status: 'draft' as const,
+        visibility: 'private' as const,
+        ownerParticipantId: 'p-1',
+        startDate: '2025-12-20T10:00:00',
+      };
+
+      await expect(createPlan(invalidPlan)).rejects.toThrow();
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it('rejects plan update with invalid startDate format', async () => {
+      const invalidUpdates = {
+        startDate: '2025-12-20T10:00:00',
+      };
+
+      await expect(updatePlan('plan-1', invalidUpdates)).rejects.toThrow();
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
     it('deletes a plan', async () => {
       fetchMock.mockResolvedValueOnce(mockResponse({}, { status: 204 }));
 

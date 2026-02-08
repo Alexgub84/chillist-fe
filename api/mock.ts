@@ -28,12 +28,12 @@ const planSchema = z.object({
   visibility: z.enum(['public', 'unlisted', 'private']),
   ownerParticipantId: z.string().nullable().optional(),
   location: locationSchema.nullable().optional(),
-  startDate: z.string().nullable().optional(),
-  endDate: z.string().nullable().optional(),
+  startDate: z.string().datetime().nullable().optional(),
+  endDate: z.string().datetime().nullable().optional(),
   tags: z.array(z.string()).nullable().optional(),
   participantIds: z.array(z.string()).optional(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
 });
 
 const participantSchema = z.object({
@@ -43,23 +43,23 @@ const participantSchema = z.object({
   displayName: z.string(),
   role: z.enum(['owner', 'participant', 'viewer']),
   isOwner: z.boolean().optional(),
-  avatarUrl: z.string().url().optional(),
-  contactEmail: z.string().email().optional(),
-  contactPhone: z.string().optional(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  avatarUrl: z.string().url().nullish(),
+  contactEmail: z.string().email().nullish(),
+  contactPhone: z.string().nullish(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
 });
 
 const equipmentItemSchema = z.object({
   itemId: z.string(),
   planId: z.string(),
   name: z.string(),
-  quantity: z.number(),
+  quantity: z.number().int(),
   unit: z.enum(['pcs', 'kg', 'g', 'lb', 'oz', 'l', 'ml', 'pack', 'set']),
-  notes: z.string().optional(),
+  notes: z.string().nullish(),
   status: z.enum(['pending', 'purchased', 'packed', 'canceled']),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
   category: z.literal('equipment'),
 });
 

@@ -53,14 +53,14 @@ const locationSchema = z.object({
 });
 
 const planCreateSchema = z.object({
-  title: z.string().min(1),
+  title: z.string().min(1).max(255),
   description: z.string().nullable().optional(),
   status: planStatusSchema.default('draft'),
   visibility: planVisibilitySchema.default('private'),
   ownerParticipantId: z.string().nullable().optional(),
   location: locationSchema.nullable().optional(),
-  startDate: z.string().nullable().optional(),
-  endDate: z.string().nullable().optional(),
+  startDate: z.string().datetime().nullable().optional(),
+  endDate: z.string().datetime().nullable().optional(),
   tags: z.array(z.string()).nullable().optional(),
   participantIds: z.array(z.string()).optional(),
 });
@@ -81,10 +81,10 @@ const participantPatchSchema = participantCreateSchema.partial();
 
 const itemCreateSchema = z.object({
   name: z.string().min(1),
-  quantity: z.number().positive().optional(),
+  quantity: z.number().int().positive().optional(),
   unit: unitSchema.optional(),
   status: itemStatusSchema.optional(),
-  notes: z.string().optional(),
+  notes: z.string().nullish(),
   category: itemCategorySchema,
 });
 
