@@ -72,8 +72,8 @@ describe('PlansList', () => {
           region: 'CA',
           city: 'Yosemite',
         },
-        startDate: '2025-07-18',
-        endDate: '2025-07-20',
+        startDate: '2025-07-18T00:00:00.000Z',
+        endDate: '2025-07-20T00:00:00.000Z',
         tags: ['outdoors', 'family', 'camping'],
         participantIds: ['participant-1', 'participant-2', 'participant-3'],
         createdAt: '2025-05-01T12:00:00.000Z',
@@ -99,6 +99,13 @@ describe('PlansList', () => {
     mockPlans.forEach((plan) => {
       expect(screen.getByText(plan.title)).toBeInTheDocument();
     });
+
+    expect(screen.getByText('Active')).toBeInTheDocument();
+    expect(screen.getByText('Draft')).toBeInTheDocument();
+
+    expect(screen.getByText(/Jul 18, 2025/i)).toBeInTheDocument();
+    expect(screen.getByText(/Pine Ridge Campground/i)).toBeInTheDocument();
+    expect(screen.getByText(/3 participants/i)).toBeInTheDocument();
   });
 
   it('renders empty state when no plans provided', () => {
@@ -112,9 +119,9 @@ describe('PlansList', () => {
 
   it('renders correct number of list items', () => {
     const plans = [
-      { planId: '1', title: 'Plan 1' },
-      { planId: '2', title: 'Plan 2' },
-      { planId: '3', title: 'Plan 3' },
+      { planId: '1', title: 'Plan 1', status: 'draft' as const },
+      { planId: '2', title: 'Plan 2', status: 'active' as const },
+      { planId: '3', title: 'Plan 3', status: 'archived' as const },
     ];
 
     render(<PlansList plans={plans} />);
@@ -126,7 +133,13 @@ describe('PlansList', () => {
   it('links each plan to the correct /plan/:planId path', async () => {
     const user = userEvent.setup();
 
-    const plans = [{ planId: 'plan-1', title: 'Weekend Camping Trip' }];
+    const plans = [
+      {
+        planId: 'plan-1',
+        title: 'Weekend Camping Trip',
+        status: 'active' as const,
+      },
+    ];
 
     render(<PlansList plans={plans} />);
 

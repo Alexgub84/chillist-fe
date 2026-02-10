@@ -306,6 +306,16 @@
       "def-10": {
         "type": "object",
         "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        },
+        "required": ["ok"],
+        "title": "DeletePlanResponse"
+      },
+      "def-11": {
+        "type": "object",
+        "properties": {
           "itemId": {
             "type": "string",
             "format": "uuid"
@@ -358,14 +368,14 @@
         ],
         "title": "Item"
       },
-      "def-11": {
+      "def-12": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/def-10"
+          "$ref": "#/components/schemas/def-11"
         },
         "title": "ItemList"
       },
-      "def-12": {
+      "def-13": {
         "type": "object",
         "properties": {
           "name": {
@@ -397,7 +407,49 @@
         "required": ["name", "category", "quantity", "status"],
         "title": "CreateItemBody"
       },
-      "def-13": {
+      "def-14": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "category": {
+            "type": "string",
+            "enum": ["equipment", "food"]
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "unit": {
+            "type": "string",
+            "enum": ["pcs", "kg", "g", "lb", "oz", "l", "ml", "pack", "set"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "purchased", "packed", "canceled"]
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "title": "UpdateItemBody"
+      },
+      "def-15": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": ["itemId"],
+        "title": "ItemIdParam"
+      },
+      "def-16": {
         "type": "object",
         "properties": {
           "planId": {
@@ -460,7 +512,7 @@
             "format": "date-time"
           },
           "items": {
-            "$ref": "#/components/schemas/def-11"
+            "$ref": "#/components/schemas/def-12"
           }
         },
         "required": [
@@ -613,7 +665,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-13"
+                  "$ref": "#/components/schemas/def-16"
                 }
               }
             }
@@ -624,6 +676,64 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a plan",
+        "tags": ["plans"],
+        "description": "Delete a plan by its ID. Cascade delete handles related items, participants, and assignments.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "planId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-10"
                 }
               }
             }
@@ -670,7 +780,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/def-12"
+                "$ref": "#/components/schemas/def-13"
               }
             }
           }
@@ -692,7 +802,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-10"
+                  "$ref": "#/components/schemas/def-11"
                 }
               }
             }
@@ -760,7 +870,86 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/def-12"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/items/{itemId}": {
+      "patch": {
+        "summary": "Update an item",
+        "tags": ["items"],
+        "description": "Update an existing item by its ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/def-14"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "itemId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/def-11"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
                 }
               }
             }
