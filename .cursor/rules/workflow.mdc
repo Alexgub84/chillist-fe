@@ -34,6 +34,12 @@ alwaysApply: true
 - No lazy coding: never use `// ... rest of code` placeholders
 - Read target file's imports, types, and style before generating code
 - Pin dependency versions exactly (no `^` or `~` ranges)
+- Use `clsx` for all dynamic or conditional `className` values — never use template literals or string concatenation for classNames
+
+## Route Files (TanStack Router)
+- Default to **lazy routes** (`createLazyFileRoute` + `.lazy.tsx` suffix) for code-splitting
+- Only use a non-lazy route (`createFileRoute` + plain `.tsx`) when the route needs eagerly-loaded features: `loader`, `beforeLoad`, search param validation, or other non-component route config
+- The root route (`__root.tsx`) must always remain non-lazy
 
 ## OpenAPI Schema Alignment (Mandatory on Every Schema Change)
 When the OpenAPI spec (`src/core/openapi.json`) or any Zod schema changes, verify alignment across ALL four layers:

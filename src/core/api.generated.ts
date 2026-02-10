@@ -182,7 +182,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-12'];
+            'application/json': components['schemas']['def-13'];
           };
         };
         /** @description Default Response */
@@ -225,6 +225,139 @@ export interface paths {
     };
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/plans/{planId}/items': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List all items for a plan
+     * @description Retrieve all items belonging to a specific plan
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-11'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
+    /**
+     * Add an item to a plan
+     * @description Create a new item in the specified plan. Equipment items always use pcs as the unit. Food items require a unit.
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-12'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-10'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
     delete?: never;
     options?: never;
     head?: never;
@@ -352,8 +485,20 @@ export interface components {
     };
     /** ItemList */
     'def-11': components['schemas']['def-10'][];
-    /** PlanWithItems */
+    /** CreateItemBody */
     'def-12': {
+      name: string;
+      /** @enum {string} */
+      category: 'equipment' | 'food';
+      quantity: number;
+      /** @enum {string} */
+      unit?: 'pcs' | 'kg' | 'g' | 'lb' | 'oz' | 'l' | 'ml' | 'pack' | 'set';
+      /** @enum {string} */
+      status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      notes?: string | null;
+    };
+    /** PlanWithItems */
+    'def-13': {
       /** Format: uuid */
       planId: string;
       title: string;

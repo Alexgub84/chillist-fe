@@ -45,12 +45,12 @@ export const itemSchema = z.discriminatedUnion('category', [
 ]);
 
 export const itemCreateSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  quantity: z.number().positive().optional(),
-  unit: unitSchema.optional(),
-  status: itemStatusSchema.optional(),
-  notes: z.string().optional(),
+  name: z.string().min(1, 'Name is required').max(255),
   category: itemCategorySchema,
+  quantity: z.number().int().min(1),
+  unit: unitSchema.optional(),
+  status: itemStatusSchema,
+  notes: z.string().nullish(),
 });
 
 export const itemPatchSchema = itemCreateSchema.partial();

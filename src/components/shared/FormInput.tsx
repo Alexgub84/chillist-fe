@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import {
   forwardRef,
   type InputHTMLAttributes,
@@ -15,13 +16,7 @@ export const FormInput = forwardRef<
   InputHTMLAttributes<HTMLInputElement> & { compact?: boolean }
 >(({ className, compact, ...props }, ref) => {
   const styles = compact ? compactInputStyles : baseInputStyles;
-  return (
-    <input
-      ref={ref}
-      className={`${styles}${className ? ` ${className}` : ''}`}
-      {...props}
-    />
-  );
+  return <input ref={ref} className={clsx(styles, className)} {...props} />;
 });
 
 FormInput.displayName = 'FormInput';
@@ -33,7 +28,7 @@ export const FormTextarea = forwardRef<
   return (
     <textarea
       ref={ref}
-      className={`${baseInputStyles} resize-none${className ? ` ${className}` : ''}`}
+      className={clsx(baseInputStyles, 'resize-none', className)}
       {...props}
     />
   );
@@ -49,7 +44,7 @@ export const FormSelect = forwardRef<
   return (
     <select
       ref={ref}
-      className={`${styles} bg-white${className ? ` ${className}` : ''}`}
+      className={clsx(styles, 'bg-white', className)}
       {...props}
     >
       {children}
