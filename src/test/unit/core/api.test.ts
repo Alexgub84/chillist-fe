@@ -321,6 +321,8 @@ describe('API Client', () => {
       const newItem = {
         name: 'Tent',
         category: 'equipment' as const,
+        quantity: 1,
+        status: 'pending' as const,
       };
 
       const item = await createItem('plan-1', newItem);

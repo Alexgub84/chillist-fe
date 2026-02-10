@@ -73,6 +73,8 @@ describe('itemCreateSchema', () => {
     const result = itemCreateSchema.safeParse({
       name: 'Tent',
       category: 'equipment',
+      quantity: 1,
+      status: 'pending',
     });
     expect(result.success).toBe(true);
   });
@@ -90,5 +92,102 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
     });
     expect(result.success).toBe(false);
+  });
+
+  it('rejects quantity of 0', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 0,
+      status: 'pending',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects negative quantity', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: -1,
+      status: 'pending',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects non-integer quantity', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 1.5,
+      status: 'pending',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('accepts unit as optional (omitted)', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 1,
+      status: 'pending',
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.unit).toBeUndefined();
+    }
+  });
+
+  it('rejects invalid category value', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'clothing',
+      quantity: 1,
+      status: 'pending',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects invalid status value', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 1,
+      status: 'archived',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects name exceeding 255 characters', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'A'.repeat(256),
+      category: 'equipment',
+      quantity: 1,
+      status: 'pending',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('accepts notes as null', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 1,
+      status: 'pending',
+      notes: null,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts notes as undefined (omitted)', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 1,
+      status: 'pending',
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.notes).toBeUndefined();
+    }
   });
 });
