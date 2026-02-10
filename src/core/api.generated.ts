@@ -182,7 +182,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-13'];
+            'application/json': components['schemas']['def-16'];
           };
         };
         /** @description Default Response */
@@ -225,7 +225,59 @@ export interface paths {
     };
     put?: never;
     post?: never;
-    delete?: never;
+    /**
+     * Delete a plan
+     * @description Delete a plan by its ID. Cascade delete handles related items, participants, and assignments.
+     */
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-10'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
     options?: never;
     head?: never;
     patch?: never;
@@ -259,7 +311,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-11'];
+            'application/json': components['schemas']['def-12'];
           };
         };
         /** @description Default Response */
@@ -307,7 +359,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-12'];
+          'application/json': components['schemas']['def-13'];
         };
       };
       responses: {
@@ -317,7 +369,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-10'];
+            'application/json': components['schemas']['def-11'];
           };
         };
         /** @description Default Response */
@@ -362,6 +414,87 @@ export interface paths {
     options?: never;
     head?: never;
     patch?: never;
+    trace?: never;
+  };
+  '/items/{itemId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Update an item
+     * @description Update an existing item by its ID
+     */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          itemId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-14'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-11'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
     trace?: never;
   };
 }
@@ -463,8 +596,12 @@ export interface components {
       /** Format: uuid */
       planId: string;
     };
-    /** Item */
+    /** DeletePlanResponse */
     'def-10': {
+      ok: boolean;
+    };
+    /** Item */
+    'def-11': {
       /** Format: uuid */
       itemId: string;
       /** Format: uuid */
@@ -484,9 +621,9 @@ export interface components {
       updatedAt: string;
     };
     /** ItemList */
-    'def-11': components['schemas']['def-10'][];
+    'def-12': components['schemas']['def-11'][];
     /** CreateItemBody */
-    'def-12': {
+    'def-13': {
       name: string;
       /** @enum {string} */
       category: 'equipment' | 'food';
@@ -497,8 +634,25 @@ export interface components {
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
       notes?: string | null;
     };
+    /** UpdateItemBody */
+    'def-14': {
+      name?: string;
+      /** @enum {string} */
+      category?: 'equipment' | 'food';
+      quantity?: number;
+      /** @enum {string} */
+      unit?: 'pcs' | 'kg' | 'g' | 'lb' | 'oz' | 'l' | 'ml' | 'pack' | 'set';
+      /** @enum {string} */
+      status?: 'pending' | 'purchased' | 'packed' | 'canceled';
+      notes?: string | null;
+    };
+    /** ItemIdParam */
+    'def-15': {
+      /** Format: uuid */
+      itemId: string;
+    };
     /** PlanWithItems */
-    'def-13': {
+    'def-16': {
       /** Format: uuid */
       planId: string;
       title: string;
@@ -519,7 +673,7 @@ export interface components {
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
-      items: components['schemas']['def-11'];
+      items: components['schemas']['def-12'];
     };
   };
   responses: never;

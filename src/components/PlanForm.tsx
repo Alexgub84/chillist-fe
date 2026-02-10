@@ -3,18 +3,14 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { v5 as uuidv5 } from 'uuid';
 
-import { createPlan as apiCreatePlan } from '../core/api';
-import { planSchema } from '../core/schemas/plan';
+import {
+  planCreateSchema,
+  planStatusSchema,
+  planVisibilitySchema,
+  type PlanCreate,
+} from '../core/schemas/plan';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
-
-const planCreatePayloadSchema = planSchema.omit({
-  planId: true,
-  createdAt: true,
-  updatedAt: true,
-});
-
-type PlanCreatePayload = z.infer<typeof planCreatePayloadSchema>;
 
 const locationFormSchema = z
   .object({
@@ -25,7 +21,7 @@ const locationFormSchema = z
   })
   .optional();
 
-const createPlanFormSchema = planCreatePayloadSchema
+const createPlanFormSchema = planCreateSchema
   .omit({
     tags: true,
     participantIds: true,
@@ -34,9 +30,13 @@ const createPlanFormSchema = planCreatePayloadSchema
     ownerParticipantId: true,
     title: true,
     location: true,
+    status: true,
+    visibility: true,
   })
   .extend({
     title: z.string().min(1, 'Title is required'),
+    status: planStatusSchema,
+    visibility: planVisibilitySchema,
     tagsCsv: z.string().optional(),
     participantsCsv: z.string().optional(),
     ownerName: z.string().min(1, 'Owner name is required'),
@@ -91,11 +91,21 @@ const createPlanFormSchema = planCreatePayloadSchema
 
 type FormValues = z.infer<typeof createPlanFormSchema>;
 
-export default function PlanForm() {
+export type PlanFormPayload = PlanCreate;
+
+interface PlanFormProps {
+  onSubmit: (payload: PlanFormPayload) => void | Promise<void>;
+  isSubmitting?: boolean;
+}
+
+export default function PlanForm({
+  onSubmit,
+  isSubmitting = false,
+}: PlanFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     watch,
   } = useForm<FormValues>({
     resolver: zodResolver(createPlanFormSchema),
@@ -135,8 +145,8 @@ export default function PlanForm() {
     );
   };
 
-  async function onSubmit(values: FormValues): Promise<void> {
-    const payload: PlanCreatePayload = {
+  async function handleFormSubmit(values: FormValues): Promise<void> {
+    const payload: PlanCreate = {
       title: values.title,
       description: values.description,
       status: values.status,
@@ -161,23 +171,13 @@ export default function PlanForm() {
         : undefined,
     };
 
-    try {
-      const validated = planCreatePayloadSchema.parse(payload);
-      const created = await apiCreatePlan(validated);
-      if (created?.planId) {
-        window.location.href = `/plan/${created.planId}`;
-      } else {
-        window.location.href = '/plans';
-      }
-    } catch (err) {
-      alert('Failed to create plan:' + err);
-    }
+    await onSubmit(payload);
   }
 
   return (
     <div className="w-full">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(handleFormSubmit)}
         className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8 space-y-6"
       >
         {/* Title */}
