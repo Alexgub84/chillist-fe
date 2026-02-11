@@ -157,6 +157,10 @@ See [Tailwind CSS v4 documentation](https://tailwindcss.com/docs) for more custo
 - ESLint + Prettier
 - Husky (pre-commit hooks)
 
+## Documentation
+
+- [docs/toast.md](docs/toast.md) – Toast notifications and how to show error messages app-wide.
+
 ---
 
 # Backend API Specification
