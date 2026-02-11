@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { Link, useParams } from '@tanstack/react-router';
+import toast from 'react-hot-toast';
 import { usePlan } from '../hooks/usePlan';
 import { useCreateItem } from '../hooks/useCreateItem';
+import { useUpdateItem } from '../hooks/useUpdateItem';
+import { getApiErrorMessage } from '../core/error-utils';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
-import type { ItemCategory, ItemCreate } from '../core/schemas/item';
+import type { ItemCategory, ItemCreate, ItemPatch } from '../core/schemas/item';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanDetails,
@@ -18,7 +21,9 @@ function PlanDetails() {
   const { planId } = useParams({ from: '/plan/$planId' });
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
+  const updateItemMutation = useUpdateItem(planId);
   const [showItemForm, setShowItemForm] = useState(false);
+  const [editingItemId, setEditingItemId] = useState<string | null>(null);
 
   if (isLoading) {
     return <div className="text-center">Loading plan details...</div>;
@@ -44,6 +49,44 @@ function PlanDetails() {
     await createItem.mutateAsync(payload);
     setShowItemForm(false);
   }
+
+  function handleStartEdit(itemId: string) {
+    setShowItemForm(false);
+    setEditingItemId(itemId);
+  }
+
+  function handleStartCreate() {
+    setEditingItemId(null);
+    setShowItemForm(true);
+  }
+
+  async function handleUpdateItem(values: ItemFormValues) {
+    if (!editingItemId) return;
+    const payload: ItemPatch = {
+      name: values.name,
+      category: values.category,
+      quantity: values.quantity,
+      unit: values.unit,
+      status: values.status,
+      notes: values.notes || null,
+    };
+    try {
+      await updateItemMutation.mutateAsync({
+        itemId: editingItemId,
+        updates: payload,
+      });
+      setEditingItemId(null);
+    } catch (err) {
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
+  const editingItem = editingItemId
+    ? plan.items.find((i) => i.itemId === editingItemId)
+    : null;
 
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
@@ -92,12 +135,29 @@ function PlanDetails() {
                   key={category}
                   category={category}
                   items={items}
+                  onEditItem={handleStartEdit}
                 />
               ))}
             </div>
           )}
 
-          {showItemForm ? (
+          {editingItem ? (
+            <ItemForm
+              key={editingItem.itemId}
+              defaultValues={{
+                name: editingItem.name,
+                category: editingItem.category,
+                quantity: editingItem.quantity,
+                unit: editingItem.unit,
+                status: editingItem.status,
+                notes: editingItem.notes ?? '',
+              }}
+              onSubmit={handleUpdateItem}
+              onCancel={() => setEditingItemId(null)}
+              isSubmitting={updateItemMutation.isPending}
+              submitLabel="Update Item"
+            />
+          ) : showItemForm ? (
             <ItemForm
               onSubmit={handleAddItem}
               onCancel={() => setShowItemForm(false)}
@@ -106,7 +166,7 @@ function PlanDetails() {
           ) : (
             <button
               type="button"
-              onClick={() => setShowItemForm(true)}
+              onClick={handleStartCreate}
               className="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors shadow-sm hover:shadow-md"
             >
               + Add Item

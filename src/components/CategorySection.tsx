@@ -14,11 +14,13 @@ const CATEGORY_LABELS: Record<ItemCategory, string> = {
 interface CategorySectionProps {
   category: ItemCategory;
   items: Item[];
+  onEditItem?: (itemId: string) => void;
 }
 
 export default function CategorySection({
   category,
   items,
+  onEditItem,
 }: CategorySectionProps) {
   const label = CATEGORY_LABELS[category];
 
@@ -59,7 +61,11 @@ export default function CategorySection({
         {items.length > 0 ? (
           <div className="border-t border-gray-200 divide-y divide-gray-200">
             {items.map((item) => (
-              <ItemCard key={item.itemId} item={item} />
+              <ItemCard
+                key={item.itemId}
+                item={item}
+                onEdit={onEditItem ? () => onEditItem(item.itemId) : undefined}
+              />
             ))}
           </div>
         ) : (

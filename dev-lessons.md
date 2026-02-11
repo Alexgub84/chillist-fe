@@ -6,6 +6,12 @@ A log of bugs fixed and problems solved in this project.
 
 <!-- Add new entries at the top -->
 
+## Toast notifications and error messages
+
+**Context**: The app uses `react-hot-toast` for non-blocking feedback. The Toaster is in the root layout, so any screen can show toasts.
+
+**How to show error messages**: In mutation handlers (e.g. create/update item), wrap the call in try/catch and use `getApiErrorMessage()` from `src/core/error-utils.ts` to get user-friendly `{ title, message }`, then call `toast.error(\`${title}: ${message}\`)`. This keeps error copy consistent and avoids exposing raw API messages. See [docs/toast.md](docs/toast.md) for full instructions and examples.
+
 ## 2026-02-08: Zod Schemas Must Mirror OpenAPI Format Constraints
 
 **Problem**: Creating a new plan failed with `body/startDate must match format "date-time"`. The `makeDateTime` helper produced `2025-12-20T10:00:00` (no timezone designator), which is not valid RFC 3339.
