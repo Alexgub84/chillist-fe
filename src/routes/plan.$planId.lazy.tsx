@@ -10,7 +10,13 @@ import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
-import type { ItemCategory, ItemCreate, ItemPatch } from '../core/schemas/item';
+import StatusFilter from '../components/StatusFilter';
+import type {
+  ItemCategory,
+  ItemCreate,
+  ItemPatch,
+  ItemStatus,
+} from '../core/schemas/item';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanDetails,
@@ -24,6 +30,7 @@ function PlanDetails() {
   const updateItemMutation = useUpdateItem(planId);
   const [showItemForm, setShowItemForm] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<ItemStatus | null>(null);
 
   if (isLoading) {
     return <div className="text-center">Loading plan details...</div>;
@@ -90,9 +97,23 @@ function PlanDetails() {
 
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
+  const statusCounts: Record<ItemStatus, number> = {
+    pending: 0,
+    purchased: 0,
+    packed: 0,
+    canceled: 0,
+  };
+  for (const item of plan.items) {
+    statusCounts[item.status]++;
+  }
+
+  const filteredItems = statusFilter
+    ? plan.items.filter((item) => item.status === statusFilter)
+    : plan.items;
+
   const itemsByCategory = CATEGORIES.map((category) => ({
     category,
-    items: plan.items.filter((item) => item.category === category),
+    items: filteredItems.filter((item) => item.category === category),
   }));
 
   return (
@@ -119,6 +140,17 @@ function PlanDetails() {
               )}
             </h2>
           </div>
+
+          {plan.items.length > 0 && (
+            <div className="mb-3 sm:mb-4">
+              <StatusFilter
+                selected={statusFilter}
+                onChange={setStatusFilter}
+                counts={statusCounts}
+                total={plan.items.length}
+              />
+            </div>
+          )}
 
           {plan.items.length === 0 && !showItemForm && (
             <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center mb-4">

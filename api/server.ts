@@ -98,6 +98,7 @@ const itemCreateSchema = z.object({
   unit: unitSchema.optional(),
   status: itemStatusSchema,
   notes: z.string().nullable().optional(),
+  assignedParticipantId: z.string().nullable().optional(),
 });
 
 const itemPatchSchema = itemCreateSchema.partial();
@@ -504,6 +505,7 @@ export async function buildServer(
         unit: parsed.unit ?? 'pcs',
         status: parsed.status,
         notes: parsed.notes,
+        assignedParticipantId: parsed.assignedParticipantId,
         createdAt: now,
         updatedAt: now,
       };
@@ -553,7 +555,7 @@ export async function buildServer(
 
       await persistData(store, shouldPersist, filePath);
 
-      void reply.status(204).send();
+      void reply.send({ ok: true });
     }
   );
 

@@ -27,6 +27,7 @@ const baseItemSchema = z.object({
   unit: unitSchema,
   notes: z.string().nullish(),
   status: itemStatusSchema,
+  assignedParticipantId: z.string().nullish(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
 });
@@ -51,6 +52,7 @@ export const itemCreateSchema = z.object({
   unit: unitSchema.optional(),
   status: itemStatusSchema,
   notes: z.string().nullish(),
+  assignedParticipantId: z.string().nullish(),
 });
 
 export const itemPatchSchema = itemCreateSchema.partial();

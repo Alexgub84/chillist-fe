@@ -58,6 +58,7 @@ const equipmentItemSchema = z.object({
   unit: z.enum(['pcs', 'kg', 'g', 'lb', 'oz', 'l', 'ml', 'pack', 'set']),
   notes: z.string().nullish(),
   status: z.enum(['pending', 'purchased', 'packed', 'canceled']),
+  assignedParticipantId: z.string().nullish(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
   category: z.literal('equipment'),
