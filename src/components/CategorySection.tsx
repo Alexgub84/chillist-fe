@@ -3,7 +3,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@headlessui/react';
-import type { Item, ItemCategory } from '../core/schemas/item';
+import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
 import ItemCard from './ItemCard';
 
 const CATEGORY_LABELS: Record<ItemCategory, string> = {
@@ -15,12 +15,14 @@ interface CategorySectionProps {
   category: ItemCategory;
   items: Item[];
   onEditItem?: (itemId: string) => void;
+  onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
 }
 
 export default function CategorySection({
   category,
   items,
   onEditItem,
+  onUpdateItem,
 }: CategorySectionProps) {
   const label = CATEGORY_LABELS[category];
 
@@ -65,6 +67,11 @@ export default function CategorySection({
                 key={item.itemId}
                 item={item}
                 onEdit={onEditItem ? () => onEditItem(item.itemId) : undefined}
+                onUpdate={
+                  onUpdateItem
+                    ? (updates) => onUpdateItem(item.itemId, updates)
+                    : undefined
+                }
               />
             ))}
           </div>

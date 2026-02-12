@@ -1,28 +1,19 @@
 import clsx from 'clsx';
-import type { Item } from '../core/schemas/item';
-
-const STATUS_CONFIG: Record<
-  Item['status'],
-  { label: string; bg: string; text: string }
-> = {
-  pending: { label: 'Pending', bg: 'bg-yellow-100', text: 'text-yellow-800' },
-  purchased: {
-    label: 'Purchased',
-    bg: 'bg-blue-100',
-    text: 'text-blue-800',
-  },
-  packed: { label: 'Packed', bg: 'bg-green-100', text: 'text-green-800' },
-  canceled: { label: 'Canceled', bg: 'bg-gray-100', text: 'text-gray-500' },
-};
+import type { Item, ItemPatch } from '../core/schemas/item';
+import { STATUS_OPTIONS, UNIT_OPTIONS } from '../core/constants/item';
+import InlineSelect from './shared/InlineSelect';
+import InlineQuantityInput from './shared/InlineQuantityInput';
 
 interface ItemCardProps {
   item: Item;
   onEdit?: () => void;
+  onUpdate?: (updates: ItemPatch) => void;
 }
 
-export default function ItemCard({ item, onEdit }: ItemCardProps) {
-  const status = STATUS_CONFIG[item.status];
+export default function ItemCard({ item, onEdit, onUpdate }: ItemCardProps) {
+  const statusOption = STATUS_OPTIONS.find((s) => s.value === item.status);
   const isCanceled = item.status === 'canceled';
+  const isEquipment = item.category === 'equipment';
 
   return (
     <div className="px-3 sm:px-5 py-3 sm:py-4">
@@ -38,14 +29,39 @@ export default function ItemCard({ item, onEdit }: ItemCardProps) {
           </span>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
-            <span
-              className={clsx(
-                'text-xs sm:text-sm',
-                isCanceled ? 'text-gray-400' : 'text-gray-600'
-              )}
-            >
-              {item.quantity} {item.unit}
-            </span>
+            {onUpdate ? (
+              <span className="inline-flex items-center gap-x-1">
+                <InlineQuantityInput
+                  value={item.quantity}
+                  onChange={(quantity) => onUpdate({ quantity })}
+                  className={clsx(
+                    'text-xs sm:text-sm',
+                    isCanceled ? 'text-gray-400' : 'text-gray-600'
+                  )}
+                />
+                <InlineSelect
+                  value={item.unit}
+                  onChange={(unit) => onUpdate({ unit })}
+                  options={UNIT_OPTIONS}
+                  disabled={isEquipment}
+                  buttonClassName={clsx(
+                    'text-xs sm:text-sm',
+                    isCanceled ? 'text-gray-400' : 'text-gray-600',
+                    !isEquipment && 'hover:bg-gray-100 px-1'
+                  )}
+                  ariaLabel={`Change unit for ${item.name}`}
+                />
+              </span>
+            ) : (
+              <span
+                className={clsx(
+                  'text-xs sm:text-sm',
+                  isCanceled ? 'text-gray-400' : 'text-gray-600'
+                )}
+              >
+                {item.quantity} {item.unit}
+              </span>
+            )}
             {item.notes && (
               <span className="text-xs sm:text-sm text-gray-400 truncate max-w-[200px] sm:max-w-xs">
                 {item.notes}
@@ -79,15 +95,29 @@ export default function ItemCard({ item, onEdit }: ItemCardProps) {
           </button>
         )}
 
-        <span
-          className={clsx(
-            'shrink-0 inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium',
-            status.bg,
-            status.text
-          )}
-        >
-          {status.label}
-        </span>
+        {onUpdate ? (
+          <InlineSelect
+            value={item.status}
+            onChange={(status) => onUpdate({ status })}
+            options={STATUS_OPTIONS}
+            buttonClassName={clsx(
+              'shrink-0 inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium hover:opacity-80',
+              statusOption?.bg,
+              statusOption?.text
+            )}
+            ariaLabel={`Change status for ${item.name}`}
+          />
+        ) : (
+          <span
+            className={clsx(
+              'shrink-0 inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium',
+              statusOption?.bg,
+              statusOption?.text
+            )}
+          >
+            {statusOption?.label ?? item.status}
+          </span>
+        )}
       </div>
     </div>
   );

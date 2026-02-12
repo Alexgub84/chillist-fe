@@ -10,6 +10,11 @@ import {
   type ItemCategory,
   type Unit,
 } from '../core/schemas/item';
+import {
+  CATEGORY_OPTIONS,
+  STATUS_OPTIONS,
+  UNIT_OPTIONS,
+} from '../core/constants/item';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 import Autocomplete from './shared/Autocomplete';
@@ -37,36 +42,6 @@ const ITEM_FORM_DEFAULTS: ItemFormValues = {
   status: 'pending',
   notes: '',
 };
-
-const CATEGORY_OPTIONS: {
-  value: z.infer<typeof itemCategorySchema>;
-  label: string;
-}[] = [
-  { value: 'food', label: 'Food' },
-  { value: 'equipment', label: 'Equipment' },
-];
-
-const STATUS_OPTIONS: {
-  value: z.infer<typeof itemStatusSchema>;
-  label: string;
-}[] = [
-  { value: 'pending', label: 'Pending' },
-  { value: 'purchased', label: 'Purchased' },
-  { value: 'packed', label: 'Packed' },
-  { value: 'canceled', label: 'Canceled' },
-];
-
-const UNIT_OPTIONS: { value: z.infer<typeof unitSchema>; label: string }[] = [
-  { value: 'kg', label: 'kg' },
-  { value: 'g', label: 'g' },
-  { value: 'lb', label: 'lb' },
-  { value: 'oz', label: 'oz' },
-  { value: 'l', label: 'l' },
-  { value: 'ml', label: 'ml' },
-  { value: 'pcs', label: 'pcs' },
-  { value: 'pack', label: 'pack' },
-  { value: 'set', label: 'set' },
-];
 
 interface ItemFormProps {
   defaultValues?: Partial<ItemFormValues>;
