@@ -67,28 +67,28 @@ function PlanDetails() {
     setShowItemForm(true);
   }
 
-  async function handleUpdateItem(values: ItemFormValues) {
-    if (!editingItemId) return;
-    const payload: ItemPatch = {
-      name: values.name,
-      category: values.category,
-      quantity: values.quantity,
-      unit: values.unit,
-      status: values.status,
-      notes: values.notes || null,
-    };
+  async function updateItem(itemId: string, updates: ItemPatch) {
     try {
-      await updateItemMutation.mutateAsync({
-        itemId: editingItemId,
-        updates: payload,
-      });
-      setEditingItemId(null);
+      await updateItemMutation.mutateAsync({ itemId, updates });
     } catch (err) {
       const { title, message } = getApiErrorMessage(
         err instanceof Error ? err : new Error(String(err))
       );
       toast.error(`${title}: ${message}`);
     }
+  }
+
+  async function handleFormSubmit(values: ItemFormValues) {
+    if (!editingItemId) return;
+    await updateItem(editingItemId, {
+      name: values.name,
+      category: values.category,
+      quantity: values.quantity,
+      unit: values.unit,
+      status: values.status,
+      notes: values.notes || null,
+    });
+    setEditingItemId(null);
   }
 
   const editingItem = editingItemId
@@ -168,6 +168,7 @@ function PlanDetails() {
                   category={category}
                   items={items}
                   onEditItem={handleStartEdit}
+                  onUpdateItem={updateItem}
                 />
               ))}
             </div>
@@ -184,7 +185,7 @@ function PlanDetails() {
                 status: editingItem.status,
                 notes: editingItem.notes ?? '',
               }}
-              onSubmit={handleUpdateItem}
+              onSubmit={handleFormSubmit}
               onCancel={() => setEditingItemId(null)}
               isSubmitting={updateItemMutation.isPending}
               submitLabel="Update Item"
