@@ -37,3 +37,6 @@ coverage
 # Build
 build
 
+# OpenAPI spec (fetched from backend, never edited locally)
+src/core/openapi.json
+
