@@ -283,6 +283,333 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/plans/{planId}/participants': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List all participants for a plan
+     * @description Retrieve all participants belonging to a specific plan
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-18'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
+    /**
+     * Add a participant to a plan
+     * @description Create a new participant in the specified plan
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-19'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-17'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/participants/{participantId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get participant by ID
+     * @description Retrieve a single participant by its ID
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          participantId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-17'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    /**
+     * Delete a participant
+     * @description Delete a participant by its ID. Items assigned to this participant will have their assignment cleared.
+     */
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          participantId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-22'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    /**
+     * Update a participant
+     * @description Update an existing participant by its ID
+     */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          participantId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-20'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-17'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    trace?: never;
+  };
   '/plans/{planId}/items': {
     parameters: {
       query?: never;
@@ -615,6 +942,8 @@ export interface components {
       /** @enum {string} */
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
       notes?: string | null;
+      /** Format: uuid */
+      assignedParticipantId?: string | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -633,6 +962,8 @@ export interface components {
       /** @enum {string} */
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
       notes?: string | null;
+      /** Format: uuid */
+      assignedParticipantId?: string | null;
     };
     /** UpdateItemBody */
     'def-14': {
@@ -645,6 +976,8 @@ export interface components {
       /** @enum {string} */
       status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       notes?: string | null;
+      /** Format: uuid */
+      assignedParticipantId?: string | null;
     };
     /** ItemIdParam */
     'def-15': {
@@ -674,6 +1007,58 @@ export interface components {
       /** Format: date-time */
       updatedAt: string;
       items: components['schemas']['def-12'];
+    };
+    /** Participant */
+    'def-17': {
+      /** Format: uuid */
+      participantId: string;
+      /** Format: uuid */
+      planId: string;
+      displayName: string;
+      name?: string | null;
+      lastName?: string | null;
+      /** @enum {string} */
+      role: 'owner' | 'participant' | 'viewer';
+      avatarUrl?: string | null;
+      contactEmail?: string | null;
+      contactPhone?: string | null;
+      /** Format: date-time */
+      createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
+    };
+    /** ParticipantList */
+    'def-18': components['schemas']['def-17'][];
+    /** CreateParticipantBody */
+    'def-19': {
+      displayName: string;
+      /** @enum {string} */
+      role?: 'owner' | 'participant' | 'viewer';
+      name?: string;
+      lastName?: string;
+      avatarUrl?: string;
+      contactEmail?: string;
+      contactPhone?: string;
+    };
+    /** UpdateParticipantBody */
+    'def-20': {
+      displayName?: string;
+      /** @enum {string} */
+      role?: 'owner' | 'participant' | 'viewer';
+      name?: string | null;
+      lastName?: string | null;
+      avatarUrl?: string | null;
+      contactEmail?: string | null;
+      contactPhone?: string | null;
+    };
+    /** ParticipantIdParam */
+    'def-21': {
+      /** Format: uuid */
+      participantId: string;
+    };
+    /** DeleteParticipantResponse */
+    'def-22': {
+      ok: boolean;
     };
   };
   responses: never;

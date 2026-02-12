@@ -1,14 +1,14 @@
 {
   "plans": [
     {
-      "planId": "plan-1",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "title": "Weekend Camping Trip",
       "description": "Two-night stay at Pine Ridge Campground with friends.",
       "status": "active",
       "visibility": "public",
-      "ownerParticipantId": "participant-1",
+      "ownerParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
       "location": {
-        "locationId": "location-1",
+        "locationId": "09d5ac50-de2e-4e4a-b31c-896aa574d95b",
         "name": "Pine Ridge Campground",
         "timezone": "America/Los_Angeles",
         "latitude": 37.8651,
@@ -17,10 +17,14 @@
         "region": "CA",
         "city": "Yosemite"
       },
-      "startDate": "2025-07-18T00:00:00Z",
-      "endDate": "2025-07-20T00:00:00Z",
+      "startDate": "2025-07-18T00:00:00.000Z",
+      "endDate": "2025-07-20T00:00:00.000Z",
       "tags": ["outdoors", "family", "camping"],
-      "participantIds": ["participant-1", "participant-2", "participant-3"],
+      "participantIds": [
+        "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
+        "457393e1-822f-4c1c-a081-8207aa6b9fe1",
+        "399dcf24-f8c4-45f8-96fb-4478d578908f"
+      ],
       "createdAt": "2025-05-01T12:00:00.000Z",
       "updatedAt": "2025-05-10T08:30:00.000Z"
     },
@@ -35,11 +39,11 @@
         "locationId": "d06c8578-0a10-4b7d-bddb-f07e0e306cd6",
         "name": "Park ha-Yarkon",
         "country": "Israel",
-        "region": "",
+        "region": null,
         "city": "Ramat Gan"
       },
-      "startDate": "2025-12-15T12:38:00Z",
-      "endDate": "2025-12-15T15:38:00Z",
+      "startDate": "2025-12-15T12:38:00.000Z",
+      "endDate": "2025-12-15T15:38:00.000Z",
       "participantIds": [
         "3cdcb33e-eebd-5716-8164-7da2b8158993",
         "de0bf12f-97de-534c-9930-27ebd6e0f944"
@@ -57,12 +61,12 @@
       "location": {
         "locationId": "0743c27e-873a-4d2b-9779-006d21ffb3a1",
         "name": "sdsd",
-        "country": "",
-        "region": "",
-        "city": ""
+        "country": null,
+        "region": null,
+        "city": null
       },
-      "startDate": "2025-12-15T13:40:00Z",
-      "endDate": "2025-12-24T16:41:00Z",
+      "startDate": "2025-12-15T13:40:00.000Z",
+      "endDate": "2025-12-24T16:41:00.000Z",
       "participantIds": [
         "3cdcb33e-eebd-5716-8164-7da2b8158993",
         "de0bf12f-97de-534c-9930-27ebd6e0f944",
@@ -74,7 +78,7 @@
   ],
   "participants": [
     {
-      "participantId": "participant-1",
+      "participantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
       "name": "Alex",
       "lastName": "Guberman",
       "displayName": "Alex G.",
@@ -85,7 +89,7 @@
       "updatedAt": "2025-05-10T08:00:00.000Z"
     },
     {
-      "participantId": "participant-2",
+      "participantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
       "name": "Jamie",
       "lastName": "Rivera",
       "displayName": "Jamie",
@@ -96,7 +100,7 @@
       "updatedAt": "2025-05-10T08:00:00.000Z"
     },
     {
-      "participantId": "participant-3",
+      "participantId": "399dcf24-f8c4-45f8-96fb-4478d578908f",
       "name": "Taylor",
       "lastName": "Morgan",
       "displayName": "Taylor",
@@ -108,31 +112,32 @@
   ],
   "items": [
     {
-      "itemId": "item-1",
-      "planId": "plan-1",
+      "itemId": "a83dbd25-cfda-4cea-b53b-c8163ef94c77",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Family Tent",
-      "quantity": 1,
-      "unit": "set",
+      "quantity": 3,
+      "unit": "pcs",
       "notes": "Check stakes before departure",
       "status": "packed",
       "createdAt": "2025-05-02T10:00:00.000Z",
-      "updatedAt": "2025-05-10T08:15:00.000Z",
+      "updatedAt": "2026-02-11T11:20:27.470Z",
       "category": "equipment"
     },
     {
-      "itemId": "item-2",
-      "planId": "plan-1",
+      "itemId": "404954b1-04f3-4512-abae-42683bffad2b",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Trail Mix",
       "quantity": 5,
       "unit": "pack",
+      "notes": null,
       "status": "purchased",
       "createdAt": "2025-05-03T14:20:00.000Z",
       "updatedAt": "2025-05-09T18:45:00.000Z",
       "category": "food"
     },
     {
-      "itemId": "item-3",
-      "planId": "plan-1",
+      "itemId": "4741a1b6-33b8-46d7-864c-7e61c748ff12",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Sleeping Bags",
       "quantity": 4,
       "unit": "pcs",
@@ -143,8 +148,8 @@
       "category": "equipment"
     },
     {
-      "itemId": "item-4",
-      "planId": "plan-1",
+      "itemId": "ccab3332-cc4f-449b-aec6-4130855cb0bf",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Camp Stove",
       "quantity": 1,
       "unit": "pcs",
@@ -155,8 +160,8 @@
       "category": "equipment"
     },
     {
-      "itemId": "item-5",
-      "planId": "plan-1",
+      "itemId": "bfd3aa99-197f-4b40-8607-11a7bc59e8f8",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Propane Canisters",
       "quantity": 2,
       "unit": "pcs",
@@ -167,19 +172,20 @@
       "category": "equipment"
     },
     {
-      "itemId": "item-6",
-      "planId": "plan-1",
+      "itemId": "10ad45f4-4afb-40c3-b0e7-676e293fada1",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Lantern",
       "quantity": 2,
       "unit": "pcs",
+      "notes": null,
       "status": "packed",
       "createdAt": "2025-05-07T13:30:00.000Z",
       "updatedAt": "2025-05-10T07:20:00.000Z",
       "category": "equipment"
     },
     {
-      "itemId": "item-7",
-      "planId": "plan-1",
+      "itemId": "f38b7f87-e468-4d32-9c53-bd7cd2820283",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "S'mores Kit",
       "quantity": 3,
       "unit": "pack",
@@ -190,8 +196,8 @@
       "category": "food"
     },
     {
-      "itemId": "item-8",
-      "planId": "plan-1",
+      "itemId": "7c5393a6-3450-4615-ae03-0a62447fcdaf",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Breakfast Burritos",
       "quantity": 6,
       "unit": "pcs",
@@ -202,19 +208,20 @@
       "category": "food"
     },
     {
-      "itemId": "item-9",
-      "planId": "plan-1",
+      "itemId": "59ea2733-e7cf-4700-a3ef-189c44203d68",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Coffee Beans",
       "quantity": 1,
       "unit": "lb",
+      "notes": null,
       "status": "purchased",
       "createdAt": "2025-05-07T09:10:00.000Z",
       "updatedAt": "2025-05-09T18:45:00.000Z",
       "category": "food"
     },
     {
-      "itemId": "item-10",
-      "planId": "plan-1",
+      "itemId": "fbf1ccf5-4107-416b-bd67-12b4b4868557",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Water Jugs",
       "quantity": 4,
       "unit": "l",
@@ -226,15 +233,15 @@
     },
     {
       "itemId": "90c92f2b-17b9-4406-8492-6065a9e0f212",
-      "planId": "plan-1",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Tent",
       "quantity": 1,
       "unit": "pcs",
-      "status": "pending",
       "notes": null,
-      "category": "equipment",
+      "status": "purchased",
       "createdAt": "2026-02-09T20:18:35.623Z",
-      "updatedAt": "2026-02-09T20:18:35.623Z"
+      "updatedAt": "2026-02-11T11:20:35.532Z",
+      "category": "equipment"
     }
   ]
 }

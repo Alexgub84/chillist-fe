@@ -24,6 +24,12 @@ class HttpError extends Error {
   }
 }
 
+function statusColor(code: number): string {
+  if (code >= 400) return '\x1b[31m';
+  if (code >= 300) return '\x1b[33m';
+  return '\x1b[32m';
+}
+
 const planStatusSchema = z.enum(['draft', 'active', 'archived']);
 const planVisibilitySchema = z.enum(['public', 'unlisted', 'private']);
 const participantRoleSchema = z.enum(['owner', 'participant', 'viewer']);
@@ -55,17 +61,23 @@ const locationSchema = z.object({
 const planCreateSchema = z.object({
   title: z.string().min(1).max(255),
   description: z.string().nullable().optional(),
-  status: planStatusSchema.default('draft'),
-  visibility: planVisibilitySchema.default('private'),
-  ownerParticipantId: z.string().nullable().optional(),
+  visibility: planVisibilitySchema.optional(),
   location: locationSchema.nullable().optional(),
   startDate: z.string().datetime().nullable().optional(),
   endDate: z.string().datetime().nullable().optional(),
   tags: z.array(z.string()).nullable().optional(),
-  participantIds: z.array(z.string()).optional(),
 });
 
-const planPatchSchema = planCreateSchema.partial();
+const planPatchSchema = z.object({
+  title: z.string().min(1).max(255).optional(),
+  description: z.string().nullable().optional(),
+  status: planStatusSchema.optional(),
+  visibility: planVisibilitySchema.optional(),
+  location: locationSchema.nullable().optional(),
+  startDate: z.string().datetime().nullable().optional(),
+  endDate: z.string().datetime().nullable().optional(),
+  tags: z.array(z.string()).nullable().optional(),
+});
 
 const participantCreateSchema = z.object({
   displayName: z.string().min(1),
@@ -80,12 +92,12 @@ const participantCreateSchema = z.object({
 const participantPatchSchema = participantCreateSchema.partial();
 
 const itemCreateSchema = z.object({
-  name: z.string().min(1),
-  quantity: z.number().int().positive().optional(),
-  unit: unitSchema.optional(),
-  status: itemStatusSchema.optional(),
-  notes: z.string().nullish(),
+  name: z.string().min(1).max(255),
   category: itemCategorySchema,
+  quantity: z.number().int().min(1),
+  unit: unitSchema.optional(),
+  status: itemStatusSchema,
+  notes: z.string().nullable().optional(),
 });
 
 const itemPatchSchema = itemCreateSchema.partial();
@@ -94,6 +106,7 @@ export interface BuildServerOptions {
   dataFilePath?: string;
   initialData?: MockData;
   persist?: boolean;
+  logger?: boolean;
 }
 
 interface MutableStore {
@@ -165,7 +178,10 @@ async function persistData(
 
   await saveMockData(
     {
-      plans: data.plans,
+      plans: data.plans.map((plan) => ({
+        ...plan,
+        participantIds: plan.participantIds ?? undefined,
+      })),
       participants: data.participants,
       items: data.items,
     },
@@ -176,12 +192,12 @@ async function persistData(
 export async function buildServer(
   options: BuildServerOptions = {}
 ): Promise<FastifyInstance> {
-  const app = Fastify({
-    logger: false,
-  });
+  const enableLogger = options.logger !== false;
+  const app = Fastify({ logger: false });
 
   await app.register(cors, {
     origin: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   });
 
   const filePath = options.dataFilePath ?? DEFAULT_MOCK_DATA_PATH;
@@ -189,8 +205,41 @@ export async function buildServer(
   const store = cloneData(initialData);
   const shouldPersist = options.persist ?? true;
 
-  app.setErrorHandler((error, _request, reply) => {
+  if (enableLogger) {
+    app.addHook('onResponse', (request, reply, done) => {
+      if (request.method === 'OPTIONS') {
+        done();
+        return;
+      }
+
+      const status = reply.statusCode;
+      const ms = reply.elapsedTime.toFixed(0);
+      const tag = statusColor(status);
+      const reset = '\x1b[0m';
+
+      const parts = [
+        `${tag}${request.method}${reset}`,
+        request.url,
+        `→ ${tag}${status}${reset}`,
+        `(${ms}ms)`,
+      ];
+
+      if (['POST', 'PUT', 'PATCH'].includes(request.method) && request.body) {
+        parts.push(`\n  body: ${JSON.stringify(request.body)}`);
+      }
+
+      console.info(`[mock] ${parts.join(' ')}`);
+      done();
+    });
+  }
+
+  app.setErrorHandler((error, request, reply) => {
     if (error instanceof HttpError) {
+      if (enableLogger) {
+        console.warn(
+          `[mock] \x1b[31m${request.method}\x1b[0m ${request.url} → \x1b[31m${error.statusCode}\x1b[0m ${error.message}`
+        );
+      }
       void reply.status(error.statusCode).send({ message: error.message });
       return;
     }
@@ -199,9 +248,21 @@ export async function buildServer(
       'statusCode' in error && typeof error.statusCode === 'number'
         ? error.statusCode
         : 500;
+    if (enableLogger) {
+      console.error(
+        `[mock] \x1b[31m${request.method}\x1b[0m ${request.url} → \x1b[31m${status}\x1b[0m ${error.message}`,
+        ['POST', 'PUT', 'PATCH'].includes(request.method) && request.body
+          ? `\n  body: ${JSON.stringify(request.body)}`
+          : ''
+      );
+    }
     void reply
       .status(status)
       .send({ message: error.message ?? 'Unexpected error' });
+  });
+
+  app.get('/health', async (_request, reply) => {
+    void reply.send({ status: 'healthy', database: 'connected' });
   });
 
   app.get('/plans', async (_request, reply) => {
@@ -217,12 +278,6 @@ export async function buildServer(
           locationId: parsed.location.locationId ?? randomUUID(),
         }
       : undefined;
-    const participantIds = parsed.participantIds
-      ? [...new Set(parsed.participantIds)]
-      : [];
-    if (!participantIds.includes(parsed.ownerParticipantId)) {
-      participantIds.push(parsed.ownerParticipantId);
-    }
     const plan: Plan = {
       planId: randomUUID(),
       createdAt: now,
@@ -230,13 +285,13 @@ export async function buildServer(
       description: parsed.description,
       endDate: parsed.endDate,
       location,
-      ownerParticipantId: parsed.ownerParticipantId,
-      participantIds,
+      ownerParticipantId: undefined,
+      participantIds: [],
       startDate: parsed.startDate,
-      status: parsed.status,
+      status: 'draft',
       tags: parsed.tags,
       title: parsed.title,
-      visibility: parsed.visibility,
+      visibility: parsed.visibility ?? 'private',
     };
 
     store.plans.push(plan);
@@ -275,17 +330,6 @@ export async function buildServer(
         };
       }
 
-      if (updates.participantIds) {
-        plan.participantIds = [...new Set(updates.participantIds)];
-      }
-
-      if (updates.ownerParticipantId) {
-        plan.participantIds = plan.participantIds ?? [];
-        if (!plan.participantIds.includes(updates.ownerParticipantId)) {
-          plan.participantIds.push(updates.ownerParticipantId);
-        }
-      }
-
       await persistData(store, shouldPersist, filePath);
 
       void reply.send(plan);
@@ -309,7 +353,7 @@ export async function buildServer(
 
       await persistData(store, shouldPersist, filePath);
 
-      void reply.status(204).send();
+      void reply.send({ ok: true });
     }
   );
 
@@ -455,11 +499,11 @@ export async function buildServer(
         itemId: randomUUID(),
         planId: request.params.planId,
         name: parsed.name,
-        quantity: parsed.quantity ?? 1,
-        unit: parsed.unit ?? 'pcs',
-        status: parsed.status ?? 'pending',
-        notes: parsed.notes,
         category: parsed.category,
+        quantity: parsed.quantity,
+        unit: parsed.unit ?? 'pcs',
+        status: parsed.status,
+        notes: parsed.notes,
         createdAt: now,
         updatedAt: now,
       };

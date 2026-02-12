@@ -11,6 +11,7 @@ function createTestData(): MockData {
         planId: 'plan-1',
         title: 'Test Plan',
         status: 'draft',
+        visibility: 'private',
         ownerParticipantId: 'participant-1',
         participantIds: ['participant-1'],
         createdAt: now,
@@ -50,6 +51,7 @@ describe('mock server', () => {
     const server = await buildServer({
       initialData: createTestData(),
       persist: false,
+      logger: false,
     });
     try {
       const response = await server.inject({ method: 'GET', url: '/plans' });
@@ -67,6 +69,7 @@ describe('mock server', () => {
     const server = await buildServer({
       initialData: createTestData(),
       persist: false,
+      logger: false,
     });
     try {
       const response = await server.inject({
@@ -74,18 +77,14 @@ describe('mock server', () => {
         url: '/plans',
         payload: {
           title: 'Summer Trip',
-          ownerParticipantId: 'participant-1',
-          status: 'active',
         },
       });
 
       expect(response.statusCode).toBe(201);
       const payload = response.json() as Record<string, unknown>;
       expect(payload.planId).toEqual(expect.any(String));
-      expect(payload.status).toBe('active');
-      expect(payload.participantIds).toEqual(
-        expect.arrayContaining(['participant-1'])
-      );
+      expect(payload.status).toBe('draft');
+      expect(payload.visibility).toBe('private');
     } finally {
       await server.close();
     }
@@ -95,6 +94,7 @@ describe('mock server', () => {
     const server = await buildServer({
       initialData: createTestData(),
       persist: false,
+      logger: false,
     });
     try {
       const response = await server.inject({
@@ -120,6 +120,7 @@ describe('mock server', () => {
     const server = await buildServer({
       initialData: createTestData(),
       persist: false,
+      logger: false,
     });
     try {
       const response = await server.inject({
@@ -153,6 +154,7 @@ describe('mock server', () => {
     const server = await buildServer({
       initialData: createTestData(),
       persist: false,
+      logger: false,
     });
     try {
       const response = await server.inject({
@@ -161,6 +163,8 @@ describe('mock server', () => {
         payload: {
           name: 'Lantern',
           category: 'equipment',
+          quantity: 2,
+          status: 'pending',
         },
       });
 
@@ -168,6 +172,7 @@ describe('mock server', () => {
       const payload = response.json() as Record<string, unknown>;
       expect(payload.itemId).toEqual(expect.any(String));
       expect(payload.planId).toBe('plan-1');
+      expect(payload.quantity).toBe(2);
       expect(payload.status).toBe('pending');
     } finally {
       await server.close();
@@ -178,6 +183,7 @@ describe('mock server', () => {
     const server = await buildServer({
       initialData: createTestData(),
       persist: false,
+      logger: false,
     });
     try {
       const response = await server.inject({
