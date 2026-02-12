@@ -182,7 +182,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-16'];
+            'application/json': components['schemas']['def-17'];
           };
         };
         /** @description Default Response */
@@ -311,7 +311,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-18'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -359,7 +359,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-19'];
+          'application/json': components['schemas']['def-20'];
         };
       };
       responses: {
@@ -369,7 +369,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-18'];
           };
         };
         /** @description Default Response */
@@ -444,7 +444,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-18'];
           };
         };
         /** @description Default Response */
@@ -499,7 +499,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-22'];
+            'application/json': components['schemas']['def-23'];
           };
         };
         /** @description Default Response */
@@ -557,7 +557,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-20'];
+          'application/json': components['schemas']['def-21'];
         };
       };
       responses: {
@@ -567,7 +567,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-18'];
           };
         };
         /** @description Default Response */
@@ -753,7 +753,59 @@ export interface paths {
     get?: never;
     put?: never;
     post?: never;
-    delete?: never;
+    /**
+     * Delete an item
+     * @description Delete an item by its ID. Cascade delete handles related assignments.
+     */
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          itemId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-16'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
     options?: never;
     head?: never;
     /**
@@ -984,8 +1036,12 @@ export interface components {
       /** Format: uuid */
       itemId: string;
     };
-    /** PlanWithItems */
+    /** DeleteItemResponse */
     'def-16': {
+      ok: boolean;
+    };
+    /** PlanWithItems */
+    'def-17': {
       /** Format: uuid */
       planId: string;
       title: string;
@@ -1009,7 +1065,7 @@ export interface components {
       items: components['schemas']['def-12'];
     };
     /** Participant */
-    'def-17': {
+    'def-18': {
       /** Format: uuid */
       participantId: string;
       /** Format: uuid */
@@ -1028,9 +1084,9 @@ export interface components {
       updatedAt: string;
     };
     /** ParticipantList */
-    'def-18': components['schemas']['def-17'][];
+    'def-19': components['schemas']['def-18'][];
     /** CreateParticipantBody */
-    'def-19': {
+    'def-20': {
       displayName: string;
       /** @enum {string} */
       role?: 'owner' | 'participant' | 'viewer';
@@ -1041,7 +1097,7 @@ export interface components {
       contactPhone?: string;
     };
     /** UpdateParticipantBody */
-    'def-20': {
+    'def-21': {
       displayName?: string;
       /** @enum {string} */
       role?: 'owner' | 'participant' | 'viewer';
@@ -1052,12 +1108,12 @@ export interface components {
       contactPhone?: string | null;
     };
     /** ParticipantIdParam */
-    'def-21': {
+    'def-22': {
       /** Format: uuid */
       participantId: string;
     };
     /** DeleteParticipantResponse */
-    'def-22': {
+    'def-23': {
       ok: boolean;
     };
   };

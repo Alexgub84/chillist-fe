@@ -375,7 +375,7 @@ describe('API Client', () => {
     });
 
     it('deletes an item', async () => {
-      fetchMock.mockResolvedValueOnce(mockResponse({}, { status: 204 }));
+      fetchMock.mockResolvedValueOnce(mockResponse({ ok: true }));
 
       await deleteItem('item-1');
       expect(fetchMock).toHaveBeenCalledWith(

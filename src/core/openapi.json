@@ -467,6 +467,16 @@
       "def-16": {
         "type": "object",
         "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        },
+        "required": ["ok"],
+        "title": "DeleteItemResponse"
+      },
+      "def-17": {
+        "type": "object",
+        "properties": {
           "planId": {
             "type": "string",
             "format": "uuid"
@@ -541,7 +551,7 @@
         ],
         "title": "PlanWithItems"
       },
-      "def-17": {
+      "def-18": {
         "type": "object",
         "properties": {
           "participantId": {
@@ -598,14 +608,14 @@
         ],
         "title": "Participant"
       },
-      "def-18": {
+      "def-19": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/def-17"
+          "$ref": "#/components/schemas/def-18"
         },
         "title": "ParticipantList"
       },
-      "def-19": {
+      "def-20": {
         "type": "object",
         "properties": {
           "displayName": {
@@ -640,7 +650,7 @@
         "required": ["displayName"],
         "title": "CreateParticipantBody"
       },
-      "def-20": {
+      "def-21": {
         "type": "object",
         "properties": {
           "displayName": {
@@ -679,7 +689,7 @@
         },
         "title": "UpdateParticipantBody"
       },
-      "def-21": {
+      "def-22": {
         "type": "object",
         "properties": {
           "participantId": {
@@ -690,7 +700,7 @@
         "required": ["participantId"],
         "title": "ParticipantIdParam"
       },
-      "def-22": {
+      "def-23": {
         "type": "object",
         "properties": {
           "ok": {
@@ -839,7 +849,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-16"
+                  "$ref": "#/components/schemas/def-17"
                 }
               }
             }
@@ -967,7 +977,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-18"
+                  "$ref": "#/components/schemas/def-19"
                 }
               }
             }
@@ -1012,7 +1022,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/def-19"
+                "$ref": "#/components/schemas/def-20"
               }
             }
           }
@@ -1034,7 +1044,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-17"
+                  "$ref": "#/components/schemas/def-18"
                 }
               }
             }
@@ -1104,7 +1114,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-17"
+                  "$ref": "#/components/schemas/def-18"
                 }
               }
             }
@@ -1149,7 +1159,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/def-20"
+                "$ref": "#/components/schemas/def-21"
               }
             }
           }
@@ -1171,7 +1181,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-17"
+                  "$ref": "#/components/schemas/def-18"
                 }
               }
             }
@@ -1239,7 +1249,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/def-22"
+                  "$ref": "#/components/schemas/def-23"
                 }
               }
             }
@@ -1466,6 +1476,64 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an item",
+        "tags": ["items"],
+        "description": "Delete an item by its ID. Cascade delete handles related assignments.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "itemId",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-16"
                 }
               }
             }
