@@ -17,7 +17,8 @@ alwaysApply: true
 3. Confirm with user which issue we're working on
 4. Assign yourself and add "in progress" label
 5. Create a feature branch from up-to-date main: `git checkout main && git pull origin main && git checkout -b <branch>`
-6. Implement the feature/fix per the issue description
+6. Sync the OpenAPI spec and generated types: `npm run api:sync`
+7. Implement the feature/fix per the issue description
 
 ## Planning Mode
 - Output a concise plan before writing code
@@ -45,7 +46,11 @@ alwaysApply: true
 When the OpenAPI spec (`src/core/openapi.json`) changes, propagate those changes across ALL layers in order:
 
 ### Source of truth
-`src/core/openapi.json` is the single contract. Everything else derives from it.
+The **backend** owns the OpenAPI spec. The frontend only **consumes** it.
+- `src/core/openapi.json` is gitignored and fetched from the backend via `npm run api:fetch`
+- **NEVER** edit `src/core/openapi.json` directly in this repo
+- To update the spec, make changes in the backend repo and then run `npm run api:sync` to pull + regenerate types
+- If you need a new field or endpoint, it must be implemented in the backend first
 
 ### Layer checklist (update in this order)
 1. **Frontend Zod schemas** (`src/core/schemas/`) — mirror OpenAPI format constraints (`date-time` → `.datetime()`, `nullable` → `.nullish()`, `integer` → `.int()`, `maxLength` → `.max()`)

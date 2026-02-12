@@ -6,6 +6,24 @@ A log of bugs fixed and problems solved in this project.
 
 <!-- Add new entries at the top -->
 
+## 2026-02-12: OpenAPI Spec Drift — Frontend Edited the Contract Directly
+
+**Problem**: Backend query failed with `column plans_items.assigned_participant_id does not exist`. The backend Drizzle ORM schema referenced a column that was never added to the database.
+
+**Root Cause**: The OpenAPI spec (`src/core/openapi.json`) was edited directly in the frontend repo — `assignedParticipantId` was added to the Item, CreateItemBody, and UpdateItemBody schemas. All frontend layers (Zod schemas, mock server, generated types) were aligned to the updated spec, but no database migration was ever created on the backend. The backend ORM picked up the new field from the shared contract, generating SQL for a column that didn't exist.
+
+**Solution**:
+- Gitignored `src/core/openapi.json` so it can never be edited locally again
+- Added `predev` script to auto-fetch the spec from the backend on `npm run dev`
+- Added `npm run api:fetch` step to CI pipeline before lint/typecheck/build
+- Updated workflow rules to clarify the backend owns the spec
+
+**Lessons**:
+1. The OpenAPI spec must be owned by the backend — the frontend should only fetch and consume it, never edit it
+2. A committed spec file with no guardrails can be silently modified, causing schema drift between frontend and backend
+3. Gitignoring generated/fetched files and auto-fetching them in dev/CI is the strongest guardrail against accidental edits
+4. When aligning schemas, always verify changes flow from backend (migration + spec) to frontend (fetch + regenerate), not the other way around
+
 ## Toast notifications and error messages
 
 **Context**: The app uses `react-hot-toast` for non-blocking feedback. The Toaster is in the root layout, so any screen can show toasts.
