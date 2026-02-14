@@ -12,12 +12,12 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { Route as rootRouteImport } from './routes/__root';
 import { Route as CreatePlanRouteImport } from './routes/create-plan';
+import { Route as PlanPlanIdRouteImport } from './routes/plan.$planId';
 
 const PlansLazyRouteImport = createFileRoute('/plans')();
 const NotFoundLazyRouteImport = createFileRoute('/not-found')();
 const AboutLazyRouteImport = createFileRoute('/about')();
 const IndexLazyRouteImport = createFileRoute('/')();
-const PlanPlanIdLazyRouteImport = createFileRoute('/plan/$planId')();
 
 const PlansLazyRoute = PlansLazyRouteImport.update({
   id: '/plans',
@@ -44,7 +44,7 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
-const PlanPlanIdLazyRoute = PlanPlanIdLazyRouteImport.update({
+const PlanPlanIdRoute = PlanPlanIdRouteImport.update({
   id: '/plan/$planId',
   path: '/plan/$planId',
   getParentRoute: () => rootRouteImport,
@@ -56,7 +56,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
-  '/plan/$planId': typeof PlanPlanIdLazyRoute;
+  '/plan/$planId': typeof PlanPlanIdRoute;
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute;
@@ -64,7 +64,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
-  '/plan/$planId': typeof PlanPlanIdLazyRoute;
+  '/plan/$planId': typeof PlanPlanIdRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
@@ -73,7 +73,7 @@ export interface FileRoutesById {
   '/about': typeof AboutLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
-  '/plan/$planId': typeof PlanPlanIdLazyRoute;
+  '/plan/$planId': typeof PlanPlanIdRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
@@ -108,7 +108,7 @@ export interface RootRouteChildren {
   AboutLazyRoute: typeof AboutLazyRoute;
   NotFoundLazyRoute: typeof NotFoundLazyRoute;
   PlansLazyRoute: typeof PlansLazyRoute;
-  PlanPlanIdLazyRoute: typeof PlanPlanIdLazyRoute;
+  PlanPlanIdRoute: typeof PlanPlanIdRoute;
 }
 
 declare module '@tanstack/react-router' {
@@ -152,7 +152,7 @@ declare module '@tanstack/react-router' {
       id: '/plan/$planId';
       path: '/plan/$planId';
       fullPath: '/plan/$planId';
-      preLoaderRoute: typeof PlanPlanIdLazyRouteImport;
+      preLoaderRoute: typeof PlanPlanIdRouteImport;
       parentRoute: typeof rootRouteImport;
     };
   }
@@ -164,7 +164,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutLazyRoute: AboutLazyRoute,
   NotFoundLazyRoute: NotFoundLazyRoute,
   PlansLazyRoute: PlansLazyRoute,
-  PlanPlanIdLazyRoute: PlanPlanIdLazyRoute,
+  PlanPlanIdRoute: PlanPlanIdRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { createLazyFileRoute } from '@tanstack/react-router';
-import { Link, useParams } from '@tanstack/react-router';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearch,
+} from '@tanstack/react-router';
 import toast from 'react-hot-toast';
 import { usePlan } from '../hooks/usePlan';
 import { useCreateItem } from '../hooks/useCreateItem';
@@ -28,9 +33,10 @@ function PlanDetails() {
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
+  const { status: statusFilter } = useSearch({ from: '/plan/$planId' });
+  const navigate = useNavigate();
   const [showItemForm, setShowItemForm] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
-  const [statusFilter, setStatusFilter] = useState<ItemStatus | null>(null);
 
   if (isLoading) {
     return <div className="text-center">Loading plan details...</div>;
@@ -144,8 +150,13 @@ function PlanDetails() {
           {plan.items.length > 0 && (
             <div className="mb-3 sm:mb-4">
               <StatusFilter
-                selected={statusFilter}
-                onChange={setStatusFilter}
+                selected={statusFilter ?? null}
+                onChange={(status) =>
+                  navigate({
+                    search: { status: status ?? undefined },
+                    replace: true,
+                  })
+                }
                 counts={statusCounts}
                 total={plan.items.length}
               />
