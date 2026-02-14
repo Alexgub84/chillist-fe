@@ -6,7 +6,7 @@ import { useCreatePlan } from '../../../hooks/useCreatePlan';
 import * as apiModule from '../../../core/api';
 
 vi.mock('../../../core/api', () => ({
-  createPlan: vi.fn(),
+  createPlanWithOwner: vi.fn(),
 }));
 
 describe('useCreatePlan', () => {
@@ -30,24 +30,40 @@ describe('useCreatePlan', () => {
     );
   }
 
-  it('should call createPlan API with the provided payload', async () => {
-    const mockPlan = {
-      planId: 'plan-123',
-      title: 'Test Plan',
-      status: 'draft' as const,
-      visibility: 'public' as const,
-      ownerParticipantId: 'owner-1',
-      createdAt: '2025-12-12T00:00:00Z',
-      updatedAt: '2025-12-12T00:00:00Z',
-    };
-    const mockCreatePlan = vi.mocked(apiModule.createPlan);
-    mockCreatePlan.mockResolvedValue(mockPlan);
+  const mockPlanWithDetails = {
+    planId: 'plan-123',
+    title: 'Test Plan',
+    status: 'draft' as const,
+    visibility: 'public' as const,
+    ownerParticipantId: 'owner-1',
+    createdAt: '2025-12-12T00:00:00Z',
+    updatedAt: '2025-12-12T00:00:00Z',
+    items: [],
+    participants: [
+      {
+        participantId: 'owner-1',
+        planId: 'plan-123',
+        name: 'Test',
+        lastName: 'Owner',
+        contactPhone: '+1234567890',
+        role: 'owner' as const,
+        createdAt: '2025-12-12T00:00:00Z',
+        updatedAt: '2025-12-12T00:00:00Z',
+      },
+    ],
+  };
+
+  it('should call createPlanWithOwner API with the provided payload', async () => {
+    const mockCreatePlan = vi.mocked(apiModule.createPlanWithOwner);
+    mockCreatePlan.mockResolvedValue(mockPlanWithDetails);
 
     const payload = {
       title: 'Test Plan',
-      status: 'draft' as const,
-      visibility: 'public' as const,
-      ownerParticipantId: 'owner-1',
+      owner: {
+        name: 'Test',
+        lastName: 'Owner',
+        contactPhone: '+1234567890',
+      },
     };
 
     const { result } = renderHook(() => useCreatePlan(), { wrapper });
@@ -60,20 +76,13 @@ describe('useCreatePlan', () => {
 
     expect(mockCreatePlan).toHaveBeenCalledTimes(1);
     expect(mockCreatePlan).toHaveBeenCalledWith(payload);
-    expect(result.current.data).toEqual(mockPlan);
+    expect(result.current.data).toEqual(mockPlanWithDetails);
   });
 
   it('should invalidate plans query cache on success', async () => {
-    const mockPlan = {
-      planId: 'plan-456',
-      title: 'Another Plan',
-      status: 'draft' as const,
-      visibility: 'private' as const,
-      ownerParticipantId: 'owner-2',
-      createdAt: '2025-12-12T00:00:00Z',
-      updatedAt: '2025-12-12T00:00:00Z',
-    };
-    vi.mocked(apiModule.createPlan).mockResolvedValue(mockPlan);
+    vi.mocked(apiModule.createPlanWithOwner).mockResolvedValue(
+      mockPlanWithDetails
+    );
 
     queryClient.setQueryData(['plans'], [{ planId: 'existing' }]);
     const invalidateSpy = vi.spyOn(queryClient, 'invalidateQueries');
@@ -82,9 +91,11 @@ describe('useCreatePlan', () => {
 
     result.current.mutate({
       title: 'Another Plan',
-      status: 'draft' as const,
-      visibility: 'private' as const,
-      ownerParticipantId: 'owner-2',
+      owner: {
+        name: 'Another',
+        lastName: 'Owner',
+        contactPhone: '+0000000000',
+      },
     });
 
     await waitFor(() => {
@@ -95,7 +106,7 @@ describe('useCreatePlan', () => {
   });
 
   it('should set error state when API call fails', async () => {
-    vi.mocked(apiModule.createPlan).mockRejectedValue(
+    vi.mocked(apiModule.createPlanWithOwner).mockRejectedValue(
       new Error('Network error')
     );
 
@@ -103,9 +114,11 @@ describe('useCreatePlan', () => {
 
     result.current.mutate({
       title: 'Fail Plan',
-      status: 'draft' as const,
-      visibility: 'public' as const,
-      ownerParticipantId: 'owner-3',
+      owner: {
+        name: 'Fail',
+        lastName: 'Owner',
+        contactPhone: '+0000000000',
+      },
     });
 
     await waitFor(() => {

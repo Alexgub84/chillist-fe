@@ -1,13 +1,12 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { v5 as uuidv5 } from 'uuid';
 
 import {
-  planCreateSchema,
   planStatusSchema,
   planVisibilitySchema,
-  type PlanCreate,
+  type PlanCreateWithOwner,
 } from '../core/schemas/plan';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
@@ -21,25 +20,25 @@ const locationFormSchema = z
   })
   .optional();
 
-const createPlanFormSchema = planCreateSchema
-  .omit({
-    tags: true,
-    participantIds: true,
-    startDate: true,
-    endDate: true,
-    ownerParticipantId: true,
-    title: true,
-    location: true,
-    status: true,
-    visibility: true,
-  })
-  .extend({
+const participantRowSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  contactPhone: z.string().min(1, 'Phone is required'),
+  contactEmail: z.string().optional(),
+});
+
+const createPlanFormSchema = z
+  .object({
     title: z.string().min(1, 'Title is required'),
+    description: z.string().optional(),
     status: planStatusSchema,
     visibility: planVisibilitySchema,
-    tagsCsv: z.string().optional(),
-    participantsCsv: z.string().optional(),
     ownerName: z.string().min(1, 'Owner name is required'),
+    ownerLastName: z.string().min(1, 'Owner last name is required'),
+    ownerPhone: z.string().min(1, 'Owner phone is required'),
+    ownerEmail: z.string().optional(),
+    tagsCsv: z.string().optional(),
+    participants: z.array(participantRowSchema).optional(),
     oneDay: z.boolean().optional(),
     singleDate: z
       .string()
@@ -58,40 +57,22 @@ const createPlanFormSchema = planCreateSchema
     endDateTime: z.string().optional(),
     location: locationFormSchema,
   })
-  .refine(
-    (data) => {
-      // One-day mode: require singleDate
-      return !data.oneDay || !!data.singleDate;
-    },
-    {
-      message: 'Date is required',
-      path: ['singleDate'],
-    }
-  )
-  .refine(
-    (data) => {
-      // Multi-day mode: require startDateDate
-      return data.oneDay || !!data.startDateDate;
-    },
-    {
-      message: 'Start date is required',
-      path: ['startDateDate'],
-    }
-  )
-  .refine(
-    (data) => {
-      // Multi-day mode: require endDateDate
-      return data.oneDay || !!data.endDateDate;
-    },
-    {
-      message: 'End date is required',
-      path: ['endDateDate'],
-    }
-  );
+  .refine((data) => !data.oneDay || !!data.singleDate, {
+    message: 'Date is required',
+    path: ['singleDate'],
+  })
+  .refine((data) => data.oneDay || !!data.startDateDate, {
+    message: 'Start date is required',
+    path: ['startDateDate'],
+  })
+  .refine((data) => data.oneDay || !!data.endDateDate, {
+    message: 'End date is required',
+    path: ['endDateDate'],
+  });
 
 type FormValues = z.infer<typeof createPlanFormSchema>;
 
-export type PlanFormPayload = PlanCreate;
+export type PlanFormPayload = PlanCreateWithOwner;
 
 interface PlanFormProps {
   onSubmit: (payload: PlanFormPayload) => void | Promise<void>;
@@ -105,11 +86,22 @@ export default function PlanForm({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     watch,
   } = useForm<FormValues>({
     resolver: zodResolver(createPlanFormSchema),
-    defaultValues: { status: 'draft', oneDay: false },
+    defaultValues: {
+      status: 'draft',
+      visibility: 'private',
+      oneDay: false,
+      participants: [],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'participants',
   });
 
   const oneDay = watch('oneDay');
@@ -129,7 +121,7 @@ export default function PlanForm({
   };
 
   const UUID_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-  const generateId = (name: string) => {
+  const generateLocationId = (name: string) => {
     return uuidv5(name, UUID_NAMESPACE);
   };
 
@@ -146,12 +138,28 @@ export default function PlanForm({
   };
 
   async function handleFormSubmit(values: FormValues): Promise<void> {
-    const payload: PlanCreate = {
+    const participants = (values.participants ?? [])
+      .filter(
+        (p) => p.name.trim() || p.lastName.trim() || p.contactPhone.trim()
+      )
+      .map((p) => ({
+        name: p.name.trim(),
+        lastName: p.lastName.trim(),
+        contactPhone: p.contactPhone.trim(),
+        contactEmail: p.contactEmail?.trim() || undefined,
+      }));
+
+    const payload: PlanCreateWithOwner = {
       title: values.title,
-      description: values.description,
-      status: values.status,
+      description: values.description || undefined,
       visibility: values.visibility,
-      ownerParticipantId: generateId(values.ownerName),
+      owner: {
+        name: values.ownerName.trim(),
+        lastName: values.ownerLastName.trim(),
+        contactPhone: values.ownerPhone.trim(),
+        contactEmail: values.ownerEmail?.trim() || undefined,
+      },
+      participants: participants.length > 0 ? participants : undefined,
       startDate: values.oneDay
         ? makeDateTime(values.singleDate, values.singleStartTime)
         : makeDateTime(values.startDateDate, values.startDateTime),
@@ -159,13 +167,12 @@ export default function PlanForm({
         ? makeDateTime(values.singleDate, values.singleEndTime)
         : makeDateTime(values.endDateDate, values.endDateTime),
       tags: parseTags(values.tagsCsv),
-      participantIds: parseTags(values.participantsCsv)?.map((n) =>
-        generateId(n)
-      ),
       location: hasLocationData(values.location)
         ? {
             ...values.location,
-            locationId: generateId(values.location!.name || values.title),
+            locationId: generateLocationId(
+              values.location!.name || values.title
+            ),
             name: values.location!.name || values.title,
           }
         : undefined,
@@ -180,7 +187,6 @@ export default function PlanForm({
         onSubmit={handleSubmit(handleFormSubmit)}
         className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8 space-y-6"
       >
-        {/* Title */}
         <div>
           <FormLabel>Title *</FormLabel>
           <FormInput {...register('title')} placeholder="Enter plan title" />
@@ -189,7 +195,6 @@ export default function PlanForm({
           )}
         </div>
 
-        {/* Description */}
         <div>
           <FormLabel>Description</FormLabel>
           <FormTextarea
@@ -199,7 +204,6 @@ export default function PlanForm({
           />
         </div>
 
-        {/* Status and Visibility */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
             <FormLabel>Status</FormLabel>
@@ -225,21 +229,153 @@ export default function PlanForm({
           </div>
         </div>
 
-        {/* Owner Name */}
-        <div>
-          <FormLabel>Owner Name *</FormLabel>
-          <FormInput
-            {...register('ownerName')}
-            placeholder="Enter your full name"
-          />
-          {errors.ownerName && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.ownerName.message}
-            </p>
-          )}
-        </div>
+        <fieldset className="border border-gray-200 rounded-lg p-4 sm:p-5">
+          <legend className="text-sm font-semibold text-gray-700 px-2 mb-3">
+            Owner (you) *
+          </legend>
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <FormLabel>First Name *</FormLabel>
+                <FormInput
+                  {...register('ownerName')}
+                  placeholder="First name"
+                  compact
+                />
+                {errors.ownerName && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.ownerName.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <FormLabel>Last Name *</FormLabel>
+                <FormInput
+                  {...register('ownerLastName')}
+                  placeholder="Last name"
+                  compact
+                />
+                {errors.ownerLastName && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.ownerLastName.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <FormLabel>Phone *</FormLabel>
+                <FormInput
+                  {...register('ownerPhone')}
+                  placeholder="Phone number"
+                  compact
+                />
+                {errors.ownerPhone && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.ownerPhone.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <FormLabel>Email</FormLabel>
+                <FormInput
+                  {...register('ownerEmail')}
+                  placeholder="Email (optional)"
+                  compact
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
 
-        {/* Location Section */}
+        <fieldset className="border border-gray-200 rounded-lg p-4 sm:p-5">
+          <legend className="text-sm font-semibold text-gray-700 px-2 mb-3">
+            Participants (optional)
+          </legend>
+          <div className="space-y-4">
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-3"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-600">
+                    Participant {index + 1}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => remove(index)}
+                    className="text-sm text-red-500 hover:text-red-700 transition-colors"
+                  >
+                    Remove
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <FormInput
+                      {...register(`participants.${index}.name`)}
+                      placeholder="First name *"
+                      compact
+                    />
+                    {errors.participants?.[index]?.name && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {errors.participants[index].name.message}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <FormInput
+                      {...register(`participants.${index}.lastName`)}
+                      placeholder="Last name *"
+                      compact
+                    />
+                    {errors.participants?.[index]?.lastName && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {errors.participants[index].lastName.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <FormInput
+                      {...register(`participants.${index}.contactPhone`)}
+                      placeholder="Phone *"
+                      compact
+                    />
+                    {errors.participants?.[index]?.contactPhone && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {errors.participants[index].contactPhone.message}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <FormInput
+                      {...register(`participants.${index}.contactEmail`)}
+                      placeholder="Email (optional)"
+                      compact
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() =>
+                append({
+                  name: '',
+                  lastName: '',
+                  contactPhone: '',
+                  contactEmail: '',
+                })
+              }
+              className="w-full px-4 py-2 border-2 border-dashed border-gray-300 text-gray-600 rounded-lg hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
+            >
+              + Add Participant
+            </button>
+          </div>
+        </fieldset>
+
         <fieldset className="border border-gray-200 rounded-lg p-4 sm:p-5">
           <legend className="text-sm font-semibold text-gray-700 px-2 mb-3">
             Location (optional)
@@ -282,7 +418,6 @@ export default function PlanForm({
           </div>
         </fieldset>
 
-        {/* Date Section */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <input
@@ -355,7 +490,6 @@ export default function PlanForm({
           )}
         </div>
 
-        {/* Tags */}
         <div>
           <FormLabel>Tags (comma separated)</FormLabel>
           <FormInput
@@ -364,16 +498,6 @@ export default function PlanForm({
           />
         </div>
 
-        {/* Participants */}
-        <div>
-          <FormLabel>Participants (comma separated names)</FormLabel>
-          <FormInput
-            {...register('participantsCsv')}
-            placeholder="Alice, Bob, Charlie"
-          />
-        </div>
-
-        {/* Submit Button */}
         <div className="pt-4 sm:pt-6">
           <button
             type="submit"

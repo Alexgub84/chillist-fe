@@ -38,14 +38,15 @@ const planSchema = z.object({
 
 const participantSchema = z.object({
   participantId: z.string(),
+  planId: z.string().optional(),
   name: z.string(),
   lastName: z.string(),
-  displayName: z.string(),
+  contactPhone: z.string().nullable().optional(),
+  displayName: z.string().nullable().optional(),
   role: z.enum(['owner', 'participant', 'viewer']),
   isOwner: z.boolean().optional(),
   avatarUrl: z.string().url().nullish(),
   contactEmail: z.string().email().nullish(),
-  contactPhone: z.string().nullish(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
 });

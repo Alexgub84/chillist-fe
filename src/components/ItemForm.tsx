@@ -23,6 +23,8 @@ import commonItemsData from '../data/common-items.json';
 type CommonItem = { name: string; category: ItemCategory; unit: Unit };
 const COMMON_ITEMS: CommonItem[] = commonItemsData as CommonItem[];
 
+import type { Participant } from '../core/schemas/participant';
+
 const itemFormSchema = z.object({
   name: z.string().min(1, 'Name is required').max(255),
   category: itemCategorySchema,
@@ -30,6 +32,7 @@ const itemFormSchema = z.object({
   unit: unitSchema,
   status: itemStatusSchema,
   notes: z.string().optional(),
+  assignedParticipantId: z.string().optional(),
 });
 
 export type ItemFormValues = z.infer<typeof itemFormSchema>;
@@ -41,10 +44,12 @@ const ITEM_FORM_DEFAULTS: ItemFormValues = {
   unit: 'kg',
   status: 'pending',
   notes: '',
+  assignedParticipantId: '',
 };
 
 interface ItemFormProps {
   defaultValues?: Partial<ItemFormValues>;
+  participants?: Participant[];
   onSubmit: (values: ItemFormValues) => void | Promise<void>;
   onCancel?: () => void;
   isSubmitting?: boolean;
@@ -53,6 +58,7 @@ interface ItemFormProps {
 
 export default function ItemForm({
   defaultValues,
+  participants = [],
   onSubmit,
   onCancel,
   isSubmitting = false,
@@ -203,6 +209,20 @@ export default function ItemForm({
           rows={2}
         />
       </div>
+
+      {participants.length > 0 && (
+        <div>
+          <FormLabel>Assign to</FormLabel>
+          <FormSelect {...register('assignedParticipantId')} compact>
+            <option value="">Unassigned</option>
+            {participants.map((p) => (
+              <option key={p.participantId} value={p.participantId}>
+                {p.name} {p.lastName}
+              </option>
+            ))}
+          </FormSelect>
+        </div>
+      )}
 
       <div className="flex gap-3 pt-2">
         <button

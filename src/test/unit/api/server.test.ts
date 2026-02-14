@@ -127,8 +127,9 @@ describe('mock server', () => {
         method: 'POST',
         url: '/plans/plan-1/participants',
         payload: {
-          displayName: 'Jamie',
-          role: 'participant',
+          name: 'Jamie',
+          lastName: 'Rivera',
+          contactPhone: '+1234567890',
         },
       });
 
@@ -145,6 +146,54 @@ describe('mock server', () => {
       expect(plan.participantIds).toEqual(
         expect.arrayContaining([payload.participantId as string])
       );
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('creates a plan with owner via /plans/with-owner', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/with-owner',
+        payload: {
+          title: 'Beach Trip',
+          owner: {
+            name: 'Alex',
+            lastName: 'G',
+            contactPhone: '+9876543210',
+          },
+          participants: [
+            {
+              name: 'Jamie',
+              lastName: 'Rivera',
+              contactPhone: '+1111111111',
+            },
+          ],
+        },
+      });
+
+      expect(response.statusCode).toBe(201);
+      const payload = response.json() as Record<string, unknown>;
+      expect(payload.planId).toEqual(expect.any(String));
+      expect(payload.title).toBe('Beach Trip');
+      expect(payload.status).toBe('draft');
+      expect(Array.isArray(payload.items)).toBe(true);
+      expect((payload.items as unknown[]).length).toBe(0);
+      expect(Array.isArray(payload.participants)).toBe(true);
+      const participants = payload.participants as Array<
+        Record<string, unknown>
+      >;
+      expect(participants.length).toBe(2);
+      expect(participants[0].role).toBe('owner');
+      expect(participants[0].name).toBe('Alex');
+      expect(participants[1].role).toBe('participant');
+      expect(participants[1].name).toBe('Jamie');
     } finally {
       await server.close();
     }

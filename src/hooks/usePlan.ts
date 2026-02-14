@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchPlan } from '../core/api';
-import type { PlanWithItems } from '../core/schemas/plan';
+import type { PlanWithDetails } from '../core/schemas/plan';
 
 export function usePlan(planId: string) {
-  return useQuery<PlanWithItems>({
+  return useQuery<PlanWithDetails>({
     queryKey: ['plan', planId],
     queryFn: () => fetchPlan(planId),
     retry: false,

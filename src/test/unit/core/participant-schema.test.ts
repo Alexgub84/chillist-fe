@@ -4,8 +4,10 @@ import { participantSchema } from '../../../core/schemas/participant';
 describe('participantSchema date-time validation', () => {
   const validParticipant = {
     participantId: 'p-1',
+    planId: 'plan-1',
     name: 'Test',
     lastName: 'User',
+    contactPhone: '+1234567890',
     displayName: 'Test User',
     role: 'owner' as const,
     createdAt: '2025-01-01T00:00:00Z',
@@ -38,7 +40,7 @@ describe('participantSchema date-time validation', () => {
       ...validParticipant,
       avatarUrl: null,
       contactEmail: null,
-      contactPhone: null,
+      displayName: null,
     });
     expect(result.success).toBe(true);
   });
@@ -53,19 +55,19 @@ describe('participantSchema date-time validation', () => {
     expect(result.success).toBe(true);
   });
 
-  it('rejects invalid email format', () => {
+  it('accepts any string for contactEmail (no format constraint in OpenAPI)', () => {
     const result = participantSchema.safeParse({
       ...validParticipant,
       contactEmail: 'not-an-email',
     });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
-  it('rejects invalid URL format for avatarUrl', () => {
+  it('accepts any string for avatarUrl (no format constraint in OpenAPI)', () => {
     const result = participantSchema.safeParse({
       ...validParticipant,
       avatarUrl: 'not-a-url',
     });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 });
