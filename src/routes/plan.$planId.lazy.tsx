@@ -16,14 +16,10 @@ import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
-import StatusFilter from '../components/StatusFilter';
+import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
-import type {
-  ItemCategory,
-  ItemCreate,
-  ItemPatch,
-  ItemStatus,
-} from '../core/schemas/item';
+import type { ItemCategory, ItemCreate, ItemPatch } from '../core/schemas/item';
+import type { ListFilter } from '../core/schemas/plan-search';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanDetails,
@@ -36,10 +32,10 @@ function PlanDetails() {
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
   const createParticipantMutation = useCreateParticipant(planId);
-  const { status: statusFilter, participant: participantFilter } = useSearch({
+  const { list: listFilter, participant: participantFilter } = useSearch({
     from: '/plan/$planId',
   });
-  const navigate = useNavigate();
+  const navigate = useNavigate({ from: '/plan/$planId' });
   const [showItemForm, setShowItemForm] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
 
@@ -110,16 +106,6 @@ function PlanDetails() {
 
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
-  const statusCounts: Record<ItemStatus, number> = {
-    pending: 0,
-    purchased: 0,
-    packed: 0,
-    canceled: 0,
-  };
-  for (const item of plan.items) {
-    statusCounts[item.status]++;
-  }
-
   const participantCounts: Record<string, number> = { unassigned: 0 };
   for (const p of plan.participants) {
     participantCounts[p.participantId] = 0;
@@ -133,15 +119,27 @@ function PlanDetails() {
     }
   }
 
-  const filteredItems = plan.items.filter((item) => {
-    if (statusFilter && item.status !== statusFilter) return false;
-    if (participantFilter) {
-      if (participantFilter === 'unassigned') {
-        if (item.assignedParticipantId) return false;
-      } else if (item.assignedParticipantId !== participantFilter) {
-        return false;
-      }
-    }
+  const participantScopedItems = plan.items.filter((item) => {
+    if (!participantFilter) return true;
+    if (participantFilter === 'unassigned') return !item.assignedParticipantId;
+    return item.assignedParticipantId === participantFilter;
+  });
+
+  const listCounts: Record<ListFilter, number> = {
+    buying: 0,
+    packing: 0,
+    assigning: 0,
+  };
+  for (const item of participantScopedItems) {
+    if (item.status === 'pending') listCounts.buying++;
+    if (item.status === 'purchased') listCounts.packing++;
+    if (!item.assignedParticipantId) listCounts.assigning++;
+  }
+
+  const filteredItems = participantScopedItems.filter((item) => {
+    if (listFilter === 'buying' && item.status !== 'pending') return false;
+    if (listFilter === 'packing' && item.status !== 'purchased') return false;
+    if (listFilter === 'assigning' && item.assignedParticipantId) return false;
     return true;
   });
 
@@ -163,7 +161,9 @@ function PlanDetails() {
         </div>
         <Plan
           plan={plan}
-          onAddParticipant={(p) => createParticipantMutation.mutateAsync(p)}
+          onAddParticipant={async (p) => {
+            await createParticipantMutation.mutateAsync(p);
+          }}
           isAddingParticipant={createParticipantMutation.isPending}
         />
 
@@ -180,38 +180,48 @@ function PlanDetails() {
           </div>
 
           {plan.items.length > 0 && (
-            <div className="mb-3 sm:mb-4 space-y-2">
-              <StatusFilter
-                selected={statusFilter ?? null}
-                onChange={(status) =>
-                  navigate({
-                    search: (prev) => ({
-                      ...prev,
-                      status: status ?? undefined,
-                    }),
-                    replace: true,
-                  })
-                }
-                counts={statusCounts}
-                total={plan.items.length}
-              />
+            <div className="mb-4 sm:mb-6 space-y-3">
               {plan.participants.length > 0 && (
-                <ParticipantFilter
-                  participants={plan.participants}
-                  selected={participantFilter ?? null}
-                  onChange={(participantId) =>
+                <div>
+                  <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
+                    Filter by person
+                  </p>
+                  <ParticipantFilter
+                    participants={plan.participants}
+                    selected={participantFilter ?? null}
+                    onChange={(participantId) =>
+                      navigate({
+                        search: {
+                          list: listFilter,
+                          participant: participantId ?? undefined,
+                        },
+                        replace: true,
+                      })
+                    }
+                    counts={participantCounts}
+                    total={plan.items.length}
+                  />
+                </div>
+              )}
+              {plan.participants.length > 0 && (
+                <div className="border-t border-gray-200" />
+              )}
+              <div>
+                <ListTabs
+                  selected={listFilter ?? null}
+                  onChange={(filter) =>
                     navigate({
-                      search: (prev) => ({
-                        ...prev,
-                        participant: participantId ?? undefined,
-                      }),
+                      search: {
+                        list: filter ?? undefined,
+                        participant: participantFilter,
+                      },
                       replace: true,
                     })
                   }
-                  counts={participantCounts}
-                  total={plan.items.length}
+                  counts={listCounts}
+                  total={participantScopedItems.length}
                 />
-              )}
+              </div>
             </div>
           )}
 

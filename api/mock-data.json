@@ -84,8 +84,8 @@
       "location": {
         "locationId": "81c0ce94-8c9d-5b07-bc80-50ad5db9ea58",
         "name": "Kfir house",
-        "country": "",
-        "region": "",
+        "country": null,
+        "region": null,
         "city": "hulon"
       },
       "startDate": "2026-02-20T19:24:00Z",
@@ -103,19 +103,23 @@
   "participants": [
     {
       "participantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Alex",
       "lastName": "Guberman",
+      "contactPhone": "0541234567",
       "displayName": "Alex G.",
       "role": "owner",
-      "isOwner": true,
+      "avatarUrl": null,
       "contactEmail": "alex@example.com",
       "createdAt": "2025-05-01T12:00:00.000Z",
       "updatedAt": "2025-05-10T08:00:00.000Z"
     },
     {
       "participantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Jamie",
       "lastName": "Rivera",
+      "contactPhone": "0529876543",
       "displayName": "Jamie",
       "role": "participant",
       "avatarUrl": "https://example.com/avatars/jamie.png",
@@ -125,11 +129,14 @@
     },
     {
       "participantId": "399dcf24-f8c4-45f8-96fb-4478d578908f",
+      "planId": "030a5978-d76a-4817-a0eb-346e38a45c63",
       "name": "Taylor",
       "lastName": "Morgan",
       "contactPhone": "+1-310-555-0198",
       "displayName": "Taylor",
       "role": "viewer",
+      "avatarUrl": null,
+      "contactEmail": null,
       "createdAt": "2025-05-04T16:45:00.000Z",
       "updatedAt": "2025-05-10T08:05:00.000Z"
     },
@@ -235,8 +242,9 @@
       "notes": "Check stakes before departure",
       "status": "packed",
       "createdAt": "2025-05-02T10:00:00.000Z",
-      "updatedAt": "2026-02-11T11:20:27.470Z",
-      "category": "equipment"
+      "updatedAt": "2026-02-15T07:48:16.012Z",
+      "category": "equipment",
+      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1"
     },
     {
       "itemId": "404954b1-04f3-4512-abae-42683bffad2b",
@@ -259,8 +267,9 @@
       "notes": "Two rated for 20°F",
       "status": "packed",
       "createdAt": "2025-05-04T11:05:00.000Z",
-      "updatedAt": "2025-05-10T07:50:00.000Z",
-      "category": "equipment"
+      "updatedAt": "2026-02-15T07:48:19.630Z",
+      "category": "equipment",
+      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428"
     },
     {
       "itemId": "ccab3332-cc4f-449b-aec6-4130855cb0bf",
@@ -271,8 +280,9 @@
       "notes": "Need to borrow from Taylor",
       "status": "pending",
       "createdAt": "2025-05-06T09:40:00.000Z",
-      "updatedAt": "2025-05-09T12:10:00.000Z",
-      "category": "equipment"
+      "updatedAt": "2026-02-15T07:48:17.808Z",
+      "category": "equipment",
+      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428"
     },
     {
       "itemId": "bfd3aa99-197f-4b40-8607-11a7bc59e8f8",
@@ -283,8 +293,9 @@
       "notes": "Pick up at REI on Thursday",
       "status": "pending",
       "createdAt": "2025-05-06T09:45:00.000Z",
-      "updatedAt": "2025-05-09T12:10:00.000Z",
-      "category": "equipment"
+      "updatedAt": "2026-02-15T07:48:21.196Z",
+      "category": "equipment",
+      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1"
     },
     {
       "itemId": "10ad45f4-4afb-40c3-b0e7-676e293fada1",
@@ -518,14 +529,14 @@
       "itemId": "b59a06d7-3de6-46e5-80c0-0b6b9cc53632",
       "planId": "f0619158-c528-43cc-931b-2b73ea0bcb1e",
       "name": "Shower Tent",
-      "category": "equipment",
       "quantity": 1,
       "unit": "pcs",
-      "status": "pending",
       "notes": null,
+      "status": "pending",
       "assignedParticipantId": "42205c9b-9242-489b-a367-232528213b7d",
       "createdAt": "2026-02-14T19:41:47.035Z",
-      "updatedAt": "2026-02-14T19:41:47.035Z"
+      "updatedAt": "2026-02-14T19:41:47.035Z",
+      "category": "equipment"
     },
     {
       "itemId": "aa01bb02-cc03-dd04-ee05-ff0611111111",
