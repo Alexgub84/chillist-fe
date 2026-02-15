@@ -219,6 +219,7 @@ test.describe('Main flow: plan creation, items, participants, filters', () => {
     const statusTabs = page.locator(
       '[role="tablist"][aria-label="Filter items by list"]'
     );
+    await statusTabs.scrollIntoViewIfNeeded();
 
     // Buying List — pending items: Tent and Bread (Water is Purchased)
     // Use hasText instead of getByRole name — tab labels are hidden on mobile
