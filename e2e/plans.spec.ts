@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 
 // Only intercept API requests to :3333, not page navigation to :5173
 const API_PLANS_URL = '**/localhost:3333/plans';

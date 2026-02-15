@@ -666,11 +666,20 @@ export async function buildServer(
     }
   );
 
+  app.post('/_reset', async (_request, reply) => {
+    const fresh = cloneData(initialData);
+    store.plans = fresh.plans;
+    store.participants = fresh.participants;
+    store.items = fresh.items;
+    void reply.send({ ok: true });
+  });
+
   return app;
 }
 
 async function start(): Promise<void> {
-  const server = await buildServer();
+  const persist = process.env.MOCK_PERSIST !== 'false';
+  const server = await buildServer({ persist });
   const port = Number(process.env.MOCK_SERVER_PORT ?? 3333);
   const host = process.env.MOCK_SERVER_HOST ?? '0.0.0.0';
 
