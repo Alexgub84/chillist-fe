@@ -2,43 +2,45 @@ import { describe, it, expect } from 'vitest';
 import { planSearchSchema } from '../../../core/schemas/plan-search';
 
 describe('planSearchSchema', () => {
-  describe('status param', () => {
-    it('parses a valid status', () => {
-      const result = planSearchSchema.parse({ status: 'pending' });
-      expect(result.status).toBe('pending');
+  describe('list param', () => {
+    it('parses "buying"', () => {
+      const result = planSearchSchema.parse({ list: 'buying' });
+      expect(result.list).toBe('buying');
     });
 
-    it('parses each valid status value', () => {
-      const statuses = ['pending', 'purchased', 'packed', 'canceled'] as const;
-      for (const status of statuses) {
-        const result = planSearchSchema.parse({ status });
-        expect(result.status).toBe(status);
-      }
+    it('parses "packing"', () => {
+      const result = planSearchSchema.parse({ list: 'packing' });
+      expect(result.list).toBe('packing');
     });
 
-    it('defaults to undefined when status is missing', () => {
+    it('parses "assigning"', () => {
+      const result = planSearchSchema.parse({ list: 'assigning' });
+      expect(result.list).toBe('assigning');
+    });
+
+    it('defaults to undefined when list is missing', () => {
       const result = planSearchSchema.parse({});
-      expect(result.status).toBeUndefined();
+      expect(result.list).toBeUndefined();
     });
 
-    it('defaults to undefined when status is undefined', () => {
-      const result = planSearchSchema.parse({ status: undefined });
-      expect(result.status).toBeUndefined();
+    it('defaults to undefined when list is undefined', () => {
+      const result = planSearchSchema.parse({ list: undefined });
+      expect(result.list).toBeUndefined();
     });
 
-    it('defaults to undefined when status is null', () => {
-      const result = planSearchSchema.parse({ status: null });
-      expect(result.status).toBeUndefined();
+    it('defaults to undefined when list is null', () => {
+      const result = planSearchSchema.parse({ list: null });
+      expect(result.list).toBeUndefined();
     });
 
-    it('defaults to undefined for an invalid status string', () => {
-      const result = planSearchSchema.parse({ status: 'invalid' });
-      expect(result.status).toBeUndefined();
+    it('defaults to undefined for an invalid list string', () => {
+      const result = planSearchSchema.parse({ list: 'invalid' });
+      expect(result.list).toBeUndefined();
     });
 
-    it('defaults to undefined for a numeric status', () => {
-      const result = planSearchSchema.parse({ status: 123 });
-      expect(result.status).toBeUndefined();
+    it('defaults to undefined for a numeric list', () => {
+      const result = planSearchSchema.parse({ list: 123 });
+      expect(result.list).toBeUndefined();
     });
   });
 
@@ -75,28 +77,28 @@ describe('planSearchSchema', () => {
   });
 
   describe('combined params', () => {
-    it('parses both status and participant together', () => {
+    it('parses both list and participant together', () => {
       const result = planSearchSchema.parse({
-        status: 'packed',
+        list: 'packing',
         participant: 'p-456',
       });
-      expect(result.status).toBe('packed');
+      expect(result.list).toBe('packing');
       expect(result.participant).toBe('p-456');
     });
 
     it('defaults both when empty object', () => {
       const result = planSearchSchema.parse({});
-      expect(result.status).toBeUndefined();
+      expect(result.list).toBeUndefined();
       expect(result.participant).toBeUndefined();
     });
 
     it('ignores extra properties', () => {
       const result = planSearchSchema.parse({
-        status: 'packed',
+        list: 'buying',
         participant: 'p-1',
         foo: 'bar',
       });
-      expect(result.status).toBe('packed');
+      expect(result.list).toBe('buying');
       expect(result.participant).toBe('p-1');
     });
   });

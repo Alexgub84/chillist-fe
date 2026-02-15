@@ -1,7 +1,9 @@
 import { z } from 'zod';
-import { itemStatusSchema } from './item';
+
+export const listFilterSchema = z.enum(['buying', 'packing', 'assigning']);
+export type ListFilter = z.infer<typeof listFilterSchema>;
 
 export const planSearchSchema = z.object({
-  status: itemStatusSchema.optional().catch(undefined),
+  list: listFilterSchema.optional().catch(undefined),
   participant: z.string().optional().catch(undefined),
 });
