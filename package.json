@@ -15,6 +15,7 @@
     "prepare": "husky",
     "mock:server": "tsx watch api/server.ts",
     "mock:server:ci": "tsx api/server.ts",
+    "mock:server:e2e": "MOCK_PERSIST=false tsx api/server.ts",
     "routes": "npx @tanstack/router-cli@latest generate",
     "api:fetch": "curl -s -o src/core/openapi.json https://raw.githubusercontent.com/Alexgub84/chillist-be/main/docs/openapi.json",
     "api:types": "openapi-typescript src/core/openapi.json -o src/core/api.generated.ts && prettier --write src/core/api.generated.ts",

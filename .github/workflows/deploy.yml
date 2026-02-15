@@ -41,13 +41,10 @@ jobs:
         run: npm run test:run
 
       - name: Install Playwright browsers
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps chromium firefox webkit
 
       - name: Run E2E tests
-        run: |
-          npm run mock:server:ci &
-          sleep 3
-          npm run e2e
+        run: npm run e2e
         env:
           VITE_API_URL: http://localhost:3333
 
