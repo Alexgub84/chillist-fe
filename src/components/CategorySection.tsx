@@ -4,6 +4,7 @@ import {
   DisclosurePanel,
 } from '@headlessui/react';
 import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
+import type { Participant } from '../core/schemas/participant';
 import ItemCard from './ItemCard';
 
 const CATEGORY_LABELS: Record<ItemCategory, string> = {
@@ -14,6 +15,7 @@ const CATEGORY_LABELS: Record<ItemCategory, string> = {
 interface CategorySectionProps {
   category: ItemCategory;
   items: Item[];
+  participants?: Participant[];
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
 }
@@ -21,6 +23,7 @@ interface CategorySectionProps {
 export default function CategorySection({
   category,
   items,
+  participants = [],
   onEditItem,
   onUpdateItem,
 }: CategorySectionProps) {
@@ -66,6 +69,7 @@ export default function CategorySection({
               <ItemCard
                 key={item.itemId}
                 item={item}
+                participants={participants}
                 onEdit={onEditItem ? () => onEditItem(item.itemId) : undefined}
                 onUpdate={
                   onUpdateItem

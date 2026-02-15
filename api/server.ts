@@ -32,7 +32,6 @@ function statusColor(code: number): string {
 
 const planStatusSchema = z.enum(['draft', 'active', 'archived']);
 const planVisibilitySchema = z.enum(['public', 'unlisted', 'private']);
-const participantRoleSchema = z.enum(['owner', 'participant', 'viewer']);
 const itemStatusSchema = z.enum(['pending', 'purchased', 'packed', 'canceled']);
 const itemCategorySchema = z.enum(['equipment', 'food']);
 const unitSchema = z.enum([
@@ -79,17 +78,48 @@ const planPatchSchema = z.object({
   tags: z.array(z.string()).nullable().optional(),
 });
 
+const participantCreateRoleSchema = z.enum(['participant', 'viewer']);
+
 const participantCreateSchema = z.object({
-  displayName: z.string().min(1),
-  role: participantRoleSchema,
-  name: z.string().min(1).optional(),
-  lastName: z.string().min(1).optional(),
-  avatarUrl: z.string().url().optional(),
-  contactEmail: z.string().email().optional(),
-  contactPhone: z.string().optional(),
+  name: z.string().min(1).max(255),
+  lastName: z.string().min(1).max(255),
+  contactPhone: z.string().min(1).max(50),
+  displayName: z.string().min(1).max(255).optional(),
+  role: participantCreateRoleSchema.optional(),
+  avatarUrl: z.string().optional(),
+  contactEmail: z.string().max(255).optional(),
 });
 
-const participantPatchSchema = participantCreateSchema.partial();
+const participantPatchSchema = z.object({
+  name: z.string().min(1).max(255).optional(),
+  lastName: z.string().min(1).max(255).optional(),
+  contactPhone: z.string().min(1).max(50).optional(),
+  displayName: z.string().max(255).nullable().optional(),
+  role: participantCreateRoleSchema.optional(),
+  avatarUrl: z.string().nullable().optional(),
+  contactEmail: z.string().max(255).nullable().optional(),
+});
+
+const ownerBodySchema = z.object({
+  name: z.string().min(1).max(255),
+  lastName: z.string().min(1).max(255),
+  contactPhone: z.string().min(1).max(50),
+  displayName: z.string().min(1).max(255).optional(),
+  avatarUrl: z.string().optional(),
+  contactEmail: z.string().max(255).optional(),
+});
+
+const planCreateWithOwnerSchema = z.object({
+  title: z.string().min(1).max(255),
+  description: z.string().nullable().optional(),
+  visibility: planVisibilitySchema.optional(),
+  location: locationSchema.nullable().optional(),
+  startDate: z.string().datetime().nullable().optional(),
+  endDate: z.string().datetime().nullable().optional(),
+  tags: z.array(z.string()).nullable().optional(),
+  owner: ownerBodySchema,
+  participants: z.array(participantCreateSchema).optional(),
+});
 
 const itemCreateSchema = z.object({
   name: z.string().min(1).max(255),
@@ -301,6 +331,78 @@ export async function buildServer(
     void reply.status(201).send(plan);
   });
 
+  app.post('/plans/with-owner', async (request, reply) => {
+    const parsed = planCreateWithOwnerSchema.parse(request.body);
+    const now = new Date().toISOString();
+    const planId = randomUUID();
+
+    const location = parsed.location
+      ? {
+          ...parsed.location,
+          locationId: parsed.location.locationId ?? randomUUID(),
+        }
+      : undefined;
+
+    const ownerParticipantId = randomUUID();
+    const ownerParticipant: Participant = {
+      participantId: ownerParticipantId,
+      planId,
+      name: parsed.owner.name,
+      lastName: parsed.owner.lastName,
+      contactPhone: parsed.owner.contactPhone,
+      displayName: parsed.owner.displayName ?? null,
+      role: 'owner',
+      avatarUrl: parsed.owner.avatarUrl ?? null,
+      contactEmail: parsed.owner.contactEmail ?? null,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    const additionalParticipants: Participant[] = (
+      parsed.participants ?? []
+    ).map((p) => ({
+      participantId: randomUUID(),
+      planId,
+      name: p.name,
+      lastName: p.lastName,
+      contactPhone: p.contactPhone,
+      displayName: p.displayName ?? null,
+      role: p.role ?? 'participant',
+      avatarUrl: p.avatarUrl ?? null,
+      contactEmail: p.contactEmail ?? null,
+      createdAt: now,
+      updatedAt: now,
+    }));
+
+    const allParticipants = [ownerParticipant, ...additionalParticipants];
+
+    const plan: Plan = {
+      planId,
+      createdAt: now,
+      updatedAt: now,
+      description: parsed.description,
+      endDate: parsed.endDate,
+      location,
+      ownerParticipantId,
+      participantIds: allParticipants.map((p) => p.participantId),
+      startDate: parsed.startDate,
+      status: 'draft',
+      tags: parsed.tags,
+      title: parsed.title,
+      visibility: parsed.visibility ?? 'private',
+    };
+
+    store.plans.push(plan);
+    store.participants.push(...allParticipants);
+    await persistData(store, shouldPersist, filePath);
+
+    void reply.status(201).send({
+      ...plan,
+      items: [],
+      participants: allParticipants,
+    });
+  });
+
   app.get<{ Params: { planId: string } }>(
     '/plans/:planId',
     async (request, reply) => {
@@ -308,7 +410,15 @@ export async function buildServer(
       const planItems = store.items.filter(
         (item) => item.planId === plan.planId
       );
-      void reply.send({ ...plan, items: planItems });
+      const participantIds = new Set(plan.participantIds ?? []);
+      const planParticipants = store.participants.filter((p) =>
+        participantIds.has(p.participantId)
+      );
+      void reply.send({
+        ...plan,
+        items: planItems,
+        participants: planParticipants,
+      });
     }
   );
 
@@ -379,22 +489,19 @@ export async function buildServer(
       const now = new Date().toISOString();
       const participant: Participant = {
         participantId: randomUUID(),
-        displayName: parsed.displayName,
-        role: parsed.role,
-        name: parsed.name ?? parsed.displayName,
-        lastName: parsed.lastName ?? parsed.displayName,
-        isOwner: parsed.role === 'owner',
-        avatarUrl: parsed.avatarUrl,
-        contactEmail: parsed.contactEmail,
+        planId: plan.planId,
+        name: parsed.name,
+        lastName: parsed.lastName,
         contactPhone: parsed.contactPhone,
+        displayName: parsed.displayName ?? null,
+        role: parsed.role ?? 'participant',
+        avatarUrl: parsed.avatarUrl ?? null,
+        contactEmail: parsed.contactEmail ?? null,
         createdAt: now,
         updatedAt: now,
       };
 
       store.participants.push(participant);
-      if (participant.isOwner) {
-        plan.ownerParticipantId = participant.participantId;
-      }
 
       plan.participantIds = plan.participantIds ?? [];
       plan.participantIds.push(participant.participantId);

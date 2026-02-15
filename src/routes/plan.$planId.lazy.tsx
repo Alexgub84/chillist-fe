@@ -10,12 +10,14 @@ import toast from 'react-hot-toast';
 import { usePlan } from '../hooks/usePlan';
 import { useCreateItem } from '../hooks/useCreateItem';
 import { useUpdateItem } from '../hooks/useUpdateItem';
+import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { getApiErrorMessage } from '../core/error-utils';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
 import StatusFilter from '../components/StatusFilter';
+import ParticipantFilter from '../components/ParticipantFilter';
 import type {
   ItemCategory,
   ItemCreate,
@@ -33,7 +35,10 @@ function PlanDetails() {
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
-  const { status: statusFilter } = useSearch({ from: '/plan/$planId' });
+  const createParticipantMutation = useCreateParticipant(planId);
+  const { status: statusFilter, participant: participantFilter } = useSearch({
+    from: '/plan/$planId',
+  });
   const navigate = useNavigate();
   const [showItemForm, setShowItemForm] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
@@ -58,6 +63,7 @@ function PlanDetails() {
       unit: values.unit,
       status: values.status,
       notes: values.notes || null,
+      assignedParticipantId: values.assignedParticipantId || null,
     };
     await createItem.mutateAsync(payload);
     setShowItemForm(false);
@@ -93,6 +99,7 @@ function PlanDetails() {
       unit: values.unit,
       status: values.status,
       notes: values.notes || null,
+      assignedParticipantId: values.assignedParticipantId || null,
     });
     setEditingItemId(null);
   }
@@ -113,9 +120,30 @@ function PlanDetails() {
     statusCounts[item.status]++;
   }
 
-  const filteredItems = statusFilter
-    ? plan.items.filter((item) => item.status === statusFilter)
-    : plan.items;
+  const participantCounts: Record<string, number> = { unassigned: 0 };
+  for (const p of plan.participants) {
+    participantCounts[p.participantId] = 0;
+  }
+  for (const item of plan.items) {
+    if (item.assignedParticipantId) {
+      participantCounts[item.assignedParticipantId] =
+        (participantCounts[item.assignedParticipantId] ?? 0) + 1;
+    } else {
+      participantCounts['unassigned']++;
+    }
+  }
+
+  const filteredItems = plan.items.filter((item) => {
+    if (statusFilter && item.status !== statusFilter) return false;
+    if (participantFilter) {
+      if (participantFilter === 'unassigned') {
+        if (item.assignedParticipantId) return false;
+      } else if (item.assignedParticipantId !== participantFilter) {
+        return false;
+      }
+    }
+    return true;
+  });
 
   const itemsByCategory = CATEGORIES.map((category) => ({
     category,
@@ -133,7 +161,11 @@ function PlanDetails() {
             ← Back to Plans
           </Link>
         </div>
-        <Plan plan={plan} />
+        <Plan
+          plan={plan}
+          onAddParticipant={(p) => createParticipantMutation.mutateAsync(p)}
+          isAddingParticipant={createParticipantMutation.isPending}
+        />
 
         <div className="mt-6 sm:mt-8">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
@@ -148,18 +180,38 @@ function PlanDetails() {
           </div>
 
           {plan.items.length > 0 && (
-            <div className="mb-3 sm:mb-4">
+            <div className="mb-3 sm:mb-4 space-y-2">
               <StatusFilter
                 selected={statusFilter ?? null}
                 onChange={(status) =>
                   navigate({
-                    search: { status: status ?? undefined },
+                    search: (prev) => ({
+                      ...prev,
+                      status: status ?? undefined,
+                    }),
                     replace: true,
                   })
                 }
                 counts={statusCounts}
                 total={plan.items.length}
               />
+              {plan.participants.length > 0 && (
+                <ParticipantFilter
+                  participants={plan.participants}
+                  selected={participantFilter ?? null}
+                  onChange={(participantId) =>
+                    navigate({
+                      search: (prev) => ({
+                        ...prev,
+                        participant: participantId ?? undefined,
+                      }),
+                      replace: true,
+                    })
+                  }
+                  counts={participantCounts}
+                  total={plan.items.length}
+                />
+              )}
             </div>
           )}
 
@@ -178,6 +230,7 @@ function PlanDetails() {
                   key={category}
                   category={category}
                   items={items}
+                  participants={plan.participants}
                   onEditItem={handleStartEdit}
                   onUpdateItem={updateItem}
                 />
@@ -195,7 +248,9 @@ function PlanDetails() {
                 unit: editingItem.unit,
                 status: editingItem.status,
                 notes: editingItem.notes ?? '',
+                assignedParticipantId: editingItem.assignedParticipantId ?? '',
               }}
+              participants={plan.participants}
               onSubmit={handleFormSubmit}
               onCancel={() => setEditingItemId(null)}
               isSubmitting={updateItemMutation.isPending}
@@ -203,6 +258,7 @@ function PlanDetails() {
             />
           ) : showItemForm ? (
             <ItemForm
+              participants={plan.participants}
               onSubmit={handleAddItem}
               onCancel={() => setShowItemForm(false)}
               isSubmitting={createItem.isPending}

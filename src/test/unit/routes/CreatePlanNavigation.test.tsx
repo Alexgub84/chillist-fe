@@ -100,7 +100,7 @@ describe('CreatePlan - Navigation', () => {
 
     // Verify navigation to create-plan page
     await waitFor(() => {
-      expect(screen.getByText(/owner name/i)).toBeInTheDocument();
+      expect(screen.getByText(/first name/i)).toBeInTheDocument();
       expect(
         screen.getByRole('button', { name: /create plan/i })
       ).toBeInTheDocument();
@@ -132,7 +132,7 @@ describe('CreatePlan - Navigation', () => {
     router.navigate({ to: '/create-plan' });
 
     await waitFor(() => {
-      expect(screen.getByText(/owner name/i)).toBeInTheDocument();
+      expect(screen.getByText(/first name/i)).toBeInTheDocument();
       expect(
         screen.getByRole('button', { name: /create plan/i })
       ).toBeInTheDocument();

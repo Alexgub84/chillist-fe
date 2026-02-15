@@ -29,6 +29,15 @@ describe('CreatePlan - PlanForm', () => {
     );
   };
 
+  async function fillOwnerFields(user: ReturnType<typeof userEvent.setup>) {
+    await user.type(screen.getByPlaceholderText(/first name/i), 'Alice');
+    await user.type(screen.getByPlaceholderText(/last name/i), 'Smith');
+    await user.type(
+      screen.getByPlaceholderText(/phone number/i),
+      '+1234567890'
+    );
+  }
+
   describe('Validation errors for required fields', () => {
     it('should show error when title is missing', async () => {
       const user = userEvent.setup();
@@ -70,12 +79,8 @@ describe('CreatePlan - PlanForm', () => {
       const user = userEvent.setup();
       renderForm();
 
-      const inputs = screen.getAllByRole('textbox');
-      const titleInput = inputs[0];
-      await user.type(titleInput, 'Test Plan');
-
-      const ownerInput = screen.getByPlaceholderText(/enter your full name/i);
-      await user.type(ownerInput, 'John Doe');
+      await user.type(getInputByLabel(/title/i), 'Test Plan');
+      await fillOwnerFields(user);
 
       const oneDayCheckbox = getInputByLabel(/one-day plan/i);
       await user.click(oneDayCheckbox);
@@ -96,12 +101,8 @@ describe('CreatePlan - PlanForm', () => {
       const user = userEvent.setup();
       renderForm();
 
-      const inputs = screen.getAllByRole('textbox');
-      const titleInput = inputs[0];
-      await user.type(titleInput, 'Test Plan');
-
-      const ownerInput = screen.getByPlaceholderText(/enter your full name/i);
-      await user.type(ownerInput, 'John Doe');
+      await user.type(getInputByLabel(/title/i), 'Test Plan');
+      await fillOwnerFields(user);
 
       const submitButton = screen.getByRole('button', {
         name: /create plan/i,
@@ -119,12 +120,8 @@ describe('CreatePlan - PlanForm', () => {
       const user = userEvent.setup();
       renderForm();
 
-      const inputs = screen.getAllByRole('textbox');
-      const titleInput = inputs[0];
-      await user.type(titleInput, 'Test Plan');
-
-      const ownerInput = screen.getByPlaceholderText(/enter your full name/i);
-      await user.type(ownerInput, 'John Doe');
+      await user.type(getInputByLabel(/title/i), 'Test Plan');
+      await fillOwnerFields(user);
 
       const startDateInput = getInputByLabel(/start date/i);
       await user.type(startDateInput, '2025-12-20');
@@ -175,7 +172,7 @@ describe('CreatePlan - PlanForm', () => {
 
       await user.type(getInputByLabel(/title/i), 'Picnic Day');
       await user.type(getInputByLabel(/description/i), 'A fun day out');
-      await user.type(getInputByLabel(/owner name/i), 'Alice');
+      await fillOwnerFields(user);
 
       await user.click(getInputByLabel(/one-day plan/i));
 
@@ -191,10 +188,6 @@ describe('CreatePlan - PlanForm', () => {
         screen.getByPlaceholderText(/e\.g\. picnic, friends, summer/i),
         'outdoor,fun'
       );
-      await user.type(
-        screen.getByPlaceholderText(/Alice, Bob, Charlie/i),
-        'Alice, Bob'
-      );
 
       await user.click(screen.getByRole('button', { name: /create plan/i }));
 
@@ -204,12 +197,15 @@ describe('CreatePlan - PlanForm', () => {
           expect.objectContaining({
             title: 'Picnic Day',
             description: 'A fun day out',
-            status: 'draft',
-            ownerParticipantId: 'uuid-alice',
+            owner: {
+              name: 'Alice',
+              lastName: 'Smith',
+              contactPhone: '+1234567890',
+              contactEmail: undefined,
+            },
             startDate: '2025-12-20T10:00:00Z',
             endDate: '2025-12-20T16:00:00Z',
             tags: ['outdoor', 'fun'],
-            participantIds: ['uuid-alice', 'uuid-bob'],
           })
         );
 
@@ -229,7 +225,7 @@ describe('CreatePlan - PlanForm', () => {
       await user.type(getInputByLabel(/title/i), 'Weekend Trip');
       await user.type(getInputByLabel(/description/i), 'Two day adventure');
       await user.selectOptions(getInputByLabel(/status/i), 'active');
-      await user.type(getInputByLabel(/owner name/i), 'Charlie');
+      await fillOwnerFields(user);
 
       await user.type(getInputByLabel(/start date/i), '2025-12-20');
       await user.type(getInputByLabel(/start time/i), '09:00');
@@ -240,10 +236,6 @@ describe('CreatePlan - PlanForm', () => {
         screen.getByPlaceholderText(/e\.g\. picnic, friends, summer/i),
         'travel'
       );
-      await user.type(
-        screen.getByPlaceholderText(/Alice, Bob, Charlie/i),
-        'Charlie, Dave'
-      );
 
       await user.click(screen.getByRole('button', { name: /create plan/i }));
 
@@ -253,12 +245,15 @@ describe('CreatePlan - PlanForm', () => {
           expect.objectContaining({
             title: 'Weekend Trip',
             description: 'Two day adventure',
-            status: 'active',
-            ownerParticipantId: 'uuid-charlie',
+            owner: {
+              name: 'Alice',
+              lastName: 'Smith',
+              contactPhone: '+1234567890',
+              contactEmail: undefined,
+            },
             startDate: '2025-12-20T09:00:00Z',
             endDate: '2025-12-22T18:00:00Z',
             tags: ['travel'],
-            participantIds: ['uuid-charlie', 'uuid-dave'],
           })
         );
 
@@ -270,13 +265,71 @@ describe('CreatePlan - PlanForm', () => {
     });
   });
 
+  describe('Participants', () => {
+    it('should add and submit participants', async () => {
+      const user = userEvent.setup();
+      renderForm();
+
+      await user.type(getInputByLabel(/title/i), 'Group Trip');
+      await fillOwnerFields(user);
+      await user.click(getInputByLabel(/one-day plan/i));
+
+      await waitFor(() => {
+        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+      });
+      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+
+      const addButton = screen.getByText(/\+ add participant/i);
+      await user.click(addButton);
+
+      const firstNameInputs = screen.getAllByPlaceholderText(/first name \*/i);
+      const lastNameInputs = screen.getAllByPlaceholderText(/last name \*/i);
+      const phoneInputs = screen.getAllByPlaceholderText(/phone \*/i);
+
+      await user.type(firstNameInputs[0], 'Bob');
+      await user.type(lastNameInputs[0], 'Jones');
+      await user.type(phoneInputs[0], '+9999999999');
+
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
+
+      await waitFor(() => {
+        expect(handleSubmit).toHaveBeenCalledTimes(1);
+        const payload = handleSubmit.mock.calls[0][0];
+        expect(payload.participants).toEqual([
+          {
+            name: 'Bob',
+            lastName: 'Jones',
+            contactPhone: '+9999999999',
+            contactEmail: undefined,
+          },
+        ]);
+      });
+    });
+
+    it('should remove a participant row', async () => {
+      const user = userEvent.setup();
+      renderForm();
+
+      const addButton = screen.getByText(/\+ add participant/i);
+      await user.click(addButton);
+      await user.click(addButton);
+
+      expect(screen.getAllByText(/participant \d/i)).toHaveLength(2);
+
+      const removeButtons = screen.getAllByText(/remove/i);
+      await user.click(removeButtons[0]);
+
+      expect(screen.getAllByText(/participant \d/i)).toHaveLength(1);
+    });
+  });
+
   describe('Location handling', () => {
     it('should omit location from payload when no location fields are filled', async () => {
       const user = userEvent.setup();
       renderForm();
 
       await user.type(getInputByLabel(/title/i), 'No Location Plan');
-      await user.type(getInputByLabel(/owner name/i), 'Owner');
+      await fillOwnerFields(user);
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
@@ -299,7 +352,7 @@ describe('CreatePlan - PlanForm', () => {
       renderForm();
 
       await user.type(getInputByLabel(/title/i), 'Park Hangout');
-      await user.type(getInputByLabel(/owner name/i), 'Owner');
+      await fillOwnerFields(user);
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
@@ -338,7 +391,7 @@ describe('CreatePlan - PlanForm', () => {
       renderForm();
 
       await user.type(getInputByLabel(/title/i), 'Beach Trip');
-      await user.type(getInputByLabel(/owner name/i), 'Owner');
+      await fillOwnerFields(user);
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
@@ -365,13 +418,13 @@ describe('CreatePlan - PlanForm', () => {
     });
   });
 
-  describe('ID generation from names', () => {
-    it('should generate ownerParticipantId from owner name using uuid v5', async () => {
+  describe('Owner fields in payload', () => {
+    it('should include owner object with name, lastName, contactPhone', async () => {
       const user = userEvent.setup();
       renderForm();
 
       await user.type(getInputByLabel(/title/i), 'Test');
-      await user.type(getInputByLabel(/owner name/i), 'Test Owner');
+      await fillOwnerFields(user);
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
@@ -385,36 +438,11 @@ describe('CreatePlan - PlanForm', () => {
       await waitFor(() => {
         expect(handleSubmit).toHaveBeenCalledWith(
           expect.objectContaining({
-            ownerParticipantId: 'uuid-test-owner',
-          })
-        );
-      });
-    });
-
-    it('should generate participantIds from participant names using uuid v5', async () => {
-      const user = userEvent.setup();
-      renderForm();
-
-      await user.type(getInputByLabel(/title/i), 'Test');
-      await user.type(getInputByLabel(/owner name/i), 'Owner');
-      await user.click(getInputByLabel(/one-day plan/i));
-
-      await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
-      });
-
-      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
-      await user.type(
-        screen.getByPlaceholderText(/Alice, Bob, Charlie/i),
-        'Anna, Beth, Carol'
-      );
-
-      await user.click(screen.getByRole('button', { name: /create plan/i }));
-
-      await waitFor(() => {
-        expect(handleSubmit).toHaveBeenCalledWith(
-          expect.objectContaining({
-            participantIds: ['uuid-anna', 'uuid-beth', 'uuid-carol'],
+            owner: expect.objectContaining({
+              name: 'Alice',
+              lastName: 'Smith',
+              contactPhone: '+1234567890',
+            }),
           })
         );
       });

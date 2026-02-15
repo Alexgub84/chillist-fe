@@ -1,19 +1,44 @@
+import { useMemo } from 'react';
 import clsx from 'clsx';
 import type { Item, ItemPatch } from '../core/schemas/item';
+import type { Participant } from '../core/schemas/participant';
 import { STATUS_OPTIONS, UNIT_OPTIONS } from '../core/constants/item';
 import InlineSelect from './shared/InlineSelect';
 import InlineQuantityInput from './shared/InlineQuantityInput';
 
 interface ItemCardProps {
   item: Item;
+  participants?: Participant[];
   onEdit?: () => void;
   onUpdate?: (updates: ItemPatch) => void;
 }
 
-export default function ItemCard({ item, onEdit, onUpdate }: ItemCardProps) {
+export default function ItemCard({
+  item,
+  participants = [],
+  onEdit,
+  onUpdate,
+}: ItemCardProps) {
   const statusOption = STATUS_OPTIONS.find((s) => s.value === item.status);
   const isCanceled = item.status === 'canceled';
   const isEquipment = item.category === 'equipment';
+
+  const assignedParticipant = useMemo(
+    () =>
+      participants.find((p) => p.participantId === item.assignedParticipantId),
+    [participants, item.assignedParticipantId]
+  );
+
+  const assignmentOptions = useMemo(() => {
+    const opts = [{ value: '', label: 'Unassigned' }];
+    for (const p of participants) {
+      opts.push({
+        value: p.participantId,
+        label: `${p.name} ${p.lastName}`,
+      });
+    }
+    return opts;
+  }, [participants]);
 
   return (
     <div className="px-3 sm:px-5 py-3 sm:py-4">
@@ -66,6 +91,43 @@ export default function ItemCard({ item, onEdit, onUpdate }: ItemCardProps) {
               <span className="text-xs sm:text-sm text-gray-400 truncate max-w-[200px] sm:max-w-xs">
                 {item.notes}
               </span>
+            )}
+
+            {participants.length > 0 && (
+              <>
+                <span className="text-gray-300">|</span>
+                {onUpdate ? (
+                  <InlineSelect
+                    value={item.assignedParticipantId ?? ''}
+                    onChange={(participantId) =>
+                      onUpdate({
+                        assignedParticipantId: participantId || null,
+                      })
+                    }
+                    options={assignmentOptions}
+                    buttonClassName={clsx(
+                      'text-xs sm:text-sm px-1.5 py-0.5 rounded',
+                      item.assignedParticipantId
+                        ? 'text-indigo-600 bg-indigo-50 hover:bg-indigo-100'
+                        : 'text-gray-400 hover:bg-gray-100'
+                    )}
+                    ariaLabel={`Assign ${item.name} to participant`}
+                  />
+                ) : (
+                  <span
+                    className={clsx(
+                      'text-xs sm:text-sm px-1.5 py-0.5 rounded',
+                      assignedParticipant
+                        ? 'text-indigo-600 bg-indigo-50'
+                        : 'text-gray-400'
+                    )}
+                  >
+                    {assignedParticipant
+                      ? `${assignedParticipant.name} ${assignedParticipant.lastName}`
+                      : 'Unassigned'}
+                  </span>
+                )}
+              </>
             )}
           </div>
         </div>

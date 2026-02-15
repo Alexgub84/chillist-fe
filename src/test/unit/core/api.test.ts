@@ -3,6 +3,7 @@ import {
   createItem,
   createParticipant,
   createPlan,
+  createPlanWithOwner,
   deleteItem,
   deleteParticipant,
   deletePlan,
@@ -57,7 +58,7 @@ describe('API Client', () => {
     updatedAt: '2025-01-01T00:00:00Z',
   };
 
-  const mockPlanWithItems = {
+  const mockPlanWithDetails = {
     ...mockPlan,
     items: [
       {
@@ -72,13 +73,27 @@ describe('API Client', () => {
         updatedAt: '2025-01-01T00:00:00Z',
       },
     ],
+    participants: [
+      {
+        participantId: 'p-1',
+        planId: 'plan-1',
+        name: 'Test',
+        lastName: 'User',
+        contactPhone: '+1234567890',
+        role: 'owner',
+        createdAt: '2025-01-01T00:00:00Z',
+        updatedAt: '2025-01-01T00:00:00Z',
+      },
+    ],
   };
 
   const mockParticipant = {
     participantId: 'p-1',
-    displayName: 'Test User',
+    planId: 'plan-1',
     name: 'Test',
     lastName: 'User',
+    contactPhone: '+1234567890',
+    displayName: 'Test User',
     role: 'owner',
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
@@ -112,12 +127,13 @@ describe('API Client', () => {
       );
     });
 
-    it('fetches a single plan with items', async () => {
-      fetchMock.mockResolvedValueOnce(mockResponse(mockPlanWithItems));
+    it('fetches a single plan with items and participants', async () => {
+      fetchMock.mockResolvedValueOnce(mockResponse(mockPlanWithDetails));
 
       const plan = await fetchPlan('plan-1');
-      expect(plan).toEqual(mockPlanWithItems);
+      expect(plan).toEqual(mockPlanWithDetails);
       expect(plan.items).toHaveLength(1);
+      expect(plan.participants).toHaveLength(1);
       expect(fetchMock).toHaveBeenCalledWith(
         'http://api.test/plans/plan-1',
         expect.objectContaining({
@@ -208,6 +224,52 @@ describe('API Client', () => {
         })
       );
     });
+
+    it('creates a plan with owner', async () => {
+      const mockResponse201 = {
+        ...mockPlan,
+        items: [],
+        participants: [
+          {
+            participantId: 'owner-1',
+            planId: 'plan-1',
+            name: 'Alice',
+            lastName: 'Smith',
+            contactPhone: '+1234567890',
+            role: 'owner',
+            createdAt: '2025-01-01T00:00:00Z',
+            updatedAt: '2025-01-01T00:00:00Z',
+          },
+        ],
+      };
+      fetchMock.mockResolvedValueOnce(
+        mockResponse(mockResponse201, { status: 201 })
+      );
+
+      const payload = {
+        title: 'Test Plan',
+        owner: {
+          name: 'Alice',
+          lastName: 'Smith',
+          contactPhone: '+1234567890',
+        },
+      };
+
+      const plan = await createPlanWithOwner(payload);
+      expect(plan.planId).toBe('plan-1');
+      expect(plan.participants).toHaveLength(1);
+      expect(plan.participants[0].name).toBe('Alice');
+      expect(fetchMock).toHaveBeenCalledWith(
+        'http://api.test/plans/with-owner',
+        expect.objectContaining({
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: expect.objectContaining({
+            'Content-Type': 'application/json',
+          }),
+        })
+      );
+    });
   });
 
   describe('Participants', () => {
@@ -230,8 +292,9 @@ describe('API Client', () => {
       fetchMock.mockResolvedValueOnce(mockResponse(mockParticipant));
 
       const newParticipant = {
-        displayName: 'Test User',
-        role: 'owner' as const,
+        name: 'Test',
+        lastName: 'User',
+        contactPhone: '+1234567890',
       };
 
       const participant = await createParticipant('plan-1', newParticipant);

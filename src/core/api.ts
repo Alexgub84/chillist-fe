@@ -17,12 +17,14 @@ import {
 } from './schemas/participant';
 import {
   planCreateSchema,
+  planCreateWithOwnerSchema,
   planPatchSchema,
   planSchema,
-  planWithItemsSchema,
+  planWithDetailsSchema,
   type Plan,
-  type PlanWithItems,
+  type PlanWithDetails,
   type PlanCreate,
+  type PlanCreateWithOwner,
   type PlanPatch,
 } from './schemas/plan';
 
@@ -101,9 +103,9 @@ export async function fetchPlans(): Promise<Plan[]> {
   return z.array(planSchema).parse(data);
 }
 
-export async function fetchPlan(planId: string): Promise<PlanWithItems> {
+export async function fetchPlan(planId: string): Promise<PlanWithDetails> {
   const data = await request<unknown>(`/plans/${planId}`);
-  return planWithItemsSchema.parse(data);
+  return planWithDetailsSchema.parse(data);
 }
 
 export async function createPlan(plan: PlanCreate): Promise<Plan> {
@@ -114,6 +116,18 @@ export async function createPlan(plan: PlanCreate): Promise<Plan> {
     body: JSON.stringify(validPlan),
   });
   return planSchema.parse(data);
+}
+
+export async function createPlanWithOwner(
+  plan: PlanCreateWithOwner
+): Promise<PlanWithDetails> {
+  const validPlan = planCreateWithOwnerSchema.parse(plan);
+
+  const data = await request<unknown>('/plans/with-owner', {
+    method: 'POST',
+    body: JSON.stringify(validPlan),
+  });
+  return planWithDetailsSchema.parse(data);
 }
 
 export async function updatePlan(

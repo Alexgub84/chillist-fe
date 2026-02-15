@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateItem } from '../core/api';
 import type { ItemPatch } from '../core/schemas/item';
-import type { PlanWithItems } from '../core/schemas/plan';
+import type { PlanWithDetails } from '../core/schemas/plan';
 
 interface UpdateItemVariables {
   itemId: string;
@@ -17,12 +17,12 @@ export function useUpdateItem(planId: string) {
     onMutate: async ({ itemId, updates }) => {
       await queryClient.cancelQueries({ queryKey: ['plan', planId] });
 
-      const previousPlan = queryClient.getQueryData<PlanWithItems>([
+      const previousPlan = queryClient.getQueryData<PlanWithDetails>([
         'plan',
         planId,
       ]);
 
-      queryClient.setQueryData<PlanWithItems>(['plan', planId], (old) => {
+      queryClient.setQueryData<PlanWithDetails>(['plan', planId], (old) => {
         if (!old) return old;
         return {
           ...old,
