@@ -204,13 +204,25 @@ export async function mockPlanRoutes(page: Page, plan: MockPlan) {
   return state;
 }
 
+function toPlanSummary(plan: MockPlan) {
+  return {
+    planId: plan.planId,
+    title: plan.title,
+    description: plan.description,
+    status: plan.status,
+    visibility: plan.visibility,
+    ownerParticipantId: plan.ownerParticipantId,
+    participantIds: plan.participantIds,
+    startDate: plan.startDate,
+    endDate: plan.endDate,
+    tags: plan.tags,
+    createdAt: plan.createdAt,
+    updatedAt: plan.updatedAt,
+  };
+}
+
 export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
-  const planSummaries = plans.map((plan) => {
-    const { items, participants, ...summary } = plan;
-    void items;
-    void participants;
-    return summary;
-  });
+  const planSummaries = plans.map(toPlanSummary);
 
   await page.route(`${API_PATTERN}/plans`, async (route) => {
     const method = route.request().method();
@@ -219,20 +231,7 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
     } else if (method === 'POST') {
       const body = route.request().postDataJSON();
       const newPlan = buildPlan({ title: body.title });
-      planSummaries.push({
-        planId: newPlan.planId,
-        title: newPlan.title,
-        description: newPlan.description,
-        status: newPlan.status,
-        visibility: newPlan.visibility,
-        ownerParticipantId: newPlan.ownerParticipantId,
-        participantIds: newPlan.participantIds,
-        startDate: newPlan.startDate,
-        endDate: newPlan.endDate,
-        tags: newPlan.tags,
-        createdAt: newPlan.createdAt,
-        updatedAt: newPlan.updatedAt,
-      });
+      planSummaries.push(toPlanSummary(newPlan));
       await route.fulfill({ json: newPlan, status: 201 });
     } else {
       await route.continue();
