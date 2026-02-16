@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 
 const ATTR = 'data-scroll-item-id';
 const DEBOUNCE_MS = 150;
+const MAX_RESTORE_ATTEMPTS = 10;
+const RESTORE_INTERVAL_MS = 50;
 
 function getStorageKey(key: string) {
   return `scroll-item:${key}`;
@@ -27,6 +29,11 @@ function findCenterItemId(): string | null {
   }
 
   return closestId;
+}
+
+function isElementInViewport(el: Element): boolean {
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight && rect.bottom > 0;
 }
 
 if (typeof window !== 'undefined') {
@@ -63,11 +70,22 @@ export function useScrollRestore(key: string, isReady: boolean) {
     const savedId = sessionStorage.getItem(getStorageKey(key));
     if (!savedId) return;
 
-    setTimeout(() => {
+    let attempts = 0;
+
+    function tryScroll() {
       const target = document.querySelector(`[${ATTR}="${savedId}"]`);
-      if (target) {
-        target.scrollIntoView({ behavior: 'instant', block: 'center' });
+      if (!target) return;
+
+      target.scrollIntoView({ behavior: 'instant', block: 'center' });
+
+      if (isElementInViewport(target) || attempts >= MAX_RESTORE_ATTEMPTS) {
+        return;
       }
-    }, 0);
+
+      attempts++;
+      setTimeout(tryScroll, RESTORE_INTERVAL_MS);
+    }
+
+    setTimeout(tryScroll, 0);
   }, [key, isReady]);
 }

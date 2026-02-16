@@ -38,7 +38,7 @@ jobs:
         run: npm run typecheck
 
       - name: Run unit tests
-        run: npm run test:run
+        run: npm run test:unit
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium firefox webkit
