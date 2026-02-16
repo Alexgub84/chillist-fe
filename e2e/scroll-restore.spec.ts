@@ -46,11 +46,9 @@ test.describe('Scroll restoration on browser refresh', () => {
     const planId = await seedPlanWithItems(20);
 
     await page.goto(`/plan/${planId}`);
-    await expect(page.locator('[data-scroll-item-id]').first()).toBeVisible({
-      timeout: 10000,
-    });
-
     const allItems = page.locator('[data-scroll-item-id]');
+    await expect(allItems.first()).toBeVisible({ timeout: 10000 });
+
     const targetItem = allItems.nth(14);
     const targetId = await targetItem.getAttribute('data-scroll-item-id');
     const firstId = await allItems.first().getAttribute('data-scroll-item-id');
@@ -59,19 +57,16 @@ test.describe('Scroll restoration on browser refresh', () => {
     await page.waitForTimeout(300);
 
     await page.reload();
-    await expect(page.locator('[data-scroll-item-id]').first()).toBeAttached({
-      timeout: 10000,
-    });
-    await page.waitForTimeout(1500);
+    await expect(allItems.first()).toBeVisible({ timeout: 10000 });
+
+    const target = page.locator(`[data-scroll-item-id="${targetId}"]`);
+    await expect(target).toBeInViewport({ timeout: 5000 });
 
     const viewport = page.viewportSize()!;
-
-    const targetBox = await page
-      .locator(`[data-scroll-item-id="${targetId}"]`)
-      .boundingBox();
+    const targetBox = await target.boundingBox();
     expect(
       targetBox,
-      `Target item (index 14, id=${targetId}) should be in viewport`
+      `Target item (index 14) should have a bounding box`
     ).toBeTruthy();
     expect(
       isInViewport(targetBox!, viewport.height),
@@ -84,7 +79,7 @@ test.describe('Scroll restoration on browser refresh', () => {
     expect(firstBox, 'First item should exist').toBeTruthy();
     expect(
       isInViewport(firstBox!, viewport.height),
-      `First item top=${firstBox!.y} should NOT be in viewport (proves we scrolled, not just at top)`
+      `First item top=${firstBox!.y} should NOT be in viewport`
     ).toBe(false);
   });
 
@@ -96,11 +91,9 @@ test.describe('Scroll restoration on browser refresh', () => {
     const planId = await seedPlanWithItems(20);
 
     await page.goto(`/plan/${planId}`);
-    await expect(page.locator('[data-scroll-item-id]').first()).toBeVisible({
-      timeout: 10000,
-    });
-
     const allItems = page.locator('[data-scroll-item-id]');
+    await expect(allItems.first()).toBeVisible({ timeout: 10000 });
+
     const targetItem = allItems.nth(14);
     const targetId = await targetItem.getAttribute('data-scroll-item-id');
     const firstId = await allItems.first().getAttribute('data-scroll-item-id');
@@ -109,19 +102,16 @@ test.describe('Scroll restoration on browser refresh', () => {
     await page.waitForTimeout(300);
 
     await page.reload();
-    await expect(page.locator('[data-scroll-item-id]').first()).toBeAttached({
-      timeout: 10000,
-    });
-    await page.waitForTimeout(1500);
+    await expect(allItems.first()).toBeVisible({ timeout: 10000 });
+
+    const target = page.locator(`[data-scroll-item-id="${targetId}"]`);
+    await expect(target).toBeInViewport({ timeout: 5000 });
 
     const viewport = page.viewportSize()!;
-
-    const targetBox = await page
-      .locator(`[data-scroll-item-id="${targetId}"]`)
-      .boundingBox();
+    const targetBox = await target.boundingBox();
     expect(
       targetBox,
-      `Target item (index 14, id=${targetId}) should be in viewport`
+      `Target item (index 14) should have a bounding box`
     ).toBeTruthy();
     expect(
       isInViewport(targetBox!, viewport.height),

@@ -29,6 +29,10 @@ function findCenterItemId(): string | null {
   return closestId;
 }
 
+if (typeof window !== 'undefined') {
+  window.history.scrollRestoration = 'manual';
+}
+
 export function useScrollRestore(key: string, isReady: boolean) {
   const restoredRef = useRef(false);
 
@@ -59,13 +63,11 @@ export function useScrollRestore(key: string, isReady: boolean) {
     const savedId = sessionStorage.getItem(getStorageKey(key));
     if (!savedId) return;
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const target = document.querySelector(`[${ATTR}="${savedId}"]`);
-        if (target) {
-          target.scrollIntoView({ behavior: 'instant', block: 'center' });
-        }
-      });
-    });
+    setTimeout(() => {
+      const target = document.querySelector(`[${ATTR}="${savedId}"]`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'instant', block: 'center' });
+      }
+    }, 0);
   }, [key, isReady]);
 }
