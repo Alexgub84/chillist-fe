@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: CI
 
 on:
   push:
@@ -9,11 +9,10 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  test:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write
 
     steps:
       - name: Checkout
@@ -45,8 +44,6 @@ jobs:
 
       - name: Run E2E tests
         run: npm run e2e
-        env:
-          VITE_API_URL: http://localhost:3333
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
@@ -55,6 +52,30 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch OpenAPI spec from backend
+        run: npm run api:fetch
 
       - name: Build
         run: npm run build

@@ -8,8 +8,16 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between py-2 sm:py-4">
-          <Link to="/" className="text-xl font-semibold text-gray-900">
-            Chillist
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-xl font-semibold text-gray-900"
+          >
+            <img
+              src="/logo-icon.png"
+              alt="Chillist"
+              className="h-8 w-8 sm:h-9 sm:w-9"
+            />
+            <span>Chillist</span>
           </Link>
 
           <button
