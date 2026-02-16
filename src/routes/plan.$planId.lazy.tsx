@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-router';
 import toast from 'react-hot-toast';
 import { usePlan } from '../hooks/usePlan';
+import { useScrollRestore } from '../hooks/useScrollRestore';
 import { useCreateItem } from '../hooks/useCreateItem';
 import { useUpdateItem } from '../hooks/useUpdateItem';
 import { useCreateParticipant } from '../hooks/useCreateParticipant';
@@ -38,6 +39,8 @@ function PlanDetails() {
   const navigate = useNavigate({ from: '/plan/$planId' });
   const [showItemForm, setShowItemForm] = useState(false);
   const [editingItemId, setEditingItemId] = useState<string | null>(null);
+
+  useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
   if (isLoading) {
     return <div className="text-center">Loading plan details...</div>;

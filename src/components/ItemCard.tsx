@@ -49,6 +49,7 @@ export default function ItemCard({
 
   return (
     <div
+      data-scroll-item-id={item.itemId}
       className={clsx(
         'border-l-4 px-4 sm:px-5 py-3 sm:py-4 transition-colors hover:bg-gray-50/80',
         STATUS_ACCENT[item.status] ?? 'border-l-gray-300'
