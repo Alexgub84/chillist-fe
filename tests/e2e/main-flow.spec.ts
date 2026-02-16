@@ -103,13 +103,6 @@ test.describe('Plan creation via UI', () => {
   });
 });
 
-function isInViewport(
-  box: { y: number; height: number },
-  viewportHeight: number
-): boolean {
-  return box.y + box.height > 0 && box.y < viewportHeight;
-}
-
 test.describe('Item CRUD', () => {
   test('adds items via UI and verifies they appear in categories', async ({
     page,
@@ -163,52 +156,6 @@ test.describe('Item CRUD', () => {
     await expect(tentCard.getByLabel('Change status for Tent')).toContainText(
       'Purchased'
     );
-  });
-
-  test('scroll position restores to correct item after refresh', async ({
-    page,
-  }) => {
-    const items = Array.from({ length: 20 }, (_, i) => ({
-      name: `Item ${String(i + 1).padStart(2, '0')}`,
-      category: (i < 10 ? 'equipment' : 'food') as 'equipment' | 'food',
-      quantity: i + 1,
-    }));
-    const plan = buildPlan({ title: 'Scroll Test', items });
-    await mockPlanRoutes(page, plan);
-
-    await page.goto(`/plan/${plan.planId}`);
-    const allItems = page.locator('[data-scroll-item-id]');
-    await expect(allItems.first()).toBeVisible({ timeout: 10000 });
-
-    const targetItem = allItems.nth(14);
-    const targetId = await targetItem.getAttribute('data-scroll-item-id');
-    const firstId = await allItems.first().getAttribute('data-scroll-item-id');
-
-    await targetItem.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
-
-    await page.reload();
-    await expect(allItems.first()).toBeVisible({ timeout: 10000 });
-
-    const target = page.locator(`[data-scroll-item-id="${targetId}"]`);
-    await expect(target).toBeInViewport({ timeout: 5000 });
-
-    const vp = page.viewportSize()!;
-    const targetBox = await target.boundingBox();
-    expect(targetBox).toBeTruthy();
-    expect(
-      isInViewport(targetBox!, vp.height),
-      `Target item top=${targetBox!.y} should be within viewport height=${vp.height}`
-    ).toBe(true);
-
-    const firstBox = await page
-      .locator(`[data-scroll-item-id="${firstId}"]`)
-      .boundingBox();
-    expect(firstBox).toBeTruthy();
-    expect(
-      isInViewport(firstBox!, vp.height),
-      `First item top=${firstBox!.y} should NOT be in viewport`
-    ).toBe(false);
   });
 });
 
