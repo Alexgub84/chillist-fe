@@ -9,17 +9,27 @@ This is the FRONTEND repo (chillist-fe). Only modify files inside this repo.
 NEVER modify files in chillist-be or any other sibling repo from this workspace.
 If a task requires backend changes, stop and tell the user to switch to the backend repo.
 
-The ONE exception: you MAY read and write files in ../chillist-docs/ (the shared docs repo) to read rules/docs and update dev-lessons, guides, specs, or rules when needed.
+The ONE exception: you MAY read and write files in /Users/alexguberman/Projects/chillist/chillist-docs/ (the shared docs repo) to read rules/docs and update dev-lessons, guides, specs, or rules when needed.
+
+# Git Safety (NEVER BREAK THESE)
+
+- NEVER push directly to `main` or `staging`. Always create a feature branch.
+- NEVER commit without creating a branch first: `git checkout -b feat/<name>`
+- Always push the feature branch and open a PR with `gh pr create`.
+- If the user says "commit and push", create a feature branch first — do NOT push to main.
 
 # How to Start Every Task
 
-Before writing any code, FIRST use the Read tool on ALL of these files:
+Before writing any code, FIRST use the Read tool on ALL of these files.
+IMPORTANT: Use ABSOLUTE paths (the Read tool does not resolve relative paths).
 
-1. ../chillist-docs/rules/common.md (git workflow, planning, code standards, security)
-2. ../chillist-docs/rules/frontend.md (clsx, TanStack Router, OpenAPI sync, testing)
-3. ../chillist-docs/guides/frontend.md (setup, scripts, mock server, API layer, CI/CD)
-4. ../chillist-docs/specs/mvp-v1.md (product requirements, entities, API endpoints)
-5. ../chillist-docs/dev-lessons/frontend.md (past bugs - check before debugging)
+1. /Users/alexguberman/Projects/chillist/chillist-docs/rules/common.md (git workflow, planning, code standards, security)
+2. /Users/alexguberman/Projects/chillist/chillist-docs/rules/frontend.md (clsx, TanStack Router, OpenAPI sync, testing)
+3. /Users/alexguberman/Projects/chillist/chillist-docs/guides/frontend.md (setup, scripts, mock server, API layer, CI/CD)
+4. /Users/alexguberman/Projects/chillist/chillist-docs/specs/mvp-v1.md (product requirements, entities, API endpoints)
+5. /Users/alexguberman/Projects/chillist/chillist-docs/dev-lessons/frontend.md (past bugs - check before debugging)
+
+If ANY file returns "not found", STOP and tell the user — do not silently skip.
 
 Read the docs FIRST, then explore the specific files in this repo that are relevant to the task.
 Do NOT scan the entire codebase upfront - only look at files directly related to the work.
@@ -28,21 +38,21 @@ Do NOT scan the entire codebase upfront - only look at files directly related to
 
 After EVERY bug fix or feature implementation, you MUST update the relevant docs before considering the task complete:
 
-1. **Specs** (../chillist-docs/specs/mvp-v1.md) — ALWAYS update when:
+1. **Specs** (/Users/alexguberman/Projects/chillist/chillist-docs/specs/mvp-v1.md) — ALWAYS update when:
    - A feature is added, changed, or removed
    - A new UI behavior is introduced (e.g., scroll restoration, filters, animations)
    - Mark completed features as done, add new ones that were built
 
-2. **Dev lessons** (../chillist-docs/dev-lessons/frontend.md) — ALWAYS update when:
+2. **Dev lessons** (/Users/alexguberman/Projects/chillist/chillist-docs/dev-lessons/frontend.md) — ALWAYS update when:
    - A bug was fixed (what went wrong, root cause, solution)
    - A non-obvious technical decision was made (e.g., sessionStorage over React state)
    - A gotcha was discovered (e.g., CI=1 breaking local Playwright runs)
 
-3. **Rules** (../chillist-docs/rules/frontend.md) — Update when:
+3. **Rules** (/Users/alexguberman/Projects/chillist/chillist-docs/rules/frontend.md) — Update when:
    - A fix implies a pattern that should be followed going forward
    - A new convention is established (e.g., data attributes for scroll tracking)
 
-4. **Guides** (../chillist-docs/guides/frontend.md) — Update when:
+4. **Guides** (/Users/alexguberman/Projects/chillist/chillist-docs/guides/frontend.md) — Update when:
    - Setup steps, scripts, or dev workflow changed
    - New tools or dependencies were added
 
