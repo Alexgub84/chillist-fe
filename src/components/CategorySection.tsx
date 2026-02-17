@@ -5,6 +5,7 @@ import {
 } from '@headlessui/react';
 import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
+import type { ListFilter } from '../core/schemas/plan-search';
 import ItemCard from './ItemCard';
 
 const CATEGORY_LABELS: Record<ItemCategory, string> = {
@@ -16,6 +17,7 @@ interface CategorySectionProps {
   category: ItemCategory;
   items: Item[];
   participants?: Participant[];
+  listFilter?: ListFilter | null;
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
 }
@@ -24,6 +26,7 @@ export default function CategorySection({
   category,
   items,
   participants = [],
+  listFilter,
   onEditItem,
   onUpdateItem,
 }: CategorySectionProps) {
@@ -70,6 +73,7 @@ export default function CategorySection({
                 key={item.itemId}
                 item={item}
                 participants={participants}
+                listFilter={listFilter}
                 onEdit={onEditItem ? () => onEditItem(item.itemId) : undefined}
                 onUpdate={
                   onUpdateItem

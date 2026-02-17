@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import type { Item, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
+import type { ListFilter } from '../core/schemas/plan-search';
 import { STATUS_OPTIONS, UNIT_OPTIONS } from '../core/constants/item';
 import InlineSelect from './shared/InlineSelect';
 import InlineQuantityInput from './shared/InlineQuantityInput';
@@ -13,9 +14,26 @@ const STATUS_ACCENT: Record<string, string> = {
   canceled: 'border-l-gray-300',
 };
 
+interface QuickActionConfig {
+  targetStatus: 'purchased' | 'packed';
+  accentColor: string;
+}
+
+const QUICK_ACTIONS: Record<string, QuickActionConfig> = {
+  buying: {
+    targetStatus: 'purchased',
+    accentColor: 'accent-blue-500',
+  },
+  packing: {
+    targetStatus: 'packed',
+    accentColor: 'accent-green-500',
+  },
+};
+
 interface ItemCardProps {
   item: Item;
   participants?: Participant[];
+  listFilter?: ListFilter | null;
   onEdit?: () => void;
   onUpdate?: (updates: ItemPatch) => void;
 }
@@ -23,12 +41,18 @@ interface ItemCardProps {
 export default function ItemCard({
   item,
   participants = [],
+  listFilter,
   onEdit,
   onUpdate,
 }: ItemCardProps) {
   const statusOption = STATUS_OPTIONS.find((s) => s.value === item.status);
   const isCanceled = item.status === 'canceled';
   const isEquipment = item.category === 'equipment';
+  const quickAction =
+    listFilter && listFilter in QUICK_ACTIONS
+      ? QUICK_ACTIONS[listFilter]
+      : null;
+  const [isChecking, setIsChecking] = useState(false);
 
   const assignedParticipant = useMemo(
     () =>
@@ -46,6 +70,80 @@ export default function ItemCard({
     }
     return opts;
   }, [participants]);
+
+  function handleCheck() {
+    if (!onUpdate || !quickAction || isChecking) return;
+    setIsChecking(true);
+    setTimeout(() => {
+      onUpdate({ status: quickAction.targetStatus });
+    }, 300);
+  }
+
+  if (quickAction && onUpdate) {
+    return (
+      <label
+        data-scroll-item-id={item.itemId}
+        className={clsx(
+          'border-l-4 px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:bg-gray-50/80 select-none',
+          STATUS_ACCENT[item.status] ?? 'border-l-gray-300',
+          isChecking && 'opacity-40'
+        )}
+      >
+        <input
+          type="checkbox"
+          checked={isChecking}
+          onChange={handleCheck}
+          className={clsx(
+            'h-5 w-5 shrink-0 rounded cursor-pointer',
+            quickAction.accentColor
+          )}
+        />
+
+        <div className="flex-1 min-w-0">
+          <span
+            className={clsx(
+              'text-sm sm:text-base font-semibold transition-all duration-300',
+              isChecking ? 'line-through text-gray-400' : 'text-gray-900'
+            )}
+          >
+            {item.name}
+          </span>
+
+          <div className="flex flex-wrap items-center gap-2 mt-1">
+            <span className="inline-flex items-center rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-gray-100 text-gray-600">
+              {item.quantity} {item.unit}
+            </span>
+
+            {item.notes && (
+              <span className="inline-flex items-center rounded-md bg-gray-50 px-2 py-0.5 text-xs sm:text-sm text-gray-500 truncate max-w-[180px] sm:max-w-xs border border-gray-200">
+                {item.notes}
+              </span>
+            )}
+
+            {assignedParticipant && (
+              <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
+                <svg
+                  className="w-3 h-3"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                {assignedParticipant.name} {assignedParticipant.lastName}
+              </span>
+            )}
+          </div>
+        </div>
+      </label>
+    );
+  }
 
   return (
     <div
