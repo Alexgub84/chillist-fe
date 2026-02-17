@@ -244,6 +244,7 @@ function PlanDetails() {
                   category={category}
                   items={items}
                   participants={plan.participants}
+                  listFilter={listFilter}
                   onEditItem={handleStartEdit}
                   onUpdateItem={updateItem}
                 />
