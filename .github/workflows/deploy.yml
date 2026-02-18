@@ -1,10 +1,7 @@
-name: CI
+name: Deploy
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -42,8 +39,10 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium firefox webkit
 
-      - name: Run E2E tests
-        run: npm run e2e
+      - name: Run E2E tests (all browsers)
+        run: npx playwright test
+        env:
+          VITE_AUTH_MOCK: 'true'
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
@@ -55,13 +54,35 @@ jobs:
 
   deploy:
     needs: test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
 
     steps:
+      - name: Validate required environment
+        run: |
+          missing=()
+          [ -z "$VITE_API_URL" ] && missing+=("VITE_API_URL")
+          [ -z "$VITE_API_KEY" ] && missing+=("VITE_API_KEY")
+          [ -z "$VITE_SUPABASE_URL" ] && missing+=("VITE_SUPABASE_URL")
+          [ -z "$VITE_SUPABASE_ANON_KEY" ] && missing+=("VITE_SUPABASE_ANON_KEY")
+          [ -z "$CLOUDFLARE_API_TOKEN" ] && missing+=("CLOUDFLARE_API_TOKEN")
+          [ -z "$CLOUDFLARE_ACCOUNT_ID" ] && missing+=("CLOUDFLARE_ACCOUNT_ID")
+          [ -z "$CLOUDFLARE_PROJECT_NAME" ] && missing+=("CLOUDFLARE_PROJECT_NAME")
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing required environment variables: ${missing[*]}"
+            exit 1
+          fi
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PROJECT_NAME: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -82,6 +103,8 @@ jobs:
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
