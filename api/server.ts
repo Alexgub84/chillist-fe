@@ -666,6 +666,30 @@ export async function buildServer(
     }
   );
 
+  app.get('/auth/me', async (request, reply) => {
+    const authHeader = request.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      void reply.status(401).send({ message: 'Unauthorized' });
+      return;
+    }
+
+    const token = authHeader.slice(7);
+    let email = 'test@chillist.dev';
+    let sub = '00000000-0000-0000-0000-000000000001';
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      if (payload.email) email = payload.email;
+      if (payload.sub) sub = payload.sub;
+    } catch {
+      // malformed token — fall back to defaults
+    }
+
+    void reply.send({
+      user: { id: sub, email, role: 'authenticated' },
+    });
+  });
+
   app.post('/_reset', async (_request, reply) => {
     const fresh = cloneData(initialData);
     store.plans = fresh.plans;
