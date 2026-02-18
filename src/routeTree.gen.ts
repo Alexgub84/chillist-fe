@@ -14,11 +14,24 @@ import { Route as rootRouteImport } from './routes/__root';
 import { Route as CreatePlanRouteImport } from './routes/create-plan';
 import { Route as PlanPlanIdRouteImport } from './routes/plan.$planId';
 
+const SignupLazyRouteImport = createFileRoute('/signup')();
+const SigninLazyRouteImport = createFileRoute('/signin')();
 const PlansLazyRouteImport = createFileRoute('/plans')();
 const NotFoundLazyRouteImport = createFileRoute('/not-found')();
+const CompleteProfileLazyRouteImport = createFileRoute('/complete-profile')();
 const AboutLazyRouteImport = createFileRoute('/about')();
 const IndexLazyRouteImport = createFileRoute('/')();
 
+const SignupLazyRoute = SignupLazyRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route));
+const SigninLazyRoute = SigninLazyRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/signin.lazy').then((d) => d.Route));
 const PlansLazyRoute = PlansLazyRouteImport.update({
   id: '/plans',
   path: '/plans',
@@ -29,6 +42,13 @@ const NotFoundLazyRoute = NotFoundLazyRouteImport.update({
   path: '/not-found',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/not-found.lazy').then((d) => d.Route));
+const CompleteProfileLazyRoute = CompleteProfileLazyRouteImport.update({
+  id: '/complete-profile',
+  path: '/complete-profile',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/complete-profile.lazy').then((d) => d.Route)
+);
 const AboutLazyRoute = AboutLazyRouteImport.update({
   id: '/about',
   path: '/about',
@@ -54,16 +74,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute;
   '/create-plan': typeof CreatePlanRoute;
   '/about': typeof AboutLazyRoute;
+  '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
+  '/signin': typeof SigninLazyRoute;
+  '/signup': typeof SignupLazyRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute;
   '/create-plan': typeof CreatePlanRoute;
   '/about': typeof AboutLazyRoute;
+  '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
+  '/signin': typeof SigninLazyRoute;
+  '/signup': typeof SignupLazyRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
 }
 export interface FileRoutesById {
@@ -71,8 +97,11 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute;
   '/create-plan': typeof CreatePlanRoute;
   '/about': typeof AboutLazyRoute;
+  '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
+  '/signin': typeof SigninLazyRoute;
+  '/signup': typeof SignupLazyRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
 }
 export interface FileRouteTypes {
@@ -81,24 +110,33 @@ export interface FileRouteTypes {
     | '/'
     | '/create-plan'
     | '/about'
+    | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/signin'
+    | '/signup'
     | '/plan/$planId';
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
     | '/create-plan'
     | '/about'
+    | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/signin'
+    | '/signup'
     | '/plan/$planId';
   id:
     | '__root__'
     | '/'
     | '/create-plan'
     | '/about'
+    | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/signin'
+    | '/signup'
     | '/plan/$planId';
   fileRoutesById: FileRoutesById;
 }
@@ -106,13 +144,30 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute;
   CreatePlanRoute: typeof CreatePlanRoute;
   AboutLazyRoute: typeof AboutLazyRoute;
+  CompleteProfileLazyRoute: typeof CompleteProfileLazyRoute;
   NotFoundLazyRoute: typeof NotFoundLazyRoute;
   PlansLazyRoute: typeof PlansLazyRoute;
+  SigninLazyRoute: typeof SigninLazyRoute;
+  SignupLazyRoute: typeof SignupLazyRoute;
   PlanPlanIdRoute: typeof PlanPlanIdRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup';
+      path: '/signup';
+      fullPath: '/signup';
+      preLoaderRoute: typeof SignupLazyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    '/signin': {
+      id: '/signin';
+      path: '/signin';
+      fullPath: '/signin';
+      preLoaderRoute: typeof SigninLazyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/plans': {
       id: '/plans';
       path: '/plans';
@@ -125,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/not-found';
       fullPath: '/not-found';
       preLoaderRoute: typeof NotFoundLazyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    '/complete-profile': {
+      id: '/complete-profile';
+      path: '/complete-profile';
+      fullPath: '/complete-profile';
+      preLoaderRoute: typeof CompleteProfileLazyRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     '/about': {
@@ -162,8 +224,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   CreatePlanRoute: CreatePlanRoute,
   AboutLazyRoute: AboutLazyRoute,
+  CompleteProfileLazyRoute: CompleteProfileLazyRoute,
   NotFoundLazyRoute: NotFoundLazyRoute,
   PlansLazyRoute: PlansLazyRoute,
+  SigninLazyRoute: SigninLazyRoute,
+  SignupLazyRoute: SignupLazyRoute,
   PlanPlanIdRoute: PlanPlanIdRoute,
 };
 export const routeTree = rootRouteImport

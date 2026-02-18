@@ -1,4 +1,34 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+const supabaseMock = vi.hoisted(() => {
+  const fn = vi.fn;
+  return {
+    auth: {
+      getSession: fn().mockResolvedValue({
+        data: { session: null },
+        error: null,
+      }),
+      onAuthStateChange: fn().mockReturnValue({
+        data: { subscription: { unsubscribe: fn() } },
+      }),
+    },
+  };
+});
+
+vi.mock('../../../src/lib/supabase', () => ({
+  supabase: supabaseMock,
+}));
+
+const DEFAULT_SESSION = {
+  access_token: 'mock-access-token-xyz',
+  refresh_token: 'mock-refresh-token-xyz',
+  user: {
+    id: '00000000-0000-0000-0000-000000000001',
+    email: 'test@chillist.dev',
+    user_metadata: {},
+  },
+};
+
 import {
   createItem,
   createParticipant,
@@ -7,6 +37,7 @@ import {
   deleteItem,
   deleteParticipant,
   deletePlan,
+  fetchAuthMe,
   fetchItem,
   fetchItems,
   fetchParticipant,
@@ -18,7 +49,6 @@ import {
   updatePlan,
 } from '../../../src/core/api';
 
-// Mock fetch
 const fetchMock = vi.fn();
 global.fetch = fetchMock;
 
@@ -482,6 +512,72 @@ describe('API Client', () => {
       await expect(fetchPlans()).rejects.toThrow(
         'Invalid API response: Expected JSON'
       );
+    });
+  });
+
+  describe('JWT Injection', () => {
+    it('includes Authorization header when session exists', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(mockResponse([mockPlan]));
+
+      await fetchPlans();
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        'http://api.test/plans',
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: `Bearer ${DEFAULT_SESSION.access_token}`,
+          }),
+        })
+      );
+    });
+
+    it('omits Authorization header when no session', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: null },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(mockResponse([mockPlan]));
+
+      await fetchPlans();
+
+      const callHeaders = fetchMock.mock.calls[0][1].headers;
+      expect(callHeaders).not.toHaveProperty('Authorization');
+    });
+  });
+
+  describe('Auth - fetchAuthMe', () => {
+    it('returns parsed user from /auth/me', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({
+          user: {
+            id: '00000000-0000-0000-0000-000000000001',
+            email: 'test@chillist.dev',
+            role: 'authenticated',
+          },
+        })
+      );
+
+      const result = await fetchAuthMe();
+      expect(result.user.email).toBe('test@chillist.dev');
+      expect(result.user.role).toBe('authenticated');
+    });
+
+    it('rejects when response shape is invalid', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(mockResponse({ invalid: true }));
+
+      await expect(fetchAuthMe()).rejects.toThrow();
     });
   });
 });

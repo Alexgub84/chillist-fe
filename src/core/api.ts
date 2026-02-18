@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { supabase } from '../lib/supabase';
 import {
   itemCreateSchema,
   itemPatchSchema,
@@ -48,6 +49,14 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
 
   if (apiKey) {
     (headers as Record<string, string>)['x-api-key'] = apiKey;
+  }
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (session?.access_token) {
+    (headers as Record<string, string>)['Authorization'] =
+      `Bearer ${session.access_token}`;
   }
 
   let response: Response;
@@ -241,4 +250,15 @@ export async function deleteItem(itemId: string): Promise<void> {
   await request(`/items/${itemId}`, {
     method: 'DELETE',
   });
+}
+
+// --- Auth ---
+
+import { authMeResponseSchema, type AuthMeResponse } from './auth-api';
+
+export type { AuthMeResponse };
+
+export async function fetchAuthMe(): Promise<AuthMeResponse> {
+  const data = await request<unknown>('/auth/me');
+  return authMeResponseSchema.parse(data);
 }

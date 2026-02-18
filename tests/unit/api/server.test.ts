@@ -244,4 +244,78 @@ describe('mock server', () => {
       await server.close();
     }
   });
+
+  it('GET /auth/me returns user from JWT payload', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(
+      JSON.stringify({
+        sub: '550e8400-e29b-41d4-a716-446655440000',
+        email: 'alex@chillist.dev',
+        role: 'authenticated',
+      })
+    );
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/auth/me',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      expect(response.statusCode).toBe(200);
+      const body = response.json() as { user: Record<string, unknown> };
+      expect(body.user.id).toBe('550e8400-e29b-41d4-a716-446655440000');
+      expect(body.user.email).toBe('alex@chillist.dev');
+      expect(body.user.role).toBe('authenticated');
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('GET /auth/me falls back to defaults for malformed JWT', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/auth/me',
+        headers: {
+          authorization: 'Bearer not-a-real-jwt',
+        },
+      });
+      expect(response.statusCode).toBe(200);
+      const body = response.json() as { user: Record<string, unknown> };
+      expect(body.user.email).toBe('test@chillist.dev');
+      expect(body.user.role).toBe('authenticated');
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('GET /auth/me returns 401 when Authorization header is missing', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/auth/me',
+      });
+      expect(response.statusCode).toBe(401);
+    } finally {
+      await server.close();
+    }
+  });
 });

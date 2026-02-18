@@ -94,8 +94,8 @@ export interface paths {
     };
     put?: never;
     /**
-     * Create a new plan
-     * @description Create a new plan with the provided details
+     * [DEPRECATED] Create a plan without owner
+     * @description Deprecated: Use POST /plans/with-owner instead. Creates a plan without an owner participant.
      */
     post: {
       parameters: {
@@ -106,7 +106,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-7'];
+          'application/json': components['schemas']['def-8'];
         };
       };
       responses: {
@@ -154,6 +154,76 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/plans/with-owner': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * [NEW] Create a plan with owner participant
+     * @description Creates a plan and its owner participant in a single transaction. Returns the plan with participants[] and items[]. Replaces POST /plans for new FE integration.
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-9'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-25'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/plans/{planId}': {
     parameters: {
       query?: never;
@@ -162,8 +232,8 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * Get plan by ID
-     * @description Retrieve a single plan by its ID with associated items
+     * Get plan by ID (now includes participants)
+     * @description Retrieve a single plan by its ID with associated items and participants. Response now includes participants[] array alongside items[].
      */
     get: {
       parameters: {
@@ -182,7 +252,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-25'];
           };
         };
         /** @description Default Response */
@@ -246,7 +316,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-10'];
+            'application/json': components['schemas']['def-12'];
           };
         };
         /** @description Default Response */
@@ -280,7 +350,72 @@ export interface paths {
     };
     options?: never;
     head?: never;
-    patch?: never;
+    /**
+     * Update a plan
+     * @description Update an existing plan by its ID
+     */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-10'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-5'];
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
     trace?: never;
   };
   '/plans/{planId}/participants': {
@@ -311,7 +446,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-19'];
+            'application/json': components['schemas']['def-20'];
           };
         };
         /** @description Default Response */
@@ -345,8 +480,8 @@ export interface paths {
     };
     put?: never;
     /**
-     * Add a participant to a plan
-     * @description Create a new participant in the specified plan
+     * [UPDATED] Add a participant to a plan
+     * @description Create a new participant in the specified plan. Required fields changed: now requires name, lastName, contactPhone instead of displayName.
      */
     post: {
       parameters: {
@@ -359,7 +494,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-20'];
+          'application/json': components['schemas']['def-21'];
         };
       };
       responses: {
@@ -369,7 +504,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-18'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -444,7 +579,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-18'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -499,7 +634,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-23'];
+            'application/json': components['schemas']['def-24'];
           };
         };
         /** @description Default Response */
@@ -557,7 +692,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-21'];
+          'application/json': components['schemas']['def-22'];
         };
       };
       responses: {
@@ -567,7 +702,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-18'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -638,7 +773,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-12'];
+            'application/json': components['schemas']['def-14'];
           };
         };
         /** @description Default Response */
@@ -686,7 +821,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-13'];
+          'application/json': components['schemas']['def-15'];
         };
       };
       responses: {
@@ -696,7 +831,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-11'];
+            'application/json': components['schemas']['def-13'];
           };
         };
         /** @description Default Response */
@@ -774,7 +909,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-16'];
+            'application/json': components['schemas']['def-18'];
           };
         };
         /** @description Default Response */
@@ -823,7 +958,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-14'];
+          'application/json': components['schemas']['def-16'];
         };
       };
       responses: {
@@ -833,7 +968,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-11'];
+            'application/json': components['schemas']['def-13'];
           };
         };
         /** @description Default Response */
@@ -874,6 +1009,189 @@ export interface paths {
         };
       };
     };
+    trace?: never;
+  };
+  '/plans/{planId}/invite/{inviteToken}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Access a plan via invite link
+     * @description Public endpoint. Validates the invite token and returns plan data with items. Participant PII is stripped — only displayName and role are included.
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+          inviteToken: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-29'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/plans/{planId}/participants/{participantId}/regenerate-token': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Regenerate invite token for a participant
+     * @description Generates a new invite token for the specified participant, invalidating the previous one. Requires API key (owner action).
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+          participantId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-31'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/auth/me': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get current user from JWT
+     * @description Returns the authenticated user identity extracted from the JWT. Returns 401 if no valid JWT is provided.
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              user: {
+                id: string;
+                email: string;
+                role: string;
+              };
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
     trace?: never;
   };
 }
@@ -942,8 +1260,17 @@ export interface components {
     };
     /** PlanList */
     'def-6': components['schemas']['def-5'][];
-    /** CreatePlanBody */
+    /** OwnerBody */
     'def-7': {
+      name: string;
+      lastName: string;
+      contactPhone: string;
+      displayName?: string;
+      avatarUrl?: string;
+      contactEmail?: string;
+    };
+    /** CreatePlanBodyLegacy */
+    'def-8': {
       title: string;
       description?: string | null;
       /** @enum {string} */
@@ -955,8 +1282,23 @@ export interface components {
       endDate?: string | null;
       tags?: string[] | null;
     };
+    /** CreatePlanBody */
+    'def-9': {
+      title: string;
+      description?: string | null;
+      /** @enum {string} */
+      visibility?: 'public' | 'unlisted' | 'private';
+      location?: components['schemas']['def-4'] | null;
+      /** Format: date-time */
+      startDate?: string | null;
+      /** Format: date-time */
+      endDate?: string | null;
+      tags?: string[] | null;
+      owner: components['schemas']['def-7'];
+      participants?: components['schemas']['def-21'][];
+    };
     /** UpdatePlanBody */
-    'def-8': {
+    'def-10': {
       title?: string;
       description?: string | null;
       /** @enum {string} */
@@ -971,16 +1313,16 @@ export interface components {
       tags?: string[] | null;
     };
     /** PlanIdParam */
-    'def-9': {
+    'def-11': {
       /** Format: uuid */
       planId: string;
     };
     /** DeletePlanResponse */
-    'def-10': {
+    'def-12': {
       ok: boolean;
     };
     /** Item */
-    'def-11': {
+    'def-13': {
       /** Format: uuid */
       itemId: string;
       /** Format: uuid */
@@ -1002,9 +1344,9 @@ export interface components {
       updatedAt: string;
     };
     /** ItemList */
-    'def-12': components['schemas']['def-11'][];
+    'def-14': components['schemas']['def-13'][];
     /** CreateItemBody */
-    'def-13': {
+    'def-15': {
       name: string;
       /** @enum {string} */
       category: 'equipment' | 'food';
@@ -1018,7 +1360,7 @@ export interface components {
       assignedParticipantId?: string | null;
     };
     /** UpdateItemBody */
-    'def-14': {
+    'def-16': {
       name?: string;
       /** @enum {string} */
       category?: 'equipment' | 'food';
@@ -1032,16 +1374,69 @@ export interface components {
       assignedParticipantId?: string | null;
     };
     /** ItemIdParam */
-    'def-15': {
+    'def-17': {
       /** Format: uuid */
       itemId: string;
     };
     /** DeleteItemResponse */
-    'def-16': {
+    'def-18': {
       ok: boolean;
     };
-    /** PlanWithItems */
-    'def-17': {
+    /** Participant */
+    'def-19': {
+      /** Format: uuid */
+      participantId: string;
+      /** Format: uuid */
+      planId: string;
+      name: string;
+      lastName: string;
+      contactPhone: string;
+      displayName?: string | null;
+      /** @enum {string} */
+      role: 'owner' | 'participant' | 'viewer';
+      avatarUrl?: string | null;
+      contactEmail?: string | null;
+      inviteToken?: string | null;
+      /** Format: date-time */
+      createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
+    };
+    /** ParticipantList */
+    'def-20': components['schemas']['def-19'][];
+    /** CreateParticipantBody */
+    'def-21': {
+      name: string;
+      lastName: string;
+      contactPhone: string;
+      displayName?: string;
+      /** @enum {string} */
+      role?: 'participant' | 'viewer';
+      avatarUrl?: string;
+      contactEmail?: string;
+    };
+    /** UpdateParticipantBody */
+    'def-22': {
+      name?: string;
+      lastName?: string;
+      contactPhone?: string;
+      displayName?: string | null;
+      /** @enum {string} */
+      role?: 'participant' | 'viewer';
+      avatarUrl?: string | null;
+      contactEmail?: string | null;
+    };
+    /** ParticipantIdParam */
+    'def-23': {
+      /** Format: uuid */
+      participantId: string;
+    };
+    /** DeleteParticipantResponse */
+    'def-24': {
+      ok: boolean;
+    };
+    /** PlanWithDetails */
+    'def-25': {
       /** Format: uuid */
       planId: string;
       title: string;
@@ -1062,59 +1457,56 @@ export interface components {
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
-      items: components['schemas']['def-12'];
+      items: components['schemas']['def-14'];
+      participants: components['schemas']['def-20'];
     };
-    /** Participant */
-    'def-18': {
-      /** Format: uuid */
-      participantId: string;
+    /** InviteParams */
+    'def-26': {
       /** Format: uuid */
       planId: string;
-      displayName: string;
-      name?: string | null;
-      lastName?: string | null;
+      inviteToken: string;
+    };
+    /** InviteParticipant */
+    'def-27': {
+      /** Format: uuid */
+      participantId: string;
+      displayName?: string | null;
       /** @enum {string} */
       role: 'owner' | 'participant' | 'viewer';
-      avatarUrl?: string | null;
-      contactEmail?: string | null;
-      contactPhone?: string | null;
+    };
+    /** InviteParticipantList */
+    'def-28': components['schemas']['def-27'][];
+    /** InvitePlanResponse */
+    'def-29': {
+      /** Format: uuid */
+      planId: string;
+      title: string;
+      description?: string | null;
+      /** @enum {string} */
+      status: 'draft' | 'active' | 'archived';
+      location?: components['schemas']['def-4'] | null;
+      /** Format: date-time */
+      startDate?: string | null;
+      /** Format: date-time */
+      endDate?: string | null;
+      tags?: string[] | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
+      items: components['schemas']['def-14'];
+      participants: components['schemas']['def-28'];
     };
-    /** ParticipantList */
-    'def-19': components['schemas']['def-18'][];
-    /** CreateParticipantBody */
-    'def-20': {
-      displayName: string;
-      /** @enum {string} */
-      role?: 'owner' | 'participant' | 'viewer';
-      name?: string;
-      lastName?: string;
-      avatarUrl?: string;
-      contactEmail?: string;
-      contactPhone?: string;
-    };
-    /** UpdateParticipantBody */
-    'def-21': {
-      displayName?: string;
-      /** @enum {string} */
-      role?: 'owner' | 'participant' | 'viewer';
-      name?: string | null;
-      lastName?: string | null;
-      avatarUrl?: string | null;
-      contactEmail?: string | null;
-      contactPhone?: string | null;
-    };
-    /** ParticipantIdParam */
-    'def-22': {
+    /** RegenerateTokenParams */
+    'def-30': {
+      /** Format: uuid */
+      planId: string;
       /** Format: uuid */
       participantId: string;
     };
-    /** DeleteParticipantResponse */
-    'def-23': {
-      ok: boolean;
+    /** RegenerateTokenResponse */
+    'def-31': {
+      inviteToken: string;
     };
   };
   responses: never;
