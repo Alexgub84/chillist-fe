@@ -64,7 +64,6 @@ jobs:
         run: |
           missing=()
           [ -z "$VITE_API_URL" ] && missing+=("VITE_API_URL")
-          [ -z "$VITE_API_KEY" ] && missing+=("VITE_API_KEY")
           [ -z "$VITE_SUPABASE_URL" ] && missing+=("VITE_SUPABASE_URL")
           [ -z "$VITE_SUPABASE_ANON_KEY" ] && missing+=("VITE_SUPABASE_ANON_KEY")
           [ -z "$CLOUDFLARE_API_TOKEN" ] && missing+=("CLOUDFLARE_API_TOKEN")
@@ -76,7 +75,6 @@ jobs:
           fi
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
-          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -102,7 +100,6 @@ jobs:
         run: npm run build
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
-          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
 
