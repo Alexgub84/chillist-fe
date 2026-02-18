@@ -19,9 +19,9 @@ async function addItemViaUI(
 
   const nameInput = form.getByPlaceholder('Item name');
   await nameInput.fill(name);
-  await page
-    .getByRole('option', { name, exact: true })
-    .click({ timeout: 5000 });
+  const option = page.getByRole('option', { name, exact: true });
+  await expect(option).toBeVisible({ timeout: 5000 });
+  await option.click({ force: true });
 
   const quantityInput = form.locator('input[type="number"]');
   await quantityInput.fill(String(quantity));

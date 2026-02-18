@@ -1,0 +1,13 @@
+{
+  "networkPolicy": {
+    "default": "deny",
+    "allow": [
+      "registry.npmjs.org",
+      "*.githubusercontent.com",
+      "github.com",
+      "*.github.com",
+      "api.github.com"
+    ]
+  },
+  "enableSharedBuildCache": true
+}
