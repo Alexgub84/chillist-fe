@@ -51,30 +51,26 @@ describe('Plan', () => {
     expect(screen.getByText('A fun weekend outdoors')).toBeInTheDocument();
   });
 
-  it('renders detail labels from translations', () => {
+  it('renders compact detail labels', () => {
     render(<Plan plan={buildPlan()} />);
 
-    expect(screen.getByText('Details')).toBeInTheDocument();
-    expect(screen.getByText('Status')).toBeInTheDocument();
-    expect(screen.getByText('Visibility')).toBeInTheDocument();
+    expect(screen.getByText('Description')).toBeInTheDocument();
     expect(screen.getByText('Owner')).toBeInTheDocument();
     expect(screen.getByText('Start')).toBeInTheDocument();
     expect(screen.getByText('End')).toBeInTheDocument();
-    expect(screen.getByText('Location')).toBeInTheDocument();
   });
 
-  it('shows owner name in details and participant list', () => {
+  it('shows owner name and avatar in compact card', () => {
     render(<Plan plan={buildPlan()} />);
 
-    const matches = screen.getAllByText('Alex Smith');
-    expect(matches).toHaveLength(2);
+    expect(screen.getByText('Alex Smith')).toBeInTheDocument();
   });
 
-  it('shows location details', () => {
+  it('shows dates in DD.MM.YYYY format', () => {
     render(<Plan plan={buildPlan()} />);
 
-    expect(screen.getByText('Yosemite')).toBeInTheDocument();
-    expect(screen.getByText(/Mariposa/)).toBeInTheDocument();
+    expect(screen.getByText('20.12.2025')).toBeInTheDocument();
+    expect(screen.getByText('22.12.2025')).toBeInTheDocument();
   });
 
   it('shows N/A when dates are missing', () => {
@@ -86,31 +82,77 @@ describe('Plan', () => {
     expect(naElements.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('renders participant list with role badge', () => {
+  it('renders participant avatars with count', () => {
     render(<Plan plan={buildPlan()} />);
 
-    expect(screen.getByText('Participants')).toBeInTheDocument();
-    expect(screen.getByText('AS')).toBeInTheDocument();
-    expect(screen.getByText('owner')).toBeInTheDocument();
-  });
-
-  it('shows empty participant message when no participants', () => {
-    render(<Plan plan={buildPlan({ participants: [] })} />);
-
     expect(
-      screen.getByText('No participants yet. Add one to get started!')
+      screen.getByText((_content, element) => {
+        return element?.textContent === 'Participants (1)';
+      })
     ).toBeInTheDocument();
   });
 
-  it('shows add participant button when handler provided', () => {
-    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
-
-    expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
-  });
-
-  it('opens add participant form on button click', async () => {
+  it('shows add participant circle that opens modal with form', async () => {
     const user = userEvent.setup();
     render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+
+    const addButton = screen.getByTitle('+ Add Participant');
+    expect(addButton).toBeInTheDocument();
+
+    await user.click(addButton);
+
+    await waitFor(() => {
+      expect(screen.getByText('First Name *')).toBeInTheDocument();
+    });
+  });
+
+  it('shows manage button that opens participant modal', async () => {
+    const user = userEvent.setup();
+    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+
+    expect(screen.getByText('Manage')).toBeInTheDocument();
+    await user.click(screen.getByText('Manage'));
+
+    await waitFor(() => {
+      expect(screen.getByText('owner')).toBeInTheDocument();
+      expect(screen.getByText('+1234567890')).toBeInTheDocument();
+    });
+  });
+
+  it('shows empty participant message in modal when no participants', async () => {
+    const user = userEvent.setup();
+    render(
+      <Plan plan={buildPlan({ participants: [] })} onAddParticipant={vi.fn()} />
+    );
+
+    await user.click(screen.getByText('Manage'));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText('No participants yet. Add one to get started!')
+      ).toBeInTheDocument();
+    });
+  });
+
+  it('shows add participant button in modal when handler provided', async () => {
+    const user = userEvent.setup();
+    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+
+    await user.click(screen.getByText('Manage'));
+
+    await waitFor(() => {
+      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
+    });
+  });
+
+  it('opens add participant form in modal', async () => {
+    const user = userEvent.setup();
+    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+
+    await user.click(screen.getByText('Manage'));
+    await waitFor(() => {
+      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
+    });
 
     await user.click(screen.getByText('+ Add Participant'));
 
@@ -124,6 +166,11 @@ describe('Plan', () => {
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
     render(<Plan plan={buildPlan()} onAddParticipant={onAdd} />);
+
+    await user.click(screen.getByText('Manage'));
+    await waitFor(() => {
+      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
+    });
 
     await user.click(screen.getByText('+ Add Participant'));
 
@@ -143,9 +190,14 @@ describe('Plan', () => {
     });
   });
 
-  it('cancels add participant form', async () => {
+  it('cancels add participant form in modal', async () => {
     const user = userEvent.setup();
     render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+
+    await user.click(screen.getByText('Manage'));
+    await waitFor(() => {
+      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
+    });
 
     await user.click(screen.getByText('+ Add Participant'));
     expect(screen.getByText('First Name *')).toBeInTheDocument();

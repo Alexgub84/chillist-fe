@@ -48,7 +48,8 @@ export default function Autocomplete({
   return (
     <Combobox
       value={value}
-      onChange={(selected: string) => {
+      onChange={(selected: string | null) => {
+        if (selected === null) return;
         onChange(selected);
         onSelect(selected);
       }}
