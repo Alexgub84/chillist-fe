@@ -50,6 +50,12 @@
     "firstName": "First name",
     "lastName": "Last name",
     "phone": "Phone",
+    "phoneCountry": "Country code",
+    "phoneCountryDefault": "Code",
+    "phonePlaceholder": "501234567",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "emailChanged": "A confirmation link was sent to your new email address.",
     "saving": "Saving...",
     "submit": "Save & Continue",
     "skip": "Skip for now",
@@ -105,6 +111,8 @@
     "firstName": "First Name *",
     "lastName": "Last Name *",
     "phone": "Phone *",
+    "phoneCountry": "Country code",
+    "phoneCountryDefault": "Code",
     "email": "Email",
     "firstNamePlaceholder": "First name",
     "lastNamePlaceholder": "Last name",
@@ -138,6 +146,7 @@
     "title": "Items",
     "empty": "No items yet. Add one to get started!",
     "addItem": "+ Add Item",
+    "editItem": "Edit Item",
     "updateItem": "Update Item",
     "addItemLabel": "Add Item",
     "name": "Name *",
@@ -177,8 +186,7 @@
   "filters": {
     "all": "All",
     "buyingList": "Buying List",
-    "packingList": "Packing List",
-    "assigningList": "Assigning List"
+    "packingList": "Packing List"
   },
   "roles": {
     "owner": "owner",
@@ -252,6 +260,7 @@
     "set": "Set"
   },
   "language": {
-    "toggle": "עב"
+    "en": "EN",
+    "he": "עב"
   }
 }

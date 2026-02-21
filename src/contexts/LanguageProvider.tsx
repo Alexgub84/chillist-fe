@@ -1,11 +1,11 @@
 import { useCallback, useEffect, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { LanguageContext, type AppLanguage } from './language-context';
+import { LanguageContext, isRtl, type AppLanguage } from './language-context';
 
 function applyDirection(lang: AppLanguage) {
   const html = document.documentElement;
-  html.dir = lang === 'he' ? 'rtl' : 'ltr';
+  html.dir = isRtl(lang) ? 'rtl' : 'ltr';
   html.lang = lang;
 }
 

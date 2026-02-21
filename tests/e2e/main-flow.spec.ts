@@ -240,14 +240,6 @@ test.describe('Filters', () => {
       page.locator('[class*="border-l-"]').filter({ hasText: 'Tent' })
     ).toBeHidden();
 
-    await statusTabs.locator('button', { hasText: 'Assigning List' }).click();
-    await expect(
-      page.locator('[class*="border-l-"]').filter({ hasText: 'Bread' })
-    ).toBeVisible();
-    await expect(
-      page.locator('[class*="border-l-"]').filter({ hasText: 'Tent' })
-    ).toBeHidden();
-
     await statusTabs.locator('button', { hasText: /^All/ }).click();
     await expect(
       page.locator('[class*="border-l-"]').filter({ hasText: 'Tent' })

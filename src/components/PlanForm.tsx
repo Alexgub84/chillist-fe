@@ -11,6 +11,14 @@ import {
 } from '../core/schemas/plan';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
+import { useLanguage } from '../contexts/useLanguage';
+import {
+  countryCodes,
+  getFlagEmoji,
+  getDialCode,
+  detectCountryFromPhone,
+  getDefaultCountryByLanguage,
+} from '../data/country-codes';
 
 const locationFormSchema = z
   .object({
@@ -24,6 +32,7 @@ const locationFormSchema = z
 const participantRowSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   lastName: z.string().min(1, 'Last name is required'),
+  phoneCountry: z.string().optional(),
   contactPhone: z.string().min(1, 'Phone is required'),
   contactEmail: z.string().optional(),
 });
@@ -36,6 +45,7 @@ const createPlanFormSchema = z
     visibility: planVisibilitySchema,
     ownerName: z.string().min(1, 'Owner name is required'),
     ownerLastName: z.string().min(1, 'Owner last name is required'),
+    ownerPhoneCountry: z.string().optional(),
     ownerPhone: z.string().min(1, 'Owner phone is required'),
     ownerEmail: z.string().optional(),
     tagsCsv: z.string().optional(),
@@ -75,16 +85,52 @@ type FormValues = z.infer<typeof createPlanFormSchema>;
 
 export type PlanFormPayload = PlanCreateWithOwner;
 
+export interface DefaultOwner {
+  ownerName?: string;
+  ownerLastName?: string;
+  ownerPhoneCountry?: string;
+  ownerPhone?: string;
+  ownerEmail?: string;
+}
+
 interface PlanFormProps {
   onSubmit: (payload: PlanFormPayload) => void | Promise<void>;
   isSubmitting?: boolean;
+  defaultOwner?: DefaultOwner;
+}
+
+function resolveOwnerPhone(
+  defaultOwner: DefaultOwner | undefined,
+  lang: string
+): { country: string; local: string } {
+  const langDefault = getDefaultCountryByLanguage(lang);
+  if (!defaultOwner?.ownerPhone) {
+    return {
+      country: defaultOwner?.ownerPhoneCountry ?? langDefault,
+      local: '',
+    };
+  }
+  if (defaultOwner.ownerPhoneCountry) {
+    return {
+      country: defaultOwner.ownerPhoneCountry,
+      local: defaultOwner.ownerPhone,
+    };
+  }
+  const detected = detectCountryFromPhone(defaultOwner.ownerPhone);
+  if (detected)
+    return { country: detected.countryCode, local: detected.localNumber };
+  return { country: langDefault, local: defaultOwner.ownerPhone };
 }
 
 export default function PlanForm({
   onSubmit,
   isSubmitting = false,
+  defaultOwner,
 }: PlanFormProps) {
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const ownerPhone = resolveOwnerPhone(defaultOwner, language);
+  const defaultPhoneCountry = getDefaultCountryByLanguage(language);
   const {
     register,
     handleSubmit,
@@ -98,6 +144,11 @@ export default function PlanForm({
       visibility: 'private',
       oneDay: false,
       participants: [],
+      ownerName: defaultOwner?.ownerName ?? '',
+      ownerLastName: defaultOwner?.ownerLastName ?? '',
+      ownerPhoneCountry: ownerPhone.country,
+      ownerPhone: ownerPhone.local,
+      ownerEmail: defaultOwner?.ownerEmail ?? '',
     },
   });
 
@@ -139,6 +190,11 @@ export default function PlanForm({
     );
   };
 
+  function combinePhone(country: string | undefined, phone: string): string {
+    const prefix = getDialCode(country ?? '');
+    return prefix ? `${prefix}${phone}` : phone;
+  }
+
   async function handleFormSubmit(values: FormValues): Promise<void> {
     const participants = (values.participants ?? [])
       .filter(
@@ -147,7 +203,7 @@ export default function PlanForm({
       .map((p) => ({
         name: p.name.trim(),
         lastName: p.lastName.trim(),
-        contactPhone: p.contactPhone.trim(),
+        contactPhone: combinePhone(p.phoneCountry, p.contactPhone.trim()),
         contactEmail: p.contactEmail?.trim() || undefined,
       }));
 
@@ -158,7 +214,10 @@ export default function PlanForm({
       owner: {
         name: values.ownerName.trim(),
         lastName: values.ownerLastName.trim(),
-        contactPhone: values.ownerPhone.trim(),
+        contactPhone: combinePhone(
+          values.ownerPhoneCountry,
+          values.ownerPhone.trim()
+        ),
         contactEmail: values.ownerEmail?.trim() || undefined,
       },
       participants: participants.length > 0 ? participants : undefined,
@@ -267,28 +326,40 @@ export default function PlanForm({
                 )}
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <FormLabel>{t('planForm.phone')}</FormLabel>
+            <div>
+              <FormLabel>{t('planForm.phone')}</FormLabel>
+              <div className="flex gap-2">
+                <select
+                  {...register('ownerPhoneCountry')}
+                  aria-label={t('planForm.phoneCountry')}
+                  className="w-[140px] shrink-0 rounded-md border border-gray-300 px-2 py-1.5 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                >
+                  <option value="">{t('planForm.phoneCountryDefault')}</option>
+                  {countryCodes.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {getFlagEmoji(c.code)} {c.dialCode}
+                    </option>
+                  ))}
+                </select>
                 <FormInput
                   {...register('ownerPhone')}
                   placeholder={t('planForm.phonePlaceholder')}
                   compact
                 />
-                {errors.ownerPhone && (
-                  <p className="text-sm text-red-600 mt-1">
-                    {errors.ownerPhone.message}
-                  </p>
-                )}
               </div>
-              <div>
-                <FormLabel>{t('planForm.email')}</FormLabel>
-                <FormInput
-                  {...register('ownerEmail')}
-                  placeholder={t('planForm.emailPlaceholder')}
-                  compact
-                />
-              </div>
+              {errors.ownerPhone && (
+                <p className="text-sm text-red-600 mt-1">
+                  {errors.ownerPhone.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <FormLabel>{t('planForm.email')}</FormLabel>
+              <FormInput
+                {...register('ownerEmail')}
+                placeholder={t('planForm.emailPlaceholder')}
+                compact
+              />
             </div>
           </div>
         </fieldset>
@@ -341,26 +412,40 @@ export default function PlanForm({
                     )}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
+                <div>
+                  <div className="flex gap-2">
+                    <select
+                      {...register(`participants.${index}.phoneCountry`)}
+                      aria-label={t('planForm.phoneCountry')}
+                      className="w-[140px] shrink-0 rounded-md border border-gray-300 px-2 py-1.5 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                    >
+                      <option value="">
+                        {t('planForm.phoneCountryDefault')}
+                      </option>
+                      {countryCodes.map((c) => (
+                        <option key={c.code} value={c.code}>
+                          {getFlagEmoji(c.code)} {c.dialCode}
+                        </option>
+                      ))}
+                    </select>
                     <FormInput
                       {...register(`participants.${index}.contactPhone`)}
                       placeholder={t('planForm.phonePlaceholder')}
                       compact
                     />
-                    {errors.participants?.[index]?.contactPhone && (
-                      <p className="text-sm text-red-600 mt-1">
-                        {errors.participants[index].contactPhone.message}
-                      </p>
-                    )}
                   </div>
-                  <div>
-                    <FormInput
-                      {...register(`participants.${index}.contactEmail`)}
-                      placeholder={t('planForm.emailPlaceholder')}
-                      compact
-                    />
-                  </div>
+                  {errors.participants?.[index]?.contactPhone && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.participants[index].contactPhone.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <FormInput
+                    {...register(`participants.${index}.contactEmail`)}
+                    placeholder={t('planForm.emailPlaceholder')}
+                    compact
+                  />
                 </div>
               </div>
             ))}
@@ -370,6 +455,7 @@ export default function PlanForm({
                 append({
                   name: '',
                   lastName: '',
+                  phoneCountry: defaultPhoneCountry,
                   contactPhone: '',
                   contactEmail: '',
                 })

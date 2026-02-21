@@ -11,7 +11,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CreatePlan } from '../../../src/routes/create-plan';
 import { PlansList } from '../../../src/components/PlansList';
 
-// Mock the hooks and API
+vi.mock('../../../src/contexts/useAuth', () => ({
+  useAuth: () => ({
+    session: null,
+    user: null,
+    loading: false,
+    signOut: vi.fn(),
+  }),
+}));
+
 vi.mock('../../../src/hooks/usePlans', () => ({
   default: vi.fn(() => ({
     data: [

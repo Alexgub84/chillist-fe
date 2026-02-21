@@ -101,10 +101,11 @@
     },
     {
       "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
-      "createdAt": "2026-02-21T12:00:04.108Z",
-      "updatedAt": "2026-02-21T12:00:04.108Z",
+      "title": "חגיגה",
       "description": "חוגגים יום הולדת לדודיניו",
-      "endDate": "2026-02-21T19:05:00Z",
+      "status": "draft",
+      "visibility": "public",
+      "ownerParticipantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
       "location": {
         "locationId": "53953405-e1fc-585f-b3eb-2498983cf946",
         "name": "בית של דודו",
@@ -112,16 +113,15 @@
         "region": "",
         "city": "אזור"
       },
-      "ownerParticipantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
+      "startDate": "2026-02-21T15:59:00Z",
+      "endDate": "2026-02-21T19:05:00Z",
       "participantIds": [
         "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
         "a581b939-36b4-4f9a-8b3d-9047953398f9",
         "23e04bdb-8dfe-4b12-8167-737fc83faee3"
       ],
-      "startDate": "2026-02-21T15:59:00Z",
-      "status": "draft",
-      "title": "חגיגה",
-      "visibility": "public"
+      "createdAt": "2026-02-21T12:00:04.108Z",
+      "updatedAt": "2026-02-21T12:00:04.108Z"
     }
   ],
   "participants": [
@@ -891,14 +891,14 @@
       "itemId": "1a2842b5-a06e-42cf-af12-b12b46023e86",
       "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
       "name": "טופו",
-      "category": "food",
       "quantity": 1,
       "unit": "kg",
-      "status": "pending",
       "notes": null,
+      "status": "packed",
       "assignedParticipantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
       "createdAt": "2026-02-21T12:01:02.836Z",
-      "updatedAt": "2026-02-21T12:01:02.836Z"
+      "updatedAt": "2026-02-21T21:52:57.671Z",
+      "category": "food"
     }
   ]
 }

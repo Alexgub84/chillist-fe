@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import PlanForm from '../../../src/components/PlanForm';
+import type { DefaultOwner } from '../../../src/components/PlanForm';
 
 vi.mock('uuid', () => ({
   v5: vi.fn(
@@ -23,9 +24,16 @@ describe('CreatePlan - PlanForm', () => {
     handleSubmit = vi.fn();
   });
 
-  const renderForm = (props?: { isSubmitting?: boolean }) => {
+  const renderForm = (props?: {
+    isSubmitting?: boolean;
+    defaultOwner?: DefaultOwner;
+  }) => {
     return render(
-      <PlanForm onSubmit={handleSubmit} isSubmitting={props?.isSubmitting} />
+      <PlanForm
+        onSubmit={handleSubmit}
+        isSubmitting={props?.isSubmitting}
+        defaultOwner={props?.defaultOwner}
+      />
     );
   };
 
@@ -457,6 +465,113 @@ describe('CreatePlan - PlanForm', () => {
       const submitButton = screen.getByRole('button', { name: /creating/i });
       expect(submitButton).toBeDisabled();
       expect(submitButton).toHaveTextContent('Creating…');
+    });
+  });
+
+  describe('Owner pre-fill from auth', () => {
+    const signedInOwner: DefaultOwner = {
+      ownerName: 'Alex',
+      ownerLastName: 'Guberman',
+      ownerPhone: '+972501234567',
+      ownerEmail: 'alex@example.com',
+    };
+
+    it('should pre-fill owner fields when defaultOwner is provided', () => {
+      renderForm({ defaultOwner: signedInOwner });
+
+      expect(screen.getByPlaceholderText(/first name/i)).toHaveValue('Alex');
+      expect(screen.getByPlaceholderText(/last name/i)).toHaveValue('Guberman');
+      expect(screen.getByPlaceholderText(/phone number/i)).toHaveValue(
+        '501234567'
+      );
+      expect(screen.getByPlaceholderText(/email/i)).toHaveValue(
+        'alex@example.com'
+      );
+    });
+
+    it('should leave owner fields empty when defaultOwner is not provided', () => {
+      renderForm();
+
+      expect(screen.getByPlaceholderText(/first name/i)).toHaveValue('');
+      expect(screen.getByPlaceholderText(/last name/i)).toHaveValue('');
+      expect(screen.getByPlaceholderText(/phone number/i)).toHaveValue('');
+    });
+
+    it('should submit pre-filled owner data without manual editing', async () => {
+      const user = userEvent.setup();
+      renderForm({ defaultOwner: signedInOwner });
+
+      await user.type(getInputByLabel(/title/i), 'Beach Day');
+      await user.click(getInputByLabel(/one-day plan/i));
+
+      await waitFor(() => {
+        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+      });
+
+      await user.type(getInputByLabel(/^date \*$/i), '2026-03-15');
+
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
+
+      await waitFor(() => {
+        expect(handleSubmit).toHaveBeenCalledTimes(1);
+        expect(handleSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            title: 'Beach Day',
+            owner: {
+              name: 'Alex',
+              lastName: 'Guberman',
+              contactPhone: '+972501234567',
+              contactEmail: 'alex@example.com',
+            },
+          })
+        );
+      });
+    });
+
+    it('should allow overriding pre-filled owner fields', async () => {
+      const user = userEvent.setup();
+      renderForm({ defaultOwner: signedInOwner });
+
+      const phoneInput = screen.getByPlaceholderText(/phone number/i);
+      await user.clear(phoneInput);
+      await user.type(phoneInput, '999888777');
+
+      await user.type(getInputByLabel(/title/i), 'Override Test');
+      await user.click(getInputByLabel(/one-day plan/i));
+
+      await waitFor(() => {
+        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+      });
+
+      await user.type(getInputByLabel(/^date \*$/i), '2026-03-15');
+
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
+
+      await waitFor(() => {
+        expect(handleSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            owner: expect.objectContaining({
+              name: 'Alex',
+              lastName: 'Guberman',
+              contactPhone: '+972999888777',
+              contactEmail: 'alex@example.com',
+            }),
+          })
+        );
+      });
+    });
+
+    it('should handle partial defaultOwner (only email)', () => {
+      renderForm({
+        defaultOwner: { ownerEmail: 'partial@example.com' },
+      });
+
+      expect(screen.getByPlaceholderText(/first name/i)).toHaveValue('');
+      expect(screen.getByPlaceholderText(/last name/i)).toHaveValue('');
+      expect(screen.getByPlaceholderText(/phone number/i)).toHaveValue('');
+      expect(screen.getByPlaceholderText(/email/i)).toHaveValue(
+        'partial@example.com'
+      );
     });
   });
 });
