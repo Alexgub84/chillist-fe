@@ -232,16 +232,24 @@
     "endDateRequired": "End date is required",
     "quantityMin": "Quantity must be at least 1"
   },
+  "unitGroups": {
+    "weight": "Weight",
+    "volume": "Volume",
+    "length": "Length",
+    "count": "Count"
+  },
   "units": {
-    "kg": "kg",
-    "g": "g",
-    "lb": "lb",
-    "oz": "oz",
-    "l": "l",
-    "ml": "ml",
-    "pcs": "pcs",
-    "pack": "pack",
-    "set": "set"
+    "kg": "Kilogram",
+    "g": "Gram",
+    "lb": "Pound",
+    "oz": "Ounce",
+    "l": "Liter",
+    "ml": "Milliliter",
+    "m": "Meter",
+    "cm": "Centimeter",
+    "pcs": "Pieces",
+    "pack": "Pack",
+    "set": "Set"
   },
   "language": {
     "toggle": "עב"
