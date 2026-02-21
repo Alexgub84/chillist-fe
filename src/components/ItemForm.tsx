@@ -14,7 +14,7 @@ import {
 import {
   CATEGORY_OPTIONS,
   STATUS_OPTIONS,
-  UNIT_OPTIONS,
+  UNIT_GROUPS,
 } from '../core/constants/item';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
@@ -262,17 +262,38 @@ export default function ItemForm({
 
         <div>
           <FormLabel>{t('items.unit')}</FormLabel>
-          <FormSelect {...register('unit')} disabled={isEquipment} compact>
-            {isEquipment ? (
-              <option value="pcs">{t('units.pcs')}</option>
-            ) : (
-              UNIT_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {t(opt.labelKey)}
-                </option>
-              ))
+          <Controller
+            name="unit"
+            control={control}
+            render={({ field }) => (
+              <FormSelect
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                name={field.name}
+                ref={field.ref}
+                disabled={isEquipment}
+                compact
+              >
+                {isEquipment ? (
+                  <option value="pcs">{t('units.pcs')}</option>
+                ) : (
+                  UNIT_GROUPS.map((group) => (
+                    <optgroup
+                      key={group.groupLabelKey}
+                      label={t(group.groupLabelKey)}
+                    >
+                      {group.options.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {t(opt.labelKey)}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))
+                )}
+              </FormSelect>
             )}
-          </FormSelect>
+          />
         </div>
       </div>
 

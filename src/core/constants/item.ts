@@ -47,7 +47,48 @@ export const UNIT_OPTIONS: { value: Unit; labelKey: string }[] = [
   { value: 'oz', labelKey: 'units.oz' },
   { value: 'l', labelKey: 'units.l' },
   { value: 'ml', labelKey: 'units.ml' },
+  { value: 'm', labelKey: 'units.m' },
+  { value: 'cm', labelKey: 'units.cm' },
   { value: 'pcs', labelKey: 'units.pcs' },
   { value: 'pack', labelKey: 'units.pack' },
   { value: 'set', labelKey: 'units.set' },
+];
+
+export type UnitGroup = {
+  groupLabelKey: string;
+  options: { value: Unit; labelKey: string }[];
+};
+
+export const UNIT_GROUPS: UnitGroup[] = [
+  {
+    groupLabelKey: 'unitGroups.weight',
+    options: [
+      { value: 'kg', labelKey: 'units.kg' },
+      { value: 'g', labelKey: 'units.g' },
+      { value: 'lb', labelKey: 'units.lb' },
+      { value: 'oz', labelKey: 'units.oz' },
+    ],
+  },
+  {
+    groupLabelKey: 'unitGroups.volume',
+    options: [
+      { value: 'l', labelKey: 'units.l' },
+      { value: 'ml', labelKey: 'units.ml' },
+    ],
+  },
+  {
+    groupLabelKey: 'unitGroups.length',
+    options: [
+      { value: 'm', labelKey: 'units.m' },
+      { value: 'cm', labelKey: 'units.cm' },
+    ],
+  },
+  {
+    groupLabelKey: 'unitGroups.count',
+    options: [
+      { value: 'pcs', labelKey: 'units.pcs' },
+      { value: 'pack', labelKey: 'units.pack' },
+      { value: 'set', labelKey: 'units.set' },
+    ],
+  },
 ];

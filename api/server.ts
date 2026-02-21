@@ -42,6 +42,8 @@ const unitSchema = z.enum([
   'oz',
   'l',
   'ml',
+  'm',
+  'cm',
   'pack',
   'set',
 ]);

@@ -20,7 +20,7 @@ describe('ItemCard', () => {
     render(<ItemCard item={baseItem} />);
 
     expect(screen.getByText('Tent')).toBeInTheDocument();
-    expect(screen.getByText('2 pcs')).toBeInTheDocument();
+    expect(screen.getByText('2 Pieces')).toBeInTheDocument();
   });
 
   it('renders the correct status badge', () => {
