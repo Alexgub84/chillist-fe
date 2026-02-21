@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../lib/supabase';
 
 const signInSchema = z.object({
@@ -13,6 +14,7 @@ const signInSchema = z.object({
 type SignInForm = z.infer<typeof signInSchema>;
 
 export function SignIn() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const {
@@ -58,8 +60,10 @@ export function SignIn() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-sm sm:p-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Sign in</h1>
-        <p className="mt-1 text-sm text-gray-600">Welcome back to Chillist.</p>
+        <h1 className="text-2xl font-semibold text-gray-900">
+          {t('signIn.title')}
+        </h1>
+        <p className="mt-1 text-sm text-gray-600">{t('signIn.subtitle')}</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
           <div>
@@ -67,7 +71,7 @@ export function SignIn() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              {t('signIn.email')}
             </label>
             <input
               id="email"
@@ -75,7 +79,7 @@ export function SignIn() {
               autoComplete="email"
               {...register('email')}
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              placeholder="you@example.com"
+              placeholder={t('signIn.emailPlaceholder')}
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-600">
@@ -89,7 +93,7 @@ export function SignIn() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Password
+              {t('signIn.password')}
             </label>
             <input
               id="password"
@@ -97,7 +101,7 @@ export function SignIn() {
               autoComplete="current-password"
               {...register('password')}
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              placeholder="Your password"
+              placeholder={t('signIn.passwordPlaceholder')}
             />
             {errors.password && (
               <p className="mt-1 text-sm text-red-600">
@@ -111,7 +115,7 @@ export function SignIn() {
             disabled={isSubmitting}
             className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? 'Signing in...' : 'Sign In'}
+            {isSubmitting ? t('signIn.submitting') : t('signIn.submit')}
           </button>
         </form>
 
@@ -121,7 +125,9 @@ export function SignIn() {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">or</span>
+              <span className="bg-white px-2 text-gray-500">
+                {t('signIn.or')}
+              </span>
             </div>
           </div>
 
@@ -148,17 +154,17 @@ export function SignIn() {
                 fill="#EA4335"
               />
             </svg>
-            Sign in with Google
+            {t('signIn.google')}
           </button>
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-600">
-          Don&apos;t have an account?{' '}
+          {t('signIn.noAccount')}{' '}
           <Link
             to="/signup"
             className="font-medium text-blue-600 hover:text-blue-500"
           >
-            Sign up
+            {t('signIn.signUpLink')}
           </Link>
         </p>
       </div>

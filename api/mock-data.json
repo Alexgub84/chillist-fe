@@ -98,6 +98,30 @@
       ],
       "createdAt": "2026-02-14T15:24:35.859Z",
       "updatedAt": "2026-02-14T15:24:35.859Z"
+    },
+    {
+      "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
+      "createdAt": "2026-02-21T12:00:04.108Z",
+      "updatedAt": "2026-02-21T12:00:04.108Z",
+      "description": "חוגגים יום הולדת לדודיניו",
+      "endDate": "2026-02-21T19:05:00Z",
+      "location": {
+        "locationId": "53953405-e1fc-585f-b3eb-2498983cf946",
+        "name": "בית של דודו",
+        "country": "ישראל",
+        "region": "",
+        "city": "אזור"
+      },
+      "ownerParticipantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
+      "participantIds": [
+        "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
+        "a581b939-36b4-4f9a-8b3d-9047953398f9",
+        "23e04bdb-8dfe-4b12-8167-737fc83faee3"
+      ],
+      "startDate": "2026-02-21T15:59:00Z",
+      "status": "draft",
+      "title": "חגיגה",
+      "visibility": "public"
     }
   ],
   "participants": [
@@ -230,6 +254,45 @@
       "contactEmail": "dana@example.com",
       "createdAt": "2025-12-15T10:41:13.099Z",
       "updatedAt": "2025-12-15T10:41:13.099Z"
+    },
+    {
+      "participantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
+      "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
+      "name": "אלכס",
+      "lastName": "גוברמן",
+      "contactPhone": "0546340926",
+      "displayName": null,
+      "role": "owner",
+      "avatarUrl": null,
+      "contactEmail": null,
+      "createdAt": "2026-02-21T12:00:04.108Z",
+      "updatedAt": "2026-02-21T12:00:04.108Z"
+    },
+    {
+      "participantId": "a581b939-36b4-4f9a-8b3d-9047953398f9",
+      "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
+      "name": "דודו",
+      "lastName": "אלבז",
+      "contactPhone": "0546468567",
+      "displayName": null,
+      "role": "participant",
+      "avatarUrl": null,
+      "contactEmail": null,
+      "createdAt": "2026-02-21T12:00:04.108Z",
+      "updatedAt": "2026-02-21T12:00:04.108Z"
+    },
+    {
+      "participantId": "23e04bdb-8dfe-4b12-8167-737fc83faee3",
+      "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
+      "name": "כפיר",
+      "lastName": "פקוס",
+      "contactPhone": "0546786456",
+      "displayName": null,
+      "role": "participant",
+      "avatarUrl": null,
+      "contactEmail": null,
+      "createdAt": "2026-02-21T12:00:04.108Z",
+      "updatedAt": "2026-02-21T12:00:04.108Z"
     }
   ],
   "items": [
@@ -241,10 +304,10 @@
       "unit": "pcs",
       "notes": "Check stakes before departure",
       "status": "packed",
+      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
       "createdAt": "2025-05-02T10:00:00.000Z",
       "updatedAt": "2026-02-15T07:48:16.012Z",
-      "category": "equipment",
-      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1"
+      "category": "equipment"
     },
     {
       "itemId": "404954b1-04f3-4512-abae-42683bffad2b",
@@ -266,10 +329,10 @@
       "unit": "pcs",
       "notes": "Two rated for 20°F",
       "status": "packed",
+      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
       "createdAt": "2025-05-04T11:05:00.000Z",
       "updatedAt": "2026-02-15T07:48:19.630Z",
-      "category": "equipment",
-      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428"
+      "category": "equipment"
     },
     {
       "itemId": "ccab3332-cc4f-449b-aec6-4130855cb0bf",
@@ -279,10 +342,10 @@
       "unit": "pcs",
       "notes": "Need to borrow from Taylor",
       "status": "pending",
+      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
       "createdAt": "2025-05-06T09:40:00.000Z",
       "updatedAt": "2026-02-15T07:48:17.808Z",
-      "category": "equipment",
-      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428"
+      "category": "equipment"
     },
     {
       "itemId": "bfd3aa99-197f-4b40-8607-11a7bc59e8f8",
@@ -292,10 +355,10 @@
       "unit": "pcs",
       "notes": "Pick up at REI on Thursday",
       "status": "pending",
+      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
       "createdAt": "2025-05-06T09:45:00.000Z",
       "updatedAt": "2026-02-15T07:48:21.196Z",
-      "category": "equipment",
-      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1"
+      "category": "equipment"
     },
     {
       "itemId": "10ad45f4-4afb-40c3-b0e7-676e293fada1",
@@ -823,6 +886,19 @@
       "createdAt": "2026-02-14T16:35:00.000Z",
       "updatedAt": "2026-02-14T17:00:00.000Z",
       "category": "food"
+    },
+    {
+      "itemId": "1a2842b5-a06e-42cf-af12-b12b46023e86",
+      "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
+      "name": "טופו",
+      "category": "food",
+      "quantity": 1,
+      "unit": "kg",
+      "status": "pending",
+      "notes": null,
+      "assignedParticipantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
+      "createdAt": "2026-02-21T12:01:02.836Z",
+      "updatedAt": "2026-02-21T12:01:02.836Z"
     }
   ]
 }

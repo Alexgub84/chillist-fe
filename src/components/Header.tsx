@@ -1,6 +1,8 @@
 import { Link } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/useAuth';
+import { useLanguage } from '../contexts/useLanguage';
 
 function getUserDisplayName(user: {
   email?: string;
@@ -36,6 +38,12 @@ export default function Header() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const { user, loading, signOut } = useAuth();
+  const { t } = useTranslation();
+  const { language, setLanguage } = useLanguage();
+
+  function toggleLanguage() {
+    setLanguage(language === 'en' ? 'he' : 'en');
+  }
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -112,7 +120,7 @@ export default function Header() {
                   to="/plans"
                   className="block px-3 py-2 text-base sm:text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
                 >
-                  Plans
+                  {t('nav.plans')}
                 </Link>
               </li>
               <li>
@@ -120,10 +128,19 @@ export default function Header() {
                   to="/about"
                   className="block px-3 py-2 text-base sm:text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
                 >
-                  About
+                  {t('nav.about')}
                 </Link>
               </li>
             </ul>
+
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              data-testid="lang-toggle"
+              className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 transition-colors cursor-pointer"
+            >
+              {t('language.toggle')}
+            </button>
 
             {!loading && (
               <>
@@ -144,13 +161,13 @@ export default function Header() {
                     </button>
 
                     {isUserMenuOpen && (
-                      <div className="absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black/5 z-50">
+                      <div className="absolute end-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black/5 z-50">
                         <div className="px-4 py-3 border-b border-gray-100">
                           <p
                             className="text-sm font-medium text-gray-900"
                             data-testid="menu-display-name"
                           >
-                            {getUserDisplayName(user) || 'User'}
+                            {getUserDisplayName(user) || t('auth.userFallback')}
                           </p>
                           <p
                             className="text-xs text-gray-500 truncate mt-0.5"
@@ -173,16 +190,16 @@ export default function Header() {
                             onClick={() => setIsUserMenuOpen(false)}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                           >
-                            Edit Profile
+                            {t('auth.editProfile')}
                           </Link>
                           <button
                             onClick={() => {
                               setIsUserMenuOpen(false);
                               signOut();
                             }}
-                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                            className="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                           >
-                            Sign Out
+                            {t('auth.signOut')}
                           </button>
                         </div>
                       </div>
@@ -194,13 +211,13 @@ export default function Header() {
                       to="/signin"
                       className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
                     >
-                      Sign In
+                      {t('auth.signIn')}
                     </Link>
                     <Link
                       to="/signup"
                       className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors"
                     >
-                      Sign Up
+                      {t('auth.signUp')}
                     </Link>
                   </div>
                 )}
@@ -210,7 +227,7 @@ export default function Header() {
         </div>
 
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white shadow-lg z-50 sm:hidden border-t border-gray-200 transition-opacity duration-200">
+          <div className="absolute top-full start-0 end-0 bg-white shadow-lg z-50 sm:hidden border-t border-gray-200 transition-opacity duration-200">
             <ul className="list-none m-0 p-0">
               <li className="border-b border-gray-100">
                 <Link
@@ -218,7 +235,7 @@ export default function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
                 >
-                  Plans
+                  {t('nav.plans')}
                 </Link>
               </li>
               <li className="border-b border-gray-100">
@@ -227,8 +244,21 @@ export default function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
                 >
-                  About
+                  {t('nav.about')}
                 </Link>
+              </li>
+              <li className="border-b border-gray-100">
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleLanguage();
+                    setIsMenuOpen(false);
+                  }}
+                  data-testid="lang-toggle-mobile"
+                  className="block w-full text-start px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
+                >
+                  {t('language.toggle')}
+                </button>
               </li>
               {!loading && (
                 <li className="border-b border-gray-100 last:border-b-0">
@@ -240,7 +270,7 @@ export default function Header() {
                         </span>
                         <div className="min-w-0">
                           <p className="text-sm font-medium text-gray-900 truncate">
-                            {getUserDisplayName(user) || 'User'}
+                            {getUserDisplayName(user) || t('auth.userFallback')}
                           </p>
                           <p className="text-xs text-gray-500 truncate">
                             {user.email}
@@ -257,7 +287,7 @@ export default function Header() {
                         onClick={() => setIsMenuOpen(false)}
                         className="block w-full text-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
                       >
-                        Edit Profile
+                        {t('auth.editProfile')}
                       </Link>
                       <button
                         onClick={() => {
@@ -266,7 +296,7 @@ export default function Header() {
                         }}
                         className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
                       >
-                        Sign Out
+                        {t('auth.signOut')}
                       </button>
                     </div>
                   ) : (
@@ -276,14 +306,14 @@ export default function Header() {
                         onClick={() => setIsMenuOpen(false)}
                         className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
                       >
-                        Sign In
+                        {t('auth.signIn')}
                       </Link>
                       <Link
                         to="/signup"
                         onClick={() => setIsMenuOpen(false)}
                         className="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-gray-50 transition-colors border-t border-gray-100"
                       >
-                        Sign Up
+                        {t('auth.signUp')}
                       </Link>
                     </div>
                   )}

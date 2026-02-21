@@ -1,6 +1,15 @@
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
+import '../src/i18n';
+
+vi.mock('../src/contexts/useLanguage', () => ({
+  useLanguage: () => ({
+    language: 'en' as const,
+    setLanguage: vi.fn(),
+  }),
+}));
+
 vi.mock('../src/lib/supabase', () => ({
   supabase: {
     auth: {

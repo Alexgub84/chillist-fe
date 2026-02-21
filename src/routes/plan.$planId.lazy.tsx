@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import {
   Link,
@@ -28,6 +29,7 @@ export const Route = createLazyFileRoute('/plan/$planId')({
 });
 
 function PlanDetails() {
+  const { t } = useTranslation();
   const { planId } = useParams({ from: '/plan/$planId' });
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
@@ -43,7 +45,7 @@ function PlanDetails() {
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
   if (isLoading) {
-    return <div className="text-center">Loading plan details...</div>;
+    return <div className="text-center">{t('plan.loading')}</div>;
   }
 
   if (error) {
@@ -51,7 +53,7 @@ function PlanDetails() {
   }
 
   if (!plan) {
-    throw new Error('Plan not found');
+    throw new Error(t('plan.notFound'));
   }
 
   async function handleAddItem(values: ItemFormValues) {
@@ -159,7 +161,7 @@ function PlanDetails() {
             to="/plans"
             className="text-blue-500 hover:underline text-sm sm:text-base"
           >
-            ← Back to Plans
+            {t('plan.backToPlans')}
           </Link>
         </div>
         <Plan
@@ -173,9 +175,9 @@ function PlanDetails() {
         <div className="mt-6 sm:mt-8">
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-              Items
+              {t('items.title')}
               {plan.items.length > 0 && (
-                <span className="ml-2 text-sm font-normal text-gray-500">
+                <span className="ms-2 text-sm font-normal text-gray-500">
                   ({plan.items.length})
                 </span>
               )}
@@ -187,7 +189,7 @@ function PlanDetails() {
               {plan.participants.length > 0 && (
                 <div>
                   <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
-                    Filter by person
+                    {t('plan.filterByPerson')}
                   </p>
                   <ParticipantFilter
                     participants={plan.participants}
@@ -231,7 +233,7 @@ function PlanDetails() {
           {plan.items.length === 0 && !showItemForm && (
             <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center mb-4">
               <p className="text-gray-500 text-sm sm:text-base">
-                No items yet. Add one to get started!
+                {t('items.empty')}
               </p>
             </div>
           )}
@@ -268,7 +270,7 @@ function PlanDetails() {
               onSubmit={handleFormSubmit}
               onCancel={() => setEditingItemId(null)}
               isSubmitting={updateItemMutation.isPending}
-              submitLabel="Update Item"
+              submitLabel={t('items.updateItem')}
             />
           ) : showItemForm ? (
             <ItemForm
@@ -283,7 +285,7 @@ function PlanDetails() {
               onClick={handleStartCreate}
               className="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors shadow-sm hover:shadow-md"
             >
-              + Add Item
+              {t('items.addItem')}
             </button>
           )}
         </div>

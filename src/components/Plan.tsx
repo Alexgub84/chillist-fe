@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import type { PlanWithDetails } from '../core/schemas/plan';
 import type {
   Participant,
@@ -66,6 +67,7 @@ function AddParticipantForm({
   onCancel: () => void;
   isSubmitting: boolean;
 }) {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -96,17 +98,21 @@ function AddParticipantForm({
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <FormLabel>First Name *</FormLabel>
-          <FormInput {...register('name')} placeholder="First name" compact />
+          <FormLabel>{t('addParticipant.firstName')}</FormLabel>
+          <FormInput
+            {...register('name')}
+            placeholder={t('addParticipant.firstNamePlaceholder')}
+            compact
+          />
           {errors.name && (
             <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>
           )}
         </div>
         <div>
-          <FormLabel>Last Name *</FormLabel>
+          <FormLabel>{t('addParticipant.lastName')}</FormLabel>
           <FormInput
             {...register('lastName')}
-            placeholder="Last name"
+            placeholder={t('addParticipant.lastNamePlaceholder')}
             compact
           />
           {errors.lastName && (
@@ -118,10 +124,10 @@ function AddParticipantForm({
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <FormLabel>Phone *</FormLabel>
+          <FormLabel>{t('addParticipant.phone')}</FormLabel>
           <FormInput
             {...register('contactPhone')}
-            placeholder="Phone number"
+            placeholder={t('addParticipant.phonePlaceholder')}
             compact
           />
           {errors.contactPhone && (
@@ -131,10 +137,10 @@ function AddParticipantForm({
           )}
         </div>
         <div>
-          <FormLabel>Email</FormLabel>
+          <FormLabel>{t('addParticipant.email')}</FormLabel>
           <FormInput
             {...register('contactEmail')}
-            placeholder="Email (optional)"
+            placeholder={t('addParticipant.emailPlaceholder')}
             compact
           />
         </div>
@@ -145,14 +151,16 @@ function AddParticipantForm({
           disabled={isSubmitting}
           className="flex-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
         >
-          {isSubmitting ? 'Adding…' : 'Add Participant'}
+          {isSubmitting
+            ? t('addParticipant.submitting')
+            : t('addParticipant.submit')}
         </button>
         <button
           type="button"
           onClick={onCancel}
           className="px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors text-sm"
         >
-          Cancel
+          {t('addParticipant.cancel')}
         </button>
       </div>
     </form>
@@ -170,6 +178,7 @@ export function Plan({
   onAddParticipant,
   isAddingParticipant = false,
 }: PlanProps) {
+  const { t } = useTranslation();
   const [showForm, setShowForm] = useState(false);
 
   const {
@@ -183,7 +192,6 @@ export function Plan({
     participants,
   } = plan;
 
-  const NA = 'N/A';
   const start = startDate ? formatDateTime(startDate) : null;
   const end = endDate ? formatDateTime(endDate) : null;
 
@@ -211,51 +219,53 @@ export function Plan({
 
         <div className="px-3 sm:px-6 lg:px-8 py-3 sm:py-6">
           <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700 mb-4">
-            Details
+            {t('plan.details')}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
-            <DetailRow label="Status">
-              <span className="font-medium capitalize">{status}</span>
+            <DetailRow label={t('plan.status')}>
+              <span className="font-medium">{t(`planStatus.${status}`)}</span>
             </DetailRow>
 
-            <DetailRow label="Visibility">
-              <span className="font-medium capitalize">{visibility || NA}</span>
+            <DetailRow label={t('plan.visibility')}>
+              <span className="font-medium">
+                {visibility ? t(`planVisibility.${visibility}`) : t('plan.na')}
+              </span>
             </DetailRow>
 
             {owner && (
-              <DetailRow label="Owner">
+              <DetailRow label={t('plan.owner')}>
                 <span className="font-medium">
                   {owner.name} {owner.lastName}
                 </span>
               </DetailRow>
             )}
 
-            <DetailRow label="Start">
+            <DetailRow label={t('plan.start')}>
               {start ? (
                 <span>
                   {start.date}{' '}
                   <span className="text-gray-500">{start.time}</span>
                 </span>
               ) : (
-                NA
+                t('plan.na')
               )}
             </DetailRow>
 
-            <DetailRow label="End">
+            <DetailRow label={t('plan.end')}>
               {end ? (
                 <span>
                   {end.date} <span className="text-gray-500">{end.time}</span>
                 </span>
               ) : (
-                NA
+                t('plan.na')
               )}
             </DetailRow>
 
             {location && (
-              <DetailRow label="Location">
+              <DetailRow label={t('plan.location')}>
                 <span className="font-medium">{location.name}</span>
                 {(location.city || location.country) && (
-                  <span className="text-gray-500 ml-1">
+                  <span className="text-gray-500 ms-1">
                     —{' '}
                     {[location.city, location.region, location.country]
                       .filter(Boolean)
@@ -270,8 +280,8 @@ export function Plan({
         <div className="px-3 sm:px-6 lg:px-8 py-3 sm:py-6 border-t border-gray-200">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700">
-              Participants
-              <span className="ml-2 text-sm font-normal text-gray-500">
+              {t('plan.participants')}
+              <span className="ms-2 text-sm font-normal text-gray-500">
                 ({participants.length})
               </span>
             </h2>
@@ -302,11 +312,11 @@ export function Plan({
                   </div>
                   <span
                     className={clsx(
-                      'text-xs font-medium px-2 py-0.5 rounded-full capitalize shrink-0',
+                      'text-xs font-medium px-2 py-0.5 rounded-full shrink-0',
                       roleBadgeColor(p.role)
                     )}
                   >
-                    {p.role}
+                    {t(`roles.${p.role}`)}
                   </span>
                 </div>
               ))}
@@ -315,7 +325,7 @@ export function Plan({
 
           {participants.length === 0 && !showForm && (
             <p className="text-gray-500 text-sm mb-4">
-              No participants yet. Add one to get started!
+              {t('plan.noParticipants')}
             </p>
           )}
 
@@ -332,7 +342,7 @@ export function Plan({
                 onClick={() => setShowForm(true)}
                 className="w-full px-4 py-2 border-2 border-dashed border-gray-300 text-gray-600 rounded-lg hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
               >
-                + Add Participant
+                {t('plan.addParticipant')}
               </button>
             ))}
         </div>

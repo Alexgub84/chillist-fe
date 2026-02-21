@@ -2,6 +2,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { v5 as uuidv5 } from 'uuid';
+import { useTranslation } from 'react-i18next';
 
 import {
   planStatusSchema,
@@ -83,6 +84,7 @@ export default function PlanForm({
   onSubmit,
   isSubmitting = false,
 }: PlanFormProps) {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -188,29 +190,32 @@ export default function PlanForm({
         className="bg-white rounded-lg shadow-sm p-4 sm:p-6 lg:p-8 space-y-6"
       >
         <div>
-          <FormLabel>Title *</FormLabel>
-          <FormInput {...register('title')} placeholder="Enter plan title" />
+          <FormLabel>{t('planForm.title')}</FormLabel>
+          <FormInput
+            {...register('title')}
+            placeholder={t('planForm.titlePlaceholder')}
+          />
           {errors.title && (
             <p className="text-sm text-red-600 mt-1">{errors.title.message}</p>
           )}
         </div>
 
         <div>
-          <FormLabel>Description</FormLabel>
+          <FormLabel>{t('planForm.description')}</FormLabel>
           <FormTextarea
             {...register('description')}
-            placeholder="Add details about your plan"
+            placeholder={t('planForm.descriptionPlaceholder')}
             rows={4}
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <FormLabel>Status</FormLabel>
+            <FormLabel>{t('planForm.status')}</FormLabel>
             <FormSelect {...register('status')}>
-              <option value="draft">Draft</option>
-              <option value="active">Active</option>
-              <option value="archived">Archived</option>
+              <option value="draft">{t('planStatus.draft')}</option>
+              <option value="active">{t('planStatus.active')}</option>
+              <option value="archived">{t('planStatus.archived')}</option>
             </FormSelect>
             {errors.status && (
               <p className="text-sm text-red-600 mt-1">
@@ -220,26 +225,26 @@ export default function PlanForm({
           </div>
 
           <div>
-            <FormLabel>Visibility</FormLabel>
+            <FormLabel>{t('planForm.visibility')}</FormLabel>
             <FormSelect {...register('visibility')}>
-              <option value="public">Public</option>
-              <option value="unlisted">Unlisted</option>
-              <option value="private">Private</option>
+              <option value="public">{t('planVisibility.public')}</option>
+              <option value="unlisted">{t('planVisibility.unlisted')}</option>
+              <option value="private">{t('planVisibility.private')}</option>
             </FormSelect>
           </div>
         </div>
 
         <fieldset className="border border-gray-200 rounded-lg p-4 sm:p-5">
           <legend className="text-sm font-semibold text-gray-700 px-2 mb-3">
-            Owner (you) *
+            {t('planForm.ownerLegend')}
           </legend>
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <FormLabel>First Name *</FormLabel>
+                <FormLabel>{t('planForm.firstName')}</FormLabel>
                 <FormInput
                   {...register('ownerName')}
-                  placeholder="First name"
+                  placeholder={t('planForm.firstNamePlaceholder')}
                   compact
                 />
                 {errors.ownerName && (
@@ -249,10 +254,10 @@ export default function PlanForm({
                 )}
               </div>
               <div>
-                <FormLabel>Last Name *</FormLabel>
+                <FormLabel>{t('planForm.lastName')}</FormLabel>
                 <FormInput
                   {...register('ownerLastName')}
-                  placeholder="Last name"
+                  placeholder={t('planForm.lastNamePlaceholder')}
                   compact
                 />
                 {errors.ownerLastName && (
@@ -264,10 +269,10 @@ export default function PlanForm({
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <FormLabel>Phone *</FormLabel>
+                <FormLabel>{t('planForm.phone')}</FormLabel>
                 <FormInput
                   {...register('ownerPhone')}
-                  placeholder="Phone number"
+                  placeholder={t('planForm.phonePlaceholder')}
                   compact
                 />
                 {errors.ownerPhone && (
@@ -277,10 +282,10 @@ export default function PlanForm({
                 )}
               </div>
               <div>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('planForm.email')}</FormLabel>
                 <FormInput
                   {...register('ownerEmail')}
-                  placeholder="Email (optional)"
+                  placeholder={t('planForm.emailPlaceholder')}
                   compact
                 />
               </div>
@@ -290,7 +295,7 @@ export default function PlanForm({
 
         <fieldset className="border border-gray-200 rounded-lg p-4 sm:p-5">
           <legend className="text-sm font-semibold text-gray-700 px-2 mb-3">
-            Participants (optional)
+            {t('planForm.participantsLegend')}
           </legend>
           <div className="space-y-4">
             {fields.map((field, index) => (
@@ -300,21 +305,21 @@ export default function PlanForm({
               >
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-gray-600">
-                    Participant {index + 1}
+                    {t('planForm.participantIndex', { index: index + 1 })}
                   </span>
                   <button
                     type="button"
                     onClick={() => remove(index)}
                     className="text-sm text-red-500 hover:text-red-700 transition-colors"
                   >
-                    Remove
+                    {t('planForm.remove')}
                   </button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <FormInput
                       {...register(`participants.${index}.name`)}
-                      placeholder="First name *"
+                      placeholder={t('planForm.firstNamePlaceholder')}
                       compact
                     />
                     {errors.participants?.[index]?.name && (
@@ -326,7 +331,7 @@ export default function PlanForm({
                   <div>
                     <FormInput
                       {...register(`participants.${index}.lastName`)}
-                      placeholder="Last name *"
+                      placeholder={t('planForm.lastNamePlaceholder')}
                       compact
                     />
                     {errors.participants?.[index]?.lastName && (
@@ -340,7 +345,7 @@ export default function PlanForm({
                   <div>
                     <FormInput
                       {...register(`participants.${index}.contactPhone`)}
-                      placeholder="Phone *"
+                      placeholder={t('planForm.phonePlaceholder')}
                       compact
                     />
                     {errors.participants?.[index]?.contactPhone && (
@@ -352,7 +357,7 @@ export default function PlanForm({
                   <div>
                     <FormInput
                       {...register(`participants.${index}.contactEmail`)}
-                      placeholder="Email (optional)"
+                      placeholder={t('planForm.emailPlaceholder')}
                       compact
                     />
                   </div>
@@ -371,47 +376,47 @@ export default function PlanForm({
               }
               className="w-full px-4 py-2 border-2 border-dashed border-gray-300 text-gray-600 rounded-lg hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
             >
-              + Add Participant
+              {t('planForm.addParticipant')}
             </button>
           </div>
         </fieldset>
 
         <fieldset className="border border-gray-200 rounded-lg p-4 sm:p-5">
           <legend className="text-sm font-semibold text-gray-700 px-2 mb-3">
-            Location (optional)
+            {t('planForm.locationLegend')}
           </legend>
           <div className="space-y-4">
             <div>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t('planForm.locationName')}</FormLabel>
               <FormInput
                 {...register('location.name' as const)}
-                placeholder="Location name"
+                placeholder={t('planForm.locationNamePlaceholder')}
                 compact
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <FormLabel>City</FormLabel>
+                <FormLabel>{t('planForm.city')}</FormLabel>
                 <FormInput
                   {...register('location.city' as const)}
-                  placeholder="City"
+                  placeholder={t('planForm.cityPlaceholder')}
                   compact
                 />
               </div>
               <div>
-                <FormLabel>Country</FormLabel>
+                <FormLabel>{t('planForm.country')}</FormLabel>
                 <FormInput
                   {...register('location.country' as const)}
-                  placeholder="Country"
+                  placeholder={t('planForm.countryPlaceholder')}
                   compact
                 />
               </div>
             </div>
             <div>
-              <FormLabel>Region</FormLabel>
+              <FormLabel>{t('planForm.region')}</FormLabel>
               <FormInput
                 {...register('location.region' as const)}
-                placeholder="Region/Province"
+                placeholder={t('planForm.regionPlaceholder')}
                 compact
               />
             </div>
@@ -430,14 +435,14 @@ export default function PlanForm({
               htmlFor="oneDay"
               className="text-sm font-medium text-gray-700 cursor-pointer"
             >
-              One-day plan
+              {t('planForm.oneDay')}
             </label>
           </div>
 
           {oneDay ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-blue-50 p-4 rounded-lg">
               <div>
-                <FormLabel>Date *</FormLabel>
+                <FormLabel>{t('planForm.date')}</FormLabel>
                 <FormInput type="date" {...register('singleDate')} compact />
                 {errors.singleDate && (
                   <p className="text-sm text-red-600 mt-1">
@@ -446,7 +451,7 @@ export default function PlanForm({
                 )}
               </div>
               <div>
-                <FormLabel>Start time</FormLabel>
+                <FormLabel>{t('planForm.startTime')}</FormLabel>
                 <FormInput
                   type="time"
                   {...register('singleStartTime')}
@@ -454,14 +459,14 @@ export default function PlanForm({
                 />
               </div>
               <div>
-                <FormLabel>End time</FormLabel>
+                <FormLabel>{t('planForm.endTime')}</FormLabel>
                 <FormInput type="time" {...register('singleEndTime')} compact />
               </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-blue-50 p-4 rounded-lg">
               <div>
-                <FormLabel>Start date *</FormLabel>
+                <FormLabel>{t('planForm.startDate')}</FormLabel>
                 <FormInput type="date" {...register('startDateDate')} compact />
                 {errors.startDateDate && (
                   <p className="text-sm text-red-600 mt-1">
@@ -470,11 +475,11 @@ export default function PlanForm({
                 )}
               </div>
               <div>
-                <FormLabel>Start time</FormLabel>
+                <FormLabel>{t('planForm.startTime')}</FormLabel>
                 <FormInput type="time" {...register('startDateTime')} compact />
               </div>
               <div>
-                <FormLabel>End date *</FormLabel>
+                <FormLabel>{t('planForm.endDate')}</FormLabel>
                 <FormInput type="date" {...register('endDateDate')} compact />
                 {errors.endDateDate && (
                   <p className="text-sm text-red-600 mt-1">
@@ -483,7 +488,7 @@ export default function PlanForm({
                 )}
               </div>
               <div>
-                <FormLabel>End time</FormLabel>
+                <FormLabel>{t('planForm.endTime')}</FormLabel>
                 <FormInput type="time" {...register('endDateTime')} compact />
               </div>
             </div>
@@ -491,10 +496,10 @@ export default function PlanForm({
         </div>
 
         <div>
-          <FormLabel>Tags (comma separated)</FormLabel>
+          <FormLabel>{t('planForm.tags')}</FormLabel>
           <FormInput
             {...register('tagsCsv')}
-            placeholder="e.g. picnic, friends, summer"
+            placeholder={t('planForm.tagsPlaceholder')}
           />
         </div>
 
@@ -504,7 +509,7 @@ export default function PlanForm({
             disabled={isSubmitting}
             className="w-full px-4 py-3 bg-blue-600 text-white text-base sm:text-lg font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm hover:shadow-md"
           >
-            {isSubmitting ? 'Creating…' : 'Create Plan'}
+            {isSubmitting ? t('planForm.submitting') : t('planForm.submit')}
           </button>
         </div>
       </form>

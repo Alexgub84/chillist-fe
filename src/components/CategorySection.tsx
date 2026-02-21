@@ -3,15 +3,11 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@headlessui/react';
+import { useTranslation } from 'react-i18next';
 import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import ItemCard from './ItemCard';
-
-const CATEGORY_LABELS: Record<ItemCategory, string> = {
-  equipment: 'Equipment',
-  food: 'Food',
-};
 
 interface CategorySectionProps {
   category: ItemCategory;
@@ -30,7 +26,8 @@ export default function CategorySection({
   onEditItem,
   onUpdateItem,
 }: CategorySectionProps) {
-  const label = CATEGORY_LABELS[category];
+  const { t } = useTranslation();
+  const categoryLabel = t(`categories.${category}`);
 
   return (
     <Disclosure
@@ -40,9 +37,9 @@ export default function CategorySection({
     >
       <DisclosureButton className="group w-full px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 active:bg-gray-100 transition-colors">
         <h3 className="text-base sm:text-lg font-semibold text-gray-800">
-          {label}
+          {categoryLabel}
           {items.length > 0 && (
-            <span className="ml-2 text-sm font-normal text-gray-500">
+            <span className="ms-2 text-sm font-normal text-gray-500">
               ({items.length})
             </span>
           )}
@@ -86,7 +83,9 @@ export default function CategorySection({
         ) : (
           <div className="border-t border-gray-200 px-4 sm:px-5 py-3 sm:py-4 text-center">
             <p className="text-sm sm:text-base text-gray-500">
-              No {label.toLowerCase()} items
+              {t('categories.noItems', {
+                category: categoryLabel.toLowerCase(),
+              })}
             </p>
           </div>
         )}

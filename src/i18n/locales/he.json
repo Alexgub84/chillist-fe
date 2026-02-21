@@ -1,0 +1,231 @@
+{
+  "nav": {
+    "plans": "תוכניות",
+    "about": "אודות"
+  },
+  "auth": {
+    "signIn": "התחברות",
+    "signUp": "הרשמה",
+    "signOut": "התנתקות",
+    "editProfile": "עריכת פרופיל",
+    "userFallback": "משתמש",
+    "signedInAs": "מחובר בתור {{email}}",
+    "signedIn": "מחובר",
+    "signOutFailed": "ההתנתקות נכשלה: {{message}}"
+  },
+  "signIn": {
+    "title": "התחברות",
+    "subtitle": "ברוכים השבים ל-Chillist.",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "הסיסמה שלך",
+    "submitting": "מתחבר...",
+    "submit": "התחברות",
+    "or": "או",
+    "google": "התחברות עם Google",
+    "noAccount": "אין לך חשבון?",
+    "signUpLink": "הרשמה"
+  },
+  "signUp": {
+    "title": "יצירת חשבון",
+    "subtitle": "הירשם כדי להתחיל לתכנן עם Chillist.",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "לפחות 6 תווים",
+    "submitting": "יוצר חשבון...",
+    "submit": "הרשמה",
+    "or": "או",
+    "google": "הרשמה עם Google",
+    "hasAccount": "כבר יש לך חשבון?",
+    "signInLink": "התחברות",
+    "confirmTitle": "בדוק את האימייל שלך",
+    "confirmMessage": "שלחנו קישור אישור לאימייל שלך. בדוק את תיבת הדואר הנכנס ולחץ על הקישור כדי להפעיל את החשבון.",
+    "goToSignIn": "עבור להתחברות"
+  },
+  "profile": {
+    "title": "השלם את הפרופיל שלך",
+    "subtitle": "הוסף את הפרטים שלך כדי שחברי הטיול ידעו מי אתה. כל השדות אופציונליים.",
+    "firstName": "שם פרטי",
+    "lastName": "שם משפחה",
+    "phone": "טלפון",
+    "saving": "שומר...",
+    "submit": "שמירה והמשך",
+    "skip": "דלג לעת עתה",
+    "updated": "הפרופיל עודכן"
+  },
+  "plans": {
+    "title": "התוכניות שלי",
+    "createNew": "יצירת תוכנית חדשה",
+    "empty": "אין תוכניות עדיין. צור אחת כדי להתחיל!",
+    "loading": "טוען תוכניות...",
+    "tryAgain": "נסה שוב",
+    "participant_one": "משתתף {{count}}",
+    "participant_other": "{{count}} משתתפים"
+  },
+  "plan": {
+    "details": "פרטים",
+    "status": "סטטוס",
+    "visibility": "נראות",
+    "owner": "בעלים",
+    "start": "התחלה",
+    "end": "סיום",
+    "location": "מיקום",
+    "na": "לא זמין",
+    "participants": "משתתפים",
+    "noParticipants": "אין משתתפים עדיין. הוסף אחד כדי להתחיל!",
+    "addParticipant": "+ הוספת משתתף",
+    "backToPlans": "→ חזרה לתוכניות",
+    "loading": "טוען פרטי תוכנית...",
+    "notFound": "התוכנית לא נמצאה",
+    "filterByPerson": "סינון לפי אדם"
+  },
+  "addParticipant": {
+    "firstName": "שם פרטי *",
+    "lastName": "שם משפחה *",
+    "phone": "טלפון *",
+    "email": "אימייל",
+    "firstNamePlaceholder": "שם פרטי",
+    "lastNamePlaceholder": "שם משפחה",
+    "phonePlaceholder": "מספר טלפון",
+    "emailPlaceholder": "אימייל (אופציונלי)",
+    "submitting": "מוסיף…",
+    "submit": "הוספת משתתף",
+    "cancel": "ביטול"
+  },
+  "planForm": {
+    "title": "כותרת *",
+    "titlePlaceholder": "הזן כותרת לתוכנית",
+    "description": "תיאור",
+    "descriptionPlaceholder": "הוסף פרטים על התוכנית שלך",
+    "status": "סטטוס",
+    "visibility": "נראות",
+    "ownerLegend": "בעלים (אתה) *",
+    "firstName": "שם פרטי *",
+    "lastName": "שם משפחה *",
+    "phone": "טלפון *",
+    "email": "אימייל",
+    "firstNamePlaceholder": "שם פרטי",
+    "lastNamePlaceholder": "שם משפחה",
+    "phonePlaceholder": "מספר טלפון",
+    "emailPlaceholder": "אימייל (אופציונלי)",
+    "participantsLegend": "משתתפים (אופציונלי)",
+    "participantIndex": "משתתף {{index}}",
+    "remove": "הסרה",
+    "addParticipant": "+ הוספת משתתף",
+    "locationLegend": "מיקום (אופציונלי)",
+    "locationName": "שם",
+    "locationNamePlaceholder": "שם המיקום",
+    "city": "עיר",
+    "cityPlaceholder": "עיר",
+    "country": "מדינה",
+    "countryPlaceholder": "מדינה",
+    "region": "אזור",
+    "regionPlaceholder": "אזור/מחוז",
+    "oneDay": "תוכנית ליום אחד",
+    "date": "תאריך *",
+    "startTime": "שעת התחלה",
+    "endTime": "שעת סיום",
+    "startDate": "תאריך התחלה *",
+    "endDate": "תאריך סיום *",
+    "tags": "תגיות (מופרדות בפסיקים)",
+    "tagsPlaceholder": "לדוגמה: פיקניק, חברים, קיץ",
+    "submitting": "יוצר…",
+    "submit": "יצירת תוכנית"
+  },
+  "items": {
+    "title": "פריטים",
+    "empty": "אין פריטים עדיין. הוסף אחד כדי להתחיל!",
+    "addItem": "+ הוספת פריט",
+    "updateItem": "עדכון פריט",
+    "addItemLabel": "הוספת פריט",
+    "name": "שם *",
+    "namePlaceholder": "שם הפריט",
+    "category": "קטגוריה *",
+    "status": "סטטוס *",
+    "quantity": "כמות *",
+    "unit": "יחידה",
+    "notes": "הערות",
+    "notesPlaceholder": "הערות (אופציונלי)",
+    "assignTo": "הקצה ל",
+    "unassigned": "לא מוקצה",
+    "saving": "שומר…",
+    "cancel": "ביטול"
+  },
+  "categories": {
+    "equipment": "ציוד",
+    "food": "אוכל",
+    "noItems": "אין פריטי {{category}}"
+  },
+  "itemStatus": {
+    "pending": "ממתין",
+    "purchased": "נרכש",
+    "packed": "נארז",
+    "canceled": "בוטל"
+  },
+  "planStatus": {
+    "active": "פעיל",
+    "draft": "טיוטה",
+    "archived": "בארכיון"
+  },
+  "planVisibility": {
+    "public": "ציבורי",
+    "unlisted": "לא ברשימה",
+    "private": "פרטי"
+  },
+  "filters": {
+    "all": "הכל",
+    "buyingList": "רשימת קניות",
+    "packingList": "רשימת אריזה",
+    "assigningList": "רשימת הקצאה"
+  },
+  "roles": {
+    "owner": "בעלים",
+    "participant": "משתתף",
+    "viewer": "צופה"
+  },
+  "errors": {
+    "somethingWentWrong": "משהו השתבש",
+    "unexpectedError": "אירעה שגיאה בלתי צפויה.",
+    "backToPlans": "חזרה לתוכניות"
+  },
+  "notFound": {
+    "title": "404 — הדף לא נמצא",
+    "message": "לא הצלחנו למצוא את הדף שחיפשת.",
+    "backToPlans": "חזרה לתוכניות"
+  },
+  "about": {
+    "title": "אודותינו",
+    "welcome": "ברוכים הבאים ל-Chillist!"
+  },
+  "validation": {
+    "emailInvalid": "נא להזין אימייל תקין",
+    "passwordMin": "הסיסמה חייבת להכיל לפחות 6 תווים",
+    "nameRequired": "שם הוא שדה חובה",
+    "lastNameRequired": "שם משפחה הוא שדה חובה",
+    "phoneRequired": "טלפון הוא שדה חובה",
+    "titleRequired": "כותרת היא שדה חובה",
+    "ownerNameRequired": "שם הבעלים הוא שדה חובה",
+    "ownerLastNameRequired": "שם משפחה של הבעלים הוא שדה חובה",
+    "ownerPhoneRequired": "טלפון הבעלים הוא שדה חובה",
+    "dateRequired": "תאריך הוא שדה חובה",
+    "startDateRequired": "תאריך התחלה הוא שדה חובה",
+    "endDateRequired": "תאריך סיום הוא שדה חובה",
+    "quantityMin": "הכמות חייבת להיות לפחות 1"
+  },
+  "units": {
+    "kg": "ק\"ג",
+    "g": "ג",
+    "lb": "ליברה",
+    "oz": "אונקיה",
+    "l": "ל",
+    "ml": "מ\"ל",
+    "pcs": "יח'",
+    "pack": "חב'",
+    "set": "סט"
+  },
+  "language": {
+    "toggle": "EN"
+  }
+}

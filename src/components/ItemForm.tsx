@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 
 import {
   itemCategorySchema,
@@ -18,10 +19,27 @@ import {
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 import Autocomplete from './shared/Autocomplete';
-import commonItemsData from '../data/common-items.json';
+import { useLanguage } from '../contexts/useLanguage';
+import commonItemsEn from '../data/common-items.json';
+import commonItemsHe from '../data/common-items.he.json';
 
-type CommonItem = { name: string; category: ItemCategory; unit: Unit };
-const COMMON_ITEMS: CommonItem[] = commonItemsData as CommonItem[];
+type CommonItemEn = {
+  id: string;
+  name: string;
+  category: ItemCategory;
+  unit: Unit;
+  aliases: string[];
+  tags: string[];
+};
+
+type CommonItemHe = {
+  name: string;
+  category: ItemCategory;
+  unit: Unit;
+};
+
+const EN_ITEMS: CommonItemEn[] = commonItemsEn as CommonItemEn[];
+const HE_ITEMS: CommonItemHe[] = commonItemsHe as CommonItemHe[];
 
 import type { Participant } from '../core/schemas/participant';
 
@@ -62,8 +80,10 @@ export default function ItemForm({
   onSubmit,
   onCancel,
   isSubmitting = false,
-  submitLabel = 'Add Item',
+  submitLabel,
 }: ItemFormProps) {
+  const { t } = useTranslation();
+  const { language } = useLanguage();
   const formRef = useRef<HTMLFormElement>(null);
 
   const {
@@ -85,14 +105,68 @@ export default function ItemForm({
   const category = watch('category');
   const isEquipment = category === 'equipment';
 
-  const itemNames = useMemo(() => COMMON_ITEMS.map((i) => i.name), []);
+  const itemNames = useMemo(
+    () =>
+      language === 'he'
+        ? HE_ITEMS.map((i) => i.name)
+        : EN_ITEMS.map((i) => i.name),
+    [language]
+  );
+
   const itemLookup = useMemo(() => {
-    const map = new Map<string, CommonItem>();
-    for (const item of COMMON_ITEMS) {
-      map.set(item.name.toLowerCase(), item);
+    const map = new Map<string, { category: ItemCategory; unit: Unit }>();
+    if (language === 'he') {
+      for (const item of HE_ITEMS) {
+        map.set(item.name.toLowerCase(), {
+          category: item.category,
+          unit: item.unit,
+        });
+      }
+    } else {
+      for (const item of EN_ITEMS) {
+        map.set(item.name.toLowerCase(), {
+          category: item.category,
+          unit: item.unit,
+        });
+        for (const alias of item.aliases) {
+          map.set(alias.toLowerCase(), {
+            category: item.category,
+            unit: item.unit,
+          });
+        }
+      }
     }
     return map;
-  }, []);
+  }, [language]);
+
+  const searchIndex = useMemo(() => {
+    const map = new Map<string, string[]>();
+    if (language === 'he') {
+      for (const item of HE_ITEMS) {
+        map.set(item.name, [item.name.toLowerCase()]);
+      }
+    } else {
+      for (const item of EN_ITEMS) {
+        const terms = [
+          item.name.toLowerCase(),
+          ...item.aliases.map((a) => a.toLowerCase()),
+          ...item.tags.map((tag) => tag.toLowerCase()),
+        ];
+        map.set(item.name, terms);
+      }
+    }
+    return map;
+  }, [language]);
+
+  const filterFn = useCallback(
+    (itemName: string, query: string) => {
+      const terms = searchIndex.get(itemName);
+      if (!terms) return false;
+      const q = query.toLowerCase();
+      return terms.some((term) => term.includes(q));
+    },
+    [searchIndex]
+  );
 
   function handleItemSelect(name: string, fieldOnChange: (v: string) => void) {
     fieldOnChange(name);
@@ -116,7 +190,7 @@ export default function ItemForm({
       className="bg-white rounded-lg shadow-sm p-4 sm:p-6 space-y-4"
     >
       <div>
-        <FormLabel>Name *</FormLabel>
+        <FormLabel>{t('items.name')}</FormLabel>
         <Controller
           name="name"
           control={control}
@@ -126,7 +200,8 @@ export default function ItemForm({
               value={field.value}
               onChange={field.onChange}
               onSelect={(name) => handleItemSelect(name, field.onChange)}
-              placeholder="Item name"
+              filterFn={filterFn}
+              placeholder={t('items.namePlaceholder')}
               compact
             />
           )}
@@ -138,11 +213,11 @@ export default function ItemForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <FormLabel>Category *</FormLabel>
+          <FormLabel>{t('items.category')}</FormLabel>
           <FormSelect {...register('category')} compact>
             {CATEGORY_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
-                {opt.label}
+                {t(opt.labelKey)}
               </option>
             ))}
           </FormSelect>
@@ -154,11 +229,11 @@ export default function ItemForm({
         </div>
 
         <div>
-          <FormLabel>Status *</FormLabel>
+          <FormLabel>{t('items.status')}</FormLabel>
           <FormSelect {...register('status')} compact>
             {STATUS_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
-                {opt.label}
+                {t(opt.labelKey)}
               </option>
             ))}
           </FormSelect>
@@ -170,7 +245,7 @@ export default function ItemForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <FormLabel>Quantity *</FormLabel>
+          <FormLabel>{t('items.quantity')}</FormLabel>
           <FormInput
             type="number"
             min={1}
@@ -186,14 +261,14 @@ export default function ItemForm({
         </div>
 
         <div>
-          <FormLabel>Unit</FormLabel>
+          <FormLabel>{t('items.unit')}</FormLabel>
           <FormSelect {...register('unit')} disabled={isEquipment} compact>
             {isEquipment ? (
-              <option value="pcs">pcs</option>
+              <option value="pcs">{t('units.pcs')}</option>
             ) : (
               UNIT_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
-                  {opt.label}
+                  {t(opt.labelKey)}
                 </option>
               ))
             )}
@@ -202,19 +277,19 @@ export default function ItemForm({
       </div>
 
       <div>
-        <FormLabel>Notes</FormLabel>
+        <FormLabel>{t('items.notes')}</FormLabel>
         <FormTextarea
           {...register('notes')}
-          placeholder="Optional notes"
+          placeholder={t('items.notesPlaceholder')}
           rows={2}
         />
       </div>
 
       {participants.length > 0 && (
         <div>
-          <FormLabel>Assign to</FormLabel>
+          <FormLabel>{t('items.assignTo')}</FormLabel>
           <FormSelect {...register('assignedParticipantId')} compact>
-            <option value="">Unassigned</option>
+            <option value="">{t('items.unassigned')}</option>
             {participants.map((p) => (
               <option key={p.participantId} value={p.participantId}>
                 {p.name} {p.lastName}
@@ -230,7 +305,9 @@ export default function ItemForm({
           disabled={isSubmitting}
           className="flex-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          {isSubmitting ? 'Saving…' : submitLabel}
+          {isSubmitting
+            ? t('items.saving')
+            : (submitLabel ?? t('items.addItemLabel'))}
         </button>
         {onCancel && (
           <button
@@ -238,7 +315,7 @@ export default function ItemForm({
             onClick={onCancel}
             className="px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors"
           >
-            Cancel
+            {t('items.cancel')}
           </button>
         )}
       </div>

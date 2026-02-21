@@ -1,6 +1,12 @@
 import { beforeAll, describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+const mockLanguage = { language: 'en' as const, setLanguage: vi.fn() };
+vi.mock('../../../src/contexts/useLanguage', () => ({
+  useLanguage: () => mockLanguage,
+}));
+
 import ItemForm from '../../../src/components/ItemForm';
 
 beforeAll(() => {
@@ -149,6 +155,50 @@ describe('ItemForm', () => {
         expect(categorySelect.value).toBe('equipment');
         expect(unitSelect.value).toBe('pcs');
       });
+    });
+
+    it('suggests Hebrew items when language is Hebrew', async () => {
+      mockLanguage.language = 'he';
+
+      const user = userEvent.setup();
+      render(<ItemForm onSubmit={vi.fn()} />);
+
+      const nameInput = screen.getByPlaceholderText(/item name/i);
+      await user.type(nameInput, 'אוהל');
+
+      const option = await screen.findByRole('option', { name: 'אוהל' });
+      expect(option).toBeInTheDocument();
+
+      await user.click(option);
+
+      const categorySelect = getInputByLabel(
+        /category \*/i
+      ) as HTMLSelectElement;
+      const unitSelect = getInputByLabel(/^unit$/i) as HTMLSelectElement;
+
+      await waitFor(() => {
+        expect(categorySelect.value).toBe('equipment');
+        expect(unitSelect.value).toBe('pcs');
+      });
+
+      mockLanguage.language = 'en';
+    });
+
+    it('does not suggest English items when language is Hebrew', async () => {
+      mockLanguage.language = 'he';
+
+      const user = userEvent.setup();
+      render(<ItemForm onSubmit={vi.fn()} />);
+
+      const nameInput = screen.getByPlaceholderText(/item name/i);
+      await user.type(nameInput, 'Tent');
+
+      await new Promise((r) => setTimeout(r, 100));
+      expect(
+        screen.queryByRole('option', { name: 'Tent' })
+      ).not.toBeInTheDocument();
+
+      mockLanguage.language = 'en';
     });
   });
 

@@ -16,6 +16,7 @@ interface AutocompleteProps {
   onSelect: (value: string) => void;
   placeholder?: string;
   compact?: boolean;
+  filterFn?: (item: string, query: string) => boolean;
 }
 
 export default function Autocomplete({
@@ -25,14 +26,18 @@ export default function Autocomplete({
   onSelect,
   placeholder,
   compact = false,
+  filterFn,
 }: AutocompleteProps) {
   const [query, setQuery] = useState('');
 
+  const defaultFilter = (item: string, q: string) =>
+    item.toLowerCase().includes(q.toLowerCase());
+
+  const matchFn = filterFn ?? defaultFilter;
+
   const filtered =
     query.length > 0
-      ? items
-          .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
-          .slice(0, MAX_RESULTS)
+      ? items.filter((item) => matchFn(item, query)).slice(0, MAX_RESULTS)
       : [];
 
   const inputStyles = clsx(

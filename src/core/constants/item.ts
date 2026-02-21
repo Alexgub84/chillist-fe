@@ -1,50 +1,53 @@
 import type { ItemCategory, ItemStatus, Unit } from '../schemas/item';
 
-export const CATEGORY_OPTIONS: { value: ItemCategory; label: string }[] = [
-  { value: 'food', label: 'Food' },
-  { value: 'equipment', label: 'Equipment' },
+export const CATEGORY_OPTIONS: {
+  value: ItemCategory;
+  labelKey: string;
+}[] = [
+  { value: 'food', labelKey: 'categories.food' },
+  { value: 'equipment', labelKey: 'categories.equipment' },
 ];
 
 export const STATUS_OPTIONS: {
   value: ItemStatus;
-  label: string;
+  labelKey: string;
   bg: string;
   text: string;
 }[] = [
   {
     value: 'pending',
-    label: 'Pending',
+    labelKey: 'itemStatus.pending',
     bg: 'bg-yellow-100',
     text: 'text-yellow-800',
   },
   {
     value: 'purchased',
-    label: 'Purchased',
+    labelKey: 'itemStatus.purchased',
     bg: 'bg-blue-100',
     text: 'text-blue-800',
   },
   {
     value: 'packed',
-    label: 'Packed',
+    labelKey: 'itemStatus.packed',
     bg: 'bg-green-100',
     text: 'text-green-800',
   },
   {
     value: 'canceled',
-    label: 'Canceled',
+    labelKey: 'itemStatus.canceled',
     bg: 'bg-gray-100',
     text: 'text-gray-500',
   },
 ];
 
-export const UNIT_OPTIONS: { value: Unit; label: string }[] = [
-  { value: 'kg', label: 'kg' },
-  { value: 'g', label: 'g' },
-  { value: 'lb', label: 'lb' },
-  { value: 'oz', label: 'oz' },
-  { value: 'l', label: 'l' },
-  { value: 'ml', label: 'ml' },
-  { value: 'pcs', label: 'pcs' },
-  { value: 'pack', label: 'pack' },
-  { value: 'set', label: 'set' },
+export const UNIT_OPTIONS: { value: Unit; labelKey: string }[] = [
+  { value: 'kg', labelKey: 'units.kg' },
+  { value: 'g', labelKey: 'units.g' },
+  { value: 'lb', labelKey: 'units.lb' },
+  { value: 'oz', labelKey: 'units.oz' },
+  { value: 'l', labelKey: 'units.l' },
+  { value: 'ml', labelKey: 'units.ml' },
+  { value: 'pcs', labelKey: 'units.pcs' },
+  { value: 'pack', labelKey: 'units.pack' },
+  { value: 'set', labelKey: 'units.set' },
 ];
