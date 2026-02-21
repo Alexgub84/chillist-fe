@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -137,6 +138,7 @@ export default function PlanForm({
     control,
     formState: { errors },
     watch,
+    setValue,
   } = useForm<FormValues>({
     resolver: zodResolver(createPlanFormSchema),
     defaultValues: {
@@ -158,6 +160,28 @@ export default function PlanForm({
   });
 
   const oneDay = watch('oneDay');
+
+  useEffect(() => {
+    const subscription = watch((values, { name }) => {
+      if (name !== 'startDateTime' && name !== 'startDateDate') return;
+      if (values.oneDay) return;
+      if (
+        !values.startDateDate ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(values.startDateDate)
+      )
+        return;
+      if (!values.startDateTime || !/^\d{2}:\d{2}$/.test(values.startDateTime))
+        return;
+      if (values.endDateDate) return;
+
+      const [year, month, day] = values.startDateDate.split('-').map(Number);
+      const d = new Date(year, month - 1, day + 1);
+      const endDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      setValue('endDateDate', endDate);
+      setValue('endDateTime', values.startDateTime);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, setValue]);
 
   const parseTags = (csv?: string) =>
     csv

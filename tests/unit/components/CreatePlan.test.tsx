@@ -237,7 +237,9 @@ describe('CreatePlan - PlanForm', () => {
 
       await user.type(getInputByLabel(/start date/i), '2025-12-20');
       await user.type(getInputByLabel(/start time/i), '09:00');
+      await user.clear(getInputByLabel(/end date/i));
       await user.type(getInputByLabel(/end date/i), '2025-12-22');
+      await user.clear(getInputByLabel(/end time/i));
       await user.type(getInputByLabel(/end time/i), '18:00');
 
       await user.type(

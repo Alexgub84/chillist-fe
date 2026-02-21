@@ -140,6 +140,44 @@ test.describe('Item CRUD', () => {
     await expect(tentCard).toContainText('4');
   });
 
+  test('edits all item fields via modal form', async ({ page }) => {
+    const plan = buildTestPlan();
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('Bread')).toBeVisible({ timeout: 10000 });
+
+    await page.getByLabel('Edit Bread').click();
+    const editForm = page.locator('form:has(button:text("Update Item"))');
+    await expect(editForm).toBeVisible();
+
+    const nameInput = editForm.getByPlaceholder('Item name');
+    await nameInput.clear();
+    await nameInput.fill('Granola');
+    await nameInput.press('Escape');
+
+    await editForm.locator('input[type="number"]').fill('5');
+    await editForm.locator('select[name="unit"]').selectOption('kg');
+    await editForm.locator('select[name="status"]').selectOption('purchased');
+    await editForm.locator('textarea').fill('Organic whole grain');
+    await editForm
+      .locator('select[name="assignedParticipantId"]')
+      .selectOption({ label: 'Bob Helper' });
+
+    await editForm.getByRole('button', { name: 'Update Item' }).click();
+    await expect(editForm).toBeHidden({ timeout: 5000 });
+
+    const itemCard = page
+      .locator('[class*="border-l-"]')
+      .filter({ hasText: 'Granola' });
+    await expect(itemCard).toBeVisible({ timeout: 5000 });
+    await expect(itemCard).toContainText('5');
+    await expect(itemCard).toContainText('Kilogram');
+    await expect(itemCard).toContainText('Purchased');
+    await expect(itemCard).toContainText('Organic whole grain');
+    await expect(itemCard).toContainText('Bob Helper');
+  });
+
   test('changes item status inline', async ({ page }) => {
     const plan = buildTestPlan();
     await mockPlanRoutes(page, plan);
