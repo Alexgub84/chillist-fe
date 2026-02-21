@@ -33,6 +33,13 @@ export default function InlineSelect<T extends string>({
   return (
     <Listbox value={value} onChange={onChange} disabled={disabled}>
       <ListboxButton
+        onClick={() =>
+          console.log('[InlineSelect] CLICKED:', {
+            value,
+            disabled,
+            ariaLabel,
+          })
+        }
         className={clsx(
           'cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 rounded',
           disabled && 'cursor-default opacity-60',

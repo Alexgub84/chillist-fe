@@ -276,6 +276,13 @@ export default function ItemForm({
             render={({ field }) => (
               <FormSelect
                 value={field.value}
+                onClick={() =>
+                  console.log('[ItemForm] unit CLICKED:', {
+                    value: field.value,
+                    disabled: isEquipment,
+                    inModal,
+                  })
+                }
                 onChange={(e) => {
                   console.log('[ItemForm] unit onChange:', {
                     from: field.value,
