@@ -1,30 +1,60 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
+
+async function toggleLanguage(page: Page, isMobile: boolean) {
+  if (isMobile) {
+    await page.getByLabel('Toggle menu').click();
+    const toggle = page.getByTestId('lang-toggle-mobile');
+    await expect(toggle).toBeVisible();
+    await toggle.click();
+  } else {
+    await page.getByTestId('lang-toggle').click();
+  }
+}
+
+async function getLangToggleText(page: Page, isMobile: boolean) {
+  if (isMobile) {
+    await page.getByLabel('Toggle menu').click();
+    const toggle = page.getByTestId('lang-toggle-mobile');
+    await expect(toggle).toBeVisible();
+    const text = await toggle.textContent();
+    await page.getByLabel('Toggle menu').click();
+    return text;
+  }
+  return page.getByTestId('lang-toggle').textContent();
+}
 
 test.describe('i18n - language switching', () => {
-  test('switches to Hebrew and back to English', async ({ page }) => {
+  test('switches to Hebrew and back to English', async ({ page, isMobile }) => {
     await page.goto('/plans');
 
-    const langToggle = page.getByTestId('lang-toggle');
-    await expect(langToggle).toBeVisible();
-    await expect(langToggle).toHaveText('עב');
+    const initialText = await getLangToggleText(page, isMobile);
+    expect(initialText).toBe('עב');
 
     const plansNav = page.getByRole('link', { name: 'Plans' });
-    await expect(plansNav).toBeVisible();
+    if (!isMobile) {
+      await expect(plansNav).toBeVisible();
+    }
 
-    await langToggle.click();
+    await toggleLanguage(page, isMobile);
 
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
     await expect(page.locator('html')).toHaveAttribute('lang', 'he');
 
-    await expect(langToggle).toHaveText('EN');
+    const hebrewText = await getLangToggleText(page, isMobile);
+    expect(hebrewText).toBe('EN');
 
-    const hebrewPlansNav = page.getByRole('link', { name: 'תוכניות' });
-    await expect(hebrewPlansNav).toBeVisible();
+    if (!isMobile) {
+      const hebrewPlansNav = page.getByRole('link', { name: 'תוכניות' });
+      await expect(hebrewPlansNav).toBeVisible();
+    }
 
-    await langToggle.click();
+    await toggleLanguage(page, isMobile);
 
     await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(plansNav).toBeVisible();
+
+    if (!isMobile) {
+      await expect(plansNav).toBeVisible();
+    }
   });
 });
