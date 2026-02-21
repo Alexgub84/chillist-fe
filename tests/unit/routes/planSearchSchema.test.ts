@@ -13,11 +13,6 @@ describe('planSearchSchema', () => {
       expect(result.list).toBe('packing');
     });
 
-    it('parses "assigning"', () => {
-      const result = planSearchSchema.parse({ list: 'assigning' });
-      expect(result.list).toBe('assigning');
-    });
-
     it('defaults to undefined when list is missing', () => {
       const result = planSearchSchema.parse({});
       expect(result.list).toBeUndefined();

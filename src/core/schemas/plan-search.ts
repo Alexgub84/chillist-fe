@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const listFilterSchema = z.enum(['buying', 'packing', 'assigning']);
+export const listFilterSchema = z.enum(['buying', 'packing']);
 export type ListFilter = z.infer<typeof listFilterSchema>;
 
 export const planSearchSchema = z.object({

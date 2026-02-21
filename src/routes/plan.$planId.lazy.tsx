@@ -18,6 +18,7 @@ import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
+import Modal from '../components/shared/Modal';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
 import type { ItemCategory, ItemCreate, ItemPatch } from '../core/schemas/item';
@@ -133,18 +134,15 @@ function PlanDetails() {
   const listCounts: Record<ListFilter, number> = {
     buying: 0,
     packing: 0,
-    assigning: 0,
   };
   for (const item of participantScopedItems) {
     if (item.status === 'pending') listCounts.buying++;
     if (item.status === 'purchased') listCounts.packing++;
-    if (!item.assignedParticipantId) listCounts.assigning++;
   }
 
   const filteredItems = participantScopedItems.filter((item) => {
     if (listFilter === 'buying' && item.status !== 'pending') return false;
     if (listFilter === 'packing' && item.status !== 'purchased') return false;
-    if (listFilter === 'assigning' && item.assignedParticipantId) return false;
     return true;
   });
 
@@ -254,25 +252,7 @@ function PlanDetails() {
             </div>
           )}
 
-          {editingItem ? (
-            <ItemForm
-              key={editingItem.itemId}
-              defaultValues={{
-                name: editingItem.name,
-                category: editingItem.category,
-                quantity: editingItem.quantity,
-                unit: editingItem.unit,
-                status: editingItem.status,
-                notes: editingItem.notes ?? '',
-                assignedParticipantId: editingItem.assignedParticipantId ?? '',
-              }}
-              participants={plan.participants}
-              onSubmit={handleFormSubmit}
-              onCancel={() => setEditingItemId(null)}
-              isSubmitting={updateItemMutation.isPending}
-              submitLabel={t('items.updateItem')}
-            />
-          ) : showItemForm ? (
+          {showItemForm ? (
             <ItemForm
               participants={plan.participants}
               onSubmit={handleAddItem}
@@ -288,6 +268,34 @@ function PlanDetails() {
               {t('items.addItem')}
             </button>
           )}
+
+          <Modal
+            open={!!editingItem}
+            onClose={() => setEditingItemId(null)}
+            title={t('items.editItem')}
+          >
+            {editingItem && (
+              <ItemForm
+                key={editingItem.itemId}
+                defaultValues={{
+                  name: editingItem.name,
+                  category: editingItem.category,
+                  quantity: editingItem.quantity,
+                  unit: editingItem.unit,
+                  status: editingItem.status,
+                  notes: editingItem.notes ?? '',
+                  assignedParticipantId:
+                    editingItem.assignedParticipantId ?? '',
+                }}
+                participants={plan.participants}
+                onSubmit={handleFormSubmit}
+                onCancel={() => setEditingItemId(null)}
+                isSubmitting={updateItemMutation.isPending}
+                submitLabel={t('items.updateItem')}
+                inModal
+              />
+            )}
+          </Modal>
         </div>
       </div>
     </div>

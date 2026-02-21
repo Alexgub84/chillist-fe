@@ -1,7 +1,13 @@
 import { Link } from '@tanstack/react-router';
+import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/useAuth';
+import {
+  SUPPORTED_LANGUAGES,
+  LANGUAGE_META,
+  type AppLanguage,
+} from '../contexts/language-context';
 import { useLanguage } from '../contexts/useLanguage';
 
 function getUserDisplayName(user: {
@@ -36,13 +42,18 @@ function getUserInitials(user: {
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const langMenuRef = useRef<HTMLDivElement>(null);
   const { user, loading, signOut } = useAuth();
   const { t } = useTranslation();
   const { language, setLanguage } = useLanguage();
 
-  function toggleLanguage() {
-    setLanguage(language === 'en' ? 'he' : 'en');
+  const currentMeta = LANGUAGE_META[language];
+
+  function selectLanguage(lang: AppLanguage) {
+    setLanguage(lang);
+    setIsLangMenuOpen(false);
   }
 
   useEffect(() => {
@@ -52,6 +63,12 @@ export default function Header() {
         !userMenuRef.current.contains(e.target as Node)
       ) {
         setIsUserMenuOpen(false);
+      }
+      if (
+        langMenuRef.current &&
+        !langMenuRef.current.contains(e.target as Node)
+      ) {
+        setIsLangMenuOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -133,14 +150,58 @@ export default function Header() {
               </li>
             </ul>
 
-            <button
-              type="button"
-              onClick={toggleLanguage}
-              data-testid="lang-toggle"
-              className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 transition-colors cursor-pointer"
-            >
-              {t('language.toggle')}
-            </button>
+            <div className="relative" ref={langMenuRef}>
+              <button
+                type="button"
+                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+                data-testid="lang-toggle"
+                className="flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 transition-colors cursor-pointer"
+                aria-expanded={isLangMenuOpen}
+              >
+                <span>{currentMeta.nativeLabel}</span>
+                <span className="text-gray-400">
+                  {currentMeta.currencySymbol}
+                </span>
+                <svg
+                  className="h-4 w-4 text-gray-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              {isLangMenuOpen && (
+                <div className="absolute end-0 mt-1 w-44 rounded-lg bg-white shadow-lg ring-1 ring-black/5 z-50 py-1">
+                  {SUPPORTED_LANGUAGES.map((code) => {
+                    const meta = LANGUAGE_META[code];
+                    return (
+                      <button
+                        key={code}
+                        onClick={() => selectLanguage(code)}
+                        data-testid={`lang-option-${code}`}
+                        className={clsx(
+                          'flex w-full items-center justify-between px-3 py-2 text-sm transition-colors',
+                          code === language
+                            ? 'bg-blue-50 text-blue-700 font-semibold'
+                            : 'text-gray-700 hover:bg-gray-50'
+                        )}
+                      >
+                        <span>{meta.nativeLabel}</span>
+                        <span className="text-gray-400">
+                          {meta.currencySymbol}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
 
             {!loading && (
               <>
@@ -247,19 +308,32 @@ export default function Header() {
                   {t('nav.about')}
                 </Link>
               </li>
-              <li className="border-b border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => {
-                    toggleLanguage();
-                    setIsMenuOpen(false);
-                  }}
-                  data-testid="lang-toggle-mobile"
-                  className="block w-full text-start px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
-                >
-                  {t('language.toggle')}
-                </button>
-              </li>
+              {SUPPORTED_LANGUAGES.map((code) => {
+                const meta = LANGUAGE_META[code];
+                return (
+                  <li key={code} className="border-b border-gray-100">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        selectLanguage(code);
+                        setIsMenuOpen(false);
+                      }}
+                      data-testid={`lang-toggle-mobile-${code}`}
+                      className={clsx(
+                        'flex w-full items-center justify-between px-4 py-3 text-base font-medium transition-colors',
+                        code === language
+                          ? 'text-blue-600 bg-blue-50'
+                          : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      )}
+                    >
+                      <span>{meta.nativeLabel}</span>
+                      <span className="text-gray-400">
+                        {meta.currencySymbol}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
               {!loading && (
                 <li className="border-b border-gray-100 last:border-b-0">
                   {user ? (

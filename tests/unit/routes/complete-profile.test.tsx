@@ -49,12 +49,13 @@ describe('Complete Profile Page', () => {
     } as never);
   });
 
-  it('renders first name, last name, and phone fields', () => {
+  it('renders first name, last name, phone, and email fields', () => {
     renderPage();
 
     expect(screen.getByLabelText(/first name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/last name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/phone/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
   });
 
   it('renders Skip link to /plans', () => {
@@ -70,6 +71,12 @@ describe('Complete Profile Page', () => {
     expect(
       screen.getByRole('button', { name: /save & continue/i })
     ).toBeInTheDocument();
+  });
+
+  it('pre-fills email from user.email', () => {
+    renderPage();
+
+    expect(screen.getByLabelText(/email/i)).toHaveValue('test@test.com');
   });
 
   it('pre-fills fields from Google user_metadata (splits full_name)', () => {
@@ -88,6 +95,7 @@ describe('Complete Profile Page', () => {
 
     expect(screen.getByLabelText(/first name/i)).toHaveValue('Alex');
     expect(screen.getByLabelText(/last name/i)).toHaveValue('Guberman');
+    expect(screen.getByLabelText(/email/i)).toHaveValue('google@test.com');
   });
 
   it('pre-fills from existing first_name/last_name/phone metadata', () => {
@@ -99,7 +107,7 @@ describe('Complete Profile Page', () => {
         user_metadata: {
           first_name: 'Jamie',
           last_name: 'Rivera',
-          phone: '+1234567890',
+          phone: '+972501234567',
         },
       } as never,
       loading: false,
@@ -110,7 +118,8 @@ describe('Complete Profile Page', () => {
 
     expect(screen.getByLabelText(/first name/i)).toHaveValue('Jamie');
     expect(screen.getByLabelText(/last name/i)).toHaveValue('Rivera');
-    expect(screen.getByLabelText(/phone/i)).toHaveValue('+1234567890');
+    expect(screen.getByLabelText(/phone/i)).toHaveValue('501234567');
+    expect(screen.getByLabelText(/country code/i)).toHaveValue('IL');
   });
 
   it('calls updateUser with validated data on submit', async () => {
@@ -206,7 +215,7 @@ describe('Complete Profile Page', () => {
     expect(mockSupabase.auth.updateUser).not.toHaveBeenCalled();
   });
 
-  it('shows validation error when phone exceeds 50 characters', async () => {
+  it('blocks submission when phone exceeds 50 characters', async () => {
     const user = userEvent.setup();
     renderPage();
 
@@ -214,10 +223,90 @@ describe('Complete Profile Page', () => {
     await user.click(screen.getByRole('button', { name: /save & continue/i }));
 
     await waitFor(() => {
-      expect(screen.getByText(/50/i)).toBeInTheDocument();
+      expect(mockSupabase.auth.updateUser).not.toHaveBeenCalled();
     });
 
-    expect(mockSupabase.auth.updateUser).not.toHaveBeenCalled();
+    expect(mockNavigate).not.toHaveBeenCalled();
+  });
+
+  it('sends email to updateUser when email is changed', async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    const emailInput = screen.getByLabelText(/email/i);
+    await user.clear(emailInput);
+    await user.type(emailInput, 'new@example.com');
+    await user.click(screen.getByRole('button', { name: /save & continue/i }));
+
+    await waitFor(() => {
+      expect(mockSupabase.auth.updateUser).toHaveBeenCalledWith({
+        email: 'new@example.com',
+      });
+    });
+  });
+
+  it('shows email-changed toast when email is updated', async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    const emailInput = screen.getByLabelText(/email/i);
+    await user.clear(emailInput);
+    await user.type(emailInput, 'new@example.com');
+    await user.click(screen.getByRole('button', { name: /save & continue/i }));
+
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalledWith(
+        'A confirmation link was sent to your new email address.'
+      );
+    });
+  });
+
+  it('does not send email to updateUser when email is unchanged', async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(screen.getByLabelText(/first name/i), 'Alex');
+    await user.click(screen.getByRole('button', { name: /save & continue/i }));
+
+    await waitFor(() => {
+      expect(mockSupabase.auth.updateUser).toHaveBeenCalledWith({
+        data: { first_name: 'Alex' },
+      });
+    });
+  });
+
+  it('sends both email and metadata when both are changed', async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.type(screen.getByLabelText(/first name/i), 'Alex');
+    const emailInput = screen.getByLabelText(/email/i);
+    await user.clear(emailInput);
+    await user.type(emailInput, 'new@example.com');
+    await user.click(screen.getByRole('button', { name: /save & continue/i }));
+
+    await waitFor(() => {
+      expect(mockSupabase.auth.updateUser).toHaveBeenCalledWith({
+        email: 'new@example.com',
+        data: { first_name: 'Alex' },
+      });
+    });
+  });
+
+  it('blocks submission for invalid email format', async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    const emailInput = screen.getByLabelText(/email/i);
+    await user.clear(emailInput);
+    await user.type(emailInput, 'not-an-email');
+    await user.click(screen.getByRole('button', { name: /save & continue/i }));
+
+    await waitFor(() => {
+      expect(mockSupabase.auth.updateUser).not.toHaveBeenCalled();
+    });
+
+    expect(mockNavigate).not.toHaveBeenCalled();
   });
 
   it('redirects unauthenticated users to /plans', () => {
