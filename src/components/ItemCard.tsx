@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import type { Item, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
@@ -45,7 +46,20 @@ export default function ItemCard({
   onEdit,
   onUpdate,
 }: ItemCardProps) {
-  const statusOption = STATUS_OPTIONS.find((s) => s.value === item.status);
+  const { t } = useTranslation();
+
+  const resolvedStatusOptions = useMemo(
+    () => STATUS_OPTIONS.map((s) => ({ ...s, label: t(s.labelKey) })),
+    [t]
+  );
+  const resolvedUnitOptions = useMemo(
+    () => UNIT_OPTIONS.map((u) => ({ ...u, label: t(u.labelKey) })),
+    [t]
+  );
+
+  const statusOption = resolvedStatusOptions.find(
+    (s) => s.value === item.status
+  );
   const isCanceled = item.status === 'canceled';
   const isEquipment = item.category === 'equipment';
   const quickAction =
@@ -61,7 +75,7 @@ export default function ItemCard({
   );
 
   const assignmentOptions = useMemo(() => {
-    const opts = [{ value: '', label: 'Unassigned' }];
+    const opts = [{ value: '', label: t('items.unassigned') }];
     for (const p of participants) {
       opts.push({
         value: p.participantId,
@@ -69,7 +83,7 @@ export default function ItemCard({
       });
     }
     return opts;
-  }, [participants]);
+  }, [participants, t]);
 
   function handleCheck() {
     if (!onUpdate || !quickAction || isChecking) return;
@@ -111,7 +125,7 @@ export default function ItemCard({
 
           <div className="flex flex-wrap items-center gap-2 mt-1">
             <span className="inline-flex items-center rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-gray-100 text-gray-600">
-              {item.quantity} {item.unit}
+              {item.quantity} {t(`units.${item.unit}`)}
             </span>
 
             {item.notes && (
@@ -168,7 +182,7 @@ export default function ItemCard({
             <InlineSelect
               value={item.status}
               onChange={(status) => onUpdate({ status })}
-              options={STATUS_OPTIONS}
+              options={resolvedStatusOptions}
               buttonClassName={clsx(
                 'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium hover:opacity-80 transition-opacity',
                 statusOption?.bg,
@@ -184,7 +198,7 @@ export default function ItemCard({
                 statusOption?.text
               )}
             >
-              {statusOption?.label ?? item.status}
+              {statusOption?.label ?? t(`itemStatus.${item.status}`)}
             </span>
           )}
 
@@ -232,7 +246,7 @@ export default function ItemCard({
             <InlineSelect
               value={item.unit}
               onChange={(unit) => onUpdate({ unit })}
-              options={UNIT_OPTIONS}
+              options={resolvedUnitOptions}
               disabled={isEquipment}
               buttonClassName={clsx(
                 'text-xs sm:text-sm font-medium',
@@ -250,7 +264,7 @@ export default function ItemCard({
                 : 'bg-gray-100 text-gray-700'
             )}
           >
-            {item.quantity} {item.unit}
+            {item.quantity} {t(`units.${item.unit}`)}
           </span>
         )}
 
@@ -304,7 +318,7 @@ export default function ItemCard({
                 </svg>
                 {assignedParticipant
                   ? `${assignedParticipant.name} ${assignedParticipant.lastName}`
-                  : 'Unassigned'}
+                  : t('items.unassigned')}
               </span>
             )}
           </>

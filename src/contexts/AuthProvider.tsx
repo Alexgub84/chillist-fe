@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, type ReactNode } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import toast from 'react-hot-toast';
+import i18n from '../i18n';
 import { supabase } from '../lib/supabase';
 import { fetchAuthMe } from '../core/api';
 import { AuthContext } from './auth-context';
@@ -26,10 +27,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       if (event === 'SIGNED_IN') {
         fetchAuthMe()
           .then((res) => {
-            toast.success(`Signed in as ${res.user.email}`);
+            toast.success(i18n.t('auth.signedInAs', { email: res.user.email }));
           })
           .catch(() => {
-            toast.success('Signed in');
+            toast.success(i18n.t('auth.signedIn'));
           });
       }
 
@@ -47,7 +48,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
-      toast.error(`Sign out failed: ${error.message}`);
+      toast.error(i18n.t('auth.signOutFailed', { message: error.message }));
     }
   }, []);
 

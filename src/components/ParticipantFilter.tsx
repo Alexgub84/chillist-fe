@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import type { Participant } from '../core/schemas/participant';
 
 interface ParticipantFilterProps {
@@ -16,6 +17,7 @@ export default function ParticipantFilter({
   counts,
   total,
 }: ParticipantFilterProps) {
+  const { t } = useTranslation();
   return (
     <div
       className="flex flex-wrap gap-2"
@@ -33,7 +35,7 @@ export default function ParticipantFilter({
         )}
         aria-pressed={selected === null}
       >
-        All
+        {t('filters.all')}
         <span
           className={clsx(
             'text-xs tabular-nums',
@@ -55,7 +57,7 @@ export default function ParticipantFilter({
         )}
         aria-pressed={selected === 'unassigned'}
       >
-        Unassigned
+        {t('items.unassigned')}
         <span
           className={clsx(
             'text-xs tabular-nums',

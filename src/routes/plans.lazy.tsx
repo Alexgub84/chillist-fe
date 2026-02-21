@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createLazyFileRoute } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 import { usePlans } from '../hooks/usePlans';
 import { PlansList } from '../components/PlansList';
 import { getApiErrorMessage } from '../core/error-utils';
@@ -9,6 +10,7 @@ export const Route = createLazyFileRoute('/plans')({
 });
 
 function Plans() {
+  const { t } = useTranslation();
   const { data: plans, isLoading, error, refetch } = usePlans();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ function Plans() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-gray-600">Loading plans...</div>
+        <div className="text-gray-600">{t('plans.loading')}</div>
       </div>
     );
   }
@@ -43,7 +45,7 @@ function Plans() {
               onClick={() => refetch()}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
             >
-              Try Again
+              {t('plans.tryAgain')}
             </button>
           )}
         </div>

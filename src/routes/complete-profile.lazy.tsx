@@ -1,6 +1,7 @@
 import { createLazyFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { useAuth } from '../contexts/useAuth';
@@ -44,6 +45,7 @@ function CompleteProfileForm({
 }: {
   user: { user_metadata: Record<string, unknown> };
 }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const metadata = user.user_metadata;
   const { first, last } = splitFullName(metadata.full_name as string);
@@ -79,7 +81,7 @@ function CompleteProfileForm({
       return;
     }
 
-    toast.success('Profile updated');
+    toast.success(t('profile.updated'));
     navigate({ to: '/plans' });
   }
 
@@ -87,12 +89,9 @@ function CompleteProfileForm({
     <div className="flex min-h-[60vh] items-center justify-center">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-sm sm:p-8">
         <h1 className="text-2xl font-semibold text-gray-900">
-          Complete your profile
+          {t('profile.title')}
         </h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Add your details so your trip buddies know who you are. All fields are
-          optional.
-        </p>
+        <p className="mt-1 text-sm text-gray-600">{t('profile.subtitle')}</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
           <div>
@@ -100,7 +99,7 @@ function CompleteProfileForm({
               htmlFor="firstName"
               className="block text-sm font-medium text-gray-700"
             >
-              First name
+              {t('profile.firstName')}
             </label>
             <input
               id="firstName"
@@ -122,7 +121,7 @@ function CompleteProfileForm({
               htmlFor="lastName"
               className="block text-sm font-medium text-gray-700"
             >
-              Last name
+              {t('profile.lastName')}
             </label>
             <input
               id="lastName"
@@ -144,7 +143,7 @@ function CompleteProfileForm({
               htmlFor="phone"
               className="block text-sm font-medium text-gray-700"
             >
-              Phone
+              {t('profile.phone')}
             </label>
             <input
               id="phone"
@@ -166,7 +165,7 @@ function CompleteProfileForm({
             disabled={isSubmitting}
             className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? 'Saving...' : 'Save & Continue'}
+            {isSubmitting ? t('profile.saving') : t('profile.submit')}
           </button>
         </form>
 
@@ -175,7 +174,7 @@ function CompleteProfileForm({
             to="/plans"
             className="text-sm font-medium text-gray-500 hover:text-gray-700"
           >
-            Skip for now
+            {t('profile.skip')}
           </Link>
         </p>
       </div>

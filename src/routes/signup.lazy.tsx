@@ -1,6 +1,7 @@
 import { createLazyFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
@@ -14,6 +15,7 @@ const signUpSchema = z.object({
 type SignUpForm = z.infer<typeof signUpSchema>;
 
 export function SignUp() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [confirmationSent, setConfirmationSent] = useState(false);
 
@@ -82,17 +84,16 @@ export function SignUp() {
               </svg>
             </div>
             <h2 className="text-xl font-semibold text-gray-900">
-              Check your email
+              {t('signUp.confirmTitle')}
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              We sent a confirmation link to your email. Please check your inbox
-              and click the link to activate your account.
+              {t('signUp.confirmMessage')}
             </p>
             <Link
               to="/signin"
               className="mt-6 inline-block text-sm font-medium text-blue-600 hover:text-blue-500"
             >
-              Go to Sign In
+              {t('signUp.goToSignIn')}
             </Link>
           </div>
         </div>
@@ -104,11 +105,9 @@ export function SignUp() {
     <div className="flex min-h-[60vh] items-center justify-center">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-sm sm:p-8">
         <h1 className="text-2xl font-semibold text-gray-900">
-          Create an account
+          {t('signUp.title')}
         </h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Sign up to start planning with Chillist.
-        </p>
+        <p className="mt-1 text-sm text-gray-600">{t('signUp.subtitle')}</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
           <div>
@@ -116,7 +115,7 @@ export function SignUp() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              {t('signUp.email')}
             </label>
             <input
               id="email"
@@ -124,7 +123,7 @@ export function SignUp() {
               autoComplete="email"
               {...register('email')}
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              placeholder="you@example.com"
+              placeholder={t('signUp.emailPlaceholder')}
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-600">
@@ -138,7 +137,7 @@ export function SignUp() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Password
+              {t('signUp.password')}
             </label>
             <input
               id="password"
@@ -146,7 +145,7 @@ export function SignUp() {
               autoComplete="new-password"
               {...register('password')}
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              placeholder="At least 6 characters"
+              placeholder={t('signUp.passwordPlaceholder')}
             />
             {errors.password && (
               <p className="mt-1 text-sm text-red-600">
@@ -160,7 +159,7 @@ export function SignUp() {
             disabled={isSubmitting}
             className="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? 'Creating account...' : 'Sign Up'}
+            {isSubmitting ? t('signUp.submitting') : t('signUp.submit')}
           </button>
         </form>
 
@@ -170,7 +169,9 @@ export function SignUp() {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">or</span>
+              <span className="bg-white px-2 text-gray-500">
+                {t('signUp.or')}
+              </span>
             </div>
           </div>
 
@@ -197,17 +198,17 @@ export function SignUp() {
                 fill="#EA4335"
               />
             </svg>
-            Sign up with Google
+            {t('signUp.google')}
           </button>
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{' '}
+          {t('signUp.hasAccount')}{' '}
           <Link
             to="/signin"
             className="font-medium text-blue-600 hover:text-blue-500"
           >
-            Sign in
+            {t('signUp.signInLink')}
           </Link>
         </p>
       </div>

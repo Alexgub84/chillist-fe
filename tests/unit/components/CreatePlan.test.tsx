@@ -282,13 +282,14 @@ describe('CreatePlan - PlanForm', () => {
       const addButton = screen.getByText(/\+ add participant/i);
       await user.click(addButton);
 
-      const firstNameInputs = screen.getAllByPlaceholderText(/first name \*/i);
-      const lastNameInputs = screen.getAllByPlaceholderText(/last name \*/i);
-      const phoneInputs = screen.getAllByPlaceholderText(/phone \*/i);
+      const firstNameInputs = screen.getAllByPlaceholderText(/^first name$/i);
+      const lastNameInputs = screen.getAllByPlaceholderText(/^last name$/i);
+      const phoneInputs = screen.getAllByPlaceholderText(/^phone number$/i);
 
-      await user.type(firstNameInputs[0], 'Bob');
-      await user.type(lastNameInputs[0], 'Jones');
-      await user.type(phoneInputs[0], '+9999999999');
+      const pIdx = firstNameInputs.length - 1;
+      await user.type(firstNameInputs[pIdx], 'Bob');
+      await user.type(lastNameInputs[pIdx], 'Jones');
+      await user.type(phoneInputs[pIdx], '+9999999999');
 
       await user.click(screen.getByRole('button', { name: /create plan/i }));
 

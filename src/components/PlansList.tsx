@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Link } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 import type { Plan, PlanStatus } from '../core/types/plan';
 
 interface PlansListProps {
@@ -16,49 +17,42 @@ interface PlansListProps {
   >;
 }
 
-const statusConfig: Record<PlanStatus, { label: string; className: string }> = {
-  active: {
-    label: 'Active',
-    className: 'bg-green-100 text-green-700',
-  },
-  draft: {
-    label: 'Draft',
-    className: 'bg-yellow-100 text-yellow-700',
-  },
-  archived: {
-    label: 'Archived',
-    className: 'bg-gray-100 text-gray-500',
-  },
+const statusClassName: Record<PlanStatus, string> = {
+  active: 'bg-green-100 text-green-700',
+  draft: 'bg-yellow-100 text-yellow-700',
+  archived: 'bg-gray-100 text-gray-500',
 };
 
-function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
-}
-
 export function PlansList({ plans }: PlansListProps) {
+  const { t } = useTranslation();
+
+  function formatDate(dateStr: string): string {
+    return new Date(dateStr).toLocaleDateString(undefined, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  }
+
   return (
     <div className="w-full">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
-          My Plans
+          {t('plans.title')}
         </h1>
         <button
           type="button"
           className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white text-base sm:text-lg font-medium rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors cursor-pointer shadow-sm hover:shadow-md"
         >
           <Link to="/create-plan" className="block">
-            Create New Plan
+            {t('plans.createNew')}
           </Link>
         </button>
       </div>
       {plans.length === 0 ? (
         <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center">
           <p className="text-gray-500 text-base sm:text-lg">
-            No plans yet. Create one to get started!
+            {t('plans.empty')}
           </p>
         </div>
       ) : (
@@ -67,7 +61,6 @@ export function PlansList({ plans }: PlansListProps) {
           className="bg-white rounded-lg shadow-sm divide-y divide-gray-200 overflow-hidden"
         >
           {plans.map((plan) => {
-            const { label, className } = statusConfig[plan.status];
             const meta: string[] = [];
             if (plan.startDate) {
               meta.push(formatDate(plan.startDate));
@@ -76,8 +69,9 @@ export function PlansList({ plans }: PlansListProps) {
               meta.push(plan.location.name);
             }
             if (plan.participantIds && plan.participantIds.length > 0) {
-              const count = plan.participantIds.length;
-              meta.push(`${count} participant${count === 1 ? '' : 's'}`);
+              meta.push(
+                t('plans.participant', { count: plan.participantIds.length })
+              );
             }
 
             return (
@@ -97,10 +91,10 @@ export function PlansList({ plans }: PlansListProps) {
                     <span
                       className={clsx(
                         'inline-flex self-start sm:self-auto items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
-                        className
+                        statusClassName[plan.status]
                       )}
                     >
-                      {label}
+                      {t(`planStatus.${plan.status}`)}
                     </span>
                   </div>
                   {meta.length > 0 && (

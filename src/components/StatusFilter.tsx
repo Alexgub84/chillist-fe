@@ -1,9 +1,10 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import type { ListFilter } from '../core/schemas/plan-search';
 
 interface ListTabOption {
   value: ListFilter | null;
-  label: string;
+  labelKey: string;
   icon: React.ReactNode;
   activeBg: string;
   activeText: string;
@@ -81,7 +82,7 @@ const ListIcon = () => (
 const LIST_TABS: ListTabOption[] = [
   {
     value: null,
-    label: 'All',
+    labelKey: 'filters.all',
     icon: <ListIcon />,
     activeBg: 'bg-gray-800',
     activeText: 'text-white',
@@ -89,7 +90,7 @@ const LIST_TABS: ListTabOption[] = [
   },
   {
     value: 'buying',
-    label: 'Buying List',
+    labelKey: 'filters.buyingList',
     icon: <ShoppingCartIcon />,
     activeBg: 'bg-amber-50',
     activeText: 'text-amber-700',
@@ -97,7 +98,7 @@ const LIST_TABS: ListTabOption[] = [
   },
   {
     value: 'packing',
-    label: 'Packing List',
+    labelKey: 'filters.packingList',
     icon: <BoxIcon />,
     activeBg: 'bg-blue-50',
     activeText: 'text-blue-700',
@@ -105,7 +106,7 @@ const LIST_TABS: ListTabOption[] = [
   },
   {
     value: 'assigning',
-    label: 'Assigning List',
+    labelKey: 'filters.assigningList',
     icon: <UserPlusIcon />,
     activeBg: 'bg-violet-50',
     activeText: 'text-violet-700',
@@ -126,6 +127,7 @@ export default function ListTabs({
   counts,
   total,
 }: ListTabsProps) {
+  const { t } = useTranslation();
   return (
     <div
       className="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-1 gap-1"
@@ -156,7 +158,7 @@ export default function ListTabs({
             aria-selected={isActive}
           >
             {tab.icon}
-            <span className="hidden sm:inline">{tab.label}</span>
+            <span className="hidden sm:inline">{t(tab.labelKey)}</span>
             <span
               className={clsx(
                 'inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full text-xs font-semibold tabular-nums',
