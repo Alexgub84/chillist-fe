@@ -57,3 +57,9 @@ After EVERY bug fix or feature implementation, you MUST update the relevant docs
    - New tools or dependencies were added
 
 Do NOT skip this step. If the docs repo files don't exist yet, tell the user.
+
+**After updating any docs file, ALWAYS commit and push the changes to chillist-docs immediately:**
+```
+cd /Users/alexguberman/Projects/chillist/chillist-docs && git add -A && git commit -m "docs: <short description>" && git push
+```
+Do NOT leave docs changes uncommitted or unpushed.

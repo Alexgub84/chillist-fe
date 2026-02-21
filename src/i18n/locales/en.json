@@ -195,6 +195,24 @@
     "message": "We couldn't find the page you were looking for.",
     "backToPlans": "Back to Plans"
   },
+  "home": {
+    "headline": "Plan your next trip together",
+    "subtitle": "One place to organize trips, share checklists, and track who brings what.",
+    "cta": "Get Started",
+    "heroAlt": "Friends camping together around a campfire",
+    "howItWorks": "How it works",
+    "step1Title": "Create a plan",
+    "step1Desc": "Name your trip, set the dates, and invite your friends.",
+    "step1Alt": "Creating a plan in Chillist",
+    "step2Title": "Add your gear and food",
+    "step2Desc": "Build a shared checklist with 700+ item suggestions to pick from.",
+    "step2Alt": "Adding items to the checklist",
+    "step3Title": "Track together",
+    "step3Desc": "See who brings what and mark items as bought or packed.",
+    "step3Alt": "Tracking items with your group",
+    "bottomHeadline": "Ready to plan?",
+    "bottomCta": "Create Your First Plan"
+  },
   "about": {
     "title": "About Us",
     "welcome": "Welcome to Chillist!"
