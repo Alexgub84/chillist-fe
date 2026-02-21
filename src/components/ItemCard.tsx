@@ -245,15 +245,7 @@ export default function ItemCard({
             />
             <InlineSelect
               value={item.unit}
-              onChange={(unit) => {
-                console.log('[ItemCard] unit onChange:', {
-                  itemName: item.name,
-                  from: item.unit,
-                  to: unit,
-                  disabled: isEquipment,
-                });
-                onUpdate({ unit });
-              }}
+              onChange={(unit) => onUpdate({ unit })}
               options={resolvedUnitOptions}
               disabled={isEquipment}
               buttonClassName={clsx(

@@ -270,52 +270,24 @@ export default function ItemForm({
 
         <div>
           <FormLabel>{t('items.unit')}</FormLabel>
-          <Controller
-            name="unit"
-            control={control}
-            render={({ field }) => (
-              <FormSelect
-                value={field.value}
-                onClick={() =>
-                  console.log('[ItemForm] unit CLICKED:', {
-                    value: field.value,
-                    disabled: isEquipment,
-                    inModal,
-                  })
-                }
-                onChange={(e) => {
-                  console.log('[ItemForm] unit onChange:', {
-                    from: field.value,
-                    to: e.target.value,
-                    disabled: isEquipment,
-                  });
-                  field.onChange(e);
-                }}
-                onBlur={field.onBlur}
-                name={field.name}
-                ref={field.ref}
-                disabled={isEquipment}
-                compact
-              >
-                {isEquipment ? (
-                  <option value="pcs">{t('units.pcs')}</option>
-                ) : (
-                  UNIT_GROUPS.map((group) => (
-                    <optgroup
-                      key={group.groupLabelKey}
-                      label={t(group.groupLabelKey)}
-                    >
-                      {group.options.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {t(opt.labelKey)}
-                        </option>
-                      ))}
-                    </optgroup>
-                  ))
-                )}
-              </FormSelect>
+          <FormSelect {...register('unit')} disabled={isEquipment} compact>
+            {isEquipment ? (
+              <option value="pcs">{t('units.pcs')}</option>
+            ) : (
+              UNIT_GROUPS.map((group) => (
+                <optgroup
+                  key={group.groupLabelKey}
+                  label={t(group.groupLabelKey)}
+                >
+                  {group.options.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {t(opt.labelKey)}
+                    </option>
+                  ))}
+                </optgroup>
+              ))
             )}
-          />
+          </FormSelect>
         </div>
       </div>
 
