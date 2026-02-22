@@ -1,10 +1,24 @@
 import { z } from 'zod';
+import type { components } from '../api.generated';
 import { locationSchema } from './location';
 import { itemSchema } from './item';
 import { participantSchema, participantCreateSchema } from './participant';
 
-export const planStatusSchema = z.enum(['draft', 'active', 'archived']);
-export const planVisibilitySchema = z.enum(['public', 'unlisted', 'private']);
+type BEPlan = components['schemas']['def-5'];
+
+const PLAN_STATUS_VALUES = [
+  'draft',
+  'active',
+  'archived',
+] as const satisfies readonly BEPlan['status'][];
+const PLAN_VISIBILITY_VALUES = [
+  'public',
+  'unlisted',
+  'private',
+] as const satisfies readonly BEPlan['visibility'][];
+
+export const planStatusSchema = z.enum(PLAN_STATUS_VALUES);
+export const planVisibilitySchema = z.enum(PLAN_VISIBILITY_VALUES);
 
 export const planSchema = z.object({
   planId: z.string(),

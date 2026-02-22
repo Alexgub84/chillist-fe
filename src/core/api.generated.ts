@@ -1332,7 +1332,18 @@ export interface components {
       category: 'equipment' | 'food';
       quantity: number;
       /** @enum {string} */
-      unit: 'pcs' | 'kg' | 'g' | 'lb' | 'oz' | 'l' | 'ml' | 'pack' | 'set';
+      unit:
+        | 'pcs'
+        | 'kg'
+        | 'g'
+        | 'lb'
+        | 'oz'
+        | 'l'
+        | 'ml'
+        | 'm'
+        | 'cm'
+        | 'pack'
+        | 'set';
       /** @enum {string} */
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
       notes?: string | null;
@@ -1352,7 +1363,18 @@ export interface components {
       category: 'equipment' | 'food';
       quantity: number;
       /** @enum {string} */
-      unit?: 'pcs' | 'kg' | 'g' | 'lb' | 'oz' | 'l' | 'ml' | 'pack' | 'set';
+      unit?:
+        | 'pcs'
+        | 'kg'
+        | 'g'
+        | 'lb'
+        | 'oz'
+        | 'l'
+        | 'ml'
+        | 'm'
+        | 'cm'
+        | 'pack'
+        | 'set';
       /** @enum {string} */
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
       notes?: string | null;
@@ -1366,7 +1388,18 @@ export interface components {
       category?: 'equipment' | 'food';
       quantity?: number;
       /** @enum {string} */
-      unit?: 'pcs' | 'kg' | 'g' | 'lb' | 'oz' | 'l' | 'ml' | 'pack' | 'set';
+      unit?:
+        | 'pcs'
+        | 'kg'
+        | 'g'
+        | 'lb'
+        | 'oz'
+        | 'l'
+        | 'ml'
+        | 'm'
+        | 'cm'
+        | 'pack'
+        | 'set';
       /** @enum {string} */
       status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       notes?: string | null;
