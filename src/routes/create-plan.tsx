@@ -21,7 +21,7 @@ function splitFullName(fullName?: string): { first: string; last: string } {
 export function CreatePlan() {
   const navigate = useNavigate();
   const createPlan = useCreatePlan();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const defaultOwner = useMemo((): DefaultOwner | undefined => {
     if (!user) return undefined;
@@ -42,6 +42,14 @@ export function CreatePlan() {
     } else {
       navigate({ to: '/plans' });
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center py-12">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
+      </div>
+    );
   }
 
   return (

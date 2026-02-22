@@ -125,6 +125,7 @@
     "remove": "Remove",
     "addParticipant": "+ Add Participant",
     "locationLegend": "Location (optional)",
+    "locationSearchPlaceholder": "Search for a location...",
     "locationName": "Name",
     "locationNamePlaceholder": "Location name",
     "city": "City",
