@@ -245,7 +245,6 @@
   "unitGroups": {
     "weight": "Weight",
     "volume": "Volume",
-    "length": "Length",
     "count": "Count"
   },
   "units": {
@@ -255,8 +254,6 @@
     "oz": "Ounce",
     "l": "Liter",
     "ml": "Milliliter",
-    "m": "Meter",
-    "cm": "Centimeter",
     "pcs": "Pieces",
     "pack": "Pack",
     "set": "Set"

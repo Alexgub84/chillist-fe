@@ -54,7 +54,9 @@ function getApiErrorByStatus(
       return {
         title: 'Invalid Request',
         message:
-          'The request was invalid. Please check your input and try again.',
+          originalMessage && originalMessage !== 'API request failed'
+            ? originalMessage
+            : 'The request was invalid. Please check your input and try again.',
         canRetry: false,
       };
 

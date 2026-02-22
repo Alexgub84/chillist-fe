@@ -47,8 +47,6 @@ export const UNIT_OPTIONS: { value: Unit; labelKey: string }[] = [
   { value: 'oz', labelKey: 'units.oz' },
   { value: 'l', labelKey: 'units.l' },
   { value: 'ml', labelKey: 'units.ml' },
-  { value: 'm', labelKey: 'units.m' },
-  { value: 'cm', labelKey: 'units.cm' },
   { value: 'pcs', labelKey: 'units.pcs' },
   { value: 'pack', labelKey: 'units.pack' },
   { value: 'set', labelKey: 'units.set' },
@@ -74,13 +72,6 @@ export const UNIT_GROUPS: UnitGroup[] = [
     options: [
       { value: 'l', labelKey: 'units.l' },
       { value: 'ml', labelKey: 'units.ml' },
-    ],
-  },
-  {
-    groupLabelKey: 'unitGroups.length',
-    options: [
-      { value: 'm', labelKey: 'units.m' },
-      { value: 'cm', labelKey: 'units.cm' },
     ],
   },
   {
