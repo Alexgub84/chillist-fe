@@ -12,6 +12,7 @@ import type {
 import { FormLabel } from './shared/FormLabel';
 import { FormInput } from './shared/FormInput';
 import Modal from './shared/Modal';
+import LocationMap from './LocationMap';
 
 function formatDateShort(iso: string): string {
   const d = new Date(iso);
@@ -165,7 +166,8 @@ export function Plan({
   const [showManageModal, setShowManageModal] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
 
-  const { title, description, startDate, endDate, participants } = plan;
+  const { title, description, startDate, endDate, participants, location } =
+    plan;
   const owner = participants.find((p) => p.role === 'owner');
 
   async function handleAddParticipant(participant: ParticipantCreate) {
@@ -226,6 +228,34 @@ export function Plan({
             </p>
           </div>
         </div>
+
+        {location && (
+          <div>
+            <p className="text-xs font-medium text-blue-500 uppercase tracking-wider mb-2">
+              {t('plan.location')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              {location.latitude != null && location.longitude != null && (
+                <LocationMap
+                  latitude={location.latitude}
+                  longitude={location.longitude}
+                />
+              )}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm sm:text-base font-semibold text-gray-800">
+                  {location.name}
+                </p>
+                {(location.city || location.region || location.country) && (
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    {[location.city, location.region, location.country]
+                      .filter(Boolean)
+                      .join(', ')}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         <div>
           <p className="text-xs font-medium text-blue-500 uppercase tracking-wider mb-2">

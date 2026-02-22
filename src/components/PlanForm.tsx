@@ -20,6 +20,8 @@ import {
   detectCountryFromPhone,
   getDefaultCountryByLanguage,
 } from '../data/country-codes';
+import LocationAutocomplete from './LocationAutocomplete';
+import type { PlaceResult } from './LocationAutocomplete';
 
 const locationFormSchema = z
   .object({
@@ -27,6 +29,8 @@ const locationFormSchema = z
     city: z.string().optional(),
     country: z.string().optional(),
     region: z.string().optional(),
+    latitude: z.number().nullish(),
+    longitude: z.number().nullish(),
   })
   .optional();
 
@@ -160,6 +164,19 @@ export default function PlanForm({
   });
 
   const oneDay = watch('oneDay');
+  const locationData = watch('location');
+
+  function handlePlaceSelect(place: PlaceResult) {
+    setValue('location', {
+      ...locationData,
+      name: place.name,
+      city: place.city || '',
+      country: place.country || '',
+      region: place.region || '',
+      latitude: place.latitude,
+      longitude: place.longitude,
+    });
+  }
 
   useEffect(() => {
     const subscription = watch((values, { name }) => {
@@ -207,10 +224,15 @@ export default function PlanForm({
     city?: string;
     country?: string;
     region?: string;
+    latitude?: number | null;
+    longitude?: number | null;
   }) => {
     if (!loc) return false;
-    return [loc.name, loc.city, loc.country, loc.region].some(
-      (v) => v && v.trim().length > 0
+    return (
+      [loc.name, loc.city, loc.country, loc.region].some(
+        (v) => v && v.trim().length > 0
+      ) ||
+      (loc.latitude != null && loc.longitude != null)
     );
   };
 
@@ -496,6 +518,11 @@ export default function PlanForm({
             {t('planForm.locationLegend')}
           </legend>
           <div className="space-y-4">
+            <LocationAutocomplete
+              onPlaceSelect={handlePlaceSelect}
+              latitude={locationData?.latitude}
+              longitude={locationData?.longitude}
+            />
             <div>
               <FormLabel>{t('planForm.locationName')}</FormLabel>
               <FormInput

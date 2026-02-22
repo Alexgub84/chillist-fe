@@ -125,6 +125,7 @@
     "remove": "הסרה",
     "addParticipant": "+ הוספת משתתף",
     "locationLegend": "מיקום (אופציונלי)",
+    "locationSearchPlaceholder": "חפש מיקום...",
     "locationName": "שם",
     "locationNamePlaceholder": "שם המיקום",
     "city": "עיר",

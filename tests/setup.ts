@@ -10,6 +10,15 @@ vi.mock('../src/contexts/useLanguage', () => ({
   }),
 }));
 
+vi.mock('@vis.gl/react-google-maps', () => ({
+  APIProvider: ({ children }: { children: unknown }) => children,
+  Map: () => null,
+  AdvancedMarker: () => null,
+  Pin: () => null,
+  useMapsLibrary: () => null,
+  useApiIsLoaded: () => false,
+}));
+
 vi.mock('../src/lib/supabase', () => ({
   supabase: {
     auth: {
