@@ -1,8 +1,21 @@
 import { z } from 'zod';
+import type { components } from '../api.generated';
 
-export const participantRoleSchema = z.enum(['owner', 'participant', 'viewer']);
+type BEParticipant = components['schemas']['def-19'];
+type BECreateParticipant = components['schemas']['def-21'];
 
-export const participantCreateRoleSchema = z.enum(['participant', 'viewer']);
+const ROLE_VALUES = [
+  'owner',
+  'participant',
+  'viewer',
+] as const satisfies readonly BEParticipant['role'][];
+const CREATE_ROLE_VALUES = [
+  'participant',
+  'viewer',
+] as const satisfies readonly NonNullable<BECreateParticipant['role']>[];
+
+export const participantRoleSchema = z.enum(ROLE_VALUES);
+export const participantCreateRoleSchema = z.enum(CREATE_ROLE_VALUES);
 
 export const participantSchema = z.object({
   participantId: z.string(),

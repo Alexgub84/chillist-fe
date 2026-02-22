@@ -1,13 +1,19 @@
 import { z } from 'zod';
+import type { components } from '../api.generated';
 
-export const itemCategorySchema = z.enum(['equipment', 'food']);
-export const itemStatusSchema = z.enum([
+type BEItem = components['schemas']['def-13'];
+
+const CATEGORY_VALUES = [
+  'equipment',
+  'food',
+] as const satisfies readonly BEItem['category'][];
+const STATUS_VALUES = [
   'pending',
   'purchased',
   'packed',
   'canceled',
-]);
-export const unitSchema = z.enum([
+] as const satisfies readonly BEItem['status'][];
+const UNIT_VALUES = [
   'pcs',
   'kg',
   'g',
@@ -15,9 +21,15 @@ export const unitSchema = z.enum([
   'oz',
   'l',
   'ml',
+  'm',
+  'cm',
   'pack',
   'set',
-]);
+] as const satisfies readonly BEItem['unit'][];
+
+export const itemCategorySchema = z.enum(CATEGORY_VALUES);
+export const itemStatusSchema = z.enum(STATUS_VALUES);
+export const unitSchema = z.enum(UNIT_VALUES);
 
 const baseItemSchema = z.object({
   itemId: z.string(),
