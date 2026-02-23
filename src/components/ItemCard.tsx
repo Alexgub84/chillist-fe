@@ -225,6 +225,30 @@ export default function ItemCard({
               </svg>
             </button>
           )}
+
+          {onUpdate && !isCanceled && (
+            <button
+              type="button"
+              onClick={() => onUpdate({ status: 'canceled' })}
+              className="inline-flex items-center justify-center w-8 h-8 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+              aria-label={`Cancel ${item.name}`}
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
 

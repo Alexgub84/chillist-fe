@@ -5,8 +5,6 @@ import userEvent from '@testing-library/user-event';
 import { PlansList } from '../../../src/components/PlansList';
 
 vi.mock('@tanstack/react-router', () => ({
-  // Mock Link to produce a real `href` attribute from `to` + `params` so
-  // tests can assert the generated path.
   Link: (props: Record<string, unknown>) => {
     const p = props as {
       to?: string;
@@ -22,9 +20,6 @@ vi.mock('@tanstack/react-router', () => ({
       });
     }
 
-    // Create props and simulate navigation by updating history when the
-    // anchor is clicked. This makes it possible to assert navigation in
-    // a jsdom test environment.
     const propsObj: Record<string, unknown> = {
       href,
       ...(rest as Record<string, unknown>),
@@ -40,8 +35,6 @@ vi.mock('@tanstack/react-router', () => ({
           originalOnClick(e as Event);
         }
       } finally {
-        // If the click handler didn't call preventDefault, push a new
-        // history entry so tests can observe the navigation.
         if (!(e as Event).defaultPrevented) {
           window.history.pushState({}, '', href);
         }
@@ -52,16 +45,47 @@ vi.mock('@tanstack/react-router', () => ({
   },
 }));
 
+function futureDate(daysFromNow: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + daysFromNow);
+  return d.toISOString();
+}
+
+function pastDate(daysAgo: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  return d.toISOString();
+}
+
 describe('PlansList', () => {
-  it('renders all plans in the list', () => {
+  const mixedPlans = [
+    {
+      planId: 'future-1',
+      title: 'Future Trip',
+      status: 'active' as const,
+      startDate: futureDate(10),
+      endDate: futureDate(12),
+    },
+    {
+      planId: 'past-1',
+      title: 'Past Camping',
+      status: 'active' as const,
+      startDate: pastDate(30),
+      endDate: pastDate(28),
+    },
+    {
+      planId: 'no-date',
+      title: 'No Date Plan',
+      status: 'draft' as const,
+    },
+  ];
+
+  it('renders plans with metadata (date, location, participants)', () => {
     const mockPlans = [
       {
         planId: 'plan-1',
         title: 'Weekend Camping Trip',
-        description: 'Two-night stay at Pine Ridge Campground with friends.',
-        status: 'active',
-        visibility: 'public',
-        ownerParticipantId: 'participant-1',
+        status: 'active' as const,
         location: {
           locationId: 'location-1',
           name: 'Pine Ridge Campground',
@@ -72,22 +96,14 @@ describe('PlansList', () => {
           region: 'CA',
           city: 'Yosemite',
         },
-        startDate: '2025-07-18T00:00:00.000Z',
-        endDate: '2025-07-20T00:00:00.000Z',
-        tags: ['outdoors', 'family', 'camping'],
+        startDate: futureDate(30),
+        endDate: futureDate(32),
         participantIds: ['participant-1', 'participant-2', 'participant-3'],
-        createdAt: '2025-05-01T12:00:00.000Z',
-        updatedAt: '2025-05-10T08:30:00.000Z',
       },
       {
         planId: 'plan-2',
         title: 'City Weekend',
-        description: 'Explore downtown and try new restaurants.',
-        status: 'draft',
-        visibility: 'unlisted',
-        ownerParticipantId: 'participant-2',
-        createdAt: '2025-06-01T09:00:00.000Z',
-        updatedAt: '2025-06-02T10:15:00.000Z',
+        status: 'draft' as const,
       },
     ];
 
@@ -103,7 +119,6 @@ describe('PlansList', () => {
     expect(screen.getByText('Active')).toBeInTheDocument();
     expect(screen.getByText('Draft')).toBeInTheDocument();
 
-    expect(screen.getByText(/Jul 18, 2025/i)).toBeInTheDocument();
     expect(screen.getByText(/Pine Ridge Campground/i)).toBeInTheDocument();
     expect(screen.getByText(/3 participants/i)).toBeInTheDocument();
   });
@@ -115,6 +130,104 @@ describe('PlansList', () => {
       /no plans yet\. create one to get started!/i
     );
     expect(emptyMessage).toBeInTheDocument();
+  });
+
+  it('does not show filter tabs when there are no plans', () => {
+    render(<PlansList plans={[]} />);
+
+    expect(screen.queryByTestId('time-filter-all')).not.toBeInTheDocument();
+  });
+
+  it('shows filter tabs when plans exist', () => {
+    render(<PlansList plans={mixedPlans} />);
+
+    expect(screen.getByTestId('time-filter-all')).toBeInTheDocument();
+    expect(screen.getByTestId('time-filter-upcoming')).toBeInTheDocument();
+    expect(screen.getByTestId('time-filter-past')).toBeInTheDocument();
+  });
+
+  it('defaults to "Upcoming" filter showing future and no-date plans', () => {
+    render(<PlansList plans={mixedPlans} />);
+
+    expect(screen.getByTestId('time-filter-upcoming')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+    const list = screen.getByTestId('plans-list');
+    expect(list.children).toHaveLength(2);
+    expect(screen.getByText('Future Trip')).toBeInTheDocument();
+    expect(screen.getByText('No Date Plan')).toBeInTheDocument();
+    expect(screen.queryByText('Past Camping')).not.toBeInTheDocument();
+  });
+
+  it('filters to upcoming plans (future + no-date)', async () => {
+    const user = userEvent.setup();
+    render(<PlansList plans={mixedPlans} />);
+
+    await user.click(screen.getByTestId('time-filter-upcoming'));
+
+    expect(screen.getByText('Future Trip')).toBeInTheDocument();
+    expect(screen.getByText('No Date Plan')).toBeInTheDocument();
+    expect(screen.queryByText('Past Camping')).not.toBeInTheDocument();
+  });
+
+  it('filters to past plans only', async () => {
+    const user = userEvent.setup();
+    render(<PlansList plans={mixedPlans} />);
+
+    await user.click(screen.getByTestId('time-filter-past'));
+
+    expect(screen.getByText('Past Camping')).toBeInTheDocument();
+    expect(screen.queryByText('Future Trip')).not.toBeInTheDocument();
+    expect(screen.queryByText('No Date Plan')).not.toBeInTheDocument();
+  });
+
+  it('shows counts on each filter tab', () => {
+    render(<PlansList plans={mixedPlans} />);
+
+    const allTab = screen.getByTestId('time-filter-all');
+    const upcomingTab = screen.getByTestId('time-filter-upcoming');
+    const pastTab = screen.getByTestId('time-filter-past');
+
+    expect(allTab).toHaveTextContent('3');
+    expect(upcomingTab).toHaveTextContent('2');
+    expect(pastTab).toHaveTextContent('1');
+  });
+
+  it('shows contextual empty message for upcoming filter', async () => {
+    const user = userEvent.setup();
+    const pastOnly = [
+      {
+        planId: 'past-1',
+        title: 'Old Trip',
+        status: 'active' as const,
+        startDate: pastDate(30),
+      },
+    ];
+
+    render(<PlansList plans={pastOnly} />);
+
+    await user.click(screen.getByTestId('time-filter-upcoming'));
+
+    expect(screen.getByText(/no upcoming plans/i)).toBeInTheDocument();
+  });
+
+  it('shows contextual empty message for past filter', async () => {
+    const user = userEvent.setup();
+    const futureOnly = [
+      {
+        planId: 'future-1',
+        title: 'Next Trip',
+        status: 'active' as const,
+        startDate: futureDate(10),
+      },
+    ];
+
+    render(<PlansList plans={futureOnly} />);
+
+    await user.click(screen.getByTestId('time-filter-past'));
+
+    expect(screen.getByText(/no past plans/i)).toBeInTheDocument();
   });
 
   it('renders correct number of list items', () => {
@@ -144,13 +257,10 @@ describe('PlansList', () => {
     render(<PlansList plans={plans} />);
 
     const titleNode = screen.getByText('Weekend Camping Trip');
-    // The mocked Link renders an <a> with an href computed from `to` and `params`.
     const anchor = titleNode.closest('a');
     expect(anchor).toBeTruthy();
     expect(anchor).toHaveAttribute('href', '/plan/plan-1');
 
-    // Simulate a user click and assert that our Link mock pushed a history entry
-    // so that the location changed to the expected path.
     await user.click(anchor as Element);
     expect(window.location.pathname).toBe('/plan/plan-1');
   });

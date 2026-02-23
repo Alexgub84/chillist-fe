@@ -17,16 +17,16 @@
         "region": "CA",
         "city": "Yosemite"
       },
-      "startDate": "2025-07-18T00:00:00.000Z",
-      "endDate": "2025-07-20T00:00:00.000Z",
+      "startDate": "2026-03-14T00:00:00.000Z",
+      "endDate": "2026-03-16T00:00:00.000Z",
       "tags": ["outdoors", "family", "camping"],
       "participantIds": [
         "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
         "457393e1-822f-4c1c-a081-8207aa6b9fe1",
         "399dcf24-f8c4-45f8-96fb-4478d578908f"
       ],
-      "createdAt": "2025-05-01T12:00:00.000Z",
-      "updatedAt": "2025-05-10T08:30:00.000Z"
+      "createdAt": "2026-02-01T12:00:00.000Z",
+      "updatedAt": "2026-02-10T08:30:00.000Z"
     },
     {
       "planId": "5213bc02-01e8-472d-a990-e6ebea137975",
@@ -42,38 +42,38 @@
         "region": null,
         "city": "Ramat Gan"
       },
-      "startDate": "2025-12-15T12:38:00.000Z",
-      "endDate": "2025-12-15T15:38:00.000Z",
+      "startDate": "2026-03-07T10:00:00.000Z",
+      "endDate": "2026-03-07T15:00:00.000Z",
       "participantIds": [
         "3cdcb33e-eebd-5716-8164-7da2b8158993",
         "de0bf12f-97de-534c-9930-27ebd6e0f944"
       ],
-      "createdAt": "2025-12-15T10:38:27.314Z",
-      "updatedAt": "2025-12-15T10:38:27.314Z"
+      "createdAt": "2026-02-15T10:38:27.314Z",
+      "updatedAt": "2026-02-15T10:38:27.314Z"
     },
     {
       "planId": "76195506-0f5b-4583-98d9-fcd6a39b0953",
-      "title": "Hdjhsd",
-      "description": "sdsd",
+      "title": "Beach Day",
+      "description": "Day trip to the beach with snacks and games.",
       "status": "active",
       "visibility": "public",
       "ownerParticipantId": "3238777c-8513-5c60-8964-99397eacfa28",
       "location": {
         "locationId": "0743c27e-873a-4d2b-9779-006d21ffb3a1",
-        "name": "sdsd",
-        "country": null,
+        "name": "Gordon Beach",
+        "country": "Israel",
         "region": null,
-        "city": null
+        "city": "Tel Aviv"
       },
-      "startDate": "2025-12-15T13:40:00.000Z",
-      "endDate": "2025-12-24T16:41:00.000Z",
+      "startDate": "2026-04-05T09:00:00.000Z",
+      "endDate": "2026-04-05T18:00:00.000Z",
       "participantIds": [
         "3cdcb33e-eebd-5716-8164-7da2b8158993",
         "de0bf12f-97de-534c-9930-27ebd6e0f944",
         "3238777c-8513-5c60-8964-99397eacfa28"
       ],
-      "createdAt": "2025-12-15T10:41:13.099Z",
-      "updatedAt": "2025-12-15T10:41:13.099Z"
+      "createdAt": "2026-02-15T10:41:13.099Z",
+      "updatedAt": "2026-02-15T10:41:13.099Z"
     },
     {
       "planId": "f0619158-c528-43cc-931b-2b73ea0bcb1e",
@@ -88,8 +88,8 @@
         "region": null,
         "city": "hulon"
       },
-      "startDate": "2026-02-20T19:24:00Z",
-      "endDate": "2026-02-20T20:24:00Z",
+      "startDate": "2026-03-01T19:00:00.000Z",
+      "endDate": "2026-03-01T22:00:00.000Z",
       "participantIds": [
         "42205c9b-9242-489b-a367-232528213b7d",
         "a6cb8858-8c2d-4d29-9ffe-337cbad8f98a",
@@ -113,8 +113,8 @@
         "region": "",
         "city": "אזור"
       },
-      "startDate": "2026-02-21T15:59:00Z",
-      "endDate": "2026-02-21T19:05:00Z",
+      "startDate": "2026-03-21T16:00:00.000Z",
+      "endDate": "2026-03-21T20:00:00.000Z",
       "participantIds": [
         "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
         "a581b939-36b4-4f9a-8b3d-9047953398f9",
@@ -858,7 +858,7 @@
       "status": "pending",
       "assignedParticipantId": "c17f4193-955c-4418-bb7a-7092b0ed3790",
       "createdAt": "2026-02-14T16:25:00.000Z",
-      "updatedAt": "2026-02-14T16:25:00.000Z",
+      "updatedAt": "2026-02-23T08:40:14.584Z",
       "category": "food"
     },
     {
@@ -875,19 +875,6 @@
       "category": "equipment"
     },
     {
-      "itemId": "dd04ee05-ff06-aa01-bb02-cc0388888888",
-      "planId": "f0619158-c528-43cc-931b-2b73ea0bcb1e",
-      "name": "Soda Cans",
-      "quantity": 8,
-      "unit": "pcs",
-      "notes": "Switched to juice instead",
-      "status": "canceled",
-      "assignedParticipantId": null,
-      "createdAt": "2026-02-14T16:35:00.000Z",
-      "updatedAt": "2026-02-14T17:00:00.000Z",
-      "category": "food"
-    },
-    {
       "itemId": "1a2842b5-a06e-42cf-af12-b12b46023e86",
       "planId": "fd25aca3-0ce9-4e6a-842c-170808e12eb7",
       "name": "טופו",
@@ -899,6 +886,32 @@
       "createdAt": "2026-02-21T12:01:02.836Z",
       "updatedAt": "2026-02-21T21:52:57.671Z",
       "category": "food"
+    },
+    {
+      "itemId": "3aa08c45-f9c6-45db-b23f-e7d718f7742f",
+      "planId": "5213bc02-01e8-472d-a990-e6ebea137975",
+      "name": "טופו",
+      "quantity": 1,
+      "unit": "g",
+      "notes": null,
+      "status": "pending",
+      "assignedParticipantId": null,
+      "createdAt": "2026-02-23T09:47:35.023Z",
+      "updatedAt": "2026-02-23T09:47:35.023Z",
+      "category": "food"
+    },
+    {
+      "itemId": "5eb0c010-9cac-458f-83e3-f40ccb2a2d56",
+      "planId": "f0619158-c528-43cc-931b-2b73ea0bcb1e",
+      "name": "שירותים ניידים",
+      "category": "equipment",
+      "quantity": 1,
+      "unit": "pcs",
+      "status": "pending",
+      "notes": null,
+      "assignedParticipantId": null,
+      "createdAt": "2026-02-23T09:56:43.399Z",
+      "updatedAt": "2026-02-23T09:56:43.399Z"
     }
   ]
 }

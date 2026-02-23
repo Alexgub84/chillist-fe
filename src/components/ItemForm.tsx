@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import clsx from 'clsx';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -73,7 +72,6 @@ interface ItemFormProps {
   onCancel?: () => void;
   isSubmitting?: boolean;
   submitLabel?: string;
-  inModal?: boolean;
 }
 
 export default function ItemForm({
@@ -83,11 +81,9 @@ export default function ItemForm({
   onCancel,
   isSubmitting = false,
   submitLabel,
-  inModal = false,
 }: ItemFormProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
-  const formRef = useRef<HTMLFormElement>(null);
 
   const {
     register,
@@ -100,12 +96,6 @@ export default function ItemForm({
     resolver: zodResolver(itemFormSchema),
     defaultValues: { ...ITEM_FORM_DEFAULTS, ...defaultValues },
   });
-
-  useEffect(() => {
-    if (!inModal) {
-      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }
-  }, [inModal]);
 
   const category = watch('category');
   const isEquipment = category === 'equipment';
@@ -189,14 +179,7 @@ export default function ItemForm({
   }, [isEquipment, setValue]);
 
   return (
-    <form
-      ref={formRef}
-      onSubmit={handleSubmit(onSubmit)}
-      className={clsx(
-        'p-4 sm:p-6 space-y-4',
-        !inModal && 'bg-white rounded-lg shadow-sm'
-      )}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-6 space-y-4">
       <div>
         <FormLabel>{t('items.name')}</FormLabel>
         <Controller
