@@ -11,7 +11,10 @@
     "userFallback": "User",
     "signedInAs": "Signed in as {{email}}",
     "signedIn": "Signed in",
-    "signOutFailed": "Sign out failed: {{message}}"
+    "signOutFailed": "Sign out failed: {{message}}",
+    "sessionExpired": "Session Expired",
+    "sessionExpiredMessage": "Your session has expired or is invalid. Please sign in again to continue.",
+    "dismiss": "Dismiss"
   },
   "signIn": {
     "title": "Sign in",
@@ -204,7 +207,9 @@
   "errors": {
     "somethingWentWrong": "Something went wrong",
     "unexpectedError": "An unexpected error occurred.",
-    "backToPlans": "Back to Plans"
+    "backToPlans": "Back to Plans",
+    "planNotFound": "Plan not found",
+    "planNoAccess": "This plan doesn't exist or you don't have access to it. If you're the owner, try signing in."
   },
   "notFound": {
     "title": "404 — Page Not Found",

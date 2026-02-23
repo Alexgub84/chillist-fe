@@ -4,6 +4,17 @@ import userEvent from '@testing-library/user-event';
 import AuthProvider from '../../../src/contexts/AuthProvider';
 import { useAuth } from '../../../src/contexts/useAuth';
 import { supabase } from '../../../src/lib/supabase';
+import { emitAuthError } from '../../../src/core/auth-error';
+
+const mockNavigate = vi.fn();
+vi.mock('@tanstack/react-router', async (importOriginal) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const actual = (await importOriginal()) as Record<string, any>;
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 const mockSupabase = vi.mocked(supabase);
 
@@ -234,6 +245,47 @@ describe('AuthProvider', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('first-name')).toHaveTextContent('Alex');
+    });
+  });
+
+  it('shows AuthErrorModal when emitAuthError is called', async () => {
+    renderWithProvider();
+
+    await waitFor(() => {
+      expect(screen.getByText('Not authenticated')).toBeInTheDocument();
+    });
+
+    expect(screen.queryByText('Session Expired')).not.toBeInTheDocument();
+
+    act(() => {
+      emitAuthError();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Session Expired')).toBeInTheDocument();
+    });
+  });
+
+  it('closes AuthErrorModal when Dismiss is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithProvider();
+
+    await waitFor(() => {
+      expect(screen.getByText('Not authenticated')).toBeInTheDocument();
+    });
+
+    act(() => {
+      emitAuthError();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Session Expired')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByText('Dismiss'));
+
+    await waitFor(() => {
+      expect(screen.queryByText('Session Expired')).not.toBeInTheDocument();
     });
   });
 });

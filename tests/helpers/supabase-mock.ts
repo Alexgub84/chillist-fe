@@ -44,6 +44,10 @@ export function createSupabaseMock(
         error: null,
       }),
       signOut: vi.fn().mockResolvedValue({ error: null }),
+      refreshSession: vi.fn().mockResolvedValue({
+        data: { session },
+        error: session ? null : { message: 'No session' },
+      }),
       updateUser: vi.fn().mockResolvedValue({
         data: { user: session?.user ?? null },
         error: null,

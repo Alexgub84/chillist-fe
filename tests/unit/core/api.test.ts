@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+const emitAuthErrorMock = vi.hoisted(() => vi.fn());
+
+vi.mock('../../../src/core/auth-error', () => ({
+  emitAuthError: emitAuthErrorMock,
+}));
+
 const supabaseMock = vi.hoisted(() => {
   const fn = vi.fn;
   return {
@@ -7,6 +13,10 @@ const supabaseMock = vi.hoisted(() => {
       getSession: fn().mockResolvedValue({
         data: { session: null },
         error: null,
+      }),
+      refreshSession: fn().mockResolvedValue({
+        data: { session: null },
+        error: { message: 'No session' },
       }),
       onAuthStateChange: fn().mockReturnValue({
         data: { subscription: { unsubscribe: fn() } },
@@ -71,6 +81,8 @@ function mockResponse(
 describe('API Client', () => {
   beforeEach(() => {
     fetchMock.mockClear();
+    emitAuthErrorMock.mockClear();
+    supabaseMock.auth.refreshSession.mockClear();
     vi.stubEnv('VITE_API_URL', 'http://api.test');
   });
 
@@ -537,6 +549,102 @@ describe('API Client', () => {
 
       const callHeaders = fetchMock.mock.calls[0][1].headers;
       expect(callHeaders).not.toHaveProperty('Authorization');
+    });
+  });
+
+  describe('401 Retry with Token Refresh', () => {
+    it('retries with refreshed token on 401 when session exists', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+
+      const refreshedSession = {
+        ...DEFAULT_SESSION,
+        access_token: 'refreshed-token-abc',
+      };
+      supabaseMock.auth.refreshSession.mockResolvedValueOnce({
+        data: { session: refreshedSession },
+        error: null,
+      });
+
+      fetchMock
+        .mockResolvedValueOnce(
+          mockResponse({ message: 'Unauthorized' }, { ok: false, status: 401 })
+        )
+        .mockResolvedValueOnce(mockResponse([mockPlan]));
+
+      const plans = await fetchPlans();
+      expect(plans).toEqual([mockPlan]);
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+      expect(supabaseMock.auth.refreshSession).toHaveBeenCalledOnce();
+
+      const retryHeaders = fetchMock.mock.calls[1][1].headers;
+      expect(retryHeaders['Authorization']).toBe('Bearer refreshed-token-abc');
+    });
+
+    it('emits auth error when retry also returns 401', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+
+      const refreshedSession = {
+        ...DEFAULT_SESSION,
+        access_token: 'refreshed-token-abc',
+      };
+      supabaseMock.auth.refreshSession.mockResolvedValueOnce({
+        data: { session: refreshedSession },
+        error: null,
+      });
+
+      fetchMock
+        .mockResolvedValueOnce(
+          mockResponse({ message: 'Unauthorized' }, { ok: false, status: 401 })
+        )
+        .mockResolvedValueOnce(
+          mockResponse(
+            { message: 'Still unauthorized' },
+            { ok: false, status: 401 }
+          )
+        );
+
+      await expect(fetchPlans()).rejects.toThrow('Still unauthorized');
+      expect(emitAuthErrorMock).toHaveBeenCalledOnce();
+    });
+
+    it('emits auth error when refresh fails', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      supabaseMock.auth.refreshSession.mockResolvedValueOnce({
+        data: { session: null },
+        error: { message: 'Refresh failed' },
+      });
+
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({ message: 'Unauthorized' }, { ok: false, status: 401 })
+      );
+
+      await expect(fetchPlans()).rejects.toThrow('Unauthorized');
+      expect(emitAuthErrorMock).toHaveBeenCalledOnce();
+    });
+
+    it('does not retry on 401 when no token was sent', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: null },
+        error: null,
+      });
+
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({ message: 'Unauthorized' }, { ok: false, status: 401 })
+      );
+
+      await expect(fetchPlans()).rejects.toThrow('Unauthorized');
+      expect(supabaseMock.auth.refreshSession).not.toHaveBeenCalled();
+      expect(emitAuthErrorMock).not.toHaveBeenCalled();
+      expect(fetchMock).toHaveBeenCalledTimes(1);
     });
   });
 

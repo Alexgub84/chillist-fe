@@ -39,6 +39,10 @@ vi.mock('../src/lib/supabase', () => ({
         error: null,
       }),
       signOut: vi.fn().mockResolvedValue({ error: null }),
+      refreshSession: vi.fn().mockResolvedValue({
+        data: { session: null },
+        error: { message: 'No session' },
+      }),
       updateUser: vi.fn().mockResolvedValue({
         data: { user: null },
         error: null,

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { supabase } from '../lib/supabase';
+import { emitAuthError } from './auth-error';
 import {
   itemCreateSchema,
   itemPatchSchema,
@@ -37,54 +38,60 @@ function getApiKey() {
   return import.meta.env.VITE_API_KEY || '';
 }
 
-async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
+async function doFetch(
+  endpoint: string,
+  options?: RequestInit,
+  accessToken?: string
+): Promise<Response> {
   const baseUrl = getApiBaseUrl();
   const apiKey = getApiKey();
   const url = `${baseUrl}${endpoint}`;
 
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     ...(options?.body ? { 'Content-Type': 'application/json' } : {}),
-    ...options?.headers,
+    ...(options?.headers as Record<string, string>),
   };
 
   if (apiKey) {
-    (headers as Record<string, string>)['x-api-key'] = apiKey;
+    headers['x-api-key'] = apiKey;
   }
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  if (session?.access_token) {
-    (headers as Record<string, string>)['Authorization'] =
-      `Bearer ${session.access_token}`;
+  if (accessToken) {
+    headers['Authorization'] = `Bearer ${accessToken}`;
   }
 
-  let response: Response;
   try {
-    response = await fetch(url, {
-      ...options,
-      headers,
-    });
+    return await fetch(url, { ...options, headers });
   } catch (err) {
     throw new Error(
       `Network error: Unable to reach API at ${baseUrl}. ${err instanceof Error ? err.message : ''}`
     );
   }
+}
 
+function parseErrorResponse(response: Response, url: string) {
+  const error = new Error('API request failed') as Error & { status: number };
+  error.status = response.status;
+  return { error, url };
+}
+
+async function processResponse<T>(
+  response: Response,
+  endpoint: string
+): Promise<T> {
+  const baseUrl = getApiBaseUrl();
+  const url = `${baseUrl}${endpoint}`;
   const contentType = response.headers.get('content-type') || '';
   const isJson = contentType.includes('application/json');
 
   if (!response.ok) {
-    const error = new Error('API request failed') as Error & {
-      status: number;
-    };
-    error.status = response.status;
+    const { error } = parseErrorResponse(response, url);
     if (isJson) {
       try {
         const data = await response.json();
         if (data.message) error.message = data.message;
       } catch {
-        // Ignore JSON parsing errors
+        /* ignore */
       }
     } else {
       error.message = `API returned ${response.status}: Expected JSON response from ${url} but received ${contentType || 'unknown content type'}`;
@@ -103,6 +110,36 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   }
 
   return response.json();
+}
+
+async function getAccessToken(): Promise<string | undefined> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  return session?.access_token;
+}
+
+async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  const token = await getAccessToken();
+  const response = await doFetch(endpoint, options, token);
+
+  if (response.status === 401 && token) {
+    const { data, error } = await supabase.auth.refreshSession();
+    if (!error && data.session) {
+      const retryResponse = await doFetch(
+        endpoint,
+        options,
+        data.session.access_token
+      );
+      if (retryResponse.status === 401) {
+        emitAuthError();
+      }
+      return processResponse<T>(retryResponse, endpoint);
+    }
+    emitAuthError();
+  }
+
+  return processResponse<T>(response, endpoint);
 }
 
 // --- Plans ---
