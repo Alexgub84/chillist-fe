@@ -7,5 +7,5 @@ npx lint-staged
 echo "Running unit tests..."
 npm run test:unit
 
-echo "Running E2E tests (Chrome only)..."
-VITE_AUTH_MOCK=true npx playwright test --project="Desktop Chrome"
+echo "Running E2E tests (all browsers)..."
+CI= VITE_AUTH_MOCK=true npx playwright test
