@@ -95,7 +95,14 @@
     "backToPlans": "→ חזרה לתוכניות",
     "loading": "טוען פרטי תוכנית...",
     "notFound": "התוכנית לא נמצאה",
-    "filterByPerson": "סינון לפי אדם"
+    "filterByPerson": "סינון לפי אדם",
+    "delete": "מחיקת תוכנית",
+    "deleteConfirmTitle": "למחוק את התוכנית?",
+    "deleteConfirmMessage": "פעולה זו תמחק לצמיתות את התוכנית ואת כל הפריטים שלה. לא ניתן לבטל פעולה זו.",
+    "deleteConfirm": "מחיקה",
+    "deleteCancel": "ביטול",
+    "deleted": "התוכנית נמחקה",
+    "deleting": "מוחק…"
   },
   "addParticipant": {
     "firstName": "שם פרטי *",

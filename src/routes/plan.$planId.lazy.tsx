@@ -14,6 +14,8 @@ import { useCreateItem } from '../hooks/useCreateItem';
 import { useUpdateItem } from '../hooks/useUpdateItem';
 import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
+import { useDeletePlan } from '../hooks/useDeletePlan';
+import { useAuth } from '../contexts/useAuth';
 import { getApiErrorMessage } from '../core/error-utils';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
@@ -43,6 +45,8 @@ function PlanDetails() {
   const updateItemMutation = useUpdateItem(planId);
   const createParticipantMutation = useCreateParticipant(planId);
   const updateParticipantMutation = useUpdateParticipant(planId);
+  const deletePlanMutation = useDeletePlan();
+  const { user } = useAuth();
   const { list: listFilter, participant: participantFilter } = useSearch({
     from: '/plan/$planId',
   });
@@ -135,6 +139,22 @@ function PlanDetails() {
     setEditingParticipantId(null);
   }
 
+  const owner = plan.participants.find((p) => p.role === 'owner');
+  const isOwner = !!user && !!owner?.userId && user.id === owner.userId;
+
+  async function handleDeletePlan() {
+    try {
+      await deletePlanMutation.mutateAsync(planId);
+      toast.success(t('plan.deleted'));
+      navigate({ to: '/plans' });
+    } catch (err) {
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
   const participantCounts: Record<string, number> = { unassigned: 0 };
@@ -193,6 +213,9 @@ function PlanDetails() {
             await createParticipantMutation.mutateAsync(p);
           }}
           isAddingParticipant={createParticipantMutation.isPending}
+          isOwner={isOwner}
+          onDelete={handleDeletePlan}
+          isDeleting={deletePlanMutation.isPending}
         />
 
         <div className="mt-4 sm:mt-6">
