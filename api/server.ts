@@ -233,6 +233,22 @@ export async function buildServer(
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   });
 
+  app.addContentTypeParser(
+    'application/json',
+    { parseAs: 'string' },
+    (_req, body, done) => {
+      if (!body || (typeof body === 'string' && body.trim() === '')) {
+        done(null, undefined);
+        return;
+      }
+      try {
+        done(null, JSON.parse(body as string));
+      } catch (err) {
+        done(err as Error, undefined);
+      }
+    }
+  );
+
   const filePath = options.dataFilePath ?? DEFAULT_MOCK_DATA_PATH;
   const initialData = options.initialData ?? (await loadMockData(filePath));
   const store = cloneData(initialData);
@@ -647,24 +663,6 @@ export async function buildServer(
       await persistData(store, shouldPersist, filePath);
 
       void reply.send(item);
-    }
-  );
-
-  app.delete<{ Params: { itemId: string } }>(
-    '/items/:itemId',
-    async (request, reply) => {
-      const index = store.items.findIndex(
-        (entry) => entry.itemId === request.params.itemId
-      );
-      if (index === -1) {
-        throw new HttpError('Item not found', 404);
-      }
-
-      store.items.splice(index, 1);
-
-      await persistData(store, shouldPersist, filePath);
-
-      void reply.send({ ok: true });
     }
   );
 

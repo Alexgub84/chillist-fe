@@ -1,7 +1,10 @@
+import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import type { Plan, PlanStatus } from '../core/types/plan';
+
+type TimeFilter = 'all' | 'upcoming' | 'past';
 
 interface PlansListProps {
   plans: Array<
@@ -11,6 +14,7 @@ interface PlansListProps {
       | 'title'
       | 'status'
       | 'startDate'
+      | 'endDate'
       | 'location'
       | 'participantIds'
     >
@@ -23,8 +27,37 @@ const statusClassName: Record<PlanStatus, string> = {
   archived: 'bg-gray-100 text-gray-500',
 };
 
+const TIME_FILTERS: { value: TimeFilter; labelKey: string }[] = [
+  { value: 'all', labelKey: 'plans.all' },
+  { value: 'upcoming', labelKey: 'plans.upcoming' },
+  { value: 'past', labelKey: 'plans.past' },
+];
+
+function isPastPlan(plan: {
+  startDate?: string | null;
+  endDate?: string | null;
+}): boolean {
+  const dateStr = plan.endDate ?? plan.startDate;
+  if (!dateStr) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return new Date(dateStr) < today;
+}
+
 export function PlansList({ plans }: PlansListProps) {
   const { t } = useTranslation();
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>('upcoming');
+
+  const filteredPlans = useMemo(() => {
+    if (timeFilter === 'all') return plans;
+    if (timeFilter === 'past') return plans.filter(isPastPlan);
+    return plans.filter((p) => !isPastPlan(p));
+  }, [plans, timeFilter]);
+
+  const counts = useMemo(() => {
+    const past = plans.filter(isPastPlan).length;
+    return { all: plans.length, upcoming: plans.length - past, past };
+  }, [plans]);
 
   function formatDate(dateStr: string): string {
     return new Date(dateStr).toLocaleDateString(undefined, {
@@ -32,6 +65,13 @@ export function PlansList({ plans }: PlansListProps) {
       day: 'numeric',
       year: 'numeric',
     });
+  }
+
+  function getEmptyMessage(): string {
+    if (plans.length === 0) return t('plans.empty');
+    if (timeFilter === 'upcoming') return t('plans.emptyUpcoming');
+    if (timeFilter === 'past') return t('plans.emptyPast');
+    return t('plans.empty');
   }
 
   return (
@@ -49,10 +89,51 @@ export function PlansList({ plans }: PlansListProps) {
           </Link>
         </button>
       </div>
-      {plans.length === 0 ? (
+
+      {plans.length > 0 && (
+        <div
+          className="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-1 gap-1 mb-4"
+          role="tablist"
+          aria-label={t('plans.title')}
+        >
+          {TIME_FILTERS.map((tab) => {
+            const isActive = timeFilter === tab.value;
+            return (
+              <button
+                key={tab.value}
+                type="button"
+                role="tab"
+                data-testid={`time-filter-${tab.value}`}
+                onClick={() => setTimeFilter(tab.value)}
+                className={clsx(
+                  'inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer',
+                  isActive
+                    ? 'bg-gray-800 text-white shadow-sm border border-gray-800'
+                    : 'text-gray-500 hover:text-gray-700 hover:bg-white border border-transparent'
+                )}
+                aria-selected={isActive}
+              >
+                <span>{t(tab.labelKey)}</span>
+                <span
+                  className={clsx(
+                    'inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full text-xs font-semibold tabular-nums',
+                    isActive
+                      ? 'bg-white/30 backdrop-blur-sm'
+                      : 'bg-gray-200/70 text-gray-500'
+                  )}
+                >
+                  {counts[tab.value]}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {filteredPlans.length === 0 ? (
         <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center">
           <p className="text-gray-500 text-base sm:text-lg">
-            {t('plans.empty')}
+            {getEmptyMessage()}
           </p>
         </div>
       ) : (
@@ -60,7 +141,7 @@ export function PlansList({ plans }: PlansListProps) {
           data-testid="plans-list"
           className="bg-white rounded-lg shadow-sm divide-y divide-gray-200 overflow-hidden"
         >
-          {plans.map((plan) => {
+          {filteredPlans.map((plan) => {
             const meta: string[] = [];
             if (plan.startDate) {
               meta.push(formatDate(plan.startDate));

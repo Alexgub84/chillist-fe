@@ -10,7 +10,6 @@ vi.mock('../../../src/contexts/useLanguage', () => ({
 import ItemForm from '../../../src/components/ItemForm';
 
 beforeAll(() => {
-  Element.prototype.scrollIntoView = vi.fn();
   global.ResizeObserver = class {
     observe() {}
     unobserve() {}

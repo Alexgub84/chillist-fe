@@ -16,12 +16,13 @@ import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { getApiErrorMessage } from '../core/error-utils';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
+import Forecast from '../components/Forecast';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
 import Modal from '../components/shared/Modal';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
-import type { ItemCategory, ItemCreate, ItemPatch } from '../core/schemas/item';
+import type { ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { ListFilter } from '../core/schemas/plan-search';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
@@ -40,8 +41,7 @@ function PlanDetails() {
     from: '/plan/$planId',
   });
   const navigate = useNavigate({ from: '/plan/$planId' });
-  const [showItemForm, setShowItemForm] = useState(false);
-  const [editingItemId, setEditingItemId] = useState<string | null>(null);
+  const [itemModalId, setItemModalId] = useState<string | null>(null);
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
@@ -57,28 +57,14 @@ function PlanDetails() {
     throw new Error(t('plan.notFound'));
   }
 
-  async function handleAddItem(values: ItemFormValues) {
-    const payload: ItemCreate = {
-      name: values.name,
-      category: values.category,
-      quantity: values.quantity,
-      unit: values.unit,
-      status: values.status,
-      notes: values.notes || null,
-      assignedParticipantId: values.assignedParticipantId || null,
-    };
-    await createItem.mutateAsync(payload);
-    setShowItemForm(false);
-  }
+  const isCreating = itemModalId === 'new';
+  const editingItem =
+    itemModalId && itemModalId !== 'new'
+      ? plan.items.find((i) => i.itemId === itemModalId)
+      : null;
 
-  function handleStartEdit(itemId: string) {
-    setShowItemForm(false);
-    setEditingItemId(itemId);
-  }
-
-  function handleStartCreate() {
-    setEditingItemId(null);
-    setShowItemForm(true);
+  function closeItemModal() {
+    setItemModalId(null);
   }
 
   async function updateItem(itemId: string, updates: ItemPatch) {
@@ -92,9 +78,8 @@ function PlanDetails() {
     }
   }
 
-  async function handleFormSubmit(values: ItemFormValues) {
-    if (!editingItemId) return;
-    await updateItem(editingItemId, {
+  function toPayload(values: ItemFormValues) {
+    return {
       name: values.name,
       category: values.category,
       quantity: values.quantity,
@@ -102,13 +87,17 @@ function PlanDetails() {
       status: values.status,
       notes: values.notes || null,
       assignedParticipantId: values.assignedParticipantId || null,
-    });
-    setEditingItemId(null);
+    };
   }
 
-  const editingItem = editingItemId
-    ? plan.items.find((i) => i.itemId === editingItemId)
-    : null;
+  async function handleItemFormSubmit(values: ItemFormValues) {
+    if (isCreating) {
+      await createItem.mutateAsync(toPayload(values));
+    } else if (editingItem) {
+      await updateItem(editingItem.itemId, toPayload(values));
+    }
+    closeItemModal();
+  }
 
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
@@ -170,133 +159,151 @@ function PlanDetails() {
           isAddingParticipant={createParticipantMutation.isPending}
         />
 
-        <div className="mt-6 sm:mt-8">
-          <div className="flex items-center justify-between mb-3 sm:mb-4">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-              {t('items.title')}
-              {plan.items.length > 0 && (
-                <span className="ms-2 text-sm font-normal text-gray-500">
-                  ({plan.items.length})
-                </span>
-              )}
-            </h2>
-          </div>
+        <div className="mt-4 sm:mt-6">
+          <Forecast
+            location={plan.location}
+            startDate={plan.startDate}
+            endDate={plan.endDate}
+          />
+        </div>
 
-          {plan.items.length > 0 && (
-            <div className="mb-4 sm:mb-6 space-y-3">
-              {plan.participants.length > 0 && (
-                <div>
-                  <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
-                    {t('plan.filterByPerson')}
-                  </p>
-                  <ParticipantFilter
-                    participants={plan.participants}
-                    selected={participantFilter ?? null}
-                    onChange={(participantId) =>
-                      navigate({
-                        search: {
-                          list: listFilter,
-                          participant: participantId ?? undefined,
-                        },
-                        replace: true,
-                      })
-                    }
-                    counts={participantCounts}
-                    total={plan.items.length}
-                  />
-                </div>
-              )}
-              {plan.participants.length > 0 && (
-                <div className="border-t border-gray-200" />
-              )}
+        <div className="mt-6 sm:mt-8 flex items-center justify-between mb-3 sm:mb-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+            {t('items.title')}
+            {plan.items.length > 0 && (
+              <span className="ms-2 text-sm font-normal text-gray-500">
+                ({plan.items.length})
+              </span>
+            )}
+          </h2>
+        </div>
+
+        {plan.items.length > 0 && (
+          <div className="mb-4 sm:mb-6 space-y-3">
+            {plan.participants.length > 0 && (
               <div>
-                <ListTabs
-                  selected={listFilter ?? null}
-                  onChange={(filter) =>
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
+                  {t('plan.filterByPerson')}
+                </p>
+                <ParticipantFilter
+                  participants={plan.participants}
+                  selected={participantFilter ?? null}
+                  onChange={(participantId) =>
                     navigate({
                       search: {
-                        list: filter ?? undefined,
-                        participant: participantFilter,
+                        list: listFilter,
+                        participant: participantId ?? undefined,
                       },
                       replace: true,
                     })
                   }
-                  counts={listCounts}
-                  total={participantScopedItems.length}
+                  counts={participantCounts}
+                  total={plan.items.length}
                 />
               </div>
-            </div>
-          )}
-
-          {plan.items.length === 0 && !showItemForm && (
-            <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center mb-4">
-              <p className="text-gray-500 text-sm sm:text-base">
-                {t('items.empty')}
-              </p>
-            </div>
-          )}
-
-          {plan.items.length > 0 && (
-            <div className="space-y-4 mb-4">
-              {itemsByCategory.map(({ category, items }) => (
-                <CategorySection
-                  key={category}
-                  category={category}
-                  items={items}
-                  participants={plan.participants}
-                  listFilter={listFilter}
-                  onEditItem={handleStartEdit}
-                  onUpdateItem={updateItem}
-                />
-              ))}
-            </div>
-          )}
-
-          {showItemForm ? (
-            <ItemForm
-              participants={plan.participants}
-              onSubmit={handleAddItem}
-              onCancel={() => setShowItemForm(false)}
-              isSubmitting={createItem.isPending}
-            />
-          ) : (
-            <button
-              type="button"
-              onClick={handleStartCreate}
-              className="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors shadow-sm hover:shadow-md"
-            >
-              {t('items.addItem')}
-            </button>
-          )}
-
-          <Modal
-            open={!!editingItem}
-            onClose={() => setEditingItemId(null)}
-            title={t('items.editItem')}
-          >
-            {editingItem && (
-              <ItemForm
-                key={editingItem.itemId}
-                defaultValues={{
-                  name: editingItem.name,
-                  category: editingItem.category,
-                  quantity: editingItem.quantity,
-                  unit: editingItem.unit,
-                  status: editingItem.status,
-                  notes: editingItem.notes ?? '',
-                  assignedParticipantId:
-                    editingItem.assignedParticipantId ?? '',
-                }}
-                participants={plan.participants}
-                onSubmit={handleFormSubmit}
-                onCancel={() => setEditingItemId(null)}
-                isSubmitting={updateItemMutation.isPending}
-                submitLabel={t('items.updateItem')}
-                inModal
-              />
             )}
-          </Modal>
-        </div>
+            {plan.participants.length > 0 && (
+              <div className="border-t border-gray-200" />
+            )}
+            <div>
+              <ListTabs
+                selected={listFilter ?? null}
+                onChange={(filter) =>
+                  navigate({
+                    search: {
+                      list: filter ?? undefined,
+                      participant: participantFilter,
+                    },
+                    replace: true,
+                  })
+                }
+                counts={listCounts}
+                total={participantScopedItems.length}
+              />
+            </div>
+          </div>
+        )}
+
+        {plan.items.length === 0 && (
+          <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center mb-4">
+            <p className="text-gray-500 text-sm sm:text-base">
+              {t('items.empty')}
+            </p>
+          </div>
+        )}
+
+        {plan.items.length > 0 && (
+          <div className="space-y-4 mb-4">
+            {itemsByCategory.map(({ category, items }) => (
+              <CategorySection
+                key={category}
+                category={category}
+                items={items}
+                participants={plan.participants}
+                listFilter={listFilter}
+                onEditItem={(itemId) => setItemModalId(itemId)}
+                onUpdateItem={updateItem}
+              />
+            ))}
+          </div>
+        )}
+
+        <Modal
+          open={!!itemModalId}
+          onClose={closeItemModal}
+          title={isCreating ? t('items.addItemLabel') : t('items.editItem')}
+        >
+          <ItemForm
+            key={itemModalId ?? 'closed'}
+            defaultValues={
+              editingItem
+                ? {
+                    name: editingItem.name,
+                    category: editingItem.category,
+                    quantity: editingItem.quantity,
+                    unit: editingItem.unit,
+                    status: editingItem.status,
+                    notes: editingItem.notes ?? '',
+                    assignedParticipantId:
+                      editingItem.assignedParticipantId ?? '',
+                  }
+                : undefined
+            }
+            participants={plan.participants}
+            onSubmit={handleItemFormSubmit}
+            onCancel={closeItemModal}
+            isSubmitting={
+              isCreating ? createItem.isPending : updateItemMutation.isPending
+            }
+            submitLabel={isCreating ? undefined : t('items.updateItem')}
+          />
+        </Modal>
+      </div>
+
+      <div className="fixed bottom-6 inset-x-0 z-40 max-w-4xl mx-auto px-3 sm:px-0 pointer-events-none">
+        <button
+          type="button"
+          onClick={() => setItemModalId('new')}
+          className="pointer-events-auto ms-auto flex items-center gap-2 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 active:bg-green-800 hover:shadow-xl transition-colors cursor-pointer px-4 py-3"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2.5}
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+          <span className="text-sm font-semibold">
+            {t('items.addItemLabel')}
+          </span>
+        </button>
       </div>
     </div>
   );

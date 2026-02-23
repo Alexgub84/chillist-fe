@@ -150,7 +150,7 @@ describe('API Client', () => {
       expect(fetchMock).toHaveBeenCalledWith(
         'http://api.test/plans',
         expect.objectContaining({
-          headers: expect.objectContaining({
+          headers: expect.not.objectContaining({
             'Content-Type': 'application/json',
           }),
         })
@@ -167,7 +167,7 @@ describe('API Client', () => {
       expect(fetchMock).toHaveBeenCalledWith(
         'http://api.test/plans/plan-1',
         expect.objectContaining({
-          headers: expect.objectContaining({
+          headers: expect.not.objectContaining({
             'Content-Type': 'application/json',
           }),
         })
@@ -248,9 +248,6 @@ describe('API Client', () => {
         'http://api.test/plans/plan-1',
         expect.objectContaining({
           method: 'DELETE',
-          headers: expect.objectContaining({
-            'Content-Type': 'application/json',
-          }),
         })
       );
     });
@@ -311,7 +308,7 @@ describe('API Client', () => {
       expect(fetchMock).toHaveBeenCalledWith(
         'http://api.test/plans/plan-1/participants',
         expect.objectContaining({
-          headers: expect.objectContaining({
+          headers: expect.not.objectContaining({
             'Content-Type': 'application/json',
           }),
         })
@@ -349,7 +346,7 @@ describe('API Client', () => {
       expect(fetchMock).toHaveBeenCalledWith(
         'http://api.test/participants/p-1',
         expect.objectContaining({
-          headers: expect.objectContaining({
+          headers: expect.not.objectContaining({
             'Content-Type': 'application/json',
           }),
         })
@@ -384,9 +381,6 @@ describe('API Client', () => {
         'http://api.test/participants/p-1',
         expect.objectContaining({
           method: 'DELETE',
-          headers: expect.objectContaining({
-            'Content-Type': 'application/json',
-          }),
         })
       );
     });
@@ -401,7 +395,7 @@ describe('API Client', () => {
       expect(fetchMock).toHaveBeenCalledWith(
         'http://api.test/plans/plan-1/items',
         expect.objectContaining({
-          headers: expect.objectContaining({
+          headers: expect.not.objectContaining({
             'Content-Type': 'application/json',
           }),
         })
@@ -440,7 +434,7 @@ describe('API Client', () => {
       expect(fetchMock).toHaveBeenCalledWith(
         'http://api.test/items/item-1',
         expect.objectContaining({
-          headers: expect.objectContaining({
+          headers: expect.not.objectContaining({
             'Content-Type': 'application/json',
           }),
         })
@@ -475,9 +469,6 @@ describe('API Client', () => {
         'http://api.test/items/item-1',
         expect.objectContaining({
           method: 'DELETE',
-          headers: expect.objectContaining({
-            'Content-Type': 'application/json',
-          }),
         })
       );
     });

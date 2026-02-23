@@ -68,7 +68,12 @@
     "loading": "Loading plans...",
     "tryAgain": "Try Again",
     "participant_one": "{{count}} participant",
-    "participant_other": "{{count}} participants"
+    "participant_other": "{{count}} participants",
+    "all": "All",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "emptyUpcoming": "No upcoming plans. Create one to get started!",
+    "emptyPast": "No past plans yet."
   },
   "plan": {
     "details": "Details",
@@ -261,6 +266,27 @@
     "pcs": "Pieces",
     "pack": "Pack",
     "set": "Set"
+  },
+  "forecast": {
+    "title": "Forecast",
+    "loading": "Loading forecast...",
+    "error": "Could not load forecast. Please try again later.",
+    "locationNotFound": "Could not find this location. Try using a more specific place name or the location search.",
+    "pastDates": "We still can't predict the past! Forecast is available for upcoming plans only.",
+    "datesUnavailable": "Forecast is not available for these dates. Weather data is only available for upcoming dates.",
+    "missingLocation": "Add a location to your plan to see the weather forecast.",
+    "missingDates": "Set the plan dates to see the weather forecast.",
+    "missingLocationAndDates": "Add a location and dates to your plan to see the weather forecast."
+  },
+  "weather": {
+    "clear": "Clear",
+    "partlyCloudy": "Partly cloudy",
+    "fog": "Fog",
+    "drizzle": "Drizzle",
+    "rain": "Rain",
+    "snow": "Snow",
+    "showers": "Showers",
+    "thunderstorm": "Thunderstorm"
   },
   "language": {
     "en": "EN",
