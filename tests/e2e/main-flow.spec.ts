@@ -12,7 +12,7 @@ async function addItemViaUI(
   name: string,
   quantity: number
 ): Promise<void> {
-  await page.getByRole('button', { name: /^Add Item$/i }).click();
+  await page.getByRole('button', { name: /Add Item/i }).click();
 
   const form = page.locator('form:has(button[type="submit"])').last();
   await expect(form).toBeVisible();
