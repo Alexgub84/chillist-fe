@@ -26,6 +26,8 @@ jobs:
 
       - name: Fetch OpenAPI spec from backend
         run: npm run api:fetch
+        env:
+          API_SPEC_TOKEN: ${{ secrets.API_SPEC_TOKEN }}
 
       - name: Run linting
         run: npm run lint
