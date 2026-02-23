@@ -95,7 +95,14 @@
     "backToPlans": "← Back to Plans",
     "loading": "Loading plan details...",
     "notFound": "Plan not found",
-    "filterByPerson": "Filter by person"
+    "filterByPerson": "Filter by person",
+    "delete": "Delete Plan",
+    "deleteConfirmTitle": "Delete Plan?",
+    "deleteConfirmMessage": "This will permanently delete the plan and all its items. This action cannot be undone.",
+    "deleteConfirm": "Delete",
+    "deleteCancel": "Cancel",
+    "deleted": "Plan deleted",
+    "deleting": "Deleting…"
   },
   "addParticipant": {
     "firstName": "First Name *",

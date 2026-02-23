@@ -155,16 +155,23 @@ interface PlanProps {
   plan: PlanWithDetails;
   onAddParticipant?: (participant: ParticipantCreate) => Promise<void>;
   isAddingParticipant?: boolean;
+  isOwner?: boolean;
+  onDelete?: () => void;
+  isDeleting?: boolean;
 }
 
 export function Plan({
   plan,
   onAddParticipant,
   isAddingParticipant = false,
+  isOwner = false,
+  onDelete,
+  isDeleting = false,
 }: PlanProps) {
   const { t } = useTranslation();
   const [showManageModal, setShowManageModal] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const { title, description, startDate, endDate, participants, location } =
     plan;
@@ -298,6 +305,18 @@ export function Plan({
             </button>
           </div>
         </div>
+
+        {isOwner && onDelete && (
+          <div className="border-t border-gray-200 pt-4">
+            <button
+              type="button"
+              onClick={() => setShowDeleteConfirm(true)}
+              className="px-4 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 active:bg-red-100 transition-colors"
+            >
+              {t('plan.delete')}
+            </button>
+          </div>
+        )}
       </div>
 
       <Modal
@@ -369,6 +388,38 @@ export function Plan({
                 {t('plan.addParticipant')}
               </button>
             ))}
+        </div>
+      </Modal>
+
+      <Modal
+        open={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        title={t('plan.deleteConfirmTitle')}
+      >
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-4">
+          <p className="text-sm text-gray-600">
+            {t('plan.deleteConfirmMessage')}
+          </p>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              disabled={isDeleting}
+              onClick={() => {
+                onDelete?.();
+              }}
+              className="flex-1 px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+            >
+              {isDeleting ? t('plan.deleting') : t('plan.deleteConfirm')}
+            </button>
+            <button
+              type="button"
+              disabled={isDeleting}
+              onClick={() => setShowDeleteConfirm(false)}
+              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 disabled:opacity-50 transition-colors text-sm"
+            >
+              {t('plan.deleteCancel')}
+            </button>
+          </div>
         </div>
       </Modal>
     </div>

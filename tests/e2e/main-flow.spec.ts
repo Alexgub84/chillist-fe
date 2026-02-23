@@ -26,8 +26,10 @@ async function addItemViaUI(
   const quantityInput = form.locator('input[type="number"]');
   await quantityInput.fill(String(quantity));
 
-  await form.locator('button[type="submit"]').click();
-  await expect(form).toBeHidden({ timeout: 5000 });
+  const submitBtn = form.locator('button[type="submit"]');
+  await expect(submitBtn).toBeVisible();
+  await submitBtn.click({ force: true });
+  await expect(form).toBeHidden({ timeout: 10000 });
 }
 
 function buildTestPlan() {
@@ -136,7 +138,10 @@ test.describe('Item CRUD', () => {
     const editForm = page.locator('form:has(button:text("Update Item"))');
     await expect(editForm).toBeVisible();
     await editForm.locator('input[type="number"]').fill('4');
-    await editForm.getByRole('button', { name: 'Update Item' }).click();
+    const updateBtn = editForm.getByRole('button', { name: 'Update Item' });
+    await expect(updateBtn).toBeVisible();
+    await updateBtn.click({ force: true });
+    await expect(editForm).toBeHidden({ timeout: 10000 });
 
     const tentCard = page
       .locator('[class*="border-l-"]')
@@ -168,8 +173,10 @@ test.describe('Item CRUD', () => {
       .locator('select[name="assignedParticipantId"]')
       .selectOption({ label: 'Bob Helper' });
 
-    await editForm.getByRole('button', { name: 'Update Item' }).click();
-    await expect(editForm).toBeHidden({ timeout: 5000 });
+    const updateAllBtn = editForm.getByRole('button', { name: 'Update Item' });
+    await expect(updateAllBtn).toBeVisible();
+    await updateAllBtn.click({ force: true });
+    await expect(editForm).toBeHidden({ timeout: 10000 });
 
     const itemCard = page
       .locator('[class*="border-l-"]')

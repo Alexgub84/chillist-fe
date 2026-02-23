@@ -4,11 +4,11 @@ export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : undefined,
   reporter: process.env.CI
     ? [['list'], ['github'], ['html', { open: 'never' }]]
-    : 'html',
+    : [['html', { open: 'never' }]],
   timeout: 60000,
   use: {
     baseURL: 'http://localhost:5173',
