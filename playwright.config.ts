@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 2 : undefined,
   reporter: process.env.CI
     ? [['list'], ['github'], ['html', { open: 'never' }]]
-    : 'html',
+    : [['html', { open: 'never' }]],
   timeout: 60000,
   use: {
     baseURL: 'http://localhost:5173',
