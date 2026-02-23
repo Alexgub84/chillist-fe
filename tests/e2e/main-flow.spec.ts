@@ -97,6 +97,10 @@ test.describe('Plan creation via UI', () => {
 
     await page.getByRole('button', { name: /create plan/i }).click();
 
+    await page
+      .getByRole('button', { name: /skip for now/i })
+      .click({ timeout: 15000 });
+
     await expect(page).toHaveURL(/\/plan\//, { timeout: 15000 });
     await expect(page.getByText('E2E Test Trip')).toBeVisible();
     await expect(page.getByText('Alex Test').first()).toBeVisible();
