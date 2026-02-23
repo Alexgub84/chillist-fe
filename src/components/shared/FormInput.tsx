@@ -2,21 +2,50 @@ import clsx from 'clsx';
 import {
   forwardRef,
   type InputHTMLAttributes,
+  type MouseEvent,
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
 } from 'react';
 
+const pickerTypes = new Set([
+  'date',
+  'time',
+  'datetime-local',
+  'month',
+  'week',
+]);
+
 const baseInputStyles =
-  'w-full px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition';
+  'w-full bg-white px-3 sm:px-4 py-2 sm:py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition';
 const compactInputStyles =
-  'w-full px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition';
+  'w-full bg-white px-3 sm:px-4 py-2 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition';
 
 export const FormInput = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement> & { compact?: boolean }
->(({ className, compact, ...props }, ref) => {
+>(({ className, compact, onClick, ...props }, ref) => {
   const styles = compact ? compactInputStyles : baseInputStyles;
-  return <input ref={ref} className={clsx(styles, className)} {...props} />;
+  const hasPicker = pickerTypes.has(props.type ?? '');
+
+  function handleClick(e: MouseEvent<HTMLInputElement>) {
+    if (hasPicker) {
+      try {
+        e.currentTarget.showPicker();
+      } catch {
+        /* showPicker() may throw in non-user-gesture contexts */
+      }
+    }
+    onClick?.(e);
+  }
+
+  return (
+    <input
+      ref={ref}
+      className={clsx(styles, hasPicker && 'cursor-pointer', className)}
+      onClick={handleClick}
+      {...props}
+    />
+  );
 });
 
 FormInput.displayName = 'FormInput';
@@ -42,11 +71,7 @@ export const FormSelect = forwardRef<
 >(({ className, children, compact, ...props }, ref) => {
   const styles = compact ? compactInputStyles : baseInputStyles;
   return (
-    <select
-      ref={ref}
-      className={clsx(styles, 'bg-white', className)}
-      {...props}
-    >
+    <select ref={ref} className={clsx(styles, className)} {...props}>
       {children}
     </select>
   );

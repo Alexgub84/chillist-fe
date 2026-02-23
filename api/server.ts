@@ -90,6 +90,11 @@ const participantCreateSchema = z.object({
   role: participantCreateRoleSchema.optional(),
   avatarUrl: z.string().optional(),
   contactEmail: z.string().max(255).optional(),
+  adultsCount: z.number().int().min(0).optional(),
+  kidsCount: z.number().int().min(0).optional(),
+  foodPreferences: z.string().optional(),
+  allergies: z.string().optional(),
+  notes: z.string().optional(),
 });
 
 const participantPatchSchema = z.object({
@@ -100,6 +105,11 @@ const participantPatchSchema = z.object({
   role: participantCreateRoleSchema.optional(),
   avatarUrl: z.string().nullable().optional(),
   contactEmail: z.string().max(255).nullable().optional(),
+  adultsCount: z.number().int().min(0).nullable().optional(),
+  kidsCount: z.number().int().min(0).nullable().optional(),
+  foodPreferences: z.string().nullable().optional(),
+  allergies: z.string().nullable().optional(),
+  notes: z.string().nullable().optional(),
 });
 
 const ownerBodySchema = z.object({
@@ -372,6 +382,11 @@ export async function buildServer(
       role: 'owner',
       avatarUrl: parsed.owner.avatarUrl ?? null,
       contactEmail: parsed.owner.contactEmail ?? null,
+      adultsCount: null,
+      kidsCount: null,
+      foodPreferences: null,
+      allergies: null,
+      notes: null,
       createdAt: now,
       updatedAt: now,
     };
@@ -388,6 +403,11 @@ export async function buildServer(
       role: p.role ?? 'participant',
       avatarUrl: p.avatarUrl ?? null,
       contactEmail: p.contactEmail ?? null,
+      adultsCount: p.adultsCount ?? null,
+      kidsCount: p.kidsCount ?? null,
+      foodPreferences: p.foodPreferences ?? null,
+      allergies: p.allergies ?? null,
+      notes: p.notes ?? null,
       createdAt: now,
       updatedAt: now,
     }));
@@ -515,6 +535,11 @@ export async function buildServer(
         role: parsed.role ?? 'participant',
         avatarUrl: parsed.avatarUrl ?? null,
         contactEmail: parsed.contactEmail ?? null,
+        adultsCount: parsed.adultsCount ?? null,
+        kidsCount: parsed.kidsCount ?? null,
+        foodPreferences: parsed.foodPreferences ?? null,
+        allergies: parsed.allergies ?? null,
+        notes: parsed.notes ?? null,
         createdAt: now,
         updatedAt: now,
       };

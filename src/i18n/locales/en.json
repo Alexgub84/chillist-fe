@@ -288,6 +288,36 @@
     "showers": "Showers",
     "thunderstorm": "Thunderstorm"
   },
+  "preferences": {
+    "title": "Tell us about your group",
+    "subtitle": "Help the organizer plan better — how many are coming with you?",
+    "adultsCount": "Adults",
+    "adultsCountPlaceholder": "0",
+    "kidsCount": "Kids",
+    "kidsCountPlaceholder": "0",
+    "foodPreferences": "Food preferences",
+    "foodPreferencesPlaceholder": "e.g. vegetarian, no shellfish",
+    "allergies": "Allergies",
+    "allergiesPlaceholder": "e.g. nuts, gluten, dairy",
+    "notes": "Notes",
+    "notesPlaceholder": "Anything else the group should know",
+    "saving": "Saving…",
+    "submit": "Save Preferences",
+    "skip": "Skip for now",
+    "updated": "Preferences saved"
+  },
+  "participantDetails": {
+    "title": "Group Details",
+    "notFilled": "Preferences not filled yet",
+    "adults_one": "{{count}} adult",
+    "adults_other": "{{count}} adults",
+    "kids_one": "{{count}} kid",
+    "kids_other": "{{count}} kids",
+    "people": "People",
+    "food": "Food",
+    "notes": "Notes",
+    "edit": "Edit"
+  },
   "language": {
     "en": "EN",
     "he": "עב"

@@ -186,7 +186,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-25'];
+            'application/json': components['schemas']['def-24'];
           };
         };
         /** @description Default Response */
@@ -252,7 +252,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-25'];
+            'application/json': components['schemas']['def-24'];
           };
         };
         /** @description Default Response */
@@ -446,7 +446,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-20'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -494,7 +494,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-21'];
+          'application/json': components['schemas']['def-20'];
         };
       };
       responses: {
@@ -504,7 +504,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-19'];
+            'application/json': components['schemas']['def-18'];
           };
         };
         /** @description Default Response */
@@ -579,7 +579,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-19'];
+            'application/json': components['schemas']['def-18'];
           };
         };
         /** @description Default Response */
@@ -634,7 +634,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-24'];
+            'application/json': components['schemas']['def-23'];
           };
         };
         /** @description Default Response */
@@ -692,7 +692,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-22'];
+          'application/json': components['schemas']['def-21'];
         };
       };
       responses: {
@@ -702,7 +702,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-19'];
+            'application/json': components['schemas']['def-18'];
           };
         };
         /** @description Default Response */
@@ -888,59 +888,7 @@ export interface paths {
     get?: never;
     put?: never;
     post?: never;
-    /**
-     * Delete an item
-     * @description Delete an item by its ID. Cascade delete handles related assignments.
-     */
-    delete: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          itemId: string;
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            'application/json': components['schemas']['def-18'];
-          };
-        };
-        /** @description Default Response */
-        404: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            'application/json': components['schemas']['def-0'];
-          };
-        };
-        /** @description Default Response */
-        500: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            'application/json': components['schemas']['def-0'];
-          };
-        };
-        /** @description Default Response */
-        503: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content: {
-            'application/json': components['schemas']['def-0'];
-          };
-        };
-      };
-    };
+    delete?: never;
     options?: never;
     head?: never;
     /**
@@ -1040,7 +988,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-29'];
+            'application/json': components['schemas']['def-28'];
           };
         };
         /** @description Default Response */
@@ -1111,7 +1059,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-31'];
+            'application/json': components['schemas']['def-30'];
           };
         };
         /** @description Default Response */
@@ -1194,6 +1142,72 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/auth/profile': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Get current user profile
+     * @description Returns user identity from JWT and app preferences from the database. Returns 401 if no valid JWT is provided.
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-32'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Update user preferences
+     * @description Creates or updates the authenticated user's app preferences. Returns 401 if no valid JWT is provided.
+     */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-33'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-34'];
+          };
+        };
+      };
+    };
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1247,6 +1261,8 @@ export interface components {
       visibility: 'public' | 'unlisted' | 'private';
       /** Format: uuid */
       ownerParticipantId?: string | null;
+      /** Format: uuid */
+      createdByUserId?: string | null;
       location?: components['schemas']['def-4'] | null;
       /** Format: date-time */
       startDate?: string | null;
@@ -1295,7 +1311,7 @@ export interface components {
       endDate?: string | null;
       tags?: string[] | null;
       owner: components['schemas']['def-7'];
-      participants?: components['schemas']['def-21'][];
+      participants?: components['schemas']['def-20'][];
     };
     /** UpdatePlanBody */
     'def-10': {
@@ -1411,16 +1427,14 @@ export interface components {
       /** Format: uuid */
       itemId: string;
     };
-    /** DeleteItemResponse */
-    'def-18': {
-      ok: boolean;
-    };
     /** Participant */
-    'def-19': {
+    'def-18': {
       /** Format: uuid */
       participantId: string;
       /** Format: uuid */
       planId: string;
+      /** Format: uuid */
+      userId?: string | null;
       name: string;
       lastName: string;
       contactPhone: string;
@@ -1430,15 +1444,20 @@ export interface components {
       avatarUrl?: string | null;
       contactEmail?: string | null;
       inviteToken?: string | null;
+      adultsCount?: number | null;
+      kidsCount?: number | null;
+      foodPreferences?: string | null;
+      allergies?: string | null;
+      notes?: string | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
     };
     /** ParticipantList */
-    'def-20': components['schemas']['def-19'][];
+    'def-19': components['schemas']['def-18'][];
     /** CreateParticipantBody */
-    'def-21': {
+    'def-20': {
       name: string;
       lastName: string;
       contactPhone: string;
@@ -1447,9 +1466,14 @@ export interface components {
       role?: 'participant' | 'viewer';
       avatarUrl?: string;
       contactEmail?: string;
+      adultsCount?: number;
+      kidsCount?: number;
+      foodPreferences?: string;
+      allergies?: string;
+      notes?: string;
     };
     /** UpdateParticipantBody */
-    'def-22': {
+    'def-21': {
       name?: string;
       lastName?: string;
       contactPhone?: string;
@@ -1458,18 +1482,23 @@ export interface components {
       role?: 'participant' | 'viewer';
       avatarUrl?: string | null;
       contactEmail?: string | null;
+      adultsCount?: number | null;
+      kidsCount?: number | null;
+      foodPreferences?: string | null;
+      allergies?: string | null;
+      notes?: string | null;
     };
     /** ParticipantIdParam */
-    'def-23': {
+    'def-22': {
       /** Format: uuid */
       participantId: string;
     };
     /** DeleteParticipantResponse */
-    'def-24': {
+    'def-23': {
       ok: boolean;
     };
     /** PlanWithDetails */
-    'def-25': {
+    'def-24': {
       /** Format: uuid */
       planId: string;
       title: string;
@@ -1480,6 +1509,8 @@ export interface components {
       visibility: 'public' | 'unlisted' | 'private';
       /** Format: uuid */
       ownerParticipantId?: string | null;
+      /** Format: uuid */
+      createdByUserId?: string | null;
       location?: components['schemas']['def-4'] | null;
       /** Format: date-time */
       startDate?: string | null;
@@ -1491,16 +1522,16 @@ export interface components {
       /** Format: date-time */
       updatedAt: string;
       items: components['schemas']['def-14'];
-      participants: components['schemas']['def-20'];
+      participants: components['schemas']['def-19'];
     };
     /** InviteParams */
-    'def-26': {
+    'def-25': {
       /** Format: uuid */
       planId: string;
       inviteToken: string;
     };
     /** InviteParticipant */
-    'def-27': {
+    'def-26': {
       /** Format: uuid */
       participantId: string;
       displayName?: string | null;
@@ -1508,9 +1539,9 @@ export interface components {
       role: 'owner' | 'participant' | 'viewer';
     };
     /** InviteParticipantList */
-    'def-28': components['schemas']['def-27'][];
+    'def-27': components['schemas']['def-26'][];
     /** InvitePlanResponse */
-    'def-29': {
+    'def-28': {
       /** Format: uuid */
       planId: string;
       title: string;
@@ -1528,18 +1559,50 @@ export interface components {
       /** Format: date-time */
       updatedAt: string;
       items: components['schemas']['def-14'];
-      participants: components['schemas']['def-28'];
+      participants: components['schemas']['def-27'];
     };
     /** RegenerateTokenParams */
-    'def-30': {
+    'def-29': {
       /** Format: uuid */
       planId: string;
       /** Format: uuid */
       participantId: string;
     };
     /** RegenerateTokenResponse */
-    'def-31': {
+    'def-30': {
       inviteToken: string;
+    };
+    /** UserPreferences */
+    'def-31': {
+      /** @description Free-text dietary preferences, e.g. "vegetarian, no shellfish" */
+      foodPreferences?: string | null;
+      /** @description Free-text allergy list, e.g. "nuts, gluten, dairy" */
+      allergies?: string | null;
+      /** @description List of equipment item names the user typically brings on trips, e.g. ["tent", "sleeping bag", "headlamp"] */
+      defaultEquipment?: string[] | null;
+    };
+    /** ProfileResponse */
+    'def-32': {
+      user: {
+        id: string;
+        email: string;
+        role: string;
+      };
+      /** @description App preferences for this user. Null if the user has never saved preferences. */
+      preferences: components['schemas']['def-31'] | null;
+    };
+    /** UpdateProfileBody */
+    'def-33': {
+      /** @description Free-text dietary preferences, e.g. "vegetarian, no shellfish". Send null to clear. */
+      foodPreferences?: string | null;
+      /** @description Free-text allergy list, e.g. "nuts, gluten, dairy". Send null to clear. */
+      allergies?: string | null;
+      /** @description List of equipment item names the user typically brings. Send null to clear. */
+      defaultEquipment?: string[] | null;
+    };
+    /** UpdateProfileResponse */
+    'def-34': {
+      preferences: components['schemas']['def-31'];
     };
   };
   responses: never;

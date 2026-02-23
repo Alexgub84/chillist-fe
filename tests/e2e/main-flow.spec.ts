@@ -12,7 +12,7 @@ async function addItemViaUI(
   name: string,
   quantity: number
 ): Promise<void> {
-  await page.getByRole('button', { name: /^Add Item$/i }).click();
+  await page.getByRole('button', { name: /Add Item/i }).click();
 
   const form = page.locator('form:has(button[type="submit"])').last();
   await expect(form).toBeVisible();
@@ -96,6 +96,10 @@ test.describe('Plan creation via UI', () => {
     await page.locator('input[type="date"]').fill('2026-07-15');
 
     await page.getByRole('button', { name: /create plan/i }).click();
+
+    await page
+      .getByRole('button', { name: /skip for now/i })
+      .click({ timeout: 15000 });
 
     await expect(page).toHaveURL(/\/plan\//, { timeout: 15000 });
     await expect(page.getByText('E2E Test Trip')).toBeVisible();

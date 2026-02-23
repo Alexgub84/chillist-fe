@@ -13,6 +13,11 @@ interface MockParticipant {
   role: string;
   avatarUrl: string | null;
   contactEmail: string | null;
+  adultsCount: number | null;
+  kidsCount: number | null;
+  foodPreferences: string | null;
+  allergies: string | null;
+  notes: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -71,6 +76,11 @@ export function buildParticipant(
     role: p.role ?? 'participant',
     avatarUrl: null,
     contactEmail: null,
+    adultsCount: null,
+    kidsCount: null,
+    foodPreferences: null,
+    allergies: null,
+    notes: null,
     createdAt: timestamp(),
     updatedAt: timestamp(),
   };
@@ -183,6 +193,25 @@ export async function mockPlanRoutes(page: Page, plan: MockPlan) {
       }
     }
   );
+
+  await page.route(`${API_PATTERN}/participants/*`, async (route) => {
+    if (route.request().method() === 'PATCH') {
+      const url = route.request().url();
+      const participantId = url.split('/participants/')[1].split('?')[0];
+      const updates = route.request().postDataJSON();
+      const participant = state.participants.find(
+        (p) => p.participantId === participantId
+      );
+      if (participant) {
+        Object.assign(participant, updates, { updatedAt: timestamp() });
+        await route.fulfill({ json: participant });
+      } else {
+        await route.fulfill({ status: 404, json: { message: 'Not found' } });
+      }
+    } else {
+      await route.continue();
+    }
+  });
 
   await page.route(`${API_PATTERN}/items/*`, async (route) => {
     if (route.request().method() === 'PATCH') {
