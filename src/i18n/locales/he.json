@@ -288,6 +288,36 @@
     "showers": "ממטרים",
     "thunderstorm": "סופת רעמים"
   },
+  "preferences": {
+    "title": "ספרו לנו על הקבוצה שלכם",
+    "subtitle": "עזרו למארגן לתכנן טוב יותר — כמה מגיעים איתכם?",
+    "adultsCount": "מבוגרים",
+    "adultsCountPlaceholder": "0",
+    "kidsCount": "ילדים",
+    "kidsCountPlaceholder": "0",
+    "foodPreferences": "העדפות אוכל",
+    "foodPreferencesPlaceholder": "לדוגמה: צמחוני, ללא רכיכות",
+    "allergies": "אלרגיות",
+    "allergiesPlaceholder": "לדוגמה: אגוזים, גלוטן, חלב",
+    "notes": "הערות",
+    "notesPlaceholder": "משהו נוסף שהקבוצה צריכה לדעת",
+    "saving": "שומר…",
+    "submit": "שמירת העדפות",
+    "skip": "דלג לעת עתה",
+    "updated": "ההעדפות נשמרו"
+  },
+  "participantDetails": {
+    "title": "פרטי הקבוצה",
+    "notFilled": "ההעדפות טרם מולאו",
+    "adults_one": "מבוגר אחד",
+    "adults_other": "{{count}} מבוגרים",
+    "kids_one": "ילד אחד",
+    "kids_other": "{{count}} ילדים",
+    "people": "אנשים",
+    "food": "אוכל",
+    "notes": "הערות",
+    "edit": "עריכה"
+  },
   "language": {
     "en": "EN",
     "he": "עב"

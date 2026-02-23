@@ -6,7 +6,6 @@ import {
   Pin,
   useMapsLibrary,
 } from '@vis.gl/react-google-maps';
-import { useTranslation } from 'react-i18next';
 
 const MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
 
@@ -46,65 +45,80 @@ function AutocompleteInput({
 }: {
   onPlaceSelect: (place: PlaceResult) => void;
 }) {
-  const { t } = useTranslation();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const callbackRef = useRef(onPlaceSelect);
   callbackRef.current = onPlaceSelect;
-  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+  const elementRef = useRef<google.maps.places.PlaceAutocompleteElement | null>(
+    null
+  );
 
   const places = useMapsLibrary('places');
 
   useEffect(() => {
-    if (!places || !inputRef.current) return;
+    const container = containerRef.current;
+    if (!places || !container || elementRef.current) return;
 
     try {
-      const autocomplete = new places.Autocomplete(inputRef.current, {
-        fields: ['name', 'geometry', 'address_components'],
-      });
-      autocompleteRef.current = autocomplete;
+      const autocomplete = new google.maps.places.PlaceAutocompleteElement({});
+      elementRef.current = autocomplete;
+      container.appendChild(autocomplete);
 
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (!place.geometry?.location) return;
+      const processPlace = async (place: google.maps.places.Place) => {
+        await place.fetchFields({
+          fields: ['displayName', 'location', 'addressComponents'],
+        });
 
-        const components = place.address_components || [];
+        const components = place.addressComponents || [];
         const get = (type: string) =>
-          components.find((c) => c.types.includes(type))?.long_name;
+          components.find((c) => c.types.includes(type))?.longText ?? undefined;
 
         callbackRef.current({
-          name: place.name || '',
+          name: place.displayName || '',
           city:
             get('locality') ||
             get('sublocality') ||
             get('administrative_area_level_2'),
           country: get('country'),
           region: get('administrative_area_level_1'),
-          latitude: place.geometry.location.lat(),
-          longitude: place.geometry.location.lng(),
+          latitude: place.location?.lat() ?? 0,
+          longitude: place.location?.lng() ?? 0,
         });
-      });
-    } catch {
-      // Google Maps API failed to initialize — input remains a plain text field
-    }
+      };
 
-    return () => {
-      try {
-        if (autocompleteRef.current) {
-          google.maps.event.clearInstanceListeners(autocompleteRef.current);
+      const handlePlaceSelect = (event: Event) => {
+        const e = event as unknown as {
+          place?: google.maps.places.Place;
+        };
+        if (e.place) void processPlace(e.place);
+      };
+
+      const handleGmpSelect = (event: Event) => {
+        const e = event as unknown as {
+          placePrediction?: { toPlace(): google.maps.places.Place };
+        };
+        if (e.placePrediction) void processPlace(e.placePrediction.toPlace());
+      };
+
+      autocomplete.addEventListener('gmp-placeselect', handlePlaceSelect);
+      autocomplete.addEventListener('gmp-select', handleGmpSelect);
+
+      return () => {
+        autocomplete.removeEventListener('gmp-placeselect', handlePlaceSelect);
+        autocomplete.removeEventListener('gmp-select', handleGmpSelect);
+        if (container.contains(autocomplete)) {
+          container.removeChild(autocomplete);
         }
-      } catch {
-        // google namespace unavailable — nothing to clean up
-      }
-      autocompleteRef.current = null;
-    };
+        elementRef.current = null;
+      };
+    } catch {
+      // PlaceAutocompleteElement not available — container stays empty, manual fields still work
+    }
   }, [places]);
 
   return (
-    <input
-      ref={inputRef}
-      type="text"
-      placeholder={t('planForm.locationSearchPlaceholder')}
-      className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+    <div
+      ref={containerRef}
+      className="w-full [&>gmp-place-autocomplete]:w-full"
     />
   );
 }
@@ -145,7 +159,7 @@ export default function LocationAutocomplete({
 
   return (
     <MapErrorBoundary>
-      <APIProvider apiKey={MAPS_API_KEY}>
+      <APIProvider apiKey={MAPS_API_KEY} version="beta">
         <div className="space-y-3">
           <AutocompleteInput onPlaceSelect={onPlaceSelect} />
           {latitude != null && longitude != null && (

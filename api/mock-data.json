@@ -122,6 +122,18 @@
       ],
       "createdAt": "2026-02-21T12:00:04.108Z",
       "updatedAt": "2026-02-21T12:00:04.108Z"
+    },
+    {
+      "planId": "27d9ca83-30e5-4269-9c59-8348d33dba01",
+      "createdAt": "2026-02-23T11:14:29.287Z",
+      "updatedAt": "2026-02-23T11:14:29.287Z",
+      "endDate": "1987-04-23T23:00:00Z",
+      "ownerParticipantId": "f0ea72ba-feaf-4126-ad40-99f078317913",
+      "participantIds": ["f0ea72ba-feaf-4126-ad40-99f078317913"],
+      "startDate": "1987-04-23T10:00:00Z",
+      "status": "draft",
+      "title": "ניסוי העדפות",
+      "visibility": "private"
     }
   ],
   "participants": [
@@ -293,6 +305,25 @@
       "contactEmail": null,
       "createdAt": "2026-02-21T12:00:04.108Z",
       "updatedAt": "2026-02-21T12:00:04.108Z"
+    },
+    {
+      "participantId": "f0ea72ba-feaf-4126-ad40-99f078317913",
+      "planId": "27d9ca83-30e5-4269-9c59-8348d33dba01",
+      "name": "אלכס",
+      "lastName": "גוברמן",
+      "contactPhone": "+9720546340926",
+      "displayName": null,
+      "role": "owner",
+      "avatarUrl": null,
+      "contactEmail": "google-user@mock.dev",
+      "adultsCount": 1,
+      "kidsCount": 2,
+      "foodPreferences": "טבעוני",
+      "allergies": "בוטנים",
+      "notes": null,
+      "createdAt": "2026-02-23T11:14:29.287Z",
+      "updatedAt": "2026-02-23T11:27:02.972Z",
+      "isOwner": true
     }
   ],
   "items": [

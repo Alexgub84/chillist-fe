@@ -13,12 +13,17 @@ import { useScrollRestore } from '../hooks/useScrollRestore';
 import { useCreateItem } from '../hooks/useCreateItem';
 import { useUpdateItem } from '../hooks/useUpdateItem';
 import { useCreateParticipant } from '../hooks/useCreateParticipant';
+import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { getApiErrorMessage } from '../core/error-utils';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import Forecast from '../components/Forecast';
+import ParticipantDetails from '../components/ParticipantDetails';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
+import PreferencesForm, {
+  type PreferencesFormValues,
+} from '../components/PreferencesForm';
 import Modal from '../components/shared/Modal';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
@@ -37,11 +42,15 @@ function PlanDetails() {
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
   const createParticipantMutation = useCreateParticipant(planId);
+  const updateParticipantMutation = useUpdateParticipant(planId);
   const { list: listFilter, participant: participantFilter } = useSearch({
     from: '/plan/$planId',
   });
   const navigate = useNavigate({ from: '/plan/$planId' });
   const [itemModalId, setItemModalId] = useState<string | null>(null);
+  const [editingParticipantId, setEditingParticipantId] = useState<
+    string | null
+  >(null);
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
@@ -97,6 +106,33 @@ function PlanDetails() {
       await updateItem(editingItem.itemId, toPayload(values));
     }
     closeItemModal();
+  }
+
+  const editingParticipant = editingParticipantId
+    ? plan.participants.find((p) => p.participantId === editingParticipantId)
+    : null;
+
+  async function handlePreferencesSubmit(values: PreferencesFormValues) {
+    if (!editingParticipantId) return;
+    try {
+      await updateParticipantMutation.mutateAsync({
+        participantId: editingParticipantId,
+        updates: {
+          adultsCount: values.adultsCount ?? null,
+          kidsCount: values.kidsCount ?? null,
+          foodPreferences: values.foodPreferences || null,
+          allergies: values.allergies || null,
+          notes: values.notes || null,
+        },
+      });
+      toast.success(t('preferences.updated'));
+    } catch (err) {
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+    setEditingParticipantId(null);
   }
 
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
@@ -166,6 +202,15 @@ function PlanDetails() {
             endDate={plan.endDate}
           />
         </div>
+
+        {plan.participants.length > 0 && (
+          <div className="mt-6 sm:mt-8">
+            <ParticipantDetails
+              participants={plan.participants}
+              onEditPreferences={setEditingParticipantId}
+            />
+          </div>
+        )}
 
         <div className="mt-6 sm:mt-8 flex items-center justify-between mb-3 sm:mb-4">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
@@ -277,6 +322,30 @@ function PlanDetails() {
             }
             submitLabel={isCreating ? undefined : t('items.updateItem')}
           />
+        </Modal>
+
+        <Modal
+          open={!!editingParticipant}
+          onClose={() => setEditingParticipantId(null)}
+          title={`${editingParticipant?.name ?? ''} ${editingParticipant?.lastName ?? ''}`}
+        >
+          {editingParticipant && (
+            <PreferencesForm
+              key={editingParticipant.participantId}
+              defaultValues={{
+                adultsCount: editingParticipant.adultsCount ?? undefined,
+                kidsCount: editingParticipant.kidsCount ?? undefined,
+                foodPreferences:
+                  editingParticipant.foodPreferences ?? undefined,
+                allergies: editingParticipant.allergies ?? undefined,
+                notes: editingParticipant.notes ?? undefined,
+              }}
+              onSubmit={handlePreferencesSubmit}
+              onCancel={() => setEditingParticipantId(null)}
+              isSubmitting={updateParticipantMutation.isPending}
+              inModal
+            />
+          )}
         </Modal>
       </div>
 

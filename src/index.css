@@ -1,5 +1,18 @@
 @import 'tailwindcss';
 
+/*
+  Google Maps API (beta) injects global CSS that strips native appearance
+  from form inputs. Force native date/time picker controls to remain visible.
+*/
+input[type='date'],
+input[type='time'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='week'] {
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
