@@ -4,12 +4,15 @@ import toast from 'react-hot-toast';
 import i18n from '../i18n';
 import { supabase } from '../lib/supabase';
 import { fetchAuthMe } from '../core/api';
+import { onAuthError } from '../core/auth-error';
 import { AuthContext } from './auth-context';
+import AuthErrorModal from '../components/AuthErrorModal';
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [authErrorOpen, setAuthErrorOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session: initial } }) => {
@@ -45,6 +48,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    return onAuthError(() => {
+      setAuthErrorOpen(true);
+    });
+  }, []);
+
   const signOut = useCallback(async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
@@ -55,6 +64,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={{ session, user, loading, signOut }}>
       {children}
+      <AuthErrorModal
+        open={authErrorOpen}
+        onDismiss={() => setAuthErrorOpen(false)}
+      />
     </AuthContext.Provider>
   );
 }

@@ -34,6 +34,30 @@ describe('Error and NotFound UIs', () => {
     ).toBeInTheDocument();
   });
 
+  it('shows plan-specific message for 404 errors', () => {
+    const error404 = new Error('Not Found') as Error & { status: number };
+    error404.status = 404;
+
+    render(<ErrorPage error={error404} />);
+
+    expect(screen.getByText('Plan not found')).toBeInTheDocument();
+    expect(
+      screen.getByText(/This plan doesn't exist or you don't have access/)
+    ).toBeInTheDocument();
+    expect(screen.queryByText('Something went wrong')).not.toBeInTheDocument();
+  });
+
+  it('shows generic message for non-404 errors', () => {
+    const error500 = new Error('Server error') as Error & { status: number };
+    error500.status = 500;
+
+    render(<ErrorPage error={error500} />);
+
+    expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
+    expect(screen.getByText('Server error')).toBeInTheDocument();
+    expect(screen.queryByText('Plan not found')).not.toBeInTheDocument();
+  });
+
   it('shows ErrorPage UI when a child component throws', () => {
     // Component that throws during render
     const Bomb = () => {

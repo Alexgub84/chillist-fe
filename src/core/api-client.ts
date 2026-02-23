@@ -1,5 +1,6 @@
 import createClient from 'openapi-fetch';
 import type { paths } from './api.generated';
+import { supabase } from '../lib/supabase';
 
 export class ApiError extends Error {
   status: number;
@@ -21,6 +22,22 @@ export function getApiKey() {
   return import.meta.env.VITE_API_KEY || '';
 }
 
+async function authFetch(
+  input: RequestInfo | URL,
+  init?: RequestInit
+): Promise<Response> {
+  const headers = new Headers(init?.headers);
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (session?.access_token) {
+    headers.set('Authorization', `Bearer ${session.access_token}`);
+  }
+
+  return fetch(input, { ...init, headers });
+}
+
 export function createApiClient(customFetch?: typeof fetch) {
   const apiKey = getApiKey();
   const baseUrl = getApiBaseUrl();
@@ -28,11 +45,8 @@ export function createApiClient(customFetch?: typeof fetch) {
   const options: Parameters<typeof createClient<paths>>[0] = {
     baseUrl,
     headers: apiKey ? { 'x-api-key': apiKey } : {},
+    fetch: customFetch ?? authFetch,
   };
-
-  if (customFetch) {
-    options.fetch = customFetch;
-  }
 
   return createClient<paths>(options);
 }

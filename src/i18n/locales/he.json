@@ -11,7 +11,10 @@
     "userFallback": "משתמש",
     "signedInAs": "מחובר בתור {{email}}",
     "signedIn": "מחובר",
-    "signOutFailed": "ההתנתקות נכשלה: {{message}}"
+    "signOutFailed": "ההתנתקות נכשלה: {{message}}",
+    "sessionExpired": "פג תוקף ההתחברות",
+    "sessionExpiredMessage": "ההתחברות שלך פגה או אינה תקינה. יש להתחבר מחדש כדי להמשיך.",
+    "dismiss": "סגירה"
   },
   "signIn": {
     "title": "התחברות",
@@ -204,7 +207,9 @@
   "errors": {
     "somethingWentWrong": "משהו השתבש",
     "unexpectedError": "אירעה שגיאה בלתי צפויה.",
-    "backToPlans": "חזרה לתוכניות"
+    "backToPlans": "חזרה לתוכניות",
+    "planNotFound": "התוכנית לא נמצאה",
+    "planNoAccess": "תוכנית זו לא קיימת או שאין לך גישה אליה. אם אתה הבעלים, נסה להתחבר."
   },
   "notFound": {
     "title": "404 — הדף לא נמצא",
