@@ -13,8 +13,8 @@ import { PlansList } from '../../../src/components/PlansList';
 
 vi.mock('../../../src/contexts/useAuth', () => ({
   useAuth: () => ({
-    session: null,
-    user: null,
+    session: { access_token: 'test-token' },
+    user: { id: 'user-1', email: 'test@chillist.dev' },
     loading: false,
     isAdmin: false,
     signOut: vi.fn(),

@@ -26,6 +26,7 @@ function createTestData(): MockData {
         lastName: 'Guberman',
         role: 'owner',
         rsvpStatus: 'confirmed',
+        inviteToken: 'valid-invite-token-abc123',
         isOwner: true,
         createdAt: now,
         updatedAt: now,
@@ -315,6 +316,55 @@ describe('mock server', () => {
         url: '/auth/me',
       });
       expect(response.statusCode).toBe(401);
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('GET /plans/:planId/invite/:inviteToken returns stripped plan for valid token', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/plans/plan-1/invite/valid-invite-token-abc123',
+      });
+      expect(response.statusCode).toBe(200);
+
+      const payload = response.json() as Record<string, unknown>;
+      expect(payload.planId).toBe('plan-1');
+      expect(payload.title).toBe('Test Plan');
+      expect(Array.isArray(payload.items)).toBe(true);
+      expect(Array.isArray(payload.participants)).toBe(true);
+
+      const participants = payload.participants as Array<
+        Record<string, unknown>
+      >;
+      expect(participants[0]).toHaveProperty('participantId');
+      expect(participants[0]).toHaveProperty('displayName');
+      expect(participants[0]).toHaveProperty('role');
+      expect(participants[0]).not.toHaveProperty('contactPhone');
+      expect(participants[0]).not.toHaveProperty('contactEmail');
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('GET /plans/:planId/invite/:inviteToken returns 404 for invalid token', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/plans/plan-1/invite/wrong-token',
+      });
+      expect(response.statusCode).toBe(404);
     } finally {
       await server.close();
     }

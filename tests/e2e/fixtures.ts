@@ -390,6 +390,58 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
   });
 }
 
+export async function mockInviteRoute(
+  page: Page,
+  plan: MockPlan,
+  inviteToken: string
+) {
+  const strippedParticipants = plan.participants.map((p) => ({
+    participantId: p.participantId,
+    displayName: p.displayName ?? `${p.name} ${p.lastName}`,
+    role: p.role,
+  }));
+
+  await page.route(
+    `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}`,
+    async (route) => {
+      if (route.request().method() === 'GET') {
+        await route.fulfill({
+          json: {
+            planId: plan.planId,
+            title: plan.title,
+            description: plan.description,
+            status: plan.status,
+            location: null,
+            startDate: plan.startDate,
+            endDate: plan.endDate,
+            tags: plan.tags,
+            createdAt: plan.createdAt,
+            updatedAt: plan.updatedAt,
+            items: plan.items,
+            participants: strippedParticipants,
+          },
+        });
+      } else {
+        await route.continue();
+      }
+    }
+  );
+
+  await page.route(
+    `${API_PATTERN}/plans/${plan.planId}/invite/invalid-token-*`,
+    async (route) => {
+      if (route.request().method() === 'GET') {
+        await route.fulfill({
+          status: 404,
+          json: { message: 'Invalid or expired invite link' },
+        });
+      } else {
+        await route.continue();
+      }
+    }
+  );
+}
+
 const test = base;
 
 export { test, expect, type Page, type MockPlan };

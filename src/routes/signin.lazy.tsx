@@ -1,4 +1,9 @@
-import { createLazyFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import {
+  createLazyFileRoute,
+  Link,
+  useNavigate,
+  useSearch,
+} from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -16,6 +21,8 @@ type SignInForm = z.infer<typeof signInSchema>;
 export function SignIn() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { redirect } = useSearch({ from: '/signin' });
+  const redirectTo = redirect || '/plans';
 
   const {
     register,
@@ -36,14 +43,14 @@ export function SignIn() {
       return;
     }
 
-    navigate({ to: '/plans' });
+    navigate({ to: redirectTo });
   }
 
   async function handleGoogleSignIn() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/plans`,
+        redirectTo: `${window.location.origin}${redirectTo}`,
       },
     });
 
@@ -53,7 +60,7 @@ export function SignIn() {
     }
 
     if (!data.url) {
-      navigate({ to: '/plans' });
+      navigate({ to: redirectTo });
     }
   }
 

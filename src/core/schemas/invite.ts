@@ -1,0 +1,43 @@
+import { z } from 'zod';
+import type { components } from '../api.generated';
+import { locationSchema } from './location';
+import { itemSchema } from './item';
+
+type BEInviteParticipant = components['schemas']['def-26'];
+type BEInvitePlanResponse = components['schemas']['def-28'];
+
+const INVITE_ROLE_VALUES = [
+  'owner',
+  'participant',
+  'viewer',
+] as const satisfies readonly BEInviteParticipant['role'][];
+
+export const inviteParticipantSchema = z.object({
+  participantId: z.string(),
+  displayName: z.string().nullish(),
+  role: z.enum(INVITE_ROLE_VALUES),
+});
+
+const INVITE_PLAN_STATUS_VALUES = [
+  'draft',
+  'active',
+  'archived',
+] as const satisfies readonly BEInvitePlanResponse['status'][];
+
+export const invitePlanResponseSchema = z.object({
+  planId: z.string(),
+  title: z.string(),
+  description: z.string().nullish(),
+  status: z.enum(INVITE_PLAN_STATUS_VALUES),
+  location: locationSchema.nullish(),
+  startDate: z.string().datetime().nullish(),
+  endDate: z.string().datetime().nullish(),
+  tags: z.array(z.string()).nullish(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+  items: z.array(itemSchema),
+  participants: z.array(inviteParticipantSchema),
+});
+
+export type InviteParticipant = z.infer<typeof inviteParticipantSchema>;
+export type InvitePlanResponse = z.infer<typeof invitePlanResponseSchema>;

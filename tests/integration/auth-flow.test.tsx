@@ -31,6 +31,7 @@ vi.mock('@tanstack/react-router', () => ({
     <a href={to}>{children}</a>
   ),
   useNavigate: () => vi.fn(),
+  useSearch: () => ({}),
 }));
 
 import toast from 'react-hot-toast';

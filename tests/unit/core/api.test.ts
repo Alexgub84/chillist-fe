@@ -53,6 +53,7 @@ import {
   fetchParticipant,
   fetchParticipants,
   fetchPlan,
+  fetchPlanByInvite,
   fetchPlans,
   updateItem,
   updateParticipant,
@@ -648,6 +649,55 @@ describe('API Client', () => {
       expect(supabaseMock.auth.refreshSession).not.toHaveBeenCalled();
       expect(emitAuthErrorMock).not.toHaveBeenCalled();
       expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('Invite - fetchPlanByInvite', () => {
+    const mockInviteResponse = {
+      planId: 'plan-1',
+      title: 'Beach Trip',
+      description: 'Fun day',
+      status: 'active',
+      location: null,
+      startDate: '2026-07-01T00:00:00Z',
+      endDate: '2026-07-03T00:00:00Z',
+      tags: null,
+      createdAt: '2026-01-01T00:00:00Z',
+      updatedAt: '2026-01-01T00:00:00Z',
+      items: [],
+      participants: [
+        { participantId: 'p-1', displayName: 'Alex S.', role: 'owner' },
+      ],
+    };
+
+    it('calls the public invite endpoint without auth', async () => {
+      const sessionCallsBefore = supabaseMock.auth.getSession.mock.calls.length;
+      fetchMock.mockResolvedValueOnce(mockResponse(mockInviteResponse));
+
+      const result = await fetchPlanByInvite('plan-1', 'abc123');
+
+      expect(result.title).toBe('Beach Trip');
+      expect(result.participants[0].displayName).toBe('Alex S.');
+
+      const lastCall = fetchMock.mock.calls[fetchMock.mock.calls.length - 1];
+      expect(lastCall[0]).toBe('http://api.test/plans/plan-1/invite/abc123');
+      expect(lastCall[1].headers).not.toHaveProperty('Authorization');
+      expect(supabaseMock.auth.getSession.mock.calls.length).toBe(
+        sessionCallsBefore
+      );
+    });
+
+    it('throws on 404 for invalid token', async () => {
+      fetchMock.mockResolvedValueOnce(
+        mockResponse(
+          { message: 'Invalid or expired invite link' },
+          { ok: false, status: 404 }
+        )
+      );
+
+      await expect(fetchPlanByInvite('plan-1', 'bad-token')).rejects.toThrow(
+        'Invalid or expired invite link'
+      );
     });
   });
 

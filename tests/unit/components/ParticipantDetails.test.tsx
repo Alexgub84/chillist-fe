@@ -209,4 +209,89 @@ describe('ParticipantDetails', () => {
     expect(screen.getByText('Preferences not filled yet')).toBeInTheDocument();
     expect(screen.getByText('vegan')).toBeInTheDocument();
   });
+
+  it('shows RSVP badge for non-owner participants when isOwner is true', () => {
+    render(
+      <ParticipantDetails
+        participants={[
+          buildParticipant({
+            participantId: 'p-2',
+            name: 'Jane',
+            role: 'participant',
+            rsvpStatus: 'confirmed',
+          }),
+        ]}
+        planId="plan-1"
+        planTitle="Test"
+        isOwner
+      />
+    );
+
+    expect(screen.getByText('Confirmed')).toBeInTheDocument();
+  });
+
+  it('does not show RSVP badge for the owner participant', () => {
+    render(
+      <ParticipantDetails
+        participants={[
+          buildParticipant({
+            role: 'owner',
+            rsvpStatus: 'confirmed',
+          }),
+        ]}
+        planId="plan-1"
+        planTitle="Test"
+        isOwner
+      />
+    );
+
+    expect(screen.queryByText('Confirmed')).not.toBeInTheDocument();
+  });
+
+  it('does not show RSVP badge when isOwner is false', () => {
+    render(
+      <ParticipantDetails
+        participants={[
+          buildParticipant({
+            participantId: 'p-2',
+            name: 'Jane',
+            role: 'participant',
+            rsvpStatus: 'confirmed',
+          }),
+        ]}
+        planId="plan-1"
+        planTitle="Test"
+      />
+    );
+
+    expect(screen.queryByText('Confirmed')).not.toBeInTheDocument();
+  });
+
+  it('shows correct RSVP badge colors for each status', () => {
+    render(
+      <ParticipantDetails
+        participants={[
+          buildParticipant({
+            participantId: 'p-2',
+            name: 'Jane',
+            role: 'participant',
+            rsvpStatus: 'pending',
+          }),
+          buildParticipant({
+            participantId: 'p-3',
+            name: 'Bob',
+            lastName: 'Jones',
+            role: 'participant',
+            rsvpStatus: 'not_sure',
+          }),
+        ]}
+        planId="plan-1"
+        planTitle="Test"
+        isOwner
+      />
+    );
+
+    expect(screen.getByText('Pending')).toBeInTheDocument();
+    expect(screen.getByText('Not sure')).toBeInTheDocument();
+  });
 });

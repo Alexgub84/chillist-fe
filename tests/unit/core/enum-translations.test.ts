@@ -8,7 +8,10 @@ import {
   planStatusSchema,
   planVisibilitySchema,
 } from '../../../src/core/schemas/plan';
-import { participantRoleSchema } from '../../../src/core/schemas/participant';
+import {
+  participantRoleSchema,
+  rsvpStatusSchema,
+} from '../../../src/core/schemas/participant';
 import en from '../../../src/i18n/locales/en.json';
 import he from '../../../src/i18n/locales/he.json';
 
@@ -63,5 +66,9 @@ describe('BE enum translation coverage', () => {
 
   it('every participant role has EN + HE translation', () => {
     assertAllTranslated(participantRoleSchema.options, 'roles');
+  });
+
+  it('every RSVP status has EN + HE translation', () => {
+    assertAllTranslated(rsvpStatusSchema.options, 'rsvpStatus');
   });
 });
