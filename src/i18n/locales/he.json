@@ -222,6 +222,11 @@
     "confirmed": "מאושר",
     "not_sure": "לא בטוח"
   },
+  "inviteStatus": {
+    "pending": "ממתין",
+    "invited": "הוזמן",
+    "accepted": "התקבל"
+  },
   "errors": {
     "somethingWentWrong": "משהו השתבש",
     "unexpectedError": "אירעה שגיאה בלתי צפויה.",

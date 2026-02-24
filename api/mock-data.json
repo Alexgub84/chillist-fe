@@ -151,7 +151,8 @@
       "rsvpStatus": "pending",
       "createdAt": "2025-05-01T12:00:00.000Z",
       "updatedAt": "2025-05-10T08:00:00.000Z",
-      "userId": "dc8c93f9-8cc0-4416-b84f-638e8fffedc5"
+      "userId": "dc8c93f9-8cc0-4416-b84f-638e8fffedc5",
+      "inviteStatus": "accepted"
     },
     {
       "participantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
@@ -165,7 +166,8 @@
       "contactEmail": "jamie@example.com",
       "rsvpStatus": "pending",
       "createdAt": "2025-05-02T09:15:00.000Z",
-      "updatedAt": "2025-05-10T08:00:00.000Z"
+      "updatedAt": "2025-05-10T08:00:00.000Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "399dcf24-f8c4-45f8-96fb-4478d578908f",
@@ -179,7 +181,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2025-05-04T16:45:00.000Z",
-      "updatedAt": "2025-05-10T08:05:00.000Z"
+      "updatedAt": "2025-05-10T08:05:00.000Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "42205c9b-9242-489b-a367-232528213b7d",
@@ -193,7 +196,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2026-02-14T15:24:35.859Z",
-      "updatedAt": "2026-02-14T15:24:35.859Z"
+      "updatedAt": "2026-02-14T15:24:35.859Z",
+      "inviteStatus": "accepted"
     },
     {
       "participantId": "a6cb8858-8c2d-4d29-9ffe-337cbad8f98a",
@@ -207,7 +211,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2026-02-14T15:24:35.859Z",
-      "updatedAt": "2026-02-14T15:24:35.859Z"
+      "updatedAt": "2026-02-14T15:24:35.859Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "c17f4193-955c-4418-bb7a-7092b0ed3790",
@@ -221,7 +226,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2026-02-14T15:24:35.859Z",
-      "updatedAt": "2026-02-14T15:24:35.859Z"
+      "updatedAt": "2026-02-14T15:24:35.859Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "d08cfbe9-3da9-4e9a-818c-7fb7f198367a",
@@ -235,7 +241,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2026-02-14T19:46:02.246Z",
-      "updatedAt": "2026-02-14T19:46:02.246Z"
+      "updatedAt": "2026-02-14T19:46:02.246Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
@@ -249,7 +256,8 @@
       "contactEmail": "ron@example.com",
       "rsvpStatus": "pending",
       "createdAt": "2025-12-15T10:38:27.314Z",
-      "updatedAt": "2025-12-15T10:38:27.314Z"
+      "updatedAt": "2025-12-15T10:38:27.314Z",
+      "inviteStatus": "accepted"
     },
     {
       "participantId": "de0bf12f-97de-534c-9930-27ebd6e0f944",
@@ -263,7 +271,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2025-12-15T10:38:27.314Z",
-      "updatedAt": "2025-12-15T10:38:27.314Z"
+      "updatedAt": "2025-12-15T10:38:27.314Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "3238777c-8513-5c60-8964-99397eacfa28",
@@ -277,7 +286,8 @@
       "contactEmail": "dana@example.com",
       "rsvpStatus": "pending",
       "createdAt": "2025-12-15T10:41:13.099Z",
-      "updatedAt": "2025-12-15T10:41:13.099Z"
+      "updatedAt": "2025-12-15T10:41:13.099Z",
+      "inviteStatus": "accepted"
     },
     {
       "participantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
@@ -298,7 +308,8 @@
       "foodPreferences": null,
       "allergies": null,
       "notes": null,
-      "isOwner": true
+      "isOwner": true,
+      "inviteStatus": "accepted"
     },
     {
       "participantId": "a581b939-36b4-4f9a-8b3d-9047953398f9",
@@ -312,7 +323,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2026-02-21T12:00:04.108Z",
-      "updatedAt": "2026-02-21T12:00:04.108Z"
+      "updatedAt": "2026-02-21T12:00:04.108Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "23e04bdb-8dfe-4b12-8167-737fc83faee3",
@@ -326,7 +338,8 @@
       "contactEmail": null,
       "rsvpStatus": "pending",
       "createdAt": "2026-02-21T12:00:04.108Z",
-      "updatedAt": "2026-02-21T12:00:04.108Z"
+      "updatedAt": "2026-02-21T12:00:04.108Z",
+      "inviteStatus": "invited"
     },
     {
       "participantId": "f0ea72ba-feaf-4126-ad40-99f078317913",
@@ -346,7 +359,8 @@
       "notes": null,
       "createdAt": "2026-02-23T11:14:29.287Z",
       "updatedAt": "2026-02-23T11:27:02.972Z",
-      "isOwner": true
+      "isOwner": true,
+      "inviteStatus": "accepted"
     },
     {
       "participantId": "0426cdd6-249b-46b1-8d97-7aff8232a551",
@@ -367,7 +381,8 @@
       "allergies": null,
       "notes": null,
       "createdAt": "2026-02-24T21:05:51.553Z",
-      "updatedAt": "2026-02-24T21:05:51.553Z"
+      "updatedAt": "2026-02-24T21:05:51.553Z",
+      "inviteStatus": "invited"
     }
   ],
   "items": [

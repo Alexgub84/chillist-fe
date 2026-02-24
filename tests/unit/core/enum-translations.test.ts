@@ -11,6 +11,7 @@ import {
 import {
   participantRoleSchema,
   rsvpStatusSchema,
+  inviteStatusSchema,
 } from '../../../src/core/schemas/participant';
 import en from '../../../src/i18n/locales/en.json';
 import he from '../../../src/i18n/locales/he.json';
@@ -70,5 +71,9 @@ describe('BE enum translation coverage', () => {
 
   it('every RSVP status has EN + HE translation', () => {
     assertAllTranslated(rsvpStatusSchema.options, 'rsvpStatus');
+  });
+
+  it('every invite status has EN + HE translation', () => {
+    assertAllTranslated(inviteStatusSchema.options, 'inviteStatus');
   });
 });

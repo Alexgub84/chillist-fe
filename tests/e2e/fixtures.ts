@@ -15,6 +15,7 @@ interface MockParticipant {
   avatarUrl: string | null;
   contactEmail: string | null;
   inviteToken: string | null;
+  inviteStatus: string;
   rsvpStatus: string;
   lastActivityAt: string | null;
   adultsCount: number | null;
@@ -83,6 +84,7 @@ export function buildParticipant(
     avatarUrl: null,
     contactEmail: null,
     inviteToken: randomBytes(32).toString('hex'),
+    inviteStatus: p.role === 'owner' ? 'accepted' : 'invited',
     rsvpStatus: p.role === 'owner' ? 'confirmed' : 'pending',
     lastActivityAt: null,
     adultsCount: null,

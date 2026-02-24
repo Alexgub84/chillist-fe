@@ -222,6 +222,11 @@
     "confirmed": "Confirmed",
     "not_sure": "Not sure"
   },
+  "inviteStatus": {
+    "pending": "Pending",
+    "invited": "Invited",
+    "accepted": "Accepted"
+  },
   "errors": {
     "somethingWentWrong": "Something went wrong",
     "unexpectedError": "An unexpected error occurred.",

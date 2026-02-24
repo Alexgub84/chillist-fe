@@ -400,6 +400,7 @@ export async function buildServer(
       avatarUrl: parsed.owner.avatarUrl ?? null,
       contactEmail: parsed.owner.contactEmail ?? null,
       inviteToken: randomBytes(32).toString('hex'),
+      inviteStatus: 'accepted' as const,
       rsvpStatus: 'confirmed',
       lastActivityAt: null,
       adultsCount: null,
@@ -424,6 +425,7 @@ export async function buildServer(
       avatarUrl: p.avatarUrl ?? null,
       contactEmail: p.contactEmail ?? null,
       inviteToken: randomBytes(32).toString('hex'),
+      inviteStatus: 'invited' as const,
       rsvpStatus: 'pending' as const,
       lastActivityAt: null,
       adultsCount: p.adultsCount ?? null,
@@ -585,6 +587,54 @@ export async function buildServer(
     }
   );
 
+  app.post<{ Params: { planId: string; inviteToken: string } }>(
+    '/plans/:planId/claim/:inviteToken',
+    async (request, reply) => {
+      const { planId, inviteToken } = request.params;
+      const plan = store.plans.find((p) => p.planId === planId);
+      if (!plan) {
+        throw new HttpError('Plan not found', 404);
+      }
+
+      const authHeader = request.headers.authorization;
+      if (!authHeader?.startsWith('Bearer ')) {
+        throw new HttpError('Unauthorized', 401);
+      }
+
+      let userId = 'mock-user-id';
+      try {
+        const payload = JSON.parse(atob(authHeader.split('.')[1]));
+        userId = payload.sub ?? userId;
+      } catch {
+        /* use default */
+      }
+
+      const participantIds = new Set(plan.participantIds ?? []);
+      const planParticipants = store.participants.filter((p) =>
+        participantIds.has(p.participantId)
+      );
+
+      const tokenMatch = planParticipants.find(
+        (p) => p.inviteToken === inviteToken
+      );
+      if (!tokenMatch) {
+        throw new HttpError('Invalid or expired invite link', 404);
+      }
+
+      if (tokenMatch.inviteStatus === 'accepted') {
+        throw new HttpError('Invite already claimed', 400);
+      }
+
+      tokenMatch.userId = userId;
+      tokenMatch.inviteStatus = 'accepted';
+      tokenMatch.updatedAt = new Date().toISOString();
+
+      await persistData(store, shouldPersist, filePath);
+
+      void reply.send(tokenMatch);
+    }
+  );
+
   app.get<{ Params: { planId: string } }>(
     '/plans/:planId/participants',
     async (request, reply) => {
@@ -615,6 +665,7 @@ export async function buildServer(
         avatarUrl: parsed.avatarUrl ?? null,
         contactEmail: parsed.contactEmail ?? null,
         inviteToken: randomBytes(32).toString('hex'),
+        inviteStatus: 'invited',
         rsvpStatus: 'pending',
         lastActivityAt: null,
         adultsCount: parsed.adultsCount ?? null,
