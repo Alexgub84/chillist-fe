@@ -38,6 +38,9 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
 
+      - name: Run integration tests
+        run: npm run test:integ
+
       - name: Cache Playwright browsers
         id: playwright-cache
         uses: actions/cache@v4
