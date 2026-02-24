@@ -64,8 +64,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     navigate({ to: '/' });
   }, [queryClient, navigate]);
 
+  const isAdmin =
+    (user?.app_metadata as Record<string, unknown> | undefined)?.role ===
+    'admin';
+
   return (
-    <AuthContext.Provider value={{ session, user, loading, signOut }}>
+    <AuthContext.Provider value={{ session, user, loading, isAdmin, signOut }}>
       {children}
       <AuthErrorModal
         open={authErrorOpen}

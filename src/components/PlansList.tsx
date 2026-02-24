@@ -1,8 +1,13 @@
 import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { Link } from '@tanstack/react-router';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
+import toast from 'react-hot-toast';
 import type { Plan, PlanStatus } from '../core/types/plan';
+import { useAuth } from '../contexts/useAuth';
+import { useDeletePlan } from '../hooks/useDeletePlan';
+import { getApiErrorMessage } from '../core/error-utils';
+import Modal from './shared/Modal';
 
 type TimeFilter = 'all' | 'upcoming' | 'past';
 
@@ -46,7 +51,14 @@ function isPastPlan(plan: {
 
 export function PlansList({ plans }: PlansListProps) {
   const { t } = useTranslation();
+  const { isAdmin } = useAuth();
+  const deletePlanMutation = useDeletePlan();
   const [timeFilter, setTimeFilter] = useState<TimeFilter>('upcoming');
+  const [deletingPlanId, setDeletingPlanId] = useState<string | null>(null);
+
+  const deletingPlan = deletingPlanId
+    ? plans.find((p) => p.planId === deletingPlanId)
+    : null;
 
   const filteredPlans = useMemo(() => {
     if (timeFilter === 'all') return plans;
@@ -72,6 +84,20 @@ export function PlansList({ plans }: PlansListProps) {
     if (timeFilter === 'upcoming') return t('plans.emptyUpcoming');
     if (timeFilter === 'past') return t('plans.emptyPast');
     return t('plans.empty');
+  }
+
+  async function handleDeletePlan() {
+    if (!deletingPlanId) return;
+    try {
+      await deletePlanMutation.mutateAsync(deletingPlanId);
+      toast.success(t('admin.deleted'));
+      setDeletingPlanId(null);
+    } catch (err) {
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
   }
 
   return (
@@ -160,35 +186,97 @@ export function PlansList({ plans }: PlansListProps) {
                 key={plan.planId}
                 className="px-4 sm:px-6 py-3 sm:py-4 hover:bg-gray-50 transition-colors active:bg-gray-100"
               >
-                <Link
-                  to="/plan/$planId"
-                  params={{ planId: plan.planId }}
-                  className="block group"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
-                    <span className="text-base sm:text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
-                      {plan.title}
-                    </span>
-                    <span
-                      className={clsx(
-                        'inline-flex self-start sm:self-auto items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
-                        statusClassName[plan.status]
-                      )}
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/plan/$planId"
+                    params={{ planId: plan.planId }}
+                    className="block group flex-1 min-w-0"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
+                      <span className="text-base sm:text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                        {plan.title}
+                      </span>
+                      <span
+                        className={clsx(
+                          'inline-flex self-start sm:self-auto items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
+                          statusClassName[plan.status]
+                        )}
+                      >
+                        {t(`planStatus.${plan.status}`)}
+                      </span>
+                    </div>
+                    {meta.length > 0 && (
+                      <p className="mt-1 text-sm text-gray-400">
+                        {meta.join('  ·  ')}
+                      </p>
+                    )}
+                  </Link>
+                  {isAdmin && (
+                    <button
+                      type="button"
+                      data-testid={`admin-delete-${plan.planId}`}
+                      onClick={() => setDeletingPlanId(plan.planId)}
+                      aria-label={t('admin.deletePlan')}
+                      className="shrink-0 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                     >
-                      {t(`planStatus.${plan.status}`)}
-                    </span>
-                  </div>
-                  {meta.length > 0 && (
-                    <p className="mt-1 text-sm text-gray-400">
-                      {meta.join('  ·  ')}
-                    </p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
                   )}
-                </Link>
+                </div>
               </li>
             );
           })}
         </ul>
       )}
+
+      <Modal
+        open={deletingPlanId !== null}
+        onClose={() => setDeletingPlanId(null)}
+        title={t('admin.deleteConfirmTitle')}
+      >
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-4">
+          <p className="text-sm text-gray-600">
+            <Trans
+              i18nKey="admin.deleteConfirmMessage"
+              values={{ title: deletingPlan?.title ?? '' }}
+              components={{ strong: <strong className="font-semibold" /> }}
+            />
+          </p>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              data-testid="admin-delete-confirm"
+              disabled={deletePlanMutation.isPending}
+              onClick={handleDeletePlan}
+              className="flex-1 px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+            >
+              {deletePlanMutation.isPending
+                ? t('admin.deleting')
+                : t('admin.deleteConfirm')}
+            </button>
+            <button
+              type="button"
+              data-testid="admin-delete-cancel"
+              disabled={deletePlanMutation.isPending}
+              onClick={() => setDeletingPlanId(null)}
+              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 disabled:opacity-50 transition-colors text-sm"
+            >
+              {t('admin.deleteCancel')}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

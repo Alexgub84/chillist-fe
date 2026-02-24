@@ -341,5 +341,14 @@
   "language": {
     "en": "EN",
     "he": "עב"
+  },
+  "admin": {
+    "deletePlan": "מחיקה",
+    "deleteConfirmTitle": "למחוק את התוכנית?",
+    "deleteConfirmMessage": "האם אתה בטוח שברצונך למחוק את <strong>{{title}}</strong>? לא ניתן לבטל פעולה זו.",
+    "deleteConfirm": "מחיקה",
+    "deleteCancel": "ביטול",
+    "deleted": "התוכנית נמחקה",
+    "deleting": "מוחק…"
   }
 }

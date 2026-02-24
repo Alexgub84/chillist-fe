@@ -4,6 +4,7 @@ interface MockUser {
   id: string;
   email: string;
   user_metadata: Record<string, unknown>;
+  app_metadata: Record<string, unknown>;
   aud: string;
   role: string;
 }
@@ -33,7 +34,10 @@ function makeFakeJwt(email: string, userId: string): string {
   return `${header}.${payload}.mock-signature`;
 }
 
-function buildSession(email: string): MockSession {
+function buildSession(
+  email: string,
+  appMetadata: Record<string, unknown> = {}
+): MockSession {
   const userId = crypto.randomUUID();
   return {
     access_token: makeFakeJwt(email, userId),
@@ -44,6 +48,7 @@ function buildSession(email: string): MockSession {
       id: userId,
       email,
       user_metadata: { full_name: email.split('@')[0] },
+      app_metadata: appMetadata,
       aud: 'authenticated',
       role: 'authenticated',
     },

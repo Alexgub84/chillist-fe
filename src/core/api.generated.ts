@@ -297,7 +297,7 @@ export interface paths {
     post?: never;
     /**
      * Delete a plan
-     * @description Delete a plan by its ID. Cascade delete handles related items, participants, and assignments.
+     * @description Delete a plan by its ID. Requires JWT. Admin can delete any plan; owner can delete their own. Cascade delete handles related items, participants, and assignments.
      */
     delete: {
       parameters: {
@@ -317,6 +317,15 @@ export interface paths {
           };
           content: {
             'application/json': components['schemas']['def-12'];
+          };
+        };
+        /** @description Default Response */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
           };
         };
         /** @description Default Response */

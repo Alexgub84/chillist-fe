@@ -1,8 +1,15 @@
 import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+vi.mock('../../../src/contexts/useAuth');
+
+import { useAuth } from '../../../src/contexts/useAuth';
 import { PlansList } from '../../../src/components/PlansList';
+
+const mockUseAuth = vi.mocked(useAuth);
 
 vi.mock('@tanstack/react-router', () => ({
   Link: (props: Record<string, unknown>) => {
@@ -45,6 +52,23 @@ vi.mock('@tanstack/react-router', () => ({
   },
 }));
 
+const mockDeleteMutateAsync = vi.fn();
+vi.mock('../../../src/hooks/useDeletePlan', () => ({
+  useDeletePlan: () => ({
+    mutateAsync: mockDeleteMutateAsync,
+    isPending: false,
+  }),
+}));
+
+function renderWithQueryClient(ui: React.ReactElement) {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  return render(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
+  );
+}
+
 function futureDate(daysFromNow: number): string {
   const d = new Date();
   d.setDate(d.getDate() + daysFromNow);
@@ -58,6 +82,17 @@ function pastDate(daysAgo: number): string {
 }
 
 describe('PlansList', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockUseAuth.mockReturnValue({
+      session: null,
+      user: null,
+      loading: false,
+      isAdmin: false,
+      signOut: vi.fn(),
+    });
+  });
+
   const mixedPlans = [
     {
       planId: 'future-1',
@@ -107,7 +142,7 @@ describe('PlansList', () => {
       },
     ];
 
-    render(<PlansList plans={mockPlans} />);
+    renderWithQueryClient(<PlansList plans={mockPlans} />);
 
     const listElement = screen.getByTestId('plans-list');
     expect(listElement).toBeInTheDocument();
@@ -124,7 +159,7 @@ describe('PlansList', () => {
   });
 
   it('renders empty state when no plans provided', () => {
-    render(<PlansList plans={[]} />);
+    renderWithQueryClient(<PlansList plans={[]} />);
 
     const emptyMessage = screen.getByText(
       /no plans yet\. create one to get started!/i
@@ -133,13 +168,13 @@ describe('PlansList', () => {
   });
 
   it('does not show filter tabs when there are no plans', () => {
-    render(<PlansList plans={[]} />);
+    renderWithQueryClient(<PlansList plans={[]} />);
 
     expect(screen.queryByTestId('time-filter-all')).not.toBeInTheDocument();
   });
 
   it('shows filter tabs when plans exist', () => {
-    render(<PlansList plans={mixedPlans} />);
+    renderWithQueryClient(<PlansList plans={mixedPlans} />);
 
     expect(screen.getByTestId('time-filter-all')).toBeInTheDocument();
     expect(screen.getByTestId('time-filter-upcoming')).toBeInTheDocument();
@@ -147,7 +182,7 @@ describe('PlansList', () => {
   });
 
   it('defaults to "Upcoming" filter showing future and no-date plans', () => {
-    render(<PlansList plans={mixedPlans} />);
+    renderWithQueryClient(<PlansList plans={mixedPlans} />);
 
     expect(screen.getByTestId('time-filter-upcoming')).toHaveAttribute(
       'aria-selected',
@@ -162,7 +197,7 @@ describe('PlansList', () => {
 
   it('filters to upcoming plans (future + no-date)', async () => {
     const user = userEvent.setup();
-    render(<PlansList plans={mixedPlans} />);
+    renderWithQueryClient(<PlansList plans={mixedPlans} />);
 
     await user.click(screen.getByTestId('time-filter-upcoming'));
 
@@ -173,7 +208,7 @@ describe('PlansList', () => {
 
   it('filters to past plans only', async () => {
     const user = userEvent.setup();
-    render(<PlansList plans={mixedPlans} />);
+    renderWithQueryClient(<PlansList plans={mixedPlans} />);
 
     await user.click(screen.getByTestId('time-filter-past'));
 
@@ -183,7 +218,7 @@ describe('PlansList', () => {
   });
 
   it('shows counts on each filter tab', () => {
-    render(<PlansList plans={mixedPlans} />);
+    renderWithQueryClient(<PlansList plans={mixedPlans} />);
 
     const allTab = screen.getByTestId('time-filter-all');
     const upcomingTab = screen.getByTestId('time-filter-upcoming');
@@ -205,7 +240,7 @@ describe('PlansList', () => {
       },
     ];
 
-    render(<PlansList plans={pastOnly} />);
+    renderWithQueryClient(<PlansList plans={pastOnly} />);
 
     await user.click(screen.getByTestId('time-filter-upcoming'));
 
@@ -223,7 +258,7 @@ describe('PlansList', () => {
       },
     ];
 
-    render(<PlansList plans={futureOnly} />);
+    renderWithQueryClient(<PlansList plans={futureOnly} />);
 
     await user.click(screen.getByTestId('time-filter-past'));
 
@@ -237,7 +272,7 @@ describe('PlansList', () => {
       { planId: '3', title: 'Plan 3', status: 'archived' as const },
     ];
 
-    render(<PlansList plans={plans} />);
+    renderWithQueryClient(<PlansList plans={plans} />);
 
     const listElement = screen.getByTestId('plans-list');
     expect(listElement.children).toHaveLength(3);
@@ -254,7 +289,7 @@ describe('PlansList', () => {
       },
     ];
 
-    render(<PlansList plans={plans} />);
+    renderWithQueryClient(<PlansList plans={plans} />);
 
     const titleNode = screen.getByText('Weekend Camping Trip');
     const anchor = titleNode.closest('a');
@@ -263,5 +298,117 @@ describe('PlansList', () => {
 
     await user.click(anchor as Element);
     expect(window.location.pathname).toBe('/plan/plan-1');
+  });
+
+  describe('admin delete', () => {
+    const plans = [
+      {
+        planId: 'plan-1',
+        title: 'Beach Trip',
+        status: 'active' as const,
+        startDate: futureDate(5),
+      },
+      {
+        planId: 'plan-2',
+        title: 'Mountain Hike',
+        status: 'draft' as const,
+        startDate: futureDate(15),
+      },
+    ];
+
+    it('does not show delete buttons for non-admin users', () => {
+      mockUseAuth.mockReturnValue({
+        session: null,
+        user: null,
+        loading: false,
+        isAdmin: false,
+        signOut: vi.fn(),
+      });
+
+      renderWithQueryClient(<PlansList plans={plans} />);
+
+      expect(
+        screen.queryByTestId('admin-delete-plan-1')
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('admin-delete-plan-2')
+      ).not.toBeInTheDocument();
+    });
+
+    it('shows delete buttons on every plan card for admin users', () => {
+      mockUseAuth.mockReturnValue({
+        session: {} as never,
+        user: { app_metadata: { role: 'admin' } } as never,
+        loading: false,
+        isAdmin: true,
+        signOut: vi.fn(),
+      });
+
+      renderWithQueryClient(<PlansList plans={plans} />);
+
+      expect(screen.getByTestId('admin-delete-plan-1')).toBeInTheDocument();
+      expect(screen.getByTestId('admin-delete-plan-2')).toBeInTheDocument();
+    });
+
+    it('opens confirmation modal with plan title when delete button is clicked', async () => {
+      const user = userEvent.setup();
+      mockUseAuth.mockReturnValue({
+        session: {} as never,
+        user: { app_metadata: { role: 'admin' } } as never,
+        loading: false,
+        isAdmin: true,
+        signOut: vi.fn(),
+      });
+
+      renderWithQueryClient(<PlansList plans={plans} />);
+
+      await user.click(screen.getByTestId('admin-delete-plan-1'));
+
+      expect(screen.getByText('Delete Plan?')).toBeInTheDocument();
+      expect(screen.getAllByText('Beach Trip')).toHaveLength(2);
+      expect(screen.getByTestId('admin-delete-confirm')).toBeInTheDocument();
+      expect(screen.getByTestId('admin-delete-cancel')).toBeInTheDocument();
+    });
+
+    it('closes modal when cancel is clicked', async () => {
+      const user = userEvent.setup();
+      mockUseAuth.mockReturnValue({
+        session: {} as never,
+        user: { app_metadata: { role: 'admin' } } as never,
+        loading: false,
+        isAdmin: true,
+        signOut: vi.fn(),
+      });
+
+      renderWithQueryClient(<PlansList plans={plans} />);
+
+      await user.click(screen.getByTestId('admin-delete-plan-1'));
+      expect(screen.getByText('Delete Plan?')).toBeInTheDocument();
+
+      await user.click(screen.getByTestId('admin-delete-cancel'));
+
+      await waitFor(() => {
+        expect(screen.queryByText('Delete Plan?')).not.toBeInTheDocument();
+      });
+    });
+
+    it('calls deletePlan mutation when confirmed', async () => {
+      const user = userEvent.setup();
+      mockDeleteMutateAsync.mockResolvedValue(undefined);
+      mockUseAuth.mockReturnValue({
+        session: {} as never,
+        user: { app_metadata: { role: 'admin' } } as never,
+        loading: false,
+        isAdmin: true,
+        signOut: vi.fn(),
+      });
+
+      renderWithQueryClient(<PlansList plans={plans} />);
+
+      await user.click(screen.getByTestId('admin-delete-plan-2'));
+      await user.click(screen.getByTestId('admin-delete-confirm'));
+
+      expect(mockDeleteMutateAsync).toHaveBeenCalledWith('plan-2');
+    });
   });
 });

@@ -341,5 +341,14 @@
   "language": {
     "en": "EN",
     "he": "עב"
+  },
+  "admin": {
+    "deletePlan": "Delete",
+    "deleteConfirmTitle": "Delete Plan?",
+    "deleteConfirmMessage": "Are you sure you want to delete <strong>{{title}}</strong>? This action cannot be undone.",
+    "deleteConfirm": "Delete",
+    "deleteCancel": "Cancel",
+    "deleted": "Plan deleted",
+    "deleting": "Deleting…"
   }
 }

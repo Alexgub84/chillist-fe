@@ -235,6 +235,72 @@ export async function mockPlanRoutes(page: Page, plan: MockPlan) {
   return state;
 }
 
+export async function injectAdminSession(page: Page) {
+  await page.addInitScript(() => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(
+      JSON.stringify({
+        sub: 'admin-user-id',
+        email: 'admin@chillist.dev',
+        role: 'authenticated',
+        iat: Math.floor(Date.now() / 1000),
+        exp: Math.floor(Date.now() / 1000) + 3600,
+      })
+    );
+    const token = `${header}.${payload}.mock-signature`;
+    localStorage.setItem(
+      'mock-auth-session',
+      JSON.stringify({
+        access_token: token,
+        refresh_token: 'mock-refresh-admin',
+        expires_in: 3600,
+        token_type: 'bearer',
+        user: {
+          id: 'admin-user-id',
+          email: 'admin@chillist.dev',
+          user_metadata: { full_name: 'Admin User' },
+          app_metadata: { role: 'admin' },
+          aud: 'authenticated',
+          role: 'authenticated',
+        },
+      })
+    );
+  });
+}
+
+export async function injectUserSession(page: Page) {
+  await page.addInitScript(() => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(
+      JSON.stringify({
+        sub: 'regular-user-id',
+        email: 'user@chillist.dev',
+        role: 'authenticated',
+        iat: Math.floor(Date.now() / 1000),
+        exp: Math.floor(Date.now() / 1000) + 3600,
+      })
+    );
+    const token = `${header}.${payload}.mock-signature`;
+    localStorage.setItem(
+      'mock-auth-session',
+      JSON.stringify({
+        access_token: token,
+        refresh_token: 'mock-refresh-user',
+        expires_in: 3600,
+        token_type: 'bearer',
+        user: {
+          id: 'regular-user-id',
+          email: 'user@chillist.dev',
+          user_metadata: { full_name: 'Regular User' },
+          app_metadata: {},
+          aud: 'authenticated',
+          role: 'authenticated',
+        },
+      })
+    );
+  });
+}
+
 export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
   const planSummaries = plans.map((plan) => {
     const { items, participants, ...summary } = plan;
@@ -242,6 +308,20 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
     void participants;
     return summary;
   });
+
+  for (const plan of plans) {
+    await page.route(`${API_PATTERN}/plans/${plan.planId}`, async (route) => {
+      if (route.request().method() === 'DELETE') {
+        const index = planSummaries.findIndex((p) => p.planId === plan.planId);
+        if (index !== -1) {
+          planSummaries.splice(index, 1);
+        }
+        await route.fulfill({ json: { ok: true } });
+      } else {
+        await route.continue();
+      }
+    });
+  }
 
   await page.route(`${API_PATTERN}/plans`, async (route) => {
     const method = route.request().method();
@@ -299,4 +379,4 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
 
 const test = base;
 
-export { test, expect, type Page };
+export { test, expect, type Page, type MockPlan };

@@ -41,6 +41,7 @@ describe('Complete Profile Page', () => {
         user_metadata: {},
       } as never,
       loading: false,
+      isAdmin: false,
       signOut: vi.fn(),
     });
     mockSupabase.auth.updateUser.mockResolvedValue({
@@ -88,6 +89,7 @@ describe('Complete Profile Page', () => {
         user_metadata: { full_name: 'Alex Guberman' },
       } as never,
       loading: false,
+      isAdmin: false,
       signOut: vi.fn(),
     });
 
@@ -111,6 +113,7 @@ describe('Complete Profile Page', () => {
         },
       } as never,
       loading: false,
+      isAdmin: false,
       signOut: vi.fn(),
     });
 
@@ -314,6 +317,7 @@ describe('Complete Profile Page', () => {
       session: null,
       user: null,
       loading: false,
+      isAdmin: false,
       signOut: vi.fn(),
     });
 

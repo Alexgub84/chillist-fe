@@ -1,4 +1,11 @@
-import { test, expect, buildPlan, mockPlansListRoutes } from './fixtures';
+import {
+  test,
+  expect,
+  buildPlan,
+  mockPlansListRoutes,
+  injectAdminSession,
+  injectUserSession,
+} from './fixtures';
 
 const API_PLANS_URL = '**/localhost:3333/plans';
 
@@ -68,5 +75,105 @@ test.describe('Plans Page', () => {
     });
 
     await expect(page.getByRole('button', { name: 'Try Again' })).toBeVisible();
+  });
+});
+
+test.describe('Admin Delete', () => {
+  test('admin user sees delete buttons on every plan card', async ({
+    page,
+  }) => {
+    const plan1 = buildPlan({ title: 'Beach Trip' });
+    const plan2 = buildPlan({ title: 'Mountain Hike' });
+
+    await injectAdminSession(page);
+    await mockPlansListRoutes(page, [plan1, plan2]);
+
+    await page.goto('/plans');
+
+    await expect(page.getByText('Beach Trip')).toBeVisible({ timeout: 15000 });
+
+    await expect(
+      page.getByTestId(`admin-delete-${plan1.planId}`)
+    ).toBeVisible();
+    await expect(
+      page.getByTestId(`admin-delete-${plan2.planId}`)
+    ).toBeVisible();
+  });
+
+  test('non-admin user does NOT see delete buttons', async ({ page }) => {
+    const plan1 = buildPlan({ title: 'Beach Trip' });
+    const plan2 = buildPlan({ title: 'Mountain Hike' });
+
+    await injectUserSession(page);
+    await mockPlansListRoutes(page, [plan1, plan2]);
+
+    await page.goto('/plans');
+
+    await expect(page.getByText('Beach Trip')).toBeVisible({ timeout: 15000 });
+
+    await expect(page.getByTestId(`admin-delete-${plan1.planId}`)).toBeHidden();
+    await expect(page.getByTestId(`admin-delete-${plan2.planId}`)).toBeHidden();
+  });
+
+  test('unauthenticated user does NOT see delete buttons', async ({ page }) => {
+    const plan = buildPlan({ title: 'Beach Trip' });
+    await mockPlansListRoutes(page, [plan]);
+
+    await page.goto('/plans');
+
+    await expect(page.getByText('Beach Trip')).toBeVisible({ timeout: 15000 });
+
+    await expect(page.getByTestId(`admin-delete-${plan.planId}`)).toBeHidden();
+  });
+
+  test('admin can delete a plan via confirmation modal', async ({ page }) => {
+    const plan1 = buildPlan({ title: 'Beach Trip' });
+    const plan2 = buildPlan({ title: 'Mountain Hike' });
+
+    await injectAdminSession(page);
+    await mockPlansListRoutes(page, [plan1, plan2]);
+
+    await page.goto('/plans');
+
+    await expect(page.getByText('Beach Trip')).toBeVisible({ timeout: 15000 });
+
+    await page.getByTestId(`admin-delete-${plan1.planId}`).click();
+
+    await expect(page.getByText('Delete Plan?')).toBeVisible({
+      timeout: 10000,
+    });
+    await expect(page.getByTestId('admin-delete-confirm')).toBeVisible();
+
+    await page.getByTestId('admin-delete-confirm').click({ force: true });
+
+    await expect(page.getByText('Plan deleted')).toBeVisible({
+      timeout: 10000,
+    });
+    await expect(page.getByText('Delete Plan?')).toBeHidden({ timeout: 10000 });
+    await expect(page.getByText('Mountain Hike')).toBeVisible();
+  });
+
+  test('admin can cancel delete via modal', async ({ page }) => {
+    const plan = buildPlan({ title: 'Beach Trip' });
+
+    await injectAdminSession(page);
+    await mockPlansListRoutes(page, [plan]);
+
+    await page.goto('/plans');
+
+    await expect(page.getByText('Beach Trip')).toBeVisible({ timeout: 15000 });
+
+    await page.getByTestId(`admin-delete-${plan.planId}`).click();
+
+    await expect(page.getByText('Delete Plan?')).toBeVisible({
+      timeout: 10000,
+    });
+
+    await page.getByTestId('admin-delete-cancel').click();
+
+    await expect(page.getByText('Delete Plan?')).toBeHidden({
+      timeout: 10000,
+    });
+    await expect(page.getByText('Beach Trip')).toBeVisible();
   });
 });
