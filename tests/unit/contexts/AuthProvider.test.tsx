@@ -1,6 +1,7 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AuthProvider from '../../../src/contexts/AuthProvider';
 import { useAuth } from '../../../src/contexts/useAuth';
 import { supabase } from '../../../src/lib/supabase';
@@ -36,10 +37,13 @@ function AuthConsumer() {
 }
 
 function renderWithProvider() {
+  const queryClient = new QueryClient();
   return render(
-    <AuthProvider>
-      <AuthConsumer />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <AuthConsumer />
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
