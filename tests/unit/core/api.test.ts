@@ -55,6 +55,8 @@ import {
   fetchPlan,
   fetchPlanByInvite,
   fetchPlans,
+  claimInvite,
+  saveGuestPreferences,
   updateItem,
   updateParticipant,
   updatePlan,
@@ -697,6 +699,65 @@ describe('API Client', () => {
 
       await expect(fetchPlanByInvite('plan-1', 'bad-token')).rejects.toThrow(
         'Invalid or expired invite link'
+      );
+    });
+  });
+
+  describe('Invite - saveGuestPreferences', () => {
+    it('sends PATCH to public preferences endpoint without auth', async () => {
+      const sessionCallsBefore = supabaseMock.auth.getSession.mock.calls.length;
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({
+          participantId: 'p-1',
+          displayName: 'Guest',
+          role: 'participant',
+        })
+      );
+
+      await saveGuestPreferences('plan-1', 'token-abc', {
+        adultsCount: 2,
+        kidsCount: 1,
+        foodPreferences: 'Vegan',
+      });
+
+      const lastCall = fetchMock.mock.calls[fetchMock.mock.calls.length - 1];
+      expect(lastCall[0]).toBe(
+        'http://api.test/plans/plan-1/invite/token-abc/preferences'
+      );
+      expect(lastCall[1].method).toBe('PATCH');
+      expect(lastCall[1].headers).not.toHaveProperty('Authorization');
+      expect(JSON.parse(lastCall[1].body as string)).toEqual({
+        adultsCount: 2,
+        kidsCount: 1,
+        foodPreferences: 'Vegan',
+      });
+      expect(supabaseMock.auth.getSession.mock.calls.length).toBe(
+        sessionCallsBefore
+      );
+    });
+  });
+
+  describe('Invite - claimInvite', () => {
+    it('sends POST to claim endpoint with auth', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({
+          participantId: 'p-1',
+          userId: 'user-1',
+          inviteStatus: 'accepted',
+        })
+      );
+
+      await claimInvite('plan-1', 'token-abc');
+
+      const lastCall = fetchMock.mock.calls[fetchMock.mock.calls.length - 1];
+      expect(lastCall[0]).toBe('http://api.test/plans/plan-1/claim/token-abc');
+      expect(lastCall[1].method).toBe('POST');
+      expect(lastCall[1].headers.Authorization).toBe(
+        `Bearer ${DEFAULT_SESSION.access_token}`
       );
     });
   });
