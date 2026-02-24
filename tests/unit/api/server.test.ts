@@ -451,6 +451,45 @@ describe('mock server', () => {
     }
   });
 
+  it('PATCH /plans/:planId/invite/:inviteToken/preferences saves guest preferences', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'PATCH',
+        url: '/plans/plan-1/invite/claimable-invite-token-xyz789/preferences',
+        payload: { adultsCount: 2, kidsCount: 1, foodPreferences: 'Vegan' },
+      });
+      expect(response.statusCode).toBe(200);
+      const body = response.json() as Record<string, unknown>;
+      expect(body.participantId).toBe('participant-2');
+      expect(body.displayName).toBeTruthy();
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('PATCH /plans/:planId/invite/:inviteToken/preferences returns 404 for invalid token', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'PATCH',
+        url: '/plans/plan-1/invite/nonexistent-token/preferences',
+        payload: { adultsCount: 1 },
+      });
+      expect(response.statusCode).toBe(404);
+    } finally {
+      await server.close();
+    }
+  });
+
   it('POST /plans/:planId/claim/:inviteToken returns 400 when already claimed', async () => {
     const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
     const payload = btoa(JSON.stringify({ sub: 'some-user' }));

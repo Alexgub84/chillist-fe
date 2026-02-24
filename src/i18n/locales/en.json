@@ -362,7 +362,9 @@
     "noDescription": "No description provided.",
     "signInToJoin": "Sign in to join this plan",
     "signUpToJoin": "or create an account",
-    "goToPlan": "Go to plan"
+    "continueAsGuest": "Continue without signing in",
+    "goToPlan": "Go to plan",
+    "guestPreferencesTitle": "Your Preferences"
   },
   "language": {
     "en": "EN",

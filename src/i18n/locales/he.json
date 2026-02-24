@@ -362,7 +362,9 @@
     "noDescription": "אין תיאור.",
     "signInToJoin": "התחבר כדי להצטרף לתוכנית",
     "signUpToJoin": "או צור חשבון",
-    "goToPlan": "מעבר לתוכנית"
+    "continueAsGuest": "המשך בלי להתחבר",
+    "goToPlan": "מעבר לתוכנית",
+    "guestPreferencesTitle": "ההעדפות שלך"
   },
   "language": {
     "en": "EN",

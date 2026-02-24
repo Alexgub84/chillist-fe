@@ -430,6 +430,28 @@ export async function mockInviteRoute(
   );
 
   await page.route(
+    `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}/preferences`,
+    async (route) => {
+      if (route.request().method() === 'PATCH') {
+        const matched = plan.participants.find(
+          (p) => p.inviteToken === inviteToken
+        );
+        await route.fulfill({
+          json: {
+            participantId: matched?.participantId ?? 'unknown',
+            displayName:
+              matched?.displayName ??
+              `${matched?.name ?? ''} ${matched?.lastName ?? ''}`.trim(),
+            role: matched?.role ?? 'participant',
+          },
+        });
+      } else {
+        await route.continue();
+      }
+    }
+  );
+
+  await page.route(
     `${API_PATTERN}/plans/${plan.planId}/invite/invalid-token-*`,
     async (route) => {
       if (route.request().method() === 'GET') {

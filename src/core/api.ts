@@ -217,6 +217,33 @@ export async function fetchPlanByInvite(
   return invitePlanResponseSchema.parse(data);
 }
 
+export async function saveGuestPreferences(
+  planId: string,
+  inviteToken: string,
+  preferences: {
+    adultsCount?: number;
+    kidsCount?: number;
+    foodPreferences?: string;
+    allergies?: string;
+    notes?: string;
+  }
+): Promise<void> {
+  await publicRequest(`/plans/${planId}/invite/${inviteToken}/preferences`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(preferences),
+  });
+}
+
+export async function claimInvite(
+  planId: string,
+  inviteToken: string
+): Promise<void> {
+  await request(`/plans/${planId}/claim/${inviteToken}`, {
+    method: 'POST',
+  });
+}
+
 // --- Participants ---
 
 export async function fetchParticipants(

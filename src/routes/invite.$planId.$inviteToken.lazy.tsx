@@ -1,11 +1,23 @@
-import { createLazyFileRoute, Link, useParams } from '@tanstack/react-router';
+import { useState } from 'react';
+import {
+  createLazyFileRoute,
+  Link,
+  useNavigate,
+  useParams,
+} from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
+import toast from 'react-hot-toast';
 import { useInvitePlan } from '../hooks/useInvitePlan';
 import { useAuth } from '../contexts/useAuth';
+import { saveGuestPreferences } from '../core/api';
+import { storePendingInvite } from '../core/pending-invite';
 import type { InviteParticipant } from '../core/schemas/invite';
 import type { ItemCategory } from '../core/schemas/item';
 import LocationMap from '../components/LocationMap';
+import Modal from '../components/shared/Modal';
+import PreferencesForm from '../components/PreferencesForm';
+import type { PreferencesFormValues } from '../components/PreferencesForm';
 
 export const Route = createLazyFileRoute('/invite/$planId/$inviteToken')({
   component: InvitePlanPage,
@@ -30,9 +42,12 @@ function InvitePlanPage() {
   const { planId, inviteToken } = useParams({
     from: '/invite/$planId/$inviteToken',
   });
+  const navigate = useNavigate();
   const { data: plan, isLoading, error } = useInvitePlan(planId, inviteToken);
   const { user } = useAuth();
   const isAuthenticated = !!user;
+  const [showPreferences, setShowPreferences] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   if (isLoading) {
     return (
@@ -92,6 +107,7 @@ function InvitePlanPage() {
             <Link
               to="/signin"
               search={{ redirect: `/plan/${planId}` }}
+              onClick={() => storePendingInvite(planId, inviteToken)}
               className="w-full sm:w-auto text-center rounded-md bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors"
             >
               {t('invite.signInToJoin')}
@@ -99,10 +115,18 @@ function InvitePlanPage() {
             <Link
               to="/signup"
               search={{ redirect: `/plan/${planId}` }}
+              onClick={() => storePendingInvite(planId, inviteToken)}
               className="text-sm font-medium text-blue-600 hover:text-blue-800 underline"
             >
               {t('invite.signUpToJoin')}
             </Link>
+            <button
+              type="button"
+              onClick={() => setShowPreferences(true)}
+              className="w-full sm:w-auto text-center rounded-md border border-gray-300 bg-white px-6 py-2.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
+            >
+              {t('invite.continueAsGuest')}
+            </button>
           </>
         )}
       </div>
@@ -271,6 +295,38 @@ function InvitePlanPage() {
           <p className="text-sm text-gray-500">{t('invite.noItems')}</p>
         </div>
       )}
+
+      <Modal
+        open={showPreferences}
+        onClose={() => setShowPreferences(false)}
+        title={t('invite.guestPreferencesTitle')}
+      >
+        <PreferencesForm
+          onSubmit={handleGuestPreferences}
+          onSkip={handleSkipPreferences}
+          isSubmitting={isSaving}
+          inModal
+        />
+      </Modal>
     </div>
   );
+
+  async function handleGuestPreferences(values: PreferencesFormValues) {
+    setIsSaving(true);
+    try {
+      await saveGuestPreferences(planId, inviteToken, values);
+      toast.success(t('preferences.updated'));
+      setShowPreferences(false);
+      navigate({ to: '/plan/$planId', params: { planId } });
+    } catch {
+      toast.error(t('errors.somethingWentWrong'));
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  function handleSkipPreferences() {
+    setShowPreferences(false);
+    navigate({ to: '/plan/$planId', params: { planId } });
+  }
 }

@@ -6,6 +6,8 @@ import { useNavigate } from '@tanstack/react-router';
 import i18n from '../i18n';
 import { supabase } from '../lib/supabase';
 import { onAuthError } from '../core/auth-error';
+import { claimInvite } from '../core/api';
+import { getPendingInvite, clearPendingInvite } from '../core/pending-invite';
 import { AuthContext } from './auth-context';
 import AuthErrorModal from '../components/AuthErrorModal';
 
@@ -35,6 +37,14 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         toast.success(
           email ? i18n.t('auth.signedInAs', { email }) : i18n.t('auth.signedIn')
         );
+
+        const pending = getPendingInvite();
+        if (pending) {
+          clearPendingInvite();
+          claimInvite(pending.planId, pending.inviteToken).catch(() => {
+            /* claim failed (already claimed, invalid token, etc.) — silently ignore */
+          });
+        }
       }
 
       if (event === 'SIGNED_OUT') {

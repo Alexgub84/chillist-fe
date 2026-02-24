@@ -635,6 +635,53 @@ export async function buildServer(
     }
   );
 
+  app.patch<{ Params: { planId: string; inviteToken: string } }>(
+    '/plans/:planId/invite/:inviteToken/preferences',
+    async (request, reply) => {
+      const { planId, inviteToken } = request.params;
+      const plan = store.plans.find((p) => p.planId === planId);
+      if (!plan) {
+        throw new HttpError('Plan not found', 404);
+      }
+
+      const participantIds = new Set(plan.participantIds ?? []);
+      const planParticipants = store.participants.filter((p) =>
+        participantIds.has(p.participantId)
+      );
+
+      const tokenMatch = planParticipants.find(
+        (p) => p.inviteToken === inviteToken
+      );
+      if (!tokenMatch) {
+        throw new HttpError('Invalid or expired invite link', 404);
+      }
+
+      const body = request.body as Record<string, unknown>;
+      const allowedFields = [
+        'adultsCount',
+        'kidsCount',
+        'foodPreferences',
+        'allergies',
+        'notes',
+      ];
+      for (const field of allowedFields) {
+        if (field in body) {
+          (tokenMatch as Record<string, unknown>)[field] = body[field];
+        }
+      }
+      tokenMatch.updatedAt = new Date().toISOString();
+
+      await persistData(store, shouldPersist, filePath);
+
+      void reply.send({
+        participantId: tokenMatch.participantId,
+        displayName:
+          tokenMatch.displayName ?? `${tokenMatch.name} ${tokenMatch.lastName}`,
+        role: tokenMatch.role,
+      });
+    }
+  );
+
   app.get<{ Params: { planId: string } }>(
     '/plans/:planId/participants',
     async (request, reply) => {

@@ -604,6 +604,10 @@ test.describe('Invite Landing Page', () => {
       'href',
       expect.stringContaining(`/signup?redirect=%2Fplan%2F${plan.planId}`)
     );
+
+    await expect(
+      page.getByRole('button', { name: /continue without signing in/i })
+    ).toBeVisible();
   });
 
   test('shows "Go to plan" link when authenticated', async ({ page }) => {
@@ -633,6 +637,73 @@ test.describe('Invite Landing Page', () => {
     ).not.toBeVisible();
   });
 
+  test('guest can continue without signing in and sees preferences modal', async ({
+    page,
+  }) => {
+    const plan = buildPlan({
+      title: 'Pool Party',
+      participants: [
+        { name: 'Owner', lastName: 'User', phone: '555-0100', role: 'owner' },
+        { name: 'Guest', lastName: 'User', phone: '555-0200' },
+      ],
+    });
+
+    const inviteToken = plan.participants[1].inviteToken!;
+    await mockInviteRoute(page, plan, inviteToken);
+    await mockPlanRoutes(page, plan);
+    await page.goto(`/invite/${plan.planId}/${inviteToken}`);
+
+    await expect(page.getByText('Pool Party')).toBeVisible({ timeout: 10000 });
+
+    const continueBtn = page.getByRole('button', {
+      name: /continue without signing in/i,
+    });
+    await expect(continueBtn).toBeVisible();
+    await continueBtn.click();
+
+    await expect(page.getByText('Your Preferences')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await page.getByPlaceholder('1').fill('2');
+    await page.getByPlaceholder('0').fill('1');
+
+    await page
+      .getByRole('button', { name: /save preferences/i })
+      .click({ force: true });
+
+    await page.waitForURL(/\/plan\//, { timeout: 10000 });
+  });
+
+  test('guest can skip preferences and redirect to plan', async ({ page }) => {
+    const plan = buildPlan({
+      title: 'Day Hike',
+      participants: [
+        { name: 'Owner', lastName: 'User', phone: '555-0100', role: 'owner' },
+        { name: 'Guest', lastName: 'User', phone: '555-0200' },
+      ],
+    });
+
+    const inviteToken = plan.participants[1].inviteToken!;
+    await mockInviteRoute(page, plan, inviteToken);
+    await mockPlanRoutes(page, plan);
+    await page.goto(`/invite/${plan.planId}/${inviteToken}`);
+
+    await expect(page.getByText('Day Hike')).toBeVisible({ timeout: 10000 });
+
+    await page
+      .getByRole('button', { name: /continue without signing in/i })
+      .click();
+
+    await expect(page.getByText('Your Preferences')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await page.getByRole('button', { name: /skip/i }).click();
+
+    await page.waitForURL(/\/plan\//, { timeout: 10000 });
+  });
+
   test('sign-in link redirects to plan page after authentication', async ({
     page,
   }) => {
@@ -655,5 +726,34 @@ test.describe('Invite Landing Page', () => {
 
     await page.waitForURL(/\/signin/);
     expect(page.url()).toContain(`redirect=%2Fplan%2F${plan.planId}`);
+  });
+
+  test('sign-in from invite stores pending invite in localStorage', async ({
+    page,
+  }) => {
+    const plan = buildPlan({
+      title: 'Claim Test',
+      participants: [
+        { name: 'Owner', lastName: 'User', phone: '555-0100', role: 'owner' },
+        { name: 'Guest', lastName: 'User', phone: '555-0200' },
+      ],
+    });
+
+    const inviteToken = plan.participants[1].inviteToken!;
+    await mockInviteRoute(page, plan, inviteToken);
+    await page.goto(`/invite/${plan.planId}/${inviteToken}`);
+
+    await expect(page.getByText('Claim Test')).toBeVisible({ timeout: 10000 });
+
+    await page.getByRole('link', { name: /sign in to join/i }).click();
+    await page.waitForURL(/\/signin/);
+
+    const stored = await page.evaluate(() =>
+      localStorage.getItem('chillist-pending-invite')
+    );
+    expect(stored).toBeTruthy();
+    const parsed = JSON.parse(stored!);
+    expect(parsed.planId).toBe(plan.planId);
+    expect(parsed.inviteToken).toBe(inviteToken);
   });
 });
