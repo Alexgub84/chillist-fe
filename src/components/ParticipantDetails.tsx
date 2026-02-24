@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import type { Participant } from '../core/schemas/participant';
-import { shareInviteLink } from '../core/invite';
+import { copyInviteLink, shareInviteLink } from '../core/invite';
 
 function roleBadgeColor(role: Participant['role']) {
   if (role === 'owner') return 'bg-amber-100 text-amber-800';
@@ -95,6 +95,14 @@ function ParticipantCard({
   if (p.foodPreferences) foodParts.push(p.foodPreferences);
   if (p.allergies) foodParts.push(p.allergies);
 
+  async function handleCopy() {
+    if (!p.inviteToken) return;
+    const copied = await copyInviteLink(planId, p.inviteToken);
+    if (copied) {
+      toast.success(t('invite.copied'));
+    }
+  }
+
   async function handleShare() {
     if (!p.inviteToken) return;
     const result = await shareInviteLink(planId, p.inviteToken, planTitle);
@@ -131,27 +139,50 @@ function ParticipantCard({
         </div>
         <div className="flex items-center gap-2 shrink-0 ms-2">
           {p.inviteToken && p.role !== 'owner' && (
-            <button
-              type="button"
-              title={t('invite.shareLink')}
-              onClick={handleShare}
-              className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
+            <>
+              <button
+                type="button"
+                title={t('invite.copyLink')}
+                onClick={handleCopy}
+                className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                />
-              </svg>
-            </button>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                title={t('invite.shareLink')}
+                onClick={handleShare}
+                className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                  />
+                </svg>
+              </button>
+            </>
           )}
           {onEdit && (
             <button
