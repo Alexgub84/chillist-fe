@@ -60,6 +60,9 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
 
+      - name: Run integration tests
+        run: npm run test:integ
+
       - name: Build
         run: npm run build
         env:

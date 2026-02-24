@@ -3,7 +3,6 @@ import type { Session, User } from '@supabase/supabase-js';
 import toast from 'react-hot-toast';
 import i18n from '../i18n';
 import { supabase } from '../lib/supabase';
-import { fetchAuthMe } from '../core/api';
 import { onAuthError } from '../core/auth-error';
 import { AuthContext } from './auth-context';
 import AuthErrorModal from '../components/AuthErrorModal';
@@ -28,13 +27,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       setUser(newSession?.user ?? null);
 
       if (event === 'SIGNED_IN') {
-        fetchAuthMe()
-          .then((res) => {
-            toast.success(i18n.t('auth.signedInAs', { email: res.user.email }));
-          })
-          .catch(() => {
-            toast.success(i18n.t('auth.signedIn'));
-          });
+        const email = newSession?.user?.email;
+        toast.success(
+          email ? i18n.t('auth.signedInAs', { email }) : i18n.t('auth.signedIn')
+        );
       }
 
       if (event === 'SIGNED_OUT') {
