@@ -5,6 +5,7 @@ import {
   buildPlan,
   mockPlanRoutes,
   mockPlansListRoutes,
+  injectUserSession,
 } from './fixtures';
 
 async function addItemViaUI(
@@ -205,6 +206,108 @@ test.describe('Item CRUD', () => {
     await expect(tentCard.getByLabel('Change status for Tent')).toContainText(
       'Purchased'
     );
+  });
+});
+
+test.describe('Edit Plan', () => {
+  test('owner can edit plan title via edit modal', async ({ page }) => {
+    await injectUserSession(page);
+
+    const plan = buildPlan({
+      title: 'Original Trip Name',
+      participants: [
+        {
+          name: 'Regular',
+          lastName: 'User',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'regular-user-id',
+        },
+        { name: 'Bob', lastName: 'Helper', phone: '555-0200' },
+      ],
+      items: [{ name: 'Tent', category: 'equipment', quantity: 1 }],
+    });
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('Original Trip Name')).toBeVisible({
+      timeout: 10000,
+    });
+
+    const editBtn = page.getByTestId('edit-plan-button');
+    await expect(editBtn).toBeVisible();
+    await editBtn.click();
+
+    const editForm = page.locator('form').last();
+    await expect(editForm).toBeVisible();
+
+    const titleInput = editForm.getByPlaceholder('Enter plan title');
+    await expect(titleInput).toHaveValue('Original Trip Name');
+    await titleInput.clear();
+    await titleInput.fill('Updated Trip Name');
+
+    const submitBtn = editForm.getByRole('button', { name: /update plan/i });
+    await expect(submitBtn).toBeVisible();
+    await Promise.all([
+      page.waitForResponse((r) => r.request().method() === 'PATCH'),
+      submitBtn.click(),
+    ]);
+    await expect(editForm).toBeHidden({ timeout: 10000 });
+
+    await expect(page.getByText('Updated Trip Name')).toBeVisible({
+      timeout: 5000,
+    });
+  });
+
+  test('non-owner cannot see edit button', async ({ page }) => {
+    await injectUserSession(page);
+
+    const plan = buildPlan({
+      title: 'Someone Else Plan',
+      participants: [
+        {
+          name: 'Other',
+          lastName: 'Owner',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'different-user-id',
+        },
+        { name: 'Bob', lastName: 'Helper', phone: '555-0200' },
+      ],
+      items: [{ name: 'Tent', category: 'equipment', quantity: 1 }],
+    });
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('Someone Else Plan')).toBeVisible({
+      timeout: 10000,
+    });
+
+    await expect(page.getByTestId('edit-plan-button')).toBeHidden();
+  });
+
+  test('unauthenticated user cannot see edit button', async ({ page }) => {
+    const plan = buildPlan({
+      title: 'Public Plan',
+      participants: [
+        {
+          name: 'Owner',
+          lastName: 'User',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'some-user-id',
+        },
+      ],
+      items: [],
+    });
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('Public Plan')).toBeVisible({
+      timeout: 10000,
+    });
+
+    await expect(page.getByTestId('edit-plan-button')).toBeHidden();
   });
 });
 

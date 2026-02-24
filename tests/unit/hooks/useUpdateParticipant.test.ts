@@ -37,6 +37,7 @@ describe('useUpdateParticipant', () => {
     lastName: 'Smith',
     contactPhone: '+1234567890',
     role: 'owner' as const,
+    rsvpStatus: 'confirmed' as const,
     adultsCount: 2,
     kidsCount: 1,
     foodPreferences: 'vegetarian',

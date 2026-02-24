@@ -96,6 +96,9 @@
     "loading": "Loading plan details...",
     "notFound": "Plan not found",
     "filterByPerson": "Filter by person",
+    "edit": "Edit Plan",
+    "editPlan": "Edit Plan",
+    "updated": "Plan updated",
     "delete": "Delete Plan",
     "deleteConfirmTitle": "Delete Plan?",
     "deleteConfirmMessage": "This will permanently delete the plan and all its items. This action cannot be undone.",
@@ -158,7 +161,9 @@
     "tags": "Tags (comma separated)",
     "tagsPlaceholder": "e.g. picnic, friends, summer",
     "submitting": "Creating…",
-    "submit": "Create Plan"
+    "submit": "Create Plan",
+    "updating": "Updating…",
+    "update": "Update Plan"
   },
   "items": {
     "title": "Items",
@@ -301,10 +306,10 @@
     "thunderstorm": "Thunderstorm"
   },
   "preferences": {
-    "title": "Tell us about your group",
-    "subtitle": "Help the organizer plan better — how many are coming with you?",
-    "adultsCount": "Adults",
-    "adultsCountPlaceholder": "0",
+    "title": "How many of you are coming?",
+    "subtitle": "The number should include you.",
+    "adultsCount": "Adults (including you)",
+    "adultsCountPlaceholder": "1",
     "kidsCount": "Kids",
     "kidsCountPlaceholder": "0",
     "foodPreferences": "Food preferences",

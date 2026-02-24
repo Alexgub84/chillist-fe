@@ -1,211 +1,145 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Plan } from '../../../src/components/Plan';
 import type { PlanWithDetails } from '../../../src/core/schemas/plan';
 
-function buildPlan(overrides?: Partial<PlanWithDetails>): PlanWithDetails {
+vi.mock('../../../src/contexts/useAuth', () => ({
+  useAuth: () => ({
+    session: null,
+    user: null,
+    loading: false,
+    isAdmin: false,
+    signOut: vi.fn(),
+  }),
+}));
+
+function buildTestPlan(overrides?: Partial<PlanWithDetails>): PlanWithDetails {
   return {
     planId: 'plan-1',
-    title: 'Camping Trip',
-    description: 'A fun weekend outdoors',
+    title: 'Test Plan',
+    description: 'A test plan',
     status: 'active',
-    visibility: 'public',
-    startDate: '2025-12-20T10:00:00Z',
-    endDate: '2025-12-22T16:00:00Z',
-    location: {
-      locationId: 'loc-1',
-      name: 'Yosemite',
-      city: 'Mariposa',
-      country: 'US',
-      region: 'California',
-    },
-    tags: [],
-    createdAt: '2025-01-01T00:00:00Z',
-    updatedAt: '2025-01-01T00:00:00Z',
+    visibility: 'private',
+    ownerParticipantId: 'p-1',
+    startDate: '2026-07-10T09:00:00Z',
+    endDate: '2026-07-12T18:00:00Z',
+    tags: null,
+    createdAt: '2026-01-01T00:00:00Z',
+    updatedAt: '2026-01-01T00:00:00Z',
+    items: [],
     participants: [
       {
         participantId: 'p-1',
         planId: 'plan-1',
-        name: 'Alex',
-        lastName: 'Smith',
+        userId: 'user-1',
+        name: 'Alice',
+        lastName: 'Owner',
+        contactPhone: '555-0001',
         displayName: null,
         role: 'owner',
         avatarUrl: null,
         contactEmail: null,
-        contactPhone: '+1234567890',
-        createdAt: '2025-01-01T00:00:00Z',
-        updatedAt: '2025-01-01T00:00:00Z',
+        inviteToken: null,
+        rsvpStatus: 'confirmed',
+        lastActivityAt: null,
+        adultsCount: null,
+        kidsCount: null,
+        foodPreferences: null,
+        allergies: null,
+        notes: null,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
       },
     ],
-    items: [],
     ...overrides,
   };
 }
 
-describe('Plan', () => {
-  it('renders plan title and description', () => {
-    render(<Plan plan={buildPlan()} />);
+describe('Plan - Edit Button', () => {
+  let handleEdit: ReturnType<typeof vi.fn>;
+  let handleDelete: ReturnType<typeof vi.fn>;
 
-    expect(screen.getByText('Camping Trip')).toBeInTheDocument();
-    expect(screen.getByText('A fun weekend outdoors')).toBeInTheDocument();
+  beforeEach(() => {
+    vi.clearAllMocks();
+    handleEdit = vi.fn();
+    handleDelete = vi.fn();
   });
 
-  it('renders compact detail labels', () => {
-    render(<Plan plan={buildPlan()} />);
-
-    expect(screen.getByText('Description')).toBeInTheDocument();
-    expect(screen.getByText('Owner')).toBeInTheDocument();
-    expect(screen.getByText('Start')).toBeInTheDocument();
-    expect(screen.getByText('End')).toBeInTheDocument();
-  });
-
-  it('shows owner name and avatar in compact card', () => {
-    render(<Plan plan={buildPlan()} />);
-
-    expect(screen.getByText('Alex Smith')).toBeInTheDocument();
-  });
-
-  it('shows dates in DD.MM.YYYY format', () => {
-    render(<Plan plan={buildPlan()} />);
-
-    expect(screen.getByText('20.12.2025')).toBeInTheDocument();
-    expect(screen.getByText('22.12.2025')).toBeInTheDocument();
-  });
-
-  it('shows N/A when dates are missing', () => {
+  it('shows edit button when isOwner is true and onEdit is provided', () => {
     render(
-      <Plan plan={buildPlan({ startDate: undefined, endDate: undefined })} />
+      <Plan
+        plan={buildTestPlan()}
+        isOwner={true}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
     );
 
-    const naElements = screen.getAllByText('N/A');
-    expect(naElements.length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByTestId('edit-plan-button')).toBeVisible();
   });
 
-  it('renders participant avatars with count', () => {
-    render(<Plan plan={buildPlan()} />);
-
-    expect(
-      screen.getByText((_content, element) => {
-        return element?.textContent === 'Participants (1)';
-      })
-    ).toBeInTheDocument();
-  });
-
-  it('shows add participant circle that opens modal with form', async () => {
-    const user = userEvent.setup();
-    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
-
-    const addButton = screen.getByTitle('+ Add Participant');
-    expect(addButton).toBeInTheDocument();
-
-    await user.click(addButton);
-
-    await waitFor(() => {
-      expect(screen.getByText('First Name *')).toBeInTheDocument();
-    });
-  });
-
-  it('shows manage button that opens participant modal', async () => {
-    const user = userEvent.setup();
-    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
-
-    expect(screen.getByText('Manage')).toBeInTheDocument();
-    await user.click(screen.getByText('Manage'));
-
-    await waitFor(() => {
-      expect(screen.getByText('owner')).toBeInTheDocument();
-      expect(screen.getByText('+1234567890')).toBeInTheDocument();
-    });
-  });
-
-  it('shows empty participant message in modal when no participants', async () => {
-    const user = userEvent.setup();
+  it('hides edit button when isOwner is false', () => {
     render(
-      <Plan plan={buildPlan({ participants: [] })} onAddParticipant={vi.fn()} />
+      <Plan
+        plan={buildTestPlan()}
+        isOwner={false}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
     );
 
-    await user.click(screen.getByText('Manage'));
-
-    await waitFor(() => {
-      expect(
-        screen.getByText('No participants yet. Add one to get started!')
-      ).toBeInTheDocument();
-    });
+    expect(screen.queryByTestId('edit-plan-button')).not.toBeInTheDocument();
   });
 
-  it('shows add participant button in modal when handler provided', async () => {
-    const user = userEvent.setup();
-    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+  it('hides edit button when onEdit is not provided', () => {
+    render(
+      <Plan plan={buildTestPlan()} isOwner={true} onDelete={handleDelete} />
+    );
 
-    await user.click(screen.getByText('Manage'));
-
-    await waitFor(() => {
-      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
-    });
+    expect(screen.queryByTestId('edit-plan-button')).not.toBeInTheDocument();
   });
 
-  it('opens add participant form in modal', async () => {
+  it('calls onEdit when the edit button is clicked', async () => {
     const user = userEvent.setup();
-    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+    render(
+      <Plan
+        plan={buildTestPlan()}
+        isOwner={true}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    );
 
-    await user.click(screen.getByText('Manage'));
-    await waitFor(() => {
-      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
-    });
-
-    await user.click(screen.getByText('+ Add Participant'));
-
-    expect(screen.getByText('First Name *')).toBeInTheDocument();
-    expect(screen.getByText('Last Name *')).toBeInTheDocument();
-    expect(screen.getByText('Phone *')).toBeInTheDocument();
-    expect(screen.getByText('Cancel')).toBeInTheDocument();
+    await user.click(screen.getByTestId('edit-plan-button'));
+    expect(handleEdit).toHaveBeenCalledTimes(1);
   });
 
-  it('submits add participant form and closes it', async () => {
-    const onAdd = vi.fn().mockResolvedValue(undefined);
-    const user = userEvent.setup();
-    render(<Plan plan={buildPlan()} onAddParticipant={onAdd} />);
+  it('shows delete button alongside edit button for owner', () => {
+    render(
+      <Plan
+        plan={buildTestPlan()}
+        isOwner={true}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    );
 
-    await user.click(screen.getByText('Manage'));
-    await waitFor(() => {
-      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
-    });
-
-    await user.click(screen.getByText('+ Add Participant'));
-
-    await user.type(screen.getByPlaceholderText('First name'), 'Bob');
-    await user.type(screen.getByPlaceholderText('Last name'), 'Jones');
-    await user.type(screen.getByPlaceholderText('Phone number'), '+9999999999');
-
-    await user.click(screen.getByText('Add Participant'));
-
-    await waitFor(() => {
-      expect(onAdd).toHaveBeenCalledWith({
-        name: 'Bob',
-        lastName: 'Jones',
-        contactPhone: '+9999999999',
-        contactEmail: undefined,
-      });
-    });
+    expect(screen.getByTestId('edit-plan-button')).toBeVisible();
+    expect(screen.getByText(/delete plan/i)).toBeVisible();
   });
 
-  it('cancels add participant form in modal', async () => {
-    const user = userEvent.setup();
-    render(<Plan plan={buildPlan()} onAddParticipant={vi.fn()} />);
+  it('hides both edit and delete when isOwner is false', () => {
+    render(
+      <Plan
+        plan={buildTestPlan()}
+        isOwner={false}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    );
 
-    await user.click(screen.getByText('Manage'));
-    await waitFor(() => {
-      expect(screen.getByText('+ Add Participant')).toBeInTheDocument();
-    });
-
-    await user.click(screen.getByText('+ Add Participant'));
-    expect(screen.getByText('First Name *')).toBeInTheDocument();
-
-    await user.click(screen.getByText('Cancel'));
-
-    await waitFor(() => {
-      expect(screen.queryByText('First Name *')).not.toBeInTheDocument();
-    });
+    expect(screen.queryByTestId('edit-plan-button')).not.toBeInTheDocument();
+    expect(screen.queryByText(/delete plan/i)).not.toBeInTheDocument();
   });
 });

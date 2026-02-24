@@ -25,6 +25,7 @@ function createTestData(): MockData {
         name: 'Alex',
         lastName: 'Guberman',
         role: 'owner',
+        rsvpStatus: 'confirmed',
         isOwner: true,
         createdAt: now,
         updatedAt: now,

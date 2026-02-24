@@ -15,6 +15,8 @@ function buildParticipant(overrides?: Partial<Participant>): Participant {
     role: 'owner',
     avatarUrl: null,
     contactEmail: null,
+    rsvpStatus: 'pending',
+    lastActivityAt: null,
     adultsCount: null,
     kidsCount: null,
     foodPreferences: null,
@@ -28,7 +30,9 @@ function buildParticipant(overrides?: Partial<Participant>): Participant {
 
 describe('ParticipantDetails', () => {
   it('renders nothing when participants list is empty', () => {
-    const { container } = render(<ParticipantDetails participants={[]} />);
+    const { container } = render(
+      <ParticipantDetails participants={[]} planId="plan-1" planTitle="Test" />
+    );
 
     expect(container.firstChild).toBeNull();
   });
@@ -44,6 +48,8 @@ describe('ParticipantDetails', () => {
             role: 'participant',
           }),
         ]}
+        planId="plan-1"
+        planTitle="Test"
       />
     );
 
@@ -53,14 +59,26 @@ describe('ParticipantDetails', () => {
   });
 
   it('renders participant name and role badge', () => {
-    render(<ParticipantDetails participants={[buildParticipant()]} />);
+    render(
+      <ParticipantDetails
+        participants={[buildParticipant()]}
+        planId="plan-1"
+        planTitle="Test"
+      />
+    );
 
     expect(screen.getByText('Alex Smith')).toBeInTheDocument();
     expect(screen.getByText('owner')).toBeInTheDocument();
   });
 
   it('shows "not filled" when participant has no preferences', () => {
-    render(<ParticipantDetails participants={[buildParticipant()]} />);
+    render(
+      <ParticipantDetails
+        participants={[buildParticipant()]}
+        planId="plan-1"
+        planTitle="Test"
+      />
+    );
 
     expect(screen.getByText('Preferences not filled yet')).toBeInTheDocument();
   });
@@ -69,6 +87,8 @@ describe('ParticipantDetails', () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant({ adultsCount: 2 })]}
+        planId="plan-1"
+        planTitle="Test"
       />
     );
 
@@ -83,6 +103,8 @@ describe('ParticipantDetails', () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant({ adultsCount: 2, kidsCount: 3 })]}
+        planId="plan-1"
+        planTitle="Test"
       />
     );
 
@@ -98,6 +120,8 @@ describe('ParticipantDetails', () => {
             allergies: 'nuts',
           }),
         ]}
+        planId="plan-1"
+        planTitle="Test"
       />
     );
 
@@ -109,6 +133,8 @@ describe('ParticipantDetails', () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant({ notes: 'bring extra tent' })]}
+        planId="plan-1"
+        planTitle="Test"
       />
     );
 
@@ -120,6 +146,8 @@ describe('ParticipantDetails', () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant()]}
+        planId="plan-1"
+        planTitle="Test"
         onEditPreferences={vi.fn()}
       />
     );
@@ -128,7 +156,13 @@ describe('ParticipantDetails', () => {
   });
 
   it('does not show edit button when onEditPreferences is not provided', () => {
-    render(<ParticipantDetails participants={[buildParticipant()]} />);
+    render(
+      <ParticipantDetails
+        participants={[buildParticipant()]}
+        planId="plan-1"
+        planTitle="Test"
+      />
+    );
 
     expect(screen.queryByText('Edit')).not.toBeInTheDocument();
   });
@@ -139,6 +173,8 @@ describe('ParticipantDetails', () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant({ participantId: 'p-42' })]}
+        planId="plan-1"
+        planTitle="Test"
         onEditPreferences={onEdit}
       />
     );
@@ -163,6 +199,8 @@ describe('ParticipantDetails', () => {
             foodPreferences: 'vegan',
           }),
         ]}
+        planId="plan-1"
+        planTitle="Test"
       />
     );
 

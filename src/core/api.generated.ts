@@ -1453,6 +1453,10 @@ export interface components {
       avatarUrl?: string | null;
       contactEmail?: string | null;
       inviteToken?: string | null;
+      /** @enum {string} */
+      rsvpStatus: 'pending' | 'confirmed' | 'not_sure';
+      /** Format: date-time */
+      lastActivityAt?: string | null;
       adultsCount?: number | null;
       kidsCount?: number | null;
       foodPreferences?: string | null;

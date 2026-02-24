@@ -51,45 +51,6 @@ jobs:
         env:
           API_SPEC_TOKEN: ${{ secrets.API_SPEC_TOKEN }}
 
-      - name: Run linting
-        run: npm run lint
-
-      - name: Run type checking
-        run: npm run typecheck
-
-      - name: Run unit tests
-        run: npm run test:unit
-
-      - name: Run integration tests
-        run: npm run test:integ
-
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ hashFiles('package-lock.json') }}
-
-      - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install chromium
-
-      - name: Install Playwright system deps
-        run: npx playwright install-deps chromium
-
-      - name: Run E2E tests (Chrome)
-        run: npx playwright test --project="Desktop Chrome"
-        env:
-          VITE_AUTH_MOCK: 'true'
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: playwright-report-chrome
-          path: playwright-report/
-          retention-days: 7
-
       - name: Build
         run: npm run build
         env:

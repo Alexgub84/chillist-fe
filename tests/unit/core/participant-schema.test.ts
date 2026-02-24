@@ -10,6 +10,7 @@ describe('participantSchema date-time validation', () => {
     contactPhone: '+1234567890',
     displayName: 'Test User',
     role: 'owner' as const,
+    rsvpStatus: 'pending' as const,
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   };
