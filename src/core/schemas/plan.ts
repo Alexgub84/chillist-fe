@@ -13,7 +13,7 @@ const PLAN_STATUS_VALUES = [
 ] as const satisfies readonly BEPlan['status'][];
 const PLAN_VISIBILITY_VALUES = [
   'public',
-  'unlisted',
+  'invite_only',
   'private',
 ] as const satisfies readonly BEPlan['visibility'][];
 

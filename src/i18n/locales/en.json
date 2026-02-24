@@ -198,7 +198,7 @@
   },
   "planVisibility": {
     "public": "Public",
-    "unlisted": "Unlisted",
+    "invite_only": "Invited Only",
     "private": "Private"
   },
   "filters": {

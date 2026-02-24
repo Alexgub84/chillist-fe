@@ -1258,7 +1258,7 @@ export interface components {
       /** @enum {string} */
       status: 'draft' | 'active' | 'archived';
       /** @enum {string} */
-      visibility: 'public' | 'unlisted' | 'private';
+      visibility: 'public' | 'invite_only' | 'private';
       /** Format: uuid */
       ownerParticipantId?: string | null;
       /** Format: uuid */
@@ -1290,7 +1290,7 @@ export interface components {
       title: string;
       description?: string | null;
       /** @enum {string} */
-      visibility?: 'public' | 'unlisted' | 'private';
+      visibility?: 'public' | 'invite_only' | 'private';
       location?: components['schemas']['def-4'] | null;
       /** Format: date-time */
       startDate?: string | null;
@@ -1303,7 +1303,7 @@ export interface components {
       title: string;
       description?: string | null;
       /** @enum {string} */
-      visibility?: 'public' | 'unlisted' | 'private';
+      visibility?: 'public' | 'invite_only' | 'private';
       location?: components['schemas']['def-4'] | null;
       /** Format: date-time */
       startDate?: string | null;
@@ -1320,7 +1320,7 @@ export interface components {
       /** @enum {string} */
       status?: 'draft' | 'active' | 'archived';
       /** @enum {string} */
-      visibility?: 'public' | 'unlisted' | 'private';
+      visibility?: 'public' | 'invite_only' | 'private';
       location?: components['schemas']['def-4'] | null;
       /** Format: date-time */
       startDate?: string | null;
@@ -1506,7 +1506,7 @@ export interface components {
       /** @enum {string} */
       status: 'draft' | 'active' | 'archived';
       /** @enum {string} */
-      visibility: 'public' | 'unlisted' | 'private';
+      visibility: 'public' | 'invite_only' | 'private';
       /** Format: uuid */
       ownerParticipantId?: string | null;
       /** Format: uuid */

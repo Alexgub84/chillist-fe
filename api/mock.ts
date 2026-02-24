@@ -25,7 +25,7 @@ const planSchema = z.object({
   title: z.string(),
   description: z.string().nullable().optional(),
   status: z.enum(['draft', 'active', 'archived']),
-  visibility: z.enum(['public', 'unlisted', 'private']),
+  visibility: z.enum(['public', 'invite_only', 'private']),
   ownerParticipantId: z.string().nullable().optional(),
   location: locationSchema.nullable().optional(),
   startDate: z.string().datetime().nullable().optional(),

@@ -4,6 +4,15 @@ import userEvent from '@testing-library/user-event';
 import PlanForm from '../../../src/components/PlanForm';
 import type { DefaultOwner } from '../../../src/components/PlanForm';
 
+vi.mock('../../../src/contexts/useAuth', () => ({
+  useAuth: () => ({
+    session: null,
+    user: null,
+    loading: false,
+    signOut: vi.fn(),
+  }),
+}));
+
 vi.mock('uuid', () => ({
   v5: vi.fn(
     (name: string) => `uuid-${name.toLowerCase().replace(/\s+/g, '-')}`
