@@ -181,6 +181,19 @@ function cloneData(data: MockData): MutableStore {
   };
 }
 
+function extractUserIdFromJwt(authHeader?: string): string | null {
+  if (!authHeader?.startsWith('Bearer ')) return null;
+  const token = authHeader.slice(7);
+  const parts = token.split('.');
+  if (parts.length < 2) return null;
+  try {
+    const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString());
+    return payload.sub ?? null;
+  } catch {
+    return null;
+  }
+}
+
 function ensurePlan(store: MutableStore, planId: string): Plan {
   const plan = store.plans.find((entry) => entry.planId === planId);
   if (!plan) {
@@ -363,6 +376,9 @@ export async function buildServer(
     const parsed = planCreateWithOwnerSchema.parse(request.body);
     const now = new Date().toISOString();
     const planId = randomUUID();
+    const jwtUserId = extractUserIdFromJwt(
+      request.headers.authorization as string | undefined
+    );
 
     const location = parsed.location
       ? {
@@ -375,6 +391,7 @@ export async function buildServer(
     const ownerParticipant: Participant = {
       participantId: ownerParticipantId,
       planId,
+      userId: jwtUserId ?? undefined,
       name: parsed.owner.name,
       lastName: parsed.owner.lastName,
       contactPhone: parsed.owner.contactPhone,
@@ -383,6 +400,8 @@ export async function buildServer(
       avatarUrl: parsed.owner.avatarUrl ?? null,
       contactEmail: parsed.owner.contactEmail ?? null,
       inviteToken: randomBytes(32).toString('hex'),
+      rsvpStatus: 'confirmed',
+      lastActivityAt: null,
       adultsCount: null,
       kidsCount: null,
       foodPreferences: null,
@@ -405,6 +424,8 @@ export async function buildServer(
       avatarUrl: p.avatarUrl ?? null,
       contactEmail: p.contactEmail ?? null,
       inviteToken: randomBytes(32).toString('hex'),
+      rsvpStatus: 'pending' as const,
+      lastActivityAt: null,
       adultsCount: p.adultsCount ?? null,
       kidsCount: p.kidsCount ?? null,
       foodPreferences: p.foodPreferences ?? null,
@@ -454,6 +475,17 @@ export async function buildServer(
       const planParticipants = store.participants.filter((p) =>
         participantIds.has(p.participantId)
       );
+
+      const jwtUserId = extractUserIdFromJwt(
+        request.headers.authorization as string | undefined
+      );
+      if (jwtUserId) {
+        const ownerP = planParticipants.find((p) => p.role === 'owner');
+        if (ownerP && !ownerP.userId) {
+          ownerP.userId = jwtUserId;
+        }
+      }
+
       void reply.send({
         ...plan,
         items: planItems,
@@ -538,6 +570,8 @@ export async function buildServer(
         avatarUrl: parsed.avatarUrl ?? null,
         contactEmail: parsed.contactEmail ?? null,
         inviteToken: randomBytes(32).toString('hex'),
+        rsvpStatus: 'pending',
+        lastActivityAt: null,
         adultsCount: parsed.adultsCount ?? null,
         kidsCount: parsed.kidsCount ?? null,
         foodPreferences: parsed.foodPreferences ?? null,

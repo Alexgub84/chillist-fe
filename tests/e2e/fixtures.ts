@@ -6,6 +6,7 @@ const API_PATTERN = '**/localhost:3333';
 interface MockParticipant {
   participantId: string;
   planId: string;
+  userId: string | null;
   name: string;
   lastName: string;
   contactPhone: string;
@@ -14,6 +15,8 @@ interface MockParticipant {
   avatarUrl: string | null;
   contactEmail: string | null;
   inviteToken: string | null;
+  rsvpStatus: string;
+  lastActivityAt: string | null;
   adultsCount: number | null;
   kidsCount: number | null;
   foodPreferences: string | null;
@@ -65,11 +68,13 @@ export function buildParticipant(
     lastName: string;
     phone?: string;
     role?: string;
+    userId?: string;
   }
 ): MockParticipant {
   return {
     participantId: randomUUID(),
     planId,
+    userId: p.userId ?? null,
     name: p.name,
     lastName: p.lastName,
     contactPhone: p.phone ?? '555-0000',
@@ -78,6 +83,8 @@ export function buildParticipant(
     avatarUrl: null,
     contactEmail: null,
     inviteToken: randomBytes(32).toString('hex'),
+    rsvpStatus: p.role === 'owner' ? 'confirmed' : 'pending',
+    lastActivityAt: null,
     adultsCount: null,
     kidsCount: null,
     foodPreferences: null,
@@ -121,6 +128,7 @@ export function buildPlan(opts?: {
     lastName: string;
     phone?: string;
     role?: string;
+    userId?: string;
   }>;
   items?: Array<{
     name: string;
@@ -160,7 +168,12 @@ export async function mockPlanRoutes(page: Page, plan: MockPlan) {
   const state = structuredClone(plan);
 
   await page.route(`${API_PATTERN}/plans/${state.planId}`, async (route) => {
-    if (route.request().method() === 'GET') {
+    const method = route.request().method();
+    if (method === 'GET') {
+      await route.fulfill({ json: state });
+    } else if (method === 'PATCH') {
+      const updates = route.request().postDataJSON();
+      Object.assign(state, updates, { updatedAt: timestamp() });
       await route.fulfill({ json: state });
     } else {
       await route.continue();

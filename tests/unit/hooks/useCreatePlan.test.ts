@@ -47,6 +47,7 @@ describe('useCreatePlan', () => {
         lastName: 'Owner',
         contactPhone: '+1234567890',
         role: 'owner' as const,
+        rsvpStatus: 'confirmed' as const,
         createdAt: '2025-12-12T00:00:00Z',
         updatedAt: '2025-12-12T00:00:00Z',
       },

@@ -158,6 +158,7 @@ interface PlanProps {
   onAddParticipant?: (participant: ParticipantCreate) => Promise<void>;
   isAddingParticipant?: boolean;
   isOwner?: boolean;
+  onEdit?: () => void;
   onDelete?: () => void;
   isDeleting?: boolean;
 }
@@ -167,6 +168,7 @@ export function Plan({
   onAddParticipant,
   isAddingParticipant = false,
   isOwner = false,
+  onEdit,
   onDelete,
   isDeleting = false,
 }: PlanProps) {
@@ -308,15 +310,27 @@ export function Plan({
           </div>
         </div>
 
-        {isOwner && onDelete && (
-          <div className="border-t border-gray-200 pt-4">
-            <button
-              type="button"
-              onClick={() => setShowDeleteConfirm(true)}
-              className="px-4 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 active:bg-red-100 transition-colors"
-            >
-              {t('plan.delete')}
-            </button>
+        {isOwner && (onEdit || onDelete) && (
+          <div className="border-t border-gray-200 pt-4 flex gap-3">
+            {onEdit && (
+              <button
+                type="button"
+                data-testid="edit-plan-button"
+                onClick={onEdit}
+                className="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors"
+              >
+                {t('plan.edit')}
+              </button>
+            )}
+            {onDelete && (
+              <button
+                type="button"
+                onClick={() => setShowDeleteConfirm(true)}
+                className="px-4 py-2 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 active:bg-red-100 transition-colors"
+              >
+                {t('plan.delete')}
+              </button>
+            )}
           </div>
         )}
       </div>

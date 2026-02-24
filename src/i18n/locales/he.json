@@ -96,6 +96,9 @@
     "loading": "טוען פרטי תוכנית...",
     "notFound": "התוכנית לא נמצאה",
     "filterByPerson": "סינון לפי אדם",
+    "edit": "עריכת תוכנית",
+    "editPlan": "עריכת תוכנית",
+    "updated": "התוכנית עודכנה",
     "delete": "מחיקת תוכנית",
     "deleteConfirmTitle": "למחוק את התוכנית?",
     "deleteConfirmMessage": "פעולה זו תמחק לצמיתות את התוכנית ואת כל הפריטים שלה. לא ניתן לבטל פעולה זו.",
@@ -158,7 +161,9 @@
     "tags": "תגיות (מופרדות בפסיקים)",
     "tagsPlaceholder": "לדוגמה: פיקניק, חברים, קיץ",
     "submitting": "יוצר…",
-    "submit": "יצירת תוכנית"
+    "submit": "יצירת תוכנית",
+    "updating": "מעדכן…",
+    "update": "עדכון תוכנית"
   },
   "items": {
     "title": "פריטים",
@@ -301,10 +306,10 @@
     "thunderstorm": "סופת רעמים"
   },
   "preferences": {
-    "title": "ספרו לנו על הקבוצה שלכם",
-    "subtitle": "עזרו למארגן לתכנן טוב יותר — כמה מגיעים איתכם?",
-    "adultsCount": "מבוגרים",
-    "adultsCountPlaceholder": "0",
+    "title": "כמה אתם מגיעים?",
+    "subtitle": "המספר כולל אתכם.",
+    "adultsCount": "מבוגרים (כולל אתכם)",
+    "adultsCountPlaceholder": "1",
     "kidsCount": "ילדים",
     "kidsCountPlaceholder": "0",
     "foodPreferences": "העדפות אוכל",

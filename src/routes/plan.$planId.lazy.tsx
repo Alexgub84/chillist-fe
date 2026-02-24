@@ -15,15 +15,16 @@ import { useUpdateItem } from '../hooks/useUpdateItem';
 import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { useDeletePlan } from '../hooks/useDeletePlan';
+import { useUpdatePlan } from '../hooks/useUpdatePlan';
 import { useAuth } from '../contexts/useAuth';
 import { getApiErrorMessage } from '../core/error-utils';
-import { copyInviteLink } from '../core/invite';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import Forecast from '../components/Forecast';
 import ParticipantDetails from '../components/ParticipantDetails';
 import CategorySection from '../components/CategorySection';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
+import EditPlanForm from '../components/EditPlanForm';
 import PreferencesForm, {
   type PreferencesFormValues,
 } from '../components/PreferencesForm';
@@ -31,6 +32,7 @@ import Modal from '../components/shared/Modal';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
 import type { ItemCategory, ItemPatch } from '../core/schemas/item';
+import type { PlanPatch } from '../core/schemas/plan';
 import type { ListFilter } from '../core/schemas/plan-search';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
@@ -47,6 +49,7 @@ function PlanDetails() {
   const createParticipantMutation = useCreateParticipant(planId);
   const updateParticipantMutation = useUpdateParticipant(planId);
   const deletePlanMutation = useDeletePlan();
+  const updatePlanMutation = useUpdatePlan(planId);
   const { user } = useAuth();
   const { list: listFilter, participant: participantFilter } = useSearch({
     from: '/plan/$planId',
@@ -56,6 +59,7 @@ function PlanDetails() {
   const [editingParticipantId, setEditingParticipantId] = useState<
     string | null
   >(null);
+  const [showEditPlanModal, setShowEditPlanModal] = useState(false);
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
@@ -156,6 +160,19 @@ function PlanDetails() {
     }
   }
 
+  async function handleEditPlan(updates: PlanPatch) {
+    try {
+      await updatePlanMutation.mutateAsync(updates);
+      toast.success(t('plan.updated'));
+      setShowEditPlanModal(false);
+    } catch (err) {
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
   const participantCounts: Record<string, number> = { unassigned: 0 };
@@ -211,16 +228,11 @@ function PlanDetails() {
         <Plan
           plan={plan}
           onAddParticipant={async (p) => {
-            const created = await createParticipantMutation.mutateAsync(p);
-            if (created.inviteToken) {
-              const copied = await copyInviteLink(planId, created.inviteToken);
-              if (copied) {
-                toast.success(t('invite.copiedAfterCreate'));
-              }
-            }
+            await createParticipantMutation.mutateAsync(p);
           }}
           isAddingParticipant={createParticipantMutation.isPending}
           isOwner={isOwner}
+          onEdit={() => setShowEditPlanModal(true)}
           onDelete={handleDeletePlan}
           isDeleting={deletePlanMutation.isPending}
         />
@@ -237,6 +249,8 @@ function PlanDetails() {
           <div className="mt-6 sm:mt-8">
             <ParticipantDetails
               participants={plan.participants}
+              planId={planId}
+              planTitle={plan.title}
               onEditPreferences={setEditingParticipantId}
             />
           </div>
@@ -376,6 +390,20 @@ function PlanDetails() {
               inModal
             />
           )}
+        </Modal>
+
+        <Modal
+          open={showEditPlanModal}
+          onClose={() => setShowEditPlanModal(false)}
+          title={t('plan.editPlan')}
+        >
+          <EditPlanForm
+            key={showEditPlanModal ? 'open' : 'closed'}
+            plan={plan}
+            onSubmit={handleEditPlan}
+            onCancel={() => setShowEditPlanModal(false)}
+            isSubmitting={updatePlanMutation.isPending}
+          />
         </Modal>
       </div>
 

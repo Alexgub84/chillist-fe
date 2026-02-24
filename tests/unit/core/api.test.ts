@@ -123,6 +123,7 @@ describe('API Client', () => {
         lastName: 'User',
         contactPhone: '+1234567890',
         role: 'owner',
+        rsvpStatus: 'confirmed',
         createdAt: '2025-01-01T00:00:00Z',
         updatedAt: '2025-01-01T00:00:00Z',
       },
@@ -137,6 +138,7 @@ describe('API Client', () => {
     contactPhone: '+1234567890',
     displayName: 'Test User',
     role: 'owner',
+    rsvpStatus: 'confirmed',
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   };
@@ -276,6 +278,7 @@ describe('API Client', () => {
             lastName: 'Smith',
             contactPhone: '+1234567890',
             role: 'owner',
+            rsvpStatus: 'confirmed',
             createdAt: '2025-01-01T00:00:00Z',
             updatedAt: '2025-01-01T00:00:00Z',
           },

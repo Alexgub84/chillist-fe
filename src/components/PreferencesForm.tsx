@@ -6,7 +6,7 @@ import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea } from './shared/FormInput';
 
 const preferencesFormSchema = z.object({
-  adultsCount: z.coerce.number().int().min(0).optional(),
+  adultsCount: z.coerce.number().int().min(1).optional(),
   kidsCount: z.coerce.number().int().min(0).optional(),
   foodPreferences: z.string().optional(),
   allergies: z.string().optional(),
@@ -40,7 +40,7 @@ export default function PreferencesForm({
   } = useForm<PreferencesFormValues>({
     resolver: zodResolver(preferencesFormSchema),
     defaultValues: {
-      adultsCount: defaultValues?.adultsCount ?? undefined,
+      adultsCount: defaultValues?.adultsCount ?? 1,
       kidsCount: defaultValues?.kidsCount ?? undefined,
       foodPreferences: defaultValues?.foodPreferences ?? '',
       allergies: defaultValues?.allergies ?? '',
@@ -60,7 +60,7 @@ export default function PreferencesForm({
             <FormLabel>{t('preferences.adultsCount')}</FormLabel>
             <FormInput
               type="number"
-              min={0}
+              min={1}
               {...register('adultsCount')}
               placeholder={t('preferences.adultsCountPlaceholder')}
               compact

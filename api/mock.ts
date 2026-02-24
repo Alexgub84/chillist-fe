@@ -36,19 +36,32 @@ const planSchema = z.object({
   updatedAt: z.string().datetime(),
 });
 
-const participantSchema = z.object({
-  participantId: z.string(),
-  planId: z.string(),
-  name: z.string(),
-  lastName: z.string(),
-  contactPhone: z.string(),
-  displayName: z.string().nullable().optional(),
-  role: z.enum(['owner', 'participant', 'viewer']),
-  avatarUrl: z.string().url().nullish(),
-  contactEmail: z.string().email().nullish(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
-});
+const participantSchema = z
+  .object({
+    participantId: z.string(),
+    planId: z.string(),
+    name: z.string(),
+    lastName: z.string(),
+    contactPhone: z.string(),
+    displayName: z.string().nullable().optional(),
+    role: z.enum(['owner', 'participant', 'viewer']),
+    avatarUrl: z.string().url().nullish(),
+    contactEmail: z.string().email().nullish(),
+    inviteToken: z.string().nullish(),
+    rsvpStatus: z
+      .enum(['pending', 'confirmed', 'not_sure'])
+      .optional()
+      .default('pending'),
+    lastActivityAt: z.string().datetime().nullish(),
+    adultsCount: z.number().int().nullish(),
+    kidsCount: z.number().int().nullish(),
+    foodPreferences: z.string().nullish(),
+    allergies: z.string().nullish(),
+    notes: z.string().nullish(),
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+  })
+  .passthrough();
 
 const equipmentItemSchema = z.object({
   itemId: z.string(),

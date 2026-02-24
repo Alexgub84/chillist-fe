@@ -7,7 +7,7 @@ describe('PreferencesForm', () => {
   it('renders all form fields', () => {
     render(<PreferencesForm onSubmit={vi.fn()} isSubmitting={false} />);
 
-    expect(screen.getByText('Adults')).toBeInTheDocument();
+    expect(screen.getByText('Adults (including you)')).toBeInTheDocument();
     expect(screen.getByText('Kids')).toBeInTheDocument();
     expect(screen.getByText('Food preferences')).toBeInTheDocument();
     expect(screen.getByText('Allergies')).toBeInTheDocument();
@@ -99,8 +99,7 @@ describe('PreferencesForm', () => {
     const onSubmit = vi.fn();
     render(<PreferencesForm onSubmit={onSubmit} isSubmitting={false} />);
 
-    const [adultsInput, kidsInput] = screen.getAllByPlaceholderText('0');
-    void kidsInput;
+    const adultsInput = screen.getByPlaceholderText('1');
     const foodInput = screen.getByPlaceholderText(
       'e.g. vegetarian, no shellfish'
     );
