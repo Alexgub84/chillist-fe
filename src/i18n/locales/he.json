@@ -198,7 +198,7 @@
   },
   "planVisibility": {
     "public": "ציבורי",
-    "unlisted": "לא ברשימה",
+    "invite_only": "מוזמנים בלבד",
     "private": "פרטי"
   },
   "filters": {

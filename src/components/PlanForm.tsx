@@ -13,6 +13,7 @@ import {
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 import { useLanguage } from '../contexts/useLanguage';
+import { useAuth } from '../contexts/useAuth';
 import {
   countryCodes,
   getFlagEmoji,
@@ -134,6 +135,8 @@ export default function PlanForm({
 }: PlanFormProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const { user } = useAuth();
+  const isAuthenticated = !!user;
   const ownerPhone = resolveOwnerPhone(defaultOwner, language);
   const defaultPhoneCountry = getDefaultCountryByLanguage(language);
   const {
@@ -147,7 +150,7 @@ export default function PlanForm({
     resolver: zodResolver(createPlanFormSchema),
     defaultValues: {
       status: 'draft',
-      visibility: 'private',
+      visibility: isAuthenticated ? 'private' : 'public',
       oneDay: false,
       participants: [],
       ownerName: defaultOwner?.ownerName ?? '',
@@ -332,9 +335,16 @@ export default function PlanForm({
           <div>
             <FormLabel>{t('planForm.visibility')}</FormLabel>
             <FormSelect {...register('visibility')}>
-              <option value="public">{t('planVisibility.public')}</option>
-              <option value="unlisted">{t('planVisibility.unlisted')}</option>
-              <option value="private">{t('planVisibility.private')}</option>
+              {isAuthenticated ? (
+                <>
+                  <option value="private">{t('planVisibility.private')}</option>
+                  <option value="invite_only">
+                    {t('planVisibility.invite_only')}
+                  </option>
+                </>
+              ) : (
+                <option value="public">{t('planVisibility.public')}</option>
+              )}
             </FormSelect>
           </div>
         </div>

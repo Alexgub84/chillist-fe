@@ -31,7 +31,7 @@ function statusColor(code: number): string {
 }
 
 const planStatusSchema = z.enum(['draft', 'active', 'archived']);
-const planVisibilitySchema = z.enum(['public', 'unlisted', 'private']);
+const planVisibilitySchema = z.enum(['public', 'invite_only', 'private']);
 const itemStatusSchema = z.enum(['pending', 'purchased', 'packed', 'canceled']);
 const itemCategorySchema = z.enum(['equipment', 'food']);
 const unitSchema = z.enum([
