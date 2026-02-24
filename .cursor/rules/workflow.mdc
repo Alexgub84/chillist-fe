@@ -17,6 +17,9 @@ The ONE exception: you MAY read and write files in /Users/alexguberman/Projects/
 - NEVER commit without creating a branch first: `git checkout -b feat/<name>`
 - Always push the feature branch and open a PR with `gh pr create`.
 - If the user says "commit and push", create a feature branch first — do NOT push to main.
+- **Before every push**, sync with main to prevent PR conflicts:
+  `git fetch origin main && git merge origin/main`
+  Resolve any conflicts, run validation, then push.
 
 # How to Start Every Task
 
