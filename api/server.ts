@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { randomBytes, randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 import Fastify, { type FastifyInstance } from 'fastify';
@@ -382,6 +382,7 @@ export async function buildServer(
       role: 'owner',
       avatarUrl: parsed.owner.avatarUrl ?? null,
       contactEmail: parsed.owner.contactEmail ?? null,
+      inviteToken: randomBytes(32).toString('hex'),
       adultsCount: null,
       kidsCount: null,
       foodPreferences: null,
@@ -403,6 +404,7 @@ export async function buildServer(
       role: p.role ?? 'participant',
       avatarUrl: p.avatarUrl ?? null,
       contactEmail: p.contactEmail ?? null,
+      inviteToken: randomBytes(32).toString('hex'),
       adultsCount: p.adultsCount ?? null,
       kidsCount: p.kidsCount ?? null,
       foodPreferences: p.foodPreferences ?? null,
@@ -535,6 +537,7 @@ export async function buildServer(
         role: parsed.role ?? 'participant',
         avatarUrl: parsed.avatarUrl ?? null,
         contactEmail: parsed.contactEmail ?? null,
+        inviteToken: randomBytes(32).toString('hex'),
         adultsCount: parsed.adultsCount ?? null,
         kidsCount: parsed.kidsCount ?? null,
         foodPreferences: parsed.foodPreferences ?? null,

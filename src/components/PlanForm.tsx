@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -168,6 +168,10 @@ export default function PlanForm({
 
   const oneDay = watch('oneDay');
   const locationData = watch('location');
+  const locationNameRef = useRef<HTMLInputElement | null>(null);
+  const { ref: locationNameFormRef, ...locationNameRest } = register(
+    'location.name' as const
+  );
 
   function handlePlaceSelect(place: PlaceResult) {
     setValue('location', {
@@ -528,17 +532,23 @@ export default function PlanForm({
             {t('planForm.locationLegend')}
           </legend>
           <div className="space-y-4">
-            <LocationAutocomplete
-              onPlaceSelect={handlePlaceSelect}
-              latitude={locationData?.latitude}
-              longitude={locationData?.longitude}
-            />
-            <div>
+            <div className="relative">
               <FormLabel>{t('planForm.locationName')}</FormLabel>
               <FormInput
-                {...register('location.name' as const)}
+                {...locationNameRest}
+                ref={(el) => {
+                  locationNameFormRef(el);
+                  locationNameRef.current = el;
+                }}
                 placeholder={t('planForm.locationNamePlaceholder')}
                 compact
+                autoComplete="off"
+              />
+              <LocationAutocomplete
+                onPlaceSelect={handlePlaceSelect}
+                latitude={locationData?.latitude}
+                longitude={locationData?.longitude}
+                inputRef={locationNameRef}
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -330,6 +330,14 @@
     "notes": "Notes",
     "edit": "Edit"
   },
+  "invite": {
+    "copied": "Invite link copied!",
+    "copiedAfterCreate": "Participant added! Invite link copied to clipboard.",
+    "copyLink": "Copy invite link",
+    "shareLink": "Share invite link",
+    "shareTitle": "Join my plan on Chillist",
+    "shareText": "You've been invited to join \"{{title}}\""
+  },
   "language": {
     "en": "EN",
     "he": "עב"

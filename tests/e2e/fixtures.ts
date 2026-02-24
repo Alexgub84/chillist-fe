@@ -1,5 +1,5 @@
 import { test as base, expect, type Page } from '@playwright/test';
-import { randomUUID } from 'node:crypto';
+import { randomBytes, randomUUID } from 'node:crypto';
 
 const API_PATTERN = '**/localhost:3333';
 
@@ -13,6 +13,7 @@ interface MockParticipant {
   role: string;
   avatarUrl: string | null;
   contactEmail: string | null;
+  inviteToken: string | null;
   adultsCount: number | null;
   kidsCount: number | null;
   foodPreferences: string | null;
@@ -76,6 +77,7 @@ export function buildParticipant(
     role: p.role ?? 'participant',
     avatarUrl: null,
     contactEmail: null,
+    inviteToken: randomBytes(32).toString('hex'),
     adultsCount: null,
     kidsCount: null,
     foodPreferences: null,

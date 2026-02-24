@@ -1,4 +1,11 @@
-import { useEffect, useRef, Component, type ReactNode } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  Component,
+  type ReactNode,
+} from 'react';
 import {
   APIProvider,
   Map,
@@ -22,6 +29,7 @@ interface LocationAutocompleteProps {
   onPlaceSelect: (place: PlaceResult) => void;
   latitude?: number | null;
   longitude?: number | null;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }
 
 class MapErrorBoundary extends Component<
@@ -40,86 +48,149 @@ class MapErrorBoundary extends Component<
   }
 }
 
-function AutocompleteInput({
+interface Suggestion {
+  placeId: string;
+  text: string;
+  toPlace: () => google.maps.places.Place;
+}
+
+function AutocompleteSuggestions({
   onPlaceSelect,
+  inputRef,
 }: {
   onPlaceSelect: (place: PlaceResult) => void;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [open, setOpen] = useState(false);
   const callbackRef = useRef(onPlaceSelect);
   callbackRef.current = onPlaceSelect;
-  const elementRef = useRef<google.maps.places.PlaceAutocompleteElement | null>(
-    null
-  );
+  const sessionTokenRef =
+    useRef<google.maps.places.AutocompleteSessionToken | null>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const places = useMapsLibrary('places');
 
+  const fetchSuggestions = useCallback(
+    async (input: string) => {
+      if (!places || input.length < 2) {
+        setSuggestions([]);
+        setOpen(false);
+        return;
+      }
+
+      if (!sessionTokenRef.current) {
+        sessionTokenRef.current =
+          new google.maps.places.AutocompleteSessionToken();
+      }
+
+      try {
+        const { suggestions: results } =
+          await google.maps.places.AutocompleteSuggestion.fetchAutocompleteSuggestions(
+            {
+              input,
+              sessionToken: sessionTokenRef.current,
+            }
+          );
+
+        const mapped: Suggestion[] = results
+          .filter((s) => s.placePrediction)
+          .map((s) => ({
+            placeId: s.placePrediction!.placeId,
+            text: s.placePrediction!.text.toString(),
+            toPlace: () => s.placePrediction!.toPlace(),
+          }));
+
+        setSuggestions(mapped);
+        setOpen(mapped.length > 0);
+      } catch {
+        setSuggestions([]);
+        setOpen(false);
+      }
+    },
+    [places]
+  );
+
+  const handleSelect = useCallback(async (suggestion: Suggestion) => {
+    setOpen(false);
+    setSuggestions([]);
+
+    const place = suggestion.toPlace();
+    await place.fetchFields({
+      fields: ['displayName', 'location', 'addressComponents'],
+    });
+
+    const components = place.addressComponents ?? [];
+    const get = (type: string) =>
+      components.find((c: google.maps.places.AddressComponent) =>
+        c.types.includes(type)
+      )?.longText ?? undefined;
+
+    callbackRef.current({
+      name: place.displayName ?? '',
+      city:
+        get('locality') ||
+        get('sublocality') ||
+        get('administrative_area_level_2'),
+      country: get('country'),
+      region: get('administrative_area_level_1'),
+      latitude: place.location?.lat() ?? 0,
+      longitude: place.location?.lng() ?? 0,
+    });
+
+    sessionTokenRef.current = null;
+  }, []);
+
   useEffect(() => {
-    const container = containerRef.current;
-    if (!places || !container || elementRef.current) return;
+    const input = inputRef.current;
+    if (!input) return;
 
-    try {
-      const autocomplete = new google.maps.places.PlaceAutocompleteElement({});
-      elementRef.current = autocomplete;
-      container.appendChild(autocomplete);
+    const onInput = () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
+        fetchSuggestions(input.value);
+      }, 300);
+    };
 
-      const processPlace = async (place: google.maps.places.Place) => {
-        await place.fetchFields({
-          fields: ['displayName', 'location', 'addressComponents'],
-        });
+    const onFocusOut = (e: FocusEvent) => {
+      const related = e.relatedTarget as Node | null;
+      if (containerRef.current?.contains(related)) return;
+      setTimeout(() => setOpen(false), 150);
+    };
 
-        const components = place.addressComponents || [];
-        const get = (type: string) =>
-          components.find((c) => c.types.includes(type))?.longText ?? undefined;
+    input.addEventListener('input', onInput);
+    input.addEventListener('focusout', onFocusOut);
 
-        callbackRef.current({
-          name: place.displayName || '',
-          city:
-            get('locality') ||
-            get('sublocality') ||
-            get('administrative_area_level_2'),
-          country: get('country'),
-          region: get('administrative_area_level_1'),
-          latitude: place.location?.lat() ?? 0,
-          longitude: place.location?.lng() ?? 0,
-        });
-      };
+    return () => {
+      input.removeEventListener('input', onInput);
+      input.removeEventListener('focusout', onFocusOut);
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [inputRef, fetchSuggestions]);
 
-      const handlePlaceSelect = (event: Event) => {
-        const e = event as unknown as {
-          place?: google.maps.places.Place;
-        };
-        if (e.place) void processPlace(e.place);
-      };
-
-      const handleGmpSelect = (event: Event) => {
-        const e = event as unknown as {
-          placePrediction?: { toPlace(): google.maps.places.Place };
-        };
-        if (e.placePrediction) void processPlace(e.placePrediction.toPlace());
-      };
-
-      autocomplete.addEventListener('gmp-placeselect', handlePlaceSelect);
-      autocomplete.addEventListener('gmp-select', handleGmpSelect);
-
-      return () => {
-        autocomplete.removeEventListener('gmp-placeselect', handlePlaceSelect);
-        autocomplete.removeEventListener('gmp-select', handleGmpSelect);
-        if (container.contains(autocomplete)) {
-          container.removeChild(autocomplete);
-        }
-        elementRef.current = null;
-      };
-    } catch {
-      // PlaceAutocompleteElement not available — container stays empty, manual fields still work
-    }
-  }, [places]);
+  if (!open || suggestions.length === 0) return null;
 
   return (
     <div
       ref={containerRef}
-      className="w-full [&>gmp-place-autocomplete]:w-full"
-    />
+      className="absolute z-50 mt-1 w-full rounded-md border border-gray-200 bg-white shadow-lg"
+    >
+      <ul className="max-h-60 overflow-auto py-1">
+        {suggestions.map((s) => (
+          <li key={s.placeId}>
+            <button
+              type="button"
+              className="w-full px-3 py-2 text-start text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => handleSelect(s)}
+            >
+              {s.text}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -154,18 +225,20 @@ export default function LocationAutocomplete({
   onPlaceSelect,
   latitude,
   longitude,
+  inputRef,
 }: LocationAutocompleteProps) {
   if (!MAPS_API_KEY) return null;
 
   return (
     <MapErrorBoundary>
-      <APIProvider apiKey={MAPS_API_KEY} version="beta">
-        <div className="space-y-3">
-          <AutocompleteInput onPlaceSelect={onPlaceSelect} />
-          {latitude != null && longitude != null && (
-            <MapPreview latitude={latitude} longitude={longitude} />
-          )}
-        </div>
+      <APIProvider apiKey={MAPS_API_KEY}>
+        <AutocompleteSuggestions
+          onPlaceSelect={onPlaceSelect}
+          inputRef={inputRef}
+        />
+        {latitude != null && longitude != null && (
+          <MapPreview latitude={latitude} longitude={longitude} />
+        )}
       </APIProvider>
     </MapErrorBoundary>
   );
