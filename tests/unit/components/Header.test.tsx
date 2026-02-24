@@ -36,6 +36,7 @@ function authUser(overrides?: {
       user_metadata: overrides?.user_metadata ?? {},
     } as never,
     loading: false,
+    isAdmin: false,
     signOut: vi.fn(),
   };
 }
@@ -51,6 +52,7 @@ describe('Header', () => {
         session: null,
         user: null,
         loading: false,
+        isAdmin: false,
         signOut: vi.fn(),
       });
 
@@ -65,6 +67,7 @@ describe('Header', () => {
         session: null,
         user: null,
         loading: true,
+        isAdmin: false,
         signOut: vi.fn(),
       });
 
@@ -79,6 +82,7 @@ describe('Header', () => {
         session: null,
         user: null,
         loading: false,
+        isAdmin: false,
         signOut: vi.fn(),
       });
 
@@ -94,6 +98,7 @@ describe('Header', () => {
         session: null,
         user: null,
         loading: false,
+        isAdmin: false,
         signOut: vi.fn(),
       });
 
@@ -270,6 +275,7 @@ describe('Header', () => {
         session: null,
         user: null,
         loading: false,
+        isAdmin: false,
         signOut: vi.fn(),
       });
 

@@ -9,6 +9,7 @@ vi.mock('../../../src/contexts/useAuth', () => ({
     session: null,
     user: null,
     loading: false,
+    isAdmin: false,
     signOut: vi.fn(),
   }),
 }));
