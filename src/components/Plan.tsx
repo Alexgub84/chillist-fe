@@ -35,6 +35,12 @@ function roleBadgeColor(role: Participant['role']) {
   return 'bg-blue-100 text-blue-700';
 }
 
+function rsvpBadgeColor(status: Participant['rsvpStatus']) {
+  if (status === 'confirmed') return 'bg-green-100 text-green-700';
+  if (status === 'not_sure') return 'bg-yellow-100 text-yellow-700';
+  return 'bg-gray-100 text-gray-500';
+}
+
 const addParticipantSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   lastName: z.string().min(1, 'Last name is required'),
@@ -361,9 +367,21 @@ export function Plan({
                       {p.name.charAt(0)}
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm sm:text-base font-medium text-gray-800 truncate">
-                        {p.name} {p.lastName}
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm sm:text-base font-medium text-gray-800 truncate">
+                          {p.name} {p.lastName}
+                        </p>
+                        {isOwner && p.role !== 'owner' && (
+                          <span
+                            className={clsx(
+                              'text-xs font-medium px-2 py-0.5 rounded-full shrink-0',
+                              rsvpBadgeColor(p.rsvpStatus)
+                            )}
+                          >
+                            {t(`rsvpStatus.${p.rsvpStatus}`)}
+                          </span>
+                        )}
+                      </div>
                       {p.contactPhone && (
                         <p className="text-xs text-gray-500 truncate">
                           {p.contactPhone}

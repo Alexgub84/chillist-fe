@@ -251,7 +251,8 @@ function PlanDetails() {
               participants={plan.participants}
               planId={planId}
               planTitle={plan.title}
-              onEditPreferences={setEditingParticipantId}
+              isOwner={isOwner}
+              onEditPreferences={isOwner ? setEditingParticipantId : undefined}
             />
           </div>
         )}

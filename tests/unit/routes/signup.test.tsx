@@ -12,6 +12,7 @@ vi.mock('@tanstack/react-router', () => ({
     <a href={to}>{children}</a>
   ),
   useNavigate: () => mockNavigate,
+  useSearch: () => ({}),
 }));
 
 vi.mock('react-hot-toast', () => ({
@@ -87,7 +88,7 @@ describe('Sign Up Page', () => {
     expect(mockNavigate).not.toHaveBeenCalled();
   });
 
-  it('redirects to /complete-profile when session is returned (no confirmation)', async () => {
+  it('redirects to /plans when session is returned (no confirmation)', async () => {
     mockSupabase.auth.signUp.mockResolvedValue({
       data: {
         session: { access_token: 'tok' },
@@ -104,7 +105,7 @@ describe('Sign Up Page', () => {
     await user.click(screen.getByRole('button', { name: /^sign up$/i }));
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith({ to: '/complete-profile' });
+      expect(mockNavigate).toHaveBeenCalledWith({ to: '/plans' });
     });
   });
 
@@ -132,7 +133,7 @@ describe('Sign Up Page', () => {
     expect(screen.getByText(/sign up with google/i)).toBeInTheDocument();
   });
 
-  it('calls signInWithOAuth with redirectTo pointing to /complete-profile', async () => {
+  it('calls signInWithOAuth with redirectTo pointing to /plans', async () => {
     const user = userEvent.setup();
     await renderSignUp();
 
@@ -141,12 +142,12 @@ describe('Sign Up Page', () => {
     expect(mockSupabase.auth.signInWithOAuth).toHaveBeenCalledWith({
       provider: 'google',
       options: expect.objectContaining({
-        redirectTo: expect.stringContaining('/complete-profile'),
+        redirectTo: expect.stringContaining('/plans'),
       }),
     });
   });
 
-  it('navigates to /complete-profile when OAuth returns no redirect URL (mock mode)', async () => {
+  it('navigates to /plans when OAuth returns no redirect URL (mock mode)', async () => {
     mockSupabase.auth.signInWithOAuth.mockResolvedValueOnce({
       data: { provider: 'google', url: '' },
       error: null,
@@ -158,7 +159,7 @@ describe('Sign Up Page', () => {
     await user.click(screen.getByText(/sign up with google/i));
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith({ to: '/complete-profile' });
+      expect(mockNavigate).toHaveBeenCalledWith({ to: '/plans' });
     });
   });
 

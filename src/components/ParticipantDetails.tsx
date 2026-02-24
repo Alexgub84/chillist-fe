@@ -10,6 +10,12 @@ function roleBadgeColor(role: Participant['role']) {
   return 'bg-blue-100 text-blue-700';
 }
 
+function rsvpBadgeColor(status: Participant['rsvpStatus']) {
+  if (status === 'confirmed') return 'bg-green-100 text-green-700';
+  if (status === 'not_sure') return 'bg-yellow-100 text-yellow-700';
+  return 'bg-gray-100 text-gray-500';
+}
+
 function avatarBorderColor(role: Participant['role']) {
   if (role === 'viewer') return 'border-gray-300';
   return 'border-emerald-400';
@@ -29,6 +35,7 @@ interface ParticipantDetailsProps {
   participants: Participant[];
   planId: string;
   planTitle: string;
+  isOwner?: boolean;
   onEditPreferences?: (participantId: string) => void;
 }
 
@@ -36,6 +43,7 @@ export default function ParticipantDetails({
   participants,
   planId,
   planTitle,
+  isOwner = false,
   onEditPreferences,
 }: ParticipantDetailsProps) {
   const { t } = useTranslation();
@@ -57,6 +65,7 @@ export default function ParticipantDetails({
             participant={p}
             planId={planId}
             planTitle={planTitle}
+            isOwner={isOwner}
             onEdit={
               onEditPreferences
                 ? () => onEditPreferences(p.participantId)
@@ -73,11 +82,13 @@ function ParticipantCard({
   participant: p,
   planId,
   planTitle,
+  isOwner,
   onEdit,
 }: {
   participant: Participant;
   planId: string;
   planTitle: string;
+  isOwner: boolean;
   onEdit?: () => void;
 }) {
   const { t } = useTranslation();
@@ -135,6 +146,16 @@ function ParticipantCard({
             >
               {t(`roles.${p.role}`)}
             </span>
+            {isOwner && p.role !== 'owner' && (
+              <span
+                className={clsx(
+                  'text-xs font-medium px-2 py-0.5 rounded-full shrink-0',
+                  rsvpBadgeColor(p.rsvpStatus)
+                )}
+              >
+                {t(`rsvpStatus.${p.rsvpStatus}`)}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0 ms-2">

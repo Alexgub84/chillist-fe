@@ -15,6 +15,7 @@ interface MockParticipant {
   avatarUrl: string | null;
   contactEmail: string | null;
   inviteToken: string | null;
+  inviteStatus: string;
   rsvpStatus: string;
   lastActivityAt: string | null;
   adultsCount: number | null;
@@ -83,6 +84,7 @@ export function buildParticipant(
     avatarUrl: null,
     contactEmail: null,
     inviteToken: randomBytes(32).toString('hex'),
+    inviteStatus: p.role === 'owner' ? 'accepted' : 'invited',
     rsvpStatus: p.role === 'owner' ? 'confirmed' : 'pending',
     lastActivityAt: null,
     adultsCount: null,
@@ -388,6 +390,58 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
       await route.continue();
     }
   });
+}
+
+export async function mockInviteRoute(
+  page: Page,
+  plan: MockPlan,
+  inviteToken: string
+) {
+  const strippedParticipants = plan.participants.map((p) => ({
+    participantId: p.participantId,
+    displayName: p.displayName ?? `${p.name} ${p.lastName}`,
+    role: p.role,
+  }));
+
+  await page.route(
+    `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}`,
+    async (route) => {
+      if (route.request().method() === 'GET') {
+        await route.fulfill({
+          json: {
+            planId: plan.planId,
+            title: plan.title,
+            description: plan.description,
+            status: plan.status,
+            location: null,
+            startDate: plan.startDate,
+            endDate: plan.endDate,
+            tags: plan.tags,
+            createdAt: plan.createdAt,
+            updatedAt: plan.updatedAt,
+            items: plan.items,
+            participants: strippedParticipants,
+          },
+        });
+      } else {
+        await route.continue();
+      }
+    }
+  );
+
+  await page.route(
+    `${API_PATTERN}/plans/${plan.planId}/invite/invalid-token-*`,
+    async (route) => {
+      if (route.request().method() === 'GET') {
+        await route.fulfill({
+          status: 404,
+          json: { message: 'Invalid or expired invite link' },
+        });
+      } else {
+        await route.continue();
+      }
+    }
+  );
 }
 
 const test = base;

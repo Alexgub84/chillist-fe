@@ -67,6 +67,7 @@
   "plans": {
     "title": "My Plans",
     "createNew": "Create New Plan",
+    "signInToCreate": "Sign in to create and manage plans",
     "empty": "No plans yet. Create one to get started!",
     "loading": "Loading plans...",
     "tryAgain": "Try Again",
@@ -216,6 +217,16 @@
     "participant": "participant",
     "viewer": "viewer"
   },
+  "rsvpStatus": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "not_sure": "Not sure"
+  },
+  "inviteStatus": {
+    "pending": "Pending",
+    "invited": "Invited",
+    "accepted": "Accepted"
+  },
   "errors": {
     "somethingWentWrong": "Something went wrong",
     "unexpectedError": "An unexpected error occurred.",
@@ -341,7 +352,17 @@
     "copyLink": "Copy invite link",
     "shareLink": "Share invite link",
     "shareTitle": "Join my plan on Chillist",
-    "shareText": "You've been invited to join \"{{title}}\""
+    "shareText": "You've been invited to join \"{{title}}\"",
+    "pageTitle": "You're Invited!",
+    "invalidLink": "This invite link is invalid or has expired.",
+    "backToHome": "Go to homepage",
+    "itemsTitle": "Items",
+    "participantsTitle": "Participants",
+    "noItems": "No items added yet.",
+    "noDescription": "No description provided.",
+    "signInToJoin": "Sign in to join this plan",
+    "signUpToJoin": "or create an account",
+    "goToPlan": "Go to plan"
   },
   "language": {
     "en": "EN",

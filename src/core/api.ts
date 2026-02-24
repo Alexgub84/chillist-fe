@@ -29,6 +29,10 @@ import {
   type PlanCreateWithOwner,
   type PlanPatch,
 } from './schemas/plan';
+import {
+  invitePlanResponseSchema,
+  type InvitePlanResponse,
+} from './schemas/invite';
 
 function getApiBaseUrl() {
   return import.meta.env.VITE_API_URL || 'http://localhost:3333';
@@ -142,6 +146,14 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   return processResponse<T>(response, endpoint);
 }
 
+async function publicRequest<T>(
+  endpoint: string,
+  options?: RequestInit
+): Promise<T> {
+  const response = await doFetch(endpoint, options);
+  return processResponse<T>(response, endpoint);
+}
+
 // --- Plans ---
 
 export async function fetchPlans(): Promise<Plan[]> {
@@ -193,6 +205,16 @@ export async function deletePlan(planId: string): Promise<void> {
   await request(`/plans/${planId}`, {
     method: 'DELETE',
   });
+}
+
+export async function fetchPlanByInvite(
+  planId: string,
+  inviteToken: string
+): Promise<InvitePlanResponse> {
+  const data = await publicRequest<unknown>(
+    `/plans/${planId}/invite/${inviteToken}`
+  );
+  return invitePlanResponseSchema.parse(data);
 }
 
 // --- Participants ---

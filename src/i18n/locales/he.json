@@ -67,6 +67,7 @@
   "plans": {
     "title": "התוכניות שלי",
     "createNew": "יצירת תוכנית חדשה",
+    "signInToCreate": "התחבר כדי ליצור ולנהל תוכניות",
     "empty": "אין תוכניות עדיין. צור אחת כדי להתחיל!",
     "loading": "טוען תוכניות...",
     "tryAgain": "נסה שוב",
@@ -216,6 +217,16 @@
     "participant": "משתתף",
     "viewer": "צופה"
   },
+  "rsvpStatus": {
+    "pending": "ממתין",
+    "confirmed": "מאושר",
+    "not_sure": "לא בטוח"
+  },
+  "inviteStatus": {
+    "pending": "ממתין",
+    "invited": "הוזמן",
+    "accepted": "התקבל"
+  },
   "errors": {
     "somethingWentWrong": "משהו השתבש",
     "unexpectedError": "אירעה שגיאה בלתי צפויה.",
@@ -341,7 +352,17 @@
     "copyLink": "העתקת קישור הזמנה",
     "shareLink": "שיתוף קישור הזמנה",
     "shareTitle": "הצטרף לתוכנית שלי ב-Chillist",
-    "shareText": "הוזמנת להצטרף ל-\"{{title}}\""
+    "shareText": "הוזמנת להצטרף ל-\"{{title}}\"",
+    "pageTitle": "הוזמנת!",
+    "invalidLink": "קישור ההזמנה אינו תקף או שפג תוקפו.",
+    "backToHome": "חזרה לדף הבית",
+    "itemsTitle": "פריטים",
+    "participantsTitle": "משתתפים",
+    "noItems": "עדיין לא נוספו פריטים.",
+    "noDescription": "אין תיאור.",
+    "signInToJoin": "התחבר כדי להצטרף לתוכנית",
+    "signUpToJoin": "או צור חשבון",
+    "goToPlan": "מעבר לתוכנית"
   },
   "language": {
     "en": "EN",

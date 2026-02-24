@@ -11,27 +11,18 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { Route as rootRouteImport } from './routes/__root';
+import { Route as SignupRouteImport } from './routes/signup';
+import { Route as SigninRouteImport } from './routes/signin';
 import { Route as CreatePlanRouteImport } from './routes/create-plan';
 import { Route as PlanPlanIdRouteImport } from './routes/plan.$planId';
+import { Route as InvitePlanIdInviteTokenRouteImport } from './routes/invite.$planId.$inviteToken';
 
-const SignupLazyRouteImport = createFileRoute('/signup')();
-const SigninLazyRouteImport = createFileRoute('/signin')();
 const PlansLazyRouteImport = createFileRoute('/plans')();
 const NotFoundLazyRouteImport = createFileRoute('/not-found')();
 const CompleteProfileLazyRouteImport = createFileRoute('/complete-profile')();
 const AboutLazyRouteImport = createFileRoute('/about')();
 const IndexLazyRouteImport = createFileRoute('/')();
 
-const SignupLazyRoute = SignupLazyRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route));
-const SigninLazyRoute = SigninLazyRouteImport.update({
-  id: '/signin',
-  path: '/signin',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/signin.lazy').then((d) => d.Route));
 const PlansLazyRoute = PlansLazyRouteImport.update({
   id: '/plans',
   path: '/plans',
@@ -54,6 +45,16 @@ const AboutLazyRoute = AboutLazyRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route));
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route));
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/signin.lazy').then((d) => d.Route));
 const CreatePlanRoute = CreatePlanRouteImport.update({
   id: '/create-plan',
   path: '/create-plan',
@@ -69,105 +70,105 @@ const PlanPlanIdRoute = PlanPlanIdRouteImport.update({
   path: '/plan/$planId',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/plan.$planId.lazy').then((d) => d.Route));
+const InvitePlanIdInviteTokenRoute = InvitePlanIdInviteTokenRouteImport.update({
+  id: '/invite/$planId/$inviteToken',
+  path: '/invite/$planId/$inviteToken',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/invite.$planId.$inviteToken.lazy').then((d) => d.Route)
+);
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute;
   '/create-plan': typeof CreatePlanRoute;
+  '/signin': typeof SigninRoute;
+  '/signup': typeof SignupRoute;
   '/about': typeof AboutLazyRoute;
   '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
-  '/signin': typeof SigninLazyRoute;
-  '/signup': typeof SignupLazyRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
+  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute;
   '/create-plan': typeof CreatePlanRoute;
+  '/signin': typeof SigninRoute;
+  '/signup': typeof SignupRoute;
   '/about': typeof AboutLazyRoute;
   '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
-  '/signin': typeof SigninLazyRoute;
-  '/signup': typeof SignupLazyRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
+  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   '/': typeof IndexLazyRoute;
   '/create-plan': typeof CreatePlanRoute;
+  '/signin': typeof SigninRoute;
+  '/signup': typeof SignupRoute;
   '/about': typeof AboutLazyRoute;
   '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
-  '/signin': typeof SigninLazyRoute;
-  '/signup': typeof SignupLazyRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
+  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
     | '/create-plan'
+    | '/signin'
+    | '/signup'
     | '/about'
     | '/complete-profile'
     | '/not-found'
     | '/plans'
-    | '/signin'
-    | '/signup'
-    | '/plan/$planId';
+    | '/plan/$planId'
+    | '/invite/$planId/$inviteToken';
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
     | '/create-plan'
+    | '/signin'
+    | '/signup'
     | '/about'
     | '/complete-profile'
     | '/not-found'
     | '/plans'
-    | '/signin'
-    | '/signup'
-    | '/plan/$planId';
+    | '/plan/$planId'
+    | '/invite/$planId/$inviteToken';
   id:
     | '__root__'
     | '/'
     | '/create-plan'
+    | '/signin'
+    | '/signup'
     | '/about'
     | '/complete-profile'
     | '/not-found'
     | '/plans'
-    | '/signin'
-    | '/signup'
-    | '/plan/$planId';
+    | '/plan/$planId'
+    | '/invite/$planId/$inviteToken';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute;
   CreatePlanRoute: typeof CreatePlanRoute;
+  SigninRoute: typeof SigninRoute;
+  SignupRoute: typeof SignupRoute;
   AboutLazyRoute: typeof AboutLazyRoute;
   CompleteProfileLazyRoute: typeof CompleteProfileLazyRoute;
   NotFoundLazyRoute: typeof NotFoundLazyRoute;
   PlansLazyRoute: typeof PlansLazyRoute;
-  SigninLazyRoute: typeof SigninLazyRoute;
-  SignupLazyRoute: typeof SignupLazyRoute;
   PlanPlanIdRoute: typeof PlanPlanIdRoute;
+  InvitePlanIdInviteTokenRoute: typeof InvitePlanIdInviteTokenRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/signup': {
-      id: '/signup';
-      path: '/signup';
-      fullPath: '/signup';
-      preLoaderRoute: typeof SignupLazyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    '/signin': {
-      id: '/signin';
-      path: '/signin';
-      fullPath: '/signin';
-      preLoaderRoute: typeof SigninLazyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
     '/plans': {
       id: '/plans';
       path: '/plans';
@@ -196,6 +197,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutLazyRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/signup': {
+      id: '/signup';
+      path: '/signup';
+      fullPath: '/signup';
+      preLoaderRoute: typeof SignupRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    '/signin': {
+      id: '/signin';
+      path: '/signin';
+      fullPath: '/signin';
+      preLoaderRoute: typeof SigninRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/create-plan': {
       id: '/create-plan';
       path: '/create-plan';
@@ -217,19 +232,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanPlanIdRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/invite/$planId/$inviteToken': {
+      id: '/invite/$planId/$inviteToken';
+      path: '/invite/$planId/$inviteToken';
+      fullPath: '/invite/$planId/$inviteToken';
+      preLoaderRoute: typeof InvitePlanIdInviteTokenRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   CreatePlanRoute: CreatePlanRoute,
+  SigninRoute: SigninRoute,
+  SignupRoute: SignupRoute,
   AboutLazyRoute: AboutLazyRoute,
   CompleteProfileLazyRoute: CompleteProfileLazyRoute,
   NotFoundLazyRoute: NotFoundLazyRoute,
   PlansLazyRoute: PlansLazyRoute,
-  SigninLazyRoute: SigninLazyRoute,
-  SignupLazyRoute: SignupLazyRoute,
   PlanPlanIdRoute: PlanPlanIdRoute,
+  InvitePlanIdInviteTokenRoute: InvitePlanIdInviteTokenRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

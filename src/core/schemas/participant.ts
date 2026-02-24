@@ -19,10 +19,16 @@ const RSVP_STATUS_VALUES = [
   'confirmed',
   'not_sure',
 ] as const satisfies readonly BEParticipant['rsvpStatus'][];
+const INVITE_STATUS_VALUES = [
+  'pending',
+  'invited',
+  'accepted',
+] as const satisfies readonly NonNullable<BEParticipant['inviteStatus']>[];
 
 export const participantRoleSchema = z.enum(ROLE_VALUES);
 export const participantCreateRoleSchema = z.enum(CREATE_ROLE_VALUES);
 export const rsvpStatusSchema = z.enum(RSVP_STATUS_VALUES);
+export const inviteStatusSchema = z.enum(INVITE_STATUS_VALUES);
 
 export const participantSchema = z.object({
   participantId: z.string(),
@@ -36,6 +42,7 @@ export const participantSchema = z.object({
   avatarUrl: z.string().nullish(),
   contactEmail: z.string().nullish(),
   inviteToken: z.string().nullish(),
+  inviteStatus: inviteStatusSchema.optional(),
   rsvpStatus: rsvpStatusSchema,
   lastActivityAt: z.string().datetime().nullish(),
   adultsCount: z.number().nullish(),

@@ -177,3 +177,48 @@ test.describe('Admin Delete', () => {
     await expect(page.getByText('Beach Trip')).toBeVisible();
   });
 });
+
+test.describe('Plans List Auth CTA', () => {
+  test('signed-in user sees "Create New Plan" link', async ({ page }) => {
+    await injectUserSession(page);
+    await mockPlansListRoutes(page, []);
+
+    await page.goto('/plans');
+    await expect(page.getByText('My Plans')).toBeVisible({ timeout: 15000 });
+
+    const createLink = page.getByRole('link', { name: /create new plan/i });
+    await expect(createLink).toBeVisible();
+    await expect(createLink).toHaveAttribute('href', '/create-plan');
+
+    await expect(
+      page.getByText('Sign in to create and manage plans')
+    ).not.toBeVisible();
+  });
+
+  test('unauthenticated user sees sign-in and sign-up buttons instead of create', async ({
+    page,
+  }) => {
+    await mockPlansListRoutes(page, []);
+
+    await page.goto('/plans');
+    await expect(page.getByText('My Plans')).toBeVisible({ timeout: 15000 });
+
+    const main = page.getByRole('main');
+
+    await expect(
+      main.getByText('Sign in to create and manage plans')
+    ).toBeVisible();
+
+    const signInLink = main.getByRole('link', { name: 'Sign In' });
+    await expect(signInLink).toBeVisible();
+    await expect(signInLink).toHaveAttribute('href', '/signin');
+
+    const signUpLink = main.getByRole('link', { name: 'Sign Up' });
+    await expect(signUpLink).toBeVisible();
+    await expect(signUpLink).toHaveAttribute('href', '/signup');
+
+    await expect(
+      main.getByRole('link', { name: /create new plan/i })
+    ).not.toBeVisible();
+  });
+});

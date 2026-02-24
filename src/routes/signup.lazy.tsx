@@ -1,4 +1,9 @@
-import { createLazyFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import {
+  createLazyFileRoute,
+  Link,
+  useNavigate,
+  useSearch,
+} from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +22,8 @@ type SignUpForm = z.infer<typeof signUpSchema>;
 export function SignUp() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { redirect } = useSearch({ from: '/signup' });
+  const redirectTo = redirect || '/plans';
   const [confirmationSent, setConfirmationSent] = useState(false);
 
   const {
@@ -39,7 +46,7 @@ export function SignUp() {
     }
 
     if (data.session) {
-      navigate({ to: '/complete-profile' });
+      navigate({ to: redirectTo });
     } else {
       setConfirmationSent(true);
     }
@@ -49,7 +56,7 @@ export function SignUp() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/complete-profile`,
+        redirectTo: `${window.location.origin}${redirectTo}`,
       },
     });
 
@@ -59,7 +66,7 @@ export function SignUp() {
     }
 
     if (!data.url) {
-      navigate({ to: '/complete-profile' });
+      navigate({ to: redirectTo });
     }
   }
 
