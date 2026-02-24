@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /*
-  Google Maps API injects global CSS that strips native appearance
+  Google Maps API (beta) injects global CSS that strips native appearance
   from form inputs. Force native date/time picker controls to remain visible.
 */
 input[type='date'],
@@ -11,27 +11,6 @@ input[type='month'],
 input[type='week'] {
   appearance: auto !important;
   -webkit-appearance: auto !important;
-}
-
-.location-autocomplete-container gmp-place-autocomplete {
-  display: block;
-  width: 100%;
-}
-
-gmp-place-autocomplete::part(input) {
-  width: 100%;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  outline: none;
-}
-
-gmp-place-autocomplete::part(input):focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 1px #3b82f6;
 }
 
 @keyframes fade-in {
