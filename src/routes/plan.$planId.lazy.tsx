@@ -17,6 +17,7 @@ import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { useDeletePlan } from '../hooks/useDeletePlan';
 import { useAuth } from '../contexts/useAuth';
 import { getApiErrorMessage } from '../core/error-utils';
+import { copyInviteLink } from '../core/invite';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import Forecast from '../components/Forecast';
@@ -210,7 +211,13 @@ function PlanDetails() {
         <Plan
           plan={plan}
           onAddParticipant={async (p) => {
-            await createParticipantMutation.mutateAsync(p);
+            const created = await createParticipantMutation.mutateAsync(p);
+            if (created.inviteToken) {
+              const copied = await copyInviteLink(planId, created.inviteToken);
+              if (copied) {
+                toast.success(t('invite.copiedAfterCreate'));
+              }
+            }
           }}
           isAddingParticipant={createParticipantMutation.isPending}
           isOwner={isOwner}

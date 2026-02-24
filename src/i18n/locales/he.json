@@ -330,6 +330,14 @@
     "notes": "הערות",
     "edit": "עריכה"
   },
+  "invite": {
+    "copied": "קישור הזמנה הועתק!",
+    "copiedAfterCreate": "המשתתף נוסף! קישור ההזמנה הועתק ללוח.",
+    "copyLink": "העתקת קישור הזמנה",
+    "shareLink": "שיתוף קישור הזמנה",
+    "shareTitle": "הצטרף לתוכנית שלי ב-Chillist",
+    "shareText": "הוזמנת להצטרף ל-\"{{title}}\""
+  },
   "language": {
     "en": "EN",
     "he": "עב"
