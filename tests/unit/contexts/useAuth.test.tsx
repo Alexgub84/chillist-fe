@@ -1,11 +1,26 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useAuth } from '../../../src/contexts/useAuth';
 import AuthProvider from '../../../src/contexts/AuthProvider';
 import type { ReactNode } from 'react';
 
+vi.mock('@tanstack/react-router', async (importOriginal) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const actual = (await importOriginal()) as Record<string, any>;
+  return {
+    ...actual,
+    useNavigate: () => vi.fn(),
+  };
+});
+
 function wrapper({ children }: { children: ReactNode }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>{children}</AuthProvider>
+    </QueryClientProvider>
+  );
 }
 
 describe('useAuth', () => {

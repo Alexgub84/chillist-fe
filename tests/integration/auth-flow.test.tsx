@@ -9,6 +9,7 @@ import {
 } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { FastifyInstance } from 'fastify';
 import { buildServer } from '../../api/server';
 import { supabase } from '../../src/lib/supabase';
@@ -161,11 +162,14 @@ beforeEach(() => {
 });
 
 function renderWithAuth(ui: React.ReactNode) {
+  const queryClient = new QueryClient();
   return render(
-    <AuthProvider>
-      {ui}
-      <Header />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        {ui}
+        <Header />
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
@@ -305,10 +309,13 @@ describe('Auth Flow Integration', () => {
 
       const user = userEvent.setup();
 
+      const queryClient = new QueryClient();
       render(
-        <AuthProvider>
-          <Header />
-        </AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <Header />
+          </AuthProvider>
+        </QueryClientProvider>
       );
 
       await waitFor(() => {
@@ -394,10 +401,13 @@ describe('Auth Flow Integration', () => {
 
       vi.mocked(toast.success).mockClear();
 
+      const qc2 = new QueryClient();
       const { unmount } = render(
-        <AuthProvider>
-          <CompleteProfile />
-        </AuthProvider>
+        <QueryClientProvider client={qc2}>
+          <AuthProvider>
+            <CompleteProfile />
+          </AuthProvider>
+        </QueryClientProvider>
       );
 
       await waitFor(() => {

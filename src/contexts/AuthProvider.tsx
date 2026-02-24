@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback, type ReactNode } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import i18n from '../i18n';
 import { supabase } from '../lib/supabase';
 import { onAuthError } from '../core/auth-error';
@@ -12,6 +14,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [authErrorOpen, setAuthErrorOpen] = useState(false);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session: initial } }) => {
@@ -54,8 +58,11 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     const { error } = await supabase.auth.signOut();
     if (error) {
       toast.error(i18n.t('auth.signOutFailed', { message: error.message }));
+      return;
     }
-  }, []);
+    queryClient.clear();
+    navigate({ to: '/' });
+  }, [queryClient, navigate]);
 
   return (
     <AuthContext.Provider value={{ session, user, loading, signOut }}>
