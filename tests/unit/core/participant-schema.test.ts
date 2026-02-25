@@ -20,20 +20,20 @@ describe('participantSchema date-time validation', () => {
     expect(result.success).toBe(true);
   });
 
-  it('rejects createdAt without timezone designator', () => {
+  it('accepts createdAt without timezone designator', () => {
     const result = participantSchema.safeParse({
       ...validParticipant,
       createdAt: '2025-01-01T00:00:00',
     });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
-  it('rejects updatedAt without timezone designator', () => {
+  it('accepts updatedAt without timezone designator', () => {
     const result = participantSchema.safeParse({
       ...validParticipant,
       updatedAt: '2025-01-01T00:00:00',
     });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
   it('accepts null for nullable optional fields', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   RouterProvider,
@@ -95,8 +95,9 @@ describe('CreatePlan - Navigation', () => {
       </QueryClientProvider>
     );
 
-    // Start at plans page
-    router.navigate({ to: '/plans' });
+    await act(async () => {
+      router.navigate({ to: '/plans' });
+    });
 
     await waitFor(() => {
       expect(screen.getByText(/my plans/i)).toBeInTheDocument();
@@ -138,7 +139,9 @@ describe('CreatePlan - Navigation', () => {
       </QueryClientProvider>
     );
 
-    router.navigate({ to: '/create-plan' });
+    await act(async () => {
+      router.navigate({ to: '/create-plan' });
+    });
 
     await waitFor(() => {
       expect(screen.getByText(/first name/i)).toBeInTheDocument();

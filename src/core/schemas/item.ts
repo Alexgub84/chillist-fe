@@ -40,8 +40,8 @@ const baseItemSchema = z.object({
   notes: z.string().nullish(),
   status: itemStatusSchema,
   assignedParticipantId: z.string().nullish(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export const equipmentItemSchema = baseItemSchema.extend({

@@ -214,7 +214,12 @@ export async function fetchPlanByInvite(
   const data = await publicRequest<unknown>(
     `/plans/${planId}/invite/${inviteToken}`
   );
-  return invitePlanResponseSchema.parse(data);
+  const result = invitePlanResponseSchema.safeParse(data);
+  if (!result.success) {
+    console.error('[invite] Schema validation failed:', result.error.issues);
+    throw result.error;
+  }
+  return result.data;
 }
 
 export async function saveGuestPreferences(

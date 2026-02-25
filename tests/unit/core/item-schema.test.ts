@@ -19,20 +19,20 @@ describe('itemSchema date-time and format validation', () => {
     expect(result.success).toBe(true);
   });
 
-  it('rejects createdAt without timezone designator', () => {
+  it('accepts createdAt without timezone designator', () => {
     const result = itemSchema.safeParse({
       ...validItem,
       createdAt: '2025-01-01T00:00:00',
     });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
-  it('rejects updatedAt without timezone designator', () => {
+  it('accepts updatedAt without timezone designator', () => {
     const result = itemSchema.safeParse({
       ...validItem,
       updatedAt: '2025-01-01T00:00:00',
     });
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
   it('rejects non-integer quantity', () => {

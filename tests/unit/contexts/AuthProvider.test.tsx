@@ -115,9 +115,11 @@ describe('AuthProvider', () => {
     expect(mockSupabase.auth.signOut).toHaveBeenCalledOnce();
   });
 
-  it('subscribes to onAuthStateChange on mount', () => {
+  it('subscribes to onAuthStateChange on mount', async () => {
     renderWithProvider();
-    expect(mockSupabase.auth.onAuthStateChange).toHaveBeenCalledOnce();
+    await waitFor(() => {
+      expect(mockSupabase.auth.onAuthStateChange).toHaveBeenCalledOnce();
+    });
   });
 
   it('unsubscribes on unmount', () => {
