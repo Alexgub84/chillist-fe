@@ -33,20 +33,32 @@ export function SignIn() {
   });
 
   async function onSubmit(values: SignInForm) {
+    console.info(
+      `[SignIn] Attempting email sign-in for "${values.email}", redirectTo="${redirectTo}".`
+    );
     const { error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
     });
 
     if (error) {
+      console.error(
+        `[SignIn] Email sign-in failed for "${values.email}". Error: ${error.message} (status: ${error.status})`
+      );
       toast.error(error.message);
       return;
     }
 
+    console.info(
+      `[SignIn] Email sign-in succeeded for "${values.email}". Navigating to "${redirectTo}".`
+    );
     navigate({ to: redirectTo });
   }
 
   async function handleGoogleSignIn() {
+    console.info(
+      `[SignIn] Initiating Google OAuth, redirectTo="${redirectTo}".`
+    );
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -55,11 +67,17 @@ export function SignIn() {
     });
 
     if (error) {
+      console.error(
+        `[SignIn] Google OAuth failed. Error: ${error.message} (status: ${error.status})`
+      );
       toast.error(error.message);
       return;
     }
 
     if (!data.url) {
+      console.info(
+        '[SignIn] Google OAuth returned no URL — navigating locally.'
+      );
       navigate({ to: redirectTo });
     }
   }

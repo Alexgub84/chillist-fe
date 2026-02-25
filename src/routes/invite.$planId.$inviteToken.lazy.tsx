@@ -58,6 +58,10 @@ function InvitePlanPage() {
   }
 
   if (error || !plan) {
+    console.error(
+      `[InvitePage] Cannot display invite — planId="${planId}", token="${inviteToken.slice(0, 8)}…". ` +
+        `Error: ${error ? `${error.name}: ${error.message}` : 'plan data is null/undefined (no error thrown)'}`
+    );
     return (
       <div className="py-16 px-4 text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-3">
@@ -318,7 +322,11 @@ function InvitePlanPage() {
       toast.success(t('preferences.updated'));
       setShowPreferences(false);
       navigate({ to: '/plan/$planId', params: { planId } });
-    } catch {
+    } catch (err) {
+      console.error(
+        `[InvitePage] saveGuestPreferences failed — planId="${planId}", token="${inviteToken.slice(0, 8)}…". ` +
+          `Error: ${err instanceof Error ? err.message : String(err)}`
+      );
       toast.error(t('errors.somethingWentWrong'));
     } finally {
       setIsSaving(false);

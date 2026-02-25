@@ -12,7 +12,10 @@ export async function copyInviteLink(
   try {
     await navigator.clipboard.writeText(link);
     return true;
-  } catch {
+  } catch (err) {
+    console.warn(
+      `[Invite] Clipboard write failed for planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
+    );
     return false;
   }
 }

@@ -89,6 +89,9 @@ function PlanDetails() {
     try {
       await updateItemMutation.mutateAsync({ itemId, updates });
     } catch (err) {
+      console.error(
+        `[PlanPage] updateItem failed — planId="${planId}", itemId="${itemId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
       const { title, message } = getApiErrorMessage(
         err instanceof Error ? err : new Error(String(err))
       );
@@ -136,6 +139,9 @@ function PlanDetails() {
       });
       toast.success(t('preferences.updated'));
     } catch (err) {
+      console.error(
+        `[PlanPage] handlePreferencesSubmit failed — planId="${planId}", participantId="${editingParticipantId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
       const { title, message } = getApiErrorMessage(
         err instanceof Error ? err : new Error(String(err))
       );
@@ -153,6 +159,9 @@ function PlanDetails() {
       toast.success(t('plan.deleted'));
       navigate({ to: '/plans' });
     } catch (err) {
+      console.error(
+        `[PlanPage] handleDeletePlan failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
       const { title, message } = getApiErrorMessage(
         err instanceof Error ? err : new Error(String(err))
       );
@@ -166,6 +175,9 @@ function PlanDetails() {
       toast.success(t('plan.updated'));
       setShowEditPlanModal(false);
     } catch (err) {
+      console.error(
+        `[PlanPage] handleEditPlan failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
       const { title, message } = getApiErrorMessage(
         err instanceof Error ? err : new Error(String(err))
       );

@@ -40,10 +40,26 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
         const pending = getPendingInvite();
         if (pending) {
+          console.info(
+            `[AuthProvider] SIGNED_IN detected with pending invite — planId="${pending.planId}", token="${pending.inviteToken.slice(0, 8)}…". Calling claimInvite…`
+          );
           clearPendingInvite();
-          claimInvite(pending.planId, pending.inviteToken).catch(() => {
-            /* claim failed (already claimed, invalid token, etc.) — silently ignore */
-          });
+          claimInvite(pending.planId, pending.inviteToken)
+            .then(() => {
+              console.info(
+                `[AuthProvider] claimInvite succeeded for planId="${pending.planId}".`
+              );
+            })
+            .catch((err) => {
+              console.warn(
+                `[AuthProvider] claimInvite failed for planId="${pending.planId}", token="${pending.inviteToken.slice(0, 8)}…". ` +
+                  `This can happen if already claimed or token is invalid. Error: ${err instanceof Error ? err.message : String(err)}`
+              );
+            });
+        } else {
+          console.debug(
+            '[AuthProvider] SIGNED_IN detected — no pending invite in localStorage.'
+          );
         }
       }
 

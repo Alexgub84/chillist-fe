@@ -67,9 +67,12 @@ async function doFetch(
   try {
     return await fetch(url, { ...options, headers });
   } catch (err) {
-    throw new Error(
-      `Network error: Unable to reach API at ${baseUrl}. ${err instanceof Error ? err.message : ''}`
+    const method = options?.method || 'GET';
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error(
+      `[API] Network error — ${method} ${endpoint} (full URL: ${url}). Error: ${msg}`
     );
+    throw new Error(`Network error: Unable to reach API at ${baseUrl}. ${msg}`);
   }
 }
 
@@ -95,11 +98,14 @@ async function processResponse<T>(
         const data = await response.json();
         if (data.message) error.message = data.message;
       } catch {
-        /* ignore */
+        /* could not parse error body */
       }
     } else {
       error.message = `API returned ${response.status}: Expected JSON response from ${url} but received ${contentType || 'unknown content type'}`;
     }
+    console.error(
+      `[API] Request failed — ${endpoint} → ${response.status} ${response.statusText}. Message: "${error.message}"`
+    );
     throw error;
   }
 
@@ -108,6 +114,9 @@ async function processResponse<T>(
   }
 
   if (!isJson) {
+    console.error(
+      `[API] Unexpected content type — ${endpoint} returned 200 but Content-Type="${contentType || 'missing'}". Expected application/json.`
+    );
     throw new Error(
       `Invalid API response: Expected JSON from ${url} but received ${contentType || 'unknown content type'}. This usually means the API URL is misconfigured.`
     );
@@ -128,6 +137,9 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const response = await doFetch(endpoint, options, token);
 
   if (response.status === 401 && token) {
+    console.warn(
+      `[API] 401 Unauthorized on ${endpoint} — attempting token refresh…`
+    );
     const { data, error } = await supabase.auth.refreshSession();
     if (!error && data.session) {
       const retryResponse = await doFetch(
@@ -136,10 +148,16 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
         data.session.access_token
       );
       if (retryResponse.status === 401) {
+        console.error(
+          `[API] 401 persisted after token refresh on ${endpoint} — emitting auth error (session expired).`
+        );
         emitAuthError();
       }
       return processResponse<T>(retryResponse, endpoint);
     }
+    console.error(
+      `[API] Token refresh failed for ${endpoint} — ${error?.message ?? 'no session returned'}. Emitting auth error.`
+    );
     emitAuthError();
   }
 
@@ -216,7 +234,11 @@ export async function fetchPlanByInvite(
   );
   const result = invitePlanResponseSchema.safeParse(data);
   if (!result.success) {
-    console.error('[invite] Schema validation failed:', result.error.issues);
+    console.error(
+      `[fetchPlanByInvite] Zod schema validation failed for planId="${planId}", inviteToken="${inviteToken.slice(0, 8)}…".\n` +
+        `Issues: ${JSON.stringify(result.error.issues, null, 2)}\n` +
+        `Raw BE response keys: ${JSON.stringify(Object.keys(data as Record<string, unknown>))}`
+    );
     throw result.error;
   }
   return result.data;

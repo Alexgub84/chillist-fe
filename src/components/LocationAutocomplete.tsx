@@ -104,7 +104,10 @@ function AutocompleteSuggestions({
 
         setSuggestions(mapped);
         setOpen(mapped.length > 0);
-      } catch {
+      } catch (err) {
+        console.warn(
+          `[LocationAutocomplete] Failed to fetch autocomplete suggestions for input="${input}". Error: ${err instanceof Error ? err.message : String(err)}`
+        );
         setSuggestions([]);
         setOpen(false);
       }

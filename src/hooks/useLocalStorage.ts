@@ -5,7 +5,10 @@ function readValue<T>(key: string, fallback: T): T {
     const raw = localStorage.getItem(key);
     if (raw === null) return fallback;
     return JSON.parse(raw) as T;
-  } catch {
+  } catch (err) {
+    console.warn(
+      `[useLocalStorage] Failed to read key="${key}" from localStorage. Using fallback. Error: ${err instanceof Error ? err.message : String(err)}`
+    );
     return fallback;
   }
 }
@@ -24,8 +27,10 @@ export function useLocalStorage<T>(
         const next = value instanceof Function ? value(prev) : value;
         try {
           localStorage.setItem(key, JSON.stringify(next));
-        } catch {
-          // quota exceeded or unavailable
+        } catch (err) {
+          console.warn(
+            `[useLocalStorage] Failed to write key="${key}" to localStorage (quota exceeded or unavailable). Error: ${err instanceof Error ? err.message : String(err)}`
+          );
         }
         return next;
       });
