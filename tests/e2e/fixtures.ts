@@ -403,6 +403,10 @@ export async function mockInviteRoute(
     role: p.role,
   }));
 
+  const tokenMatch = plan.participants.find(
+    (p) => p.inviteToken === inviteToken
+  );
+
   await page.route(
     `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}`,
     async (route) => {
@@ -421,6 +425,9 @@ export async function mockInviteRoute(
             updatedAt: plan.updatedAt,
             items: plan.items,
             participants: strippedParticipants,
+            myParticipantId: tokenMatch?.participantId ?? 'unknown',
+            myRsvpStatus: 'pending',
+            myPreferences: null,
           },
         });
       } else {

@@ -274,7 +274,11 @@
     "dateRequired": "תאריך הוא שדה חובה",
     "startDateRequired": "תאריך התחלה הוא שדה חובה",
     "endDateRequired": "תאריך סיום הוא שדה חובה",
-    "quantityMin": "הכמות חייבת להיות לפחות 1"
+    "quantityMin": "הכמות חייבת להיות לפחות 1",
+    "adultsCountInvalid": "נא להזין מספר תקין",
+    "adultsCountMin": "לפחות מבוגר אחד",
+    "kidsCountInvalid": "נא להזין מספר תקין",
+    "kidsCountMin": "לא יכול להיות שלילי"
   },
   "unitGroups": {
     "weight": "משקל",
@@ -332,7 +336,8 @@
     "saving": "שומר…",
     "submit": "שמירת העדפות",
     "skip": "דלג לעת עתה",
-    "updated": "ההעדפות נשמרו"
+    "updated": "ההעדפות נשמרו",
+    "rsvpLabel": "מגיעים?"
   },
   "participantDetails": {
     "title": "פרטי הקבוצה",
@@ -365,7 +370,22 @@
     "continueAsGuest": "המשך בלי להתחבר",
     "goToPlan": "מעבר לתוכנית",
     "guestPreferencesTitle": "ההעדפות שלך",
-    "claimFailed": "לא הצלחנו לקשר את החשבון שלך להזמנה. נסה לפתוח את קישור ההזמנה שוב."
+    "claimFailed": "לא הצלחנו לקשר את החשבון שלך להזמנה. נסה לפתוח את קישור ההזמנה שוב.",
+    "you": "אתה",
+    "yours": "שלך",
+    "editPreferences": "עריכת העדפות",
+    "addItem": "הוספת פריט",
+    "editItem": "עריכת פריט",
+    "updateItem": "עדכון",
+    "itemAdded": "הפריט נוסף",
+    "itemUpdated": "הפריט עודכן",
+    "itemNamePlaceholder": "שם הפריט",
+    "itemNotesPlaceholder": "הערות (אופציונלי)",
+    "authModalSubtitle": "הצטרפו לתוכנית על ידי התחברות או המשיכו כאורחים.",
+    "or": "או",
+    "betterExperience": "לחוויה טובה יותר,",
+    "signIn": "התחברו",
+    "signUp": "הירשמו"
   },
   "language": {
     "en": "EN",

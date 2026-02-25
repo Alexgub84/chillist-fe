@@ -517,10 +517,12 @@ test.describe('Invite Landing Page', () => {
     await page.goto(`/invite/${plan.planId}/${inviteToken}`);
 
     await expect(page.getByText('Beach BBQ')).toBeVisible({ timeout: 10000 });
-    await expect(page.getByText("You're Invited!")).toBeVisible();
+    await expect(
+      page.locator('p').filter({ hasText: "You're Invited!" })
+    ).toBeVisible();
 
-    await expect(page.getByText('Sunscreen')).toBeVisible();
-    await expect(page.getByText('Burgers')).toBeVisible();
+    await expect(page.getByText('Sunscreen')).not.toBeVisible();
+    await expect(page.getByText('Burgers')).not.toBeVisible();
 
     await expect(page.getByText('Alex Smith')).toBeVisible();
     await expect(page.getByText('Bob Jones')).toBeVisible();

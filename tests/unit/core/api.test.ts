@@ -670,6 +670,9 @@ describe('API Client', () => {
       participants: [
         { participantId: 'p-1', displayName: 'Alex S.', role: 'owner' },
       ],
+      myParticipantId: 'p-1',
+      myRsvpStatus: 'pending',
+      myPreferences: null,
     };
 
     it('calls the public invite endpoint without auth', async () => {

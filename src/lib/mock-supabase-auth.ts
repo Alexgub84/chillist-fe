@@ -18,6 +18,7 @@ interface MockSession {
 }
 
 const STORAGE_KEY = 'mock-auth-session';
+const MOCK_OWNER_USER_ID = 'dc8c93f9-8cc0-4416-b84f-638e8fffedc5';
 const listeners: Set<AuthChangeCallback> = new Set();
 
 function makeFakeJwt(email: string, userId: string): string {
@@ -38,7 +39,7 @@ function buildSession(
   email: string,
   appMetadata: Record<string, unknown> = {}
 ): MockSession {
-  const userId = crypto.randomUUID();
+  const userId = MOCK_OWNER_USER_ID;
   return {
     access_token: makeFakeJwt(email, userId),
     refresh_token: `mock-refresh-${userId}`,

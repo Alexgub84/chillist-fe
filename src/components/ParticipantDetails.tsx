@@ -134,28 +134,30 @@ function ParticipantCard({
           >
             {p.name.charAt(0)}
           </div>
-          <div className="flex items-center gap-2 min-w-0">
+          <div className="flex flex-col min-w-0">
             <span className="text-sm sm:text-base font-medium text-gray-800 truncate">
               {p.name} {p.lastName}
             </span>
-            <span
-              className={clsx(
-                'text-xs font-medium px-2 py-0.5 rounded-full shrink-0',
-                roleBadgeColor(p.role)
-              )}
-            >
-              {t(`roles.${p.role}`)}
-            </span>
-            {isOwner && p.role !== 'owner' && (
+            <div className="flex items-center gap-2 mt-0.5">
               <span
                 className={clsx(
                   'text-xs font-medium px-2 py-0.5 rounded-full shrink-0',
-                  rsvpBadgeColor(p.rsvpStatus)
+                  roleBadgeColor(p.role)
                 )}
               >
-                {t(`rsvpStatus.${p.rsvpStatus}`)}
+                {t(`roles.${p.role}`)}
               </span>
-            )}
+              {isOwner && p.role !== 'owner' && (
+                <span
+                  className={clsx(
+                    'text-xs font-medium px-2 py-0.5 rounded-full shrink-0',
+                    rsvpBadgeColor(p.rsvpStatus)
+                  )}
+                >
+                  {t(`rsvpStatus.${p.rsvpStatus}`)}
+                </span>
+              )}
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0 ms-2">
