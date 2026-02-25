@@ -583,6 +583,17 @@ export async function buildServer(
         updatedAt: plan.updatedAt,
         items: planItems,
         participants: strippedParticipants,
+        myParticipantId: tokenMatch.participantId,
+        myRsvpStatus: tokenMatch.rsvpStatus ?? 'pending',
+        myPreferences: {
+          adultsCount:
+            (tokenMatch as Record<string, unknown>).adultsCount ?? null,
+          kidsCount: (tokenMatch as Record<string, unknown>).kidsCount ?? null,
+          foodPreferences:
+            (tokenMatch as Record<string, unknown>).foodPreferences ?? null,
+          allergies: (tokenMatch as Record<string, unknown>).allergies ?? null,
+          notes: (tokenMatch as Record<string, unknown>).notes ?? null,
+        },
       });
     }
   );
@@ -663,6 +674,7 @@ export async function buildServer(
         'foodPreferences',
         'allergies',
         'notes',
+        'rsvpStatus',
       ];
       for (const field of allowedFields) {
         if (field in body) {
@@ -679,6 +691,88 @@ export async function buildServer(
           tokenMatch.displayName ?? `${tokenMatch.name} ${tokenMatch.lastName}`,
         role: tokenMatch.role,
       });
+    }
+  );
+
+  app.post<{ Params: { planId: string; inviteToken: string } }>(
+    '/plans/:planId/invite/:inviteToken/items',
+    async (request, reply) => {
+      const { planId, inviteToken } = request.params;
+      const plan = store.plans.find((p) => p.planId === planId);
+      if (!plan) throw new HttpError('Plan not found', 404);
+
+      const participantIds = new Set(plan.participantIds ?? []);
+      const tokenMatch = store.participants.find(
+        (p) =>
+          participantIds.has(p.participantId) && p.inviteToken === inviteToken
+      );
+      if (!tokenMatch) throw new HttpError('Invalid invite token', 404);
+
+      const body = request.body as Record<string, unknown>;
+      const now = new Date().toISOString();
+      const newItem = {
+        itemId: `item-${Date.now()}`,
+        planId,
+        name: String(body.name ?? ''),
+        category: String(body.category ?? 'equipment'),
+        quantity: Number(body.quantity ?? 1),
+        unit: String(body.unit ?? 'pcs'),
+        status: 'pending',
+        notes: body.notes ? String(body.notes) : null,
+        assignedParticipantId: tokenMatch.participantId,
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      store.items.push(newItem as never);
+      await persistData(store, shouldPersist, filePath);
+      void reply.status(201).send(newItem);
+    }
+  );
+
+  app.patch<{
+    Params: { planId: string; inviteToken: string; itemId: string };
+  }>(
+    '/plans/:planId/invite/:inviteToken/items/:itemId',
+    async (request, reply) => {
+      const { planId, inviteToken, itemId } = request.params;
+      const plan = store.plans.find((p) => p.planId === planId);
+      if (!plan) throw new HttpError('Plan not found', 404);
+
+      const participantIds = new Set(plan.participantIds ?? []);
+      const tokenMatch = store.participants.find(
+        (p) =>
+          participantIds.has(p.participantId) && p.inviteToken === inviteToken
+      );
+      if (!tokenMatch) throw new HttpError('Invalid invite token', 404);
+
+      const item = store.items.find(
+        (i) => i.itemId === itemId && i.planId === planId
+      );
+      if (!item) throw new HttpError('Item not found', 404);
+
+      if (item.assignedParticipantId !== tokenMatch.participantId) {
+        throw new HttpError('Cannot edit items assigned to others', 403);
+      }
+
+      const body = request.body as Record<string, unknown>;
+      const allowedFields = [
+        'name',
+        'category',
+        'quantity',
+        'unit',
+        'notes',
+        'status',
+      ];
+      for (const field of allowedFields) {
+        if (field in body) {
+          (item as Record<string, unknown>)[field] = body[field];
+        }
+      }
+      item.updatedAt = new Date().toISOString();
+
+      await persistData(store, shouldPersist, filePath);
+      void reply.send(item);
     }
   );
 

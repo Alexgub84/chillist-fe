@@ -274,7 +274,11 @@
     "dateRequired": "Date is required",
     "startDateRequired": "Start date is required",
     "endDateRequired": "End date is required",
-    "quantityMin": "Quantity must be at least 1"
+    "quantityMin": "Quantity must be at least 1",
+    "adultsCountInvalid": "Please enter a valid number",
+    "adultsCountMin": "At least 1 adult",
+    "kidsCountInvalid": "Please enter a valid number",
+    "kidsCountMin": "Cannot be negative"
   },
   "unitGroups": {
     "weight": "Weight",
@@ -332,7 +336,8 @@
     "saving": "Saving…",
     "submit": "Save Preferences",
     "skip": "Skip for now",
-    "updated": "Preferences saved"
+    "updated": "Preferences saved",
+    "rsvpLabel": "Are you coming?"
   },
   "participantDetails": {
     "title": "Group Details",
@@ -365,7 +370,22 @@
     "continueAsGuest": "Continue without signing in",
     "goToPlan": "Go to plan",
     "guestPreferencesTitle": "Your Preferences",
-    "claimFailed": "Could not link your account to this invite. Please try opening the invite link again."
+    "claimFailed": "Could not link your account to this invite. Please try opening the invite link again.",
+    "you": "you",
+    "yours": "yours",
+    "editPreferences": "Edit preferences",
+    "addItem": "Add item",
+    "editItem": "Edit item",
+    "updateItem": "Update",
+    "itemAdded": "Item added",
+    "itemUpdated": "Item updated",
+    "itemNamePlaceholder": "Item name",
+    "itemNotesPlaceholder": "Notes (optional)",
+    "authModalSubtitle": "Join this plan by signing in or continue as a guest.",
+    "or": "or",
+    "betterExperience": "For a better experience,",
+    "signIn": "sign in",
+    "signUp": "sign up"
   },
   "language": {
     "en": "EN",

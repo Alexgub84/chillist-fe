@@ -2,18 +2,37 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea } from './shared/FormInput';
 
-const preferencesFormSchema = z.object({
-  adultsCount: z.coerce.number().int().min(1).optional(),
-  kidsCount: z.coerce.number().int().min(0).optional(),
-  foodPreferences: z.string().optional(),
-  allergies: z.string().optional(),
-  notes: z.string().optional(),
-});
+export type PreferencesFormValues = {
+  rsvpStatus?: 'confirmed' | 'not_sure' | null;
+  adultsCount?: number;
+  kidsCount?: number;
+  foodPreferences?: string;
+  allergies?: string;
+  notes?: string;
+};
 
-export type PreferencesFormValues = z.infer<typeof preferencesFormSchema>;
+function buildPreferencesSchema(t: (key: string) => string) {
+  return z.object({
+    rsvpStatus: z.enum(['confirmed', 'not_sure']).nullish(),
+    adultsCount: z.coerce
+      .number({ invalid_type_error: t('validation.adultsCountInvalid') })
+      .int()
+      .min(1, t('validation.adultsCountMin'))
+      .optional(),
+    kidsCount: z.coerce
+      .number({ invalid_type_error: t('validation.kidsCountInvalid') })
+      .int()
+      .min(0, t('validation.kidsCountMin'))
+      .optional(),
+    foodPreferences: z.string().optional(),
+    allergies: z.string().optional(),
+    notes: z.string().optional(),
+  });
+}
 
 interface PreferencesFormProps {
   defaultValues?: Partial<PreferencesFormValues>;
@@ -22,6 +41,7 @@ interface PreferencesFormProps {
   onCancel?: () => void;
   isSubmitting: boolean;
   inModal?: boolean;
+  showRsvp?: boolean;
 }
 
 export default function PreferencesForm({
@@ -31,15 +51,19 @@ export default function PreferencesForm({
   onCancel,
   isSubmitting,
   inModal,
+  showRsvp,
 }: PreferencesFormProps) {
   const { t } = useTranslation();
+  const schema = buildPreferencesSchema(t);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<PreferencesFormValues>({
-    resolver: zodResolver(preferencesFormSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
+      rsvpStatus: defaultValues?.rsvpStatus ?? undefined,
       adultsCount: defaultValues?.adultsCount ?? 1,
       kidsCount: defaultValues?.kidsCount ?? undefined,
       foodPreferences: defaultValues?.foodPreferences ?? '',
@@ -48,6 +72,7 @@ export default function PreferencesForm({
     },
   });
 
+  const rsvpValue = watch('rsvpStatus');
   const padding = inModal ? 'px-4 sm:px-6 pb-4 sm:pb-6' : '';
 
   return (
@@ -55,6 +80,51 @@ export default function PreferencesForm({
       <p className="text-sm text-gray-500 mb-4">{t('preferences.subtitle')}</p>
 
       <div className="space-y-4">
+        {showRsvp && (
+          <div>
+            <FormLabel>{t('preferences.rsvpLabel')}</FormLabel>
+            <div className="flex gap-2 mt-1">
+              <label
+                className={clsx(
+                  'flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border text-sm font-medium cursor-pointer transition-colors',
+                  rsvpValue === 'confirmed'
+                    ? 'border-green-500 bg-green-50 text-green-700'
+                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                )}
+              >
+                <input
+                  type="radio"
+                  value="confirmed"
+                  {...register('rsvpStatus')}
+                  className="sr-only"
+                />
+                {t('rsvpStatus.confirmed')}
+              </label>
+              <label
+                className={clsx(
+                  'flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border text-sm font-medium cursor-pointer transition-colors',
+                  rsvpValue === 'not_sure'
+                    ? 'border-yellow-500 bg-yellow-50 text-yellow-700'
+                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                )}
+              >
+                <input
+                  type="radio"
+                  value="not_sure"
+                  {...register('rsvpStatus')}
+                  className="sr-only"
+                />
+                {t('rsvpStatus.not_sure')}
+              </label>
+            </div>
+            {errors.rsvpStatus && (
+              <p className="text-sm text-red-600 mt-1">
+                {errors.rsvpStatus.message}
+              </p>
+            )}
+          </div>
+        )}
+
         <div className="grid grid-cols-2 gap-3">
           <div>
             <FormLabel>{t('preferences.adultsCount')}</FormLabel>

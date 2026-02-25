@@ -253,6 +253,7 @@ export async function saveGuestPreferences(
     foodPreferences?: string;
     allergies?: string;
     notes?: string;
+    rsvpStatus?: string;
   }
 ): Promise<void> {
   console.info(
@@ -273,6 +274,38 @@ export async function saveGuestPreferences(
     );
     throw err;
   }
+}
+
+export async function addGuestItem(
+  planId: string,
+  inviteToken: string,
+  item: {
+    name: string;
+    category: string;
+    quantity: number;
+    unit: string;
+    notes?: string;
+  }
+): Promise<void> {
+  await publicRequest(`/plans/${planId}/invite/${inviteToken}/items`, {
+    method: 'POST',
+    body: JSON.stringify(item),
+  });
+}
+
+export async function updateGuestItem(
+  planId: string,
+  inviteToken: string,
+  itemId: string,
+  item: Record<string, unknown>
+): Promise<void> {
+  await publicRequest(
+    `/plans/${planId}/invite/${inviteToken}/items/${itemId}`,
+    {
+      method: 'PATCH',
+      body: JSON.stringify(item),
+    }
+  );
 }
 
 export async function claimInvite(

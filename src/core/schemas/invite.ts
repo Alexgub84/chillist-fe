@@ -24,6 +24,16 @@ const INVITE_PLAN_STATUS_VALUES = [
   'archived',
 ] as const satisfies readonly BEInvitePlanResponse['status'][];
 
+const RSVP_STATUS_VALUES = ['pending', 'confirmed', 'not_sure'] as const;
+
+const guestPreferencesSchema = z.object({
+  adultsCount: z.number().nullish(),
+  kidsCount: z.number().nullish(),
+  foodPreferences: z.string().nullish(),
+  allergies: z.string().nullish(),
+  notes: z.string().nullish(),
+});
+
 export const invitePlanResponseSchema = z.object({
   planId: z.string(),
   title: z.string(),
@@ -37,7 +47,12 @@ export const invitePlanResponseSchema = z.object({
   updatedAt: z.string(),
   items: z.array(itemSchema),
   participants: z.array(inviteParticipantSchema),
+  myParticipantId: z.string(),
+  myRsvpStatus: z.enum(RSVP_STATUS_VALUES),
+  myPreferences: guestPreferencesSchema.nullish(),
 });
 
 export type InviteParticipant = z.infer<typeof inviteParticipantSchema>;
 export type InvitePlanResponse = z.infer<typeof invitePlanResponseSchema>;
+export type GuestPreferences = z.infer<typeof guestPreferencesSchema>;
+export type RsvpStatus = (typeof RSVP_STATUS_VALUES)[number];
