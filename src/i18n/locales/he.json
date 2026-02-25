@@ -364,7 +364,8 @@
     "signUpToJoin": "או צור חשבון",
     "continueAsGuest": "המשך בלי להתחבר",
     "goToPlan": "מעבר לתוכנית",
-    "guestPreferencesTitle": "ההעדפות שלך"
+    "guestPreferencesTitle": "ההעדפות שלך",
+    "claimFailed": "לא הצלחנו לקשר את החשבון שלך להזמנה. נסה לפתוח את קישור ההזמנה שוב."
   },
   "language": {
     "en": "EN",

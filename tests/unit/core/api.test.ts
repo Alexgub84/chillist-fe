@@ -758,8 +758,9 @@ describe('API Client', () => {
       await expect(fetchPlanByInvite('plan-1', 'token-ok')).rejects.toThrow();
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        '[invite] Schema validation failed:',
-        expect.arrayContaining([expect.objectContaining({ path: ['status'] })])
+        expect.stringContaining(
+          '[fetchPlanByInvite] Zod schema validation failed'
+        )
       );
       consoleSpy.mockRestore();
     });

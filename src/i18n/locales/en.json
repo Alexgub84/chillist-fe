@@ -364,7 +364,8 @@
     "signUpToJoin": "or create an account",
     "continueAsGuest": "Continue without signing in",
     "goToPlan": "Go to plan",
-    "guestPreferencesTitle": "Your Preferences"
+    "guestPreferencesTitle": "Your Preferences",
+    "claimFailed": "Could not link your account to this invite. Please try opening the invite link again."
   },
   "language": {
     "en": "EN",

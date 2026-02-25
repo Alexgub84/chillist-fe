@@ -255,20 +255,51 @@ export async function saveGuestPreferences(
     notes?: string;
   }
 ): Promise<void> {
-  await publicRequest(`/plans/${planId}/invite/${inviteToken}/preferences`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(preferences),
-  });
+  console.info(
+    `[saveGuestPreferences] Saving preferences — planId="${planId}", token="${inviteToken.slice(0, 8)}…", keys=${JSON.stringify(Object.keys(preferences))}.`
+  );
+  try {
+    await publicRequest(`/plans/${planId}/invite/${inviteToken}/preferences`, {
+      method: 'PATCH',
+      body: JSON.stringify(preferences),
+    });
+    console.info(
+      `[saveGuestPreferences] Preferences saved successfully — planId="${planId}".`
+    );
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error(
+      `[saveGuestPreferences] Failed — planId="${planId}", token="${inviteToken.slice(0, 8)}…". Error: ${msg}`
+    );
+    throw err;
+  }
 }
 
 export async function claimInvite(
   planId: string,
   inviteToken: string
 ): Promise<void> {
-  await request(`/plans/${planId}/claim/${inviteToken}`, {
-    method: 'POST',
-  });
+  console.info(
+    `[claimInvite] Claiming invite — planId="${planId}", token="${inviteToken.slice(0, 8)}…".`
+  );
+  try {
+    await request(`/plans/${planId}/claim/${inviteToken}`, {
+      method: 'POST',
+    });
+    console.info(
+      `[claimInvite] Invite claimed successfully — planId="${planId}", token="${inviteToken.slice(0, 8)}…".`
+    );
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    const status =
+      err instanceof Error && 'status' in err
+        ? (err as Error & { status: number }).status
+        : undefined;
+    console.error(
+      `[claimInvite] Failed — planId="${planId}", token="${inviteToken.slice(0, 8)}…", status=${status ?? 'unknown'}. Error: ${msg}`
+    );
+    throw err;
+  }
 }
 
 // --- Participants ---

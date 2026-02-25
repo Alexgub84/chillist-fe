@@ -6,11 +6,14 @@ import {
 } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { claimInvite } from '../core/api';
+import { getPendingInvite, clearPendingInvite } from '../core/pending-invite';
 
 const signUpSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -22,6 +25,7 @@ type SignUpForm = z.infer<typeof signUpSchema>;
 export function SignUp() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { redirect } = useSearch({ from: '/signup' });
   const redirectTo = redirect || '/plans';
   const [confirmationSent, setConfirmationSent] = useState(false);
@@ -35,59 +39,96 @@ export function SignUp() {
   });
 
   async function onSubmit(values: SignUpForm) {
-    console.info(
-      `[SignUp] Attempting email sign-up for "${values.email}", redirectTo="${redirectTo}".`
-    );
-    const { data, error } = await supabase.auth.signUp({
-      email: values.email,
-      password: values.password,
-    });
+    try {
+      console.info(
+        `[SignUp] Attempting email sign-up for "${values.email}", redirectTo="${redirectTo}".`
+      );
+      const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+      });
 
-    if (error) {
+      if (error) {
+        console.error(
+          `[SignUp] Email sign-up failed for "${values.email}". Error: ${error.message} (status: ${error.status})`
+        );
+        toast.error(error.message);
+        return;
+      }
+
+      if (data.session) {
+        const pending = getPendingInvite();
+        if (pending) {
+          console.info(
+            `[SignUp] Pending invite found — planId="${pending.planId}", token="${pending.inviteToken.slice(0, 8)}…". Claiming before navigation…`
+          );
+          clearPendingInvite();
+          try {
+            await claimInvite(pending.planId, pending.inviteToken);
+          } catch (claimErr) {
+            console.warn(
+              `[SignUp] claimInvite failed — planId="${pending.planId}". User may not see the plan immediately. ` +
+                `Error: ${claimErr instanceof Error ? claimErr.message : String(claimErr)}`
+            );
+            toast.error(t('invite.claimFailed'));
+          }
+          queryClient.invalidateQueries();
+        }
+
+        console.info(
+          `[SignUp] Sign-up succeeded with immediate session for "${values.email}". Navigating to "${redirectTo}".`
+        );
+        navigate({ to: redirectTo });
+      } else {
+        console.info(
+          `[SignUp] Confirmation email sent for "${values.email}". Awaiting verification.`
+        );
+        setConfirmationSent(true);
+      }
+    } catch (err) {
       console.error(
-        `[SignUp] Email sign-up failed for "${values.email}". Error: ${error.message} (status: ${error.status})`
+        `[SignUp] Unexpected error during email sign-up. Error: ${err instanceof Error ? err.message : String(err)}`
       );
-      toast.error(error.message);
-      return;
-    }
-
-    if (data.session) {
-      console.info(
-        `[SignUp] Sign-up succeeded with immediate session for "${values.email}". Navigating to "${redirectTo}".`
-      );
-      navigate({ to: redirectTo });
-    } else {
-      console.info(
-        `[SignUp] Confirmation email sent for "${values.email}". Awaiting verification.`
-      );
-      setConfirmationSent(true);
+      toast.error(t('errors.somethingWentWrong'));
     }
   }
 
   async function handleGoogleSignUp() {
-    console.info(
-      `[SignUp] Initiating Google OAuth, redirectTo="${redirectTo}".`
-    );
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}${redirectTo}`,
-      },
-    });
+    try {
+      const pending = getPendingInvite();
+      const oauthRedirect = pending
+        ? `/invite/${pending.planId}/${pending.inviteToken}`
+        : redirectTo;
 
-    if (error) {
-      console.error(
-        `[SignUp] Google OAuth failed. Error: ${error.message} (status: ${error.status})`
-      );
-      toast.error(error.message);
-      return;
-    }
-
-    if (!data.url) {
       console.info(
-        '[SignUp] Google OAuth returned no URL — navigating locally.'
+        `[SignUp] Initiating Google OAuth, oauthRedirect="${oauthRedirect}".`
       );
-      navigate({ to: redirectTo });
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}${oauthRedirect}`,
+        },
+      });
+
+      if (error) {
+        console.error(
+          `[SignUp] Google OAuth failed. Error: ${error.message} (status: ${error.status})`
+        );
+        toast.error(error.message);
+        return;
+      }
+
+      if (!data.url) {
+        console.info(
+          '[SignUp] Google OAuth returned no URL — navigating locally.'
+        );
+        navigate({ to: oauthRedirect });
+      }
+    } catch (err) {
+      console.error(
+        `[SignUp] Unexpected error during Google OAuth. Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      toast.error(t('errors.somethingWentWrong'));
     }
   }
 

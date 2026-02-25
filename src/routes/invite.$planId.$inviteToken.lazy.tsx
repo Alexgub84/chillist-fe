@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  createLazyFileRoute,
-  Link,
-  useNavigate,
-  useParams,
-} from '@tanstack/react-router';
+import { createLazyFileRoute, Link, useParams } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
@@ -42,7 +37,6 @@ function InvitePlanPage() {
   const { planId, inviteToken } = useParams({
     from: '/invite/$planId/$inviteToken',
   });
-  const navigate = useNavigate();
   const { data: plan, isLoading, error } = useInvitePlan(planId, inviteToken);
   const { user } = useAuth();
   const isAuthenticated = !!user;
@@ -319,9 +313,11 @@ function InvitePlanPage() {
     setIsSaving(true);
     try {
       await saveGuestPreferences(planId, inviteToken, values);
+      console.info(
+        `[InvitePage] Guest preferences saved — planId="${planId}", token="${inviteToken.slice(0, 8)}…".`
+      );
       toast.success(t('preferences.updated'));
       setShowPreferences(false);
-      navigate({ to: '/plan/$planId', params: { planId } });
     } catch (err) {
       console.error(
         `[InvitePage] saveGuestPreferences failed — planId="${planId}", token="${inviteToken.slice(0, 8)}…". ` +
@@ -335,6 +331,5 @@ function InvitePlanPage() {
 
   function handleSkipPreferences() {
     setShowPreferences(false);
-    navigate({ to: '/plan/$planId', params: { planId } });
   }
 }

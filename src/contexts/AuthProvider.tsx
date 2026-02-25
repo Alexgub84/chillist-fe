@@ -20,11 +20,19 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session: initial } }) => {
-      setSession(initial);
-      setUser(initial?.user ?? null);
-      setLoading(false);
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data: { session: initial } }) => {
+        setSession(initial);
+        setUser(initial?.user ?? null);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(
+          `[AuthProvider] getSession failed on mount — app may be stuck in loading state. Error: ${err instanceof Error ? err.message : String(err)}`
+        );
+        setLoading(false);
+      });
 
     const {
       data: { subscription },
@@ -41,14 +49,15 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         const pending = getPendingInvite();
         if (pending) {
           console.info(
-            `[AuthProvider] SIGNED_IN detected with pending invite — planId="${pending.planId}", token="${pending.inviteToken.slice(0, 8)}…". Calling claimInvite…`
+            `[AuthProvider] SIGNED_IN detected with pending invite — planId="${pending.planId}", token="${pending.inviteToken.slice(0, 8)}…". Calling claimInvite (OAuth fallback)…`
           );
           clearPendingInvite();
           claimInvite(pending.planId, pending.inviteToken)
             .then(() => {
               console.info(
-                `[AuthProvider] claimInvite succeeded for planId="${pending.planId}".`
+                `[AuthProvider] claimInvite succeeded for planId="${pending.planId}". Invalidating query cache.`
               );
+              queryClient.invalidateQueries();
             })
             .catch((err) => {
               console.warn(
@@ -72,7 +81,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [queryClient]);
 
   useEffect(() => {
     return onAuthError(() => {
@@ -83,9 +92,15 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
+      console.error(
+        `[AuthProvider] signOut failed. Error: ${error.message} (status: ${error.status})`
+      );
       toast.error(i18n.t('auth.signOutFailed', { message: error.message }));
       return;
     }
+    console.info(
+      '[AuthProvider] signOut succeeded — clearing cache, navigating to home.'
+    );
     queryClient.clear();
     navigate({ to: '/' });
   }, [queryClient, navigate]);
