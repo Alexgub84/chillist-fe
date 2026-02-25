@@ -66,7 +66,10 @@ async function geocodeViaOpenMeteo(query: string): Promise<Coordinates | null> {
       latitude: data.results[0].latitude,
       longitude: data.results[0].longitude,
     };
-  } catch {
+  } catch (err) {
+    console.warn(
+      `[Geocode] OpenMeteo geocoding failed for query="${query}". Error: ${err instanceof Error ? err.message : String(err)}`
+    );
     return null;
   }
 }
@@ -87,7 +90,10 @@ async function geocodeViaGoogle(query: string): Promise<Coordinates | null> {
       latitude: data.results[0].geometry.location.lat,
       longitude: data.results[0].geometry.location.lng,
     };
-  } catch {
+  } catch (err) {
+    console.warn(
+      `[Geocode] Google geocoding failed for query="${query}". Error: ${err instanceof Error ? err.message : String(err)}`
+    );
     return null;
   }
 }

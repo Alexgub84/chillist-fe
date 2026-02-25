@@ -1,6 +1,7 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { supabase } from '../../../src/lib/supabase';
 
 const mockSupabase = vi.mocked(supabase);
@@ -22,8 +23,16 @@ vi.mock('react-hot-toast', () => ({
 import toast from 'react-hot-toast';
 import { SignIn } from '../../../src/routes/signin.lazy';
 
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: false } },
+});
+
 function renderSignIn() {
-  return render(<SignIn />);
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <SignIn />
+    </QueryClientProvider>
+  );
 }
 
 describe('Sign In Page', () => {

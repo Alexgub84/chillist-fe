@@ -8,14 +8,21 @@ import LanguageProvider from '../contexts/LanguageProvider';
 
 function logError(error: Error, context?: string) {
   const errorInfo = {
+    name: error.name,
     message: error.message,
     stack: error.stack,
     context,
     timestamp: new Date().toISOString(),
     url: window.location.href,
+    ...('status' in error
+      ? { status: (error as Error & { status?: number }).status }
+      : {}),
   };
 
-  console.error('[App Error]', errorInfo);
+  console.error(
+    `[App Error] ${context ?? 'Unknown context'} — "${error.message}" at ${window.location.href}`,
+    errorInfo
+  );
 
   // TODO: Send to error tracking service (Sentry, LogRocket, etc.)
   // if (import.meta.env.PROD) {

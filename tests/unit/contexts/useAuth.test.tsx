@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { renderHook } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useAuth } from '../../../src/contexts/useAuth';
 import AuthProvider from '../../../src/contexts/AuthProvider';
@@ -31,19 +31,27 @@ describe('useAuth', () => {
   });
 
   it('returns auth context values when inside AuthProvider', async () => {
-    const { result } = renderHook(() => useAuth(), { wrapper });
+    let result: { current: ReturnType<typeof useAuth> };
+    await act(async () => {
+      ({ result } = renderHook(() => useAuth(), { wrapper }));
+    });
 
-    expect(result.current).toHaveProperty('session');
-    expect(result.current).toHaveProperty('user');
-    expect(result.current).toHaveProperty('loading');
-    expect(result.current).toHaveProperty('signOut');
-    expect(typeof result.current.signOut).toBe('function');
+    expect(result!.current).toHaveProperty('session');
+    expect(result!.current).toHaveProperty('user');
+    expect(result!.current).toHaveProperty('loading');
+    expect(result!.current).toHaveProperty('signOut');
+    expect(typeof result!.current.signOut).toBe('function');
   });
 
   it('starts with null session and user', async () => {
-    const { result } = renderHook(() => useAuth(), { wrapper });
+    let result: { current: ReturnType<typeof useAuth> };
+    await act(async () => {
+      ({ result } = renderHook(() => useAuth(), { wrapper }));
+    });
 
-    expect(result.current.session).toBeNull();
-    expect(result.current.user).toBeNull();
+    await waitFor(() => {
+      expect(result!.current.session).toBeNull();
+      expect(result!.current.user).toBeNull();
+    });
   });
 });

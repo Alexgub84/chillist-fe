@@ -44,14 +44,14 @@ export const participantSchema = z.object({
   inviteToken: z.string().nullish(),
   inviteStatus: inviteStatusSchema.optional(),
   rsvpStatus: rsvpStatusSchema,
-  lastActivityAt: z.string().datetime().nullish(),
+  lastActivityAt: z.string().nullish(),
   adultsCount: z.number().nullish(),
   kidsCount: z.number().nullish(),
   foodPreferences: z.string().nullish(),
   allergies: z.string().nullish(),
   notes: z.string().nullish(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export const participantCreateSchema = z.object({

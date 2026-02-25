@@ -701,6 +701,69 @@ describe('API Client', () => {
         'Invalid or expired invite link'
       );
     });
+
+    it('accepts BE response with dates without timezone (no Z)', async () => {
+      const beResponse = {
+        ...mockInviteResponse,
+        startDate: '2026-07-01T00:00:00',
+        endDate: '2026-07-03T00:00:00',
+        createdAt: '2026-01-01T00:00:00',
+        updatedAt: '2026-01-01T00:00:00',
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(beResponse));
+
+      const result = await fetchPlanByInvite('plan-1', 'token-ok');
+      expect(result.title).toBe('Beach Trip');
+      expect(result.createdAt).toBe('2026-01-01T00:00:00');
+    });
+
+    it('accepts BE response with microsecond precision from PostgreSQL', async () => {
+      const beResponse = {
+        ...mockInviteResponse,
+        createdAt: '2026-01-01T00:00:00.123456',
+        updatedAt: '2026-01-01T00:00:00.654321+00:00',
+        items: [
+          {
+            itemId: 'i-1',
+            planId: 'plan-1',
+            name: 'Sunscreen',
+            category: 'equipment',
+            quantity: 1,
+            unit: 'pcs',
+            status: 'pending',
+            notes: null,
+            assignedParticipantId: null,
+            createdAt: '2026-01-01T00:00:00.123456',
+            updatedAt: '2026-01-01T00:00:00.654321',
+          },
+        ],
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(beResponse));
+
+      const result = await fetchPlanByInvite('plan-1', 'token-ok');
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].createdAt).toBe('2026-01-01T00:00:00.123456');
+    });
+
+    it('logs schema errors to console on validation failure', async () => {
+      const badResponse = {
+        ...mockInviteResponse,
+        status: 'INVALID_STATUS',
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(badResponse));
+      const consoleSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      await expect(fetchPlanByInvite('plan-1', 'token-ok')).rejects.toThrow();
+
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          '[fetchPlanByInvite] Zod schema validation failed'
+        )
+      );
+      consoleSpy.mockRestore();
+    });
   });
 
   describe('Invite - saveGuestPreferences', () => {

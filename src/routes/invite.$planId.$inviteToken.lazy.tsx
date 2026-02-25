@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  createLazyFileRoute,
-  Link,
-  useNavigate,
-  useParams,
-} from '@tanstack/react-router';
+import { createLazyFileRoute, Link, useParams } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
@@ -42,7 +37,6 @@ function InvitePlanPage() {
   const { planId, inviteToken } = useParams({
     from: '/invite/$planId/$inviteToken',
   });
-  const navigate = useNavigate();
   const { data: plan, isLoading, error } = useInvitePlan(planId, inviteToken);
   const { user } = useAuth();
   const isAuthenticated = !!user;
@@ -58,6 +52,10 @@ function InvitePlanPage() {
   }
 
   if (error || !plan) {
+    console.error(
+      `[InvitePage] Cannot display invite — planId="${planId}", token="${inviteToken.slice(0, 8)}…". ` +
+        `Error: ${error ? `${error.name}: ${error.message}` : 'plan data is null/undefined (no error thrown)'}`
+    );
     return (
       <div className="py-16 px-4 text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-3">
@@ -315,10 +313,16 @@ function InvitePlanPage() {
     setIsSaving(true);
     try {
       await saveGuestPreferences(planId, inviteToken, values);
+      console.info(
+        `[InvitePage] Guest preferences saved — planId="${planId}", token="${inviteToken.slice(0, 8)}…".`
+      );
       toast.success(t('preferences.updated'));
       setShowPreferences(false);
-      navigate({ to: '/plan/$planId', params: { planId } });
-    } catch {
+    } catch (err) {
+      console.error(
+        `[InvitePage] saveGuestPreferences failed — planId="${planId}", token="${inviteToken.slice(0, 8)}…". ` +
+          `Error: ${err instanceof Error ? err.message : String(err)}`
+      );
       toast.error(t('errors.somethingWentWrong'));
     } finally {
       setIsSaving(false);
@@ -327,6 +331,5 @@ function InvitePlanPage() {
 
   function handleSkipPreferences() {
     setShowPreferences(false);
-    navigate({ to: '/plan/$planId', params: { planId } });
   }
 }

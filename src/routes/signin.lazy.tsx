@@ -6,10 +6,13 @@ import {
 } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../lib/supabase';
+import { claimInvite } from '../core/api';
+import { getPendingInvite, clearPendingInvite } from '../core/pending-invite';
 
 const signInSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -21,6 +24,7 @@ type SignInForm = z.infer<typeof signInSchema>;
 export function SignIn() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { redirect } = useSearch({ from: '/signin' });
   const redirectTo = redirect || '/plans';
 
@@ -33,34 +37,89 @@ export function SignIn() {
   });
 
   async function onSubmit(values: SignInForm) {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: values.email,
-      password: values.password,
-    });
+    try {
+      console.info(
+        `[SignIn] Attempting email sign-in for "${values.email}", redirectTo="${redirectTo}".`
+      );
+      const { error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password,
+      });
 
-    if (error) {
-      toast.error(error.message);
-      return;
+      if (error) {
+        console.error(
+          `[SignIn] Email sign-in failed for "${values.email}". Error: ${error.message} (status: ${error.status})`
+        );
+        toast.error(error.message);
+        return;
+      }
+
+      const pending = getPendingInvite();
+      if (pending) {
+        console.info(
+          `[SignIn] Pending invite found — planId="${pending.planId}", token="${pending.inviteToken.slice(0, 8)}…". Claiming before navigation…`
+        );
+        clearPendingInvite();
+        try {
+          await claimInvite(pending.planId, pending.inviteToken);
+        } catch (claimErr) {
+          console.warn(
+            `[SignIn] claimInvite failed — planId="${pending.planId}". User may not see the plan immediately. ` +
+              `Error: ${claimErr instanceof Error ? claimErr.message : String(claimErr)}`
+          );
+          toast.error(t('invite.claimFailed'));
+        }
+        queryClient.invalidateQueries();
+      }
+
+      console.info(
+        `[SignIn] Email sign-in succeeded for "${values.email}". Navigating to "${redirectTo}".`
+      );
+      navigate({ to: redirectTo });
+    } catch (err) {
+      console.error(
+        `[SignIn] Unexpected error during email sign-in. Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      toast.error(t('errors.somethingWentWrong'));
     }
-
-    navigate({ to: redirectTo });
   }
 
   async function handleGoogleSignIn() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}${redirectTo}`,
-      },
-    });
+    try {
+      const pending = getPendingInvite();
+      const oauthRedirect = pending
+        ? `/invite/${pending.planId}/${pending.inviteToken}`
+        : redirectTo;
 
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
+      console.info(
+        `[SignIn] Initiating Google OAuth, oauthRedirect="${oauthRedirect}".`
+      );
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}${oauthRedirect}`,
+        },
+      });
 
-    if (!data.url) {
-      navigate({ to: redirectTo });
+      if (error) {
+        console.error(
+          `[SignIn] Google OAuth failed. Error: ${error.message} (status: ${error.status})`
+        );
+        toast.error(error.message);
+        return;
+      }
+
+      if (!data.url) {
+        console.info(
+          '[SignIn] Google OAuth returned no URL — navigating locally.'
+        );
+        navigate({ to: oauthRedirect });
+      }
+    } catch (err) {
+      console.error(
+        `[SignIn] Unexpected error during Google OAuth. Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      toast.error(t('errors.somethingWentWrong'));
     }
   }
 

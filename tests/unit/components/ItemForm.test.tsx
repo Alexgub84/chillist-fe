@@ -1,5 +1,5 @@
 import { beforeAll, describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const mockLanguage = { language: 'en' as const, setLanguage: vi.fn() };
@@ -192,7 +192,9 @@ describe('ItemForm', () => {
       const nameInput = screen.getByPlaceholderText(/item name/i);
       await user.type(nameInput, 'Tent');
 
-      await new Promise((r) => setTimeout(r, 100));
+      await act(async () => {
+        await new Promise((r) => setTimeout(r, 100));
+      });
       expect(
         screen.queryByRole('option', { name: 'Tent' })
       ).not.toBeInTheDocument();

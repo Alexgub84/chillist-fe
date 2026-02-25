@@ -15,11 +15,10 @@ function Plans() {
 
   useEffect(() => {
     if (error) {
-      console.error('[Plans] Failed to fetch plans:', {
-        message: error.message,
-        stack: error.stack,
-        timestamp: new Date().toISOString(),
-      });
+      console.error(
+        `[Plans] Failed to fetch plans — "${error.message}". ` +
+          `Name: ${error.name}, Stack: ${error.stack?.split('\n').slice(0, 3).join(' | ')}`
+      );
     }
   }, [error]);
 

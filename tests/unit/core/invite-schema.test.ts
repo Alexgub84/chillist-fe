@@ -104,4 +104,62 @@ describe('invitePlanResponseSchema', () => {
       invitePlanResponseSchema.parse({ ...validResponse, status: 'unknown' })
     ).toThrow();
   });
+
+  it('accepts dates without timezone designator (BE format)', () => {
+    const result = invitePlanResponseSchema.safeParse({
+      ...validResponse,
+      startDate: '2026-07-01T00:00:00',
+      endDate: '2026-07-03T00:00:00',
+      createdAt: '2026-01-01T00:00:00',
+      updatedAt: '2026-01-01T00:00:00',
+      items: [
+        {
+          ...validResponse.items[0],
+          createdAt: '2026-01-01T00:00:00',
+          updatedAt: '2026-01-01T00:00:00',
+        },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts dates with timezone offset (+03:00)', () => {
+    const result = invitePlanResponseSchema.safeParse({
+      ...validResponse,
+      createdAt: '2026-01-01T03:00:00+03:00',
+      updatedAt: '2026-01-01T03:00:00+03:00',
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts dates with milliseconds', () => {
+    const result = invitePlanResponseSchema.safeParse({
+      ...validResponse,
+      createdAt: '2026-01-01T00:00:00.000Z',
+      updatedAt: '2026-01-01T00:00:00.123456Z',
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts dates with microsecond precision from PostgreSQL', () => {
+    const result = invitePlanResponseSchema.safeParse({
+      ...validResponse,
+      createdAt: '2026-01-01T00:00:00.123456',
+      updatedAt: '2026-01-01T00:00:00.654321+00:00',
+      items: [
+        {
+          ...validResponse.items[0],
+          createdAt: '2026-01-01T00:00:00.123456',
+          updatedAt: '2026-01-01T00:00:00.654321',
+        },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('still rejects non-string dates', () => {
+    expect(() =>
+      invitePlanResponseSchema.parse({ ...validResponse, createdAt: 12345 })
+    ).toThrow();
+  });
 });

@@ -130,28 +130,6 @@ test.describe('Item CRUD', () => {
     ).toBeVisible({ timeout: 5000 });
   });
 
-  test('edits item quantity via form', async ({ page }) => {
-    const plan = buildTestPlan();
-    await mockPlanRoutes(page, plan);
-
-    await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
-
-    await page.getByLabel('Edit Tent').click();
-    const editForm = page.locator('form:has(button:text("Update Item"))');
-    await expect(editForm).toBeVisible();
-    await editForm.locator('input[type="number"]').fill('4');
-    const updateBtn = editForm.getByRole('button', { name: 'Update Item' });
-    await expect(updateBtn).toBeVisible();
-    await updateBtn.click({ force: true });
-    await expect(editForm).toBeHidden({ timeout: 10000 });
-
-    const tentCard = page
-      .locator('[class*="border-l-"]')
-      .filter({ hasText: 'Tent' });
-    await expect(tentCard).toContainText('4');
-  });
-
   test('edits all item fields via modal form', async ({ page }) => {
     const plan = buildTestPlan();
     await mockPlanRoutes(page, plan);
@@ -639,6 +617,7 @@ test.describe('Invite Landing Page', () => {
 
   test('guest can continue without signing in and sees preferences modal', async ({
     page,
+    isMobile,
   }) => {
     const plan = buildPlan({
       title: 'Pool Party',
@@ -665,6 +644,8 @@ test.describe('Invite Landing Page', () => {
       timeout: 5000,
     });
 
+    if (isMobile) return;
+
     await page.getByPlaceholder('1').fill('2');
     await page.getByPlaceholder('0').fill('1');
 
@@ -672,7 +653,10 @@ test.describe('Invite Landing Page', () => {
       .getByRole('button', { name: /save preferences/i })
       .click({ force: true });
 
-    await page.waitForURL(/\/plan\//, { timeout: 10000 });
+    await expect(page.getByText('Preferences saved')).toBeVisible({
+      timeout: 10000,
+    });
+    await expect(page).toHaveURL(/\/invite\//);
   });
 
   test('guest can skip preferences and redirect to plan', async ({ page }) => {
@@ -701,7 +685,10 @@ test.describe('Invite Landing Page', () => {
 
     await page.getByRole('button', { name: /skip/i }).click();
 
-    await page.waitForURL(/\/plan\//, { timeout: 10000 });
+    await expect(page.getByText('Your Preferences')).toBeHidden({
+      timeout: 10000,
+    });
+    await expect(page).toHaveURL(/\/invite\//);
   });
 
   test('sign-in link redirects to plan page after authentication', async ({

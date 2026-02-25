@@ -28,12 +28,12 @@ export const planSchema = z.object({
   visibility: planVisibilitySchema,
   ownerParticipantId: z.string().nullish(),
   location: locationSchema.nullish(),
-  startDate: z.string().datetime().nullish(),
-  endDate: z.string().datetime().nullish(),
+  startDate: z.string().nullish(),
+  endDate: z.string().nullish(),
   tags: z.array(z.string()).nullish(),
   participantIds: z.array(z.string()).nullish(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export const planWithItemsSchema = planSchema.extend({

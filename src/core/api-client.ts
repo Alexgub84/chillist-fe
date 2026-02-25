@@ -67,18 +67,14 @@ export function handleResponse<T>(result: ApiResponse<T>, endpoint: string): T {
     const isJson = contentType.includes('application/json');
 
     if (!isJson && response.ok === false) {
-      throw new ApiError(
-        `API returned ${response.status}: Expected JSON from ${endpoint} but received ${contentType || 'unknown content type'}. Check if API URL is correct.`,
-        response.status,
-        response.statusText
-      );
+      const msg = `API returned ${response.status}: Expected JSON from ${endpoint} but received ${contentType || 'unknown content type'}. Check if API URL is correct.`;
+      console.error(`[ApiClient] ${msg}`);
+      throw new ApiError(msg, response.status, response.statusText);
     }
 
-    throw new ApiError(
-      `Failed to fetch ${endpoint}: ${response.status} ${response.statusText}`,
-      response.status,
-      response.statusText
-    );
+    const msg = `Failed to fetch ${endpoint}: ${response.status} ${response.statusText}`;
+    console.error(`[ApiClient] ${msg}. Error body: ${JSON.stringify(error)}`);
+    throw new ApiError(msg, response.status, response.statusText);
   }
 
   return data as T;

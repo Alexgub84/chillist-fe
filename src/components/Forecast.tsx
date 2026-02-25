@@ -143,7 +143,9 @@ export default function Forecast({
   const { data, error, isLoading } = useForecast(location, startDate, endDate);
 
   if (error) {
-    console.warn('[Forecast]', error.message);
+    console.warn(
+      `[Forecast] Failed to load forecast — location="${location ?? 'none'}", startDate="${startDate ?? 'none'}", endDate="${endDate ?? 'none'}". Error: ${error.message}`
+    );
   }
 
   if (!location && (!startDate || !endDate)) {
