@@ -35,6 +35,7 @@ interface MockItem {
   quantity: number;
   unit: string;
   status: string;
+  subcategory?: string | null;
   notes: string | null;
   assignedParticipantId: string | null;
   createdAt: string;
@@ -104,6 +105,7 @@ export function buildItem(
     category: 'equipment' | 'food';
     quantity: number;
     status?: string;
+    subcategory?: string | null;
     assignedParticipantId?: string | null;
     notes?: string | null;
   }
@@ -116,6 +118,7 @@ export function buildItem(
     quantity: i.quantity,
     unit: 'pcs',
     status: i.status ?? 'pending',
+    subcategory: i.subcategory ?? null,
     notes: i.notes ?? null,
     assignedParticipantId: i.assignedParticipantId ?? null,
     createdAt: timestamp(),
@@ -371,7 +374,10 @@ export async function mockInviteRoute(
   page: Page,
   plan: MockPlan,
   inviteToken: string,
-  overrides?: { myRsvpStatus?: 'pending' | 'confirmed'; myPreferences?: object | null }
+  overrides?: {
+    myRsvpStatus?: 'pending' | 'confirmed';
+    myPreferences?: object | null;
+  }
 ) {
   const strippedParticipants = plan.participants.map((p) => ({
     participantId: p.participantId,

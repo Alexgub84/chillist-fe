@@ -22,7 +22,7 @@ import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import Forecast from '../components/Forecast';
 import ParticipantDetails from '../components/ParticipantDetails';
-import CategorySection from '../components/CategorySection';
+import ItemsList from '../components/ItemsList';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
 import EditPlanForm from '../components/EditPlanForm';
 import PreferencesForm, {
@@ -31,7 +31,7 @@ import PreferencesForm, {
 import Modal from '../components/shared/Modal';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
-import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
+import type { Item, ItemPatch } from '../core/schemas/item';
 import type { PlanPatch } from '../core/schemas/plan';
 import type { ListFilter } from '../core/schemas/plan-search';
 
@@ -195,8 +195,6 @@ function PlanDetails() {
     }
   }
 
-  const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
-
   const participantCounts: Record<string, number> = { unassigned: 0 };
   for (const p of plan.participants) {
     participantCounts[p.participantId] = 0;
@@ -230,11 +228,6 @@ function PlanDetails() {
     if (listFilter === 'packing' && item.status !== 'purchased') return false;
     return true;
   });
-
-  const itemsByCategory = CATEGORIES.map((category) => ({
-    category,
-    items: filteredItems.filter((item) => item.category === category),
-  }));
 
   return (
     <div className="w-full px-3 sm:px-0">
@@ -394,23 +387,18 @@ function PlanDetails() {
         )}
 
         {plan.items.length > 0 && (
-          <div className="space-y-4 mb-4">
-            {itemsByCategory.map(({ category, items }) => (
-              <CategorySection
-                key={category}
-                category={category}
-                items={items}
-                participants={plan.participants}
-                listFilter={listFilter}
-                selfAssignParticipantId={
-                  isOwner ? undefined : currentParticipant?.participantId
-                }
-                canEditItem={canEditItem}
-                onEditItem={(itemId) => setItemModalId(itemId)}
-                onUpdateItem={updateItem}
-              />
-            ))}
-          </div>
+          <ItemsList
+            items={filteredItems}
+            participants={plan.participants}
+            listFilter={listFilter}
+            selfAssignParticipantId={
+              isOwner ? undefined : currentParticipant?.participantId
+            }
+            canEditItem={canEditItem}
+            onEditItem={(itemId) => setItemModalId(itemId)}
+            onUpdateItem={updateItem}
+            groupBySubcategory
+          />
         )}
 
         <Modal

@@ -39,6 +39,7 @@ const baseItemSchema = z.object({
   unit: unitSchema,
   notes: z.string().nullish(),
   status: itemStatusSchema,
+  subcategory: z.string().nullish(),
   assignedParticipantId: z.string().nullish(),
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -63,6 +64,7 @@ export const itemCreateSchema = z.object({
   quantity: z.number().int().min(1),
   unit: unitSchema.optional(),
   status: itemStatusSchema,
+  subcategory: z.string().nullish(),
   notes: z.string().nullish(),
   assignedParticipantId: z.string().nullish(),
 });

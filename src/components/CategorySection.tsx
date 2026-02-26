@@ -7,6 +7,12 @@ import { useTranslation } from 'react-i18next';
 import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
+import {
+  EQUIPMENT_SUBCATEGORIES,
+  FOOD_SUBCATEGORIES,
+  OTHER_SUBCATEGORY,
+} from '../data/subcategories';
+import { groupBySubcategory } from '../core/utils/items';
 import ItemCard from './ItemCard';
 
 interface CategorySectionProps {
@@ -18,6 +24,36 @@ interface CategorySectionProps {
   canEditItem?: (item: Item) => boolean;
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
+  groupBySubcategory?: boolean;
+}
+
+const CATEGORY_TAXONOMY = {
+  equipment: EQUIPMENT_SUBCATEGORIES,
+  food: FOOD_SUBCATEGORIES,
+} as const;
+
+function orderedSubcategoryEntries(
+  groups: Record<string, Item[]>,
+  category: ItemCategory
+): [string, Item[]][] {
+  const taxonomy = CATEGORY_TAXONOMY[category];
+  const ordered: [string, Item[]][] = [];
+  for (const sub of taxonomy) {
+    const items = groups[sub];
+    if (items && items.length > 0) {
+      ordered.push([sub, items]);
+    }
+  }
+  if (groups[OTHER_SUBCATEGORY]?.length) {
+    ordered.push([OTHER_SUBCATEGORY, groups[OTHER_SUBCATEGORY]]);
+  }
+  const seen = new Set(ordered.map(([s]) => s));
+  for (const [sub, items] of Object.entries(groups)) {
+    if (!seen.has(sub) && items.length > 0) {
+      ordered.push([sub, items]);
+    }
+  }
+  return ordered;
 }
 
 export default function CategorySection({
@@ -29,9 +65,14 @@ export default function CategorySection({
   canEditItem,
   onEditItem,
   onUpdateItem,
+  groupBySubcategory: useSubcategoryGroups = false,
 }: CategorySectionProps) {
   const { t } = useTranslation();
   const categoryLabel = t(`categories.${category}`);
+
+  const subcategoryGroups = useSubcategoryGroups
+    ? groupBySubcategory(items)
+    : null;
 
   return (
     <Disclosure
@@ -69,27 +110,70 @@ export default function CategorySection({
       >
         {items.length > 0 ? (
           <div className="border-t border-gray-200 divide-y divide-gray-200">
-            {items.map((item) => {
-              const editable = canEditItem ? canEditItem(item) : true;
-              return (
-                <ItemCard
-                  key={item.itemId}
-                  item={item}
-                  participants={participants}
-                  listFilter={listFilter}
-                  selfAssignParticipantId={selfAssignParticipantId}
-                  canEdit={editable}
-                  onEdit={
-                    onEditItem ? () => onEditItem(item.itemId) : undefined
-                  }
-                  onUpdate={
-                    onUpdateItem
-                      ? (updates) => onUpdateItem(item.itemId, updates)
-                      : undefined
-                  }
-                />
-              );
-            })}
+            {subcategoryGroups && Object.keys(subcategoryGroups).length > 0
+              ? orderedSubcategoryEntries(subcategoryGroups, category).map(
+                  ([subcategory, subItems]) => (
+                    <div key={subcategory}>
+                      <div className="px-4 sm:px-5 py-2 bg-gray-50">
+                        <h4 className="text-sm font-medium text-gray-600">
+                          {subcategory}
+                          <span className="ms-2 text-gray-400">
+                            ({subItems.length})
+                          </span>
+                        </h4>
+                      </div>
+                      <div className="divide-y divide-gray-200">
+                        {subItems.map((item) => {
+                          const editable = canEditItem
+                            ? canEditItem(item)
+                            : true;
+                          return (
+                            <ItemCard
+                              key={item.itemId}
+                              item={item}
+                              participants={participants}
+                              listFilter={listFilter}
+                              selfAssignParticipantId={selfAssignParticipantId}
+                              canEdit={editable}
+                              onEdit={
+                                onEditItem
+                                  ? () => onEditItem(item.itemId)
+                                  : undefined
+                              }
+                              onUpdate={
+                                onUpdateItem
+                                  ? (updates) =>
+                                      onUpdateItem(item.itemId, updates)
+                                  : undefined
+                              }
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )
+                )
+              : items.map((item) => {
+                  const editable = canEditItem ? canEditItem(item) : true;
+                  return (
+                    <ItemCard
+                      key={item.itemId}
+                      item={item}
+                      participants={participants}
+                      listFilter={listFilter}
+                      selfAssignParticipantId={selfAssignParticipantId}
+                      canEdit={editable}
+                      onEdit={
+                        onEditItem ? () => onEditItem(item.itemId) : undefined
+                      }
+                      onUpdate={
+                        onUpdateItem
+                          ? (updates) => onUpdateItem(item.itemId, updates)
+                          : undefined
+                      }
+                    />
+                  );
+                })}
           </div>
         ) : (
           <div className="border-t border-gray-200 px-4 sm:px-5 py-3 sm:py-4 text-center">

@@ -2,16 +2,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
 import toast from 'react-hot-toast';
-import type {
-  Item,
-  ItemCategory,
-  ItemCreate,
-  ItemPatch,
-} from '../core/schemas/item';
+import type { Item, ItemCreate, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import { getApiErrorMessage } from '../core/error-utils';
-import CategorySection from './CategorySection';
+import ItemsList from './ItemsList';
 import ItemForm, { type ItemFormValues } from './ItemForm';
 import ListTabs from './StatusFilter';
 import Modal from './shared/Modal';
@@ -43,8 +38,6 @@ export interface ItemsViewProps {
   isCreating?: boolean;
 }
 
-const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
-
 export default function ItemsView({
   planTitle,
   items,
@@ -75,6 +68,7 @@ export default function ItemsView({
     return {
       name: values.name,
       category: values.category,
+      subcategory: values.subcategory || null,
       quantity: values.quantity,
       unit: values.unit,
       status: values.status,
@@ -127,11 +121,6 @@ export default function ItemsView({
     if (listFilter === 'packing' && item.status !== 'purchased') return false;
     return true;
   });
-
-  const itemsByCategory = CATEGORIES.map((category) => ({
-    category,
-    items: filteredItems.filter((item) => item.category === category),
-  }));
 
   const myParticipantId = isGuest ? guestParticipantId : selfParticipantId;
 
@@ -196,21 +185,16 @@ export default function ItemsView({
         )}
 
         {items.length > 0 && (
-          <div className="space-y-4 mb-4">
-            {itemsByCategory.map(({ category, items: catItems }) => (
-              <CategorySection
-                key={category}
-                category={category}
-                items={catItems}
-                participants={participants}
-                listFilter={listFilter}
-                selfAssignParticipantId={myParticipantId}
-                canEditItem={canEditItem}
-                onEditItem={(itemId) => setItemModalId(itemId)}
-                onUpdateItem={handleUpdateItem}
-              />
-            ))}
-          </div>
+          <ItemsList
+            items={filteredItems}
+            participants={participants}
+            listFilter={listFilter}
+            selfAssignParticipantId={myParticipantId}
+            canEditItem={canEditItem}
+            onEditItem={(itemId) => setItemModalId(itemId)}
+            onUpdateItem={handleUpdateItem}
+            groupBySubcategory
+          />
         )}
 
         <Modal
@@ -225,6 +209,7 @@ export default function ItemsView({
                 ? {
                     name: editingItem.name,
                     category: editingItem.category,
+                    subcategory: editingItem.subcategory ?? undefined,
                     quantity: editingItem.quantity,
                     unit: editingItem.unit,
                     status: editingItem.status,

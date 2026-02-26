@@ -29,7 +29,7 @@ import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import LocationMap from '../components/LocationMap';
 import Modal from '../components/shared/Modal';
-import CategorySection from '../components/CategorySection';
+import ItemsList from '../components/ItemsList';
 import ListTabs from '../components/StatusFilter';
 import PreferencesForm from '../components/PreferencesForm';
 import type { PreferencesFormValues } from '../components/PreferencesForm';
@@ -164,7 +164,6 @@ export function InvitePlanPage() {
   } = plan;
 
   const hasResponded = myRsvpStatus !== 'pending';
-  const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
   const listCounts: Record<ListFilter, number> = { buying: 0, packing: 0 };
   for (const item of items) {
@@ -177,11 +176,6 @@ export function InvitePlanPage() {
     if (listFilter === 'packing' && item.status !== 'purchased') return false;
     return true;
   });
-
-  const itemsByCategory = CATEGORIES.map((category) => ({
-    category,
-    items: filteredItems.filter((item) => item.category === category),
-  }));
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -289,25 +283,20 @@ export function InvitePlanPage() {
           )}
 
           {items.length > 0 ? (
-            <div className="space-y-4 mb-6">
-              {itemsByCategory.map(({ category, items: catItems }) => (
-                <CategorySection
-                  key={category}
-                  category={category}
-                  items={catItems}
-                  participants={participantsAsFullType}
-                  listFilter={listFilter}
-                  selfAssignParticipantId={myParticipantId}
-                  canEditItem={(item) =>
-                    !!myParticipantId &&
-                    item.assignedParticipantId === myParticipantId
-                  }
-                  onEditItem={(itemId) => setEditingItemId(itemId)}
-                  onUpdateItem={(itemId, updates) =>
-                    handleUpdateItem(itemId, updates)
-                  }
-                />
-              ))}
+            <div className="mb-6">
+              <ItemsList
+                items={filteredItems}
+                participants={participantsAsFullType}
+                listFilter={listFilter}
+                selfAssignParticipantId={myParticipantId}
+                canEditItem={(item) =>
+                  !!myParticipantId &&
+                  item.assignedParticipantId === myParticipantId
+                }
+                onEditItem={(itemId) => setEditingItemId(itemId)}
+                onUpdateItem={handleUpdateItem}
+                groupBySubcategory
+              />
             </div>
           ) : (
             <div className="bg-white rounded-xl shadow-sm p-5 sm:p-7 text-center mb-6">
