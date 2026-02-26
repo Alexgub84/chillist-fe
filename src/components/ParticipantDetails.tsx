@@ -1,13 +1,9 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@headlessui/react';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import type { Participant } from '../core/schemas/participant';
 import { copyInviteLink, shareInviteLink } from '../core/invite';
+import CollapsibleSection from './shared/CollapsibleSection';
 
 function roleBadgeColor(role: Participant['role']) {
   if (role === 'owner') return 'bg-amber-100 text-amber-800';
@@ -58,57 +54,36 @@ export default function ParticipantDetails({
   if (participants.length === 0) return null;
 
   return (
-    <Disclosure
-      as="div"
-      className="bg-white rounded-lg shadow-sm overflow-hidden"
-    >
-      <DisclosureButton className="group w-full px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 active:bg-gray-100 transition-colors">
+    <CollapsibleSection
+      title={
         <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
           {t('participantDetails.title')}
           <span className="ms-2 text-sm font-normal text-gray-500">
             ({participants.length})
           </span>
         </h2>
-        <svg
-          className="w-5 h-5 text-gray-500 transition-transform group-data-open:rotate-180"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
+      }
+      wrapperClassName="bg-white rounded-lg shadow-sm overflow-hidden"
+      panelContentClassName="border-t border-gray-200 p-4 sm:p-5 space-y-3"
+    >
+      {participants.map((p) => {
+        const canEdit = isOwner || p.participantId === currentParticipantId;
+        return (
+          <ParticipantCard
+            key={p.participantId}
+            participant={p}
+            planId={planId}
+            planTitle={planTitle}
+            isOwner={isOwner}
+            onEdit={
+              canEdit && onEditPreferences
+                ? () => onEditPreferences(p.participantId)
+                : undefined
+            }
           />
-        </svg>
-      </DisclosureButton>
-      <DisclosurePanel
-        transition
-        className="origin-top transition duration-200 ease-out data-closed:-translate-y-6 data-closed:opacity-0"
-      >
-        <div className="border-t border-gray-200 p-4 sm:p-5 space-y-3">
-          {participants.map((p) => {
-            const canEdit = isOwner || p.participantId === currentParticipantId;
-            return (
-              <ParticipantCard
-                key={p.participantId}
-                participant={p}
-                planId={planId}
-                planTitle={planTitle}
-                isOwner={isOwner}
-                onEdit={
-                  canEdit && onEditPreferences
-                    ? () => onEditPreferences(p.participantId)
-                    : undefined
-                }
-              />
-            );
-          })}
-        </div>
-      </DisclosurePanel>
-    </Disclosure>
+        );
+      })}
+    </CollapsibleSection>
   );
 }
 

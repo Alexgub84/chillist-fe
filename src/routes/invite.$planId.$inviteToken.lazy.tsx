@@ -5,11 +5,6 @@ import {
   useNavigate,
   useParams,
 } from '@tanstack/react-router';
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
@@ -29,6 +24,7 @@ import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import LocationMap from '../components/LocationMap';
 import Modal from '../components/shared/Modal';
+import CollapsibleSection from '../components/shared/CollapsibleSection';
 import ItemsList from '../components/ItemsList';
 import ListTabs from '../components/StatusFilter';
 import PreferencesForm from '../components/PreferencesForm';
@@ -508,91 +504,71 @@ export function InvitePlanPage() {
     if (participants.length === 0) return null;
 
     return (
-      <Disclosure
-        as="div"
-        className="bg-white rounded-xl shadow-sm overflow-hidden mb-6"
-      >
-        <DisclosureButton className="group w-full px-5 sm:px-7 py-4 sm:py-5 flex items-center justify-between cursor-pointer hover:bg-gray-50 active:bg-gray-100 transition-colors">
+      <CollapsibleSection
+        title={
           <h2 className="text-lg font-semibold text-gray-800">
             {t('invite.participantsTitle')}
             <span className="ms-2 text-sm font-normal text-gray-500">
               ({participants.length})
             </span>
           </h2>
-          <svg
-            className="w-5 h-5 text-gray-500 transition-transform group-data-open:rotate-180"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </DisclosureButton>
-        <DisclosurePanel
-          transition
-          className="origin-top transition duration-200 ease-out data-closed:-translate-y-6 data-closed:opacity-0"
-        >
-          <div className="border-t border-gray-200 px-5 sm:px-7 py-4 sm:py-5">
-            <div className="flex flex-wrap gap-2">
-              {participants.map((p) => {
-                const isMe = p.participantId === myParticipantId;
-                return (
-                  <div
-                    key={p.participantId}
-                    className={clsx(
-                      'flex items-center gap-2 rounded-full px-3 py-1.5',
-                      isMe ? 'bg-blue-50 ring-1 ring-blue-200' : 'bg-gray-50'
-                    )}
+        }
+        wrapperClassName="bg-white rounded-xl shadow-sm overflow-hidden mb-6"
+        buttonClassName="group w-full px-5 sm:px-7 py-4 sm:py-5 flex items-center justify-between cursor-pointer hover:bg-gray-50 active:bg-gray-100 transition-colors"
+        panelContentClassName="border-t border-gray-200 px-5 sm:px-7 py-4 sm:py-5"
+      >
+        <div className="flex flex-wrap gap-2">
+          {participants.map((p) => {
+            const isMe = p.participantId === myParticipantId;
+            return (
+              <div
+                key={p.participantId}
+                className={clsx(
+                  'flex items-center gap-2 rounded-full px-3 py-1.5',
+                  isMe ? 'bg-blue-50 ring-1 ring-blue-200' : 'bg-gray-50'
+                )}
+              >
+                <div className="w-7 h-7 rounded-full border-2 border-emerald-400 bg-white flex items-center justify-center text-xs font-bold text-gray-600 shrink-0">
+                  {(p.displayName ?? '?').charAt(0).toUpperCase()}
+                </div>
+                <span className="text-sm font-medium text-gray-700">
+                  {p.displayName ?? t('plan.na')}
+                  {isMe && (
+                    <span className="text-xs text-blue-500 ms-1">
+                      ({t('invite.you')})
+                    </span>
+                  )}
+                </span>
+                <span
+                  className={clsx(
+                    'text-xs font-medium px-2 py-0.5 rounded-full',
+                    roleBadgeColor(p.role)
+                  )}
+                >
+                  {t(`roles.${p.role}`)}
+                </span>
+                {isMe && hasResponded && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPreferences(true)}
+                    className="ms-1 text-blue-500 hover:text-blue-700 transition-colors"
+                    title={t('invite.editPreferences')}
                   >
-                    <div className="w-7 h-7 rounded-full border-2 border-emerald-400 bg-white flex items-center justify-center text-xs font-bold text-gray-600 shrink-0">
-                      {(p.displayName ?? '?').charAt(0).toUpperCase()}
-                    </div>
-                    <span className="text-sm font-medium text-gray-700">
-                      {p.displayName ?? t('plan.na')}
-                      {isMe && (
-                        <span className="text-xs text-blue-500 ms-1">
-                          ({t('invite.you')})
-                        </span>
-                      )}
-                    </span>
-                    <span
-                      className={clsx(
-                        'text-xs font-medium px-2 py-0.5 rounded-full',
-                        roleBadgeColor(p.role)
-                      )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-4 h-4"
                     >
-                      {t(`roles.${p.role}`)}
-                    </span>
-                    {isMe && hasResponded && (
-                      <button
-                        type="button"
-                        onClick={() => setShowPreferences(true)}
-                        className="ms-1 text-blue-500 hover:text-blue-700 transition-colors"
-                        title={t('invite.editPreferences')}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-4 h-4"
-                        >
-                          <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
-                        </svg>
-                      </button>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </DisclosurePanel>
-      </Disclosure>
+                      <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </CollapsibleSection>
     );
   }
 
