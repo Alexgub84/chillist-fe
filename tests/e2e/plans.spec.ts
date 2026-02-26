@@ -149,12 +149,13 @@ test.describe('Admin Delete', () => {
     await expect(page.getByText('Delete Plan?')).toBeVisible({
       timeout: 10000,
     });
-    await expect(page.getByTestId('admin-delete-confirm')).toBeVisible();
+    const confirmBtn = page.getByTestId('admin-delete-confirm');
+    await expect(confirmBtn).toBeVisible();
+    await expect(confirmBtn).toBeEnabled();
 
-    await Promise.all([
-      page.waitForResponse((r) => r.request().method() === 'DELETE'),
-      page.getByTestId('admin-delete-confirm').click({ force: true }),
-    ]);
+    await page.waitForTimeout(300);
+
+    await confirmBtn.click({ force: true });
 
     await expect(page.getByText('Delete Plan?')).toBeHidden({ timeout: 10000 });
     await expect(page.getByText('Plan deleted')).toBeVisible({

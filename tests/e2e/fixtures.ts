@@ -370,7 +370,8 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
 export async function mockInviteRoute(
   page: Page,
   plan: MockPlan,
-  inviteToken: string
+  inviteToken: string,
+  overrides?: { myRsvpStatus?: 'pending' | 'confirmed'; myPreferences?: object | null }
 ) {
   const strippedParticipants = plan.participants.map((p) => ({
     participantId: p.participantId,
@@ -401,8 +402,8 @@ export async function mockInviteRoute(
             items: plan.items,
             participants: strippedParticipants,
             myParticipantId: tokenMatch?.participantId ?? 'unknown',
-            myRsvpStatus: 'pending',
-            myPreferences: null,
+            myRsvpStatus: overrides?.myRsvpStatus ?? 'pending',
+            myPreferences: overrides?.myPreferences ?? null,
           },
         });
       } else {

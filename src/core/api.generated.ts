@@ -627,7 +627,7 @@ export interface paths {
     head?: never;
     /**
      * Update a participant
-     * @description Update an existing participant by its ID
+     * @description Update an existing participant by its ID. Owner/admin can update any participant; linked participants can only update their own record.
      */
     patch: {
       parameters: {
@@ -655,6 +655,15 @@ export interface paths {
         };
         /** @description Default Response */
         400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        403: {
           headers: {
             [name: string]: unknown;
           };
@@ -976,6 +985,143 @@ export interface paths {
     };
     trace?: never;
   };
+  '/plans/{planId}/items/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Bulk create items in a plan
+     * @description Create multiple items at once. Each item is validated independently — valid items are created, invalid items are reported in the errors array with their name.
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-36'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
+          };
+        };
+        /** @description Default Response */
+        207: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Bulk update items in a plan
+     * @description Update multiple items at once. Each item is validated independently — valid items are updated, invalid items are reported in the errors array with their name.
+     */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-38'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
+          };
+        };
+        /** @description Default Response */
+        207: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    trace?: never;
+  };
   '/plans/{planId}/invite/{inviteToken}': {
     parameters: {
       query?: never;
@@ -1224,7 +1370,7 @@ export interface paths {
     head?: never;
     /**
      * Update an item as a guest via invite token
-     * @description Updates an existing item. Only allowed if the item is assigned to the participant matched by the invite token. Returns 403 if the item belongs to another participant.
+     * @description Updates an existing item. Allowed if the item is assigned to the participant matched by the invite token OR unassigned. Returns 403 if the item belongs to another participant.
      */
     patch: {
       parameters: {
@@ -1268,6 +1414,154 @@ export interface paths {
           };
           content: {
             'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    trace?: never;
+  };
+  '/plans/{planId}/invite/{inviteToken}/items/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Bulk create items as a guest via invite token
+     * @description Creates multiple items auto-assigned to the participant matched by the invite token. Each item is validated independently — valid items are created, invalid items are reported in the errors array.
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+          inviteToken: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-41'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
+          };
+        };
+        /** @description Default Response */
+        207: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    /**
+     * Bulk update items as a guest via invite token
+     * @description Updates multiple items. Only allowed for items assigned to the participant matched by the invite token or unassigned items. Items assigned to other participants are reported in errors.
+     */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+          inviteToken: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-43'];
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
+          };
+        };
+        /** @description Default Response */
+        207: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-40'];
           };
         };
         /** @description Default Response */
@@ -1372,7 +1666,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-37'];
+            'application/json': components['schemas']['def-45'];
           };
         };
       };
@@ -1395,7 +1689,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-38'];
+          'application/json': components['schemas']['def-46'];
         };
       };
       responses: {
@@ -1405,7 +1699,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-39'];
+            'application/json': components['schemas']['def-47'];
           };
         };
       };
@@ -1640,6 +1934,7 @@ export interface components {
         | 'set';
       /** @enum {string} */
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      subcategory?: string | null;
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
@@ -1671,6 +1966,7 @@ export interface components {
         | 'set';
       /** @enum {string} */
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      subcategory?: string | null;
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
@@ -1696,6 +1992,7 @@ export interface components {
         | 'set';
       /** @enum {string} */
       status?: 'pending' | 'purchased' | 'packed' | 'canceled';
+      subcategory?: string | null;
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
@@ -1723,7 +2020,7 @@ export interface components {
       contactEmail?: string | null;
       inviteToken?: string | null;
       /** @enum {string} */
-      inviteStatus?: 'pending' | 'invited' | 'accepted';
+      inviteStatus: 'pending' | 'invited' | 'accepted';
       /** @enum {string} */
       rsvpStatus: 'pending' | 'confirmed' | 'not_sure';
       /** Format: date-time */
@@ -1771,6 +2068,8 @@ export interface components {
       foodPreferences?: string | null;
       allergies?: string | null;
       notes?: string | null;
+      /** @enum {string} */
+      rsvpStatus?: 'pending' | 'confirmed' | 'not_sure';
     };
     /** ParticipantIdParam */
     'def-21': {
@@ -1922,6 +2221,7 @@ export interface components {
         | 'cm'
         | 'pack'
         | 'set';
+      subcategory?: string | null;
       notes?: string | null;
     };
     /** UpdateInviteItemBody */
@@ -1945,10 +2245,91 @@ export interface components {
         | 'set';
       /** @enum {string} */
       status?: 'pending' | 'purchased' | 'packed' | 'canceled';
+      subcategory?: string | null;
       notes?: string | null;
     };
-    /** UserPreferences */
+    /** BulkCreateItemBody */
     'def-36': {
+      items: components['schemas']['def-14'][];
+    };
+    /** BulkUpdateItemEntry */
+    'def-37': {
+      /** Format: uuid */
+      itemId: string;
+      name?: string;
+      /** @enum {string} */
+      category?: 'equipment' | 'food';
+      quantity?: number;
+      /** @enum {string} */
+      unit?:
+        | 'pcs'
+        | 'kg'
+        | 'g'
+        | 'lb'
+        | 'oz'
+        | 'l'
+        | 'ml'
+        | 'm'
+        | 'cm'
+        | 'pack'
+        | 'set';
+      /** @enum {string} */
+      status?: 'pending' | 'purchased' | 'packed' | 'canceled';
+      subcategory?: string | null;
+      notes?: string | null;
+      /** Format: uuid */
+      assignedParticipantId?: string | null;
+    };
+    /** BulkUpdateItemBody */
+    'def-38': {
+      items: components['schemas']['def-37'][];
+    };
+    /** BulkItemError */
+    'def-39': {
+      name: string;
+      message: string;
+    };
+    /** BulkItemResponse */
+    'def-40': {
+      items: components['schemas']['def-13'];
+      errors: components['schemas']['def-39'][];
+    };
+    /** BulkCreateInviteItemBody */
+    'def-41': {
+      items: components['schemas']['def-34'][];
+    };
+    /** BulkUpdateInviteItemEntry */
+    'def-42': {
+      /** Format: uuid */
+      itemId: string;
+      name?: string;
+      /** @enum {string} */
+      category?: 'equipment' | 'food';
+      quantity?: number;
+      /** @enum {string} */
+      unit?:
+        | 'pcs'
+        | 'kg'
+        | 'g'
+        | 'lb'
+        | 'oz'
+        | 'l'
+        | 'ml'
+        | 'm'
+        | 'cm'
+        | 'pack'
+        | 'set';
+      /** @enum {string} */
+      status?: 'pending' | 'purchased' | 'packed' | 'canceled';
+      subcategory?: string | null;
+      notes?: string | null;
+    };
+    /** BulkUpdateInviteItemBody */
+    'def-43': {
+      items: components['schemas']['def-42'][];
+    };
+    /** UserPreferences */
+    'def-44': {
       /** @description Free-text dietary preferences, e.g. "vegetarian, no shellfish" */
       foodPreferences?: string | null;
       /** @description Free-text allergy list, e.g. "nuts, gluten, dairy" */
@@ -1957,17 +2338,17 @@ export interface components {
       defaultEquipment?: string[] | null;
     };
     /** ProfileResponse */
-    'def-37': {
+    'def-45': {
       user: {
         id: string;
         email: string;
         role: string;
       };
       /** @description App preferences for this user. Null if the user has never saved preferences. */
-      preferences: components['schemas']['def-36'] | null;
+      preferences: components['schemas']['def-44'] | null;
     };
     /** UpdateProfileBody */
-    'def-38': {
+    'def-46': {
       /** @description Free-text dietary preferences, e.g. "vegetarian, no shellfish". Send null to clear. */
       foodPreferences?: string | null;
       /** @description Free-text allergy list, e.g. "nuts, gluten, dairy". Send null to clear. */
@@ -1976,8 +2357,8 @@ export interface components {
       defaultEquipment?: string[] | null;
     };
     /** UpdateProfileResponse */
-    'def-39': {
-      preferences: components['schemas']['def-36'];
+    'def-47': {
+      preferences: components['schemas']['def-44'];
     };
   };
   responses: never;

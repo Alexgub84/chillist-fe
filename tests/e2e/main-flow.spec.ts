@@ -327,7 +327,7 @@ test.describe('Participant Preferences Access', () => {
 
     await page.getByText('Group Details').click();
 
-    const detailsSection = page.getByText('Group Details').locator('..');
+    const detailsSection = page.getByText('Group Details').locator('../..');
     await expect(detailsSection.getByText('Edit').first()).toBeVisible();
   });
 
@@ -503,7 +503,9 @@ test.describe('Invite Landing Page', () => {
     });
 
     const inviteToken = plan.participants[1].inviteToken!;
-    await mockInviteRoute(page, plan, inviteToken);
+    await mockInviteRoute(page, plan, inviteToken, {
+      myRsvpStatus: 'confirmed',
+    });
 
     await page.goto(`/invite/${plan.planId}/${inviteToken}`);
 
@@ -512,8 +514,8 @@ test.describe('Invite Landing Page', () => {
       page.locator('p').filter({ hasText: "You're Invited!" })
     ).toBeVisible();
 
-    await expect(page.getByText('Sunscreen')).not.toBeVisible();
-    await expect(page.getByText('Burgers')).not.toBeVisible();
+    await expect(page.getByText('Sunscreen')).toBeVisible();
+    await expect(page.getByText('Burgers')).toBeVisible();
 
     await page.getByText('Participants').click();
     await expect(page.getByText('Alex Smith')).toBeVisible();
