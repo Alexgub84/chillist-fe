@@ -13,6 +13,7 @@ test.describe('Plans Page', () => {
   test('displays plans successfully when API returns data', async ({
     page,
   }) => {
+    await injectUserSession(page);
     const plan = buildPlan({ title: 'Beach Trip' });
     await mockPlansListRoutes(page, [plan]);
 
@@ -24,6 +25,7 @@ test.describe('Plans Page', () => {
   });
 
   test('displays user-friendly error when API fails', async ({ page }) => {
+    await injectUserSession(page);
     await page.route(API_PLANS_URL, (route) => {
       route.fulfill({
         status: 500,
@@ -46,6 +48,7 @@ test.describe('Plans Page', () => {
   });
 
   test('displays connection error when network fails', async ({ page }) => {
+    await injectUserSession(page);
     await page.route(API_PLANS_URL, (route) => {
       route.abort('failed');
     });
@@ -60,6 +63,7 @@ test.describe('Plans Page', () => {
   });
 
   test('displays config error when API returns HTML', async ({ page }) => {
+    await injectUserSession(page);
     await page.route(API_PLANS_URL, (route) => {
       route.fulfill({
         status: 200,
@@ -115,15 +119,18 @@ test.describe('Admin Delete', () => {
     await expect(page.getByTestId(`admin-delete-${plan2.planId}`)).toBeHidden();
   });
 
-  test('unauthenticated user does NOT see delete buttons', async ({ page }) => {
-    const plan = buildPlan({ title: 'Beach Trip' });
-    await mockPlansListRoutes(page, [plan]);
+  test('unauthenticated user sees sign-in prompt instead of plans', async ({
+    page,
+  }) => {
+    await mockPlansListRoutes(page, []);
 
     await page.goto('/plans');
 
-    await expect(page.getByText('Beach Trip')).toBeVisible({ timeout: 15000 });
-
-    await expect(page.getByTestId(`admin-delete-${plan.planId}`)).toBeHidden();
+    await expect(page.getByText('My Plans')).toBeVisible({ timeout: 15000 });
+    const main = page.getByRole('main');
+    await expect(
+      main.getByText('Sign in to create and manage plans')
+    ).toBeVisible();
   });
 
   test('admin can delete a plan via confirmation modal', async ({ page }) => {
@@ -144,12 +151,15 @@ test.describe('Admin Delete', () => {
     });
     await expect(page.getByTestId('admin-delete-confirm')).toBeVisible();
 
-    await page.getByTestId('admin-delete-confirm').click({ force: true });
+    await Promise.all([
+      page.waitForResponse((r) => r.request().method() === 'DELETE'),
+      page.getByTestId('admin-delete-confirm').click({ force: true }),
+    ]);
 
+    await expect(page.getByText('Delete Plan?')).toBeHidden({ timeout: 10000 });
     await expect(page.getByText('Plan deleted')).toBeVisible({
       timeout: 10000,
     });
-    await expect(page.getByText('Delete Plan?')).toBeHidden({ timeout: 10000 });
     await expect(page.getByText('Mountain Hike')).toBeVisible();
   });
 

@@ -102,9 +102,9 @@ test.describe('Plan creation via UI', () => {
 
     await page.getByRole('button', { name: /create plan/i }).click();
 
-    await page
-      .getByRole('button', { name: /skip for now/i })
-      .click({ timeout: 15000 });
+    const skipBtn = page.getByRole('button', { name: /skip for now/i });
+    await expect(skipBtn).toBeVisible({ timeout: 15000 });
+    await skipBtn.click({ force: true });
 
     await expect(page).toHaveURL(/\/plan\//, { timeout: 15000 });
     await expect(page.getByText('E2E Test Trip')).toBeVisible();
@@ -116,6 +116,7 @@ test.describe('Item CRUD', () => {
   test('adds items via UI and verifies they appear in categories', async ({
     page,
   }) => {
+    await injectUserSession(page);
     const plan = buildTestPlan();
     await mockPlanRoutes(page, plan);
 
@@ -131,6 +132,7 @@ test.describe('Item CRUD', () => {
   });
 
   test('edits all item fields via modal form', async ({ page }) => {
+    await injectUserSession(page);
     const plan = buildTestPlan();
     await mockPlanRoutes(page, plan);
 
@@ -171,6 +173,7 @@ test.describe('Item CRUD', () => {
   });
 
   test('changes item status inline', async ({ page }) => {
+    await injectUserSession(page);
     const plan = buildTestPlan();
     await mockPlanRoutes(page, plan);
 
@@ -266,7 +269,7 @@ test.describe('Edit Plan', () => {
     await expect(page.getByTestId('edit-plan-button')).toBeHidden();
   });
 
-  test('unauthenticated user cannot see edit button', async ({ page }) => {
+  test('unauthenticated user is redirected to signin', async ({ page }) => {
     const plan = buildPlan({
       title: 'Public Plan',
       participants: [
@@ -283,11 +286,7 @@ test.describe('Edit Plan', () => {
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Public Plan')).toBeVisible({
-      timeout: 10000,
-    });
-
-    await expect(page.getByTestId('edit-plan-button')).toBeHidden();
+    await expect(page).toHaveURL(/\/signin/, { timeout: 10000 });
   });
 });
 
@@ -363,7 +362,7 @@ test.describe('Participant Preferences Access', () => {
     await expect(editButtons).toHaveCount(0);
   });
 
-  test('unauthenticated user cannot see edit buttons on participant preferences', async ({
+  test('unauthenticated user is redirected to signin from plan detail', async ({
     page,
   }) => {
     const plan = buildPlan({
@@ -375,31 +374,13 @@ test.describe('Participant Preferences Access', () => {
           phone: '555-0100',
           role: 'owner',
           userId: 'some-user-id',
-          adultsCount: 1,
-        },
-        {
-          name: 'Guest',
-          lastName: 'Person',
-          phone: '555-0200',
-          adultsCount: 2,
         },
       ],
     });
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Public View Plan')).toBeVisible({
-      timeout: 10000,
-    });
-
-    await expect(page.getByText('Group Details')).toBeVisible();
-
-    const editButtons = page
-      .locator('text=Group Details')
-      .locator('..')
-      .locator('..')
-      .getByRole('button', { name: 'Edit' });
-    await expect(editButtons).toHaveCount(0);
+    await expect(page).toHaveURL(/\/signin/, { timeout: 10000 });
   });
 });
 
@@ -407,6 +388,7 @@ test.describe('Filters', () => {
   test('participant filter shows correct items per person', async ({
     page,
   }) => {
+    await injectUserSession(page);
     const plan = assignItemsToParticipants(buildTestPlan());
     await mockPlanRoutes(page, plan);
 
@@ -454,6 +436,7 @@ test.describe('Filters', () => {
   });
 
   test('status filter tabs show correct items per list', async ({ page }) => {
+    await injectUserSession(page);
     const plan = assignItemsToParticipants(buildTestPlan());
     await mockPlanRoutes(page, plan);
 
