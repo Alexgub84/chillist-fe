@@ -62,8 +62,7 @@ export default function ParticipantDetails({
       </h2>
       <div className="space-y-3">
         {participants.map((p) => {
-          const canEdit =
-            isOwner || p.participantId === currentParticipantId;
+          const canEdit = isOwner || p.participantId === currentParticipantId;
           return (
             <ParticipantCard
               key={p.participantId}

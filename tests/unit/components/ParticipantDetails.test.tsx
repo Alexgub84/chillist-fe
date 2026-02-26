@@ -148,6 +148,7 @@ describe('ParticipantDetails', () => {
         participants={[buildParticipant()]}
         planId="plan-1"
         planTitle="Test"
+        isOwner
         onEditPreferences={vi.fn()}
       />
     );
@@ -175,6 +176,7 @@ describe('ParticipantDetails', () => {
         participants={[buildParticipant({ participantId: 'p-42' })]}
         planId="plan-1"
         planTitle="Test"
+        isOwner
         onEditPreferences={onEdit}
       />
     );

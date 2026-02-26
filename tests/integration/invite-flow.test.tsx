@@ -92,10 +92,19 @@ interface SeededData {
 async function seedPlanWithParticipant(
   server: FastifyInstance
 ): Promise<SeededData> {
+  const seedJwt = makeFakeJwt('seed@test.com', crypto.randomUUID());
   const planRes = await server.inject({
     method: 'POST',
     url: '/plans',
-    payload: { title: 'Invite Test Plan' },
+    headers: { authorization: `Bearer ${seedJwt}` },
+    payload: {
+      title: 'Invite Test Plan',
+      owner: {
+        name: 'Seed',
+        lastName: 'Owner',
+        contactPhone: '+0000000000',
+      },
+    },
   });
   const plan = planRes.json() as { planId: string };
 
