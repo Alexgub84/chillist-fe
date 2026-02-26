@@ -183,6 +183,9 @@
     "notesPlaceholder": "Optional notes",
     "assignTo": "Assign to",
     "unassigned": "Unassigned",
+    "assignToMe": "Assign to me",
+    "assignedToMe": "Me",
+    "unassignItem": "Unassign {{name}}",
     "saving": "Saving…",
     "cancel": "Cancel"
   },

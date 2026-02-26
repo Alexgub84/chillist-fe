@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import PlanForm from '../components/PlanForm';
@@ -11,11 +11,20 @@ import { useCreatePlan } from '../hooks/useCreatePlan';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { useAuth } from '../contexts/useAuth';
 import { getApiErrorMessage } from '../core/error-utils';
+import { supabase } from '../lib/supabase';
 import type { PlanFormPayload, DefaultOwner } from '../components/PlanForm';
 import type { PlanWithDetails } from '../core/schemas/plan';
 
 export const Route = createFileRoute('/create-plan')({
   component: CreatePlan,
+  beforeLoad: async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (!session) {
+      throw redirect({ to: '/signin' });
+    }
+  },
 });
 
 function splitFullName(fullName?: string): { first: string; last: string } {

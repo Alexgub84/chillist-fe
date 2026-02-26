@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { components } from '../api.generated';
 
-type BEItem = components['schemas']['def-13'];
+type BEItem = components['schemas']['def-12'];
 
 const CATEGORY_VALUES = [
   'equipment',

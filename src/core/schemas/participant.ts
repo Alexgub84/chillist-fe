@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import type { components } from '../api.generated';
 
-type BEParticipant = components['schemas']['def-18'];
-type BECreateParticipant = components['schemas']['def-20'];
-type BEUpdateParticipant = components['schemas']['def-21'];
+type BEParticipant = components['schemas']['def-17'];
+type BECreateParticipant = components['schemas']['def-19'];
+type BEUpdateParticipant = components['schemas']['def-20'];
 
 const ROLE_VALUES = [
   'owner',

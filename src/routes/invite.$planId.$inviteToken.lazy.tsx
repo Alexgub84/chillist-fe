@@ -217,6 +217,7 @@ export function InvitePlanPage() {
                   items={catItems}
                   participants={participantsAsFullType}
                   listFilter={listFilter}
+                  selfAssignParticipantId={myParticipantId}
                   onEditItem={(itemId) => {
                     const item = items.find((i) => i.itemId === itemId);
                     if (item?.assignedParticipantId === myParticipantId) {

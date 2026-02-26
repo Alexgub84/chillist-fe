@@ -51,7 +51,7 @@ function isPastPlan(plan: {
 
 export function PlansList({ plans }: PlansListProps) {
   const { t } = useTranslation();
-  const { user, isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
   const deletePlanMutation = useDeletePlan();
   const [timeFilter, setTimeFilter] = useState<TimeFilter>('upcoming');
   const [deletingPlanId, setDeletingPlanId] = useState<string | null>(null);
@@ -106,34 +106,12 @@ export function PlansList({ plans }: PlansListProps) {
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
           {t('plans.title')}
         </h1>
-        {user ? (
-          <Link
-            to="/create-plan"
-            className="w-full sm:w-auto inline-block text-center px-4 py-2 bg-blue-600 text-white text-base sm:text-lg font-medium rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors cursor-pointer shadow-sm hover:shadow-md"
-          >
-            {t('plans.createNew')}
-          </Link>
-        ) : (
-          <div className="flex flex-col items-end gap-1.5 w-full sm:w-auto">
-            <p className="text-sm text-gray-500 text-center sm:text-end w-full">
-              {t('plans.signInToCreate')}
-            </p>
-            <div className="flex gap-3 w-full sm:w-auto">
-              <Link
-                to="/signin"
-                className="flex-1 sm:flex-initial text-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
-              >
-                {t('auth.signIn')}
-              </Link>
-              <Link
-                to="/signup"
-                className="flex-1 sm:flex-initial text-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors"
-              >
-                {t('auth.signUp')}
-              </Link>
-            </div>
-          </div>
-        )}
+        <Link
+          to="/create-plan"
+          className="w-full sm:w-auto inline-block text-center px-4 py-2 bg-blue-600 text-white text-base sm:text-lg font-medium rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors cursor-pointer shadow-sm hover:shadow-md"
+        >
+          {t('plans.createNew')}
+        </Link>
       </div>
 
       {plans.length > 0 && (

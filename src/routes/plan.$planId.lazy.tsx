@@ -152,6 +152,9 @@ function PlanDetails() {
 
   const owner = plan.participants.find((p) => p.role === 'owner');
   const isOwner = !!user && !!owner?.userId && user.id === owner.userId;
+  const currentParticipant = user
+    ? plan.participants.find((p) => p.userId === user.id)
+    : undefined;
 
   async function handleDeletePlan() {
     try {
@@ -264,7 +267,8 @@ function PlanDetails() {
               planId={planId}
               planTitle={plan.title}
               isOwner={isOwner}
-              onEditPreferences={isOwner ? setEditingParticipantId : undefined}
+              currentParticipantId={currentParticipant?.participantId}
+              onEditPreferences={setEditingParticipantId}
             />
           </div>
         )}

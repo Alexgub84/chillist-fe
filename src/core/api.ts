@@ -18,14 +18,12 @@ import {
   type ParticipantPatch,
 } from './schemas/participant';
 import {
-  planCreateSchema,
   planCreateWithOwnerSchema,
   planPatchSchema,
   planSchema,
   planWithDetailsSchema,
   type Plan,
   type PlanWithDetails,
-  type PlanCreate,
   type PlanCreateWithOwner,
   type PlanPatch,
 } from './schemas/plan';
@@ -184,22 +182,12 @@ export async function fetchPlan(planId: string): Promise<PlanWithDetails> {
   return planWithDetailsSchema.parse(data);
 }
 
-export async function createPlan(plan: PlanCreate): Promise<Plan> {
-  const validPlan = planCreateSchema.parse(plan);
-
-  const data = await request<unknown>('/plans', {
-    method: 'POST',
-    body: JSON.stringify(validPlan),
-  });
-  return planSchema.parse(data);
-}
-
 export async function createPlanWithOwner(
   plan: PlanCreateWithOwner
 ): Promise<PlanWithDetails> {
   const validPlan = planCreateWithOwnerSchema.parse(plan);
 
-  const data = await request<unknown>('/plans/with-owner', {
+  const data = await request<unknown>('/plans', {
     method: 'POST',
     body: JSON.stringify(validPlan),
   });

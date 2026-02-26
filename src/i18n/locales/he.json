@@ -183,6 +183,9 @@
     "notesPlaceholder": "הערות (אופציונלי)",
     "assignTo": "הקצה ל",
     "unassigned": "לא מוקצה",
+    "assignToMe": "הקצה לי",
+    "assignedToMe": "אני",
+    "unassignItem": "הסר {{name}}",
     "saving": "שומר…",
     "cancel": "ביטול"
   },

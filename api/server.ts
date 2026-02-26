@@ -59,16 +59,6 @@ const locationSchema = z.object({
   city: z.string().nullable().optional(),
 });
 
-const planCreateSchema = z.object({
-  title: z.string().min(1).max(255),
-  description: z.string().nullable().optional(),
-  visibility: planVisibilitySchema.optional(),
-  location: locationSchema.nullable().optional(),
-  startDate: z.string().datetime().nullable().optional(),
-  endDate: z.string().datetime().nullable().optional(),
-  tags: z.array(z.string()).nullable().optional(),
-});
-
 const planPatchSchema = z.object({
   title: z.string().min(1).max(255).optional(),
   description: z.string().nullable().optional(),
@@ -192,6 +182,14 @@ function extractUserIdFromJwt(authHeader?: string): string | null {
   } catch {
     return null;
   }
+}
+
+function requireJwt(authHeader?: string): string {
+  const userId = extractUserIdFromJwt(authHeader);
+  if (!userId) {
+    throw new HttpError('Authentication required', 401);
+  }
+  return userId;
 }
 
 function ensurePlan(store: MutableStore, planId: string): Plan {
@@ -337,48 +335,18 @@ export async function buildServer(
     void reply.send({ status: 'healthy', database: 'connected' });
   });
 
-  app.get('/plans', async (_request, reply) => {
+  app.get('/plans', async (request, reply) => {
+    requireJwt(request.headers.authorization as string | undefined);
     void reply.send(store.plans);
   });
 
   app.post('/plans', async (request, reply) => {
-    const parsed = planCreateSchema.parse(request.body);
-    const now = new Date().toISOString();
-    const location = parsed.location
-      ? {
-          ...parsed.location,
-          locationId: parsed.location.locationId ?? randomUUID(),
-        }
-      : undefined;
-    const plan: Plan = {
-      planId: randomUUID(),
-      createdAt: now,
-      updatedAt: now,
-      description: parsed.description,
-      endDate: parsed.endDate,
-      location,
-      ownerParticipantId: undefined,
-      participantIds: [],
-      startDate: parsed.startDate,
-      status: 'draft',
-      tags: parsed.tags,
-      title: parsed.title,
-      visibility: parsed.visibility ?? 'private',
-    };
-
-    store.plans.push(plan);
-    await persistData(store, shouldPersist, filePath);
-
-    void reply.status(201).send(plan);
-  });
-
-  app.post('/plans/with-owner', async (request, reply) => {
+    const jwtUserId = requireJwt(
+      request.headers.authorization as string | undefined
+    );
     const parsed = planCreateWithOwnerSchema.parse(request.body);
     const now = new Date().toISOString();
     const planId = randomUUID();
-    const jwtUserId = extractUserIdFromJwt(
-      request.headers.authorization as string | undefined
-    );
 
     const location = parsed.location
       ? {
@@ -469,6 +437,9 @@ export async function buildServer(
   app.get<{ Params: { planId: string } }>(
     '/plans/:planId',
     async (request, reply) => {
+      const jwtUserId = requireJwt(
+        request.headers.authorization as string | undefined
+      );
       const plan = ensurePlan(store, request.params.planId);
       const planItems = store.items.filter(
         (item) => item.planId === plan.planId
@@ -478,9 +449,6 @@ export async function buildServer(
         participantIds.has(p.participantId)
       );
 
-      const jwtUserId = extractUserIdFromJwt(
-        request.headers.authorization as string | undefined
-      );
       if (jwtUserId) {
         const ownerP = planParticipants.find((p) => p.role === 'owner');
         if (ownerP && !ownerP.userId) {
@@ -499,6 +467,7 @@ export async function buildServer(
   app.patch<{ Params: { planId: string } }>(
     '/plans/:planId',
     async (request, reply) => {
+      requireJwt(request.headers.authorization as string | undefined);
       const plan = ensurePlan(store, request.params.planId);
       const updates = planPatchSchema.parse(request.body ?? {});
       const now = new Date().toISOString();
@@ -524,6 +493,7 @@ export async function buildServer(
   app.delete<{ Params: { planId: string } }>(
     '/plans/:planId',
     async (request, reply) => {
+      requireJwt(request.headers.authorization as string | undefined);
       const index = store.plans.findIndex(
         (entry) => entry.planId === request.params.planId
       );

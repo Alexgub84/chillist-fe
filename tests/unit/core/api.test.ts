@@ -42,7 +42,6 @@ const DEFAULT_SESSION = {
 import {
   createItem,
   createParticipant,
-  createPlan,
   createPlanWithOwner,
   deleteItem,
   deleteParticipant,
@@ -191,30 +190,6 @@ describe('API Client', () => {
       );
     });
 
-    it('creates a plan', async () => {
-      fetchMock.mockResolvedValueOnce(mockResponse(mockPlan));
-
-      const newPlan = {
-        title: 'Test Plan',
-        status: 'draft' as const,
-        visibility: 'private' as const,
-        ownerParticipantId: 'p-1',
-      };
-
-      const plan = await createPlan(newPlan);
-      expect(plan).toEqual(mockPlan);
-      expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plans',
-        expect.objectContaining({
-          method: 'POST',
-          body: JSON.stringify(newPlan),
-          headers: expect.objectContaining({
-            'Content-Type': 'application/json',
-          }),
-        })
-      );
-    });
-
     it('updates a plan', async () => {
       fetchMock.mockResolvedValueOnce(
         mockResponse({ ...mockPlan, title: 'Updated' })
@@ -233,19 +208,6 @@ describe('API Client', () => {
           }),
         })
       );
-    });
-
-    it('rejects plan creation with invalid startDate format', async () => {
-      const invalidPlan = {
-        title: 'Bad Dates Plan',
-        status: 'draft' as const,
-        visibility: 'private' as const,
-        ownerParticipantId: 'p-1',
-        startDate: '2025-12-20T10:00:00',
-      };
-
-      await expect(createPlan(invalidPlan)).rejects.toThrow();
-      expect(fetchMock).not.toHaveBeenCalled();
     });
 
     it('rejects plan update with invalid startDate format', async () => {
@@ -305,7 +267,7 @@ describe('API Client', () => {
       expect(plan.participants).toHaveLength(1);
       expect(plan.participants[0].name).toBe('Alice');
       expect(fetchMock).toHaveBeenCalledWith(
-        'http://api.test/plans/with-owner',
+        'http://api.test/plans',
         expect.objectContaining({
           method: 'POST',
           body: JSON.stringify(payload),

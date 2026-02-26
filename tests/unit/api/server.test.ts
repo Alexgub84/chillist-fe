@@ -62,6 +62,12 @@ function createTestData(): MockData {
   };
 }
 
+function mockJwt(sub = 'test-user-id', email = 'test@chillist.dev') {
+  const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+  const payload = btoa(JSON.stringify({ sub, email, role: 'authenticated' }));
+  return `Bearer ${header}.${payload}.mock-signature`;
+}
+
 describe('mock server', () => {
   it('lists existing plans', async () => {
     const server = await buildServer({
@@ -70,37 +76,16 @@ describe('mock server', () => {
       logger: false,
     });
     try {
-      const response = await server.inject({ method: 'GET', url: '/plans' });
+      const response = await server.inject({
+        method: 'GET',
+        url: '/plans',
+        headers: { authorization: mockJwt() },
+      });
       expect(response.statusCode).toBe(200);
 
       const payload = response.json() as unknown;
       expect(Array.isArray(payload)).toBe(true);
       expect((payload as Array<Record<string, unknown>>).length).toBe(1);
-    } finally {
-      await server.close();
-    }
-  });
-
-  it('creates a new plan with defaults', async () => {
-    const server = await buildServer({
-      initialData: createTestData(),
-      persist: false,
-      logger: false,
-    });
-    try {
-      const response = await server.inject({
-        method: 'POST',
-        url: '/plans',
-        payload: {
-          title: 'Summer Trip',
-        },
-      });
-
-      expect(response.statusCode).toBe(201);
-      const payload = response.json() as Record<string, unknown>;
-      expect(payload.planId).toEqual(expect.any(String));
-      expect(payload.status).toBe('draft');
-      expect(payload.visibility).toBe('private');
     } finally {
       await server.close();
     }
@@ -116,6 +101,7 @@ describe('mock server', () => {
       const response = await server.inject({
         method: 'GET',
         url: '/plans/plan-1',
+        headers: { authorization: mockJwt() },
       });
       expect(response.statusCode).toBe(200);
 
@@ -157,6 +143,7 @@ describe('mock server', () => {
       const planResponse = await server.inject({
         method: 'GET',
         url: '/plans/plan-1',
+        headers: { authorization: mockJwt() },
       });
       const plan = planResponse.json() as { participantIds?: string[] };
       expect(plan.participantIds).toEqual(
@@ -167,7 +154,7 @@ describe('mock server', () => {
     }
   });
 
-  it('creates a plan with owner via /plans/with-owner', async () => {
+  it('creates a plan with owner via /plans', async () => {
     const server = await buildServer({
       initialData: createTestData(),
       persist: false,
@@ -176,7 +163,8 @@ describe('mock server', () => {
     try {
       const response = await server.inject({
         method: 'POST',
-        url: '/plans/with-owner',
+        url: '/plans',
+        headers: { authorization: mockJwt() },
         payload: {
           title: 'Beach Trip',
           owner: {
@@ -244,6 +232,33 @@ describe('mock server', () => {
     }
   });
 
+  it('returns 401 when Authorization header is missing on plan routes', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const getPlans = await server.inject({ method: 'GET', url: '/plans' });
+      expect(getPlans.statusCode).toBe(401);
+
+      const getPlan = await server.inject({
+        method: 'GET',
+        url: '/plans/plan-1',
+      });
+      expect(getPlan.statusCode).toBe(401);
+
+      const postPlan = await server.inject({
+        method: 'POST',
+        url: '/plans',
+        payload: { title: 'No Auth' },
+      });
+      expect(postPlan.statusCode).toBe(401);
+    } finally {
+      await server.close();
+    }
+  });
+
   it('returns 404 when a plan is missing', async () => {
     const server = await buildServer({
       initialData: createTestData(),
@@ -254,6 +269,7 @@ describe('mock server', () => {
       const response = await server.inject({
         method: 'GET',
         url: '/plans/unknown',
+        headers: { authorization: mockJwt() },
       });
       expect(response.statusCode).toBe(404);
     } finally {
