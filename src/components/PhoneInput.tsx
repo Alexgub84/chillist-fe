@@ -50,10 +50,10 @@ export function PhoneInput({
           type="tel"
           autoComplete="tel-national"
           {...phoneProps}
-          dir={isRtl ? 'rtl' : 'ltr'}
           placeholder={phonePlaceholder}
           compact={compact}
-          className="flex-1"
+          dir={isRtl ? 'rtl' : 'ltr'}
+          className={clsx('flex-1', phoneProps.className)}
         />
       </div>
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
