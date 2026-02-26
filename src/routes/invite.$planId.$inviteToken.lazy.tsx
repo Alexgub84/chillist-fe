@@ -58,10 +58,12 @@ export function InvitePlanPage() {
   const [authModalShown, setAuthModalShown] = useState(false);
   const [listFilter, setListFilter] = useState<ListFilter | null>(null);
 
+  const myRsvpResolved = plan?.myRsvpStatus ?? 'pending';
+
   const shouldShowAuthModal =
     !isAuthenticated &&
     !!plan &&
-    plan.myRsvpStatus === 'pending' &&
+    myRsvpResolved === 'pending' &&
     !authModalShown;
 
   useEffect(() => {
@@ -124,10 +126,10 @@ export function InvitePlanPage() {
     participants,
     items,
     myParticipantId,
-    myRsvpStatus,
     myPreferences,
   } = plan;
 
+  const myRsvpStatus = myRsvpResolved;
   const hasResponded = myRsvpStatus !== 'pending';
   const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
@@ -217,6 +219,7 @@ export function InvitePlanPage() {
                   items={catItems}
                   participants={participantsAsFullType}
                   listFilter={listFilter}
+                  selfAssignParticipantId={myParticipantId ?? undefined}
                   onEditItem={(itemId) => {
                     const item = items.find((i) => i.itemId === itemId);
                     if (item?.assignedParticipantId === myParticipantId) {
