@@ -14,6 +14,7 @@ const CREATE_ROLE_VALUES = [
   'participant',
   'viewer',
 ] as const satisfies readonly NonNullable<BECreateParticipant['role']>[];
+const PATCH_ROLE_VALUES = ['participant', 'viewer', 'owner'] as const;
 const RSVP_STATUS_VALUES = [
   'pending',
   'confirmed',
@@ -27,6 +28,7 @@ const INVITE_STATUS_VALUES = [
 
 export const participantRoleSchema = z.enum(ROLE_VALUES);
 export const participantCreateRoleSchema = z.enum(CREATE_ROLE_VALUES);
+export const participantPatchRoleSchema = z.enum(PATCH_ROLE_VALUES);
 export const rsvpStatusSchema = z.enum(RSVP_STATUS_VALUES);
 export const inviteStatusSchema = z.enum(INVITE_STATUS_VALUES);
 
@@ -74,7 +76,7 @@ export const participantPatchSchema = z.object({
   lastName: z.string().min(1).max(255).optional(),
   contactPhone: z.string().min(1).max(50).optional(),
   displayName: z.string().max(255).nullish(),
-  role: participantCreateRoleSchema.optional(),
+  role: participantPatchRoleSchema.optional(),
   avatarUrl: z.string().nullish(),
   contactEmail: z.string().max(255).nullish(),
   adultsCount: z.number().int().min(0).nullish(),

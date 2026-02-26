@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import type { Item } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import { renderItemCards, type ItemListRendererProps } from './renderItemCards';
@@ -23,11 +24,14 @@ export default function SubcategorySection({
   selfParticipantId,
   cardProps,
 }: SubcategorySectionProps) {
+  const { t } = useTranslation();
+  const displayName = t(`subcategories.${subcategory}`, subcategory);
+
   return (
     <CollapsibleSection
       title={
         <h4 className="text-sm font-medium text-gray-600">
-          {subcategory}
+          {displayName}
           <span className="ms-2 text-gray-400">({items.length})</span>
         </h4>
       }

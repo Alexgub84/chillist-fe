@@ -13,8 +13,16 @@ import {
   rsvpStatusSchema,
   inviteStatusSchema,
 } from '../../../src/core/schemas/participant';
+import {
+  EQUIPMENT_SUBCATEGORIES,
+  FOOD_SUBCATEGORIES,
+  OTHER_SUBCATEGORY,
+} from '../../../src/data/subcategories';
 import en from '../../../src/i18n/locales/en.json';
 import he from '../../../src/i18n/locales/he.json';
+import es from '../../../src/i18n/locales/es.json';
+
+const ALL_LOCALES = { en, he, es } as const;
 
 function getNestedValue(obj: Record<string, unknown>, path: string): unknown {
   return path.split('.').reduce<unknown>((acc, key) => {
@@ -35,12 +43,12 @@ function assertAllTranslated(
 ): void {
   for (const value of values) {
     const key = `${namespace}.${value}`;
-    expect(getNestedValue(en, key), `en.json missing "${key}"`).toBeTypeOf(
-      'string'
-    );
-    expect(getNestedValue(he, key), `he.json missing "${key}"`).toBeTypeOf(
-      'string'
-    );
+    for (const [lang, locale] of Object.entries(ALL_LOCALES)) {
+      expect(
+        getNestedValue(locale, key),
+        `${lang}.json missing "${key}"`
+      ).toBeTypeOf('string');
+    }
   }
 }
 
@@ -75,5 +83,14 @@ describe('BE enum translation coverage', () => {
 
   it('every invite status has EN + HE translation', () => {
     assertAllTranslated(inviteStatusSchema.options, 'inviteStatus');
+  });
+
+  it('every subcategory has EN + HE translation', () => {
+    const allSubcategories = [
+      ...EQUIPMENT_SUBCATEGORIES,
+      ...FOOD_SUBCATEGORIES,
+      OTHER_SUBCATEGORY,
+    ];
+    assertAllTranslated(allSubcategories, 'subcategories');
   });
 });

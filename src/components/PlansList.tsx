@@ -36,8 +36,10 @@ const MEMBERSHIP_FILTERS: { value: MembershipFilter; labelKey: string }[] = [
 
 function isPlanOwnedBy(plan: Plan, userId: string): boolean {
   if (plan.createdByUserId === userId) return true;
-  const owner = plan.participants?.find((p) => p.role === 'owner');
-  return !!owner?.userId && owner.userId === userId;
+  return (
+    plan.participants?.some((p) => p.role === 'owner' && p.userId === userId) ??
+    false
+  );
 }
 
 function isPlanInvitedTo(plan: Plan, userId: string): boolean {

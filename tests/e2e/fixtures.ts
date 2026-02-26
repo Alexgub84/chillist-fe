@@ -223,6 +223,9 @@ export async function mockPlanRoutes(page: Page, plan: MockPlan) {
         (p) => p.participantId === participantId
       );
       if (participant) {
+        if (updates.role === 'owner' && !state.ownerParticipantId) {
+          state.ownerParticipantId = participantId;
+        }
         Object.assign(participant, updates, { updatedAt: timestamp() });
         await route.fulfill({ json: participant });
       } else {

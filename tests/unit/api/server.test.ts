@@ -118,6 +118,45 @@ describe('mock server', () => {
     }
   });
 
+  it('PATCH /participants/:id with role owner promotes participant to owner', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'PATCH',
+        url: '/participants/participant-2',
+        payload: { role: 'owner' },
+        headers: { authorization: mockJwt() },
+      });
+      expect(response.statusCode).toBe(200);
+      const participant = response.json() as {
+        participantId: string;
+        role: string;
+      };
+      expect(participant.participantId).toBe('participant-2');
+      expect(participant.role).toBe('owner');
+
+      const planRes = await server.inject({
+        method: 'GET',
+        url: '/plans/plan-1',
+        headers: { authorization: mockJwt() },
+      });
+      expect(planRes.statusCode).toBe(200);
+      const plan = planRes.json() as {
+        participants: Array<{ participantId: string; role: string }>;
+      };
+      const owners = plan.participants.filter((p) => p.role === 'owner');
+      expect(owners).toHaveLength(2);
+      expect(owners.map((p) => p.participantId)).toContain('participant-1');
+      expect(owners.map((p) => p.participantId)).toContain('participant-2');
+    } finally {
+      await server.close();
+    }
+  });
+
   it('adds a participant to a plan', async () => {
     const server = await buildServer({
       initialData: createTestData(),

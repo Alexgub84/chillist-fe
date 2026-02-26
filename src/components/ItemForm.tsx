@@ -20,28 +20,10 @@ import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 import Autocomplete from './shared/Autocomplete';
 import { useLanguage } from '../contexts/useLanguage';
-import commonItemsEn from '../data/common-items.json';
-import commonItemsHe from '../data/common-items.he.json';
-
-type CommonItemEn = {
-  id: string;
-  name: string;
-  category: ItemCategory;
-  subcategory?: string;
-  unit: Unit;
-  aliases: string[];
-  tags: string[];
-};
-
-type CommonItemHe = {
-  name: string;
-  category: ItemCategory;
-  subcategory?: string;
-  unit: Unit;
-};
-
-const EN_ITEMS: CommonItemEn[] = commonItemsEn as CommonItemEn[];
-const HE_ITEMS: CommonItemHe[] = commonItemsHe as CommonItemHe[];
+import {
+  getCommonItems,
+  getEnrichedItems,
+} from '../data/common-items-registry';
 
 import type { Participant } from '../core/schemas/participant';
 
@@ -104,32 +86,21 @@ export default function ItemForm({
   const category = watch('category');
   const isEquipment = category === 'equipment';
 
-  const itemNames = useMemo(
-    () =>
-      language === 'he'
-        ? HE_ITEMS.map((i) => i.name)
-        : EN_ITEMS.map((i) => i.name),
-    [language]
-  );
+  const items = useMemo(() => getCommonItems(language), [language]);
+  const enrichedItems = useMemo(() => getEnrichedItems(), []);
+
+  const itemNames = useMemo(() => items.map((i) => i.name), [items]);
 
   const itemLookup = useMemo(() => {
     const map = new Map<
       string,
       { category: ItemCategory; unit: Unit; subcategory?: string }
     >();
-    if (language === 'he') {
-      for (const item of HE_ITEMS) {
-        map.set(item.name.toLowerCase(), {
-          category: item.category,
-          unit: item.unit,
-          subcategory: item.subcategory,
-        });
-      }
-    } else {
-      for (const item of EN_ITEMS) {
+    if (language === 'en') {
+      for (const item of enrichedItems) {
         const entry = {
           category: item.category,
-          unit: item.unit,
+          unit: item.unit as Unit,
           subcategory: item.subcategory,
         };
         map.set(item.name.toLowerCase(), entry);
@@ -137,18 +108,22 @@ export default function ItemForm({
           map.set(alias.toLowerCase(), entry);
         }
       }
+    } else {
+      for (const item of items) {
+        map.set(item.name.toLowerCase(), {
+          category: item.category,
+          unit: item.unit as Unit,
+          subcategory: item.subcategory,
+        });
+      }
     }
     return map;
-  }, [language]);
+  }, [language, items, enrichedItems]);
 
   const searchIndex = useMemo(() => {
     const map = new Map<string, string[]>();
-    if (language === 'he') {
-      for (const item of HE_ITEMS) {
-        map.set(item.name, [item.name.toLowerCase()]);
-      }
-    } else {
-      for (const item of EN_ITEMS) {
+    if (language === 'en') {
+      for (const item of enrichedItems) {
         const terms = [
           item.name.toLowerCase(),
           ...item.aliases.map((a) => a.toLowerCase()),
@@ -156,9 +131,13 @@ export default function ItemForm({
         ];
         map.set(item.name, terms);
       }
+    } else {
+      for (const item of items) {
+        map.set(item.name, [item.name.toLowerCase()]);
+      }
     }
     return map;
-  }, [language]);
+  }, [language, items, enrichedItems]);
 
   const filterFn = useCallback(
     (itemName: string, query: string) => {

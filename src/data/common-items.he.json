@@ -3,4332 +3,4332 @@
     "name": "אוהל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "שק שינה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "מזרן שינה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "כירת קמפינג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "פנס יד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "תאורה וראות"
+    "subcategory": "Lighting and Visibility"
   },
   {
     "name": "פנס תלוי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "תאורה וראות"
+    "subcategory": "Lighting and Visibility"
   },
   {
     "name": "פנס ראש",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "תאורה וראות"
+    "subcategory": "Lighting and Visibility"
   },
   {
     "name": "צידנית",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "גריל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "כיסא מתקפל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שולחן מתקפל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שמיכת פיקניק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "שמשייה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "ברזנט",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "תרמיל גב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "ערכת עזרה ראשונה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "קרם הגנה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "דוחה חרקים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בקבוק מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "תרמוס",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "צלחות",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "כוסות",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "סט סכו״ם",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "מפיות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "שקיות אשפה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אשפה ומיחזור"
+    "subcategory": "Waste and Recycling"
   },
   {
     "name": "מגבות נייר",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אשפה ומיחזור"
+    "subcategory": "Waste and Recycling"
   },
   {
     "name": "מצית",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "גפרורים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קרש חיתוך",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי הכנת מזון"
+    "subcategory": "Food Preparation Tools"
   },
   {
     "name": "סכין מטבח",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי הכנת מזון"
+    "subcategory": "Food Preparation Tools"
   },
   {
     "name": "מלקחיים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי הכנת מזון"
+    "subcategory": "Food Preparation Tools"
   },
   {
     "name": "פותחן בקבוקים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי הכנת מזון"
+    "subcategory": "Food Preparation Tools"
   },
   {
     "name": "פותחן שימורים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי הכנת מזון"
+    "subcategory": "Food Preparation Tools"
   },
   {
     "name": "מגבות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חבל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "רמקול נייד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מוזיקה ומדיה"
+    "subcategory": "Music and Media"
   },
   {
     "name": "מטען נייד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "חכת דיג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "כדורעף",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "פריזבי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "קלפי משחק",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "משחק קופסה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "ערסל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "כרית קמפינג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "שמיכת קמפינג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "יתדות אוהל",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "תחתית אוהל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "כיסוי גשם לאוהל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "מיטת שדה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מזרן אוויר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "משאבת אוויר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סיר הולנדי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי בישול ואפייה"
+    "subcategory": "Cookware and Bakeware"
   },
   {
     "name": "מחבת ברזל יצוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי בישול ואפייה"
+    "subcategory": "Cookware and Bakeware"
   },
   {
     "name": "סיר בישול",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי בישול ואפייה"
+    "subcategory": "Cookware and Bakeware"
   },
   {
     "name": "קומקום",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי בישול ואפייה"
+    "subcategory": "Cookware and Bakeware"
   },
   {
     "name": "כף טיגון",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי הכנת מזון"
+    "subcategory": "Food Preparation Tools"
   },
   {
     "name": "מצקת",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי הכנת מזון"
+    "subcategory": "Food Preparation Tools"
   },
   {
     "name": "כפות הגשה",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "כלי בישול ואפייה"
+    "subcategory": "Cookware and Bakeware"
   },
   {
     "name": "שיפודים",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "כלי בישול ואפייה"
+    "subcategory": "Cookware and Bakeware"
   },
   {
     "name": "רשת גריל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "פחם",
     "category": "equipment",
     "unit": "kg",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "מצת אש",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "עצי הסקה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "גרזן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "כלי רב שימושי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "אולר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "טייפ חזק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חבלי גומי",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "טבעות חיבור",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "מצפן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "מפה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "משקפת",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "משרוקית",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שמיכת חירום",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "מחממי ידיים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "פונצ׳ו גשם",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "תיק עמיד למים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שק יבש",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחסון מזון וקירור"
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "name": "מסנן מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "טבליות טיהור מים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "שלוקר מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "תיק צידנית",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "קרחוניות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "מקלחת שדה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "סבון מתכלה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "נייר טואלט",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "מגבונים לחים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "ג׳ל חיטוי ידיים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "מברשת שיניים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "משחת שיניים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "שפתון לחות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ג׳ל אלוורה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משקפי שמש",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "כובע",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "נעלי הליכה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "סנדלים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ניקוי והדחת כלים"
+    "subcategory": "Cleaning and Dishwashing"
   },
   {
     "name": "מעיל גשם",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "שכבות חימום",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בגד ים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "משוט קאנו",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "אפוד הצלה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "קיאק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "סאפ",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סט שנורקל",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ארגז דיג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פיתיון דיג",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אופניים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "קסדת אופניים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "סט בדמינטון",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כדורגל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "כדור פוטבול",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "עפיפון",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "סט כדורי בוצ׳ה",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "סט קורנהול",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סט פרסות",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מכשירי קשר",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מצלמה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מוזיקה ומדיה"
+    "subcategory": "Music and Media"
   },
   {
     "name": "חצובה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כבל מאריך",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "גנרטור נייד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "מטען סולארי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "סוללות מארז",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "סוללות רזרביות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "כבל טעינה USB",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "מאוורר נייד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "תנור חימום לקמפינג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "בלון גז",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד בישול וחימום"
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "name": "מיכל דלק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "דלי מתקפל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ניקוי והדחת כלים"
+    "subcategory": "Cleaning and Dishwashing"
   },
   {
     "name": "חבל כביסה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ניקוי והדחת כלים"
+    "subcategory": "Cleaning and Dishwashing"
   },
   {
     "name": "אטבי כביסה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ניקוי והדחת כלים"
+    "subcategory": "Cleaning and Dishwashing"
   },
   {
     "name": "סבון כלים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ניקוי והדחת כלים"
+    "subcategory": "Cleaning and Dishwashing"
   },
   {
     "name": "ספוג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ניקוי והדחת כלים"
+    "subcategory": "Cleaning and Dishwashing"
   },
   {
     "name": "קערת שטיפה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ניקוי והדחת כלים"
+    "subcategory": "Cleaning and Dishwashing"
   },
   {
     "name": "אזיקונים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פרקורד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סמני דגלון",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מיכל נגד דובים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ספריי דובים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "רשת יתושים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "נרות ציטרונלה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שרשרת אורות",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "תאורה וראות"
+    "subcategory": "Lighting and Visibility"
   },
   {
     "name": "מקלות זוהר",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "תאורה וראות"
+    "subcategory": "Lighting and Visibility"
   },
   {
     "name": "מפת כוכבים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מדריך שדה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "יומן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "עט",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ספר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חזה עוף",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "בשר טחון",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "סטייק",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "נקניקיות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "נקניקיות חמות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "קציצות המבורגר",
     "category": "food",
     "unit": "pack",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "בייקון",
     "category": "food",
     "unit": "pack",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "ביצים",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ביצים"
+    "subcategory": "Eggs"
   },
   {
     "name": "לחם",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "לחמניות המבורגר",
     "category": "food",
     "unit": "pack",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "לחמניות נקניקייה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "טורטיות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אורז",
     "category": "food",
     "unit": "kg",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "פסטה",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "גבינה",
     "category": "food",
     "unit": "g",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "חמאה",
     "category": "food",
     "unit": "g",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "חלב",
     "category": "food",
     "unit": "l",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "יוגורט",
     "category": "food",
     "unit": "g",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "תפוחים",
     "category": "food",
     "unit": "kg",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "בננות",
     "category": "food",
     "unit": "kg",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תפוזים",
     "category": "food",
     "unit": "kg",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "ענבים",
     "category": "food",
     "unit": "kg",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "תותים",
     "category": "food",
     "unit": "g",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "אבטיח",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "עגבניות",
     "category": "food",
     "unit": "kg",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "חסה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "בצל",
     "category": "food",
     "unit": "kg",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "תפוחי אדמה",
     "category": "food",
     "unit": "kg",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "תירס בקלח",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "גזר",
     "category": "food",
     "unit": "kg",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "מלפפון",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "פלפלים",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "פטריות",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "חומוס",
     "category": "food",
     "unit": "g",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "חמאת בוטנים",
     "category": "food",
     "unit": "g",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "צ׳יפס",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "קרקרים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "תערובת שבילים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חטיפי אנרגיה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "גרנולה",
     "category": "food",
     "unit": "g",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "מרשמלו",
     "category": "food",
     "unit": "pack",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "שוקולד",
     "category": "food",
     "unit": "g",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "עוגיות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "קרח",
     "category": "food",
     "unit": "kg",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "מים",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "מיץ",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "שתייה מוגזת",
     "category": "food",
     "unit": "l",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בירה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אלכוהול וקוקטיילים"
+    "subcategory": "Alcohol and Mixers"
   },
   {
     "name": "יין",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אלכוהול וקוקטיילים"
+    "subcategory": "Alcohol and Mixers"
   },
   {
     "name": "קפה",
     "category": "food",
     "unit": "g",
-    "subcategory": "משקאות חמים (קפה, תה, קקאו)"
+    "subcategory": "Hot Drinks (coffee, tea, cocoa)"
   },
   {
     "name": "שקיקי תה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות חמים (קפה, תה, קקאו)"
+    "subcategory": "Hot Drinks (coffee, tea, cocoa)"
   },
   {
     "name": "קטשופ",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "חרדל",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "רוטב ברביקיו",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "שמן זית",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "מלח",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "פלפל",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "רוטב סלט",
     "category": "food",
     "unit": "ml",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "נייר אלומיניום",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שקיות כריכים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ירכי עוף",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "כנפי עוף",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "צלעות חזיר",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "חזיר מפורק",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "צלעות",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "צלעות כבש",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "פילה סלמון",
     "category": "food",
     "unit": "kg",
-    "subcategory": "דגים ופירות ים"
+    "subcategory": "Fish and Seafood"
   },
   {
     "name": "שרימפס",
     "category": "food",
     "unit": "kg",
-    "subcategory": "דגים ופירות ים"
+    "subcategory": "Fish and Seafood"
   },
   {
     "name": "סטייק טונה",
     "category": "food",
     "unit": "kg",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "טונה בקופסה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "דגים ופירות ים"
+    "subcategory": "Fish and Seafood"
   },
   {
     "name": "שעועית בקופסה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "מרק בקופסה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "תירס בקופסה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "שימורים"
+    "subcategory": "Canned and Jarred Foods"
   },
   {
     "name": "עגבניות בקופסה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "שעועית אפויה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "צ׳ילי",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "נודלס מהיר",
     "category": "food",
     "unit": "pack",
-    "subcategory": "שימורים"
+    "subcategory": "Canned and Jarred Foods"
   },
   {
     "name": "שיבולת שועל מהירה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מוצרי בוקר"
+    "subcategory": "Breakfast Staples"
   },
   {
     "name": "תערובת פנקייק",
     "category": "food",
     "unit": "g",
-    "subcategory": "מוצרי בוקר"
+    "subcategory": "Breakfast Staples"
   },
   {
     "name": "סירופ מייפל",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "דבש",
     "category": "food",
     "unit": "g",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "ריבה",
     "category": "food",
     "unit": "g",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "נוטלה",
     "category": "food",
     "unit": "g",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "גבינת שמנת",
     "category": "food",
     "unit": "g",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "גבינה פרוסה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "חזיר מעושן",
     "category": "food",
     "unit": "g",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "פרוסות הודו",
     "category": "food",
     "unit": "g",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "סלמי",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פפרוני",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סלמון מעושן",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגים ופירות ים"
+    "subcategory": "Fish and Seafood"
   },
   {
     "name": "בשר מיובש",
     "category": "food",
     "unit": "g",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "פירות יבשים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "צימוקים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "שקדים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "קשיו",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "בוטנים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "גרעיני חמנייה",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פופקורן",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "בייגלה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "סלסה",
     "category": "food",
     "unit": "g",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "גוואקמולי",
     "category": "food",
     "unit": "g",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "צ׳יפס טורטייה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "לחם פיתה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "בייגלס",
     "category": "food",
     "unit": "pack",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "מאפינס אנגלי",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קרואסונים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מאפינס",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "דגני בוקר",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגים ופירות ים"
+    "subcategory": "Fish and Seafood"
   },
   {
     "name": "חטיפי גרנולה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "חטיפי חלבון",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "אוכמניות",
     "category": "food",
     "unit": "g",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "פטל",
     "category": "food",
     "unit": "g",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "דובדבנים",
     "category": "food",
     "unit": "g",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "אפרסקים",
     "category": "food",
     "unit": "kg",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "אגסים",
     "category": "food",
     "unit": "kg",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "אננס",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "מנגו",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "אבוקדו",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "לימונים",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ליים",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "סלרי",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "ברוקולי",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "קישוא",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "אספרגוס",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "שעועית ירוקה",
     "category": "food",
     "unit": "g",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "בטטה",
     "category": "food",
     "unit": "kg",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "שום",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "ג׳ינג׳ר",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "חלפיניו",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "עשבי תיבול טריים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "עלים ירוקים וסלטים"
+    "subcategory": "Leafy Greens and Salads"
   },
   {
     "name": "תערובת קולסלו",
     "category": "food",
     "unit": "pack",
-    "subcategory": "עלים ירוקים וסלטים"
+    "subcategory": "Leafy Greens and Salads"
   },
   {
     "name": "תערובת סלט",
     "category": "food",
     "unit": "pack",
-    "subcategory": "עלים ירוקים וסלטים"
+    "subcategory": "Leafy Greens and Salads"
   },
   {
     "name": "קוסקוס",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "קינואה",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "קמח",
     "category": "food",
     "unit": "g",
-    "subcategory": "מרכיבי אפייה"
+    "subcategory": "Baking Ingredients"
   },
   {
     "name": "סוכר",
     "category": "food",
     "unit": "g",
-    "subcategory": "מרכיבי אפייה"
+    "subcategory": "Baking Ingredients"
   },
   {
     "name": "סוכר חום",
     "category": "food",
     "unit": "g",
-    "subcategory": "מרכיבי אפייה"
+    "subcategory": "Baking Ingredients"
   },
   {
     "name": "ספריי שמן",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "שמן צמחי",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "רוטב סויה",
     "category": "food",
     "unit": "ml",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "רוטב חריף",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "רוטב וורסטשייר",
     "category": "food",
     "unit": "ml",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "חומץ",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "מיונז",
     "category": "food",
     "unit": "g",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "רליש",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חמוצים",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "זיתים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אבקת שום",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "אבקת בצל",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "פפריקה",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "כמון",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "אבקת צ׳ילי",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "תיבול איטלקי",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "קינמון",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "ערכת סמורס",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קרקרים גרהם",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "חפיסות שוקולד",
     "category": "food",
     "unit": "pack",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "בראוניז",
     "category": "food",
     "unit": "pack",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "תערובת עוגה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מרכיבי אפייה"
+    "subcategory": "Baking Ingredients"
   },
   {
     "name": "פאי",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "גלידה",
     "category": "food",
     "unit": "l",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "פיצה קפואה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "מזון קפוא"
+    "subcategory": "Frozen Foods"
   },
   {
     "name": "ירקות קפואים",
     "category": "food",
     "unit": "g",
-    "subcategory": "מזון קפוא"
+    "subcategory": "Frozen Foods"
   },
   {
     "name": "פירות קפואים",
     "category": "food",
     "unit": "g",
-    "subcategory": "מזון קפוא"
+    "subcategory": "Frozen Foods"
   },
   {
     "name": "המבורגר קפוא",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מזון קפוא"
+    "subcategory": "Frozen Foods"
   },
   {
     "name": "מים מוגזים",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "לימונדה",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "תה קר",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "משקה ספורט",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "מי קוקוס",
     "category": "food",
     "unit": "l",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תערובת שוקו חם",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מרכיבי אפייה"
+    "subcategory": "Baking Ingredients"
   },
   {
     "name": "קפה נמס",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות חמים (קפה, תה, קקאו)"
+    "subcategory": "Hot Drinks (coffee, tea, cocoa)"
   },
   {
     "name": "פילטרים לקפה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות חמים (קפה, תה, קקאו)"
+    "subcategory": "Hot Drinks (coffee, tea, cocoa)"
   },
   {
     "name": "קרמר",
     "category": "food",
     "unit": "ml",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "סיידר",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "מיקסר לקוקטיילים",
     "category": "food",
     "unit": "l",
-    "subcategory": "אלכוהול וקוקטיילים"
+    "subcategory": "Alcohol and Mixers"
   },
   {
     "name": "משקאות חריפים",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אלכוהול וקוקטיילים"
+    "subcategory": "Alcohol and Mixers"
   },
   {
     "name": "סלצר",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ניילון נצמד",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "נייר אפייה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "קופסאות אחסון מזון",
     "category": "food",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כפפות חד פעמיות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קיסמים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "קשים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "צלחות נייר",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כוסות פלסטיק",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סכו״ם חד פעמי",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "טופו",
     "category": "food",
     "unit": "g",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "טמפה",
     "category": "food",
     "unit": "g",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "סייטן",
     "category": "food",
     "unit": "g",
-    "subcategory": "תחליפי בשר וחלבונים מהצומח"
+    "subcategory": "Meat Alternatives and Plant Proteins"
   },
   {
     "name": "המבורגר טבעוני",
     "category": "food",
     "unit": "pack",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "נקניקיות טבעוניות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "נקניקיות חמות טבעוניות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "ביונד מיט",
     "category": "food",
     "unit": "pack",
-    "subcategory": "תחליפי בשר וחלבונים מהצומח"
+    "subcategory": "Meat Alternatives and Plant Proteins"
   },
   {
     "name": "פלאפל",
     "category": "food",
     "unit": "pack",
-    "subcategory": "תחליפי בשר וחלבונים מהצומח"
+    "subcategory": "Meat Alternatives and Plant Proteins"
   },
   {
     "name": "אדממה",
     "category": "food",
     "unit": "g",
-    "subcategory": "תחליפי בשר וחלבונים מהצומח"
+    "subcategory": "Meat Alternatives and Plant Proteins"
   },
   {
     "name": "חומוס (גרגירי חומוס)",
     "category": "food",
     "unit": "g",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "עדשים",
     "category": "food",
     "unit": "g",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "שעועית שחורה",
     "category": "food",
     "unit": "g",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "שעועית אדומה",
     "category": "food",
     "unit": "g",
-    "subcategory": "קטניות (יבשות ומשומרות)"
+    "subcategory": "Legumes (dry and canned)"
   },
   {
     "name": "חלב שיבולת שועל",
     "category": "food",
     "unit": "l",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "חלב שקדים",
     "category": "food",
     "unit": "l",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "חלב סויה",
     "category": "food",
     "unit": "l",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "חלב קוקוס",
     "category": "food",
     "unit": "l",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "גבינה טבעונית",
     "category": "food",
     "unit": "g",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "חמאה טבעונית",
     "category": "food",
     "unit": "g",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "מיונז טבעוני",
     "category": "food",
     "unit": "g",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "יוגורט טבעוני",
     "category": "food",
     "unit": "g",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "שמרי בירה תזונתיים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אלכוהול וקוקטיילים"
+    "subcategory": "Alcohol and Mixers"
   },
   {
     "name": "טחינה",
     "category": "food",
     "unit": "g",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "חמאת שקדים",
     "category": "food",
     "unit": "g",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "חמאת קשיו",
     "category": "food",
     "unit": "g",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "זרעי צ׳יה",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "זרעי פשתן",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "זרעי המפ",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "גרעיני דלעת",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "אגוזי מלך",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פיסטוקים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תערובת אגוזים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "קייל",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תרד",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "רוקט",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מנגולד",
     "category": "food",
     "unit": "g",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "כרוב",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "כרוב ניצנים",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "כרובית",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "סלק",
     "category": "food",
     "unit": "kg",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "צנוניות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אפונת סוכר",
     "category": "food",
     "unit": "g",
-    "subcategory": "מרכיבי אפייה"
+    "subcategory": "Baking Ingredients"
   },
   {
     "name": "חציל",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "ארטישוק",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "שומר",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "דלעת חמאה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "דלורית",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פטריות פורטובלו",
     "category": "food",
     "unit": "pack",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "עגבניות מיובשות",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "פלפלים קלויים",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "קימצ׳י",
     "category": "food",
     "unit": "g",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "כרוב כבוש",
     "category": "food",
     "unit": "g",
-    "subcategory": "ירקות טריים"
+    "subcategory": "Fresh Vegetables"
   },
   {
     "name": "משחת מיסו",
     "category": "food",
     "unit": "g",
-    "subcategory": "רוטבים, תבלינים וממרחים"
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "name": "שמנת קוקוס",
     "category": "food",
     "unit": "ml",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "שמן קוקוס",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "שמן אבוקדו",
     "category": "food",
     "unit": "ml",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "שמן פשתן",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "חומץ תפוחים",
     "category": "food",
     "unit": "ml",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "חומץ בלסמי",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "טמרי",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "סריראצ׳ה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סירופ אגבה",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "סילאן",
     "category": "food",
     "unit": "ml",
-    "subcategory": "שמנים, חומץ ורוטבים"
+    "subcategory": "Oils, Vinegars, and Dressings"
   },
   {
     "name": "אורז מלא",
     "category": "food",
     "unit": "kg",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "אורז בר",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "בורגול",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "כוסמת",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "פסטה מחיטה מלאה",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "אטריות אורז",
     "category": "food",
     "unit": "g",
-    "subcategory": "דגנים ופסטה"
+    "subcategory": "Grains and Pasta"
   },
   {
     "name": "לחם מחיטה מלאה",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "טורטיות מחיטה מלאה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פריכיות אורז",
     "category": "food",
     "unit": "pack",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "צ׳יפס ירקות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "צ׳יפס קייל",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "חטיפי אצות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "מנגו מיובש",
     "category": "food",
     "unit": "g",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "חמוציות מיובשות",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תמרים",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "גוג׳י ברי",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "מנות אסאי",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תערובת סמוזי",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אבקת חלבון",
     "category": "food",
     "unit": "g",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "ספירולינה",
     "category": "food",
     "unit": "g",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "כורכום",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "מאצ׳ה",
     "category": "food",
     "unit": "g",
-    "subcategory": "תבלינים"
+    "subcategory": "Spices and Seasonings"
   },
   {
     "name": "תה צמחים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות חמים (קפה, תה, קקאו)"
+    "subcategory": "Hot Drinks (coffee, tea, cocoa)"
   },
   {
     "name": "תה ירוק",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות חמים (קפה, תה, קקאו)"
+    "subcategory": "Hot Drinks (coffee, tea, cocoa)"
   },
   {
     "name": "קומבוצ׳ה",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "מיץ סחוט טרי",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "מיץ אלוורה",
     "category": "food",
     "unit": "l",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "שוקולד מריר",
     "category": "food",
     "unit": "g",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "עוגיות טבעוניות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "טבעוני"
+    "subcategory": "Vegan"
   },
   {
     "name": "ממתק פירות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "ממתקים וקינוחים"
+    "subcategory": "Sweets and Desserts"
   },
   {
     "name": "יוגורט קוקוס",
     "category": "food",
     "unit": "g",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "תערובת שיבולת שועל ללילה",
     "category": "food",
     "unit": "g",
-    "subcategory": "מוצרי בוקר"
+    "subcategory": "Breakfast Staples"
   },
   {
     "name": "עגלה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מנשא תינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מיטת תינוק ניידת",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "לול מתקפל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כיסא אוכל נייד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מושב מגביה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מושב בטיחות לרכב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מוניטור לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "תיק החתלה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חיתולים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מגבוני תינוק",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "קרם החתלה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משטח החתלה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שקיות חיתולים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "שמיכת תינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "חיתול בד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "שק שינה לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "קרם הגנה לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "דוחה חרקים לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "כובע שמש לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "משקפי שמש לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "חיתולי שחייה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "בגד ים לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "אפוד הצלה לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "אמבטיה לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "שמפו לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "סבון גוף לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "קרם גוף לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מגבת תינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מוצץ",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "נשכן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בקבוקי תינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מברשת בקבוקים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מחמם בקבוקים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "כוסות עם פיה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "צלחות לפעוטות",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "קערות לפעוטות",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "סכו״ם לפעוטות",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "הגשה וכלי אוכל"
+    "subcategory": "Serving and Tableware"
   },
   {
     "name": "סינרים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משטח הגנה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קופסאות חטיפים",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ערכת עזרה ראשונה לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מדחום לתינוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "אקמול לתינוקות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "טיפות מי מלח",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שואב אף",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פלסטרים לילדים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "שער בטיחות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כיסויי שקע",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מגני פינות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מנעולי ארונות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מנורת לילה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "תאורה וראות"
+    "subcategory": "Lighting and Visibility"
   },
   {
     "name": "מכונת רעש לבן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בובת פרווה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שמיכת נחמה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "תיק גב לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "בקבוק מים לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "קרם הגנה לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "כובע לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מגפי גשם לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מעיל גשם לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "שק שינה לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "צעצועי חול",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "כדור חוף",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "בועות סבון",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "חוברות צביעה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "צבעי שעווה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "עפרונות צבעוניים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מדבקות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "ספרי ילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "פאזל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "דמויות פעולה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בובות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מכוניות צעצוע",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "קוביות בנייה",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פלסטלינה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אקדחי מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חבל קפיצה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "חישוק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קורקינט",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קסדה לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מצופים",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "בריכה מתנפחת",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "נודלס בריכה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "ערכת לכידת חרקים",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "זכוכית מגדלת",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משקפת לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "קלפי ציד טבע",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "טאבלט",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מוזיקה ומדיה"
+    "subcategory": "Music and Media"
   },
   {
     "name": "אוזניות לילדים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מוזיקה ומדיה"
+    "subcategory": "Music and Media"
   },
   {
     "name": "נגן DVD נייד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מוזיקה ומדיה"
+    "subcategory": "Music and Media"
   },
   {
     "name": "תרכובת לתינוקות",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "דייסת תינוקות",
     "category": "food",
     "unit": "g",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מחיות תינוקות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "צנצנות מזון תינוקות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חטיפי פאף לתינוקות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ביסקוויטי שיניים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פריכיות אורז לתינוקות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "חטיפי פעוטות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קרקרים לילדים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "קרקרים בצורת חיות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "חטיפים וצ'יפס"
+    "subcategory": "Snacks and Chips"
   },
   {
     "name": "מקלות גבינה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "יוגורט בשפופרת",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "מחיות תפוחים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "פירות טריים"
+    "subcategory": "Fresh Fruit"
   },
   {
     "name": "כוסות פירות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קופסאות צימוקים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אגוזים, זרעים ופירות יבשים"
+    "subcategory": "Nuts, Seeds, and Dried Fruit"
   },
   {
     "name": "מאפינס מיני",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פנקייקים מיני",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מוצרי בוקר"
+    "subcategory": "Breakfast Staples"
   },
   {
     "name": "נאגטס עוף",
     "category": "food",
     "unit": "pack",
-    "subcategory": "בשר ועופות"
+    "subcategory": "Meat and Poultry"
   },
   {
     "name": "אצבעות דג",
     "category": "food",
     "unit": "pack",
-    "subcategory": "דגים ופירות ים"
+    "subcategory": "Fish and Seafood"
   },
   {
     "name": "מקרוני וגבינה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "גבינות"
+    "subcategory": "Cheese"
   },
   {
     "name": "ציוד לכריכים",
     "category": "food",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חטיפי פירות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כוסות פודינג",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כוסות ג׳לי",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קופסאות מיץ",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "שקיות מים לילדים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "משקאות (ללא אלכוהול)"
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "name": "פדיאלייט",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חלב מלא",
     "category": "food",
     "unit": "l",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "חלב שוקו",
     "category": "food",
     "unit": "l",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "גבינת חוטים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בייגלס מיני",
     "category": "food",
     "unit": "pack",
-    "subcategory": "לחם ומאפייה"
+    "subcategory": "Bread and Bakery"
   },
   {
     "name": "ביסקוויטים לילדים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חטיפי ירקות",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פירות מיובשים בהקפאה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "יוגורט לסחיטה",
     "category": "food",
     "unit": "pack",
-    "subcategory": "מוצרי חלב"
+    "subcategory": "Dairy"
   },
   {
     "name": "כריכים מיני",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ארטיקים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תחבושות (מגוון)",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פדי גזה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "גליל גזה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סרט רפואי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מגבוני חיטוי",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "מי חמצן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משחת אנטיביוטיקה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קרם הידרוקורטיזון",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קרם נגד גירוד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ג׳ל לכוויות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "איבופרופן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "אקמול",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "אספירין",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "אנטיהיסטמין",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תרופת אלרגיה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אפיפן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כדורים נגד מחלת ים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "תרופה נגד שלשול",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "טבליות נוגדות חומצה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אבקת אלקטרוליטים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מלחי השתייה",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מדחום",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "פינצטה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מספריים רפואיות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סיכות ביטחון",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תחבושת אלסטית",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "תחבושת לחיצה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "תחבושת משולשת",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "קרח מיידי",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חום מיידי",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מולסקין",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פדי שלפוחיות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "טיפות עיניים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תמיסת שטיפה לפצעים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "פלסטרים פרפר",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "כפפות סטריליות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "מסכת החייאה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חוסם עורקים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ערכת נחשים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מסיר קרציות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלי בישול ואפייה"
+    "subcategory": "Cookware and Bakeware"
   },
   {
     "name": "פדים נגד עקיצות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קלמין",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תרופות מרשם",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משאף",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תמיסת עדשות מגע",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משקפיים רזרביות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ספריי לכוויות שמש",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "משחה לעקיצות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "וזלין",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כדורי צמר גפן",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "משחקים ופעילויות"
+    "subcategory": "Games and Activities"
   },
   {
     "name": "מקלוני צמר גפן",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "לוחצי לשון",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מדריך עזרה ראשונה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "רצועת כלב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "רתמת כלב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "קולר לכלב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "כלוב נשיאה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "מיטת כלב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "קערות לחיות מחמד",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "אוכל לכלבים",
     "category": "food",
     "unit": "kg",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חטיפים לכלבים",
     "category": "food",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אוכל לחתולים",
     "category": "food",
     "unit": "kg",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שקיות פסולת לחיות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קולר קרציות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "ערכת עזרה ראשונה לחיות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "עזרה ראשונה ובטיחות"
+    "subcategory": "First Aid and Safety"
   },
   {
     "name": "בקבוק מים נייד לכלב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "אפוד הצלה לכלב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "מגבת לחיות מחמד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לחיות מחמד"
+    "subcategory": "Pet Gear"
   },
   {
     "name": "דאודורנט",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "שמפו",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "מרכך",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סבון גוף",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "סכין גילוח",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קצף גילוח",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "גומיות לשיער",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מברשת שיער",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תחבושות היגייניות",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "היגיינה ואספקת שירותים"
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "name": "טמפונים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מראה קטנה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "קוצץ ציפורניים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "טישו",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אטמי אוזניים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מסכת שינה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כרית נסיעות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "דרכון",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "תעודת זהות / רישיון נהיגה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "כרטיסי ביטוח",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "מזומן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "כרטיסי אשראי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "הדפסות הזמנות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "אישור חניון",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "רישיון דיג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "מסמכים וגישה"
+    "subcategory": "Documentation and Access"
   },
   {
     "name": "מטען לרכב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "כבלי הנעה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "ערכת תיקון צמיגים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "רצועת גרירה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "רצועות גגון",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "רשת מטען",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "חשמל ומטענים"
+    "subcategory": "Power and Charging"
   },
   {
     "name": "אפוד זוהר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אבוקות כביש",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שרשראות שלג",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מגרדת שמשה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מטף כיבוי אש",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "גלאי עשן נייד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "גלאי פחמן חד חמצני",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "את קמפינג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מסור מתקפל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "פטיש",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "ערכת תפירה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "טלאי תיקון",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "סרט תיקון ציוד",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "אזיקוני כבלים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שמן סיכה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "דבק מהיר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "כלים ותיקונים מהירים"
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "name": "גפרורים עמידים למים",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מקלות הליכה",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חותלות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "סוליות ברזל",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "נעלי שלג",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "משקפי סקי",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תחתונים תרמיים",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "גרבי צמר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "כפפות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "כובע צמר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "צעיף",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "חם צוואר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חולצת בסיס עליונה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מכנסי בסיס",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מעיל פליז",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "מעיל פוך",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "חולצה מתייבשת מהר",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מכנסי טיולים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מכנסיים קצרים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כפכפים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "נעלי מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "שק יבש קטן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחסון מזון וקירור"
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "name": "שק אחסון",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחסון מזון וקירור"
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "name": "קוביות אריזה",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שק כביסה",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "שלוקר גב",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "תיק יום",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "תיק נסיעות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ארגז גג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הובלה ונשיאה"
+    "subcategory": "Transport and Carry"
   },
   {
     "name": "מנשא אופניים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "מנשא קיאק",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד לילדים ותינוקות"
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "name": "סוכך",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "מקלט מתקפל",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "חוסם רוח",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "יריעת קרקע",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "מזרן קמפינג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "נוחות ובקרת אקלים"
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "name": "שירותים ניידים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "אוהל מקלחת",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "הקמת מקום וסידור"
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "name": "מסך פרטיות",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "כיור קמפינג",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מיכל מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "ציוד משקאות"
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "name": "שלפוחית מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ברז",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "בלוקי פילוס (קרוואן)",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "חוסמי גלגלים",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "צינור ביוב לקרוואן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "מתאם חשמל לקרוואן",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "צינור מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   },
   {
     "name": "ווסת לחץ מים",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "אחר"
+    "subcategory": "Other"
   }
 ]

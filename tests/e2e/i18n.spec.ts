@@ -3,6 +3,7 @@ import { test, expect, Page } from '@playwright/test';
 async function selectLanguage(page: Page, isMobile: boolean, langCode: string) {
   if (isMobile) {
     await page.getByLabel('Toggle menu').click();
+    await page.getByTestId('lang-toggle-mobile').click();
     const option = page.getByTestId(`lang-toggle-mobile-${langCode}`);
     await expect(option).toBeVisible();
     await option.click();

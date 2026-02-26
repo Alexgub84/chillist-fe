@@ -26,6 +26,7 @@ export interface ManageParticipantsListProps {
   planId: string;
   planTitle: string;
   isOwner?: boolean;
+  onMakeOwner?: (participantId: string) => void;
 }
 
 export function ManageParticipantsList({
@@ -33,6 +34,7 @@ export function ManageParticipantsList({
   planId,
   planTitle,
   isOwner = false,
+  onMakeOwner,
 }: ManageParticipantsListProps) {
   const { t } = useTranslation();
 
@@ -139,6 +141,16 @@ export function ManageParticipantsList({
                   </svg>
                 </button>
               </>
+            )}
+            {isOwner && p.role !== 'owner' && onMakeOwner && (
+              <button
+                type="button"
+                onClick={() => onMakeOwner(p.participantId)}
+                data-testid="make-owner"
+                className="text-amber-600 hover:text-amber-700 text-sm font-medium shrink-0"
+              >
+                {t('participantDetails.makeOwner')}
+              </button>
             )}
             <span
               className={clsx(

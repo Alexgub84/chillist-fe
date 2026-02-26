@@ -141,4 +141,76 @@ describe('ManageParticipantsList', () => {
     expect(screen.getByText('Alice Smith')).toBeInTheDocument();
     expect(screen.getByText('Bob Brown')).toBeInTheDocument();
   });
+
+  it('shows Make owner button for non-owner participants when isOwner and onMakeOwner provided', () => {
+    render(
+      <ManageParticipantsList
+        participants={[
+          buildParticipant({ participantId: 'p-1', role: 'participant' }),
+        ]}
+        planId="plan-1"
+        planTitle="Test Plan"
+        isOwner
+        onMakeOwner={vi.fn()}
+      />
+    );
+
+    expect(screen.getByTestId('make-owner')).toBeInTheDocument();
+  });
+
+  it('does not show Make owner button when onMakeOwner not provided', () => {
+    render(
+      <ManageParticipantsList
+        participants={[
+          buildParticipant({ participantId: 'p-1', role: 'participant' }),
+        ]}
+        planId="plan-1"
+        planTitle="Test Plan"
+        isOwner
+      />
+    );
+
+    expect(screen.queryByTestId('make-owner')).not.toBeInTheDocument();
+  });
+
+  it('does not show Make owner button for owner participant', () => {
+    render(
+      <ManageParticipantsList
+        participants={[
+          buildParticipant({ participantId: 'p-1', role: 'owner' }),
+        ]}
+        planId="plan-1"
+        planTitle="Test Plan"
+        isOwner
+        onMakeOwner={vi.fn()}
+      />
+    );
+
+    expect(screen.queryByTestId('make-owner')).not.toBeInTheDocument();
+  });
+
+  it('calls onMakeOwner with participantId when Make owner is clicked', async () => {
+    const user = userEvent.setup();
+    const onMakeOwner = vi.fn();
+    render(
+      <ManageParticipantsList
+        participants={[
+          buildParticipant({
+            participantId: 'p-42',
+            name: 'Jane',
+            role: 'participant',
+          }),
+        ]}
+        planId="plan-1"
+        planTitle="Test Plan"
+        isOwner
+        onMakeOwner={onMakeOwner}
+      />
+    );
+
+    await user.click(screen.getByTestId('make-owner'));
+
+    expect(onMakeOwner).toHaveBeenCalledTimes(1);
+    expect(onMakeOwner).toHaveBeenCalledWith('p-42');
+  });
 });

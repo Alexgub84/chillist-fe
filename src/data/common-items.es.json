@@ -1,0 +1,4304 @@
+[
+  {
+    "name": "Paquetes de açaí",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Venda elástica ACE",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Paracetamol",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Calabaza bellota",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Figuras de acción",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Crema para picaduras",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Jarabe de agave",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Colchón inflable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Bomba de aire",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Medicamento para alergias",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Mantequilla de almendras",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Leche de almendras",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Almendras",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Gel de aloe vera",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Jugo de aloe vera",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Papel aluminio",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Serving and Tableware"
+  },
+  {
+    "name": "Galletas de animalitos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Pastillas antiácidas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Medicamento antidiarreico",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Crema antipicazón",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Ungüento antibiótico",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Antihistamínico",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Toallitas antisépticas",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Vinagre de sidra de manzana",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Manzanas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Bolsas de puré de manzana",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Alcachofas",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Rúcula",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Espárragos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Aspirina",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Aguacate",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Aceite de aguacate",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Hacha",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Bañera para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Manta para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Gel de baño para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Biberones",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Portabebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Cereal para bebé",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Botiquín para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Frascos de comida para bebé",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Bolsas de comida para bebé",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Fórmula para bebé",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Puerta de seguridad para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Repelente de insectos para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Chaleco salvavidas para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Loción para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Monitor para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Champú para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Saco de dormir para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Sombrero de sol para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Gafas de sol para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Protector solar para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Pañales de baño para bebé",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Traje de baño para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Termómetro para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Toalla para bebé",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Toallitas para bebé",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Mochila",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Tocino",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Set de bádminton",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Bagels",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Frijoles horneados",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Vinagre balsámico",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Plátanos",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Curitas (para niños)",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Vendas (surtidas)",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Pantalón térmico",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Camiseta térmica",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Salsa BBQ",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Pelota de playa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Sombrilla de playa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Gorro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Contenedor anti-osos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Spray anti-osos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Cerveza",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Remolachas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Pimientos",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Beyond Meat",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Baberos",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Bicicleta",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Casco de bicicleta",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Portabicicletas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Binoculares",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Documentation and Access"
+  },
+  {
+    "name": "Jabón biodegradable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Frijoles negros",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Parches para ampollas",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Arándanos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Juego de mesa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Set de bochas",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Gel de ducha",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Libro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Asiento elevador",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Cepillo para biberones",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Abrebotellas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Preparation Tools"
+  },
+  {
+    "name": "Calienta biberones",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Pan",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Brócoli",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Arroz integral",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Azúcar morena",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Brownies",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Coles de Bruselas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Burbujas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Alforfón",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Kit atrapa insectos",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Bloques de construcción",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Bulgur",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Cuerdas elásticas",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Panes de hamburguesa",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Hamburguesas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Gel para quemaduras",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Mantequilla",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Vendas mariposa",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Calabaza butternut",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Repollo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Cerraduras de gabinete",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Mezcla para pastel",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Sweets and Desserts"
+  },
+  {
+    "name": "Loción de calamina",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Cámara",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Manta de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Catre de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Calentador de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Colchoneta de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Almohada de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Ducha de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Fregadero de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Cocina de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Permiso de campamento",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Abrelatas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Preparation Tools"
+  },
+  {
+    "name": "Frijoles enlatados",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Maíz enlatado",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Sopa enlatada",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Tomates enlatados",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Atún enlatado",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Remo de canoa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Toldo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Cargador de auto",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Silla de auto",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Mosquetones",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Detector de monóxido de carbono",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Red de carga",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Zanahorias",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Efectivo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Mantequilla de anacardo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Anacardos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Sartén de hierro fundido",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Comida para gato",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Coliflor",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Apio",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Cereal",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Cambiador de pañales",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Carbón",
+    "category": "equipment",
+    "unit": "kg",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Queso",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Cheese"
+  },
+  {
+    "name": "Palitos de queso",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Cerezas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Semillas de chía",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Pechuga de pollo",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Nuggets de pollo",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Muslos de pollo",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Alitas de pollo",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Garbanzos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Chili",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Chile en polvo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Papas fritas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Chocolate",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Barras de chocolate",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Leche con chocolate",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Sidra",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Canela",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Velas de citronela",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Lighting and Visibility"
+  },
+  {
+    "name": "Tendedero",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Pinzas para ropa",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Mezclador de cócteles",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Crema de coco",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Leche de coco",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Aceite de coco",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Agua de coco",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Yogur de coco",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Dairy"
+  },
+  {
+    "name": "Café",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Filtros de café",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Compresa fría (instantánea)",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Mezcla para ensalada de col",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Balde plegable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Lápices de colores",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Libros para colorear",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Manta de confort",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Brújula",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Documentation and Access"
+  },
+  {
+    "name": "Acondicionador",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Solución para lentes de contacto",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Galletas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Olla",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Spray para cocinar",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Nevera portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Bolsa nevera",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Mazorca de maíz",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Protectores de esquina",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Set de cornhole",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Algodón",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Hisopos de algodón",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Cuscús",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Máscara de RCP",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Galletas saladas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Crampones",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Crayones",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Queso crema",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Crema para café",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Tarjetas de crédito",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Croissants",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Pepino",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Comino",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Vasos",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Set de cubiertos",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Tabla de cortar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Chocolate oscuro",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Jarabe de dátil",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Dátiles",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Mochila de día",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Desodorante",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Bolsa de pañales",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Crema para pañal",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Bolsas para desechar pañales",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Pañales",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Jabón para platos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Cubiertos desechables",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Serving and Tableware"
+  },
+  {
+    "name": "Guantes desechables",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Serving and Tableware"
+  },
+  {
+    "name": "Cama para perro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Collar para perro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Comida para perro",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Arnés para perro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Correa para perro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Chaleco salvavidas para perro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Premios para perro",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Muñecas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Chaqueta de plumas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Arándanos secos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Frutas secas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Mango seco",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Bolsa impermeable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Cinta adhesiva",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Bolsa de viaje",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Horno holandés",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Tapones para oídos",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Edamame",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Berenjena",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Huevos",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Venda elástica",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Adaptador eléctrico (RV)",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Sobres de electrolitos",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Manta de emergencia",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Barras energéticas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Muffins ingleses",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "EpiPen",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Cable de extensión",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Gotas para los ojos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Falafel",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Hinojo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Guía de campo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Documentation and Access"
+  },
+  {
+    "name": "Extintor",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Iniciador de fuego",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Leña",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Botiquín de primeros auxilios",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Manual de primeros auxilios",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Palitos de pescado",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Carnada de pesca",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Licencia de pesca",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Caña de pescar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Caja de aparejos de pesca",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Marcadores de bandera",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Linterna",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Lighting and Visibility"
+  },
+  {
+    "name": "Semillas de linaza",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Aceite de linaza",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Chaqueta polar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Chanclas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Flotadores",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Harina",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Silla plegable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Mesa plegable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Recipientes para alimentos",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Balón de fútbol americano",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Fruta liofilizada",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Hierbas frescas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Jugo recién exprimido",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Frisbee",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Hamburguesas congeladas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Frozen Foods"
+  },
+  {
+    "name": "Fruta congelada",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Frozen Foods"
+  },
+  {
+    "name": "Pizza congelada",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Frozen Foods"
+  },
+  {
+    "name": "Verduras congeladas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Frozen Foods"
+  },
+  {
+    "name": "Vasos de fruta",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Rollitos de fruta",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Snacks de fruta",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Cartucho de combustible",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Polainas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Ajo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Ajo en polvo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Gasas",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Rollo de gasa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Cinta de reparación de equipo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Jengibre",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Guantes",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Barras luminosas",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Lighting and Visibility"
+  },
+  {
+    "name": "Bayas de goji",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Galletas Goldfish",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Galletas Graham",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Granola",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Barras de granola",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Uvas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Judías verdes",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Té verde",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Parrilla",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Rejilla de parrilla",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Carne molida",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Lona de suelo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Guacamole",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Ligas para el cabello",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Cepillo de cabello",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Jamón",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Martillo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Hamaca",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Gel antibacterial",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Calentadores de manos",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Seltzer con alcohol",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Sombrero",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Lámpara frontal",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Lighting and Visibility"
+  },
+  {
+    "name": "Semillas de cáñamo",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Té de hierbas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Botas de senderismo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Pantalones de senderismo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Miel",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Set de herraduras",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Mezcla de chocolate caliente",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Panes de hot dog",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Hot dogs",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Compresa caliente (instantánea)",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Salsa picante",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Hula hula",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Hummus",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Mochila de hidratación",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Crema de hidrocortisona",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Agua oxigenada",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Ibuprofeno",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Hielo",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Frozen Foods"
+  },
+  {
+    "name": "Helado",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Frozen Foods"
+  },
+  {
+    "name": "Bolsas de hielo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Té helado",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Identificación / Licencia de conducir",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Tylenol infantil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Piscina inflable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Inhalador",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Repelente de insectos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Café instantáneo",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Fideos instantáneos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Avena instantánea",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Tarjetas de seguro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Condimento italiano",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Jalapeños",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Mermelada",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Vasos de gelatina",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Cecina",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Diario",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Jugo",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Cajitas de jugo",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Cuerda para saltar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Cables de arranque",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Col rizada",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Chips de col rizada",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Kayak",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Portakayak",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Kétchup",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Tetera",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Frijoles rojos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Mochila para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Casco de bicicleta para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Binoculares para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Libros para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Sombrero para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Auriculares para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Botas de lluvia para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Chaqueta de lluvia para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Saco de dormir para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Protector solar para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Botella de agua para niños",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Bolsas de agua para niños",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Kimchi",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Cuchillo de cocina",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Cometa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Kombucha",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Cucharón",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Chuletas de cordero",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Farol",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Lighting and Visibility"
+  },
+  {
+    "name": "Bolsa de lavandería",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Limonada",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Limones",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Lentejas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Lechuga",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Bloques niveladores (RV)",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Chaleco salvavidas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Encendedor",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Limas",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Bálsamo labial",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Macarrones con queso",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Cheese"
+  },
+  {
+    "name": "Lupa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Mango",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Mapa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Documentation and Access"
+  },
+  {
+    "name": "Jarabe de arce",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Malvaviscos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Matcha",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Fósforos",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Mayonesa",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Cinta médica",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Toallas sanitarias",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Leche",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Mini bagels",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Mini muffins",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Mini panqueques",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Mini sándwiches",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Espejo (pequeño)",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Pasta de miso",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Frutos secos mixtos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Molesquín",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Mosquitero",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Pastillas para el mareo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Muffins",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Herramienta multiusos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Champiñones",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Mostaza",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Cortaúñas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Servilletas",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Tarjetas de búsqueda del tesoro natural",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Braga de cuello",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Luz nocturna",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Aspirador nasal",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Nutella",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Levadura nutricional",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Leche de avena",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Aceite de oliva",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Aceitunas",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Cebolla en polvo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Cebollas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Sales de rehidratación oral",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Naranjas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Tapas de enchufes",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Mezcla de avena nocturna",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Chupete",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Corralito portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Cubos organizadores",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Tabla de paddle",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Mezcla para panqueques",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Platos de papel",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Toallas de papel",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Pimentón",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Paracord",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Papel pergamino",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Pasaporte",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Pasta",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Ingredientes para sándwich de mantequilla y mermelada",
+    "category": "food",
+    "unit": "set",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Duraznos",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Mantequilla de maní",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Cacahuates",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Peras",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Pedialyte",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Bolígrafo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Pimienta",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Pepperoni",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Tazones para mascota",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Transportadora para mascota",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Botiquín para mascotas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Collar antipulgas para mascota",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Toalla para mascota",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Bolsas para desechos de mascota",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Vaselina",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Pepinillos",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Manta de picnic",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Pastel",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Piña",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Pistachos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Pan pita",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Vasos de plástico",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Envoltura plástica",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Platos",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Plastilina",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Cartas de juego",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Navaja",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Fideos de piscina",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Refugio emergente",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Palomitas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Paletas heladas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Frozen Foods"
+  },
+  {
+    "name": "Chuletas de cerdo",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Cuna portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Botella de agua portátil para perro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Pet Gear"
+  },
+  {
+    "name": "Reproductor DVD portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Ventilador portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Generador portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Bocina portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Music and Media"
+  },
+  {
+    "name": "Baño portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Champiñones portobello",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Papas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Batería portátil",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Medicamentos recetados",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Pretzels",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Pantalla de privacidad",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Tanque de propano",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Barras de proteína",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Proteína en polvo",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Vasos de pudín",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Puffs (snack para bebé)",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Cerdo deshilachado",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Semillas de calabaza",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Rompecabezas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Camiseta de secado rápido",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Quinoa",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Rábanos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Sobretecho impermeable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Chaqueta impermeable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Poncho impermeable",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Cajitas de pasas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Pasas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Frambuesas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Rasuradora",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Chaleco reflectante",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Relish",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Parches de reparación",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Impresiones de reservación",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Costillas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Arroz",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Tortitas de arroz",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Fideos de arroz",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Galletas de arroz",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Bengalas de carretera",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Pimientos rojos asados",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Cofre de techo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Correas de portaequipaje",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Cuerda",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Manguera de desagüe (RV)",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Imperdibles",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Aderezo para ensalada",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Mezcla de ensalada",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Salami",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Gotas de solución salina",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Solución salina para heridas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Filete de salmón",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Salsa",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Sal",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Juguetes de arena",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Sandalias",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Bolsas para sándwich",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Chucrut",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Salchichas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Sierra (plegable)",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Bufanda",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Tijeras (médicas)",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Patineta",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Snacks de alga",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Seitán",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Cucharas de servir",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Kit de costura",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Champú",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Crema de afeitar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Pantalones cortos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Pala (de campamento)",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Tienda de ducha",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Camarones",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Vasos con tapa",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Brochetas",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Gafas de esquí",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Antifaz para dormir",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Saco de dormir",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Colchoneta para dormir",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Queso en rebanadas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Cheese"
+  },
+  {
+    "name": "Detector de humo (portátil)",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Salmón ahumado",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Mezcla para batido",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Kit de s'mores",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Recipientes para snacks",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Kit para mordedura de serpiente",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Guisantes dulces",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Set de snorkel",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Cadenas para nieve",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Raquetas de nieve",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Balón de fútbol",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Refresco",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Cargador solar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Leche de soja",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Salsa de soja",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Baterías de repuesto",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Gafas de repuesto",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Agua con gas",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Espátula",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Grifo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Espinacas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Licores",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Espirulina",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Tapete protector",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Férula",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Esponja",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Bebida deportiva",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Yogur en tubo",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Dairy"
+  },
+  {
+    "name": "Sriracha",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Carta estelar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Documentation and Access"
+  },
+  {
+    "name": "Bistec",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Guantes estériles",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Stickers",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Parches para picaduras",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Fresas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Popotes",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Queso en tiras",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Cheese"
+  },
+  {
+    "name": "Luces de cadena",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Lighting and Visibility"
+  },
+  {
+    "name": "Carriola",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Bolsa de compresión",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Peluche",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Azúcar",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Tomates secados al sol",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Spray para quemaduras solares",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Semillas de girasol",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Gafas de sol",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Protector solar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Pegamento instantáneo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Arrullador",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Batatas",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Traje de baño",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Acelga",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Tableta",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Tahini",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Tamari",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Tampones",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Lona",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Bolsas de té",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Teddy Grahams",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Galletas para dentición",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Mordedor",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Tempeh",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Tienda de campaña",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Huella de tienda",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Estacas de tienda",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Ropa interior térmica",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Termómetro",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Termo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Extractor de garrapatas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Kit de reparación de llantas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Pañuelos",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Tazones para niños pequeños",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Cubiertos para niños pequeños",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Platos para niños pequeños",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Barras de snack para niños",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Tofu",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Papel higiénico",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Tomates",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Fresh Vegetables"
+  },
+  {
+    "name": "Pinzas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "Depresores linguales",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Cepillo de dientes",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Pasta de dientes",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Palillos de dientes",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Totopos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Tortillas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Torniquete",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Correa de remolque",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Toallas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Carritos de juguete",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Mezcla de frutos secos y semillas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Bolsas de basura",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Food Storage and Cooling"
+  },
+  {
+    "name": "Silla alta de viaje",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Almohada de viaje",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Bastones de trekking",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Vendaje triangular",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Trípode",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Other"
+  },
+  {
+    "name": "Filetes de atún",
+    "category": "food",
+    "unit": "kg",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Rebanadas de pavo",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Meat and Poultry"
+  },
+  {
+    "name": "Cúrcuma",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Pinzas de depilar",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "First Aid and Safety"
+  },
+  {
+    "name": "Cable de carga USB",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Power and Charging"
+  },
+  {
+    "name": "Mantequilla vegana",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Queso vegano",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Galletas veganas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Mayonesa vegana",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Yogur vegano",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Aceite vegetal",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Hamburguesas vegetarianas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Chips de verduras",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Hot dogs vegetarianos",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Salchichas vegetarianas",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Vegan"
+  },
+  {
+    "name": "Pajitas de verduras",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Vinagre",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Balón de voleibol",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Games and Activities"
+  },
+  {
+    "name": "Walkie-talkies",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Documentation and Access"
+  },
+  {
+    "name": "Nueces",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Capas de abrigo",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Palangana",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Agua",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Bolsa de agua",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Botella de agua",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Filtro de agua",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Pistolas de agua",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Manguera de agua",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Jarra de agua",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Regulador de presión de agua",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Pastillas purificadoras de agua",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Drink and Beverage Equipment"
+  },
+  {
+    "name": "Zapatos acuáticos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Sandía",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Fruit"
+  },
+  {
+    "name": "Fósforos impermeables",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Cooking and Heating Equipment"
+  },
+  {
+    "name": "WD-40",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Toallitas húmedas",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Hygiene and Bathroom Supplies"
+  },
+  {
+    "name": "Cuñas para ruedas",
+    "category": "equipment",
+    "unit": "set",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Silbato",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Documentation and Access"
+  },
+  {
+    "name": "Máquina de ruido blanco",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Kids and Baby Gear"
+  },
+  {
+    "name": "Leche entera",
+    "category": "food",
+    "unit": "l",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Pan integral",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Pasta integral",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Tortillas integrales",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Arroz salvaje",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Grains and Pasta"
+  },
+  {
+    "name": "Cortavientos",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Venue Setup and Layout"
+  },
+  {
+    "name": "Raspador de parabrisas",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Transport and Carry"
+  },
+  {
+    "name": "Vino",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Beverages (non-alcoholic)"
+  },
+  {
+    "name": "Calcetines de lana",
+    "category": "equipment",
+    "unit": "pcs",
+    "subcategory": "Comfort and Climate Control"
+  },
+  {
+    "name": "Salsa Worcestershire",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Sauces, Condiments, and Spreads"
+  },
+  {
+    "name": "Yogur",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Breakfast Staples"
+  },
+  {
+    "name": "Tubos de yogur",
+    "category": "food",
+    "unit": "pack",
+    "subcategory": "Snacks and Chips"
+  },
+  {
+    "name": "Cinchos de plástico",
+    "category": "equipment",
+    "unit": "pack",
+    "subcategory": "Tools and Quick Repairs"
+  },
+  {
+    "name": "Calabacín",
+    "category": "food",
+    "unit": "pcs",
+    "subcategory": "Fresh Vegetables"
+  }
+]

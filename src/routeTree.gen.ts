@@ -8,126 +8,135 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as SignupRouteImport } from './routes/signup';
-import { Route as SigninRouteImport } from './routes/signin';
-import { Route as CreatePlanRouteImport } from './routes/create-plan';
-import { Route as PlanPlanIdRouteImport } from './routes/plan.$planId';
-import { Route as ItemsPlanIdRouteImport } from './routes/items.$planId';
-import { Route as InvitePlanIdInviteTokenRouteImport } from './routes/invite.$planId.$inviteToken';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SigninRouteImport } from './routes/signin'
+import { Route as CreatePlanRouteImport } from './routes/create-plan'
+import { Route as PlanPlanIdRouteImport } from './routes/plan.$planId'
+import { Route as ItemsPlanIdRouteImport } from './routes/items.$planId'
+import { Route as AdminLastUpdatedRouteImport } from './routes/admin.last-updated'
+import { Route as InvitePlanIdInviteTokenRouteImport } from './routes/invite.$planId.$inviteToken'
 
-const PlansLazyRouteImport = createFileRoute('/plans')();
-const NotFoundLazyRouteImport = createFileRoute('/not-found')();
-const CompleteProfileLazyRouteImport = createFileRoute('/complete-profile')();
-const AboutLazyRouteImport = createFileRoute('/about')();
-const IndexLazyRouteImport = createFileRoute('/')();
+const PlansLazyRouteImport = createFileRoute('/plans')()
+const NotFoundLazyRouteImport = createFileRoute('/not-found')()
+const CompleteProfileLazyRouteImport = createFileRoute('/complete-profile')()
+const AboutLazyRouteImport = createFileRoute('/about')()
+const IndexLazyRouteImport = createFileRoute('/')()
 
 const PlansLazyRoute = PlansLazyRouteImport.update({
   id: '/plans',
   path: '/plans',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/plans.lazy').then((d) => d.Route));
+} as any).lazy(() => import('./routes/plans.lazy').then((d) => d.Route))
 const NotFoundLazyRoute = NotFoundLazyRouteImport.update({
   id: '/not-found',
   path: '/not-found',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/not-found.lazy').then((d) => d.Route));
+} as any).lazy(() => import('./routes/not-found.lazy').then((d) => d.Route))
 const CompleteProfileLazyRoute = CompleteProfileLazyRouteImport.update({
   id: '/complete-profile',
   path: '/complete-profile',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
-  import('./routes/complete-profile.lazy').then((d) => d.Route)
-);
+  import('./routes/complete-profile.lazy').then((d) => d.Route),
+)
 const AboutLazyRoute = AboutLazyRouteImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route));
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route));
+} as any).lazy(() => import('./routes/signup.lazy').then((d) => d.Route))
 const SigninRoute = SigninRouteImport.update({
   id: '/signin',
   path: '/signin',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/signin.lazy').then((d) => d.Route));
+} as any).lazy(() => import('./routes/signin.lazy').then((d) => d.Route))
 const CreatePlanRoute = CreatePlanRouteImport.update({
   id: '/create-plan',
   path: '/create-plan',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const IndexLazyRoute = IndexLazyRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 const PlanPlanIdRoute = PlanPlanIdRouteImport.update({
   id: '/plan/$planId',
   path: '/plan/$planId',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/plan.$planId.lazy').then((d) => d.Route));
+} as any).lazy(() => import('./routes/plan.$planId.lazy').then((d) => d.Route))
 const ItemsPlanIdRoute = ItemsPlanIdRouteImport.update({
   id: '/items/$planId',
   path: '/items/$planId',
   getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/items.$planId.lazy').then((d) => d.Route))
+const AdminLastUpdatedRoute = AdminLastUpdatedRouteImport.update({
+  id: '/admin/last-updated',
+  path: '/admin/last-updated',
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
-  import('./routes/items.$planId.lazy').then((d) => d.Route)
-);
+  import('./routes/admin.last-updated.lazy').then((d) => d.Route),
+)
 const InvitePlanIdInviteTokenRoute = InvitePlanIdInviteTokenRouteImport.update({
   id: '/invite/$planId/$inviteToken',
   path: '/invite/$planId/$inviteToken',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
-  import('./routes/invite.$planId.$inviteToken.lazy').then((d) => d.Route)
-);
+  import('./routes/invite.$planId.$inviteToken.lazy').then((d) => d.Route),
+)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute;
-  '/create-plan': typeof CreatePlanRoute;
-  '/signin': typeof SigninRoute;
-  '/signup': typeof SignupRoute;
-  '/about': typeof AboutLazyRoute;
-  '/complete-profile': typeof CompleteProfileLazyRoute;
-  '/not-found': typeof NotFoundLazyRoute;
-  '/plans': typeof PlansLazyRoute;
-  '/items/$planId': typeof ItemsPlanIdRoute;
-  '/plan/$planId': typeof PlanPlanIdRoute;
-  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
+  '/': typeof IndexLazyRoute
+  '/create-plan': typeof CreatePlanRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
+  '/about': typeof AboutLazyRoute
+  '/complete-profile': typeof CompleteProfileLazyRoute
+  '/not-found': typeof NotFoundLazyRoute
+  '/plans': typeof PlansLazyRoute
+  '/admin/last-updated': typeof AdminLastUpdatedRoute
+  '/items/$planId': typeof ItemsPlanIdRoute
+  '/plan/$planId': typeof PlanPlanIdRoute
+  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute;
-  '/create-plan': typeof CreatePlanRoute;
-  '/signin': typeof SigninRoute;
-  '/signup': typeof SignupRoute;
-  '/about': typeof AboutLazyRoute;
-  '/complete-profile': typeof CompleteProfileLazyRoute;
-  '/not-found': typeof NotFoundLazyRoute;
-  '/plans': typeof PlansLazyRoute;
-  '/items/$planId': typeof ItemsPlanIdRoute;
-  '/plan/$planId': typeof PlanPlanIdRoute;
-  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
+  '/': typeof IndexLazyRoute
+  '/create-plan': typeof CreatePlanRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
+  '/about': typeof AboutLazyRoute
+  '/complete-profile': typeof CompleteProfileLazyRoute
+  '/not-found': typeof NotFoundLazyRoute
+  '/plans': typeof PlansLazyRoute
+  '/admin/last-updated': typeof AdminLastUpdatedRoute
+  '/items/$planId': typeof ItemsPlanIdRoute
+  '/plan/$planId': typeof PlanPlanIdRoute
+  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  '/': typeof IndexLazyRoute;
-  '/create-plan': typeof CreatePlanRoute;
-  '/signin': typeof SigninRoute;
-  '/signup': typeof SignupRoute;
-  '/about': typeof AboutLazyRoute;
-  '/complete-profile': typeof CompleteProfileLazyRoute;
-  '/not-found': typeof NotFoundLazyRoute;
-  '/plans': typeof PlansLazyRoute;
-  '/items/$planId': typeof ItemsPlanIdRoute;
-  '/plan/$planId': typeof PlanPlanIdRoute;
-  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexLazyRoute
+  '/create-plan': typeof CreatePlanRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
+  '/about': typeof AboutLazyRoute
+  '/complete-profile': typeof CompleteProfileLazyRoute
+  '/not-found': typeof NotFoundLazyRoute
+  '/plans': typeof PlansLazyRoute
+  '/admin/last-updated': typeof AdminLastUpdatedRoute
+  '/items/$planId': typeof ItemsPlanIdRoute
+  '/plan/$planId': typeof PlanPlanIdRoute
+  '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/create-plan'
@@ -137,10 +146,11 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/admin/last-updated'
     | '/items/$planId'
     | '/plan/$planId'
-    | '/invite/$planId/$inviteToken';
-  fileRoutesByTo: FileRoutesByTo;
+    | '/invite/$planId/$inviteToken'
+  fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/create-plan'
@@ -150,9 +160,10 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/admin/last-updated'
     | '/items/$planId'
     | '/plan/$planId'
-    | '/invite/$planId/$inviteToken';
+    | '/invite/$planId/$inviteToken'
   id:
     | '__root__'
     | '/'
@@ -163,104 +174,113 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/admin/last-updated'
     | '/items/$planId'
     | '/plan/$planId'
-    | '/invite/$planId/$inviteToken';
-  fileRoutesById: FileRoutesById;
+    | '/invite/$planId/$inviteToken'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute;
-  CreatePlanRoute: typeof CreatePlanRoute;
-  SigninRoute: typeof SigninRoute;
-  SignupRoute: typeof SignupRoute;
-  AboutLazyRoute: typeof AboutLazyRoute;
-  CompleteProfileLazyRoute: typeof CompleteProfileLazyRoute;
-  NotFoundLazyRoute: typeof NotFoundLazyRoute;
-  PlansLazyRoute: typeof PlansLazyRoute;
-  ItemsPlanIdRoute: typeof ItemsPlanIdRoute;
-  PlanPlanIdRoute: typeof PlanPlanIdRoute;
-  InvitePlanIdInviteTokenRoute: typeof InvitePlanIdInviteTokenRoute;
+  IndexLazyRoute: typeof IndexLazyRoute
+  CreatePlanRoute: typeof CreatePlanRoute
+  SigninRoute: typeof SigninRoute
+  SignupRoute: typeof SignupRoute
+  AboutLazyRoute: typeof AboutLazyRoute
+  CompleteProfileLazyRoute: typeof CompleteProfileLazyRoute
+  NotFoundLazyRoute: typeof NotFoundLazyRoute
+  PlansLazyRoute: typeof PlansLazyRoute
+  AdminLastUpdatedRoute: typeof AdminLastUpdatedRoute
+  ItemsPlanIdRoute: typeof ItemsPlanIdRoute
+  PlanPlanIdRoute: typeof PlanPlanIdRoute
+  InvitePlanIdInviteTokenRoute: typeof InvitePlanIdInviteTokenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/plans': {
-      id: '/plans';
-      path: '/plans';
-      fullPath: '/plans';
-      preLoaderRoute: typeof PlansLazyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/plans'
+      path: '/plans'
+      fullPath: '/plans'
+      preLoaderRoute: typeof PlansLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/not-found': {
-      id: '/not-found';
-      path: '/not-found';
-      fullPath: '/not-found';
-      preLoaderRoute: typeof NotFoundLazyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/not-found'
+      path: '/not-found'
+      fullPath: '/not-found'
+      preLoaderRoute: typeof NotFoundLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/complete-profile': {
-      id: '/complete-profile';
-      path: '/complete-profile';
-      fullPath: '/complete-profile';
-      preLoaderRoute: typeof CompleteProfileLazyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/complete-profile'
+      path: '/complete-profile'
+      fullPath: '/complete-profile'
+      preLoaderRoute: typeof CompleteProfileLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
-      id: '/about';
-      path: '/about';
-      fullPath: '/about';
-      preLoaderRoute: typeof AboutLazyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signup': {
-      id: '/signup';
-      path: '/signup';
-      fullPath: '/signup';
-      preLoaderRoute: typeof SignupRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signin': {
-      id: '/signin';
-      path: '/signin';
-      fullPath: '/signin';
-      preLoaderRoute: typeof SigninRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/create-plan': {
-      id: '/create-plan';
-      path: '/create-plan';
-      fullPath: '/create-plan';
-      preLoaderRoute: typeof CreatePlanRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/create-plan'
+      path: '/create-plan'
+      fullPath: '/create-plan'
+      preLoaderRoute: typeof CreatePlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexLazyRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/plan/$planId': {
-      id: '/plan/$planId';
-      path: '/plan/$planId';
-      fullPath: '/plan/$planId';
-      preLoaderRoute: typeof PlanPlanIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/plan/$planId'
+      path: '/plan/$planId'
+      fullPath: '/plan/$planId'
+      preLoaderRoute: typeof PlanPlanIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/items/$planId': {
-      id: '/items/$planId';
-      path: '/items/$planId';
-      fullPath: '/items/$planId';
-      preLoaderRoute: typeof ItemsPlanIdRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/items/$planId'
+      path: '/items/$planId'
+      fullPath: '/items/$planId'
+      preLoaderRoute: typeof ItemsPlanIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/last-updated': {
+      id: '/admin/last-updated'
+      path: '/admin/last-updated'
+      fullPath: '/admin/last-updated'
+      preLoaderRoute: typeof AdminLastUpdatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/invite/$planId/$inviteToken': {
-      id: '/invite/$planId/$inviteToken';
-      path: '/invite/$planId/$inviteToken';
-      fullPath: '/invite/$planId/$inviteToken';
-      preLoaderRoute: typeof InvitePlanIdInviteTokenRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/invite/$planId/$inviteToken'
+      path: '/invite/$planId/$inviteToken'
+      fullPath: '/invite/$planId/$inviteToken'
+      preLoaderRoute: typeof InvitePlanIdInviteTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -273,10 +293,11 @@ const rootRouteChildren: RootRouteChildren = {
   CompleteProfileLazyRoute: CompleteProfileLazyRoute,
   NotFoundLazyRoute: NotFoundLazyRoute,
   PlansLazyRoute: PlansLazyRoute,
+  AdminLastUpdatedRoute: AdminLastUpdatedRoute,
   ItemsPlanIdRoute: ItemsPlanIdRoute,
   PlanPlanIdRoute: PlanPlanIdRoute,
   InvitePlanIdInviteTokenRoute: InvitePlanIdInviteTokenRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()

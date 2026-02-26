@@ -7,7 +7,7 @@ export interface LanguageMeta {
   currencyCode: string;
 }
 
-export const SUPPORTED_LANGUAGES = ['en', 'he'] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'he', 'es'] as const;
 
 export type AppLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
@@ -25,6 +25,12 @@ export const LANGUAGE_META: Record<AppLanguage, LanguageMeta> = {
     nativeLabel: 'עברית',
     currencySymbol: '₪',
     currencyCode: 'ILS',
+  },
+  es: {
+    code: 'es',
+    nativeLabel: 'Español',
+    currencySymbol: '€',
+    currencyCode: 'EUR',
   },
 };
 

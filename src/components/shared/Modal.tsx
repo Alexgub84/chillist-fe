@@ -12,10 +12,17 @@ interface ModalProps {
   open: boolean;
   onClose: () => void;
   title?: string;
+  testId?: string;
   children: ReactNode;
 }
 
-export default function Modal({ open, onClose, title, children }: ModalProps) {
+export default function Modal({
+  open,
+  onClose,
+  title,
+  testId,
+  children,
+}: ModalProps) {
   return (
     <Transition show={open} as={Fragment}>
       <Dialog onClose={onClose} className="relative z-50">
@@ -42,7 +49,10 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-full sm:translate-y-0 sm:scale-95"
             >
-              <DialogPanel className="w-full sm:max-w-lg bg-white sm:rounded-xl shadow-xl max-h-[90vh] overflow-y-auto rounded-t-xl">
+              <DialogPanel
+                data-testid={testId}
+                className="w-full sm:max-w-lg bg-white sm:rounded-xl shadow-xl max-h-[90vh] overflow-y-auto rounded-t-xl"
+              >
                 {title && (
                   <DialogTitle className="text-lg font-semibold text-gray-900 px-4 sm:px-6 pt-4 sm:pt-6 pb-2">
                     {title}
