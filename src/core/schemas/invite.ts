@@ -3,7 +3,7 @@ import type { components } from '../api.generated';
 import { locationSchema } from './location';
 import { itemSchema } from './item';
 
-type BEInviteParticipant = components['schemas']['def-26'];
+type BEInviteParticipant = components['schemas']['def-25'];
 type BEInvitePlanResponse = components['schemas']['def-28'];
 
 const INVITE_ROLE_VALUES = [
@@ -47,8 +47,8 @@ export const invitePlanResponseSchema = z.object({
   updatedAt: z.string(),
   items: z.array(itemSchema),
   participants: z.array(inviteParticipantSchema),
-  myParticipantId: z.string(),
-  myRsvpStatus: z.enum(RSVP_STATUS_VALUES),
+  myParticipantId: z.string().optional(),
+  myRsvpStatus: z.enum(RSVP_STATUS_VALUES).optional(),
   myPreferences: guestPreferencesSchema.nullish(),
 });
 
