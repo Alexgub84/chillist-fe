@@ -38,7 +38,13 @@ function buildTestPlan() {
   return buildPlan({
     title: 'E2E Test Trip',
     participants: [
-      { name: 'Alex', lastName: 'Test', phone: '555-0100', role: 'owner' },
+      {
+        name: 'Alex',
+        lastName: 'Test',
+        phone: '555-0100',
+        role: 'owner',
+        userId: 'regular-user-id',
+      },
       { name: 'Bob', lastName: 'Helper', phone: '555-0200' },
       { name: 'Carol', lastName: 'Runner', phone: '555-0300' },
     ],
