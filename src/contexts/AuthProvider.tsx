@@ -6,7 +6,7 @@ import { useNavigate } from '@tanstack/react-router';
 import i18n from '../i18n';
 import { supabase } from '../lib/supabase';
 import { onAuthError } from '../core/auth-error';
-import { claimInvite } from '../core/api';
+import { claimInvite, syncProfile } from '../core/api';
 import { getPendingInvite, clearPendingInvite } from '../core/pending-invite';
 import { AuthContext } from './auth-context';
 import AuthErrorModal from '../components/AuthErrorModal';
@@ -75,6 +75,43 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       if (event === 'SIGNED_OUT') {
         setSession(null);
         setUser(null);
+      }
+
+      if (event === 'USER_UPDATED') {
+        console.info(
+          '[AuthProvider] USER_UPDATED detected — refreshing session before syncing profile.'
+        );
+        supabase.auth
+          .refreshSession()
+          .then(({ data, error }) => {
+            const refreshedToken = data.session?.access_token;
+
+            if (error || !refreshedToken) {
+              console.warn(
+                `[AuthProvider] refreshSession failed before /auth/sync-profile. ` +
+                  `Error: ${error?.message ?? 'no refreshed session returned'}`
+              );
+              return;
+            }
+
+            syncProfile(refreshedToken)
+              .then((synced) => {
+                console.info(
+                  `[AuthProvider] /auth/sync-profile succeeded — synced=${synced}.`
+                );
+              })
+              .catch((err) => {
+                console.warn(
+                  `[AuthProvider] /auth/sync-profile failed (non-blocking). Error: ${err instanceof Error ? err.message : String(err)}`
+                );
+              });
+          })
+          .catch((err) => {
+            console.warn(
+              `[AuthProvider] refreshSession threw before /auth/sync-profile. ` +
+                `Error: ${err instanceof Error ? err.message : String(err)}`
+            );
+          });
       }
     });
 

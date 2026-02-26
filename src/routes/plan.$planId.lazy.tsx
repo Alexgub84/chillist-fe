@@ -22,7 +22,7 @@ import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import Forecast from '../components/Forecast';
 import ParticipantDetails from '../components/ParticipantDetails';
-import CategorySection from '../components/CategorySection';
+import ItemsList from '../components/ItemsList';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
 import EditPlanForm from '../components/EditPlanForm';
 import PreferencesForm, {
@@ -31,9 +31,10 @@ import PreferencesForm, {
 import Modal from '../components/shared/Modal';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
-import type { ItemCategory, ItemPatch } from '../core/schemas/item';
+import type { Item, ItemPatch } from '../core/schemas/item';
 import type { PlanPatch } from '../core/schemas/plan';
 import type { ListFilter } from '../core/schemas/plan-search';
+import { useBulkAssign } from '../hooks/useBulkAssign';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanDetails,
@@ -60,6 +61,8 @@ function PlanDetails() {
     string | null
   >(null);
   const [showEditPlanModal, setShowEditPlanModal] = useState(false);
+
+  const bulkAssign = useBulkAssign(planId, plan?.participants ?? []);
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
@@ -103,6 +106,7 @@ function PlanDetails() {
     return {
       name: values.name,
       category: values.category,
+      subcategory: values.subcategory || null,
       quantity: values.quantity,
       unit: values.unit,
       status: values.status,
@@ -156,6 +160,12 @@ function PlanDetails() {
     ? plan.participants.find((p) => p.userId === user.id)
     : undefined;
 
+  const canEditItem = isOwner
+    ? undefined
+    : (item: Item) =>
+        !!currentParticipant &&
+        item.assignedParticipantId === currentParticipant.participantId;
+
   async function handleDeletePlan() {
     try {
       await deletePlanMutation.mutateAsync(planId);
@@ -187,8 +197,6 @@ function PlanDetails() {
       toast.error(`${title}: ${message}`);
     }
   }
-
-  const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 
   const participantCounts: Record<string, number> = { unassigned: 0 };
   for (const p of plan.participants) {
@@ -223,11 +231,6 @@ function PlanDetails() {
     if (listFilter === 'packing' && item.status !== 'purchased') return false;
     return true;
   });
-
-  const itemsByCategory = CATEGORIES.map((category) => ({
-    category,
-    items: filteredItems.filter((item) => item.category === category),
-  }));
 
   return (
     <div className="w-full px-3 sm:px-0">
@@ -273,7 +276,54 @@ function PlanDetails() {
           </div>
         )}
 
-        <div className="mt-6 sm:mt-8 flex items-center justify-between mb-3 sm:mb-4">
+        <Link
+          to="/items/$planId"
+          params={{ planId }}
+          className="mt-6 sm:mt-8 mb-4 block bg-white rounded-lg shadow-sm border border-blue-100 hover:border-blue-300 hover:shadow-md transition-all p-4 sm:p-5 group"
+        >
+          <div className="flex items-center gap-3">
+            <div className="shrink-0 w-10 h-10 rounded-full bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
+              <svg
+                className="w-5 h-5 text-blue-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">
+                {t('items.manageItems')}
+              </p>
+              <p className="text-xs sm:text-sm text-gray-500">
+                {t('items.manageItemsDesc')}
+              </p>
+            </div>
+            <svg
+              className="w-5 h-5 text-gray-400 group-hover:text-blue-500 ms-auto shrink-0 transition-colors"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </div>
+        </Link>
+
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
             {t('items.title')}
             {plan.items.length > 0 && (
@@ -305,6 +355,7 @@ function PlanDetails() {
                   }
                   counts={participantCounts}
                   total={plan.items.length}
+                  currentParticipantId={currentParticipant?.participantId}
                 />
               </div>
             )}
@@ -339,19 +390,24 @@ function PlanDetails() {
         )}
 
         {plan.items.length > 0 && (
-          <div className="space-y-4 mb-4">
-            {itemsByCategory.map(({ category, items }) => (
-              <CategorySection
-                key={category}
-                category={category}
-                items={items}
-                participants={plan.participants}
-                listFilter={listFilter}
-                onEditItem={(itemId) => setItemModalId(itemId)}
-                onUpdateItem={updateItem}
-              />
-            ))}
-          </div>
+          <ItemsList
+            items={filteredItems}
+            participants={plan.participants}
+            listFilter={listFilter}
+            selfAssignParticipantId={
+              isOwner ? undefined : currentParticipant?.participantId
+            }
+            canEditItem={canEditItem}
+            onEditItem={(itemId) => setItemModalId(itemId)}
+            onUpdateItem={updateItem}
+            onBulkAssign={
+              isOwner
+                ? (ids, pid) =>
+                    bulkAssign.mutate({ itemIds: ids, participantId: pid })
+                : undefined
+            }
+            groupBySubcategory
+          />
         )}
 
         <Modal
@@ -366,6 +422,9 @@ function PlanDetails() {
                 ? {
                     name: editingItem.name,
                     category: editingItem.category,
+                    subcategory:
+                      (editingItem as { subcategory?: string | null })
+                        .subcategory ?? undefined,
                     quantity: editingItem.quantity,
                     unit: editingItem.unit,
                     status: editingItem.status,

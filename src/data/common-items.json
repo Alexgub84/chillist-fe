@@ -5,7 +5,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "ace-wrap",
@@ -13,7 +14,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "acetaminophen",
@@ -21,7 +23,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "acorn-squash",
@@ -29,7 +32,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "action-figures",
@@ -37,7 +41,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "after-bite",
@@ -45,7 +50,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "agave-syrup",
@@ -53,7 +59,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "air-mattress",
@@ -61,7 +68,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Inflatable Mattress", "Air Bed", "מזרן מתנפח"],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "air-pump",
@@ -69,7 +77,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "allergy-medication",
@@ -77,7 +86,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "almond-butter",
@@ -85,7 +95,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "almond-milk",
@@ -93,7 +104,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["Almond Mylk"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "almonds",
@@ -101,7 +113,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["שקדים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "aloe-vera-gel",
@@ -109,7 +122,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "aloe-vera-juice",
@@ -117,7 +131,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "aluminum-foil",
@@ -125,7 +140,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Tin Foil", "Aluminium Foil", "Foil", "נייר אלומיניום", "רדיד"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Serving and Tableware"
   },
   {
     "id": "animal-crackers",
@@ -133,7 +149,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["ביסקוויטים"],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "antacid-tablets",
@@ -141,7 +158,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "anti-diarrhea-medication",
@@ -149,7 +167,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "anti-itch-cream",
@@ -157,7 +176,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "antibiotic-ointment",
@@ -165,7 +185,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "antihistamine",
@@ -173,7 +194,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["אנטיהיסטמין"],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "antiseptic-wipes",
@@ -181,7 +203,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "apple-cider-vinegar",
@@ -189,7 +212,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "apples",
@@ -197,7 +221,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Apple", "תפוחים"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "applesauce-pouches",
@@ -205,7 +230,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit", "kids", "snack"]
+    "tags": ["fruit", "kids", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "artichokes",
@@ -213,7 +239,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "arugula",
@@ -221,7 +248,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "asparagus",
@@ -229,7 +257,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "aspirin",
@@ -237,7 +266,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "avocado",
@@ -245,7 +275,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Avocados", "Avo", "אבוקדו"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "avocado-oil",
@@ -253,7 +284,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "axe",
@@ -261,7 +293,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["גרזן"],
-    "tags": ["cooking", "tools"]
+    "tags": ["cooking", "tools"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "baby-bathtub",
@@ -269,7 +302,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-blanket",
@@ -277,7 +311,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-body-wash",
@@ -285,7 +320,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-bottles",
@@ -293,7 +329,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["בקבוקי תינוק", "בקבוקים"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-carrier",
@@ -301,7 +338,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מנשא תינוק", "מנשא"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-cereal",
@@ -309,7 +347,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby", "breakfast"]
+    "tags": ["baby", "breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "baby-first-aid-kit",
@@ -317,7 +356,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "first-aid"]
+    "tags": ["baby", "first-aid"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-food-jars",
@@ -325,7 +365,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Other"
   },
   {
     "id": "baby-food-pouches",
@@ -333,7 +374,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["מחיות לתינוק"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Other"
   },
   {
     "id": "baby-formula",
@@ -341,7 +383,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["תרכובת מזון לתינוק", "תמ\"ל"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Other"
   },
   {
     "id": "baby-gate",
@@ -349,7 +392,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-insect-repellent",
@@ -357,7 +401,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-life-jacket",
@@ -365,7 +410,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "beach"]
+    "tags": ["baby", "beach"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-lotion",
@@ -373,7 +419,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-monitor",
@@ -381,7 +428,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מוניטור לתינוק", "מעקב תינוק"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-shampoo",
@@ -389,7 +437,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-sleeping-bag",
@@ -397,7 +446,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "sleep"]
+    "tags": ["baby", "sleep"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-sun-hat",
@@ -405,7 +455,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "clothing"]
+    "tags": ["baby", "clothing"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-sunglasses",
@@ -413,7 +464,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "clothing"]
+    "tags": ["baby", "clothing"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-sunscreen",
@@ -421,7 +473,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["קרם הגנה לתינוק"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-swim-diapers",
@@ -429,7 +482,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby", "beach"]
+    "tags": ["baby", "beach"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-swimsuit",
@@ -437,7 +491,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "clothing"]
+    "tags": ["baby", "clothing"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-thermometer",
@@ -445,7 +500,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "first-aid"]
+    "tags": ["baby", "first-aid"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-towel",
@@ -453,7 +509,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "baby-wipes",
@@ -461,7 +518,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["מגבונים"],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "backpack",
@@ -469,7 +527,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Backpacks", "Rucksack", "תרמיל", "תיק גב"],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "bacon",
@@ -477,7 +536,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Rashers", "בייקון"],
-    "tags": ["breakfast", "protein"]
+    "tags": ["breakfast", "protein"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "badminton-set",
@@ -485,7 +545,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["סט בדמינטון"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "bagels",
@@ -493,7 +554,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "baked-beans",
@@ -501,7 +563,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "balsamic-vinegar",
@@ -509,7 +572,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "bananas",
@@ -517,7 +581,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Banana", "בננות"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "band-aids-kids",
@@ -525,7 +590,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby", "first-aid"]
+    "tags": ["baby", "first-aid"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "bandages-assorted",
@@ -533,7 +599,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["תחבושות", "פלסטרים"],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "base-layer-bottom",
@@ -541,7 +608,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "base-layer-top",
@@ -549,7 +617,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "bbq-sauce",
@@ -557,7 +626,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Barbecue Sauce", "רוטב ברביקיו"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "beach-ball",
@@ -565,7 +635,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כדור ים"],
-    "tags": ["beach", "kids"]
+    "tags": ["beach", "kids"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "beach-umbrella",
@@ -573,7 +644,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Beach Umbrellas", "Sun Umbrella", "שמשייה", "שמשיית חוף"],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "beanie",
@@ -581,7 +653,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כובע צמר", "כיפה"],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "bear-canister",
@@ -589,7 +662,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "bear-spray",
@@ -597,7 +671,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Pepper Spray", "ספריי דובים"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "beer",
@@ -605,7 +680,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Beers", "Brews", "Lager", "Ale", "בירה"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "beets",
@@ -613,7 +689,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "bell-peppers",
@@ -621,7 +698,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Capsicum", "Bell Pepper", "פלפל", "גמבה"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "beyond-meat",
@@ -629,7 +707,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "bibs",
@@ -637,7 +716,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["סינרים"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "bike",
@@ -645,7 +725,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "bike-helmet",
@@ -653,7 +734,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "bike-rack",
@@ -661,7 +743,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "binoculars",
@@ -669,7 +752,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Binos", "משקפת"],
-    "tags": ["navigation"]
+    "tags": ["navigation"],
+    "subcategory": "Documentation and Access"
   },
   {
     "id": "biodegradable-soap",
@@ -677,7 +761,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["סבון מתכלה"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "black-beans",
@@ -685,7 +770,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "blister-pads",
@@ -693,7 +779,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "blueberries",
@@ -701,7 +788,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "board-game",
@@ -709,7 +797,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["משחק קופסה"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "bocce-ball-set",
@@ -717,7 +806,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "body-wash",
@@ -725,7 +815,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "book",
@@ -733,7 +824,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "booster-seat",
@@ -741,7 +833,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "bottle-brush",
@@ -749,7 +842,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "bottle-opener",
@@ -757,7 +851,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Bottle Openers", "פותחן בקבוקים"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Food Preparation Tools"
   },
   {
     "id": "bottle-warmer",
@@ -765,7 +860,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "bread",
@@ -773,7 +869,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Loaf", "לחם"],
-    "tags": ["breakfast", "pantry"]
+    "tags": ["breakfast", "pantry"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "broccoli",
@@ -781,7 +878,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["ברוקולי"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "brown-rice",
@@ -789,7 +887,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "brown-sugar",
@@ -797,7 +896,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "brownies",
@@ -805,7 +905,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "brussels-sprouts",
@@ -813,7 +914,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "bubbles",
@@ -821,7 +923,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["בועות סבון"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "buckwheat",
@@ -829,7 +932,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "bug-catcher-kit",
@@ -837,7 +941,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "building-blocks",
@@ -845,7 +950,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["קוביות", "לגו"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "bulgur",
@@ -853,7 +959,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "bungee-cords",
@@ -861,7 +968,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "burger-buns",
@@ -869,7 +977,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "burger-patties",
@@ -877,7 +986,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Hamburger Patties", "Beef Patties", "קציצות המבורגר"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "burn-gel",
@@ -885,7 +995,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "butter",
@@ -893,7 +1004,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Margarine", "חמאה"],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "butterfly-bandages",
@@ -901,7 +1013,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "butternut-squash",
@@ -909,7 +1022,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "cabbage",
@@ -917,7 +1031,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["כרוב"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "cabinet-locks",
@@ -925,7 +1040,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "cake-mix",
@@ -933,7 +1049,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Sweets and Desserts"
   },
   {
     "id": "calamine-lotion",
@@ -941,7 +1058,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "camera",
@@ -949,7 +1067,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Cameras", "מצלמה"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "camp-blanket",
@@ -957,7 +1076,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "camping-cot",
@@ -965,7 +1085,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מיטת שדה"],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "camping-heater",
@@ -973,7 +1094,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["power", "winter"]
+    "tags": ["power", "winter"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "camping-mat",
@@ -981,7 +1103,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מזרן קמפינג"],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "camping-pillow",
@@ -989,7 +1112,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Camp Pillow", "כרית קמפינג"],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "camping-shower",
@@ -997,7 +1121,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מקלחת שדה"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "camping-sink",
@@ -1005,7 +1130,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "camping-stove",
@@ -1019,7 +1145,8 @@
       "גז שדה",
       "בַּבּוּשׁקָה"
     ],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "campsite-permit",
@@ -1027,7 +1154,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "can-opener",
@@ -1035,7 +1163,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Tin Opener", "פותחן קופסאות"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Food Preparation Tools"
   },
   {
     "id": "canned-beans",
@@ -1043,7 +1172,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["שעועית בקופסה"],
-    "tags": ["pantry", "protein"]
+    "tags": ["pantry", "protein"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "canned-corn",
@@ -1051,7 +1181,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "canned-soup",
@@ -1059,7 +1190,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "canned-tomatoes",
@@ -1067,7 +1199,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "canned-tuna",
@@ -1075,7 +1208,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["טונה בקופסה", "טונה"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "canoe-paddle",
@@ -1083,7 +1217,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "canopy",
@@ -1091,7 +1226,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["גזיבו", "סוכך"],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "car-charger",
@@ -1099,7 +1235,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car", "power"]
+    "tags": ["car", "power"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "car-seat",
@@ -1107,7 +1244,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כיסא בטיחות", "מושב בטיחות"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "carabiners",
@@ -1115,7 +1253,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "carbon-monoxide-detector",
@@ -1123,7 +1262,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "cargo-net",
@@ -1131,7 +1271,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "carrots",
@@ -1139,7 +1280,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Carrot", "גזר"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "cash",
@@ -1147,7 +1289,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מזומן", "כסף מזומן"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "cashew-butter",
@@ -1155,7 +1298,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "cashews",
@@ -1163,7 +1307,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "cast-iron-skillet",
@@ -1171,7 +1316,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מחבת יצוקה", "מחבת ברזל"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "cat-food",
@@ -1179,7 +1325,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Other"
   },
   {
     "id": "cauliflower",
@@ -1187,7 +1334,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["כרובית"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "celery",
@@ -1195,7 +1343,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["סלרי"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "cereal",
@@ -1203,7 +1352,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["דגני בוקר"],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "changing-pad",
@@ -1211,7 +1361,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "charcoal",
@@ -1219,7 +1370,8 @@
     "category": "equipment",
     "unit": "kg",
     "aliases": ["Briquettes", "פחם"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "cheese",
@@ -1227,7 +1379,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Cheddar", "גבינה"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Cheese"
   },
   {
     "id": "cheese-sticks",
@@ -1235,7 +1388,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "cherries",
@@ -1243,7 +1397,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "chia-seeds",
@@ -1251,7 +1406,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "chicken-breast",
@@ -1259,7 +1415,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Chicken Breasts", "חזה עוף"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "chicken-nuggets",
@@ -1267,7 +1424,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["נאגטס", "שניצלונים"],
-    "tags": ["kids", "protein"]
+    "tags": ["kids", "protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "chicken-thighs",
@@ -1275,7 +1433,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "chicken-wings",
@@ -1283,7 +1442,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "chickpeas",
@@ -1291,7 +1451,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Garbanzo Beans", "חומוס (גרגירים)"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "chili",
@@ -1299,7 +1460,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "chili-powder",
@@ -1307,7 +1469,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "chips",
@@ -1315,7 +1478,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Crisps", "Potato Chips", "צ'יפס", "חטיפים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "chocolate",
@@ -1323,7 +1487,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["שוקולד"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "chocolate-bars",
@@ -1331,7 +1496,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "chocolate-milk",
@@ -1339,7 +1505,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink", "kids"]
+    "tags": ["drink", "kids"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "cider",
@@ -1347,7 +1514,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "cinnamon",
@@ -1355,7 +1523,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["קינמון"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "citronella-candles",
@@ -1363,7 +1532,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["lighting"]
+    "tags": ["lighting"],
+    "subcategory": "Lighting and Visibility"
   },
   {
     "id": "clothesline",
@@ -1371,7 +1541,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "clothespins",
@@ -1379,7 +1550,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "cocktail-mixer",
@@ -1387,7 +1559,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "coconut-cream",
@@ -1395,7 +1568,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "coconut-milk",
@@ -1403,7 +1577,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "coconut-oil",
@@ -1411,7 +1586,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "coconut-water",
@@ -1419,7 +1595,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "coconut-yogurt",
@@ -1427,7 +1604,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Dairy"
   },
   {
     "id": "coffee",
@@ -1435,7 +1613,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Ground Coffee", "Coffee Beans", "קפה"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "coffee-filters",
@@ -1443,7 +1622,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "cold-pack-instant",
@@ -1451,7 +1631,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "coleslaw-mix",
@@ -1459,7 +1640,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "collapsible-bucket",
@@ -1467,7 +1649,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "colored-pencils",
@@ -1475,7 +1658,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "coloring-books",
@@ -1483,7 +1667,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["חוברות צביעה"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "comfort-blanket",
@@ -1491,7 +1676,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "compass",
@@ -1499,7 +1685,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Compasses", "מצפן"],
-    "tags": ["navigation"]
+    "tags": ["navigation"],
+    "subcategory": "Documentation and Access"
   },
   {
     "id": "conditioner",
@@ -1507,7 +1694,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "contact-lens-solution",
@@ -1515,7 +1703,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "cookies",
@@ -1523,7 +1712,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["עוגיות"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "cooking-pot",
@@ -1531,7 +1721,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["סיר בישול"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "cooking-spray",
@@ -1539,7 +1730,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["תרסיס שמן"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "cooler",
@@ -1547,7 +1739,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Coolers", "Ice Chest", "Esky", "צידנית"],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "cooler-bag",
@@ -1555,7 +1748,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "corn-on-the-cob",
@@ -1563,7 +1757,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["תירס", "קלחי תירס"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "corner-protectors",
@@ -1571,7 +1766,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "cornhole-set",
@@ -1579,7 +1775,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "cotton-balls",
@@ -1587,7 +1784,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "cotton-swabs",
@@ -1595,7 +1793,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "couscous",
@@ -1603,7 +1802,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "cpr-mask",
@@ -1611,7 +1811,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "crackers",
@@ -1619,7 +1820,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Cracker", "Biscuits", "קרקרים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "crampons",
@@ -1627,7 +1829,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "crayons",
@@ -1635,7 +1838,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["צבעי שעווה"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "cream-cheese",
@@ -1643,7 +1847,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "creamer",
@@ -1651,7 +1856,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "credit-cards",
@@ -1659,7 +1865,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כרטיסי אשראי"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "croissants",
@@ -1667,7 +1874,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "cucumber",
@@ -1675,7 +1883,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Cucumbers", "מלפפון", "מלפפונים"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "cumin",
@@ -1683,7 +1892,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["כמון"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "cups",
@@ -1691,7 +1901,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["Cup", "כוסות"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "cutlery-set",
@@ -1699,7 +1910,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["Utensils", "Silverware", "סט סכום", "סכום"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "cutting-board",
@@ -1707,7 +1919,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Chopping Board", "קרש חיתוך"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "dark-chocolate",
@@ -1715,7 +1928,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "date-syrup",
@@ -1723,7 +1937,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "dates",
@@ -1731,7 +1946,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["תמרים"],
-    "tags": ["fruit", "snack"]
+    "tags": ["fruit", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "daypack",
@@ -1739,7 +1955,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "deodorant",
@@ -1747,7 +1964,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Antiperspirant", "דאודורנט"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "diaper-bag",
@@ -1755,7 +1973,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "storage"]
+    "tags": ["baby", "storage"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "diaper-cream",
@@ -1763,7 +1982,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "diaper-disposal-bags",
@@ -1771,7 +1991,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "diapers",
@@ -1779,7 +2000,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Nappies", "חיתולים"],
-    "tags": ["baby", "hygiene"]
+    "tags": ["baby", "hygiene"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "dish-soap",
@@ -1787,7 +2009,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "disposable-cutlery",
@@ -1795,7 +2018,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Plastic Cutlery", "Plastic Utensils", "סכום חד פעמי"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Serving and Tableware"
   },
   {
     "id": "disposable-gloves",
@@ -1803,7 +2027,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Serving and Tableware"
   },
   {
     "id": "dog-bed",
@@ -1811,7 +2036,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מיטת כלב"],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "dog-collar",
@@ -1819,7 +2045,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "dog-food",
@@ -1827,7 +2054,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Kibble", "אוכל לכלבים", "מזון לכלבים"],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Other"
   },
   {
     "id": "dog-harness",
@@ -1835,7 +2063,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "dog-leash",
@@ -1843,7 +2072,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Dog Lead", "רצועת כלב", "רצועה"],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "dog-life-jacket",
@@ -1851,7 +2081,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["beach", "pets"]
+    "tags": ["beach", "pets"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "dog-treats",
@@ -1859,7 +2090,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["חטיפים לכלב"],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Other"
   },
   {
     "id": "dolls",
@@ -1867,7 +2099,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "down-jacket",
@@ -1875,7 +2108,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מעיל פוך"],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "dried-cranberries",
@@ -1883,7 +2117,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit", "snack"]
+    "tags": ["fruit", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "dried-fruit",
@@ -1891,7 +2126,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit", "snack"]
+    "tags": ["fruit", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "dried-mango",
@@ -1899,7 +2135,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit", "snack"]
+    "tags": ["fruit", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "dry-bag",
@@ -1907,7 +2144,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Waterproof Bag", "Dry Sack", "Drybag", "תיק יבש", "שק יבש"],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "duct-tape",
@@ -1915,7 +2153,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Gaffer Tape", "טייפ חבלה", "דאקט טייפ"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "duffel-bag",
@@ -1923,7 +2162,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "dutch-oven",
@@ -1931,7 +2171,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["סיר הולנדי"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "ear-plugs",
@@ -1939,7 +2180,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["אטמי אוזניים"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "edamame",
@@ -1947,7 +2189,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein", "snack"]
+    "tags": ["protein", "snack"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "eggplant",
@@ -1955,7 +2198,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["חציל"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "eggs",
@@ -1963,7 +2207,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Egg", "ביצים"],
-    "tags": ["breakfast", "protein"]
+    "tags": ["breakfast", "protein"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "elastic-bandage",
@@ -1971,7 +2216,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "electrical-adapter-rv",
@@ -1979,7 +2225,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "electrolyte-packets",
@@ -1987,7 +2234,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "emergency-blanket",
@@ -2001,7 +2249,8 @@
       "שמיכת חירום",
       "שמיכת הצלה"
     ],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "energy-bars",
@@ -2009,7 +2258,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "english-muffins",
@@ -2017,7 +2267,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "epipen",
@@ -2025,7 +2276,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "extension-cord",
@@ -2033,7 +2285,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כבל מאריך"],
-    "tags": ["power"]
+    "tags": ["power"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "eye-drops",
@@ -2041,7 +2294,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "falafel",
@@ -2049,7 +2303,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "fennel",
@@ -2057,7 +2312,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "field-guide",
@@ -2065,7 +2321,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["navigation"]
+    "tags": ["navigation"],
+    "subcategory": "Documentation and Access"
   },
   {
     "id": "fire-extinguisher",
@@ -2073,7 +2330,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "fire-starter",
@@ -2081,7 +2339,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["מצת אש"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "firewood",
@@ -2089,7 +2348,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Fire Wood", "Logs", "עצי הסקה", "עצים"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "first-aid-kit",
@@ -2102,7 +2362,8 @@
       "ערכת עזרה ראשונה",
       "תיק עזרה ראשונה"
     ],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "first-aid-manual",
@@ -2110,7 +2371,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "fish-sticks",
@@ -2118,7 +2380,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids", "protein"]
+    "tags": ["kids", "protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "fishing-bait",
@@ -2126,7 +2389,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["פיתיון דיג"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "fishing-license",
@@ -2134,7 +2398,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "fishing-rod",
@@ -2142,7 +2407,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Fishing Pole", "חכה", "חכת דיג"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "fishing-tackle-box",
@@ -2150,7 +2416,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "flag-markers",
@@ -2158,7 +2425,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "flashlight",
@@ -2166,7 +2434,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Torch", "Flashlights", "פנס", "פנס יד"],
-    "tags": ["lighting"]
+    "tags": ["lighting"],
+    "subcategory": "Lighting and Visibility"
   },
   {
     "id": "flax-seeds",
@@ -2174,7 +2443,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "flaxseed-oil",
@@ -2182,7 +2452,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "fleece-jacket",
@@ -2190,7 +2461,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["פליז", "מעיל פליז"],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "flip-flops",
@@ -2198,7 +2470,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כפכפים"],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "floaties",
@@ -2206,7 +2479,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["beach", "kids"]
+    "tags": ["beach", "kids"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "flour",
@@ -2214,7 +2488,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["קמח"],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "folding-chair",
@@ -2222,7 +2497,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Camp Chair", "Folding Chairs", "כיסא מתקפל", "כיסא קמפינג"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "folding-table",
@@ -2230,7 +2506,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Camp Table", "Folding Tables", "שולחן מתקפל", "שולחן קמפינג"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "food-storage-containers",
@@ -2238,7 +2515,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "football",
@@ -2246,7 +2524,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "freeze-dried-fruit",
@@ -2254,7 +2533,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "fresh-herbs",
@@ -2262,7 +2542,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["עשבי תיבול"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "fresh-squeezed-juice",
@@ -2270,7 +2551,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "frisbee",
@@ -2278,7 +2560,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["פריזבי"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "frozen-burgers",
@@ -2286,7 +2569,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["frozen", "protein"]
+    "tags": ["frozen", "protein"],
+    "subcategory": "Frozen Foods"
   },
   {
     "id": "frozen-fruit",
@@ -2294,7 +2578,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["frozen", "fruit"]
+    "tags": ["frozen", "fruit"],
+    "subcategory": "Frozen Foods"
   },
   {
     "id": "frozen-pizza",
@@ -2302,7 +2587,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["פיצה קפואה"],
-    "tags": ["frozen"]
+    "tags": ["frozen"],
+    "subcategory": "Frozen Foods"
   },
   {
     "id": "frozen-vegetables",
@@ -2310,7 +2596,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["frozen", "vegetables"]
+    "tags": ["frozen", "vegetables"],
+    "subcategory": "Frozen Foods"
   },
   {
     "id": "fruit-cups",
@@ -2318,7 +2605,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit", "kids", "snack"]
+    "tags": ["fruit", "kids", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "fruit-leather",
@@ -2326,7 +2614,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "fruit-snacks",
@@ -2334,7 +2623,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["חטיפי פירות"],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "fuel-canister",
@@ -2342,7 +2632,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "gaiters",
@@ -2350,7 +2641,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "garlic",
@@ -2358,7 +2650,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["שום"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "garlic-powder",
@@ -2366,7 +2659,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "gauze-pads",
@@ -2374,7 +2668,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "gauze-roll",
@@ -2382,7 +2677,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "gear-repair-tape",
@@ -2390,7 +2686,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "ginger",
@@ -2398,7 +2695,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["ג'ינג'ר", "זנגביל"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "gloves",
@@ -2406,7 +2704,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כפפות"],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "glow-sticks",
@@ -2414,7 +2713,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["lighting"]
+    "tags": ["lighting"],
+    "subcategory": "Lighting and Visibility"
   },
   {
     "id": "goji-berries",
@@ -2422,7 +2722,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit", "snack"]
+    "tags": ["fruit", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "goldfish-crackers",
@@ -2430,7 +2731,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "graham-crackers",
@@ -2438,7 +2740,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "granola",
@@ -2446,7 +2749,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["גרנולה"],
-    "tags": ["breakfast", "snack"]
+    "tags": ["breakfast", "snack"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "granola-bars",
@@ -2454,7 +2758,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "grapes",
@@ -2462,7 +2767,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["ענבים"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "green-beans",
@@ -2470,7 +2776,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "green-tea",
@@ -2478,7 +2785,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "grill",
@@ -2486,7 +2794,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["BBQ", "Barbecue", "מנגל", "גריל"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "grill-grate",
@@ -2494,7 +2803,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "ground-beef",
@@ -2502,7 +2812,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Mince", "Ground Meat", "Minced Beef", "בשר טחון"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "groundsheet",
@@ -2510,7 +2821,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["יריעת קרקע"],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "guacamole",
@@ -2518,7 +2830,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "hair-ties",
@@ -2526,7 +2839,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["גומיות לשיער"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "hairbrush",
@@ -2534,7 +2848,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "ham",
@@ -2542,7 +2857,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["חזיר מעושן"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "hammer",
@@ -2550,7 +2866,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["פטיש"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "hammock",
@@ -2558,7 +2875,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Hammocks", "ערסל"],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "hand-sanitizer",
@@ -2566,7 +2884,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Hand Sanitiser", "Hand Gel", "ג'ל חיטוי", "אלכוג'ל"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "hand-warmers",
@@ -2574,7 +2893,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["winter"]
+    "tags": ["winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "hard-seltzer",
@@ -2582,7 +2902,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "hat",
@@ -2590,7 +2911,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כובע"],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "headlamp",
@@ -2598,7 +2920,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Headlamps", "Head Torch", "פנס ראש"],
-    "tags": ["lighting"]
+    "tags": ["lighting"],
+    "subcategory": "Lighting and Visibility"
   },
   {
     "id": "hemp-seeds",
@@ -2606,7 +2929,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "herbal-tea",
@@ -2614,7 +2938,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "hiking-boots",
@@ -2622,7 +2947,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Hiking Shoes", "Trail Boots", "נעלי הליכה", "נעלי טיול"],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "hiking-pants",
@@ -2630,7 +2956,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "honey",
@@ -2638,7 +2965,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["דבש"],
-    "tags": ["breakfast", "condiments"]
+    "tags": ["breakfast", "condiments"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "horseshoe-set",
@@ -2646,7 +2974,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "hot-chocolate-mix",
@@ -2654,7 +2983,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["שוקו חם", "קקאו"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "hot-dog-buns",
@@ -2662,7 +2992,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "hot-dogs",
@@ -2676,7 +3007,8 @@
       "נקניקיות חמות",
       "הוט דוג"
     ],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "hot-pack-instant",
@@ -2684,7 +3016,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "hot-sauce",
@@ -2692,7 +3025,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["רוטב חריף"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "hula-hoop",
@@ -2700,7 +3034,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "hummus",
@@ -2708,7 +3043,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Houmous", "Humous", "חומוס"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "hydration-pack",
@@ -2716,7 +3052,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Camelback", "Water Bladder Pack", "שלוקר", "תיק שתייה"],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "hydrocortisone-cream",
@@ -2724,7 +3061,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "hydrogen-peroxide",
@@ -2732,7 +3070,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "ibuprofen",
@@ -2740,7 +3079,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["איבופרופן", "נורופן"],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "ice",
@@ -2748,7 +3088,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Ice Cubes", "Bag of Ice", "קרח"],
-    "tags": ["frozen"]
+    "tags": ["frozen"],
+    "subcategory": "Frozen Foods"
   },
   {
     "id": "ice-cream",
@@ -2756,7 +3097,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["גלידה"],
-    "tags": ["frozen"]
+    "tags": ["frozen"],
+    "subcategory": "Frozen Foods"
   },
   {
     "id": "ice-packs",
@@ -2764,7 +3106,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "iced-tea",
@@ -2772,7 +3115,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "id-driver-license",
@@ -2780,7 +3124,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "infant-tylenol",
@@ -2788,7 +3133,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "first-aid"]
+    "tags": ["baby", "first-aid"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "inflatable-pool",
@@ -2796,7 +3142,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["בריכה מתנפחת"],
-    "tags": ["beach", "kids"]
+    "tags": ["beach", "kids"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "inhaler",
@@ -2804,7 +3151,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "insect-repellent",
@@ -2817,7 +3165,8 @@
       "דוחה חרקים",
       "ספריי יתושים"
     ],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "instant-coffee",
@@ -2825,7 +3174,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["קפה נמס"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "instant-noodles",
@@ -2833,7 +3183,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["נודלס מהיר", "אטריות מהירות"],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "instant-oatmeal",
@@ -2841,7 +3192,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "insurance-cards",
@@ -2849,7 +3201,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "italian-seasoning",
@@ -2857,7 +3210,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["תבלין איטלקי"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "jalapenos",
@@ -2865,7 +3219,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "jam",
@@ -2873,7 +3228,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["ריבה"],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "jello-cups",
@@ -2881,7 +3237,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Other"
   },
   {
     "id": "jerky",
@@ -2889,7 +3246,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Beef Jerky", "Biltong", "בשר מיובש"],
-    "tags": ["protein", "snack"]
+    "tags": ["protein", "snack"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "journal",
@@ -2897,7 +3255,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "juice",
@@ -2905,7 +3264,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["Fruit Juice", "מיץ"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "juice-boxes",
@@ -2913,7 +3273,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["קרטוני מיץ"],
-    "tags": ["drink", "kids"]
+    "tags": ["drink", "kids"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "jump-rope",
@@ -2921,7 +3282,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["חבל קפיצה"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "jumper-cables",
@@ -2929,7 +3291,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Jump Leads", "Booster Cables", "כבלי הנעה", "כבלים"],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "kale",
@@ -2937,7 +3300,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "kale-chips",
@@ -2945,7 +3309,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "kayak",
@@ -2953,7 +3318,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Kayaks", "קיאק"],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "kayak-rack",
@@ -2961,7 +3327,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "ketchup",
@@ -2969,7 +3336,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Tomato Sauce", "Catsup", "קטשופ"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "kettle",
@@ -2977,7 +3345,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["קומקום"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "kidney-beans",
@@ -2985,7 +3354,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "kids-backpack",
@@ -2993,7 +3363,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids", "storage"]
+    "tags": ["kids", "storage"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "kids-bike-helmet",
@@ -3001,7 +3372,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "kids-binoculars",
@@ -3009,7 +3381,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "kids-books",
@@ -3017,7 +3390,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "kids-hat",
@@ -3025,7 +3399,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "kids"]
+    "tags": ["clothing", "kids"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "kids-headphones",
@@ -3033,7 +3408,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "kids-rain-boots",
@@ -3041,7 +3417,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "kids"]
+    "tags": ["clothing", "kids"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "kids-rain-jacket",
@@ -3049,7 +3426,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "kids"]
+    "tags": ["clothing", "kids"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "kids-sleeping-bag",
@@ -3057,7 +3435,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "kids", "sleep"]
+    "tags": ["clothing", "kids", "sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "kids-sunscreen",
@@ -3065,7 +3444,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["קרם הגנה לילדים"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "kids-water-bottle",
@@ -3073,7 +3453,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "kids-water-pouches",
@@ -3081,7 +3462,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["drink", "kids"]
+    "tags": ["drink", "kids"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "kimchi",
@@ -3089,7 +3471,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "kitchen-knife",
@@ -3097,7 +3480,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Chef Knife", "Camp Knife", "סכין מטבח", "סכין"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "kite",
@@ -3105,7 +3489,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["עפיפון"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "kombucha",
@@ -3113,7 +3498,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "ladle",
@@ -3121,7 +3507,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מצקת"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "lamb-chops",
@@ -3129,7 +3516,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["צלעות כבש"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "lantern",
@@ -3137,7 +3525,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Lanterns", "Camp Lantern", "פנס קמפינג", "עששית"],
-    "tags": ["lighting"]
+    "tags": ["lighting"],
+    "subcategory": "Lighting and Visibility"
   },
   {
     "id": "laundry-bag",
@@ -3145,7 +3534,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "lemonade",
@@ -3153,7 +3543,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["לימונדה"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "lemons",
@@ -3161,7 +3552,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["לימונים"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "lentils",
@@ -3169,7 +3561,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["עדשים"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "lettuce",
@@ -3177,7 +3570,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Salad Greens", "חסה"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "leveling-blocks-rv",
@@ -3185,7 +3579,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "life-jacket",
@@ -3193,7 +3588,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Life Vest", "PFD", "אפוד הצלה"],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "lighter",
@@ -3201,7 +3597,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Lighters", "מצית"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "limes",
@@ -3209,7 +3606,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "lip-balm",
@@ -3217,7 +3615,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["שפתון לחות"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "mac-and-cheese",
@@ -3225,7 +3624,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["מק אנד צ'יז", "פסטה עם גבינה"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Cheese"
   },
   {
     "id": "magnifying-glass",
@@ -3233,7 +3633,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "mango",
@@ -3241,7 +3642,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "map",
@@ -3249,7 +3651,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["navigation"]
+    "tags": ["navigation"],
+    "subcategory": "Documentation and Access"
   },
   {
     "id": "maple-syrup",
@@ -3257,7 +3660,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["breakfast", "condiments"]
+    "tags": ["breakfast", "condiments"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "marshmallows",
@@ -3265,7 +3669,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Marshmallow", "מרשמלו"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "matcha",
@@ -3273,7 +3678,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "matches",
@@ -3281,7 +3687,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Match", "גפרורים"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "mayonnaise",
@@ -3289,7 +3696,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["מיונז"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "medical-tape",
@@ -3297,7 +3705,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "menstrual-pads",
@@ -3305,7 +3714,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "milk",
@@ -3313,7 +3723,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["Whole Milk", "חלב"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "mini-bagels",
@@ -3321,7 +3732,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Other"
   },
   {
     "id": "mini-muffins",
@@ -3329,7 +3741,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast", "kids"]
+    "tags": ["breakfast", "kids"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "mini-pancakes",
@@ -3337,7 +3750,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast", "kids"]
+    "tags": ["breakfast", "kids"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "mini-sandwiches",
@@ -3345,7 +3759,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Other"
   },
   {
     "id": "mirror-small",
@@ -3353,7 +3768,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מראה קטנה"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "miso-paste",
@@ -3361,7 +3777,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "mixed-nuts",
@@ -3369,7 +3786,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "moleskin",
@@ -3377,7 +3795,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "mosquito-net",
@@ -3385,7 +3804,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Mosquito Nets", "Bug Net", "רשת יתושים", "כילה"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "motion-sickness-pills",
@@ -3393,7 +3813,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "muffins",
@@ -3401,7 +3822,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "multi-tool",
@@ -3409,7 +3831,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Multitool", "Leatherman", "אולר רב שימושי"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "mushrooms",
@@ -3417,7 +3840,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Mushroom", "פטריות"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "mustard",
@@ -3425,7 +3849,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["חרדל"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "nail-clippers",
@@ -3433,7 +3858,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["גוזז ציפורניים"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "napkins",
@@ -3441,7 +3867,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Napkin", "Serviettes", "מפיות"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "nature-scavenger-hunt-cards",
@@ -3449,7 +3876,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "neck-gaiter",
@@ -3457,7 +3885,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "night-light",
@@ -3465,7 +3894,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מנורת לילה"],
-    "tags": ["baby", "lighting"]
+    "tags": ["baby", "lighting"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "nose-aspirator",
@@ -3473,7 +3903,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "first-aid"]
+    "tags": ["baby", "first-aid"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "nutella",
@@ -3481,7 +3912,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "nutritional-yeast",
@@ -3489,7 +3921,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "oat-milk",
@@ -3497,7 +3930,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["Oatmilk", "חלב שיבולת שועל"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "olive-oil",
@@ -3505,7 +3939,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["EVOO", "Extra Virgin Olive Oil", "שמן זית"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "olives",
@@ -3513,7 +3948,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["זיתים"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "onion-powder",
@@ -3521,7 +3957,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "onions",
@@ -3529,7 +3966,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Onion", "בצל"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "oral-rehydration-salts",
@@ -3537,7 +3975,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "oranges",
@@ -3545,7 +3984,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Orange", "תפוזים"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "outlet-covers",
@@ -3553,7 +3993,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "overnight-oats-mix",
@@ -3561,7 +4002,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "pacifier",
@@ -3569,7 +4011,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Dummy", "Soother", "מוצץ"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "pack-and-play",
@@ -3577,7 +4020,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "packing-cubes",
@@ -3585,7 +4029,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "paddleboard",
@@ -3593,7 +4038,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["SUP", "Stand Up Paddleboard"],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "pancake-mix",
@@ -3601,7 +4047,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["תערובת פנקייקים"],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "paper-plates",
@@ -3609,7 +4056,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Disposable Plates", "צלחות חד פעמיות", "צלחות נייר"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "paper-towels",
@@ -3617,7 +4065,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Kitchen Roll", "מגבות נייר", "נייר סופג"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "paprika",
@@ -3625,7 +4074,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["פפריקה"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "paracord",
@@ -3633,7 +4083,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Para Cord", "550 Cord"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "parchment-paper",
@@ -3641,7 +4092,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "passport",
@@ -3649,7 +4101,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Passports", "דרכון"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "pasta",
@@ -3657,7 +4110,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Noodles", "Spaghetti", "פסטה", "אטריות"],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "pbandj-supplies",
@@ -3665,7 +4119,8 @@
     "category": "food",
     "unit": "set",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Other"
   },
   {
     "id": "peaches",
@@ -3673,7 +4128,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "peanut-butter",
@@ -3681,7 +4137,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["PB", "חמאת בוטנים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "peanuts",
@@ -3689,7 +4146,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["בוטנים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "pears",
@@ -3697,7 +4155,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "pedialyte",
@@ -3705,7 +4164,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["משקה אלקטרוליטים לילדים"],
-    "tags": ["drink", "kids"]
+    "tags": ["drink", "kids"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "pen",
@@ -3713,7 +4173,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "pepper",
@@ -3721,7 +4182,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Black Pepper", "פלפל שחור"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "pepperoni",
@@ -3729,7 +4191,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "pet-bowls",
@@ -3737,7 +4200,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["קערות לחיות"],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "pet-carrier",
@@ -3745,7 +4209,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כלוב נשיאה"],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "pet-first-aid-kit",
@@ -3753,7 +4218,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid", "pets"]
+    "tags": ["first-aid", "pets"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "pet-tick-collar",
@@ -3761,7 +4227,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "pet-towel",
@@ -3769,7 +4236,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "pet-waste-bags",
@@ -3777,7 +4245,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["שקיות לכלב"],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "petroleum-jelly",
@@ -3785,7 +4254,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "pickles",
@@ -3793,7 +4263,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["מלפפון חמוץ", "חמוצים"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "picnic-blanket",
@@ -3801,7 +4272,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Picnic Rug", "Picnic Blankets", "שמיכת פיקניק"],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "pie",
@@ -3809,7 +4281,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "pineapple",
@@ -3817,7 +4290,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "pistachios",
@@ -3825,7 +4299,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "pita-bread",
@@ -3833,7 +4308,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["פיתות", "לחם פיתה"],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "plastic-cups",
@@ -3841,7 +4317,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Disposable Cups", "כוסות חד פעמיות", "כוסות פלסטיק"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "plastic-wrap",
@@ -3855,7 +4332,8 @@
       "ניילון נצמד",
       "ניילון למזון"
     ],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "plates",
@@ -3863,7 +4341,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["Plate", "צלחות"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "playdough",
@@ -3871,7 +4350,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "playing-cards",
@@ -3879,7 +4359,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["קלפים"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "pocket-knife",
@@ -3887,7 +4368,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["אולר"],
-    "tags": ["cooking", "tools"]
+    "tags": ["cooking", "tools"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "pool-noodles",
@@ -3895,7 +4377,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["נודלס בריכה"],
-    "tags": ["beach", "kids"]
+    "tags": ["beach", "kids"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "pop-up-shelter",
@@ -3903,7 +4386,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "popcorn",
@@ -3911,7 +4395,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["פופקורן"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "popsicles",
@@ -3919,7 +4404,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Ice Pops", "Icy Poles", "Ice Lollies", "ארטיק", "שלגון"],
-    "tags": ["frozen", "kids"]
+    "tags": ["frozen", "kids"],
+    "subcategory": "Frozen Foods"
   },
   {
     "id": "pork-chops",
@@ -3927,7 +4413,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["צלעות חזיר"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "portable-crib",
@@ -3935,7 +4422,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מיטת תינוק מתקפלת", "לול"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "portable-dog-water-bottle",
@@ -3943,7 +4431,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pets"]
+    "tags": ["pets"],
+    "subcategory": "Pet Gear"
   },
   {
     "id": "portable-dvd-player",
@@ -3951,7 +4440,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "portable-fan",
@@ -3959,7 +4449,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["power"]
+    "tags": ["power"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "portable-generator",
@@ -3967,7 +4458,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["גנרטור נייד"],
-    "tags": ["power"]
+    "tags": ["power"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "portable-speaker",
@@ -3975,7 +4467,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Music and Media"
   },
   {
     "id": "portable-toilet",
@@ -3983,7 +4476,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "portobello-mushrooms",
@@ -3991,7 +4485,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "potatoes",
@@ -3999,7 +4494,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Potato", "Spuds", "תפוחי אדמה"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "power-bank",
@@ -4007,7 +4503,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Battery Pack", "Portable Charger", "מטען נייד", "סוללת גיבוי"],
-    "tags": ["power"]
+    "tags": ["power"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "prescription-medications",
@@ -4015,7 +4512,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "pretzels",
@@ -4023,7 +4521,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["בייגלה", "פרצלים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "privacy-screen",
@@ -4031,7 +4530,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "propane-tank",
@@ -4039,7 +4539,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "protein-bars",
@@ -4047,7 +4548,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "protein-powder",
@@ -4055,7 +4557,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "pudding-cups",
@@ -4063,7 +4566,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Other"
   },
   {
     "id": "puffs-baby-snack",
@@ -4071,7 +4575,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Other"
   },
   {
     "id": "pulled-pork",
@@ -4079,7 +4584,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "pumpkin-seeds",
@@ -4087,7 +4593,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "puzzle",
@@ -4095,7 +4602,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["פאזל"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "quick-dry-shirt",
@@ -4103,7 +4611,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "quinoa",
@@ -4111,7 +4620,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "radishes",
@@ -4119,7 +4629,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "rain-fly",
@@ -4127,7 +4638,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "rain-jacket",
@@ -4135,7 +4647,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Rain Coat", "Waterproof Jacket", "מעיל גשם"],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "rain-poncho",
@@ -4143,7 +4656,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "raisin-boxes",
@@ -4151,7 +4665,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit", "kids", "snack"]
+    "tags": ["fruit", "kids", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "raisins",
@@ -4159,7 +4674,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["צימוקים"],
-    "tags": ["fruit", "snack"]
+    "tags": ["fruit", "snack"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "raspberries",
@@ -4167,7 +4683,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "razor",
@@ -4175,7 +4692,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["סכין גילוח", "מכונת גילוח"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "reflective-vest",
@@ -4183,7 +4701,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "relish",
@@ -4191,7 +4710,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "repair-patches",
@@ -4199,7 +4719,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "reservation-printouts",
@@ -4207,7 +4728,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "ribs",
@@ -4215,7 +4737,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["צלעות"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "rice",
@@ -4223,7 +4746,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["White Rice", "אורז"],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "rice-cakes",
@@ -4231,7 +4755,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "rice-noodles",
@@ -4239,7 +4764,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "rice-rusks",
@@ -4247,7 +4773,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "road-flares",
@@ -4255,7 +4782,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "roasted-red-peppers",
@@ -4263,7 +4791,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "roof-box",
@@ -4271,7 +4800,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "roof-rack-straps",
@@ -4279,7 +4809,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "rope",
@@ -4287,7 +4818,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Ropes", "חבל"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "rv-sewer-hose",
@@ -4295,7 +4827,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "safety-pins",
@@ -4303,7 +4836,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "salad-dressing",
@@ -4311,7 +4845,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["רוטב סלט"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "salad-mix",
@@ -4319,7 +4854,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "salami",
@@ -4327,7 +4863,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "saline-drops",
@@ -4335,7 +4872,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby", "first-aid"]
+    "tags": ["baby", "first-aid"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "saline-wound-wash",
@@ -4343,7 +4881,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "salmon-fillet",
@@ -4351,7 +4890,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["פילה סלמון"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "salsa",
@@ -4359,7 +4899,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "salt",
@@ -4367,7 +4908,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Table Salt", "Sea Salt", "מלח"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "sand-toys",
@@ -4375,7 +4917,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["צעצועי חול"],
-    "tags": ["beach", "kids"]
+    "tags": ["beach", "kids"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "sandals",
@@ -4383,7 +4926,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Flip Flops", "Thongs", "סנדלים"],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "sandwich-bags",
@@ -4391,7 +4935,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "sauerkraut",
@@ -4399,7 +4944,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "sausages",
@@ -4407,7 +4953,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Sausage", "Bangers", "נקניקיות"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "saw-folding",
@@ -4415,7 +4962,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "scarf",
@@ -4423,7 +4971,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["צעיף"],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "scissors-medical",
@@ -4431,7 +4980,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "scooter",
@@ -4439,7 +4989,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["קורקינט"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "seaweed-snacks",
@@ -4447,7 +4998,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "seitan",
@@ -4455,7 +5007,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "serving-spoons",
@@ -4463,7 +5016,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "sewing-kit",
@@ -4471,7 +5025,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["ערכת תפירה"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "shampoo",
@@ -4479,7 +5034,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Hair Shampoo", "שמפו"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "shaving-cream",
@@ -4487,7 +5043,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "shorts",
@@ -4495,7 +5052,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מכנסיים קצרים"],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "shovel-camping",
@@ -4503,7 +5061,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "shower-tent",
@@ -4511,7 +5070,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "shrimp",
@@ -4519,7 +5079,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Prawns", "שרימפס", "חסילונים"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "sippy-cups",
@@ -4527,7 +5088,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כוסות שתייה", "כוס קש"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "skewers",
@@ -4535,7 +5097,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["שיפודים"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "ski-goggles",
@@ -4543,7 +5106,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "sleep-mask",
@@ -4551,7 +5115,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מסכת שינה"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "sleeping-bag",
@@ -4559,7 +5124,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Sleeping Bags", "שק שינה"],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "sleeping-pad",
@@ -4567,7 +5133,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Sleeping Pads", "Sleeping Mat", "מזרן שינה"],
-    "tags": ["sleep"]
+    "tags": ["sleep"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "sliced-cheese",
@@ -4575,7 +5142,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Cheese"
   },
   {
     "id": "smoke-detector-portable",
@@ -4583,7 +5151,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "smoked-salmon",
@@ -4591,7 +5160,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["סלמון מעושן"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "smoothie-mix",
@@ -4599,7 +5169,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "smores-kit",
@@ -4607,7 +5178,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "snack-containers",
@@ -4615,7 +5187,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["קופסאות חטיפים"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "snakebite-kit",
@@ -4623,7 +5196,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "snap-peas",
@@ -4631,7 +5205,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "snorkel-set",
@@ -4639,7 +5214,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "snow-chains",
@@ -4647,7 +5223,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["car", "winter"]
+    "tags": ["car", "winter"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "snowshoes",
@@ -4655,7 +5232,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "soccer-ball",
@@ -4663,7 +5241,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כדורגל"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "soda",
@@ -4671,7 +5250,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["Pop", "Soft Drink", "Fizzy Drink", "שתייה מוגזת", "סודה"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "solar-charger",
@@ -4679,7 +5259,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Solar Panel", "מטען סולארי"],
-    "tags": ["power"]
+    "tags": ["power"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "soy-milk",
@@ -4687,7 +5268,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "soy-sauce",
@@ -4695,7 +5277,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["רוטב סויה"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "spare-batteries",
@@ -4703,7 +5286,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["סוללות רזרביות", "סוללות"],
-    "tags": ["power"]
+    "tags": ["power"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "spare-glasses",
@@ -4711,7 +5295,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "sparkling-water",
@@ -4719,7 +5304,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["מים מוגזים", "סודה"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "spatula",
@@ -4727,7 +5313,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מרית"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "spigot",
@@ -4735,7 +5322,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "spinach",
@@ -4743,7 +5331,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["תרד"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "spirits",
@@ -4751,7 +5340,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "spirulina",
@@ -4759,7 +5349,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "splat-mat",
@@ -4767,7 +5358,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "splint",
@@ -4775,7 +5367,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "sponge",
@@ -4783,7 +5376,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "sports-drink",
@@ -4791,7 +5385,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["משקה ספורט"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "squeezable-yogurt",
@@ -4799,7 +5394,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Dairy"
   },
   {
     "id": "sriracha",
@@ -4807,7 +5403,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "star-chart",
@@ -4815,7 +5412,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["navigation"]
+    "tags": ["navigation"],
+    "subcategory": "Documentation and Access"
   },
   {
     "id": "steak",
@@ -4823,7 +5421,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Steaks", "Beef Steak", "סטייק"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "sterile-gloves",
@@ -4831,7 +5430,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "stickers",
@@ -4839,7 +5439,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "sting-relief-pads",
@@ -4847,7 +5448,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "strawberries",
@@ -4855,7 +5457,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["תותים"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "straws",
@@ -4863,7 +5466,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "string-cheese",
@@ -4871,7 +5475,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["גבינת שרוך", "מקלות גבינה"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Cheese"
   },
   {
     "id": "string-lights",
@@ -4879,7 +5484,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["lighting"]
+    "tags": ["lighting"],
+    "subcategory": "Lighting and Visibility"
   },
   {
     "id": "stroller",
@@ -4887,7 +5493,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Pushchair", "Pram", "Buggy", "עגלה", "עגלת תינוק"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "stuff-sack",
@@ -4895,7 +5502,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "stuffed-animal",
@@ -4903,7 +5511,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["בובה רכה", "דובי"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "sugar",
@@ -4911,7 +5520,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["סוכר"],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "sun-dried-tomatoes",
@@ -4919,7 +5529,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "sunburn-relief-spray",
@@ -4927,7 +5538,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["ספריי לכוויות שמש"],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "sunflower-seeds",
@@ -4935,7 +5547,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["גרעיני חמנייה", "גרעינים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "sunglasses",
@@ -4943,7 +5556,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["משקפי שמש"],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "sunscreen",
@@ -4951,7 +5565,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Sunblock", "Sun Cream", "SPF", "קרם הגנה", "קרם שמש"],
-    "tags": ["beach"]
+    "tags": ["beach"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "super-glue",
@@ -4959,7 +5574,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["דבק מהיר", "סופר גלו"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "swaddle",
@@ -4967,7 +5583,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "sweet-potatoes",
@@ -4975,7 +5592,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["בטטה", "בטטות"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "swimsuit",
@@ -4989,7 +5607,8 @@
       "Bikini",
       "בגד ים"
     ],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "swiss-chard",
@@ -4997,7 +5616,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "tablet",
@@ -5005,7 +5625,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "tahini",
@@ -5013,7 +5634,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["טחינה"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "tamari",
@@ -5021,7 +5643,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "tampons",
@@ -5029,7 +5652,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "tarp",
@@ -5037,7 +5661,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Tarps", "Tarpaulin", "ברזנט"],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "tea-bags",
@@ -5045,7 +5670,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["שקיקי תה", "תה"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "teddy-grahams",
@@ -5053,7 +5679,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "teething-biscuits",
@@ -5061,7 +5688,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Other"
   },
   {
     "id": "teething-toy",
@@ -5069,7 +5697,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "tempeh",
@@ -5077,7 +5706,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "tent",
@@ -5085,7 +5715,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Tents", "אוהל", "אוהלים"],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "tent-footprint",
@@ -5093,7 +5724,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "tent-stakes",
@@ -5101,7 +5733,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "thermal-underwear",
@@ -5109,7 +5742,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "thermometer",
@@ -5117,7 +5751,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מד חום"],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "thermos",
@@ -5125,7 +5760,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Flask", "Insulated Bottle", "תרמוס"],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "tick-remover",
@@ -5133,7 +5769,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "tire-repair-kit",
@@ -5141,7 +5778,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "tissues",
@@ -5149,7 +5787,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["טישו", "ממחטות"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "toddler-bowls",
@@ -5157,7 +5796,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "toddler-cutlery",
@@ -5165,7 +5805,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "toddler-plates",
@@ -5173,7 +5814,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "toddler-snack-bars",
@@ -5181,7 +5823,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Other"
   },
   {
     "id": "tofu",
@@ -5189,7 +5832,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Bean Curd", "טופו"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "toilet-paper",
@@ -5197,7 +5841,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["TP", "Loo Roll", "נייר טואלט"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "tomatoes",
@@ -5205,7 +5850,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": ["Tomato", "עגבניות"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   },
   {
     "id": "tongs",
@@ -5213,7 +5859,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["BBQ Tongs", "Grilling Tongs", "מלקחיים"],
-    "tags": ["cooking"]
+    "tags": ["cooking"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "tongue-depressors",
@@ -5221,7 +5868,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "toothbrush",
@@ -5229,7 +5877,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מברשת שיניים"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "toothpaste",
@@ -5237,7 +5886,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["משחת שיניים"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "toothpicks",
@@ -5245,7 +5895,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "tortilla-chips",
@@ -5253,7 +5904,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "tortillas",
@@ -5261,7 +5913,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["Wraps", "טורטיות"],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "tourniquet",
@@ -5269,7 +5922,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "tow-strap",
@@ -5277,7 +5931,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "towels",
@@ -5285,7 +5940,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Towel", "מגבות"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "toy-cars",
@@ -5293,7 +5949,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "trail-mix",
@@ -5301,7 +5958,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["GORP", "Scroggin", "תערובת גרעינים"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "trash-bags",
@@ -5315,7 +5973,8 @@
       "שקיות זבל",
       "שקיות אשפה"
     ],
-    "tags": ["storage"]
+    "tags": ["storage"],
+    "subcategory": "Food Storage and Cooling"
   },
   {
     "id": "travel-high-chair",
@@ -5323,7 +5982,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כיסא אוכל לתינוק"],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "travel-pillow",
@@ -5331,7 +5991,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כרית נסיעות"],
-    "tags": []
+    "tags": [],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "trekking-poles",
@@ -5339,7 +6000,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["מקלות הליכה"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "triangle-bandage",
@@ -5347,7 +6009,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "tripod",
@@ -5355,7 +6018,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "tuna-steaks",
@@ -5363,7 +6027,8 @@
     "category": "food",
     "unit": "kg",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "turkey-slices",
@@ -5371,7 +6036,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["פרוסות הודו"],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "turmeric",
@@ -5379,7 +6045,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "tweezers",
@@ -5387,7 +6054,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["first-aid"]
+    "tags": ["first-aid"],
+    "subcategory": "First Aid and Safety"
   },
   {
     "id": "usb-charging-cable",
@@ -5395,7 +6063,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כבל טעינה"],
-    "tags": ["power"]
+    "tags": ["power"],
+    "subcategory": "Power and Charging"
   },
   {
     "id": "vegan-butter",
@@ -5403,7 +6072,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Dairy"
   },
   {
     "id": "vegan-cheese",
@@ -5411,7 +6081,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Cheese"
   },
   {
     "id": "vegan-cookies",
@@ -5419,7 +6090,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Other"
   },
   {
     "id": "vegan-mayo",
@@ -5427,7 +6099,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "vegan-yogurt",
@@ -5435,7 +6108,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": []
+    "tags": [],
+    "subcategory": "Dairy"
   },
   {
     "id": "vegetable-oil",
@@ -5443,7 +6117,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["שמן צמחי"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "veggie-burgers",
@@ -5451,7 +6126,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "veggie-chips",
@@ -5459,7 +6135,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "veggie-hot-dogs",
@@ -5467,7 +6144,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "veggie-sausages",
@@ -5475,7 +6153,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["protein"]
+    "tags": ["protein"],
+    "subcategory": "Meat and Poultry"
   },
   {
     "id": "veggie-straws",
@@ -5483,7 +6162,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "vinegar",
@@ -5491,7 +6171,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["חומץ"],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "volleyball",
@@ -5499,7 +6180,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["כדורעף"],
-    "tags": ["games"]
+    "tags": ["games"],
+    "subcategory": "Games and Activities"
   },
   {
     "id": "walkie-talkies",
@@ -5507,7 +6189,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": ["Walkie Talkies", "Two-Way Radios", "ווקי טוקי"],
-    "tags": ["navigation"]
+    "tags": ["navigation"],
+    "subcategory": "Documentation and Access"
   },
   {
     "id": "walnuts",
@@ -5515,7 +6198,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": ["אגוזי מלך"],
-    "tags": ["snack"]
+    "tags": ["snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "warm-layers",
@@ -5523,7 +6207,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "wash-basin",
@@ -5531,7 +6216,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "water",
@@ -5539,7 +6225,8 @@
     "category": "food",
     "unit": "l",
     "aliases": ["Drinking Water", "Bottled Water", "מים"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "water-bladder",
@@ -5547,7 +6234,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "water-bottle",
@@ -5555,7 +6243,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["Water Bottles", "בקבוק מים", "מימייה"],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "water-filter",
@@ -5563,7 +6252,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מסנן מים"],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "water-guns",
@@ -5571,7 +6261,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["אקדחי מים"],
-    "tags": ["kids"]
+    "tags": ["kids"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "water-hose",
@@ -5579,7 +6270,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "water-jug",
@@ -5587,7 +6279,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": ["מיכל מים", "ג'ריקן"],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "water-pressure-regulator",
@@ -5595,7 +6288,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "water-purification-tablets",
@@ -5603,7 +6297,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["water"]
+    "tags": ["water"],
+    "subcategory": "Drink and Beverage Equipment"
   },
   {
     "id": "water-shoes",
@@ -5611,7 +6306,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing"]
+    "tags": ["clothing"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "watermelon",
@@ -5619,7 +6315,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["אבטיח"],
-    "tags": ["fruit"]
+    "tags": ["fruit"],
+    "subcategory": "Fresh Fruit"
   },
   {
     "id": "waterproof-matches",
@@ -5627,7 +6324,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": [],
-    "tags": ["cooking", "tools"]
+    "tags": ["cooking", "tools"],
+    "subcategory": "Cooking and Heating Equipment"
   },
   {
     "id": "wd-40",
@@ -5635,7 +6333,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "wet-wipes",
@@ -5643,7 +6342,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Baby Wipes", "מגבונים לחים"],
-    "tags": ["hygiene"]
+    "tags": ["hygiene"],
+    "subcategory": "Hygiene and Bathroom Supplies"
   },
   {
     "id": "wheel-chocks",
@@ -5651,7 +6351,8 @@
     "category": "equipment",
     "unit": "set",
     "aliases": [],
-    "tags": ["car"]
+    "tags": ["car"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "whistle",
@@ -5659,7 +6360,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["navigation"]
+    "tags": ["navigation"],
+    "subcategory": "Documentation and Access"
   },
   {
     "id": "white-noise-machine",
@@ -5667,7 +6369,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["baby"]
+    "tags": ["baby"],
+    "subcategory": "Kids and Baby Gear"
   },
   {
     "id": "whole-milk",
@@ -5675,7 +6378,8 @@
     "category": "food",
     "unit": "l",
     "aliases": [],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "whole-wheat-bread",
@@ -5683,7 +6387,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "whole-wheat-pasta",
@@ -5691,7 +6396,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "whole-wheat-tortillas",
@@ -5699,7 +6405,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "wild-rice",
@@ -5707,7 +6414,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["pantry"]
+    "tags": ["pantry"],
+    "subcategory": "Grains and Pasta"
   },
   {
     "id": "windbreak",
@@ -5715,7 +6423,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["shelter"]
+    "tags": ["shelter"],
+    "subcategory": "Venue Setup and Layout"
   },
   {
     "id": "windshield-scraper",
@@ -5723,7 +6432,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["car", "winter"]
+    "tags": ["car", "winter"],
+    "subcategory": "Transport and Carry"
   },
   {
     "id": "wine",
@@ -5731,7 +6441,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Wines", "Red Wine", "White Wine", "יין"],
-    "tags": ["drink"]
+    "tags": ["drink"],
+    "subcategory": "Beverages (non-alcoholic)"
   },
   {
     "id": "wool-socks",
@@ -5739,7 +6450,8 @@
     "category": "equipment",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["clothing", "winter"]
+    "tags": ["clothing", "winter"],
+    "subcategory": "Comfort and Climate Control"
   },
   {
     "id": "worcestershire-sauce",
@@ -5747,7 +6459,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": [],
-    "tags": ["condiments"]
+    "tags": ["condiments"],
+    "subcategory": "Sauces, Condiments, and Spreads"
   },
   {
     "id": "yogurt",
@@ -5755,7 +6468,8 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["Yoghurt", "יוגורט"],
-    "tags": ["breakfast"]
+    "tags": ["breakfast"],
+    "subcategory": "Breakfast Staples"
   },
   {
     "id": "yogurt-tubes",
@@ -5763,7 +6477,8 @@
     "category": "food",
     "unit": "pack",
     "aliases": [],
-    "tags": ["kids", "snack"]
+    "tags": ["kids", "snack"],
+    "subcategory": "Snacks and Chips"
   },
   {
     "id": "zip-ties",
@@ -5771,7 +6486,8 @@
     "category": "equipment",
     "unit": "pack",
     "aliases": ["Cable Ties", "Zip-Ties", "אזיקונים"],
-    "tags": ["tools"]
+    "tags": ["tools"],
+    "subcategory": "Tools and Quick Repairs"
   },
   {
     "id": "zucchini",
@@ -5779,6 +6495,7 @@
     "category": "food",
     "unit": "pcs",
     "aliases": ["קישוא"],
-    "tags": ["vegetables"]
+    "tags": ["vegetables"],
+    "subcategory": "Fresh Vegetables"
   }
 ]

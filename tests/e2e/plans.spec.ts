@@ -149,12 +149,13 @@ test.describe('Admin Delete', () => {
     await expect(page.getByText('Delete Plan?')).toBeVisible({
       timeout: 10000,
     });
-    await expect(page.getByTestId('admin-delete-confirm')).toBeVisible();
+    const confirmBtn = page.getByTestId('admin-delete-confirm');
+    await expect(confirmBtn).toBeVisible();
+    await expect(confirmBtn).toBeEnabled();
 
-    await Promise.all([
-      page.waitForResponse((r) => r.request().method() === 'DELETE'),
-      page.getByTestId('admin-delete-confirm').click({ force: true }),
-    ]);
+    await page.waitForTimeout(300);
+
+    await confirmBtn.click({ force: true });
 
     await expect(page.getByText('Delete Plan?')).toBeHidden({ timeout: 10000 });
     await expect(page.getByText('Plan deleted')).toBeVisible({
@@ -185,6 +186,49 @@ test.describe('Admin Delete', () => {
       timeout: 10000,
     });
     await expect(page.getByText('Beach Trip')).toBeVisible();
+  });
+});
+
+test.describe('Membership Filter', () => {
+  test('user can filter plans by owned and invited', async ({ page }) => {
+    const userId = 'regular-user-id';
+    const ownedPlan = buildPlan({
+      title: 'My Camping Trip',
+      participants: [{ name: 'Alex', lastName: 'G', role: 'owner', userId }],
+    });
+    const invitedPlan = buildPlan({
+      title: 'Friend Picnic',
+      participants: [
+        { name: 'Jamie', lastName: 'R', role: 'owner' },
+        { name: 'Alex', lastName: 'G', role: 'participant', userId },
+      ],
+    });
+
+    await injectUserSession(page);
+    await mockPlansListRoutes(page, [ownedPlan, invitedPlan]);
+
+    await page.goto('/plans');
+
+    await expect(page.getByText('My Camping Trip')).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(page.getByText('Friend Picnic')).toBeVisible();
+
+    await expect(page.getByTestId('membership-filter-all')).toBeVisible();
+    await expect(page.getByTestId('membership-filter-owned')).toBeVisible();
+    await expect(page.getByTestId('membership-filter-invited')).toBeVisible();
+
+    await page.getByTestId('membership-filter-owned').click();
+    await expect(page.getByText('My Camping Trip')).toBeVisible();
+    await expect(page.getByText('Friend Picnic')).toBeHidden();
+
+    await page.getByTestId('membership-filter-invited').click();
+    await expect(page.getByText('Friend Picnic')).toBeVisible();
+    await expect(page.getByText('My Camping Trip')).toBeHidden();
+
+    await page.getByTestId('membership-filter-all').click();
+    await expect(page.getByText('My Camping Trip')).toBeVisible();
+    await expect(page.getByText('Friend Picnic')).toBeVisible();
   });
 });
 

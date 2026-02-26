@@ -95,10 +95,7 @@ export function SignUp() {
 
   async function handleGoogleSignUp() {
     try {
-      const pending = getPendingInvite();
-      const oauthRedirect = pending
-        ? `${window.location.origin}/invite/${pending.planId}/${pending.inviteToken}`
-        : `${window.location.origin}${redirectTo}`;
+      const oauthRedirect = `${window.location.origin}${redirectTo}`;
       console.info(
         `[SignUp] Initiating Google OAuth, oauthRedirect="${oauthRedirect}".`
       );

@@ -2,7 +2,11 @@ import { z } from 'zod';
 import type { components } from '../api.generated';
 import { locationSchema } from './location';
 import { itemSchema } from './item';
-import { participantSchema, participantCreateSchema } from './participant';
+import {
+  participantRoleSchema,
+  participantSchema,
+  participantCreateSchema,
+} from './participant';
 
 type BEPlan = components['schemas']['def-5'];
 
@@ -20,6 +24,12 @@ const PLAN_VISIBILITY_VALUES = [
 export const planStatusSchema = z.enum(PLAN_STATUS_VALUES);
 export const planVisibilitySchema = z.enum(PLAN_VISIBILITY_VALUES);
 
+const participantSummarySchema = z.object({
+  participantId: z.string(),
+  userId: z.string().nullish(),
+  role: participantRoleSchema,
+});
+
 export const planSchema = z.object({
   planId: z.string(),
   title: z.string(),
@@ -27,11 +37,13 @@ export const planSchema = z.object({
   status: planStatusSchema,
   visibility: planVisibilitySchema,
   ownerParticipantId: z.string().nullish(),
+  createdByUserId: z.string().nullish(),
   location: locationSchema.nullish(),
   startDate: z.string().nullish(),
   endDate: z.string().nullish(),
   tags: z.array(z.string()).nullish(),
   participantIds: z.array(z.string()).nullish(),
+  participants: z.array(participantSummarySchema).nullish(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });

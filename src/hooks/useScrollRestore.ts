@@ -29,14 +29,13 @@ function findCenterItemId(): string | null {
   return closestId;
 }
 
-if (typeof window !== 'undefined') {
-  window.history.scrollRestoration = 'manual';
-}
-
 export function useScrollRestore(key: string, isReady: boolean) {
   const restoredRef = useRef(false);
 
   useEffect(() => {
+    const prev = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+
     let timer: ReturnType<typeof setTimeout>;
 
     function handleScroll() {
@@ -53,6 +52,8 @@ export function useScrollRestore(key: string, isReady: boolean) {
     return () => {
       clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
+      sessionStorage.removeItem(getStorageKey(key));
+      window.history.scrollRestoration = prev;
     };
   }, [key]);
 

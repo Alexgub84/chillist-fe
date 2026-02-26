@@ -392,7 +392,7 @@ describe('Invite Flow Integration', () => {
   });
 
   describe('Google OAuth with pending invite', () => {
-    it('redirects OAuth to invite page URL instead of plan page', async () => {
+    it('redirects OAuth to plan page using redirect search param', async () => {
       const { planId, inviteToken } = await seedPlanWithParticipant(server);
       storePendingInvite(planId, inviteToken);
 
@@ -408,9 +408,7 @@ describe('Invite Flow Integration', () => {
       expect(mockSupabase.auth.signInWithOAuth).toHaveBeenCalledWith({
         provider: 'google',
         options: {
-          redirectTo: expect.stringContaining(
-            `/invite/${planId}/${inviteToken}`
-          ),
+          redirectTo: expect.stringContaining('/plan/test-plan'),
         },
       });
     });

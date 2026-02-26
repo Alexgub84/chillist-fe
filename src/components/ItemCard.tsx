@@ -36,6 +36,7 @@ interface ItemCardProps {
   participants?: Participant[];
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
+  canEdit?: boolean;
   onEdit?: () => void;
   onUpdate?: (updates: ItemPatch) => void;
 }
@@ -45,10 +46,12 @@ export default function ItemCard({
   participants = [],
   listFilter,
   selfAssignParticipantId,
+  canEdit = true,
   onEdit,
   onUpdate,
 }: ItemCardProps) {
   const { t } = useTranslation();
+  const isEditable = canEdit && !!onUpdate;
 
   const resolvedStatusOptions = useMemo(
     () => STATUS_OPTIONS.map((s) => ({ ...s, label: t(s.labelKey) })),
@@ -194,7 +197,7 @@ export default function ItemCard({
     );
   }
 
-  if (quickAction && onUpdate) {
+  if (quickAction && isEditable) {
     return (
       <label
         data-scroll-item-id={item.itemId}
@@ -299,10 +302,10 @@ export default function ItemCard({
         </span>
 
         <div className="flex items-center gap-2 shrink-0">
-          {onUpdate ? (
+          {isEditable ? (
             <InlineSelect
               value={item.status}
-              onChange={(status) => onUpdate({ status })}
+              onChange={(status) => onUpdate!({ status })}
               options={resolvedStatusOptions}
               buttonClassName={clsx(
                 'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium hover:opacity-80 transition-opacity',
@@ -323,7 +326,7 @@ export default function ItemCard({
             </span>
           )}
 
-          {onEdit && (
+          {isEditable && onEdit && (
             <button
               type="button"
               onClick={onEdit}
@@ -347,10 +350,10 @@ export default function ItemCard({
             </button>
           )}
 
-          {onUpdate && !isCanceled && (
+          {isEditable && !isCanceled && (
             <button
               type="button"
-              onClick={() => onUpdate({ status: 'canceled' })}
+              onClick={() => onUpdate!({ status: 'canceled' })}
               className="inline-flex items-center justify-center w-8 h-8 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
               aria-label={`Cancel ${item.name}`}
             >
@@ -374,7 +377,7 @@ export default function ItemCard({
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        {onUpdate ? (
+        {isEditable ? (
           <span
             className={clsx(
               'inline-flex items-center gap-1 rounded-md px-2 py-0.5',
@@ -385,12 +388,12 @@ export default function ItemCard({
           >
             <InlineQuantityInput
               value={item.quantity}
-              onChange={(quantity) => onUpdate({ quantity })}
+              onChange={(quantity) => onUpdate!({ quantity })}
               className="text-xs sm:text-sm font-medium"
             />
             <InlineSelect
               value={item.unit}
-              onChange={(unit) => onUpdate({ unit })}
+              onChange={(unit) => onUpdate!({ unit })}
               options={resolvedUnitOptions}
               disabled={isEquipment}
               buttonClassName={clsx(
@@ -423,11 +426,11 @@ export default function ItemCard({
           ? renderSelfAssign()
           : participants.length > 0 && (
               <>
-                {onUpdate ? (
+                {isEditable ? (
                   <InlineSelect
                     value={item.assignedParticipantId ?? ''}
                     onChange={(participantId) =>
-                      onUpdate({
+                      onUpdate!({
                         assignedParticipantId: participantId || null,
                       })
                     }

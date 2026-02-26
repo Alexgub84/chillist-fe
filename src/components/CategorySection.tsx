@@ -7,7 +7,14 @@ import { useTranslation } from 'react-i18next';
 import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
+import {
+  EQUIPMENT_SUBCATEGORIES,
+  FOOD_SUBCATEGORIES,
+  OTHER_SUBCATEGORY,
+} from '../data/subcategories';
+import { groupBySubcategory } from '../core/utils/items';
 import ItemCard from './ItemCard';
+import SubcategorySection from './SubcategorySection';
 
 interface CategorySectionProps {
   category: ItemCategory;
@@ -15,8 +22,40 @@ interface CategorySectionProps {
   participants?: Participant[];
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
+  canEditItem?: (item: Item) => boolean;
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
+  onBulkAssign?: (itemIds: string[], participantId: string) => void;
+  groupBySubcategory?: boolean;
+}
+
+const CATEGORY_TAXONOMY = {
+  equipment: EQUIPMENT_SUBCATEGORIES,
+  food: FOOD_SUBCATEGORIES,
+} as const;
+
+function orderedSubcategoryEntries(
+  groups: Record<string, Item[]>,
+  category: ItemCategory
+): [string, Item[]][] {
+  const taxonomy = CATEGORY_TAXONOMY[category];
+  const ordered: [string, Item[]][] = [];
+  for (const sub of taxonomy) {
+    const items = groups[sub];
+    if (items && items.length > 0) {
+      ordered.push([sub, items]);
+    }
+  }
+  if (groups[OTHER_SUBCATEGORY]?.length) {
+    ordered.push([OTHER_SUBCATEGORY, groups[OTHER_SUBCATEGORY]]);
+  }
+  const seen = new Set(ordered.map(([s]) => s));
+  for (const [sub, items] of Object.entries(groups)) {
+    if (!seen.has(sub) && items.length > 0) {
+      ordered.push([sub, items]);
+    }
+  }
+  return ordered;
 }
 
 export default function CategorySection({
@@ -25,11 +64,18 @@ export default function CategorySection({
   participants = [],
   listFilter,
   selfAssignParticipantId,
+  canEditItem,
   onEditItem,
   onUpdateItem,
+  onBulkAssign,
+  groupBySubcategory: useSubcategoryGroups = false,
 }: CategorySectionProps) {
   const { t } = useTranslation();
   const categoryLabel = t(`categories.${category}`);
+
+  const subcategoryGroups = useSubcategoryGroups
+    ? groupBySubcategory(items)
+    : null;
 
   return (
     <Disclosure
@@ -67,21 +113,47 @@ export default function CategorySection({
       >
         {items.length > 0 ? (
           <div className="border-t border-gray-200 divide-y divide-gray-200">
-            {items.map((item) => (
-              <ItemCard
-                key={item.itemId}
-                item={item}
-                participants={participants}
-                listFilter={listFilter}
-                selfAssignParticipantId={selfAssignParticipantId}
-                onEdit={onEditItem ? () => onEditItem(item.itemId) : undefined}
-                onUpdate={
-                  onUpdateItem
-                    ? (updates) => onUpdateItem(item.itemId, updates)
-                    : undefined
-                }
-              />
-            ))}
+            {subcategoryGroups && Object.keys(subcategoryGroups).length > 0
+              ? orderedSubcategoryEntries(subcategoryGroups, category).map(
+                  ([subcategory, subItems]) => (
+                    <SubcategorySection
+                      key={subcategory}
+                      subcategory={subcategory}
+                      items={subItems}
+                      participants={participants}
+                      onBulkAssign={onBulkAssign}
+                      cardProps={{
+                        participants,
+                        listFilter,
+                        selfAssignParticipantId,
+                        canEditItem,
+                        onEditItem,
+                        onUpdateItem,
+                      }}
+                    />
+                  )
+                )
+              : items.map((item) => {
+                  const editable = canEditItem ? canEditItem(item) : true;
+                  return (
+                    <ItemCard
+                      key={item.itemId}
+                      item={item}
+                      participants={participants}
+                      listFilter={listFilter}
+                      selfAssignParticipantId={selfAssignParticipantId}
+                      canEdit={editable}
+                      onEdit={
+                        onEditItem ? () => onEditItem(item.itemId) : undefined
+                      }
+                      onUpdate={
+                        onUpdateItem
+                          ? (updates) => onUpdateItem(item.itemId, updates)
+                          : undefined
+                      }
+                    />
+                  );
+                })}
           </div>
         ) : (
           <div className="border-t border-gray-200 px-4 sm:px-5 py-3 sm:py-4 text-center">

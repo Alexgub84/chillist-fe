@@ -38,7 +38,13 @@ function buildTestPlan() {
   return buildPlan({
     title: 'E2E Test Trip',
     participants: [
-      { name: 'Alex', lastName: 'Test', phone: '555-0100', role: 'owner' },
+      {
+        name: 'Alex',
+        lastName: 'Test',
+        phone: '555-0100',
+        role: 'owner',
+        userId: 'regular-user-id',
+      },
       { name: 'Bob', lastName: 'Helper', phone: '555-0200' },
       { name: 'Carol', lastName: 'Runner', phone: '555-0300' },
     ],
@@ -190,6 +196,54 @@ test.describe('Item CRUD', () => {
       'Purchased'
     );
   });
+
+  test('bulk adds multiple items via wizard modal', async ({ page }) => {
+    await injectUserSession(page);
+    const plan = buildTestPlan();
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('E2E Test Trip')).toBeVisible({
+      timeout: 10000,
+    });
+
+    await page.getByText('Manage Items').click();
+    await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
+    await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
+
+    await page.getByRole('button', { name: /add multiple/i }).click();
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText('What are you adding?')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog
+      .getByRole('button', { name: 'Equipment', exact: true })
+      .click();
+    await expect(dialog.getByText('Choose a subcategory')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByRole('button', { name: /First Aid and Safety/ }).click();
+
+    await expect(dialog.getByPlaceholder('Search items…')).toBeVisible({
+      timeout: 5000,
+    });
+    const firstAidCheckbox = dialog
+      .locator('div')
+      .filter({ hasText: /^First Aid Kit$/ })
+      .getByRole('checkbox');
+    await firstAidCheckbox.check();
+
+    const submitBtn = dialog.getByRole('button', { name: /add 1 item/i });
+    await expect(submitBtn).toBeVisible();
+    await submitBtn.click();
+
+    await expect(page.getByText(/added 1 item/i).first()).toBeVisible({
+      timeout: 10000,
+    });
+  });
 });
 
 test.describe('Edit Plan', () => {
@@ -319,7 +373,9 @@ test.describe('Participant Preferences Access', () => {
     await page.goto(`/plan/${plan.planId}`);
     await expect(page.getByText('Owner Plan')).toBeVisible({ timeout: 10000 });
 
-    const detailsSection = page.getByText('Group Details').locator('..');
+    await page.getByText('Group Details').click();
+
+    const detailsSection = page.getByText('Group Details').locator('../..');
     await expect(detailsSection.getByText('Edit').first()).toBeVisible();
   });
 
@@ -351,7 +407,7 @@ test.describe('Participant Preferences Access', () => {
     await page.goto(`/plan/${plan.planId}`);
     await expect(page.getByText('Other Plan')).toBeVisible({ timeout: 10000 });
 
-    await expect(page.getByText('Group Details')).toBeVisible();
+    await page.getByText('Group Details').click();
     await expect(page.getByText('Guest Person')).toBeVisible();
 
     const editButtons = page
@@ -495,7 +551,9 @@ test.describe('Invite Landing Page', () => {
     });
 
     const inviteToken = plan.participants[1].inviteToken!;
-    await mockInviteRoute(page, plan, inviteToken);
+    await mockInviteRoute(page, plan, inviteToken, {
+      myRsvpStatus: 'confirmed',
+    });
 
     await page.goto(`/invite/${plan.planId}/${inviteToken}`);
 
@@ -504,9 +562,10 @@ test.describe('Invite Landing Page', () => {
       page.locator('p').filter({ hasText: "You're Invited!" })
     ).toBeVisible();
 
-    await expect(page.getByText('Sunscreen')).not.toBeVisible();
-    await expect(page.getByText('Burgers')).not.toBeVisible();
+    await expect(page.getByText('Sunscreen')).toBeVisible();
+    await expect(page.getByText('Burgers')).toBeVisible();
 
+    await page.getByText('Participants').click();
     await expect(page.getByText('Alex Smith')).toBeVisible();
     await expect(page.getByText('Bob Jones')).toBeVisible();
   });
@@ -573,11 +632,19 @@ test.describe('Invite Landing Page', () => {
     ).toBeVisible();
   });
 
-  test('shows "Go to plan" link when authenticated', async ({ page }) => {
+  test('authenticated user is auto-redirected to plan page', async ({
+    page,
+  }) => {
     const plan = buildPlan({
       title: 'Camping Trip',
       participants: [
-        { name: 'Owner', lastName: 'User', phone: '555-0100', role: 'owner' },
+        {
+          name: 'Owner',
+          lastName: 'User',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'regular-user-id',
+        },
         { name: 'Guest', lastName: 'User', phone: '555-0200' },
       ],
     });
@@ -585,19 +652,22 @@ test.describe('Invite Landing Page', () => {
     const inviteToken = plan.participants[1].inviteToken!;
     await injectUserSession(page);
     await mockInviteRoute(page, plan, inviteToken);
+    await mockPlanRoutes(page, plan);
+
+    const API_PATTERN = '**/localhost:3333';
+    await page.route(
+      `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}/claim`,
+      async (route) => {
+        await route.fulfill({ json: { ok: true }, status: 200 });
+      }
+    );
+
     await page.goto(`/invite/${plan.planId}/${inviteToken}`);
 
+    await expect(page).toHaveURL(`/plan/${plan.planId}`, { timeout: 15000 });
     await expect(page.getByText('Camping Trip')).toBeVisible({
       timeout: 10000,
     });
-
-    const goToPlanLink = page.getByRole('link', { name: /go to plan/i });
-    await expect(goToPlanLink).toBeVisible();
-    await expect(goToPlanLink).toHaveAttribute('href', `/plan/${plan.planId}`);
-
-    await expect(
-      page.getByRole('link', { name: /sign in to join/i })
-    ).not.toBeVisible();
   });
 
   test('guest can continue without signing in and sees preferences modal', async ({
@@ -727,5 +797,65 @@ test.describe('Invite Landing Page', () => {
     const parsed = JSON.parse(stored!);
     expect(parsed.planId).toBe(plan.planId);
     expect(parsed.inviteToken).toBe(inviteToken);
+  });
+
+  test('guest can bulk add items from invite items page', async ({ page }) => {
+    const API_PATTERN = '**/localhost:3333';
+    const plan = buildPlan({
+      title: 'BBQ Party',
+      participants: [
+        { name: 'Owner', lastName: 'User', phone: '555-0100', role: 'owner' },
+        { name: 'Guest', lastName: 'User', phone: '555-0200' },
+      ],
+      items: [{ name: 'Charcoal', category: 'equipment', quantity: 1 }],
+    });
+
+    const inviteToken = plan.participants[1].inviteToken!;
+    await mockInviteRoute(page, plan, inviteToken, {
+      myRsvpStatus: 'confirmed',
+    });
+
+    await page.route(
+      `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}/items`,
+      async (route) => {
+        if (route.request().method() === 'POST') {
+          await route.fulfill({ json: { ok: true }, status: 201 });
+        } else {
+          await route.continue();
+        }
+      }
+    );
+
+    await page.goto(`/items/${plan.planId}?token=${inviteToken}`);
+    await expect(page.getByText('Charcoal')).toBeVisible({ timeout: 10000 });
+
+    await page.getByRole('button', { name: /add multiple/i }).click();
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText('What are you adding?')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByRole('button', { name: 'Food', exact: true }).click();
+    await expect(dialog.getByText('Choose a subcategory')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByRole('button', { name: /Dairy/ }).click();
+
+    await expect(dialog.getByPlaceholder('Search items…')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByText('Select all').click();
+    await expect(dialog.getByText('Deselect all')).toBeVisible();
+
+    const submitBtn = dialog.getByRole('button', { name: /add \d+ items/i });
+    await expect(submitBtn).toBeVisible();
+    await submitBtn.click();
+
+    await expect(page.getByText(/added \d+ items/i).first()).toBeVisible({
+      timeout: 10000,
+    });
   });
 });

@@ -27,6 +27,7 @@ type CommonItemEn = {
   id: string;
   name: string;
   category: ItemCategory;
+  subcategory?: string;
   unit: Unit;
   aliases: string[];
   tags: string[];
@@ -35,6 +36,7 @@ type CommonItemEn = {
 type CommonItemHe = {
   name: string;
   category: ItemCategory;
+  subcategory?: string;
   unit: Unit;
 };
 
@@ -46,6 +48,7 @@ import type { Participant } from '../core/schemas/participant';
 const itemFormSchema = z.object({
   name: z.string().min(1, 'Name is required').max(255),
   category: itemCategorySchema,
+  subcategory: z.string().optional(),
   quantity: z.coerce.number().int().min(1, 'Quantity must be at least 1'),
   unit: unitSchema,
   status: itemStatusSchema,
@@ -58,6 +61,7 @@ export type ItemFormValues = z.infer<typeof itemFormSchema>;
 const ITEM_FORM_DEFAULTS: ItemFormValues = {
   name: '',
   category: 'food',
+  subcategory: undefined,
   quantity: 1,
   unit: 'kg',
   status: 'pending',
@@ -109,25 +113,28 @@ export default function ItemForm({
   );
 
   const itemLookup = useMemo(() => {
-    const map = new Map<string, { category: ItemCategory; unit: Unit }>();
+    const map = new Map<
+      string,
+      { category: ItemCategory; unit: Unit; subcategory?: string }
+    >();
     if (language === 'he') {
       for (const item of HE_ITEMS) {
         map.set(item.name.toLowerCase(), {
           category: item.category,
           unit: item.unit,
+          subcategory: item.subcategory,
         });
       }
     } else {
       for (const item of EN_ITEMS) {
-        map.set(item.name.toLowerCase(), {
+        const entry = {
           category: item.category,
           unit: item.unit,
-        });
+          subcategory: item.subcategory,
+        };
+        map.set(item.name.toLowerCase(), entry);
         for (const alias of item.aliases) {
-          map.set(alias.toLowerCase(), {
-            category: item.category,
-            unit: item.unit,
-          });
+          map.set(alias.toLowerCase(), entry);
         }
       }
     }
@@ -169,6 +176,9 @@ export default function ItemForm({
     if (match) {
       setValue('category', match.category);
       setValue('unit', match.unit);
+      if (match.subcategory) {
+        setValue('subcategory', match.subcategory);
+      }
     }
   }
 

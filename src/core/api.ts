@@ -2,9 +2,13 @@ import { z } from 'zod';
 import { supabase } from '../lib/supabase';
 import { emitAuthError } from './auth-error';
 import {
+  bulkItemResponseSchema,
+  bulkUpdateItemEntrySchema,
   itemCreateSchema,
   itemPatchSchema,
   itemSchema,
+  type BulkItemResponse,
+  type BulkUpdateItemEntry,
   type Item,
   type ItemCreate,
   type ItemPatch,
@@ -417,6 +421,18 @@ export async function deleteItem(itemId: string): Promise<void> {
   });
 }
 
+export async function bulkUpdateItems(
+  planId: string,
+  items: BulkUpdateItemEntry[]
+): Promise<BulkItemResponse> {
+  const validItems = z.array(bulkUpdateItemEntrySchema).parse(items);
+  const data = await request<unknown>(`/plans/${planId}/items/bulk`, {
+    method: 'PATCH',
+    body: JSON.stringify({ items: validItems }),
+  });
+  return bulkItemResponseSchema.parse(data);
+}
+
 // --- Auth ---
 
 import { authMeResponseSchema, type AuthMeResponse } from './auth-api';
@@ -426,4 +442,17 @@ export type { AuthMeResponse };
 export async function fetchAuthMe(): Promise<AuthMeResponse> {
   const data = await request<unknown>('/auth/me');
   return authMeResponseSchema.parse(data);
+}
+
+const syncProfileResponseSchema = z.object({
+  synced: z.number().int(),
+});
+
+export async function syncProfile(accessToken: string): Promise<number> {
+  const data = await processResponse<unknown>(
+    await doFetch('/auth/sync-profile', { method: 'POST' }, accessToken),
+    '/auth/sync-profile'
+  );
+  const parsed = syncProfileResponseSchema.parse(data);
+  return parsed.synced;
 }

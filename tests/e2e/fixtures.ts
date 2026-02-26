@@ -35,6 +35,7 @@ interface MockItem {
   quantity: number;
   unit: string;
   status: string;
+  subcategory?: string | null;
   notes: string | null;
   assignedParticipantId: string | null;
   createdAt: string;
@@ -104,6 +105,7 @@ export function buildItem(
     category: 'equipment' | 'food';
     quantity: number;
     status?: string;
+    subcategory?: string | null;
     assignedParticipantId?: string | null;
     notes?: string | null;
   }
@@ -116,6 +118,7 @@ export function buildItem(
     quantity: i.quantity,
     unit: 'pcs',
     status: i.status ?? 'pending',
+    subcategory: i.subcategory ?? null,
     notes: i.notes ?? null,
     assignedParticipantId: i.assignedParticipantId ?? null,
     createdAt: timestamp(),
@@ -318,10 +321,18 @@ export async function injectUserSession(page: Page) {
 
 export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
   const planSummaries = plans.map((plan) => {
-    const { items, participants, ...summary } = plan;
+    const { items, ...summary } = plan;
     void items;
-    void participants;
-    return summary;
+    const owner = plan.participants.find((p) => p.role === 'owner');
+    return {
+      ...summary,
+      createdByUserId: owner?.userId ?? null,
+      participants: plan.participants.map((p) => ({
+        participantId: p.participantId,
+        userId: p.userId,
+        role: p.role,
+      })),
+    };
   });
 
   for (const plan of plans) {
@@ -370,7 +381,11 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
 export async function mockInviteRoute(
   page: Page,
   plan: MockPlan,
-  inviteToken: string
+  inviteToken: string,
+  overrides?: {
+    myRsvpStatus?: 'pending' | 'confirmed';
+    myPreferences?: object | null;
+  }
 ) {
   const strippedParticipants = plan.participants.map((p) => ({
     participantId: p.participantId,
@@ -401,8 +416,8 @@ export async function mockInviteRoute(
             items: plan.items,
             participants: strippedParticipants,
             myParticipantId: tokenMatch?.participantId ?? 'unknown',
-            myRsvpStatus: 'pending',
-            myPreferences: null,
+            myRsvpStatus: overrides?.myRsvpStatus ?? 'pending',
+            myPreferences: overrides?.myPreferences ?? null,
           },
         });
       } else {

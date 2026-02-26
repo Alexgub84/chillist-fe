@@ -171,11 +171,17 @@ describe('PlansList', () => {
     renderWithQueryClient(<PlansList plans={[]} />);
 
     expect(screen.queryByTestId('time-filter-all')).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('membership-filter-all')
+    ).not.toBeInTheDocument();
   });
 
   it('shows filter tabs when plans exist', () => {
     renderWithQueryClient(<PlansList plans={mixedPlans} />);
 
+    expect(screen.getByTestId('membership-filter-all')).toBeInTheDocument();
+    expect(screen.getByTestId('membership-filter-owned')).toBeInTheDocument();
+    expect(screen.getByTestId('membership-filter-invited')).toBeInTheDocument();
     expect(screen.getByTestId('time-filter-all')).toBeInTheDocument();
     expect(screen.getByTestId('time-filter-upcoming')).toBeInTheDocument();
     expect(screen.getByTestId('time-filter-past')).toBeInTheDocument();
@@ -263,6 +269,146 @@ describe('PlansList', () => {
     await user.click(screen.getByTestId('time-filter-past'));
 
     expect(screen.getByText(/no past plans/i)).toBeInTheDocument();
+  });
+
+  it('filters by owned when user has plans they own', async () => {
+    const user = userEvent.setup();
+    const myUserId = 'user-123';
+    mockUseAuth.mockReturnValue({
+      session: null,
+      user: { id: myUserId } as never,
+      loading: false,
+      isAdmin: false,
+      signOut: vi.fn(),
+    });
+
+    const plans = [
+      {
+        planId: 'owned-1',
+        title: 'My Trip',
+        status: 'active' as const,
+        startDate: futureDate(5),
+        participantIds: ['p1'],
+        createdByUserId: myUserId,
+        participants: [
+          { participantId: 'p1', userId: myUserId, role: 'owner' as const },
+        ],
+      },
+      {
+        planId: 'invited-1',
+        title: 'Friend Trip',
+        status: 'active' as const,
+        startDate: futureDate(10),
+        participantIds: ['p2', 'p3'],
+        createdByUserId: 'other-user',
+        participants: [
+          { participantId: 'p2', userId: 'other-user', role: 'owner' as const },
+          {
+            participantId: 'p3',
+            userId: myUserId,
+            role: 'participant' as const,
+          },
+        ],
+      },
+    ];
+
+    renderWithQueryClient(<PlansList plans={plans} />);
+
+    await user.click(screen.getByTestId('membership-filter-owned'));
+
+    expect(screen.getByText('My Trip')).toBeInTheDocument();
+    expect(screen.queryByText('Friend Trip')).not.toBeInTheDocument();
+  });
+
+  it('filters by invited when user is invited to plans', async () => {
+    const user = userEvent.setup();
+    const myUserId = 'user-456';
+    mockUseAuth.mockReturnValue({
+      session: null,
+      user: { id: myUserId } as never,
+      loading: false,
+      isAdmin: false,
+      signOut: vi.fn(),
+    });
+
+    const plans = [
+      {
+        planId: 'owned-1',
+        title: 'My Trip',
+        status: 'active' as const,
+        startDate: futureDate(5),
+        participantIds: ['p1'],
+        createdByUserId: myUserId,
+        participants: [
+          { participantId: 'p1', userId: myUserId, role: 'owner' as const },
+        ],
+      },
+      {
+        planId: 'invited-1',
+        title: 'Friend Trip',
+        status: 'active' as const,
+        startDate: futureDate(10),
+        participantIds: ['p2', 'p3'],
+        createdByUserId: 'other-user',
+        participants: [
+          { participantId: 'p2', userId: 'other-user', role: 'owner' as const },
+          {
+            participantId: 'p3',
+            userId: myUserId,
+            role: 'participant' as const,
+          },
+        ],
+      },
+    ];
+
+    renderWithQueryClient(<PlansList plans={plans} />);
+
+    await user.click(screen.getByTestId('membership-filter-invited'));
+
+    expect(screen.getByText('Friend Trip')).toBeInTheDocument();
+    expect(screen.queryByText('My Trip')).not.toBeInTheDocument();
+  });
+
+  it('shows empty owned message when user owns no plans', async () => {
+    const user = userEvent.setup();
+    mockUseAuth.mockReturnValue({
+      session: null,
+      user: { id: 'user-789' } as never,
+      loading: false,
+      isAdmin: false,
+      signOut: vi.fn(),
+    });
+
+    const plans = [
+      {
+        planId: 'invited-1',
+        title: 'Friend Trip',
+        status: 'active' as const,
+        startDate: futureDate(10),
+        participantIds: ['p2', 'p3'],
+        createdByUserId: 'other-user',
+        participants: [
+          {
+            participantId: 'p2',
+            userId: 'other-user',
+            role: 'owner' as const,
+          },
+          {
+            participantId: 'p3',
+            userId: 'user-789',
+            role: 'participant' as const,
+          },
+        ],
+      },
+    ];
+
+    renderWithQueryClient(<PlansList plans={plans} />);
+
+    await user.click(screen.getByTestId('membership-filter-owned'));
+
+    expect(
+      screen.getByText(/haven't created any plans|plans\.emptyOwned/i)
+    ).toBeInTheDocument();
   });
 
   it('renders correct number of list items', () => {
