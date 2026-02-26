@@ -288,6 +288,13 @@ export default function Header() {
         </div>
 
         {isMenuOpen && (
+          <div
+            className="fixed inset-0 z-40 sm:hidden"
+            aria-hidden="true"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
+        {isMenuOpen && (
           <div className="absolute top-full start-0 end-0 bg-white shadow-lg z-50 sm:hidden border-t border-gray-200 transition-opacity duration-200">
             <ul className="list-none m-0 p-0">
               <li className="border-b border-gray-100">

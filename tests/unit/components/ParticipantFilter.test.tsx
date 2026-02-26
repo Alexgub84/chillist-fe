@@ -53,6 +53,41 @@ describe('ParticipantFilter', () => {
     expect(screen.getByText('Bob Jones')).toBeInTheDocument();
   });
 
+  it('renders My Items button when currentParticipantId is set and hides that participant from the list', () => {
+    render(
+      <ParticipantFilter
+        participants={participants}
+        selected={null}
+        onChange={() => {}}
+        counts={counts}
+        total={6}
+        currentParticipantId="p-1"
+      />
+    );
+
+    expect(
+      screen.getByRole('button', { name: /My Items/i })
+    ).toBeInTheDocument();
+    expect(screen.queryByText('Alice Smith')).not.toBeInTheDocument();
+    expect(screen.getByText('Bob Jones')).toBeInTheDocument();
+  });
+
+  it('does not render My Items button when currentParticipantId is not set', () => {
+    render(
+      <ParticipantFilter
+        participants={participants}
+        selected={null}
+        onChange={() => {}}
+        counts={counts}
+        total={6}
+      />
+    );
+
+    expect(
+      screen.queryByRole('button', { name: /My Items/i })
+    ).not.toBeInTheDocument();
+  });
+
   it('shows correct counts on each button', () => {
     render(
       <ParticipantFilter
@@ -194,6 +229,58 @@ describe('ParticipantFilter', () => {
 
     await user.click(screen.getByRole('button', { name: /Alice Smith/i }));
     expect(onChange).toHaveBeenCalledWith('p-1');
+  });
+
+  it('calls onChange with currentParticipantId when My Items is clicked', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(
+      <ParticipantFilter
+        participants={participants}
+        selected={null}
+        onChange={onChange}
+        counts={counts}
+        total={6}
+        currentParticipantId="p-1"
+      />
+    );
+
+    await user.click(screen.getByRole('button', { name: /My Items/i }));
+    expect(onChange).toHaveBeenCalledWith('p-1');
+  });
+
+  it('marks My Items as pressed when selected matches currentParticipantId', () => {
+    render(
+      <ParticipantFilter
+        participants={participants}
+        selected="p-1"
+        onChange={() => {}}
+        counts={counts}
+        total={6}
+        currentParticipantId="p-1"
+      />
+    );
+
+    expect(screen.getByRole('button', { name: /My Items/i })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+  });
+
+  it('shows correct count on My Items button', () => {
+    render(
+      <ParticipantFilter
+        participants={participants}
+        selected={null}
+        onChange={() => {}}
+        counts={counts}
+        total={6}
+        currentParticipantId="p-1"
+      />
+    );
+
+    const myButton = screen.getByRole('button', { name: /My Items/i });
+    expect(myButton).toHaveTextContent('3');
   });
 
   it('shows zero count when participant has no items', () => {

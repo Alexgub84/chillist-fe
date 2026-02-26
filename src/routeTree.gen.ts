@@ -15,6 +15,7 @@ import { Route as SignupRouteImport } from './routes/signup';
 import { Route as SigninRouteImport } from './routes/signin';
 import { Route as CreatePlanRouteImport } from './routes/create-plan';
 import { Route as PlanPlanIdRouteImport } from './routes/plan.$planId';
+import { Route as ItemsPlanIdRouteImport } from './routes/items.$planId';
 import { Route as InvitePlanIdInviteTokenRouteImport } from './routes/invite.$planId.$inviteToken';
 
 const PlansLazyRouteImport = createFileRoute('/plans')();
@@ -70,6 +71,13 @@ const PlanPlanIdRoute = PlanPlanIdRouteImport.update({
   path: '/plan/$planId',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/plan.$planId.lazy').then((d) => d.Route));
+const ItemsPlanIdRoute = ItemsPlanIdRouteImport.update({
+  id: '/items/$planId',
+  path: '/items/$planId',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/items.$planId.lazy').then((d) => d.Route)
+);
 const InvitePlanIdInviteTokenRoute = InvitePlanIdInviteTokenRouteImport.update({
   id: '/invite/$planId/$inviteToken',
   path: '/invite/$planId/$inviteToken',
@@ -87,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
+  '/items/$planId': typeof ItemsPlanIdRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
   '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
 }
@@ -99,6 +108,7 @@ export interface FileRoutesByTo {
   '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
+  '/items/$planId': typeof ItemsPlanIdRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
   '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
 }
@@ -112,6 +122,7 @@ export interface FileRoutesById {
   '/complete-profile': typeof CompleteProfileLazyRoute;
   '/not-found': typeof NotFoundLazyRoute;
   '/plans': typeof PlansLazyRoute;
+  '/items/$planId': typeof ItemsPlanIdRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
   '/invite/$planId/$inviteToken': typeof InvitePlanIdInviteTokenRoute;
 }
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/items/$planId'
     | '/plan/$planId'
     | '/invite/$planId/$inviteToken';
   fileRoutesByTo: FileRoutesByTo;
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/items/$planId'
     | '/plan/$planId'
     | '/invite/$planId/$inviteToken';
   id:
@@ -150,6 +163,7 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/not-found'
     | '/plans'
+    | '/items/$planId'
     | '/plan/$planId'
     | '/invite/$planId/$inviteToken';
   fileRoutesById: FileRoutesById;
@@ -163,6 +177,7 @@ export interface RootRouteChildren {
   CompleteProfileLazyRoute: typeof CompleteProfileLazyRoute;
   NotFoundLazyRoute: typeof NotFoundLazyRoute;
   PlansLazyRoute: typeof PlansLazyRoute;
+  ItemsPlanIdRoute: typeof ItemsPlanIdRoute;
   PlanPlanIdRoute: typeof PlanPlanIdRoute;
   InvitePlanIdInviteTokenRoute: typeof InvitePlanIdInviteTokenRoute;
 }
@@ -232,6 +247,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlanPlanIdRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/items/$planId': {
+      id: '/items/$planId';
+      path: '/items/$planId';
+      fullPath: '/items/$planId';
+      preLoaderRoute: typeof ItemsPlanIdRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/invite/$planId/$inviteToken': {
       id: '/invite/$planId/$inviteToken';
       path: '/invite/$planId/$inviteToken';
@@ -251,6 +273,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompleteProfileLazyRoute: CompleteProfileLazyRoute,
   NotFoundLazyRoute: NotFoundLazyRoute,
   PlansLazyRoute: PlansLazyRoute,
+  ItemsPlanIdRoute: ItemsPlanIdRoute,
   PlanPlanIdRoute: PlanPlanIdRoute,
   InvitePlanIdInviteTokenRoute: InvitePlanIdInviteTokenRoute,
 };

@@ -8,6 +8,7 @@ interface ParticipantFilterProps {
   onChange: (participantId: string | null) => void;
   counts: Record<string, number>;
   total: number;
+  currentParticipantId?: string;
 }
 
 export default function ParticipantFilter({
@@ -16,8 +17,13 @@ export default function ParticipantFilter({
   onChange,
   counts,
   total,
+  currentParticipantId,
 }: ParticipantFilterProps) {
   const { t } = useTranslation();
+  const myCount = currentParticipantId
+    ? (counts[currentParticipantId] ?? 0)
+    : 0;
+
   return (
     <div
       className="flex flex-wrap gap-2"
@@ -46,6 +52,30 @@ export default function ParticipantFilter({
         </span>
       </button>
 
+      {currentParticipantId && (
+        <button
+          type="button"
+          onClick={() => onChange(currentParticipantId)}
+          className={clsx(
+            'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer',
+            selected === currentParticipantId
+              ? 'bg-blue-600 text-white'
+              : 'bg-white text-blue-600 border border-blue-300 hover:bg-blue-50 active:bg-blue-100'
+          )}
+          aria-pressed={selected === currentParticipantId}
+        >
+          {t('filters.myItems')}
+          <span
+            className={clsx(
+              'text-xs tabular-nums',
+              selected === currentParticipantId ? 'opacity-75' : 'text-blue-400'
+            )}
+          >
+            {myCount}
+          </span>
+        </button>
+      )}
+
       <button
         type="button"
         onClick={() => onChange('unassigned')}
@@ -69,6 +99,7 @@ export default function ParticipantFilter({
       </button>
 
       {participants.map((p) => {
+        if (p.participantId === currentParticipantId) return null;
         const isActive = selected === p.participantId;
         const count = counts[p.participantId] ?? 0;
 

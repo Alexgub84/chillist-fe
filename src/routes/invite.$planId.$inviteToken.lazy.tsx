@@ -1,5 +1,15 @@
-import { useState, useEffect, useMemo } from 'react';
-import { createLazyFileRoute, Link, useParams } from '@tanstack/react-router';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import {
+  createLazyFileRoute,
+  Link,
+  useNavigate,
+  useParams,
+} from '@tanstack/react-router';
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
@@ -7,6 +17,7 @@ import toast from 'react-hot-toast';
 import { useInvitePlan } from '../hooks/useInvitePlan';
 import { useAuth } from '../contexts/useAuth';
 import {
+  claimInvite,
   saveGuestPreferences,
   addGuestItem,
   updateGuestItem,
@@ -43,6 +54,7 @@ function roleBadgeColor(role: InviteParticipant['role']) {
 
 export function InvitePlanPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { planId, inviteToken } = useParams({
     from: '/invite/$planId/$inviteToken',
@@ -57,6 +69,29 @@ export function InvitePlanPage() {
   const [showAddItem, setShowAddItem] = useState(false);
   const [authModalShown, setAuthModalShown] = useState(false);
   const [listFilter, setListFilter] = useState<ListFilter | null>(null);
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const claimAttempted = useRef(false);
+
+  useEffect(() => {
+    if (!isAuthenticated || !plan || claimAttempted.current) return;
+    claimAttempted.current = true;
+    setIsRedirecting(true);
+
+    console.info(
+      `[InvitePage] Authenticated user detected — claiming invite and redirecting to plan. planId="${planId}", token="${inviteToken.slice(0, 8)}…".`
+    );
+
+    claimInvite(planId, inviteToken)
+      .catch((err) => {
+        console.debug(
+          `[InvitePage] claimInvite returned error (may already be claimed) — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
+        );
+      })
+      .finally(() => {
+        queryClient.invalidateQueries();
+        navigate({ to: '/plan/$planId', params: { planId } });
+      });
+  }, [isAuthenticated, plan, planId, inviteToken, navigate, queryClient]);
 
   const shouldShowAuthModal =
     !isAuthenticated &&
@@ -157,15 +192,12 @@ export function InvitePlanPage() {
         <h1 className="text-2xl sm:text-3xl font-bold">{title}</h1>
       </div>
 
-      {isAuthenticated && (
-        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-6 flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-          <Link
-            to="/plan/$planId"
-            params={{ planId }}
-            className="w-full sm:w-auto text-center rounded-md bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors"
-          >
-            {t('invite.goToPlan')}
-          </Link>
+      {isRedirecting && (
+        <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-6 flex items-center justify-center gap-3">
+          <div className="w-5 h-5 border-2 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+          <span className="text-sm font-medium text-gray-600">
+            {t('invite.redirecting')}
+          </span>
         </div>
       )}
 
@@ -173,6 +205,54 @@ export function InvitePlanPage() {
       {renderParticipants()}
       {hasResponded && !isAuthenticated && (
         <>
+          <Link
+            to="/items/$planId"
+            params={{ planId }}
+            search={{ token: inviteToken }}
+            className="block bg-white rounded-xl shadow-sm border border-blue-100 hover:border-blue-300 hover:shadow-md transition-all p-4 sm:p-5 mb-4 group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-full bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
+                <svg
+                  className="w-5 h-5 text-blue-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">
+                  {t('items.manageItems')}
+                </p>
+                <p className="text-xs sm:text-sm text-gray-500">
+                  {t('items.manageItemsDesc')}
+                </p>
+              </div>
+              <svg
+                className="w-5 h-5 text-gray-400 group-hover:text-blue-500 ms-auto shrink-0 transition-colors"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </Link>
+
           <div className="flex items-center justify-between mb-4">
             <ListTabs
               selected={listFilter}
@@ -218,12 +298,11 @@ export function InvitePlanPage() {
                   participants={participantsAsFullType}
                   listFilter={listFilter}
                   selfAssignParticipantId={myParticipantId}
-                  onEditItem={(itemId) => {
-                    const item = items.find((i) => i.itemId === itemId);
-                    if (item?.assignedParticipantId === myParticipantId) {
-                      setEditingItemId(itemId);
-                    }
-                  }}
+                  canEditItem={(item) =>
+                    !!myParticipantId &&
+                    item.assignedParticipantId === myParticipantId
+                  }
+                  onEditItem={(itemId) => setEditingItemId(itemId)}
                   onUpdateItem={(itemId, updates) =>
                     handleUpdateItem(itemId, updates)
                   }
@@ -440,65 +519,91 @@ export function InvitePlanPage() {
     if (participants.length === 0) return null;
 
     return (
-      <div className="bg-white rounded-xl shadow-sm p-5 sm:p-7 mb-6">
-        <h2 className="text-lg font-semibold text-gray-800 mb-3">
-          {t('invite.participantsTitle')}
-          <span className="ms-2 text-sm font-normal text-gray-500">
-            ({participants.length})
-          </span>
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {participants.map((p) => {
-            const isMe = p.participantId === myParticipantId;
-            return (
-              <div
-                key={p.participantId}
-                className={clsx(
-                  'flex items-center gap-2 rounded-full px-3 py-1.5',
-                  isMe ? 'bg-blue-50 ring-1 ring-blue-200' : 'bg-gray-50'
-                )}
-              >
-                <div className="w-7 h-7 rounded-full border-2 border-emerald-400 bg-white flex items-center justify-center text-xs font-bold text-gray-600 shrink-0">
-                  {(p.displayName ?? '?').charAt(0).toUpperCase()}
-                </div>
-                <span className="text-sm font-medium text-gray-700">
-                  {p.displayName ?? t('plan.na')}
-                  {isMe && (
-                    <span className="text-xs text-blue-500 ms-1">
-                      ({t('invite.you')})
-                    </span>
-                  )}
-                </span>
-                <span
-                  className={clsx(
-                    'text-xs font-medium px-2 py-0.5 rounded-full',
-                    roleBadgeColor(p.role)
-                  )}
-                >
-                  {t(`roles.${p.role}`)}
-                </span>
-                {isMe && hasResponded && (
-                  <button
-                    type="button"
-                    onClick={() => setShowPreferences(true)}
-                    className="ms-1 text-blue-500 hover:text-blue-700 transition-colors"
-                    title={t('invite.editPreferences')}
+      <Disclosure
+        as="div"
+        className="bg-white rounded-xl shadow-sm overflow-hidden mb-6"
+      >
+        <DisclosureButton className="group w-full px-5 sm:px-7 py-4 sm:py-5 flex items-center justify-between cursor-pointer hover:bg-gray-50 active:bg-gray-100 transition-colors">
+          <h2 className="text-lg font-semibold text-gray-800">
+            {t('invite.participantsTitle')}
+            <span className="ms-2 text-sm font-normal text-gray-500">
+              ({participants.length})
+            </span>
+          </h2>
+          <svg
+            className="w-5 h-5 text-gray-500 transition-transform group-data-open:rotate-180"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </DisclosureButton>
+        <DisclosurePanel
+          transition
+          className="origin-top transition duration-200 ease-out data-closed:-translate-y-6 data-closed:opacity-0"
+        >
+          <div className="border-t border-gray-200 px-5 sm:px-7 py-4 sm:py-5">
+            <div className="flex flex-wrap gap-2">
+              {participants.map((p) => {
+                const isMe = p.participantId === myParticipantId;
+                return (
+                  <div
+                    key={p.participantId}
+                    className={clsx(
+                      'flex items-center gap-2 rounded-full px-3 py-1.5',
+                      isMe ? 'bg-blue-50 ring-1 ring-blue-200' : 'bg-gray-50'
+                    )}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-4 h-4"
+                    <div className="w-7 h-7 rounded-full border-2 border-emerald-400 bg-white flex items-center justify-center text-xs font-bold text-gray-600 shrink-0">
+                      {(p.displayName ?? '?').charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-sm font-medium text-gray-700">
+                      {p.displayName ?? t('plan.na')}
+                      {isMe && (
+                        <span className="text-xs text-blue-500 ms-1">
+                          ({t('invite.you')})
+                        </span>
+                      )}
+                    </span>
+                    <span
+                      className={clsx(
+                        'text-xs font-medium px-2 py-0.5 rounded-full',
+                        roleBadgeColor(p.role)
+                      )}
                     >
-                      <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
-                    </svg>
-                  </button>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+                      {t(`roles.${p.role}`)}
+                    </span>
+                    {isMe && hasResponded && (
+                      <button
+                        type="button"
+                        onClick={() => setShowPreferences(true)}
+                        className="ms-1 text-blue-500 hover:text-blue-700 transition-colors"
+                        title={t('invite.editPreferences')}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </DisclosurePanel>
+      </Disclosure>
     );
   }
 

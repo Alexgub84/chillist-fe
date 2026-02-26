@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import ItemCard from '../../../src/components/ItemCard';
 import type { Item } from '../../../src/core/schemas/item';
@@ -14,6 +14,8 @@ const baseItem: Item = {
   createdAt: '2025-01-01T00:00:00Z',
   updatedAt: '2025-01-01T00:00:00Z',
 };
+
+const noop = vi.fn();
 
 describe('ItemCard', () => {
   it('renders item name, quantity, and unit', () => {
@@ -54,5 +56,101 @@ describe('ItemCard', () => {
     render(<ItemCard item={baseItem} />);
 
     expect(screen.queryByText('Bring extra stakes')).not.toBeInTheDocument();
+  });
+
+  describe('permission gating (canEdit)', () => {
+    it('shows edit button and inline controls when canEdit is true', () => {
+      render(
+        <ItemCard item={baseItem} canEdit onEdit={noop} onUpdate={noop} />
+      );
+
+      expect(
+        screen.getByRole('button', { name: /Edit Tent/i })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Cancel Tent/i })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Change status for Tent/i })
+      ).toBeInTheDocument();
+    });
+
+    it('hides edit button, cancel, and inline controls when canEdit is false', () => {
+      render(
+        <ItemCard
+          item={baseItem}
+          canEdit={false}
+          onEdit={noop}
+          onUpdate={noop}
+        />
+      );
+
+      expect(
+        screen.queryByRole('button', { name: /Edit Tent/i })
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /Cancel Tent/i })
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /Change status for Tent/i })
+      ).not.toBeInTheDocument();
+      expect(screen.getByText('Pending')).toBeInTheDocument();
+      expect(screen.getByText('2 Pieces')).toBeInTheDocument();
+    });
+
+    it('still renders self-assign button when canEdit is false but selfAssignParticipantId is set', () => {
+      render(
+        <ItemCard
+          item={baseItem}
+          canEdit={false}
+          selfAssignParticipantId="p-me"
+          onUpdate={noop}
+        />
+      );
+
+      expect(screen.getByText('Assign to me')).toBeInTheDocument();
+    });
+
+    it('shows "Assigned to me" badge when item is assigned to self and canEdit is false', () => {
+      const assignedItem: Item = {
+        ...baseItem,
+        assignedParticipantId: 'p-me',
+      };
+      render(
+        <ItemCard
+          item={assignedItem}
+          canEdit={false}
+          selfAssignParticipantId="p-me"
+          onUpdate={noop}
+        />
+      );
+
+      expect(screen.getByText('Me')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Unassign Tent/i })
+      ).toBeInTheDocument();
+    });
+
+    it('does not show checklist checkbox when canEdit is false in buying filter', () => {
+      render(
+        <ItemCard
+          item={baseItem}
+          canEdit={false}
+          listFilter="buying"
+          onUpdate={noop}
+        />
+      );
+
+      expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
+      expect(screen.getByText('Tent')).toBeInTheDocument();
+    });
+
+    it('shows checklist checkbox when canEdit is true in buying filter', () => {
+      render(
+        <ItemCard item={baseItem} canEdit listFilter="buying" onUpdate={noop} />
+      );
+
+      expect(screen.getByRole('checkbox')).toBeInTheDocument();
+    });
   });
 });

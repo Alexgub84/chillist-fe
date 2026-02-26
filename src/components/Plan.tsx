@@ -306,13 +306,15 @@ export function Plan({
                 </button>
               )}
             </div>
-            <button
-              type="button"
-              onClick={() => setShowManageModal(true)}
-              className="ms-2 px-4 py-1.5 border border-gray-300 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-50 active:bg-gray-100 transition-colors"
-            >
-              {t('plan.manage')}
-            </button>
+            {isOwner && (
+              <button
+                type="button"
+                onClick={() => setShowManageModal(true)}
+                className="ms-2 px-4 py-1.5 border border-gray-300 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-50 active:bg-gray-100 transition-colors"
+              >
+                {t('plan.manage')}
+              </button>
+            )}
           </div>
         </div>
 

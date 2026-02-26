@@ -173,6 +173,9 @@
     "editItem": "עריכת פריט",
     "updateItem": "עדכון פריט",
     "addItemLabel": "הוספת פריט",
+    "manageItems": "ניהול פריטים",
+    "manageItemsDesc": "צפייה, הוספה ועריכה של כל הפריטים במקום אחד",
+    "backToPlan": "→ חזרה לתוכנית",
     "name": "שם *",
     "namePlaceholder": "שם הפריט",
     "category": "קטגוריה *",
@@ -212,6 +215,7 @@
   },
   "filters": {
     "all": "הכל",
+    "myItems": "שלי",
     "buyingList": "רשימת קניות",
     "packingList": "רשימת אריזה"
   },
@@ -372,6 +376,7 @@
     "signUpToJoin": "או צור חשבון",
     "continueAsGuest": "המשך בלי להתחבר",
     "goToPlan": "מעבר לתוכנית",
+    "redirecting": "מעביר אותך לתוכנית…",
     "guestPreferencesTitle": "ההעדפות שלך",
     "claimFailed": "לא הצלחנו לקשר את החשבון שלך להזמנה. נסה לפתוח את קישור ההזמנה שוב.",
     "you": "אתה",

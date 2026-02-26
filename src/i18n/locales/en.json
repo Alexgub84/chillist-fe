@@ -173,6 +173,9 @@
     "editItem": "Edit Item",
     "updateItem": "Update Item",
     "addItemLabel": "Add Item",
+    "manageItems": "Manage Items",
+    "manageItemsDesc": "View, add, and edit all items in one place",
+    "backToPlan": "← Back to plan",
     "name": "Name *",
     "namePlaceholder": "Item name",
     "category": "Category *",
@@ -212,6 +215,7 @@
   },
   "filters": {
     "all": "All",
+    "myItems": "My Items",
     "buyingList": "Buying List",
     "packingList": "Packing List"
   },
@@ -372,6 +376,7 @@
     "signUpToJoin": "or create an account",
     "continueAsGuest": "Continue without signing in",
     "goToPlan": "Go to plan",
+    "redirecting": "Taking you to the plan…",
     "guestPreferencesTitle": "Your Preferences",
     "claimFailed": "Could not link your account to this invite. Please try opening the invite link again.",
     "you": "you",

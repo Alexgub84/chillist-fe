@@ -4,6 +4,14 @@ import userEvent from '@testing-library/user-event';
 import ParticipantDetails from '../../../src/components/ParticipantDetails';
 import type { Participant } from '../../../src/core/schemas/participant';
 
+async function expandParticipants() {
+  const user = userEvent.setup();
+  const button = screen.getByRole('button', {
+    name: /Group Details/i,
+  });
+  await user.click(button);
+}
+
 function buildParticipant(overrides?: Partial<Participant>): Participant {
   return {
     participantId: 'p-1',
@@ -54,11 +62,14 @@ describe('ParticipantDetails', () => {
     );
 
     expect(
-      screen.getByText((_content, el) => el?.textContent === 'Group Details(2)')
+      screen.getByText(
+        (_content, el) =>
+          el?.tagName === 'H2' && el?.textContent === 'Group Details(2)'
+      )
     ).toBeInTheDocument();
   });
 
-  it('renders participant name and role badge', () => {
+  it('renders participant name and role badge', async () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant()]}
@@ -66,12 +77,13 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Alex Smith')).toBeInTheDocument();
     expect(screen.getByText('owner')).toBeInTheDocument();
   });
 
-  it('shows "not filled" when participant has no preferences', () => {
+  it('shows "not filled" when participant has no preferences', async () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant()]}
@@ -79,11 +91,12 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Preferences not filled yet')).toBeInTheDocument();
   });
 
-  it('shows people count when adultsCount is filled', () => {
+  it('shows people count when adultsCount is filled', async () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant({ adultsCount: 2 })]}
@@ -91,6 +104,7 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('People')).toBeInTheDocument();
     expect(screen.getByText('2 adults')).toBeInTheDocument();
@@ -99,7 +113,7 @@ describe('ParticipantDetails', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('shows people count with both adults and kids', () => {
+  it('shows people count with both adults and kids', async () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant({ adultsCount: 2, kidsCount: 3 })]}
@@ -107,11 +121,12 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('2 adults, 3 kids')).toBeInTheDocument();
   });
 
-  it('shows food preferences and allergies', () => {
+  it('shows food preferences and allergies', async () => {
     render(
       <ParticipantDetails
         participants={[
@@ -124,12 +139,13 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Food')).toBeInTheDocument();
     expect(screen.getByText('vegetarian · nuts')).toBeInTheDocument();
   });
 
-  it('shows notes when filled', () => {
+  it('shows notes when filled', async () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant({ notes: 'bring extra tent' })]}
@@ -137,12 +153,13 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Notes')).toBeInTheDocument();
     expect(screen.getByText('bring extra tent')).toBeInTheDocument();
   });
 
-  it('shows edit button when onEditPreferences is provided', () => {
+  it('shows edit button when onEditPreferences is provided', async () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant()]}
@@ -152,11 +169,12 @@ describe('ParticipantDetails', () => {
         onEditPreferences={vi.fn()}
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Edit')).toBeInTheDocument();
   });
 
-  it('does not show edit button when onEditPreferences is not provided', () => {
+  it('does not show edit button when onEditPreferences is not provided', async () => {
     render(
       <ParticipantDetails
         participants={[buildParticipant()]}
@@ -164,6 +182,7 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.queryByText('Edit')).not.toBeInTheDocument();
   });
@@ -180,6 +199,7 @@ describe('ParticipantDetails', () => {
         onEditPreferences={onEdit}
       />
     );
+    await expandParticipants();
 
     await user.click(screen.getByText('Edit'));
 
@@ -187,7 +207,7 @@ describe('ParticipantDetails', () => {
     expect(onEdit).toHaveBeenCalledWith('p-42');
   });
 
-  it('renders multiple participant cards', () => {
+  it('renders multiple participant cards', async () => {
     render(
       <ParticipantDetails
         participants={[
@@ -205,6 +225,7 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Alex Smith')).toBeInTheDocument();
     expect(screen.getByText('Jane Doe')).toBeInTheDocument();
@@ -212,7 +233,7 @@ describe('ParticipantDetails', () => {
     expect(screen.getByText('vegan')).toBeInTheDocument();
   });
 
-  it('shows RSVP badge for non-owner participants when isOwner is true', () => {
+  it('shows RSVP badge for non-owner participants when isOwner is true', async () => {
     render(
       <ParticipantDetails
         participants={[
@@ -228,11 +249,12 @@ describe('ParticipantDetails', () => {
         isOwner
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Confirmed')).toBeInTheDocument();
   });
 
-  it('does not show RSVP badge for the owner participant', () => {
+  it('does not show RSVP badge for the owner participant', async () => {
     render(
       <ParticipantDetails
         participants={[
@@ -246,11 +268,12 @@ describe('ParticipantDetails', () => {
         isOwner
       />
     );
+    await expandParticipants();
 
     expect(screen.queryByText('Confirmed')).not.toBeInTheDocument();
   });
 
-  it('does not show RSVP badge when isOwner is false', () => {
+  it('does not show RSVP badge when isOwner is false', async () => {
     render(
       <ParticipantDetails
         participants={[
@@ -265,11 +288,12 @@ describe('ParticipantDetails', () => {
         planTitle="Test"
       />
     );
+    await expandParticipants();
 
     expect(screen.queryByText('Confirmed')).not.toBeInTheDocument();
   });
 
-  it('shows correct RSVP badge colors for each status', () => {
+  it('shows correct RSVP badge colors for each status', async () => {
     render(
       <ParticipantDetails
         participants={[
@@ -292,6 +316,7 @@ describe('ParticipantDetails', () => {
         isOwner
       />
     );
+    await expandParticipants();
 
     expect(screen.getByText('Pending')).toBeInTheDocument();
     expect(screen.getByText('Not sure')).toBeInTheDocument();

@@ -1,10 +1,29 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+import { useEffect, useRef } from 'react';
+import {
+  createRootRoute,
+  Outlet,
+  useRouterState,
+} from '@tanstack/react-router';
 import { Toaster } from 'react-hot-toast';
 import NotFound from './not-found.lazy';
 import Header from '../components/Header';
 import { ErrorPage } from './ErrorPage';
 import AuthProvider from '../contexts/AuthProvider';
 import LanguageProvider from '../contexts/LanguageProvider';
+
+function ScrollToTop() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const prevRef = useRef(pathname);
+
+  useEffect(() => {
+    if (prevRef.current !== pathname) {
+      window.scrollTo(0, 0);
+      prevRef.current = pathname;
+    }
+  }, [pathname]);
+
+  return null;
+}
 
 function logError(error: Error, context?: string) {
   const errorInfo = {
@@ -70,6 +89,7 @@ export const Route = createRootRoute({
               }}
             />
             <Header />
+            <ScrollToTop />
             <main className="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-6 lg:py-8">
               <Outlet />
             </main>

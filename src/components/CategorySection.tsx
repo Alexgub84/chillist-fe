@@ -15,6 +15,7 @@ interface CategorySectionProps {
   participants?: Participant[];
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
+  canEditItem?: (item: Item) => boolean;
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
 }
@@ -25,6 +26,7 @@ export default function CategorySection({
   participants = [],
   listFilter,
   selfAssignParticipantId,
+  canEditItem,
   onEditItem,
   onUpdateItem,
 }: CategorySectionProps) {
@@ -67,21 +69,27 @@ export default function CategorySection({
       >
         {items.length > 0 ? (
           <div className="border-t border-gray-200 divide-y divide-gray-200">
-            {items.map((item) => (
-              <ItemCard
-                key={item.itemId}
-                item={item}
-                participants={participants}
-                listFilter={listFilter}
-                selfAssignParticipantId={selfAssignParticipantId}
-                onEdit={onEditItem ? () => onEditItem(item.itemId) : undefined}
-                onUpdate={
-                  onUpdateItem
-                    ? (updates) => onUpdateItem(item.itemId, updates)
-                    : undefined
-                }
-              />
-            ))}
+            {items.map((item) => {
+              const editable = canEditItem ? canEditItem(item) : true;
+              return (
+                <ItemCard
+                  key={item.itemId}
+                  item={item}
+                  participants={participants}
+                  listFilter={listFilter}
+                  selfAssignParticipantId={selfAssignParticipantId}
+                  canEdit={editable}
+                  onEdit={
+                    onEditItem ? () => onEditItem(item.itemId) : undefined
+                  }
+                  onUpdate={
+                    onUpdateItem
+                      ? (updates) => onUpdateItem(item.itemId, updates)
+                      : undefined
+                  }
+                />
+              );
+            })}
           </div>
         ) : (
           <div className="border-t border-gray-200 px-4 sm:px-5 py-3 sm:py-4 text-center">
