@@ -5707,7 +5707,7 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Vegan"
   },
   {
     "id": "tent",
@@ -5833,7 +5833,7 @@
     "unit": "kg",
     "aliases": ["Bean Curd", "טופו"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Vegan"
   },
   {
     "id": "toilet-paper",
@@ -6073,7 +6073,7 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Dairy"
+    "subcategory": "Vegan"
   },
   {
     "id": "vegan-cheese",
@@ -6082,7 +6082,7 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Cheese"
+    "subcategory": "Vegan"
   },
   {
     "id": "vegan-cookies",
@@ -6091,7 +6091,7 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Vegan"
   },
   {
     "id": "vegan-mayo",
@@ -6100,7 +6100,7 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Vegan"
   },
   {
     "id": "vegan-yogurt",
@@ -6109,7 +6109,7 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Dairy"
+    "subcategory": "Vegan"
   },
   {
     "id": "vegetable-oil",
@@ -6127,7 +6127,7 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Vegan"
   },
   {
     "id": "veggie-chips",
@@ -6145,7 +6145,7 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Vegan"
   },
   {
     "id": "veggie-sausages",
@@ -6154,7 +6154,7 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Vegan"
   },
   {
     "id": "veggie-straws",

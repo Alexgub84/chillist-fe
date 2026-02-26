@@ -40,6 +40,16 @@ export function getDefaultCountryByLanguage(lang: string): string {
   return '';
 }
 
+export function combinePhone(
+  countryCode: string | undefined,
+  localNumber: string
+): string {
+  const trimmed = localNumber.trim();
+  if (!trimmed) return '';
+  const dialCode = getDialCode(countryCode ?? '');
+  return dialCode ? `${dialCode}${trimmed}` : trimmed;
+}
+
 export const countryCodes: CountryCode[] = [
   { code: 'AF', name: 'Afghanistan', dialCode: '+93' },
   { code: 'AL', name: 'Albania', dialCode: '+355' },
