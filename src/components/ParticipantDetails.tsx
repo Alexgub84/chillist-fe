@@ -36,6 +36,7 @@ interface ParticipantDetailsProps {
   planId: string;
   planTitle: string;
   isOwner?: boolean;
+  currentParticipantId?: string;
   onEditPreferences?: (participantId: string) => void;
 }
 
@@ -44,6 +45,7 @@ export default function ParticipantDetails({
   planId,
   planTitle,
   isOwner = false,
+  currentParticipantId,
   onEditPreferences,
 }: ParticipantDetailsProps) {
   const { t } = useTranslation();
@@ -59,20 +61,24 @@ export default function ParticipantDetails({
         </span>
       </h2>
       <div className="space-y-3">
-        {participants.map((p) => (
-          <ParticipantCard
-            key={p.participantId}
-            participant={p}
-            planId={planId}
-            planTitle={planTitle}
-            isOwner={isOwner}
-            onEdit={
-              onEditPreferences
-                ? () => onEditPreferences(p.participantId)
-                : undefined
-            }
-          />
-        ))}
+        {participants.map((p) => {
+          const canEdit =
+            isOwner || p.participantId === currentParticipantId;
+          return (
+            <ParticipantCard
+              key={p.participantId}
+              participant={p}
+              planId={planId}
+              planTitle={planTitle}
+              isOwner={isOwner}
+              onEdit={
+                canEdit && onEditPreferences
+                  ? () => onEditPreferences(p.participantId)
+                  : undefined
+              }
+            />
+          );
+        })}
       </div>
     </div>
   );
