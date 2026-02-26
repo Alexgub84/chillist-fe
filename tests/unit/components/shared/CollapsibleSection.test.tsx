@@ -16,9 +16,7 @@ describe('CollapsibleSection', () => {
 
   it('renders custom title element', () => {
     render(
-      <CollapsibleSection
-        title={<h2 className="custom">Custom Title</h2>}
-      >
+      <CollapsibleSection title={<h2 className="custom">Custom Title</h2>}>
         <p>Content</p>
       </CollapsibleSection>
     );
@@ -43,10 +41,7 @@ describe('CollapsibleSection', () => {
 
   it('renders with buttonAs div without error', async () => {
     render(
-      <CollapsibleSection
-        title="Section"
-        buttonAs="div"
-      >
+      <CollapsibleSection title="Section" buttonAs="div">
         <p>Content</p>
       </CollapsibleSection>
     );

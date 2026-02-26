@@ -7,7 +7,7 @@
     "predev": "npm run api:fetch",
     "dev": "vite --env-file .env.local",
     "build": "vite build",
-    "test": "vitest run && playwright test",
+    "test": "npm run typecheck && npm run lint && vitest run && playwright test",
     "test:unit": "vitest run tests/unit",
     "test:unit:watch": "vitest tests/unit",
     "test:integ": "vitest run tests/integration",
