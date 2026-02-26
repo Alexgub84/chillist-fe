@@ -210,4 +210,51 @@ describe('BulkAssignButton', () => {
 
     expect(onAssign).toHaveBeenCalledWith(['i-1', 'i-3'], 'p-1');
   });
+
+  it('with restrictToUnassignedOnly shows only self in dropdown and assigns only unassigned items', async () => {
+    const user = userEvent.setup();
+    const onAssign = vi.fn();
+    const items = [
+      buildItem({ itemId: 'i-1', assignedParticipantId: null }),
+      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-2' }),
+    ];
+
+    render(
+      <BulkAssignButton
+        items={items}
+        participants={participants}
+        onAssign={onAssign}
+        restrictToUnassignedOnly
+        selfParticipantId="p-1"
+      />
+    );
+
+    await user.click(screen.getByRole('button', { name: /assign all/i }));
+
+    expect(screen.getByText('Alex Smith')).toBeInTheDocument();
+    expect(screen.queryByText('Jane Doe')).not.toBeInTheDocument();
+
+    await user.click(screen.getByText('Alex Smith'));
+
+    expect(onAssign).toHaveBeenCalledWith(['i-1'], 'p-1');
+  });
+
+  it('with restrictToUnassignedOnly renders nothing when no unassigned items', () => {
+    const items = [
+      buildItem({ itemId: 'i-1', assignedParticipantId: 'p-2' }),
+      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-2' }),
+    ];
+
+    const { container } = render(
+      <BulkAssignButton
+        items={items}
+        participants={participants}
+        onAssign={vi.fn()}
+        restrictToUnassignedOnly
+        selfParticipantId="p-1"
+      />
+    );
+
+    expect(container.innerHTML).toBe('');
+  });
 });

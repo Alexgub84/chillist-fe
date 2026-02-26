@@ -400,11 +400,8 @@ function PlanDetails() {
             canEditItem={canEditItem}
             onEditItem={(itemId) => setItemModalId(itemId)}
             onUpdateItem={updateItem}
-            onBulkAssign={
-              isOwner
-                ? (ids, pid) =>
-                    bulkAssign.mutate({ itemIds: ids, participantId: pid })
-                : undefined
+            onBulkAssign={(ids, pid) =>
+              bulkAssign.mutate({ itemIds: ids, participantId: pid })
             }
             groupBySubcategory
           />

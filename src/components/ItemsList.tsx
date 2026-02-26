@@ -47,6 +47,7 @@ export default function ItemsList({
           onEditItem={onEditItem}
           onUpdateItem={onUpdateItem}
           onBulkAssign={onBulkAssign}
+          restrictToUnassignedOnly={!!selfAssignParticipantId}
           groupBySubcategory={groupBySubcategory}
         />
       ))}

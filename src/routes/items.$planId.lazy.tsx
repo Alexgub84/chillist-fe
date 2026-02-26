@@ -78,11 +78,8 @@ function AuthItemsPage({ planId }: { planId: string }) {
       onUpdateItem={async (itemId, updates) => {
         await updateItemMutation.mutateAsync({ itemId, updates });
       }}
-      onBulkAssign={
-        isOwner
-          ? (ids, pid) =>
-              bulkAssign.mutate({ itemIds: ids, participantId: pid })
-          : undefined
+      onBulkAssign={(ids, pid) =>
+        bulkAssign.mutate({ itemIds: ids, participantId: pid })
       }
       isCreating={createItem.isPending}
     />

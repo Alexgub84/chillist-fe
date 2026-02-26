@@ -1,8 +1,3 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
@@ -16,6 +11,7 @@ import { groupBySubcategory } from '../core/utils/items';
 import BulkAssignButton from './BulkAssignButton';
 import ItemCard from './ItemCard';
 import SubcategorySection from './SubcategorySection';
+import CollapsibleSection from './shared/CollapsibleSection';
 
 interface CategorySectionProps {
   category: ItemCategory;
@@ -27,6 +23,7 @@ interface CategorySectionProps {
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
   onBulkAssign?: (itemIds: string[], participantId: string) => void;
+  restrictToUnassignedOnly?: boolean;
   groupBySubcategory?: boolean;
 }
 
@@ -69,6 +66,7 @@ export default function CategorySection({
   onEditItem,
   onUpdateItem,
   onBulkAssign,
+  restrictToUnassignedOnly,
   groupBySubcategory: useSubcategoryGroups = false,
 }: CategorySectionProps) {
   const { t } = useTranslation();
@@ -79,12 +77,8 @@ export default function CategorySection({
     : null;
 
   return (
-    <Disclosure
-      as="div"
-      defaultOpen
-      className="bg-white rounded-lg shadow-sm overflow-hidden"
-    >
-      <DisclosureButton className="group w-full px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 active:bg-gray-100 transition-colors">
+    <CollapsibleSection
+      title={
         <h3 className="text-base sm:text-lg font-semibold text-gray-800">
           {categoryLabel}
           {items.length > 0 && (
@@ -93,120 +87,105 @@ export default function CategorySection({
             </span>
           )}
         </h3>
-        <svg
-          className="w-5 h-5 text-gray-500 transition-transform group-data-open:rotate-180"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </DisclosureButton>
-      <DisclosurePanel
-        transition
-        className="origin-top transition duration-200 ease-out data-closed:-translate-y-6 data-closed:opacity-0"
-      >
-        {items.length > 0 ? (
-          <div className="border-t border-gray-200 divide-y divide-gray-200">
-            {subcategoryGroups && Object.keys(subcategoryGroups).length > 0
-              ? orderedSubcategoryEntries(subcategoryGroups, category).map(
-                  ([subcategory, subItems]) => (
-                    <SubcategorySection
-                      key={subcategory}
-                      subcategory={subcategory}
-                      items={subItems}
-                      participants={participants}
-                      onBulkAssign={onBulkAssign}
-                      cardProps={{
-                        participants,
-                        listFilter,
-                        selfAssignParticipantId,
-                        canEditItem,
-                        onEditItem,
-                        onUpdateItem,
-                      }}
-                    />
-                  )
+      }
+      wrapperClassName="bg-white rounded-lg shadow-sm overflow-hidden"
+    >
+      {items.length > 0 ? (
+        <div className="border-t border-gray-200 divide-y divide-gray-200">
+          {subcategoryGroups && Object.keys(subcategoryGroups).length > 0
+            ? orderedSubcategoryEntries(subcategoryGroups, category).map(
+                ([subcategory, subItems]) => (
+                  <SubcategorySection
+                    key={subcategory}
+                    subcategory={subcategory}
+                    items={subItems}
+                    participants={participants}
+                    onBulkAssign={onBulkAssign}
+                    restrictToUnassignedOnly={restrictToUnassignedOnly}
+                    selfParticipantId={selfAssignParticipantId}
+                    cardProps={{
+                      participants,
+                      listFilter,
+                      selfAssignParticipantId,
+                      canEditItem,
+                      onEditItem,
+                      onUpdateItem,
+                    }}
+                  />
                 )
-              : (() => {
-                  if (onBulkAssign && participants.length > 0) {
-                    return (
-                      <>
-                        <div className="px-4 sm:px-5 py-2 border-b border-gray-100">
-                          <BulkAssignButton
-                            items={items}
+              )
+            : (() => {
+                if (onBulkAssign && participants.length > 0) {
+                  return (
+                    <>
+                      <div className="px-4 sm:px-5 py-2 border-b border-gray-100">
+                        <BulkAssignButton
+                          items={items}
+                          participants={participants}
+                          onAssign={onBulkAssign}
+                          restrictToUnassignedOnly={restrictToUnassignedOnly}
+                          selfParticipantId={selfAssignParticipantId}
+                        />
+                      </div>
+                      {items.map((item) => {
+                        const editable = canEditItem ? canEditItem(item) : true;
+                        return (
+                          <ItemCard
+                            key={item.itemId}
+                            item={item}
                             participants={participants}
-                            onAssign={onBulkAssign}
+                            listFilter={listFilter}
+                            selfAssignParticipantId={selfAssignParticipantId}
+                            canEdit={editable}
+                            onEdit={
+                              onEditItem
+                                ? () => onEditItem(item.itemId)
+                                : undefined
+                            }
+                            onUpdate={
+                              onUpdateItem
+                                ? (updates) =>
+                                    onUpdateItem(item.itemId, updates)
+                                : undefined
+                            }
                           />
-                        </div>
-                        {items.map((item) => {
-                          const editable = canEditItem
-                            ? canEditItem(item)
-                            : true;
-                          return (
-                            <ItemCard
-                              key={item.itemId}
-                              item={item}
-                              participants={participants}
-                              listFilter={listFilter}
-                              selfAssignParticipantId={selfAssignParticipantId}
-                              canEdit={editable}
-                              onEdit={
-                                onEditItem
-                                  ? () => onEditItem(item.itemId)
-                                  : undefined
-                              }
-                              onUpdate={
-                                onUpdateItem
-                                  ? (updates) =>
-                                      onUpdateItem(item.itemId, updates)
-                                  : undefined
-                              }
-                            />
-                          );
-                        })}
-                      </>
-                    );
-                  }
-                  return items.map((item) => {
-                    const editable = canEditItem ? canEditItem(item) : true;
-                    return (
-                      <ItemCard
-                        key={item.itemId}
-                        item={item}
-                        participants={participants}
-                        listFilter={listFilter}
-                        selfAssignParticipantId={selfAssignParticipantId}
-                        canEdit={editable}
-                        onEdit={
-                          onEditItem ? () => onEditItem(item.itemId) : undefined
-                        }
-                        onUpdate={
-                          onUpdateItem
-                            ? (updates) => onUpdateItem(item.itemId, updates)
-                            : undefined
-                        }
-                      />
-                    );
-                  });
-                })()}
-          </div>
-        ) : (
-          <div className="border-t border-gray-200 px-4 sm:px-5 py-3 sm:py-4 text-center">
-            <p className="text-sm sm:text-base text-gray-500">
-              {t('categories.noItems', {
-                category: categoryLabel.toLowerCase(),
-              })}
-            </p>
-          </div>
-        )}
-      </DisclosurePanel>
-    </Disclosure>
+                        );
+                      })}
+                    </>
+                  );
+                }
+                return items.map((item) => {
+                  const editable = canEditItem ? canEditItem(item) : true;
+                  return (
+                    <ItemCard
+                      key={item.itemId}
+                      item={item}
+                      participants={participants}
+                      listFilter={listFilter}
+                      selfAssignParticipantId={selfAssignParticipantId}
+                      canEdit={editable}
+                      onEdit={
+                        onEditItem ? () => onEditItem(item.itemId) : undefined
+                      }
+                      onUpdate={
+                        onUpdateItem
+                          ? (updates) => onUpdateItem(item.itemId, updates)
+                          : undefined
+                      }
+                    />
+                  );
+                });
+              })()}
+        </div>
+      ) : (
+        <div className="border-t border-gray-200 px-4 sm:px-5 py-3 sm:py-4 text-center">
+          <p className="text-sm sm:text-base text-gray-500">
+            {t('categories.noItems', {
+              category: categoryLabel.toLowerCase(),
+            })}
+          </p>
+        </div>
+      )}
+    </CollapsibleSection>
   );
 }

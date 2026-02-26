@@ -9,12 +9,16 @@ interface BulkAssignButtonProps {
   items: Item[];
   participants: Participant[];
   onAssign: (itemIds: string[], participantId: string) => void;
+  restrictToUnassignedOnly?: boolean;
+  selfParticipantId?: string;
 }
 
 export default function BulkAssignButton({
   items,
   participants,
   onAssign,
+  restrictToUnassignedOnly,
+  selfParticipantId,
 }: BulkAssignButtonProps) {
   const { t } = useTranslation();
   const [dialogState, setDialogState] = useState<{
@@ -26,48 +30,61 @@ export default function BulkAssignButton({
     unassignedIds: string[];
   } | null>(null);
 
+  const effectiveItems = restrictToUnassignedOnly
+    ? items.filter((i) => !i.assignedParticipantId)
+    : items;
+
+  const effectiveParticipants =
+    restrictToUnassignedOnly && selfParticipantId
+      ? participants.filter((p) => p.participantId === selfParticipantId)
+      : participants;
+
   const participantOptions = useMemo(
     () =>
-      participants.map((p) => ({
+      effectiveParticipants.map((p) => ({
         id: p.participantId,
         label: `${p.name} ${p.lastName}`,
       })),
-    [participants]
+    [effectiveParticipants]
   );
 
   function handleSelectParticipant(participantId: string) {
     const selected = participantOptions.find((p) => p.id === participantId);
     if (!selected) return;
 
-    const allIds = items.map((i) => i.itemId);
-    const conflicts = items.filter(
+    const allIds = effectiveItems.map((i) => i.itemId);
+    const conflicts = effectiveItems.filter(
       (i) =>
         i.assignedParticipantId !== null &&
         i.assignedParticipantId !== undefined &&
         i.assignedParticipantId !== participantId
     );
-    const unassignedIds = items
+    const unassignedIds = effectiveItems
       .filter(
         (i) =>
           !i.assignedParticipantId || i.assignedParticipantId === participantId
       )
       .map((i) => i.itemId);
 
-    if (conflicts.length === 0) {
-      onAssign(allIds, participantId);
+    if (restrictToUnassignedOnly || conflicts.length === 0) {
+      onAssign(
+        unassignedIds.length > 0 ? unassignedIds : allIds,
+        participantId
+      );
     } else {
       setDialogState({
         participantId,
         participantName: selected.label,
         conflictCount: conflicts.length,
-        totalCount: items.length,
+        totalCount: effectiveItems.length,
         allIds,
         unassignedIds,
       });
     }
   }
 
-  if (participants.length === 0) return null;
+  if (effectiveParticipants.length === 0) return null;
+  if (restrictToUnassignedOnly && effectiveItems.length === 0) return null;
 
   return (
     <>
