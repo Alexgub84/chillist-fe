@@ -8,12 +8,11 @@ import { useAuth } from '../contexts/useAuth';
 import { useLanguage } from '../contexts/useLanguage';
 import { supabase } from '../lib/supabase';
 import {
-  countryCodes,
-  getFlagEmoji,
-  getDialCode,
+  combinePhone,
   detectCountryFromPhone,
   getDefaultCountryByLanguage,
 } from '../data/country-codes';
+import { PhoneInput } from '../components/PhoneInput';
 
 const profileSchema = z.object({
   firstName: z.string().max(100).optional().or(z.literal('')),
@@ -96,8 +95,7 @@ function CompleteProfileForm({
     if (values.lastName) data.last_name = values.lastName;
 
     if (values.phone) {
-      const dialCode = getDialCode(values.phoneCountry ?? '');
-      data.phone = dialCode ? `${dialCode}${values.phone}` : values.phone;
+      data.phone = combinePhone(values.phoneCountry, values.phone);
     }
 
     const emailChanged = !!values.email && values.email !== currentEmail;
@@ -186,33 +184,14 @@ function CompleteProfileForm({
             >
               {t('profile.phone')}
             </label>
-            <div className="mt-1 flex gap-2">
-              <select
-                {...register('phoneCountry')}
-                aria-label={t('profile.phoneCountry')}
-                className="w-[140px] shrink-0 rounded-md border border-gray-300 px-2 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              >
-                <option value="">{t('profile.phoneCountryDefault')}</option>
-                {countryCodes.map((c) => (
-                  <option key={c.code} value={c.code}>
-                    {getFlagEmoji(c.code)} {c.dialCode}
-                  </option>
-                ))}
-              </select>
-              <input
-                id="phone"
-                type="tel"
-                autoComplete="tel-national"
-                {...register('phone')}
-                className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                placeholder={t('profile.phonePlaceholder')}
-              />
-            </div>
-            {errors.phone && (
-              <p className="mt-1 text-sm text-red-600">
-                {errors.phone.message}
-              </p>
-            )}
+            <PhoneInput
+              countryProps={register('phoneCountry')}
+              phoneProps={{ ...register('phone'), id: 'phone' }}
+              countrySelectAriaLabel={t('profile.phoneCountry')}
+              phoneCountryDefaultLabel={t('profile.phoneCountryDefault')}
+              phonePlaceholder={t('profile.phonePlaceholder')}
+              error={errors.phone?.message}
+            />
           </div>
 
           <div>

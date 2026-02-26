@@ -3,18 +3,23 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
-import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import type { PlanWithDetails } from '../core/schemas/plan';
 import type {
   Participant,
   ParticipantCreate,
 } from '../core/schemas/participant';
-import { copyInviteLink, shareInviteLink } from '../core/invite';
 import { FormLabel } from './shared/FormLabel';
+import { ManageParticipantsList } from './ManageParticipantsList';
 import { FormInput } from './shared/FormInput';
 import Modal from './shared/Modal';
 import LocationMap from './LocationMap';
+import {
+  combinePhone,
+  getDefaultCountryByLanguage,
+} from '../data/country-codes';
+import { useLanguage } from '../contexts/useLanguage';
+import { PhoneInput } from './PhoneInput';
 
 function formatDateShort(iso: string): string {
   const d = new Date(iso);
@@ -29,21 +34,10 @@ function avatarBorderColor(role: Participant['role']) {
   return 'border-emerald-400';
 }
 
-function roleBadgeColor(role: Participant['role']) {
-  if (role === 'owner') return 'bg-amber-100 text-amber-800';
-  if (role === 'viewer') return 'bg-gray-100 text-gray-600';
-  return 'bg-blue-100 text-blue-700';
-}
-
-function rsvpBadgeColor(status: Participant['rsvpStatus']) {
-  if (status === 'confirmed') return 'bg-green-100 text-green-700';
-  if (status === 'not_sure') return 'bg-yellow-100 text-yellow-700';
-  return 'bg-gray-100 text-gray-500';
-}
-
 const addParticipantSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   lastName: z.string().min(1, 'Last name is required'),
+  phoneCountry: z.string().optional().or(z.literal('')),
   contactPhone: z.string().min(1, 'Phone is required'),
   contactEmail: z.string().optional(),
 });
@@ -60,6 +54,8 @@ function AddParticipantForm({
   isSubmitting: boolean;
 }) {
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const defaultPhoneCountry = getDefaultCountryByLanguage(language);
   const {
     register,
     handleSubmit,
@@ -69,6 +65,7 @@ function AddParticipantForm({
     defaultValues: {
       name: '',
       lastName: '',
+      phoneCountry: defaultPhoneCountry,
       contactPhone: '',
       contactEmail: '',
     },
@@ -78,7 +75,7 @@ function AddParticipantForm({
     await onSubmit({
       name: values.name.trim(),
       lastName: values.lastName.trim(),
-      contactPhone: values.contactPhone.trim(),
+      contactPhone: combinePhone(values.phoneCountry, values.contactPhone),
       contactEmail: values.contactEmail?.trim() || undefined,
     });
   }
@@ -117,16 +114,15 @@ function AddParticipantForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <FormLabel>{t('addParticipant.phone')}</FormLabel>
-          <FormInput
-            {...register('contactPhone')}
-            placeholder={t('addParticipant.phonePlaceholder')}
+          <PhoneInput
+            countryProps={register('phoneCountry')}
+            phoneProps={register('contactPhone')}
+            countrySelectAriaLabel={t('profile.phoneCountry')}
+            phoneCountryDefaultLabel={t('profile.phoneCountryDefault')}
+            phonePlaceholder={t('addParticipant.phonePlaceholder')}
             compact
+            error={errors.contactPhone?.message}
           />
-          {errors.contactPhone && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.contactPhone.message}
-            </p>
-          )}
         </div>
         <div>
           <FormLabel>{t('addParticipant.email')}</FormLabel>
@@ -352,122 +348,12 @@ export function Plan({
         title={t('plan.participants')}
       >
         <div className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-3">
-          {participants.length > 0 && (
-            <div className="space-y-2">
-              {participants.map((p) => (
-                <div
-                  key={p.participantId}
-                  className="flex items-center justify-between bg-gray-50 rounded-lg px-3 sm:px-4 py-2 sm:py-3"
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div
-                      className={clsx(
-                        'w-8 h-8 rounded-full border-2 bg-white flex items-center justify-center text-xs font-bold text-gray-600 shrink-0',
-                        avatarBorderColor(p.role)
-                      )}
-                    >
-                      {p.name.charAt(0)}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <p className="text-sm sm:text-base font-medium text-gray-800 truncate">
-                          {p.name} {p.lastName}
-                        </p>
-                        {isOwner && p.role !== 'owner' && (
-                          <span
-                            className={clsx(
-                              'text-xs font-medium px-2 py-0.5 rounded-full shrink-0',
-                              rsvpBadgeColor(p.rsvpStatus)
-                            )}
-                          >
-                            {t(`rsvpStatus.${p.rsvpStatus}`)}
-                          </span>
-                        )}
-                      </div>
-                      {p.contactPhone && (
-                        <p className="text-xs text-gray-500 truncate">
-                          {p.contactPhone}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    {p.inviteToken && p.role !== 'owner' && (
-                      <>
-                        <button
-                          type="button"
-                          title={t('invite.copyLink')}
-                          onClick={async () => {
-                            const copied = await copyInviteLink(
-                              plan.planId,
-                              p.inviteToken!
-                            );
-                            if (copied) {
-                              toast.success(t('invite.copied'));
-                            }
-                          }}
-                          className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
-                        >
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                            />
-                          </svg>
-                        </button>
-                        <button
-                          type="button"
-                          title={t('invite.shareLink')}
-                          onClick={async () => {
-                            const result = await shareInviteLink(
-                              plan.planId,
-                              p.inviteToken!,
-                              title
-                            );
-                            if (result === 'copied') {
-                              toast.success(t('invite.copied'));
-                            }
-                          }}
-                          className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
-                        >
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                            />
-                          </svg>
-                        </button>
-                      </>
-                    )}
-                    <span
-                      className={clsx(
-                        'text-xs font-medium px-2 py-0.5 rounded-full',
-                        roleBadgeColor(p.role)
-                      )}
-                    >
-                      {t(`roles.${p.role}`)}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <ManageParticipantsList
+            participants={participants}
+            planId={plan.planId}
+            planTitle={title}
+            isOwner={isOwner}
+          />
 
           {participants.length === 0 && !showAddForm && (
             <p className="text-gray-500 text-sm">{t('plan.noParticipants')}</p>

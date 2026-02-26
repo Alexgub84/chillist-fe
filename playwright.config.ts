@@ -11,7 +11,7 @@ export default defineConfig({
     : [['html', { open: 'never' }]],
   timeout: 60000,
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:5174',
     trace: 'on-first-retry',
   },
   projects: [
@@ -33,8 +33,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npx vite',
-    url: 'http://localhost:5173',
+    command: 'npx vite --port 5174',
+    url: 'http://localhost:5174',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
     env: { VITE_AUTH_MOCK: 'true' },

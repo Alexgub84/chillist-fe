@@ -15,12 +15,11 @@ import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 import { useLanguage } from '../contexts/useLanguage';
 import { useAuth } from '../contexts/useAuth';
 import {
-  countryCodes,
-  getFlagEmoji,
-  getDialCode,
+  combinePhone,
   detectCountryFromPhone,
   getDefaultCountryByLanguage,
 } from '../data/country-codes';
+import { PhoneInput } from './PhoneInput';
 import LocationAutocomplete from './LocationAutocomplete';
 import type { PlaceResult } from './LocationAutocomplete';
 
@@ -243,11 +242,6 @@ export default function PlanForm({
     );
   };
 
-  function combinePhone(country: string | undefined, phone: string): string {
-    const prefix = getDialCode(country ?? '');
-    return prefix ? `${prefix}${phone}` : phone;
-  }
-
   async function handleFormSubmit(values: FormValues): Promise<void> {
     const participants = (values.participants ?? [])
       .filter(
@@ -256,7 +250,7 @@ export default function PlanForm({
       .map((p) => ({
         name: p.name.trim(),
         lastName: p.lastName.trim(),
-        contactPhone: combinePhone(p.phoneCountry, p.contactPhone.trim()),
+        contactPhone: combinePhone(p.phoneCountry, p.contactPhone),
         contactEmail: p.contactEmail?.trim() || undefined,
       }));
 
@@ -267,10 +261,7 @@ export default function PlanForm({
       owner: {
         name: values.ownerName.trim(),
         lastName: values.ownerLastName.trim(),
-        contactPhone: combinePhone(
-          values.ownerPhoneCountry,
-          values.ownerPhone.trim()
-        ),
+        contactPhone: combinePhone(values.ownerPhoneCountry, values.ownerPhone),
         contactEmail: values.ownerEmail?.trim() || undefined,
       },
       participants: participants.length > 0 ? participants : undefined,
@@ -388,30 +379,15 @@ export default function PlanForm({
             </div>
             <div>
               <FormLabel>{t('planForm.phone')}</FormLabel>
-              <div className="flex gap-2">
-                <select
-                  {...register('ownerPhoneCountry')}
-                  aria-label={t('planForm.phoneCountry')}
-                  className="w-[140px] shrink-0 rounded-md border border-gray-300 px-2 py-1.5 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                >
-                  <option value="">{t('planForm.phoneCountryDefault')}</option>
-                  {countryCodes.map((c) => (
-                    <option key={c.code} value={c.code}>
-                      {getFlagEmoji(c.code)} {c.dialCode}
-                    </option>
-                  ))}
-                </select>
-                <FormInput
-                  {...register('ownerPhone')}
-                  placeholder={t('planForm.phonePlaceholder')}
-                  compact
-                />
-              </div>
-              {errors.ownerPhone && (
-                <p className="text-sm text-red-600 mt-1">
-                  {errors.ownerPhone.message}
-                </p>
-              )}
+              <PhoneInput
+                countryProps={register('ownerPhoneCountry')}
+                phoneProps={register('ownerPhone')}
+                countrySelectAriaLabel={t('planForm.phoneCountry')}
+                phoneCountryDefaultLabel={t('planForm.phoneCountryDefault')}
+                phonePlaceholder={t('planForm.phonePlaceholder')}
+                compact
+                error={errors.ownerPhone?.message}
+              />
             </div>
             <div>
               <FormLabel>{t('planForm.email')}</FormLabel>
@@ -473,32 +449,18 @@ export default function PlanForm({
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2">
-                    <select
-                      {...register(`participants.${index}.phoneCountry`)}
-                      aria-label={t('planForm.phoneCountry')}
-                      className="w-[140px] shrink-0 rounded-md border border-gray-300 px-2 py-1.5 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                    >
-                      <option value="">
-                        {t('planForm.phoneCountryDefault')}
-                      </option>
-                      {countryCodes.map((c) => (
-                        <option key={c.code} value={c.code}>
-                          {getFlagEmoji(c.code)} {c.dialCode}
-                        </option>
-                      ))}
-                    </select>
-                    <FormInput
-                      {...register(`participants.${index}.contactPhone`)}
-                      placeholder={t('planForm.phonePlaceholder')}
-                      compact
-                    />
-                  </div>
-                  {errors.participants?.[index]?.contactPhone && (
-                    <p className="text-sm text-red-600 mt-1">
-                      {errors.participants[index].contactPhone.message}
-                    </p>
-                  )}
+                  <PhoneInput
+                    countryProps={register(
+                      `participants.${index}.phoneCountry`
+                    )}
+                    phoneProps={register(`participants.${index}.contactPhone`)}
+                    countrySelectAriaLabel={t('planForm.phoneCountry')}
+                    phoneCountryDefaultLabel={t('planForm.phoneCountryDefault')}
+                    phonePlaceholder={t('planForm.phonePlaceholder')}
+                    compact
+                    hasLabel={false}
+                    error={errors.participants?.[index]?.contactPhone?.message}
+                  />
                 </div>
                 <div>
                   <FormInput

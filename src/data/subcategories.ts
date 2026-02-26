@@ -31,6 +31,7 @@ export const FOOD_SUBCATEGORIES = [
   'Meat and Poultry',
   'Fish and Seafood',
   'Meat Alternatives and Plant Proteins',
+  'Vegan',
   'Eggs',
   'Dairy',
   'Dairy Alternatives',
