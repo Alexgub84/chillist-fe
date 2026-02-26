@@ -15,6 +15,8 @@ import { FormLabel } from './shared/FormLabel';
 import { FormInput } from './shared/FormInput';
 import Modal from './shared/Modal';
 import LocationMap from './LocationMap';
+import { PlanParticipants } from './PlanParticipants';
+import { avatarBorderColor } from './participant-utils';
 
 function formatDateShort(iso: string): string {
   const d = new Date(iso);
@@ -22,11 +24,6 @@ function formatDateShort(iso: string): string {
   const month = String(d.getMonth() + 1).padStart(2, '0');
   const year = d.getFullYear();
   return `${day}.${month}.${year}`;
-}
-
-function avatarBorderColor(role: Participant['role']) {
-  if (role === 'viewer') return 'border-gray-300';
-  return 'border-emerald-400';
 }
 
 function roleBadgeColor(role: Participant['role']) {
@@ -274,49 +271,19 @@ export function Plan({
           </div>
         )}
 
-        <div>
-          <p className="text-xs font-medium text-blue-500 uppercase tracking-wider mb-2">
-            {t('plan.participants')} ({participants.length})
-          </p>
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-1 rtl:space-x-reverse">
-              {participants.map((p) => (
-                <div
-                  key={p.participantId}
-                  title={`${p.name} ${p.lastName}`}
-                  className={clsx(
-                    'w-9 h-9 rounded-full border-2 bg-white flex items-center justify-center text-xs font-bold text-gray-600',
-                    avatarBorderColor(p.role)
-                  )}
-                >
-                  {p.name.charAt(0)}
-                </div>
-              ))}
-              {onAddParticipant && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowAddForm(true);
-                    setShowManageModal(true);
-                  }}
-                  title={t('plan.addParticipant')}
-                  className="w-9 h-9 rounded-full border-2 border-dashed border-gray-300 bg-white flex items-center justify-center text-gray-400 hover:border-blue-400 hover:text-blue-500 transition-colors"
-                >
-                  +
-                </button>
-              )}
-            </div>
-            {isOwner && (
-              <button
-                type="button"
-                onClick={() => setShowManageModal(true)}
-                className="ms-2 px-4 py-1.5 border border-gray-300 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-50 active:bg-gray-100 transition-colors"
-              >
-                {t('plan.manage')}
-              </button>
-            )}
-          </div>
-        </div>
+        <PlanParticipants
+          participants={participants}
+          isOwner={isOwner}
+          onManageClick={() => setShowManageModal(true)}
+          onAddClick={
+            onAddParticipant
+              ? () => {
+                  setShowAddForm(true);
+                  setShowManageModal(true);
+                }
+              : undefined
+          }
+        />
 
         {isOwner && (onEdit || onDelete) && (
           <div className="border-t border-gray-200 pt-4 flex gap-3">
