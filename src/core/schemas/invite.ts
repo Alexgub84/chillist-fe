@@ -47,8 +47,8 @@ export const invitePlanResponseSchema = z.object({
   updatedAt: z.string(),
   items: z.array(itemSchema),
   participants: z.array(inviteParticipantSchema),
-  myParticipantId: z.string().optional(),
-  myRsvpStatus: z.enum(RSVP_STATUS_VALUES).optional(),
+  myParticipantId: z.string(),
+  myRsvpStatus: z.enum(RSVP_STATUS_VALUES),
   myPreferences: guestPreferencesSchema.nullish(),
 });
 
