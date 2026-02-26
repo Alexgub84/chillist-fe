@@ -33,35 +33,35 @@ export default function SubcategorySection({
           {subcategory}
           <span className="ms-2 text-gray-400">({items.length})</span>
         </h4>
-        <div className="flex items-center gap-1">
-          {onBulkAssign && (
-            <BulkAssignButton
-              items={items}
-              participants={participants}
-              onAssign={onBulkAssign}
-            />
-          )}
-          <svg
-            className="w-4 h-4 text-gray-400 transition-transform group-data-open:rotate-180"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </div>
+        <svg
+          className="w-4 h-4 text-gray-400 transition-transform group-data-open:rotate-180"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
       </DisclosureButton>
       <DisclosurePanel
         transition
         className="origin-top transition duration-150 ease-out data-closed:-translate-y-4 data-closed:opacity-0"
       >
         <div className="divide-y divide-gray-200">
+          {onBulkAssign && participants.length > 0 && (
+            <div className="px-4 sm:px-5 py-2 border-b border-gray-100">
+              <BulkAssignButton
+                items={items}
+                participants={participants}
+                onAssign={onBulkAssign}
+              />
+            </div>
+          )}
           {renderItemCards({ items, ...cardProps })}
         </div>
       </DisclosurePanel>

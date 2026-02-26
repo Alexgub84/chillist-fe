@@ -13,6 +13,7 @@ import {
   OTHER_SUBCATEGORY,
 } from '../data/subcategories';
 import { groupBySubcategory } from '../core/utils/items';
+import BulkAssignButton from './BulkAssignButton';
 import ItemCard from './ItemCard';
 import SubcategorySection from './SubcategorySection';
 
@@ -133,27 +134,68 @@ export default function CategorySection({
                     />
                   )
                 )
-              : items.map((item) => {
-                  const editable = canEditItem ? canEditItem(item) : true;
-                  return (
-                    <ItemCard
-                      key={item.itemId}
-                      item={item}
-                      participants={participants}
-                      listFilter={listFilter}
-                      selfAssignParticipantId={selfAssignParticipantId}
-                      canEdit={editable}
-                      onEdit={
-                        onEditItem ? () => onEditItem(item.itemId) : undefined
-                      }
-                      onUpdate={
-                        onUpdateItem
-                          ? (updates) => onUpdateItem(item.itemId, updates)
-                          : undefined
-                      }
-                    />
-                  );
-                })}
+              : (() => {
+                  if (onBulkAssign && participants.length > 0) {
+                    return (
+                      <>
+                        <div className="px-4 sm:px-5 py-2 border-b border-gray-100">
+                          <BulkAssignButton
+                            items={items}
+                            participants={participants}
+                            onAssign={onBulkAssign}
+                          />
+                        </div>
+                        {items.map((item) => {
+                          const editable = canEditItem
+                            ? canEditItem(item)
+                            : true;
+                          return (
+                            <ItemCard
+                              key={item.itemId}
+                              item={item}
+                              participants={participants}
+                              listFilter={listFilter}
+                              selfAssignParticipantId={selfAssignParticipantId}
+                              canEdit={editable}
+                              onEdit={
+                                onEditItem
+                                  ? () => onEditItem(item.itemId)
+                                  : undefined
+                              }
+                              onUpdate={
+                                onUpdateItem
+                                  ? (updates) =>
+                                      onUpdateItem(item.itemId, updates)
+                                  : undefined
+                              }
+                            />
+                          );
+                        })}
+                      </>
+                    );
+                  }
+                  return items.map((item) => {
+                    const editable = canEditItem ? canEditItem(item) : true;
+                    return (
+                      <ItemCard
+                        key={item.itemId}
+                        item={item}
+                        participants={participants}
+                        listFilter={listFilter}
+                        selfAssignParticipantId={selfAssignParticipantId}
+                        canEdit={editable}
+                        onEdit={
+                          onEditItem ? () => onEditItem(item.itemId) : undefined
+                        }
+                        onUpdate={
+                          onUpdateItem
+                            ? (updates) => onUpdateItem(item.itemId, updates)
+                            : undefined
+                        }
+                      />
+                    );
+                  });
+                })()}
           </div>
         ) : (
           <div className="border-t border-gray-200 px-4 sm:px-5 py-3 sm:py-4 text-center">
