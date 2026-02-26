@@ -95,18 +95,13 @@ export function SignUp() {
 
   async function handleGoogleSignUp() {
     try {
-      const pending = getPendingInvite();
-      const oauthRedirect = pending
-        ? `/invite/${pending.planId}/${pending.inviteToken}`
-        : redirectTo;
-
       console.info(
-        `[SignUp] Initiating Google OAuth, oauthRedirect="${oauthRedirect}".`
+        `[SignUp] Initiating Google OAuth, redirectTo="${redirectTo}".`
       );
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}${oauthRedirect}`,
+          redirectTo: `${window.location.origin}${redirectTo}`,
         },
       });
 
@@ -122,7 +117,7 @@ export function SignUp() {
         console.info(
           '[SignUp] Google OAuth returned no URL — navigating locally.'
         );
-        navigate({ to: oauthRedirect });
+        navigate({ to: redirectTo });
       }
     } catch (err) {
       console.error(

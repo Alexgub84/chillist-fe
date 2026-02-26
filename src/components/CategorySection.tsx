@@ -14,6 +14,7 @@ interface CategorySectionProps {
   items: Item[];
   participants?: Participant[];
   listFilter?: ListFilter | null;
+  selfAssignParticipantId?: string;
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
 }
@@ -23,6 +24,7 @@ export default function CategorySection({
   items,
   participants = [],
   listFilter,
+  selfAssignParticipantId,
   onEditItem,
   onUpdateItem,
 }: CategorySectionProps) {
@@ -71,6 +73,7 @@ export default function CategorySection({
                 item={item}
                 participants={participants}
                 listFilter={listFilter}
+                selfAssignParticipantId={selfAssignParticipantId}
                 onEdit={onEditItem ? () => onEditItem(item.itemId) : undefined}
                 onUpdate={
                   onUpdateItem

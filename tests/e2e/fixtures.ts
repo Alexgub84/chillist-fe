@@ -337,36 +337,11 @@ export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
       }
     });
   }
-
   await page.route(`${API_PATTERN}/plans`, async (route) => {
     const method = route.request().method();
     if (method === 'GET') {
       await route.fulfill({ json: planSummaries });
     } else if (method === 'POST') {
-      const body = route.request().postDataJSON();
-      const newPlan = buildPlan({ title: body.title });
-      planSummaries.push({
-        planId: newPlan.planId,
-        title: newPlan.title,
-        description: newPlan.description,
-        status: newPlan.status,
-        visibility: newPlan.visibility,
-        ownerParticipantId: newPlan.ownerParticipantId,
-        participantIds: newPlan.participantIds,
-        startDate: newPlan.startDate,
-        endDate: newPlan.endDate,
-        tags: newPlan.tags,
-        createdAt: newPlan.createdAt,
-        updatedAt: newPlan.updatedAt,
-      });
-      await route.fulfill({ json: newPlan, status: 201 });
-    } else {
-      await route.continue();
-    }
-  });
-
-  await page.route(`${API_PATTERN}/plans/with-owner`, async (route) => {
-    if (route.request().method() === 'POST') {
       const body = route.request().postDataJSON();
       const participants = [
         {

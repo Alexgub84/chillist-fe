@@ -80,11 +80,6 @@ export function handleResponse<T>(result: ApiResponse<T>, endpoint: string): T {
   return data as T;
 }
 
-export async function fetchPlansFromOpenAPI() {
-  const result = await client.GET('/plans');
-  return handleResponse(result, '/plans');
-}
-
 export async function checkHealth() {
   const result = await client.GET('/health');
   return handleResponse(result, '/health');

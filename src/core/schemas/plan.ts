@@ -66,20 +66,6 @@ export const planCreateWithOwnerSchema = z.object({
   participants: z.array(participantCreateSchema).optional(),
 });
 
-// Legacy schemas (used by deprecated POST /plans and PATCH /plans/:planId)
-export const planCreateSchema = z.object({
-  title: z.string().min(1, 'Title is required').max(255),
-  description: z.string().nullish(),
-  status: planStatusSchema.default('draft'),
-  visibility: planVisibilitySchema.default('private'),
-  ownerParticipantId: z.string().min(1),
-  location: locationSchema.nullish(),
-  startDate: z.string().datetime().nullish(),
-  endDate: z.string().datetime().nullish(),
-  tags: z.array(z.string()).nullish(),
-  participantIds: z.array(z.string()).nullish(),
-});
-
 export const planPatchSchema = z.object({
   title: z.string().min(1).max(255).optional(),
   description: z.string().nullish(),
@@ -96,6 +82,5 @@ export type PlanVisibility = z.infer<typeof planVisibilitySchema>;
 export type Plan = z.infer<typeof planSchema>;
 export type PlanWithItems = z.infer<typeof planWithItemsSchema>;
 export type PlanWithDetails = z.infer<typeof planWithDetailsSchema>;
-export type PlanCreate = z.infer<typeof planCreateSchema>;
 export type PlanCreateWithOwner = z.infer<typeof planCreateWithOwnerSchema>;
 export type PlanPatch = z.infer<typeof planPatchSchema>;

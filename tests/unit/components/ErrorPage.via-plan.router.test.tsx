@@ -4,8 +4,8 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { routeTree } from '../../../src/routeTree.gen';
+import { supabase } from '../../../src/lib/supabase';
 
-// Mock the usePlan hook used by the /plan/$planId route to return an error
 vi.mock('../../../src/hooks/usePlan', () => ({
   usePlan: () => ({
     data: undefined,
@@ -13,6 +13,28 @@ vi.mock('../../../src/hooks/usePlan', () => ({
     error: new Error('Plan fetch failed'),
   }),
 }));
+
+vi.mocked(supabase.auth.getSession).mockResolvedValue({
+  data: {
+    session: {
+      access_token: 'mock-token',
+      refresh_token: 'mock-refresh',
+      expires_in: 3600,
+      token_type: 'bearer',
+      user: {
+        id: 'test-user',
+        email: 'test@test.com',
+        aud: 'authenticated',
+        app_metadata: {},
+        user_metadata: {},
+        created_at: '',
+      },
+    },
+  },
+  error: null,
+} as ReturnType<typeof supabase.auth.getSession> extends Promise<infer R>
+  ? R
+  : never);
 
 describe('Router integration - Error via plan route', () => {
   it('renders ErrorPage when the plan loader/hook errors', async () => {

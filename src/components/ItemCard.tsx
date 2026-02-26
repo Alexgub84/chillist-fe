@@ -35,6 +35,7 @@ interface ItemCardProps {
   item: Item;
   participants?: Participant[];
   listFilter?: ListFilter | null;
+  selfAssignParticipantId?: string;
   onEdit?: () => void;
   onUpdate?: (updates: ItemPatch) => void;
 }
@@ -43,6 +44,7 @@ export default function ItemCard({
   item,
   participants = [],
   listFilter,
+  selfAssignParticipantId,
   onEdit,
   onUpdate,
 }: ItemCardProps) {
@@ -93,6 +95,105 @@ export default function ItemCard({
     }, 300);
   }
 
+  const isAssignedToMe =
+    !!selfAssignParticipantId &&
+    item.assignedParticipantId === selfAssignParticipantId;
+
+  function renderSelfAssign() {
+    if (!onUpdate || !selfAssignParticipantId) return null;
+
+    if (isAssignedToMe) {
+      return (
+        <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
+          <svg
+            className="w-3 h-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+          {t('items.assignedToMe')}
+          <button
+            type="button"
+            onClick={() => onUpdate({ assignedParticipantId: null })}
+            className="ms-0.5 text-indigo-400 hover:text-indigo-700 transition-colors"
+            aria-label={t('items.unassignItem', { name: item.name })}
+          >
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </span>
+      );
+    }
+
+    if (item.assignedParticipantId && assignedParticipant) {
+      return (
+        <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-gray-100 text-gray-500 border border-gray-200">
+          <svg
+            className="w-3 h-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+          {assignedParticipant.name} {assignedParticipant.lastName}
+        </span>
+      );
+    }
+
+    return (
+      <button
+        type="button"
+        onClick={() =>
+          onUpdate({ assignedParticipantId: selfAssignParticipantId })
+        }
+        className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-blue-50 text-blue-600 border border-dashed border-blue-300 hover:bg-blue-100 hover:border-blue-400 transition-colors cursor-pointer"
+      >
+        <svg
+          className="w-3 h-3"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 4v16m8-8H4"
+          />
+        </svg>
+        {t('items.assignToMe')}
+      </button>
+    );
+  }
+
   if (quickAction && onUpdate) {
     return (
       <label
@@ -134,7 +235,7 @@ export default function ItemCard({
               </span>
             )}
 
-            {assignedParticipant && (
+            {isAssignedToMe ? (
               <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
                 <svg
                   className="w-3 h-3"
@@ -150,8 +251,28 @@ export default function ItemCard({
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                {assignedParticipant.name} {assignedParticipant.lastName}
+                {t('items.assignedToMe')}
               </span>
+            ) : (
+              assignedParticipant && (
+                <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
+                  <svg
+                    className="w-3 h-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                  {assignedParticipant.name} {assignedParticipant.lastName}
+                </span>
+              )
             )}
           </div>
         </div>
@@ -298,55 +419,57 @@ export default function ItemCard({
           </span>
         )}
 
-        {participants.length > 0 && (
-          <>
-            {onUpdate ? (
-              <InlineSelect
-                value={item.assignedParticipantId ?? ''}
-                onChange={(participantId) =>
-                  onUpdate({
-                    assignedParticipantId: participantId || null,
-                  })
-                }
-                options={assignmentOptions}
-                buttonClassName={clsx(
-                  'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium transition-colors',
-                  item.assignedParticipantId
-                    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                    : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300 hover:border-gray-400'
-                )}
-                ariaLabel={`Assign ${item.name} to participant`}
-              />
-            ) : (
-              <span
-                className={clsx(
-                  'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium',
-                  assignedParticipant
-                    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                    : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300'
-                )}
-              >
-                <svg
-                  className="w-3 h-3"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        {selfAssignParticipantId && onUpdate
+          ? renderSelfAssign()
+          : participants.length > 0 && (
+              <>
+                {onUpdate ? (
+                  <InlineSelect
+                    value={item.assignedParticipantId ?? ''}
+                    onChange={(participantId) =>
+                      onUpdate({
+                        assignedParticipantId: participantId || null,
+                      })
+                    }
+                    options={assignmentOptions}
+                    buttonClassName={clsx(
+                      'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium transition-colors',
+                      item.assignedParticipantId
+                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                        : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300 hover:border-gray-400'
+                    )}
+                    ariaLabel={`Assign ${item.name} to participant`}
                   />
-                </svg>
-                {assignedParticipant
-                  ? `${assignedParticipant.name} ${assignedParticipant.lastName}`
-                  : t('items.unassigned')}
-              </span>
+                ) : (
+                  <span
+                    className={clsx(
+                      'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium',
+                      assignedParticipant
+                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                        : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300'
+                    )}
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                    {assignedParticipant
+                      ? `${assignedParticipant.name} ${assignedParticipant.lastName}`
+                      : t('items.unassigned')}
+                  </span>
+                )}
+              </>
             )}
-          </>
-        )}
       </div>
     </div>
   );
