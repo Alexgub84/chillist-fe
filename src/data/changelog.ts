@@ -15,7 +15,7 @@ export const changelog: ChangelogEntry[] = [
     date: '2026-02-26',
     title: 'Collapsible plan details',
     description:
-      'The plan details section on the plan page is now collapsible. It opens by default for owners and participants who haven\'t confirmed their RSVP, and stays collapsed otherwise to keep the focus on items.',
+      "The plan details section on the plan page is now collapsible. It opens by default for owners and participants who haven't confirmed their RSVP, and stays collapsed otherwise to keep the focus on items.",
   },
   {
     date: '2026-02-26',
