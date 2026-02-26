@@ -459,11 +459,13 @@ function PlanDetails() {
                   editingParticipant.foodPreferences ?? undefined,
                 allergies: editingParticipant.allergies ?? undefined,
                 notes: editingParticipant.notes ?? undefined,
+                rsvpStatus: editingParticipant.rsvpStatus as 'confirmed' | 'not_sure' | null | undefined,
               }}
               onSubmit={handlePreferencesSubmit}
               onCancel={() => setEditingParticipantId(null)}
               isSubmitting={updateParticipantMutation.isPending}
               inModal
+              showRsvp={editingParticipant.role !== 'owner'}
             />
           )}
         </Modal>
