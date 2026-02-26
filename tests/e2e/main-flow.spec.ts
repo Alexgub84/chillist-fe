@@ -196,6 +196,54 @@ test.describe('Item CRUD', () => {
       'Purchased'
     );
   });
+
+  test('bulk adds multiple items via wizard modal', async ({ page }) => {
+    await injectUserSession(page);
+    const plan = buildTestPlan();
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('E2E Test Trip')).toBeVisible({
+      timeout: 10000,
+    });
+
+    await page.getByText('Manage Items').click();
+    await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
+    await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
+
+    await page.getByRole('button', { name: /add multiple/i }).click();
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText('What are you adding?')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog
+      .getByRole('button', { name: 'Equipment', exact: true })
+      .click();
+    await expect(dialog.getByText('Choose a subcategory')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByRole('button', { name: /First Aid and Safety/ }).click();
+
+    await expect(dialog.getByPlaceholder('Search items…')).toBeVisible({
+      timeout: 5000,
+    });
+    const firstAidCheckbox = dialog
+      .locator('div')
+      .filter({ hasText: /^First Aid Kit$/ })
+      .getByRole('checkbox');
+    await firstAidCheckbox.check();
+
+    const submitBtn = dialog.getByRole('button', { name: /add 1 item/i });
+    await expect(submitBtn).toBeVisible();
+    await submitBtn.click();
+
+    await expect(page.getByText(/added 1 item/i).first()).toBeVisible({
+      timeout: 10000,
+    });
+  });
 });
 
 test.describe('Edit Plan', () => {
@@ -749,5 +797,65 @@ test.describe('Invite Landing Page', () => {
     const parsed = JSON.parse(stored!);
     expect(parsed.planId).toBe(plan.planId);
     expect(parsed.inviteToken).toBe(inviteToken);
+  });
+
+  test('guest can bulk add items from invite items page', async ({ page }) => {
+    const API_PATTERN = '**/localhost:3333';
+    const plan = buildPlan({
+      title: 'BBQ Party',
+      participants: [
+        { name: 'Owner', lastName: 'User', phone: '555-0100', role: 'owner' },
+        { name: 'Guest', lastName: 'User', phone: '555-0200' },
+      ],
+      items: [{ name: 'Charcoal', category: 'equipment', quantity: 1 }],
+    });
+
+    const inviteToken = plan.participants[1].inviteToken!;
+    await mockInviteRoute(page, plan, inviteToken, {
+      myRsvpStatus: 'confirmed',
+    });
+
+    await page.route(
+      `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}/items`,
+      async (route) => {
+        if (route.request().method() === 'POST') {
+          await route.fulfill({ json: { ok: true }, status: 201 });
+        } else {
+          await route.continue();
+        }
+      }
+    );
+
+    await page.goto(`/items/${plan.planId}?token=${inviteToken}`);
+    await expect(page.getByText('Charcoal')).toBeVisible({ timeout: 10000 });
+
+    await page.getByRole('button', { name: /add multiple/i }).click();
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText('What are you adding?')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByRole('button', { name: 'Food', exact: true }).click();
+    await expect(dialog.getByText('Choose a subcategory')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByRole('button', { name: /Dairy/ }).click();
+
+    await expect(dialog.getByPlaceholder('Search items…')).toBeVisible({
+      timeout: 5000,
+    });
+
+    await dialog.getByText('Select all').click();
+    await expect(dialog.getByText('Deselect all')).toBeVisible();
+
+    const submitBtn = dialog.getByRole('button', { name: /add \d+ items/i });
+    await expect(submitBtn).toBeVisible();
+    await submitBtn.click();
+
+    await expect(page.getByText(/added \d+ items/i).first()).toBeVisible({
+      timeout: 10000,
+    });
   });
 });

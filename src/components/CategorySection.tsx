@@ -14,6 +14,7 @@ import {
 } from '../data/subcategories';
 import { groupBySubcategory } from '../core/utils/items';
 import ItemCard from './ItemCard';
+import SubcategorySection from './SubcategorySection';
 
 interface CategorySectionProps {
   category: ItemCategory;
@@ -24,6 +25,7 @@ interface CategorySectionProps {
   canEditItem?: (item: Item) => boolean;
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
+  onBulkAssign?: (itemIds: string[], participantId: string) => void;
   groupBySubcategory?: boolean;
 }
 
@@ -65,6 +67,7 @@ export default function CategorySection({
   canEditItem,
   onEditItem,
   onUpdateItem,
+  onBulkAssign,
   groupBySubcategory: useSubcategoryGroups = false,
 }: CategorySectionProps) {
   const { t } = useTranslation();
@@ -113,44 +116,21 @@ export default function CategorySection({
             {subcategoryGroups && Object.keys(subcategoryGroups).length > 0
               ? orderedSubcategoryEntries(subcategoryGroups, category).map(
                   ([subcategory, subItems]) => (
-                    <div key={subcategory}>
-                      <div className="px-4 sm:px-5 py-2 bg-gray-50">
-                        <h4 className="text-sm font-medium text-gray-600">
-                          {subcategory}
-                          <span className="ms-2 text-gray-400">
-                            ({subItems.length})
-                          </span>
-                        </h4>
-                      </div>
-                      <div className="divide-y divide-gray-200">
-                        {subItems.map((item) => {
-                          const editable = canEditItem
-                            ? canEditItem(item)
-                            : true;
-                          return (
-                            <ItemCard
-                              key={item.itemId}
-                              item={item}
-                              participants={participants}
-                              listFilter={listFilter}
-                              selfAssignParticipantId={selfAssignParticipantId}
-                              canEdit={editable}
-                              onEdit={
-                                onEditItem
-                                  ? () => onEditItem(item.itemId)
-                                  : undefined
-                              }
-                              onUpdate={
-                                onUpdateItem
-                                  ? (updates) =>
-                                      onUpdateItem(item.itemId, updates)
-                                  : undefined
-                              }
-                            />
-                          );
-                        })}
-                      </div>
-                    </div>
+                    <SubcategorySection
+                      key={subcategory}
+                      subcategory={subcategory}
+                      items={subItems}
+                      participants={participants}
+                      onBulkAssign={onBulkAssign}
+                      cardProps={{
+                        participants,
+                        listFilter,
+                        selfAssignParticipantId,
+                        canEditItem,
+                        onEditItem,
+                        onUpdateItem,
+                      }}
+                    />
                   )
                 )
               : items.map((item) => {

@@ -56,6 +56,7 @@ import {
   fetchPlans,
   claimInvite,
   saveGuestPreferences,
+  syncProfile,
   updateItem,
   updateParticipant,
   updatePlan,
@@ -819,6 +820,29 @@ describe('API Client', () => {
       fetchMock.mockResolvedValueOnce(mockResponse({ invalid: true }));
 
       await expect(fetchAuthMe()).rejects.toThrow();
+    });
+  });
+
+  describe('Auth - syncProfile', () => {
+    it('posts to /auth/sync-profile with provided refreshed token', async () => {
+      const sessionCallsBefore = supabaseMock.auth.getSession.mock.calls.length;
+      fetchMock.mockResolvedValueOnce(mockResponse({ synced: 3 }));
+
+      const synced = await syncProfile('fresh-token-123');
+
+      expect(synced).toBe(3);
+      const lastCall = fetchMock.mock.calls[fetchMock.mock.calls.length - 1];
+      expect(lastCall[0]).toBe('http://api.test/auth/sync-profile');
+      expect(lastCall[1].method).toBe('POST');
+      expect(lastCall[1].headers.Authorization).toBe('Bearer fresh-token-123');
+      expect(supabaseMock.auth.getSession.mock.calls.length).toBe(
+        sessionCallsBefore
+      );
+    });
+
+    it('rejects when /auth/sync-profile response shape is invalid', async () => {
+      fetchMock.mockResolvedValueOnce(mockResponse({ synced: '3' }));
+      await expect(syncProfile('fresh-token-123')).rejects.toThrow();
     });
   });
 });

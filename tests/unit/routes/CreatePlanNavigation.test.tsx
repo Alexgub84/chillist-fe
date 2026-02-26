@@ -100,7 +100,9 @@ describe('CreatePlan - Navigation', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText(/my plans/i)).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /my plans/i })
+      ).toBeInTheDocument();
       expect(screen.getByText('Summer Picnic')).toBeInTheDocument();
     });
 

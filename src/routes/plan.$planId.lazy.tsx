@@ -34,6 +34,7 @@ import ParticipantFilter from '../components/ParticipantFilter';
 import type { Item, ItemPatch } from '../core/schemas/item';
 import type { PlanPatch } from '../core/schemas/plan';
 import type { ListFilter } from '../core/schemas/plan-search';
+import { useBulkAssign } from '../hooks/useBulkAssign';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanDetails,
@@ -60,6 +61,8 @@ function PlanDetails() {
     string | null
   >(null);
   const [showEditPlanModal, setShowEditPlanModal] = useState(false);
+
+  const bulkAssign = useBulkAssign(planId, plan?.participants ?? []);
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
@@ -397,6 +400,12 @@ function PlanDetails() {
             canEditItem={canEditItem}
             onEditItem={(itemId) => setItemModalId(itemId)}
             onUpdateItem={updateItem}
+            onBulkAssign={
+              isOwner
+                ? (ids, pid) =>
+                    bulkAssign.mutate({ itemIds: ids, participantId: pid })
+                : undefined
+            }
             groupBySubcategory
           />
         )}

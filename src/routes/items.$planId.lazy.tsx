@@ -17,6 +17,7 @@ import type { Participant } from '../core/schemas/participant';
 import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../contexts/useAuth';
+import { useBulkAssign } from '../hooks/useBulkAssign';
 import ErrorPage from './ErrorPage';
 import ItemsView from '../components/ItemsView';
 
@@ -43,6 +44,7 @@ function AuthItemsPage({ planId }: { planId: string }) {
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
+  const bulkAssign = useBulkAssign(planId, plan?.participants ?? []);
 
   useScrollRestore(`items-${planId}`, !isLoading && !!plan);
 
@@ -76,6 +78,12 @@ function AuthItemsPage({ planId }: { planId: string }) {
       onUpdateItem={async (itemId, updates) => {
         await updateItemMutation.mutateAsync({ itemId, updates });
       }}
+      onBulkAssign={
+        isOwner
+          ? (ids, pid) =>
+              bulkAssign.mutate({ itemIds: ids, participantId: pid })
+          : undefined
+      }
       isCreating={createItem.isPending}
     />
   );

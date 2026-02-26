@@ -13,6 +13,7 @@ export interface ItemsListProps {
   canEditItem?: (item: Item) => boolean;
   onEditItem?: (itemId: string) => void;
   onUpdateItem?: (itemId: string, updates: ItemPatch) => void;
+  onBulkAssign?: (itemIds: string[], participantId: string) => void;
   groupBySubcategory?: boolean;
 }
 
@@ -24,6 +25,7 @@ export default function ItemsList({
   canEditItem,
   onEditItem,
   onUpdateItem,
+  onBulkAssign,
   groupBySubcategory = true,
 }: ItemsListProps) {
   const itemsByCategory = CATEGORIES.map((category) => ({
@@ -44,6 +46,7 @@ export default function ItemsList({
           canEditItem={canEditItem}
           onEditItem={onEditItem}
           onUpdateItem={onUpdateItem}
+          onBulkAssign={onBulkAssign}
           groupBySubcategory={groupBySubcategory}
         />
       ))}

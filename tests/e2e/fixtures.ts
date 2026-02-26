@@ -321,10 +321,18 @@ export async function injectUserSession(page: Page) {
 
 export async function mockPlansListRoutes(page: Page, plans: MockPlan[] = []) {
   const planSummaries = plans.map((plan) => {
-    const { items, participants, ...summary } = plan;
+    const { items, ...summary } = plan;
     void items;
-    void participants;
-    return summary;
+    const owner = plan.participants.find((p) => p.role === 'owner');
+    return {
+      ...summary,
+      createdByUserId: owner?.userId ?? null,
+      participants: plan.participants.map((p) => ({
+        participantId: p.participantId,
+        userId: p.userId,
+        role: p.role,
+      })),
+    };
   });
 
   for (const plan of plans) {

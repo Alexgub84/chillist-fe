@@ -6,6 +6,16 @@ import AuthProvider from '../../../src/contexts/AuthProvider';
 import { useAuth } from '../../../src/contexts/useAuth';
 import { supabase } from '../../../src/lib/supabase';
 import { emitAuthError } from '../../../src/core/auth-error';
+import { syncProfile } from '../../../src/core/api';
+
+vi.mock('../../../src/core/api', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../../src/core/api')>();
+  return {
+    ...actual,
+    claimInvite: vi.fn(),
+    syncProfile: vi.fn(),
+  };
+});
 
 const mockNavigate = vi.fn();
 vi.mock('@tanstack/react-router', async (importOriginal) => {
@@ -18,6 +28,7 @@ vi.mock('@tanstack/react-router', async (importOriginal) => {
 });
 
 const mockSupabase = vi.mocked(supabase);
+const mockSyncProfile = vi.mocked(syncProfile);
 
 function AuthConsumer() {
   const { user, loading, signOut } = useAuth();
@@ -50,6 +61,7 @@ function renderWithProvider() {
 describe('AuthProvider', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockSyncProfile.mockResolvedValue(0);
     mockSupabase.auth.getSession.mockResolvedValue({
       data: { session: null },
       error: null,
@@ -223,6 +235,16 @@ describe('AuthProvider', () => {
       error: null,
     } as never);
 
+    mockSupabase.auth.refreshSession.mockResolvedValue({
+      data: {
+        session: {
+          ...initialSession,
+          access_token: 'refreshed-token',
+        },
+      },
+      error: null,
+    } as never);
+
     let authCallback: (...args: unknown[]) => void = () => {};
     mockSupabase.auth.onAuthStateChange.mockImplementation(
       (cb: (...args: unknown[]) => void) => {
@@ -251,6 +273,10 @@ describe('AuthProvider', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('first-name')).toHaveTextContent('Alex');
+    });
+    await waitFor(() => {
+      expect(mockSupabase.auth.refreshSession).toHaveBeenCalledOnce();
+      expect(mockSyncProfile).toHaveBeenCalledWith('refreshed-token');
     });
   });
 
