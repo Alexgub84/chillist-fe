@@ -325,6 +325,8 @@ test.describe('Participant Preferences Access', () => {
     await page.goto(`/plan/${plan.planId}`);
     await expect(page.getByText('Owner Plan')).toBeVisible({ timeout: 10000 });
 
+    await page.getByText('Group Details').click();
+
     const detailsSection = page.getByText('Group Details').locator('..');
     await expect(detailsSection.getByText('Edit').first()).toBeVisible();
   });
@@ -357,7 +359,7 @@ test.describe('Participant Preferences Access', () => {
     await page.goto(`/plan/${plan.planId}`);
     await expect(page.getByText('Other Plan')).toBeVisible({ timeout: 10000 });
 
-    await expect(page.getByText('Group Details')).toBeVisible();
+    await page.getByText('Group Details').click();
     await expect(page.getByText('Guest Person')).toBeVisible();
 
     const editButtons = page
@@ -513,6 +515,7 @@ test.describe('Invite Landing Page', () => {
     await expect(page.getByText('Sunscreen')).not.toBeVisible();
     await expect(page.getByText('Burgers')).not.toBeVisible();
 
+    await page.getByText('Participants').click();
     await expect(page.getByText('Alex Smith')).toBeVisible();
     await expect(page.getByText('Bob Jones')).toBeVisible();
   });
@@ -579,11 +582,19 @@ test.describe('Invite Landing Page', () => {
     ).toBeVisible();
   });
 
-  test('shows "Go to plan" link when authenticated', async ({ page }) => {
+  test('authenticated user is auto-redirected to plan page', async ({
+    page,
+  }) => {
     const plan = buildPlan({
       title: 'Camping Trip',
       participants: [
-        { name: 'Owner', lastName: 'User', phone: '555-0100', role: 'owner' },
+        {
+          name: 'Owner',
+          lastName: 'User',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'regular-user-id',
+        },
         { name: 'Guest', lastName: 'User', phone: '555-0200' },
       ],
     });
@@ -591,19 +602,22 @@ test.describe('Invite Landing Page', () => {
     const inviteToken = plan.participants[1].inviteToken!;
     await injectUserSession(page);
     await mockInviteRoute(page, plan, inviteToken);
+    await mockPlanRoutes(page, plan);
+
+    const API_PATTERN = '**/localhost:3333';
+    await page.route(
+      `${API_PATTERN}/plans/${plan.planId}/invite/${inviteToken}/claim`,
+      async (route) => {
+        await route.fulfill({ json: { ok: true }, status: 200 });
+      }
+    );
+
     await page.goto(`/invite/${plan.planId}/${inviteToken}`);
 
+    await expect(page).toHaveURL(`/plan/${plan.planId}`, { timeout: 15000 });
     await expect(page.getByText('Camping Trip')).toBeVisible({
       timeout: 10000,
     });
-
-    const goToPlanLink = page.getByRole('link', { name: /go to plan/i });
-    await expect(goToPlanLink).toBeVisible();
-    await expect(goToPlanLink).toHaveAttribute('href', `/plan/${plan.planId}`);
-
-    await expect(
-      page.getByRole('link', { name: /sign in to join/i })
-    ).not.toBeVisible();
   });
 
   test('guest can continue without signing in and sees preferences modal', async ({
