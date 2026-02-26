@@ -55,8 +55,9 @@ function AuthItemsPage({ planId }: { planId: string }) {
   if (error) throw error;
   if (!plan) throw new Error(t('plan.notFound'));
 
-  const owner = plan.participants.find((p) => p.role === 'owner');
-  const isOwner = !!user && !!owner?.userId && user.id === owner.userId;
+  const isOwner =
+    !!user &&
+    plan.participants.some((p) => p.role === 'owner' && p.userId === user.id);
   const currentParticipant = user
     ? plan.participants.find((p) => p.userId === user.id)
     : undefined;

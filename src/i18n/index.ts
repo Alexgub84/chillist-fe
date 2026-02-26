@@ -6,6 +6,7 @@ import {
 } from '../contexts/language-context';
 import en from './locales/en.json';
 import he from './locales/he.json';
+import es from './locales/es.json';
 
 const STORAGE_KEY = 'chillist-lang';
 
@@ -23,6 +24,7 @@ i18n.use(initReactI18next).init({
   resources: {
     en: { translation: en },
     he: { translation: he },
+    es: { translation: es },
   },
   lng: getSavedLanguage(),
   fallbackLng: SUPPORTED_LANGUAGES[0],

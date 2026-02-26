@@ -1,11 +1,11 @@
 {
   "name": "chillist-fe",
   "private": true,
-  "version": "1.15.1",
+  "version": "1.16.0",
   "type": "module",
   "scripts": {
     "predev": "npm run api:fetch",
-    "dev": "vite --env-file .env.local",
+    "dev": "vite",
     "build": "vite build",
     "test": "npm run typecheck && npm run lint && vitest run && playwright test",
     "test:unit": "vitest run tests/unit",

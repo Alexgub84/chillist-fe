@@ -321,4 +321,72 @@ describe('ParticipantDetails', () => {
     expect(screen.getByText('Pending')).toBeInTheDocument();
     expect(screen.getByText('Not sure')).toBeInTheDocument();
   });
+
+  it('shows Make owner button for non-owner participants when isOwner and onMakeOwner provided', async () => {
+    render(
+      <ParticipantDetails
+        participants={[
+          buildParticipant({
+            participantId: 'p-owner',
+            name: 'Owner',
+            role: 'owner',
+          }),
+          buildParticipant({
+            participantId: 'p-2',
+            name: 'Jane',
+            role: 'participant',
+          }),
+        ]}
+        planId="plan-1"
+        planTitle="Test"
+        isOwner
+        onMakeOwner={vi.fn()}
+      />
+    );
+    await expandParticipants();
+
+    const makeOwnerButtons = screen.getAllByTestId('make-owner');
+    expect(makeOwnerButtons).toHaveLength(1);
+  });
+
+  it('does not show Make owner button for owner participant', async () => {
+    render(
+      <ParticipantDetails
+        participants={[buildParticipant({ role: 'owner' })]}
+        planId="plan-1"
+        planTitle="Test"
+        isOwner
+        onMakeOwner={vi.fn()}
+      />
+    );
+    await expandParticipants();
+
+    expect(screen.queryByTestId('make-owner')).not.toBeInTheDocument();
+  });
+
+  it('calls onMakeOwner with participantId when Make owner is clicked', async () => {
+    const user = userEvent.setup();
+    const onMakeOwner = vi.fn();
+    render(
+      <ParticipantDetails
+        participants={[
+          buildParticipant({
+            participantId: 'p-42',
+            name: 'Jane',
+            role: 'participant',
+          }),
+        ]}
+        planId="plan-1"
+        planTitle="Test"
+        isOwner
+        onMakeOwner={onMakeOwner}
+      />
+    );
+    await expandParticipants();
+
+    await user.click(screen.getByTestId('make-owner'));
+
+    expect(onMakeOwner).toHaveBeenCalledTimes(1);
+    expect(onMakeOwner).toHaveBeenCalledWith('p-42');
+  });
 });

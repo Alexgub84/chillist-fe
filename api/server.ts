@@ -71,6 +71,7 @@ const planPatchSchema = z.object({
 });
 
 const participantCreateRoleSchema = z.enum(['participant', 'viewer']);
+const participantPatchRoleSchema = z.enum(['participant', 'viewer', 'owner']);
 
 const participantCreateSchema = z.object({
   name: z.string().min(1).max(255),
@@ -92,7 +93,7 @@ const participantPatchSchema = z.object({
   lastName: z.string().min(1).max(255).optional(),
   contactPhone: z.string().min(1).max(50).optional(),
   displayName: z.string().max(255).nullable().optional(),
-  role: participantCreateRoleSchema.optional(),
+  role: participantPatchRoleSchema.optional(),
   avatarUrl: z.string().nullable().optional(),
   contactEmail: z.string().max(255).nullable().optional(),
   adultsCount: z.number().int().min(0).nullable().optional(),
@@ -129,6 +130,7 @@ const itemCreateSchema = z.object({
   quantity: z.number().int().min(1),
   unit: unitSchema.optional(),
   status: itemStatusSchema,
+  subcategory: z.string().nullable().optional(),
   notes: z.string().nullable().optional(),
   assignedParticipantId: z.string().nullable().optional(),
 });
@@ -688,6 +690,7 @@ export async function buildServer(
         quantity: Number(body.quantity ?? 1),
         unit: String(body.unit ?? 'pcs'),
         status: 'pending',
+        subcategory: body.subcategory ? String(body.subcategory) : null,
         notes: body.notes ? String(body.notes) : null,
         assignedParticipantId: tokenMatch.participantId,
         createdAt: now,
@@ -822,18 +825,21 @@ export async function buildServer(
 
       const nextRole = updates.role ?? participant.role;
 
-      Object.assign(participant, updates, {
-        updatedAt: now,
-        isOwner: nextRole === 'owner',
-      });
-
-      store.plans.forEach((plan) => {
-        if (
-          plan.participantIds?.includes(participant.participantId) &&
-          participant.isOwner
-        ) {
+      if (nextRole === 'owner') {
+        const plan = store.plans.find(
+          (p) =>
+            p.planId === (participant as { planId?: string }).planId ||
+            p.participantIds?.includes(participant.participantId) ||
+            p.ownerParticipantId === participant.participantId
+        );
+        if (plan && !plan.ownerParticipantId) {
           plan.ownerParticipantId = participant.participantId;
         }
+      }
+
+      Object.assign(participant, updates, {
+        updatedAt: now,
+        role: nextRole,
       });
 
       await persistData(store, shouldPersist, filePath);
@@ -898,6 +904,7 @@ export async function buildServer(
         quantity: parsed.quantity,
         unit: parsed.unit ?? 'pcs',
         status: parsed.status,
+        subcategory: parsed.subcategory ?? null,
         notes: parsed.notes,
         assignedParticipantId: parsed.assignedParticipantId,
         createdAt: now,

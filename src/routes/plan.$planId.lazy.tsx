@@ -29,6 +29,7 @@ import PreferencesForm, {
   type PreferencesFormValues,
 } from '../components/PreferencesForm';
 import Modal from '../components/shared/Modal';
+import CollapsibleSection from '../components/shared/CollapsibleSection';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
 import type { Item, ItemPatch } from '../core/schemas/item';
@@ -61,6 +62,8 @@ function PlanDetails() {
     string | null
   >(null);
   const [showEditPlanModal, setShowEditPlanModal] = useState(false);
+  const [transferTargetParticipantId, setTransferTargetParticipantId] =
+    useState<string | null>(null);
 
   const bulkAssign = useBulkAssign(planId, plan?.participants ?? []);
 
@@ -154,8 +157,9 @@ function PlanDetails() {
     setEditingParticipantId(null);
   }
 
-  const owner = plan.participants.find((p) => p.role === 'owner');
-  const isOwner = !!user && !!owner?.userId && user.id === owner.userId;
+  const isOwner =
+    !!user &&
+    plan.participants.some((p) => p.role === 'owner' && p.userId === user.id);
   const currentParticipant = user
     ? plan.participants.find((p) => p.userId === user.id)
     : undefined;
@@ -165,6 +169,9 @@ function PlanDetails() {
     : (item: Item) =>
         !!currentParticipant &&
         item.assignedParticipantId === currentParticipant.participantId;
+
+  const planDetailsOpen =
+    isOwner || currentParticipant?.rsvpStatus !== 'confirmed';
 
   async function handleDeletePlan() {
     try {
@@ -190,6 +197,26 @@ function PlanDetails() {
     } catch (err) {
       console.error(
         `[PlanPage] handleEditPlan failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
+  async function handleTransferOwnership() {
+    if (!transferTargetParticipantId) return;
+    try {
+      await updateParticipantMutation.mutateAsync({
+        participantId: transferTargetParticipantId,
+        updates: { role: 'owner' },
+      });
+      toast.success(t('participantDetails.addOwnerSuccess'));
+      setTransferTargetParticipantId(null);
+    } catch (err) {
+      console.error(
+        `[PlanPage] handleTransferOwnership failed — planId="${planId}", participantId="${transferTargetParticipantId}". Error: ${err instanceof Error ? err.message : String(err)}`
       );
       const { title, message } = getApiErrorMessage(
         err instanceof Error ? err : new Error(String(err))
@@ -243,17 +270,29 @@ function PlanDetails() {
             {t('plan.backToPlans')}
           </Link>
         </div>
-        <Plan
-          plan={plan}
-          onAddParticipant={async (p) => {
-            await createParticipantMutation.mutateAsync(p);
-          }}
-          isAddingParticipant={createParticipantMutation.isPending}
-          isOwner={isOwner}
-          onEdit={() => setShowEditPlanModal(true)}
-          onDelete={handleDeletePlan}
-          isDeleting={deletePlanMutation.isPending}
-        />
+        <CollapsibleSection
+          title={
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+              {t('plan.planDetails')}
+            </h2>
+          }
+          defaultOpen={planDetailsOpen}
+          wrapperClassName="bg-white rounded-xl shadow-sm overflow-hidden"
+          panelContentClassName="border-t border-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-5"
+        >
+          <Plan
+            plan={plan}
+            onAddParticipant={async (p) => {
+              await createParticipantMutation.mutateAsync(p);
+            }}
+            isAddingParticipant={createParticipantMutation.isPending}
+            isOwner={isOwner}
+            onEdit={() => setShowEditPlanModal(true)}
+            onDelete={handleDeletePlan}
+            isDeleting={deletePlanMutation.isPending}
+            onMakeOwner={isOwner ? setTransferTargetParticipantId : undefined}
+          />
+        </CollapsibleSection>
 
         <div className="mt-4 sm:mt-6">
           <Forecast
@@ -272,6 +311,7 @@ function PlanDetails() {
               isOwner={isOwner}
               currentParticipantId={currentParticipant?.participantId}
               onEditPreferences={setEditingParticipantId}
+              onMakeOwner={isOwner ? setTransferTargetParticipantId : undefined}
             />
           </div>
         )}
@@ -477,6 +517,45 @@ function PlanDetails() {
             onCancel={() => setShowEditPlanModal(false)}
             isSubmitting={updatePlanMutation.isPending}
           />
+        </Modal>
+
+        <Modal
+          open={transferTargetParticipantId !== null}
+          onClose={() => setTransferTargetParticipantId(null)}
+          title={t('participantDetails.addOwnerTitle')}
+          testId="add-owner-dialog"
+        >
+          <div className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-4">
+            <p className="text-sm text-gray-600">
+              {t('participantDetails.addOwnerMessage', {
+                name: (() => {
+                  const target = plan.participants.find(
+                    (x) => x.participantId === transferTargetParticipantId
+                  );
+                  return target ? `${target.name} ${target.lastName}` : '';
+                })(),
+              })}
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                data-testid="transfer-ownership-confirm"
+                disabled={updateParticipantMutation.isPending}
+                onClick={handleTransferOwnership}
+                className="flex-1 px-4 py-2 bg-amber-600 text-white font-semibold rounded-lg hover:bg-amber-700 active:bg-amber-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+              >
+                {t('participantDetails.addOwnerConfirm')}
+              </button>
+              <button
+                type="button"
+                disabled={updateParticipantMutation.isPending}
+                onClick={() => setTransferTargetParticipantId(null)}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 disabled:opacity-50 transition-colors text-sm"
+              >
+                {t('participantDetails.addOwnerCancel')}
+              </button>
+            </div>
+          </div>
         </Modal>
       </div>
 

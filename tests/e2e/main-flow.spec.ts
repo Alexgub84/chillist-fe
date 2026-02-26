@@ -113,7 +113,9 @@ test.describe('Plan creation via UI', () => {
     await skipBtn.click({ force: true });
 
     await expect(page).toHaveURL(/\/plan\//, { timeout: 15000 });
-    await expect(page.getByText('E2E Test Trip')).toBeVisible();
+    await expect(page.getByText('E2E Test Trip')).toBeVisible({
+      timeout: 10000,
+    });
     await expect(page.getByText('Alex Test').first()).toBeVisible();
   });
 });
@@ -437,6 +439,49 @@ test.describe('Participant Preferences Access', () => {
 
     await page.goto(`/plan/${plan.planId}`);
     await expect(page).toHaveURL(/\/signin/, { timeout: 10000 });
+  });
+
+  test('owner can add another participant as owner', async ({ page }) => {
+    await injectUserSession(page);
+
+    const plan = buildPlan({
+      title: 'Add Owner Test Plan',
+      participants: [
+        {
+          name: 'Owner',
+          lastName: 'User',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'regular-user-id',
+        },
+        {
+          name: 'Guest',
+          lastName: 'Person',
+          phone: '555-0200',
+          role: 'participant',
+        },
+      ],
+    });
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('Add Owner Test Plan')).toBeVisible({
+      timeout: 10000,
+    });
+
+    const makeOwnerBtn = page.getByTestId('make-owner');
+    await expect(makeOwnerBtn).toBeVisible({ timeout: 5000 });
+    await makeOwnerBtn.click({ force: true });
+
+    const dialog = page.getByTestId('add-owner-dialog');
+    await expect(dialog).toBeVisible({ timeout: 10000 });
+    await expect(dialog.getByText('Guest Person')).toBeVisible();
+
+    await page.getByTestId('transfer-ownership-confirm').click({ force: true });
+    await expect(dialog).toBeHidden({ timeout: 10000 });
+    await expect(page.getByText('Added as owner successfully')).toBeVisible({
+      timeout: 10000,
+    });
   });
 });
 

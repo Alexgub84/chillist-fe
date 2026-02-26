@@ -8,18 +8,10 @@ import {
   EQUIPMENT_SUBCATEGORIES,
   FOOD_SUBCATEGORIES,
 } from '../data/subcategories';
-import commonItemsEn from '../data/common-items.json';
-import commonItemsHe from '../data/common-items.he.json';
-
-interface CommonItem {
-  name: string;
-  category: ItemCategory;
-  subcategory?: string;
-  unit: string;
-}
-
-const EN_ITEMS: CommonItem[] = commonItemsEn as CommonItem[];
-const HE_ITEMS: CommonItem[] = commonItemsHe as CommonItem[];
+import {
+  getCommonItems,
+  type CommonItemBase,
+} from '../data/common-items-registry';
 
 interface SelectedItem {
   name: string;
@@ -71,10 +63,7 @@ export default function BulkAddModal({
     setTimeout(reset, 200);
   }
 
-  const items = useMemo(
-    () => (language === 'he' ? HE_ITEMS : EN_ITEMS),
-    [language]
-  );
+  const items = useMemo(() => getCommonItems(language), [language]);
 
   const subcategories = useMemo(() => {
     if (!category) return [];
@@ -115,7 +104,7 @@ export default function BulkAddModal({
   }, [filteredItems, selected]);
 
   const toggleItem = useCallback(
-    (item: CommonItem) => {
+    (item: CommonItemBase) => {
       setSelected((prev) => {
         const next = new Map(prev);
         if (next.has(item.name)) {
@@ -218,7 +207,9 @@ export default function BulkAddModal({
       ? t('items.bulkAddTitle')
       : step === 'subcategory'
         ? t('items.bulkAddPickSubcategory')
-        : (subcategory ?? t('items.bulkAddSelectItems'));
+        : subcategory
+          ? t(`subcategories.${subcategory}`, subcategory)
+          : t('items.bulkAddSelectItems');
 
   return (
     <Modal open={open} onClose={handleClose} title={modalTitle}>
@@ -378,7 +369,7 @@ function SubcategoryStep({
               className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors text-start cursor-pointer"
             >
               <span className="text-sm font-medium text-gray-800">
-                {sub.name}
+                {t(`subcategories.${sub.name}`, sub.name)}
               </span>
               <span className="text-xs text-gray-400">
                 {t('items.bulkAddItemCount', { count: sub.count })}
@@ -408,7 +399,7 @@ function ItemsStep({
   onSubmit,
   onBack,
 }: {
-  filteredItems: CommonItem[];
+  filteredItems: CommonItemBase[];
   selected: Map<string, SelectedItem>;
   allFilteredSelected: boolean;
   search: string;
@@ -418,7 +409,7 @@ function ItemsStep({
   onSearchChange: (v: string) => void;
   onCustomNameChange: (v: string) => void;
   onAddCustom: () => void;
-  onToggleItem: (item: CommonItem) => void;
+  onToggleItem: (item: CommonItemBase) => void;
   onToggleSelectAll: () => void;
   onUpdateQuantity: (name: string, delta: number) => void;
   onSubmit: () => void;

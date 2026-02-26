@@ -7,6 +7,7 @@ import {
 export interface CollapsibleSectionProps {
   title: React.ReactNode;
   defaultOpen?: boolean;
+  forceOpen?: boolean;
   children: React.ReactNode;
   wrapperClassName?: string;
   buttonClassName?: string;
@@ -46,6 +47,7 @@ function ChevronIcon({ className }: { className?: string }) {
 export default function CollapsibleSection({
   title,
   defaultOpen = true,
+  forceOpen = false,
   children,
   wrapperClassName,
   buttonClassName = DEFAULT_BUTTON_CLASS,
@@ -54,6 +56,24 @@ export default function CollapsibleSection({
   panelContentClassName,
   chevronClassName,
 }: CollapsibleSectionProps) {
+  if (forceOpen) {
+    return (
+      <div className={wrapperClassName}>
+        <div className={buttonClassName}>
+          {title}
+          <ChevronIcon className={chevronClassName} />
+        </div>
+        <div className={panelClassName}>
+          {panelContentClassName ? (
+            <div className={panelContentClassName}>{children}</div>
+          ) : (
+            children
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Disclosure as="div" defaultOpen={defaultOpen} className={wrapperClassName}>
       <DisclosureButton as={buttonAs} className={buttonClassName}>

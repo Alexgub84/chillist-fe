@@ -163,6 +163,7 @@ interface PlanProps {
   onEdit?: () => void;
   onDelete?: () => void;
   isDeleting?: boolean;
+  onMakeOwner?: (participantId: string) => void;
 }
 
 export function Plan({
@@ -173,6 +174,7 @@ export function Plan({
   onEdit,
   onDelete,
   isDeleting = false,
+  onMakeOwner,
 }: PlanProps) {
   const { t } = useTranslation();
   const [showManageModal, setShowManageModal] = useState(false);
@@ -181,7 +183,8 @@ export function Plan({
 
   const { title, description, startDate, endDate, participants, location } =
     plan;
-  const owner = participants.find((p) => p.role === 'owner');
+  const owners = participants.filter((p) => p.role === 'owner');
+  const owner = owners[0];
 
   async function handleAddParticipant(participant: ParticipantCreate) {
     if (!onAddParticipant) return;
@@ -191,7 +194,7 @@ export function Plan({
 
   return (
     <div className="w-full">
-      <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 space-y-4 sm:space-y-5">
+      <div className="space-y-4 sm:space-y-5">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-800 line-clamp-2">
           {title}
         </h1>
@@ -353,6 +356,7 @@ export function Plan({
             planId={plan.planId}
             planTitle={title}
             isOwner={isOwner}
+            onMakeOwner={onMakeOwner}
           />
 
           {participants.length === 0 && !showAddForm && (

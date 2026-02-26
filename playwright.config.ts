@@ -37,6 +37,6 @@ export default defineConfig({
     url: 'http://localhost:5174',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
-    env: { VITE_AUTH_MOCK: 'true' },
+    env: { VITE_AUTH_MOCK: 'true', VITE_E2E: 'true' },
   },
 });

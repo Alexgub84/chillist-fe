@@ -39,6 +39,7 @@ interface ParticipantDetailsProps {
   isOwner?: boolean;
   currentParticipantId?: string;
   onEditPreferences?: (participantId: string) => void;
+  onMakeOwner?: (participantId: string) => void;
 }
 
 export default function ParticipantDetails({
@@ -48,8 +49,10 @@ export default function ParticipantDetails({
   isOwner = false,
   currentParticipantId,
   onEditPreferences,
+  onMakeOwner,
 }: ParticipantDetailsProps) {
   const { t } = useTranslation();
+  const keepOpenForE2E = import.meta.env.VITE_E2E === 'true';
 
   if (participants.length === 0) return null;
 
@@ -64,6 +67,7 @@ export default function ParticipantDetails({
         </h2>
       }
       wrapperClassName="bg-white rounded-lg shadow-sm overflow-hidden"
+      forceOpen={keepOpenForE2E}
       panelContentClassName="border-t border-gray-200 p-4 sm:p-5 space-y-3"
     >
       {participants.map((p) => {
@@ -80,6 +84,11 @@ export default function ParticipantDetails({
                 ? () => onEditPreferences(p.participantId)
                 : undefined
             }
+            onMakeOwner={
+              isOwner && p.role !== 'owner' && onMakeOwner
+                ? () => onMakeOwner(p.participantId)
+                : undefined
+            }
           />
         );
       })}
@@ -93,12 +102,14 @@ function ParticipantCard({
   planTitle,
   isOwner,
   onEdit,
+  onMakeOwner,
 }: {
   participant: Participant;
   planId: string;
   planTitle: string;
   isOwner: boolean;
   onEdit?: () => void;
+  onMakeOwner?: () => void;
 }) {
   const { t } = useTranslation();
   const filled = hasPreferences(p);
@@ -131,9 +142,12 @@ function ParticipantCard({
     }
   }
 
+  const hasActions =
+    (p.inviteToken && p.role !== 'owner') || onEdit || onMakeOwner;
+
   return (
     <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5">
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
         <div className="flex items-center gap-3 min-w-0">
           <div
             className={clsx(
@@ -144,7 +158,7 @@ function ParticipantCard({
             {p.name.charAt(0)}
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-sm sm:text-base font-medium text-gray-800 truncate">
+            <span className="text-sm sm:text-base font-medium text-gray-800 wrap-break-word">
               {p.name} {p.lastName}
             </span>
             <div className="flex items-center gap-2 mt-0.5">
@@ -169,63 +183,81 @@ function ParticipantCard({
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2 shrink-0 ms-2">
-          {p.inviteToken && p.role !== 'owner' && (
-            <>
+        {hasActions && (
+          <div className="flex items-center gap-2 ps-12 sm:ps-0 sm:ms-2 shrink-0">
+            {p.inviteToken && p.role !== 'owner' && (
+              <>
+                <button
+                  type="button"
+                  title={t('invite.copyLink')}
+                  onClick={handleCopy}
+                  className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  title={t('invite.shareLink')}
+                  onClick={handleShare}
+                  className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                    />
+                  </svg>
+                </button>
+                {(onEdit || onMakeOwner) && (
+                  <span className="w-px h-4 bg-gray-200" aria-hidden="true" />
+                )}
+              </>
+            )}
+            {onEdit && (
               <button
                 type="button"
-                title={t('invite.copyLink')}
-                onClick={handleCopy}
-                className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
+                onClick={onEdit}
+                className="text-blue-500 hover:text-blue-700 text-sm font-medium shrink-0"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                  />
-                </svg>
+                {t('participantDetails.edit')}
               </button>
+            )}
+            {onEdit && onMakeOwner && (
+              <span className="w-px h-4 bg-gray-200" aria-hidden="true" />
+            )}
+            {onMakeOwner && (
               <button
                 type="button"
-                title={t('invite.shareLink')}
-                onClick={handleShare}
-                className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors rounded-md hover:bg-blue-50"
+                onClick={onMakeOwner}
+                data-testid="make-owner"
+                className="text-amber-600 hover:text-amber-700 text-sm font-medium shrink-0"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                  />
-                </svg>
+                {t('participantDetails.makeOwner')}
               </button>
-            </>
-          )}
-          {onEdit && (
-            <button
-              type="button"
-              onClick={onEdit}
-              className="text-blue-500 hover:text-blue-700 text-sm font-medium shrink-0"
-            >
-              {t('participantDetails.edit')}
-            </button>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
 
       {!filled && (

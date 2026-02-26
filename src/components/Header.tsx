@@ -43,9 +43,10 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
-  const { user, loading, signOut } = useAuth();
+  const { user, loading, signOut, isAdmin } = useAuth();
   const { t } = useTranslation();
   const { language, setLanguage } = useLanguage();
 
@@ -92,7 +93,10 @@ export default function Header() {
           </Link>
 
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+              if (isMenuOpen) setIsMobileLangOpen(false);
+            }}
             className="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors"
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
@@ -148,6 +152,16 @@ export default function Header() {
                   {t('nav.about')}
                 </Link>
               </li>
+              {isAdmin && (
+                <li>
+                  <Link
+                    to="/admin/last-updated"
+                    className="block px-3 py-2 text-base sm:text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
+                  >
+                    Last Updated
+                  </Link>
+                </li>
+              )}
             </ul>
 
             <div className="relative" ref={langMenuRef}>
@@ -291,7 +305,10 @@ export default function Header() {
           <div
             className="fixed inset-0 z-40 sm:hidden"
             aria-hidden="true"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => {
+              setIsMenuOpen(false);
+              setIsMobileLangOpen(false);
+            }}
           />
         )}
         {isMenuOpen && (
@@ -315,32 +332,77 @@ export default function Header() {
                   {t('nav.about')}
                 </Link>
               </li>
-              {SUPPORTED_LANGUAGES.map((code) => {
-                const meta = LANGUAGE_META[code];
-                return (
-                  <li key={code} className="border-b border-gray-100">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        selectLanguage(code);
-                        setIsMenuOpen(false);
-                      }}
-                      data-testid={`lang-toggle-mobile-${code}`}
-                      className={clsx(
-                        'flex w-full items-center justify-between px-4 py-3 text-base font-medium transition-colors',
-                        code === language
-                          ? 'text-blue-600 bg-blue-50'
-                          : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                      )}
-                    >
-                      <span>{meta.nativeLabel}</span>
-                      <span className="text-gray-400">
-                        {meta.currencySymbol}
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
+              {isAdmin && (
+                <li className="border-b border-gray-100">
+                  <Link
+                    to="/admin/last-updated"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
+                  >
+                    Last Updated
+                  </Link>
+                </li>
+              )}
+              <li className="border-b border-gray-100">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileLangOpen(!isMobileLangOpen)}
+                  data-testid="lang-toggle-mobile"
+                  className="flex w-full items-center justify-between px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  <span>
+                    {currentMeta.nativeLabel}{' '}
+                    <span className="text-gray-400">
+                      {currentMeta.currencySymbol}
+                    </span>
+                  </span>
+                  <svg
+                    className={clsx(
+                      'h-4 w-4 text-gray-400 transition-transform',
+                      isMobileLangOpen && 'rotate-180'
+                    )}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+                {isMobileLangOpen && (
+                  <div className="bg-gray-50">
+                    {SUPPORTED_LANGUAGES.map((code) => {
+                      const meta = LANGUAGE_META[code];
+                      return (
+                        <button
+                          key={code}
+                          type="button"
+                          onClick={() => {
+                            selectLanguage(code);
+                            setIsMobileLangOpen(false);
+                            setIsMenuOpen(false);
+                          }}
+                          data-testid={`lang-toggle-mobile-${code}`}
+                          className={clsx(
+                            'flex w-full items-center justify-between px-6 py-2.5 text-sm transition-colors',
+                            code === language
+                              ? 'text-blue-600 bg-blue-50 font-semibold'
+                              : 'text-gray-600 hover:text-blue-600 hover:bg-gray-100'
+                          )}
+                        >
+                          <span>{meta.nativeLabel}</span>
+                          <span className="text-gray-400">
+                            {meta.currencySymbol}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </li>
               {!loading && (
                 <li className="border-b border-gray-100 last:border-b-0">
                   {user ? (
