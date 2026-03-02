@@ -19,6 +19,7 @@ import { useAuth } from '../contexts/useAuth';
 import { getApiErrorMessage } from '../core/error-utils';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
+import RequestToJoinPage from '../components/RequestToJoinPage';
 import Forecast from '../components/Forecast';
 import ParticipantDetails from '../components/ParticipantDetails';
 import ItemsList from '../components/ItemsList';
@@ -33,6 +34,7 @@ import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
 import type { Item, ItemPatch } from '../core/schemas/item';
 import type { PlanPatch } from '../core/schemas/plan';
+import { isNotParticipantResponse } from '../core/schemas/plan';
 import type { ListFilter } from '../core/schemas/plan-search';
 import { useBulkAssign } from '../hooks/useBulkAssign';
 
@@ -63,7 +65,10 @@ function PlanDetails() {
   const [transferTargetParticipantId, setTransferTargetParticipantId] =
     useState<string | null>(null);
 
-  const bulkAssign = useBulkAssign(planId, plan?.participants ?? []);
+  const bulkAssign = useBulkAssign(
+    planId,
+    plan && !isNotParticipantResponse(plan) ? plan.participants : []
+  );
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
@@ -77,6 +82,10 @@ function PlanDetails() {
 
   if (!plan) {
     throw new Error(t('plan.notFound'));
+  }
+
+  if (isNotParticipantResponse(plan)) {
+    return <RequestToJoinPage planId={planId} response={plan} />;
   }
 
   const isCreating = itemModalId === 'new';

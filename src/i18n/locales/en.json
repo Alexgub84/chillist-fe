@@ -510,6 +510,19 @@
     "he": "עב",
     "es": "ES"
   },
+  "joinRequest": {
+    "title": "Request to Join",
+    "subtitle": "You're not a participant in this plan. Fill in your details to request access.",
+    "submit": "Send Request",
+    "submitting": "Sending…",
+    "successTitle": "Request sent!",
+    "successMessage": "The plan owner will review your request.",
+    "pendingBadge": "Pending approval",
+    "approvedBadge": "Approved",
+    "rejectedBadge": "Rejected",
+    "alreadySentTitle": "Request already sent",
+    "alreadySentMessage": "Your request to join this plan is being reviewed."
+  },
   "admin": {
     "deletePlan": "Delete",
     "deleteConfirmTitle": "Delete Plan?",

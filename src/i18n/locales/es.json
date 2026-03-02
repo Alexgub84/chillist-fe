@@ -494,6 +494,19 @@
     "he": "עב",
     "es": "ES"
   },
+  "joinRequest": {
+    "title": "Solicitar unirse",
+    "subtitle": "No eres participante de este plan. Completa tus datos para solicitar acceso.",
+    "submit": "Enviar solicitud",
+    "submitting": "Enviando…",
+    "successTitle": "¡Solicitud enviada!",
+    "successMessage": "El propietario del plan revisará tu solicitud.",
+    "pendingBadge": "Pendiente de aprobación",
+    "approvedBadge": "Aprobado",
+    "rejectedBadge": "Rechazado",
+    "alreadySentTitle": "Solicitud ya enviada",
+    "alreadySentMessage": "Tu solicitud para unirte a este plan está siendo revisada."
+  },
   "admin": {
     "deletePlan": "Eliminar",
     "deleteConfirmTitle": "¿Eliminar plan?",

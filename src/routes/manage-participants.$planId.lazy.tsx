@@ -12,6 +12,7 @@ import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { useAuth } from '../contexts/useAuth';
 import type { ParticipantCreate } from '../core/schemas/participant';
+import { isNotParticipantResponse } from '../core/schemas/plan';
 import { getApiErrorMessage } from '../core/error-utils';
 import type { PreferencesFormValues } from '../components/PreferencesForm';
 import clsx from 'clsx';
@@ -46,9 +47,10 @@ function ManageParticipantsPage() {
   const isOwner =
     !!user &&
     !!plan &&
+    !isNotParticipantResponse(plan) &&
     plan.participants.some((p) => p.role === 'owner' && p.userId === user.id);
   const currentParticipant =
-    user && plan
+    user && plan && !isNotParticipantResponse(plan)
       ? plan.participants.find((p) => p.userId === user.id)
       : undefined;
 
@@ -65,7 +67,7 @@ function ManageParticipantsPage() {
   if (error) throw error;
   if (!plan) throw new Error(t('plan.notFound'));
 
-  if (!isOwner) {
+  if (!isOwner || isNotParticipantResponse(plan)) {
     return null;
   }
 

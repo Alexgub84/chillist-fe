@@ -6,6 +6,12 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: '2026-03-02',
+    title: 'Request to Join plan',
+    description:
+      "Invited users who aren't yet participants now see a plan preview and a form to request access instead of a crash. Once submitted, the page shows a pending status badge until the owner approves.",
+  },
+  {
     date: '2026-02-26',
     title: 'Admin changelog page',
     description:

@@ -14,6 +14,7 @@ import { useUpdateItem } from '../hooks/useUpdateItem';
 import { addGuestItem, updateGuestItem } from '../core/api';
 import { getApiErrorMessage } from '../core/error-utils';
 import type { Participant } from '../core/schemas/participant';
+import { isNotParticipantResponse } from '../core/schemas/plan';
 import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../contexts/useAuth';
@@ -44,7 +45,10 @@ function AuthItemsPage({ planId }: { planId: string }) {
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
-  const bulkAssign = useBulkAssign(planId, plan?.participants ?? []);
+  const bulkAssign = useBulkAssign(
+    planId,
+    plan && !isNotParticipantResponse(plan) ? plan.participants : []
+  );
 
   useScrollRestore(`items-${planId}`, !isLoading && !!plan);
 
@@ -54,6 +58,10 @@ function AuthItemsPage({ planId }: { planId: string }) {
 
   if (error) throw error;
   if (!plan) throw new Error(t('plan.notFound'));
+
+  if (isNotParticipantResponse(plan)) {
+    return null;
+  }
 
   const isOwner =
     !!user &&
