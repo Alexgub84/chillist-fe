@@ -200,6 +200,7 @@ export default function ItemCard({
   if (quickAction && isEditable) {
     return (
       <label
+        data-testid={`item-card-${item.itemId}`}
         data-scroll-item-id={item.itemId}
         className={clsx(
           'border-l-4 px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:bg-gray-50/80 select-none',
@@ -285,6 +286,7 @@ export default function ItemCard({
 
   return (
     <div
+      data-testid={`item-card-${item.itemId}`}
       data-scroll-item-id={item.itemId}
       className={clsx(
         'border-l-4 px-4 sm:px-5 py-3 sm:py-4 transition-colors hover:bg-gray-50/80',

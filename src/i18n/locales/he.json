@@ -19,6 +19,7 @@
   "signIn": {
     "title": "התחברות",
     "subtitle": "ברוכים השבים ל-Chillist.",
+    "planRedirectSubtitle": "התחברו כדי לצפות בתוכנית או לבקש להצטרף.",
     "email": "אימייל",
     "password": "סיסמה",
     "emailPlaceholder": "you@example.com",
@@ -33,6 +34,7 @@
   "signUp": {
     "title": "יצירת חשבון",
     "subtitle": "הירשם כדי להתחיל לתכנן עם Chillist.",
+    "planRedirectSubtitle": "צרו חשבון כדי לצפות בתוכנית או לבקש להצטרף.",
     "email": "אימייל",
     "password": "סיסמה",
     "emailPlaceholder": "you@example.com",
@@ -448,7 +450,11 @@
     "requestStatus_pending": "ממתין",
     "requestStatus_approved": "אושר",
     "requestStatus_rejected": "נדחה",
-    "participantAdded": "המשתתף נוסף"
+    "participantAdded": "המשתתף נוסף",
+    "approveRequest": "אשר",
+    "rejectRequest": "דחה",
+    "requestApproved": "בקשת ההצטרפות אושרה",
+    "requestRejected": "בקשת ההצטרפות נדחתה"
   },
   "participantDetails": {
     "title": "פרטי הקבוצה",
@@ -509,6 +515,19 @@
     "en": "EN",
     "he": "עב",
     "es": "ES"
+  },
+  "joinRequest": {
+    "title": "בקשה להצטרפות",
+    "subtitle": "אינך משתתף בתוכנית זו. מלא את פרטיך כדי לבקש גישה.",
+    "submit": "שליחת בקשה",
+    "submitting": "שולח…",
+    "successTitle": "הבקשה נשלחה!",
+    "successMessage": "בעל התוכנית יבחן את בקשתך.",
+    "pendingBadge": "ממתין לאישור",
+    "approvedBadge": "אושר",
+    "rejectedBadge": "נדחה",
+    "alreadySentTitle": "הבקשה כבר נשלחה",
+    "alreadySentMessage": "בקשתך להצטרף לתוכנית זו נמצאת בבדיקה."
   },
   "admin": {
     "deletePlan": "מחיקה",

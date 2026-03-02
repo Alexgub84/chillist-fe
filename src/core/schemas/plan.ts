@@ -91,6 +91,20 @@ export const planPatchSchema = z.object({
   tags: z.array(z.string()).nullish(),
 });
 
+export const planPreviewSchema = z.object({
+  title: z.string(),
+  description: z.string().nullish(),
+  location: locationSchema.nullish(),
+  startDate: z.string().nullish(),
+  endDate: z.string().nullish(),
+});
+
+export const notParticipantResponseSchema = z.object({
+  status: z.literal('not_participant'),
+  preview: planPreviewSchema,
+  joinRequest: joinRequestSchema.nullish(),
+});
+
 export type PlanStatus = z.infer<typeof planStatusSchema>;
 export type PlanVisibility = z.infer<typeof planVisibilitySchema>;
 export type Plan = z.infer<typeof planSchema>;
@@ -98,3 +112,13 @@ export type PlanWithItems = z.infer<typeof planWithItemsSchema>;
 export type PlanWithDetails = z.infer<typeof planWithDetailsSchema>;
 export type PlanCreateWithOwner = z.infer<typeof planCreateWithOwnerSchema>;
 export type PlanPatch = z.infer<typeof planPatchSchema>;
+export type PlanPreview = z.infer<typeof planPreviewSchema>;
+export type NotParticipantResponse = z.infer<
+  typeof notParticipantResponseSchema
+>;
+
+export function isNotParticipantResponse(
+  data: PlanWithDetails | NotParticipantResponse
+): data is NotParticipantResponse {
+  return (data as NotParticipantResponse).status === 'not_participant';
+}

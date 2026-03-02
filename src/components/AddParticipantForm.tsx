@@ -39,6 +39,8 @@ export function AddParticipantForm({
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<AddParticipantFormValues>({
     resolver: zodResolver(addParticipantSchema),
@@ -95,10 +97,10 @@ export function AddParticipantForm({
         <div>
           <FormLabel>{t('addParticipant.phone')}</FormLabel>
           <PhoneInput
-            countryProps={register('phoneCountry')}
+            countryValue={watch('phoneCountry') ?? ''}
+            onCountryChange={(code) => setValue('phoneCountry', code)}
             phoneProps={register('contactPhone')}
             countrySelectAriaLabel={t('profile.phoneCountry')}
-            phoneCountryDefaultLabel={t('profile.phoneCountryDefault')}
             phonePlaceholder={t('addParticipant.phonePlaceholder')}
             compact
             error={errors.contactPhone?.message}

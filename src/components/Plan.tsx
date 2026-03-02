@@ -38,7 +38,10 @@ export function Plan({
   return (
     <div className="w-full">
       <div className="space-y-4 sm:space-y-5">
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-800 line-clamp-2">
+        <h1
+          data-testid="plan-title"
+          className="text-xl sm:text-2xl font-bold text-gray-800 line-clamp-2"
+        >
           {title}
         </h1>
 

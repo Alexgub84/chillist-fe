@@ -6,13 +6,12 @@ import { z } from 'zod';
 import toast from 'react-hot-toast';
 import { useAuth } from '../contexts/useAuth';
 import { useLanguage } from '../contexts/useLanguage';
-import { supabase } from '../lib/supabase';
 import {
-  combinePhone,
-  detectCountryFromPhone,
-  getDefaultCountryByLanguage,
-} from '../data/country-codes';
-import { PhoneInput } from '../components/PhoneInput';
+  splitFullName,
+  parseExistingPhone,
+  updateUserProfile,
+} from '../core/profile-utils';
+import ProfileFields from '../components/shared/ProfileFields';
 
 const profileSchema = z.object({
   firstName: z.string().max(100).optional().or(z.literal('')),
@@ -23,15 +22,6 @@ const profileSchema = z.object({
 });
 
 type ProfileForm = z.infer<typeof profileSchema>;
-
-function splitFullName(fullName?: string): { first: string; last: string } {
-  if (!fullName) return { first: '', last: '' };
-  const parts = fullName.trim().split(/\s+/);
-  return {
-    first: parts[0] ?? '',
-    last: parts.slice(1).join(' '),
-  };
-}
 
 export function CompleteProfile() {
   const navigate = useNavigate();
@@ -47,18 +37,6 @@ export function CompleteProfile() {
   }
 
   return <CompleteProfileForm user={user!} />;
-}
-
-function parseExistingPhone(
-  rawPhone: string | undefined,
-  lang: string
-): { country: string; local: string } {
-  if (!rawPhone)
-    return { country: getDefaultCountryByLanguage(lang), local: '' };
-  const detected = detectCountryFromPhone(rawPhone);
-  if (detected)
-    return { country: detected.countryCode, local: detected.localNumber };
-  return { country: getDefaultCountryByLanguage(lang), local: rawPhone };
 }
 
 function CompleteProfileForm({
@@ -77,6 +55,8 @@ function CompleteProfileForm({
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ProfileForm>({
     resolver: zodResolver(profileSchema),
@@ -90,33 +70,21 @@ function CompleteProfileForm({
   });
 
   async function onSubmit(values: ProfileForm) {
-    const data: Record<string, string> = {};
-    if (values.firstName) data.first_name = values.firstName;
-    if (values.lastName) data.last_name = values.lastName;
+    const result = await updateUserProfile({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      phoneCountry: values.phoneCountry,
+      phone: values.phone,
+      currentEmail,
+      newEmail: values.email,
+    });
 
-    if (values.phone) {
-      data.phone = combinePhone(values.phoneCountry, values.phone);
-    }
-
-    const emailChanged = !!values.email && values.email !== currentEmail;
-
-    if (Object.keys(data).length === 0 && !emailChanged) {
-      navigate({ to: '/plans' });
+    if (!result.success) {
+      toast.error(result.error ?? t('profile.updateFailed'));
       return;
     }
 
-    const updatePayload: { email?: string; data?: Record<string, string> } = {};
-    if (emailChanged) updatePayload.email = values.email;
-    if (Object.keys(data).length > 0) updatePayload.data = data;
-
-    const { error } = await supabase.auth.updateUser(updatePayload);
-
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-
-    if (emailChanged) {
+    if (result.emailChanged) {
       toast.success(t('profile.emailChanged'));
     } else {
       toast.success(t('profile.updated'));
@@ -133,88 +101,12 @@ function CompleteProfileForm({
         <p className="mt-1 text-sm text-gray-600">{t('profile.subtitle')}</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
-          <div>
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t('profile.firstName')}
-            </label>
-            <input
-              id="firstName"
-              type="text"
-              autoComplete="given-name"
-              {...register('firstName')}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              placeholder="Alex"
-            />
-            {errors.firstName && (
-              <p className="mt-1 text-sm text-red-600">
-                {errors.firstName.message}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t('profile.lastName')}
-            </label>
-            <input
-              id="lastName"
-              type="text"
-              autoComplete="family-name"
-              {...register('lastName')}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              placeholder="Guberman"
-            />
-            {errors.lastName && (
-              <p className="mt-1 text-sm text-red-600">
-                {errors.lastName.message}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t('profile.phone')}
-            </label>
-            <PhoneInput
-              countryProps={register('phoneCountry')}
-              phoneProps={{ ...register('phone'), id: 'phone' }}
-              countrySelectAriaLabel={t('profile.phoneCountry')}
-              phoneCountryDefaultLabel={t('profile.phoneCountryDefault')}
-              phonePlaceholder={t('profile.phonePlaceholder')}
-              error={errors.phone?.message}
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t('profile.email')}
-            </label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              {...register('email')}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-              placeholder={t('profile.emailPlaceholder')}
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-600">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
+          <ProfileFields
+            register={register}
+            errors={errors}
+            watch={watch}
+            setValue={setValue}
+          />
 
           <button
             type="submit"

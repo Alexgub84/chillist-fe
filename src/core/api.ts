@@ -22,12 +22,14 @@ import {
   type ParticipantPatch,
 } from './schemas/participant';
 import {
+  notParticipantResponseSchema,
   planCreateWithOwnerSchema,
   planPatchSchema,
   planSchema,
   planWithDetailsSchema,
   type Plan,
   type PlanWithDetails,
+  type NotParticipantResponse,
   type PlanCreateWithOwner,
   type PlanPatch,
 } from './schemas/plan';
@@ -35,6 +37,7 @@ import {
   invitePlanResponseSchema,
   type InvitePlanResponse,
 } from './schemas/invite';
+import { joinRequestSchema, type JoinRequest } from './schemas/join-request';
 
 function getApiBaseUrl() {
   return import.meta.env.VITE_API_URL || 'http://localhost:3333';
@@ -181,9 +184,67 @@ export async function fetchPlans(): Promise<Plan[]> {
   return z.array(planSchema).parse(data);
 }
 
-export async function fetchPlan(planId: string): Promise<PlanWithDetails> {
+export async function fetchPlan(
+  planId: string
+): Promise<PlanWithDetails | NotParticipantResponse> {
   const data = await request<unknown>(`/plans/${planId}`);
-  return planWithDetailsSchema.parse(data);
+  const raw = data as Record<string, unknown> | null;
+
+  if (raw?.status === 'not_participant') {
+    const result = notParticipantResponseSchema.safeParse(data);
+    if (!result.success) {
+      console.error(
+        `[fetchPlan] not_participant schema validation failed for planId="${planId}". ` +
+          `Issues: ${JSON.stringify(result.error.issues)}`
+      );
+      throw result.error;
+    }
+    return result.data;
+  }
+
+  const result = planWithDetailsSchema.safeParse(data);
+  if (!result.success) {
+    console.error(
+      `[fetchPlan] Zod validation failed for planId="${planId}". ` +
+        `Raw response keys: ${JSON.stringify(Object.keys(raw ?? {}))}. ` +
+        `Issues: ${JSON.stringify(result.error.issues)}`
+    );
+    throw result.error;
+  }
+  return result.data;
+}
+
+export async function createJoinRequest(
+  planId: string,
+  body: {
+    name: string;
+    lastName: string;
+    contactPhone: string;
+    contactEmail?: string;
+    displayName?: string;
+    adultsCount?: number;
+    kidsCount?: number;
+    foodPreferences?: string;
+    allergies?: string;
+    notes?: string;
+  }
+): Promise<JoinRequest> {
+  const data = await request<unknown>(`/plans/${planId}/join-requests`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+  return joinRequestSchema.parse(data);
+}
+
+export async function updateJoinRequestStatus(
+  planId: string,
+  requestId: string,
+  status: 'approved' | 'rejected'
+): Promise<unknown> {
+  return request<unknown>(`/plans/${planId}/join-requests/${requestId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  });
 }
 
 export async function createPlanWithOwner(

@@ -7,11 +7,17 @@ import {
   useParams,
 } from '@tanstack/react-router';
 import toast from 'react-hot-toast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { usePlan } from '../hooks/usePlan';
 import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
-import { useAuth } from '../contexts/useAuth';
+import { updateJoinRequestStatus } from '../core/api';
 import type { ParticipantCreate } from '../core/schemas/participant';
+import {
+  isNotParticipantResponse,
+  type PlanWithDetails,
+} from '../core/schemas/plan';
+import { usePlanRole } from '../hooks/usePlanRole';
 import { getApiErrorMessage } from '../core/error-utils';
 import type { PreferencesFormValues } from '../components/PreferencesForm';
 import clsx from 'clsx';
@@ -34,7 +40,6 @@ function ManageParticipantsPage() {
   const { data: plan, isLoading, error } = usePlan(planId);
   const createParticipantMutation = useCreateParticipant(planId);
   const updateParticipantMutation = useUpdateParticipant(planId);
-  const { user } = useAuth();
   const navigate = useNavigate({ from: '/manage-participants/$planId' });
   const [editingParticipantId, setEditingParticipantId] = useState<
     string | null
@@ -42,15 +47,25 @@ function ManageParticipantsPage() {
   const [transferTargetParticipantId, setTransferTargetParticipantId] =
     useState<string | null>(null);
   const [showAddParticipant, setShowAddParticipant] = useState(false);
+  const queryClient = useQueryClient();
 
-  const isOwner =
-    !!user &&
-    !!plan &&
-    plan.participants.some((p) => p.role === 'owner' && p.userId === user.id);
-  const currentParticipant =
-    user && plan
-      ? plan.participants.find((p) => p.userId === user.id)
-      : undefined;
+  const joinRequestMutation = useMutation({
+    mutationFn: ({
+      requestId,
+      status,
+    }: {
+      requestId: string;
+      status: 'approved' | 'rejected';
+    }) => updateJoinRequestStatus(planId, requestId, status),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['plan', planId] });
+    },
+  });
+
+  const hasPlan = !!plan && !isNotParticipantResponse(plan);
+  const { isOwner, currentParticipant } = usePlanRole(
+    hasPlan ? plan : ({ participants: [] } as unknown as PlanWithDetails)
+  );
 
   useEffect(() => {
     if (plan && !isOwner) {
@@ -65,7 +80,7 @@ function ManageParticipantsPage() {
   if (error) throw error;
   if (!plan) throw new Error(t('plan.notFound'));
 
-  if (!isOwner) {
+  if (!isOwner || isNotParticipantResponse(plan)) {
     return null;
   }
 
@@ -135,6 +150,42 @@ function ManageParticipantsPage() {
     }
   }
 
+  async function handleApproveRequest(requestId: string) {
+    try {
+      await joinRequestMutation.mutateAsync({
+        requestId,
+        status: 'approved',
+      });
+      toast.success(t('manageParticipants.requestApproved'));
+    } catch (err) {
+      console.error(
+        `[ManageParticipants] handleApproveRequest failed — planId="${planId}", requestId="${requestId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
+  async function handleRejectRequest(requestId: string) {
+    try {
+      await joinRequestMutation.mutateAsync({
+        requestId,
+        status: 'rejected',
+      });
+      toast.success(t('manageParticipants.requestRejected'));
+    } catch (err) {
+      console.error(
+        `[ManageParticipants] handleRejectRequest failed — planId="${planId}", requestId="${requestId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
   return (
     <div className="w-full px-3 sm:px-0">
       <div className="max-w-4xl mx-auto">
@@ -196,7 +247,13 @@ function ManageParticipantsPage() {
             {plan.joinRequests?.length ? (
               <div className="space-y-3">
                 {plan.joinRequests.map((req) => (
-                  <JoinRequestCard key={req.requestId} request={req} />
+                  <JoinRequestCard
+                    key={req.requestId}
+                    request={req}
+                    onApprove={handleApproveRequest}
+                    onReject={handleRejectRequest}
+                    isPending={joinRequestMutation.isPending}
+                  />
                 ))}
               </div>
             ) : (
@@ -287,7 +344,17 @@ function ManageParticipantsPage() {
   );
 }
 
-function JoinRequestCard({ request: req }: { request: JoinRequest }) {
+function JoinRequestCard({
+  request: req,
+  onApprove,
+  onReject,
+  isPending,
+}: {
+  request: JoinRequest;
+  onApprove: (requestId: string) => void;
+  onReject: (requestId: string) => void;
+  isPending: boolean;
+}) {
   const { t } = useTranslation();
   const peopleParts: string[] = [];
   if (req.adultsCount != null && req.adultsCount > 0) {
@@ -310,7 +377,10 @@ function JoinRequestCard({ request: req }: { request: JoinRequest }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5">
+    <div
+      className="bg-white rounded-lg shadow-sm p-4 sm:p-5"
+      data-testid={`join-request-card-${req.requestId}`}
+    >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 rounded-full border-2 border-amber-300 bg-white flex items-center justify-center text-xs font-bold text-gray-600 shrink-0">
@@ -332,6 +402,28 @@ function JoinRequestCard({ request: req }: { request: JoinRequest }) {
             </div>
           </div>
         </div>
+        {req.status === 'pending' && (
+          <div className="flex gap-2 shrink-0">
+            <button
+              type="button"
+              data-testid={`approve-join-request-${req.requestId}`}
+              disabled={isPending}
+              onClick={() => onApprove(req.requestId)}
+              className="px-3 py-1.5 bg-green-600 text-white text-xs font-semibold rounded-lg hover:bg-green-700 active:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {t('manageParticipants.approveRequest')}
+            </button>
+            <button
+              type="button"
+              data-testid={`reject-join-request-${req.requestId}`}
+              disabled={isPending}
+              onClick={() => onReject(req.requestId)}
+              className="px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {t('manageParticipants.rejectRequest')}
+            </button>
+          </div>
+        )}
       </div>
       {!filled && (
         <p className="text-sm text-gray-400 italic">

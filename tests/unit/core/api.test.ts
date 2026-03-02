@@ -58,6 +58,7 @@ import {
   saveGuestPreferences,
   syncProfile,
   updateItem,
+  updateJoinRequestStatus,
   updateParticipant,
   updatePlan,
 } from '../../../src/core/api';
@@ -843,6 +844,43 @@ describe('API Client', () => {
     it('rejects when /auth/sync-profile response shape is invalid', async () => {
       fetchMock.mockResolvedValueOnce(mockResponse({ synced: '3' }));
       await expect(syncProfile('fresh-token-123')).rejects.toThrow();
+    });
+  });
+
+  describe('updateJoinRequestStatus', () => {
+    it('sends PATCH with approved status', async () => {
+      fetchMock.mockResolvedValueOnce(mockResponse({ ok: true }));
+
+      const result = await updateJoinRequestStatus('p-1', 'r-1', 'approved');
+
+      expect(result).toEqual({ ok: true });
+      const [url, opts] = fetchMock.mock.calls[fetchMock.mock.calls.length - 1];
+      expect(url).toBe('http://api.test/plans/p-1/join-requests/r-1');
+      expect(opts.method).toBe('PATCH');
+      expect(JSON.parse(opts.body)).toEqual({ status: 'approved' });
+    });
+
+    it('sends PATCH with rejected status', async () => {
+      fetchMock.mockResolvedValueOnce(mockResponse({ ok: true }));
+
+      await updateJoinRequestStatus('p-1', 'r-1', 'rejected');
+
+      const [url, opts] = fetchMock.mock.calls[fetchMock.mock.calls.length - 1];
+      expect(url).toBe('http://api.test/plans/p-1/join-requests/r-1');
+      expect(JSON.parse(opts.body)).toEqual({ status: 'rejected' });
+    });
+
+    it('throws on non-ok response', async () => {
+      fetchMock.mockResolvedValueOnce(
+        mockResponse(
+          { statusCode: 403, error: 'Forbidden', message: 'Not allowed' },
+          { ok: false, status: 403 }
+        )
+      );
+
+      await expect(
+        updateJoinRequestStatus('p-1', 'r-1', 'approved')
+      ).rejects.toThrow();
     });
   });
 });

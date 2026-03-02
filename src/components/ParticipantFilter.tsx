@@ -29,6 +29,7 @@ export default function ParticipantFilter({
       className="flex flex-wrap gap-2"
       role="group"
       aria-label="Filter by participant"
+      data-testid="participant-filter"
     >
       <button
         type="button"
@@ -107,6 +108,7 @@ export default function ParticipantFilter({
           <button
             key={p.participantId}
             type="button"
+            data-testid={`participant-filter-${p.participantId}`}
             onClick={() => onChange(p.participantId)}
             className={clsx(
               'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer',

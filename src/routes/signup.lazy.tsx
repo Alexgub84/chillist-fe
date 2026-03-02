@@ -28,6 +28,8 @@ export function SignUp() {
   const queryClient = useQueryClient();
   const { redirect } = useSearch({ from: '/signup' });
   const redirectTo = redirect || '/plans';
+  const isFromPlan =
+    typeof redirect === 'string' && redirect.startsWith('/plan/');
   const [confirmationSent, setConfirmationSent] = useState(false);
 
   const {
@@ -156,6 +158,7 @@ export function SignUp() {
             </p>
             <Link
               to="/signin"
+              search={redirect ? { redirect } : {}}
               className="mt-6 inline-block text-sm font-medium text-blue-600 hover:text-blue-500"
             >
               {t('signUp.goToSignIn')}
@@ -172,7 +175,9 @@ export function SignUp() {
         <h1 className="text-2xl font-semibold text-gray-900">
           {t('signUp.title')}
         </h1>
-        <p className="mt-1 text-sm text-gray-600">{t('signUp.subtitle')}</p>
+        <p className="mt-1 text-sm text-gray-600">
+          {isFromPlan ? t('signUp.planRedirectSubtitle') : t('signUp.subtitle')}
+        </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
           <div>
@@ -271,6 +276,7 @@ export function SignUp() {
           {t('signUp.hasAccount')}{' '}
           <Link
             to="/signin"
+            search={redirect ? { redirect } : {}}
             className="font-medium text-blue-600 hover:text-blue-500"
           >
             {t('signUp.signInLink')}

@@ -1,60 +1,63 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createLazyFileRoute } from '@tanstack/react-router';
 import {
+  createLazyFileRoute,
   Link,
   useNavigate,
   useParams,
   useSearch,
 } from '@tanstack/react-router';
-import toast from 'react-hot-toast';
 import { usePlan } from '../hooks/usePlan';
 import { useScrollRestore } from '../hooks/useScrollRestore';
-import { useCreateItem } from '../hooks/useCreateItem';
-import { useUpdateItem } from '../hooks/useUpdateItem';
-import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
-import { useDeletePlan } from '../hooks/useDeletePlan';
-import { useUpdatePlan } from '../hooks/useUpdatePlan';
-import { useAuth } from '../contexts/useAuth';
-import { getApiErrorMessage } from '../core/error-utils';
+import { usePlanRole } from '../hooks/usePlanRole';
+import { usePlanActions } from '../hooks/usePlanActions';
+import { useBulkAssign } from '../hooks/useBulkAssign';
+import {
+  isNotParticipantResponse,
+  type PlanWithDetails,
+} from '../core/schemas/plan';
+import {
+  countItemsPerParticipant,
+  filterItemsByAssignedParticipant,
+  countItemsByListTab,
+  filterItemsByStatusTab,
+} from '../core/utils-plan-items';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
+import RequestToJoinPage from '../components/RequestToJoinPage';
 import Forecast from '../components/Forecast';
 import ParticipantDetails from '../components/ParticipantDetails';
 import ItemsList from '../components/ItemsList';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
 import EditPlanForm from '../components/EditPlanForm';
-import PreferencesForm, {
-  type PreferencesFormValues,
-} from '../components/PreferencesForm';
+import PreferencesForm from '../components/PreferencesForm';
+import TransferOwnershipModal from '../components/TransferOwnershipModal';
 import Modal from '../components/shared/Modal';
 import CollapsibleSection from '../components/shared/CollapsibleSection';
+import SectionLink from '../components/shared/SectionLink';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
-import type { Item, ItemPatch } from '../core/schemas/item';
-import type { PlanPatch } from '../core/schemas/plan';
-import type { ListFilter } from '../core/schemas/plan-search';
-import { useBulkAssign } from '../hooks/useBulkAssign';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
-  component: PlanDetails,
+  component: PlanPage,
   errorComponent: ErrorPage,
 });
 
-function PlanDetails() {
+function PlanPage() {
   const { t } = useTranslation();
   const { planId } = useParams({ from: '/plan/$planId' });
   const { data: plan, isLoading, error } = usePlan(planId);
-  const createItem = useCreateItem(planId);
-  const updateItemMutation = useUpdateItem(planId);
-  const updateParticipantMutation = useUpdateParticipant(planId);
-  const deletePlanMutation = useDeletePlan();
-  const updatePlanMutation = useUpdatePlan(planId);
-  const { user } = useAuth();
+  const navigate = useNavigate({ from: '/plan/$planId' });
   const { list: listFilter, participant: participantFilter } = useSearch({
     from: '/plan/$planId',
   });
-  const navigate = useNavigate({ from: '/plan/$planId' });
+
+  const actions = usePlanActions(planId);
+  const bulkAssign = useBulkAssign(
+    planId,
+    plan && !isNotParticipantResponse(plan) ? plan.participants : []
+  );
+
   const [itemModalId, setItemModalId] = useState<string | null>(null);
   const [editingParticipantId, setEditingParticipantId] = useState<
     string | null
@@ -63,7 +66,10 @@ function PlanDetails() {
   const [transferTargetParticipantId, setTransferTargetParticipantId] =
     useState<string | null>(null);
 
-  const bulkAssign = useBulkAssign(planId, plan?.participants ?? []);
+  const hasPlan = !!plan && !isNotParticipantResponse(plan);
+  const { isOwner, currentParticipant, canEditItem } = usePlanRole(
+    hasPlan ? plan : ({ participants: [] } as unknown as PlanWithDetails)
+  );
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
@@ -79,183 +85,76 @@ function PlanDetails() {
     throw new Error(t('plan.notFound'));
   }
 
+  if (isNotParticipantResponse(plan)) {
+    return <RequestToJoinPage planId={planId} response={plan} />;
+  }
+
+  const planDetailsOpen =
+    isOwner || currentParticipant?.rsvpStatus !== 'confirmed';
+
   const isCreating = itemModalId === 'new';
   const editingItem =
     itemModalId && itemModalId !== 'new'
       ? plan.items.find((i) => i.itemId === itemModalId)
       : null;
-
-  function closeItemModal() {
-    setItemModalId(null);
-  }
-
-  async function updateItem(itemId: string, updates: ItemPatch) {
-    try {
-      await updateItemMutation.mutateAsync({ itemId, updates });
-    } catch (err) {
-      console.error(
-        `[PlanPage] updateItem failed — planId="${planId}", itemId="${itemId}". Error: ${err instanceof Error ? err.message : String(err)}`
-      );
-      const { title, message } = getApiErrorMessage(
-        err instanceof Error ? err : new Error(String(err))
-      );
-      toast.error(`${title}: ${message}`);
-    }
-  }
-
-  function toPayload(values: ItemFormValues) {
-    return {
-      name: values.name,
-      category: values.category,
-      subcategory: values.subcategory || null,
-      quantity: values.quantity,
-      unit: values.unit,
-      status: values.status,
-      notes: values.notes || null,
-      assignedParticipantId: values.assignedParticipantId || null,
-    };
-  }
-
-  async function handleItemFormSubmit(values: ItemFormValues) {
-    if (isCreating) {
-      await createItem.mutateAsync(toPayload(values));
-    } else if (editingItem) {
-      await updateItem(editingItem.itemId, toPayload(values));
-    }
-    closeItemModal();
-  }
-
   const editingParticipant = editingParticipantId
     ? plan.participants.find((p) => p.participantId === editingParticipantId)
     : null;
 
-  async function handlePreferencesSubmit(values: PreferencesFormValues) {
+  const participantCounts = countItemsPerParticipant(
+    plan.participants,
+    plan.items
+  );
+  const participantScopedItems = filterItemsByAssignedParticipant(
+    plan.items,
+    participantFilter
+  );
+  const listCounts = countItemsByListTab(participantScopedItems);
+  const filteredItems = filterItemsByStatusTab(
+    participantScopedItems,
+    listFilter
+  );
+
+  const transferTargetName = (() => {
+    const target = plan.participants.find(
+      (x) => x.participantId === transferTargetParticipantId
+    );
+    return target ? `${target.name} ${target.lastName}` : '';
+  })();
+
+  async function handleItemFormSubmit(values: ItemFormValues) {
+    await actions.createOrUpdateItem(
+      values,
+      editingItem ? editingItem.itemId : null
+    );
+    setItemModalId(null);
+  }
+
+  async function handlePreferencesSubmit(
+    values: import('../components/PreferencesForm').PreferencesFormValues
+  ) {
     if (!editingParticipantId) return;
-    try {
-      await updateParticipantMutation.mutateAsync({
-        participantId: editingParticipantId,
-        updates: {
-          adultsCount: values.adultsCount ?? null,
-          kidsCount: values.kidsCount ?? null,
-          foodPreferences: values.foodPreferences || null,
-          allergies: values.allergies || null,
-          notes: values.notes || null,
-        },
-      });
-      toast.success(t('preferences.updated'));
-    } catch (err) {
-      console.error(
-        `[PlanPage] handlePreferencesSubmit failed — planId="${planId}", participantId="${editingParticipantId}". Error: ${err instanceof Error ? err.message : String(err)}`
-      );
-      const { title, message } = getApiErrorMessage(
-        err instanceof Error ? err : new Error(String(err))
-      );
-      toast.error(`${title}: ${message}`);
-    }
+    await actions.updateParticipantPreferences(editingParticipantId, values);
     setEditingParticipantId(null);
   }
 
-  const isOwner =
-    !!user &&
-    plan.participants.some((p) => p.role === 'owner' && p.userId === user.id);
-  const currentParticipant = user
-    ? plan.participants.find((p) => p.userId === user.id)
-    : undefined;
-
-  const canEditItem = isOwner
-    ? undefined
-    : (item: Item) =>
-        !!currentParticipant &&
-        item.assignedParticipantId === currentParticipant.participantId;
-
-  const planDetailsOpen =
-    isOwner || currentParticipant?.rsvpStatus !== 'confirmed';
-
   async function handleDeletePlan() {
-    try {
-      await deletePlanMutation.mutateAsync(planId);
-      toast.success(t('plan.deleted'));
-      navigate({ to: '/plans' });
-    } catch (err) {
-      console.error(
-        `[PlanPage] handleDeletePlan failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
-      );
-      const { title, message } = getApiErrorMessage(
-        err instanceof Error ? err : new Error(String(err))
-      );
-      toast.error(`${title}: ${message}`);
-    }
+    const success = await actions.deletePlan();
+    if (success) navigate({ to: '/plans' });
   }
 
-  async function handleEditPlan(updates: PlanPatch) {
-    try {
-      await updatePlanMutation.mutateAsync(updates);
-      toast.success(t('plan.updated'));
-      setShowEditPlanModal(false);
-    } catch (err) {
-      console.error(
-        `[PlanPage] handleEditPlan failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
-      );
-      const { title, message } = getApiErrorMessage(
-        err instanceof Error ? err : new Error(String(err))
-      );
-      toast.error(`${title}: ${message}`);
-    }
+  async function handleEditPlan(
+    updates: import('../core/schemas/plan').PlanPatch
+  ) {
+    const success = await actions.updatePlanDetails(updates);
+    if (success) setShowEditPlanModal(false);
   }
 
   async function handleTransferOwnership() {
     if (!transferTargetParticipantId) return;
-    try {
-      await updateParticipantMutation.mutateAsync({
-        participantId: transferTargetParticipantId,
-        updates: { role: 'owner' },
-      });
-      toast.success(t('participantDetails.addOwnerSuccess'));
-      setTransferTargetParticipantId(null);
-    } catch (err) {
-      console.error(
-        `[PlanPage] handleTransferOwnership failed — planId="${planId}", participantId="${transferTargetParticipantId}". Error: ${err instanceof Error ? err.message : String(err)}`
-      );
-      const { title, message } = getApiErrorMessage(
-        err instanceof Error ? err : new Error(String(err))
-      );
-      toast.error(`${title}: ${message}`);
-    }
+    await actions.transferPlanOwnership(transferTargetParticipantId);
+    setTransferTargetParticipantId(null);
   }
-
-  const participantCounts: Record<string, number> = { unassigned: 0 };
-  for (const p of plan.participants) {
-    participantCounts[p.participantId] = 0;
-  }
-  for (const item of plan.items) {
-    if (item.assignedParticipantId) {
-      participantCounts[item.assignedParticipantId] =
-        (participantCounts[item.assignedParticipantId] ?? 0) + 1;
-    } else {
-      participantCounts['unassigned']++;
-    }
-  }
-
-  const participantScopedItems = plan.items.filter((item) => {
-    if (!participantFilter) return true;
-    if (participantFilter === 'unassigned') return !item.assignedParticipantId;
-    return item.assignedParticipantId === participantFilter;
-  });
-
-  const listCounts: Record<ListFilter, number> = {
-    buying: 0,
-    packing: 0,
-  };
-  for (const item of participantScopedItems) {
-    if (item.status === 'pending') listCounts.buying++;
-    if (item.status === 'purchased') listCounts.packing++;
-  }
-
-  const filteredItems = participantScopedItems.filter((item) => {
-    if (listFilter === 'buying' && item.status !== 'pending') return false;
-    if (listFilter === 'packing' && item.status !== 'purchased') return false;
-    return true;
-  });
 
   return (
     <div className="w-full px-3 sm:px-0">
@@ -268,6 +167,7 @@ function PlanDetails() {
             {t('plan.backToPlans')}
           </Link>
         </div>
+
         <CollapsibleSection
           title={
             <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
@@ -283,7 +183,7 @@ function PlanDetails() {
             isOwner={isOwner}
             onEdit={() => setShowEditPlanModal(true)}
             onDelete={handleDeletePlan}
-            isDeleting={deletePlanMutation.isPending}
+            isDeleting={actions.isDeletingPlan}
           />
         </CollapsibleSection>
 
@@ -296,39 +196,15 @@ function PlanDetails() {
         </div>
 
         {isOwner && plan.participants.length > 0 && (
-          <Link
-            data-testid="manage-participants-link"
+          <SectionLink
             to="/manage-participants/$planId"
             params={{ planId }}
-            className="mt-4 sm:mt-5 mb-4 block bg-white rounded-lg shadow-sm border border-amber-100 hover:border-amber-300 hover:shadow-md transition-all p-4 sm:p-5 group"
-          >
-            <div className="flex items-center gap-3">
-              <div className="shrink-0 w-10 h-10 rounded-full bg-amber-50 group-hover:bg-amber-100 flex items-center justify-center transition-colors">
-                <svg
-                  className="w-5 h-5 text-amber-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-amber-700 transition-colors">
-                  {t('manageParticipants.linkTitle')}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-500">
-                  {t('manageParticipants.linkDesc')}
-                </p>
-              </div>
+            testId="manage-participants-link"
+            colorScheme="amber"
+            className="mt-4 sm:mt-5 mb-4"
+            icon={
               <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-amber-500 ms-auto shrink-0 transition-colors"
+                className="w-5 h-5 text-amber-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -338,11 +214,13 @@ function PlanDetails() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M9 5l7 7-7 7"
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                 />
               </svg>
-            </div>
-          </Link>
+            }
+            title={t('manageParticipants.linkTitle')}
+            subtitle={t('manageParticipants.linkDesc')}
+          />
         )}
 
         {plan.participants.length > 0 && (
@@ -359,38 +237,14 @@ function PlanDetails() {
           </div>
         )}
 
-        <Link
+        <SectionLink
           to="/items/$planId"
           params={{ planId }}
-          className="mt-6 sm:mt-8 mb-4 block bg-white rounded-lg shadow-sm border border-blue-100 hover:border-blue-300 hover:shadow-md transition-all p-4 sm:p-5 group"
-        >
-          <div className="flex items-center gap-3">
-            <div className="shrink-0 w-10 h-10 rounded-full bg-blue-50 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
-              <svg
-                className="w-5 h-5 text-blue-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                />
-              </svg>
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">
-                {t('items.manageItems')}
-              </p>
-              <p className="text-xs sm:text-sm text-gray-500">
-                {t('items.manageItemsDesc')}
-              </p>
-            </div>
+          colorScheme="blue"
+          className="mt-6 sm:mt-8 mb-4"
+          icon={
             <svg
-              className="w-5 h-5 text-gray-400 group-hover:text-blue-500 ms-auto shrink-0 transition-colors"
+              className="w-5 h-5 text-blue-600"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -400,17 +254,22 @@ function PlanDetails() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M9 5l7 7-7 7"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
               />
             </svg>
-          </div>
-        </Link>
+          }
+          title={t('items.manageItems')}
+          subtitle={t('items.manageItemsDesc')}
+        />
 
         <div className="flex items-center justify-between mb-3 sm:mb-4">
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
             {t('items.title')}
             {plan.items.length > 0 && (
-              <span className="ms-2 text-sm font-normal text-gray-500">
+              <span
+                data-testid="items-count"
+                className="ms-2 text-sm font-normal text-gray-500"
+              >
                 ({plan.items.length})
               </span>
             )}
@@ -482,7 +341,7 @@ function PlanDetails() {
             }
             canEditItem={canEditItem}
             onEditItem={(itemId) => setItemModalId(itemId)}
-            onUpdateItem={updateItem}
+            onUpdateItem={actions.updateSingleItem}
             onBulkAssign={(ids, pid) =>
               bulkAssign.mutate({ itemIds: ids, participantId: pid })
             }
@@ -492,7 +351,7 @@ function PlanDetails() {
 
         <Modal
           open={!!itemModalId}
-          onClose={closeItemModal}
+          onClose={() => setItemModalId(null)}
           title={isCreating ? t('items.addItemLabel') : t('items.editItem')}
           testId="add-item-modal"
         >
@@ -517,9 +376,9 @@ function PlanDetails() {
             }
             participants={plan.participants}
             onSubmit={handleItemFormSubmit}
-            onCancel={closeItemModal}
+            onCancel={() => setItemModalId(null)}
             isSubmitting={
-              isCreating ? createItem.isPending : updateItemMutation.isPending
+              isCreating ? actions.isCreatingItem : actions.isUpdatingItem
             }
             submitLabel={isCreating ? undefined : t('items.updateItem')}
           />
@@ -543,7 +402,7 @@ function PlanDetails() {
               }}
               onSubmit={handlePreferencesSubmit}
               onCancel={() => setEditingParticipantId(null)}
-              isSubmitting={updateParticipantMutation.isPending}
+              isSubmitting={actions.isUpdatingParticipant}
               inModal
             />
           )}
@@ -559,48 +418,17 @@ function PlanDetails() {
             plan={plan}
             onSubmit={handleEditPlan}
             onCancel={() => setShowEditPlanModal(false)}
-            isSubmitting={updatePlanMutation.isPending}
+            isSubmitting={actions.isUpdatingPlan}
           />
         </Modal>
 
-        <Modal
+        <TransferOwnershipModal
           open={transferTargetParticipantId !== null}
           onClose={() => setTransferTargetParticipantId(null)}
-          title={t('participantDetails.addOwnerTitle')}
-          testId="add-owner-dialog"
-        >
-          <div className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-4">
-            <p className="text-sm text-gray-600">
-              {t('participantDetails.addOwnerMessage', {
-                name: (() => {
-                  const target = plan.participants.find(
-                    (x) => x.participantId === transferTargetParticipantId
-                  );
-                  return target ? `${target.name} ${target.lastName}` : '';
-                })(),
-              })}
-            </p>
-            <div className="flex gap-3">
-              <button
-                type="button"
-                data-testid="transfer-ownership-confirm"
-                disabled={updateParticipantMutation.isPending}
-                onClick={handleTransferOwnership}
-                className="flex-1 px-4 py-2 bg-amber-600 text-white font-semibold rounded-lg hover:bg-amber-700 active:bg-amber-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
-              >
-                {t('participantDetails.addOwnerConfirm')}
-              </button>
-              <button
-                type="button"
-                disabled={updateParticipantMutation.isPending}
-                onClick={() => setTransferTargetParticipantId(null)}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 disabled:opacity-50 transition-colors text-sm"
-              >
-                {t('participantDetails.addOwnerCancel')}
-              </button>
-            </div>
-          </div>
-        </Modal>
+          onConfirm={handleTransferOwnership}
+          participantName={transferTargetName}
+          isPending={actions.isUpdatingParticipant}
+        />
       </div>
 
       <div className="fixed bottom-6 inset-x-0 z-40 max-w-4xl mx-auto px-3 sm:px-0 pointer-events-none">

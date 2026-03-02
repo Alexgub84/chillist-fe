@@ -27,6 +27,21 @@ When asked to create GitHub issues: see `../chillist-docs/guides/issue-managemen
   `git fetch origin main && git merge origin/main`
   Resolve any conflicts, run validation, then push.
 
+# Formatting (MANDATORY after every file write)
+
+- **After EVERY file creation or modification**, immediately run `npx prettier --write <file>` on that file.
+- This applies to ALL files: source code, test files, config files — no exceptions.
+- The Write tool bypasses VS Code's format-on-save, so Prettier must be run manually every time.
+- When writing multiple files in a batch, format them all in a single `prettier --write` call afterward.
+
+# Completion and Review Protocol (MANDATORY)
+
+- **NEVER commit or push** until the user explicitly approves.
+- When implementation is done: run validation (typecheck, lint, tests), then tell the user "Done — ready for your review and testing."
+- **Wait for the user** to review the changes, test locally, and confirm everything works.
+- Only after the user says it's approved (e.g., "looks good", "commit", "push it"), proceed with git commit, branch, and push.
+- This applies to BOTH the frontend repo (chillist-fe) and the docs repo (chillist-docs).
+
 # How to Start Every Task
 
 Before writing any code, FIRST use the Read tool on ALL of these files.
@@ -71,8 +86,4 @@ After EVERY bug fix or feature implementation, you MUST update the relevant docs
 
 Do NOT skip this step. If the docs repo files don't exist yet, tell the user.
 
-**After updating any docs file, ALWAYS commit and push the changes to chillist-docs immediately:**
-```
-cd /Users/alexguberman/Projects/chillist/chillist-docs && git add -A && git commit -m "docs: <short description>" && git push
-```
-Do NOT leave docs changes uncommitted or unpushed.
+**After updating docs files, do NOT commit or push automatically.** Follow the Completion and Review Protocol above — tell the user the docs are updated and wait for approval before committing.

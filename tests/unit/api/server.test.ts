@@ -566,4 +566,181 @@ describe('mock server', () => {
       await server.close();
     }
   });
+
+  it('POST /plans/:planId/join-requests creates a pending join request', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'requesting-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/join-requests',
+        headers: { authorization: `Bearer ${token}` },
+        payload: {
+          name: 'Charlie',
+          lastName: 'Joiner',
+          contactPhone: '555-7777',
+        },
+      });
+      expect(response.statusCode).toBe(201);
+      const body = response.json();
+      expect(body.name).toBe('Charlie');
+      expect(body.status).toBe('pending');
+      expect(body.requestId).toBeDefined();
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('PATCH /plans/:planId/join-requests/:requestId approves and creates participant', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const ownerPayload = btoa(JSON.stringify({ sub: 'owner-user' }));
+    const requesterPayload = btoa(JSON.stringify({ sub: 'requesting-user' }));
+    const ownerToken = `${header}.${ownerPayload}.mock-signature`;
+    const requesterToken = `${header}.${requesterPayload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const createRes = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/join-requests',
+        headers: { authorization: `Bearer ${requesterToken}` },
+        payload: {
+          name: 'Dave',
+          lastName: 'Joiner',
+          contactPhone: '555-8888',
+        },
+      });
+      const { requestId } = createRes.json();
+
+      const approveRes = await server.inject({
+        method: 'PATCH',
+        url: `/plans/plan-1/join-requests/${requestId}`,
+        headers: { authorization: `Bearer ${ownerToken}` },
+        payload: { status: 'approved' },
+      });
+      expect(approveRes.statusCode).toBe(200);
+      const body = approveRes.json();
+      expect(body.name).toBe('Dave');
+      expect(body.role).toBe('participant');
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('PATCH /plans/:planId/join-requests/:requestId rejects a request', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const ownerPayload = btoa(JSON.stringify({ sub: 'owner-user' }));
+    const requesterPayload = btoa(JSON.stringify({ sub: 'requesting-user' }));
+    const ownerToken = `${header}.${ownerPayload}.mock-signature`;
+    const requesterToken = `${header}.${requesterPayload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const createRes = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/join-requests',
+        headers: { authorization: `Bearer ${requesterToken}` },
+        payload: {
+          name: 'Eve',
+          lastName: 'Joiner',
+          contactPhone: '555-9999',
+        },
+      });
+      const { requestId } = createRes.json();
+
+      const rejectRes = await server.inject({
+        method: 'PATCH',
+        url: `/plans/plan-1/join-requests/${requestId}`,
+        headers: { authorization: `Bearer ${ownerToken}` },
+        payload: { status: 'rejected' },
+      });
+      expect(rejectRes.statusCode).toBe(200);
+      const body = rejectRes.json();
+      expect(body.status).toBe('rejected');
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('PATCH /plans/:planId/join-requests/:requestId returns 409 for already processed request', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const ownerPayload = btoa(JSON.stringify({ sub: 'owner-user' }));
+    const requesterPayload = btoa(JSON.stringify({ sub: 'requesting-user' }));
+    const ownerToken = `${header}.${ownerPayload}.mock-signature`;
+    const requesterToken = `${header}.${requesterPayload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const createRes = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/join-requests',
+        headers: { authorization: `Bearer ${requesterToken}` },
+        payload: {
+          name: 'Frank',
+          lastName: 'Joiner',
+          contactPhone: '555-1111',
+        },
+      });
+      const { requestId } = createRes.json();
+
+      await server.inject({
+        method: 'PATCH',
+        url: `/plans/plan-1/join-requests/${requestId}`,
+        headers: { authorization: `Bearer ${ownerToken}` },
+        payload: { status: 'approved' },
+      });
+
+      const secondRes = await server.inject({
+        method: 'PATCH',
+        url: `/plans/plan-1/join-requests/${requestId}`,
+        headers: { authorization: `Bearer ${ownerToken}` },
+        payload: { status: 'rejected' },
+      });
+      expect(secondRes.statusCode).toBe(409);
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('PATCH /plans/:planId/join-requests/:requestId returns 404 for unknown request', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'owner-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'PATCH',
+        url: '/plans/plan-1/join-requests/nonexistent-id',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { status: 'approved' },
+      });
+      expect(response.statusCode).toBe(404);
+    } finally {
+      await server.close();
+    }
+  });
 });

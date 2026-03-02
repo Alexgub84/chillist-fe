@@ -122,7 +122,7 @@ describe('Complete Profile Page', () => {
     expect(screen.getByLabelText(/first name/i)).toHaveValue('Jamie');
     expect(screen.getByLabelText(/last name/i)).toHaveValue('Rivera');
     expect(screen.getByLabelText(/phone/i)).toHaveValue('501234567');
-    expect(screen.getByLabelText(/country code/i)).toHaveValue('IL');
+    expect(screen.getByLabelText(/country code/i)).toHaveValue('🇮🇱 +972');
   });
 
   it('calls updateUser with validated data on submit', async () => {

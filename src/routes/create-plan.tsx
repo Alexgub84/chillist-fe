@@ -11,6 +11,7 @@ import { useCreatePlan } from '../hooks/useCreatePlan';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { useAuth } from '../contexts/useAuth';
 import { getApiErrorMessage } from '../core/error-utils';
+import { splitFullName } from '../core/profile-utils';
 import { supabase } from '../lib/supabase';
 import type { PlanFormPayload, DefaultOwner } from '../components/PlanForm';
 import type { PlanWithDetails } from '../core/schemas/plan';
@@ -26,15 +27,6 @@ export const Route = createFileRoute('/create-plan')({
     }
   },
 });
-
-function splitFullName(fullName?: string): { first: string; last: string } {
-  if (!fullName) return { first: '', last: '' };
-  const parts = fullName.trim().split(/\s+/);
-  return {
-    first: parts[0] ?? '',
-    last: parts.slice(1).join(' '),
-  };
-}
 
 export function CreatePlan() {
   const { t } = useTranslation();

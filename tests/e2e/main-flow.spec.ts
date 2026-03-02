@@ -929,6 +929,7 @@ test.describe('Invite Landing Page', () => {
 
   test('sign-in link redirects to plan page after authentication', async ({
     page,
+    isMobile,
   }) => {
     const plan = buildPlan({
       title: 'Day Out',
@@ -944,8 +945,9 @@ test.describe('Invite Landing Page', () => {
 
     await expect(page.getByText('Day Out')).toBeVisible({ timeout: 10000 });
 
-    const signInLink = page.getByRole('link', { name: /sign in to join/i });
-    await signInLink.click();
+    const signInLink = page.getByTestId('invite-signin-link');
+    await signInLink.scrollIntoViewIfNeeded();
+    await signInLink.click({ force: isMobile });
 
     await page.waitForURL(/\/signin/);
     expect(page.url()).toContain(`redirect=%2Fplan%2F${plan.planId}`);

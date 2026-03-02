@@ -144,10 +144,30 @@ export interface BuildServerOptions {
   logger?: boolean;
 }
 
+interface JoinRequestRecord {
+  requestId: string;
+  planId: string;
+  supabaseUserId: string;
+  name: string;
+  lastName: string;
+  contactPhone: string;
+  contactEmail?: string | null;
+  displayName?: string | null;
+  adultsCount?: number | null;
+  kidsCount?: number | null;
+  foodPreferences?: string | null;
+  allergies?: string | null;
+  notes?: string | null;
+  status: 'pending' | 'approved' | 'rejected';
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface MutableStore {
   plans: Plan[];
   participants: Participant[];
   items: Item[];
+  joinRequests: JoinRequestRecord[];
 }
 
 function cloneData(data: MockData): MutableStore {
@@ -170,6 +190,7 @@ function cloneData(data: MockData): MutableStore {
     plans,
     participants: structuredClone(data.participants),
     items: structuredClone(data.items),
+    joinRequests: [],
   };
 }
 
@@ -458,11 +479,15 @@ export async function buildServer(
         }
       }
 
+      const planJoinRequests = store.joinRequests.filter(
+        (jr) => jr.planId === plan.planId
+      );
+
       void reply.send({
         ...plan,
         items: planItems,
         participants: planParticipants,
-        joinRequests: [],
+        joinRequests: planJoinRequests,
       });
     }
   );
@@ -967,11 +992,115 @@ export async function buildServer(
     });
   });
 
+  app.post<{ Params: { planId: string } }>(
+    '/plans/:planId/join-requests',
+    async (request, reply) => {
+      const jwtUserId = requireJwt(
+        request.headers.authorization as string | undefined
+      );
+      ensurePlan(store, request.params.planId);
+      const body = request.body as Record<string, unknown>;
+      const now = new Date().toISOString();
+
+      const existing = store.joinRequests.find(
+        (jr) =>
+          jr.planId === request.params.planId && jr.supabaseUserId === jwtUserId
+      );
+      if (existing) {
+        void reply.send(existing);
+        return;
+      }
+
+      const joinRequest: JoinRequestRecord = {
+        requestId: randomUUID(),
+        planId: request.params.planId,
+        supabaseUserId: jwtUserId,
+        name: String(body.name ?? ''),
+        lastName: String(body.lastName ?? ''),
+        contactPhone: String(body.contactPhone ?? ''),
+        contactEmail: (body.contactEmail as string) ?? null,
+        displayName: (body.displayName as string) ?? null,
+        adultsCount: (body.adultsCount as number) ?? null,
+        kidsCount: (body.kidsCount as number) ?? null,
+        foodPreferences: (body.foodPreferences as string) ?? null,
+        allergies: (body.allergies as string) ?? null,
+        notes: (body.notes as string) ?? null,
+        status: 'pending',
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      store.joinRequests.push(joinRequest);
+      void reply.code(201).send(joinRequest);
+    }
+  );
+
+  app.patch<{ Params: { planId: string; requestId: string } }>(
+    '/plans/:planId/join-requests/:requestId',
+    async (request, reply) => {
+      requireJwt(request.headers.authorization as string | undefined);
+      ensurePlan(store, request.params.planId);
+      const body = request.body as Record<string, unknown>;
+      const newStatus = body.status as string;
+
+      if (newStatus !== 'approved' && newStatus !== 'rejected') {
+        throw new HttpError('status must be approved or rejected', 400);
+      }
+
+      const joinRequest = store.joinRequests.find(
+        (jr) =>
+          jr.requestId === request.params.requestId &&
+          jr.planId === request.params.planId
+      );
+      if (!joinRequest) {
+        throw new HttpError('Join request not found', 404);
+      }
+      if (joinRequest.status !== 'pending') {
+        throw new HttpError('Join request already processed', 409);
+      }
+
+      joinRequest.status = newStatus;
+      joinRequest.updatedAt = new Date().toISOString();
+
+      if (newStatus === 'approved') {
+        const plan = ensurePlan(store, request.params.planId);
+        const newParticipant: Participant = {
+          participantId: randomUUID(),
+          planId: plan.planId,
+          name: joinRequest.name,
+          lastName: joinRequest.lastName,
+          contactPhone: joinRequest.contactPhone,
+          displayName: joinRequest.displayName ?? undefined,
+          contactEmail: joinRequest.contactEmail ?? undefined,
+          role: 'participant',
+          adultsCount: joinRequest.adultsCount ?? undefined,
+          kidsCount: joinRequest.kidsCount ?? undefined,
+          foodPreferences: joinRequest.foodPreferences ?? undefined,
+          allergies: joinRequest.allergies ?? undefined,
+          notes: joinRequest.notes ?? undefined,
+          userId: joinRequest.supabaseUserId,
+          inviteToken: randomBytes(16).toString('hex'),
+          inviteStatus: 'accepted',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+        store.participants.push(newParticipant);
+        if (!plan.participantIds) plan.participantIds = [];
+        plan.participantIds.push(newParticipant.participantId);
+        void reply.send(newParticipant);
+        return;
+      }
+
+      void reply.send(joinRequest);
+    }
+  );
+
   app.post('/_reset', async (_request, reply) => {
     const fresh = cloneData(initialData);
     store.plans = fresh.plans;
     store.participants = fresh.participants;
     store.items = fresh.items;
+    store.joinRequests = fresh.joinRequests;
     void reply.send({ ok: true });
   });
 
