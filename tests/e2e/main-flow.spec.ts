@@ -504,8 +504,10 @@ test.describe('Participant Preferences Access', () => {
     });
     await mockPlanRoutes(page, plan);
 
-    await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Owner Plan')).toBeVisible({ timeout: 10000 });
+    await page.goto(`/manage-participants/${plan.planId}`);
+    await expect(
+      page.getByRole('heading', { name: 'Manage Participants' })
+    ).toBeVisible({ timeout: 10000 });
 
     await page.getByText('Group Details').click();
 
@@ -538,18 +540,8 @@ test.describe('Participant Preferences Access', () => {
     });
     await mockPlanRoutes(page, plan);
 
-    await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Other Plan')).toBeVisible({ timeout: 10000 });
-
-    await page.getByText('Group Details').click();
-    await expect(page.getByText('Guest Person')).toBeVisible();
-
-    const editButtons = page
-      .locator('text=Group Details')
-      .locator('..')
-      .locator('..')
-      .getByRole('button', { name: 'Edit' });
-    await expect(editButtons).toHaveCount(0);
+    await page.goto(`/manage-participants/${plan.planId}`);
+    await expect(page).toHaveURL(`/plan/${plan.planId}`, { timeout: 10000 });
   });
 
   test('unauthenticated user is redirected to signin from plan detail', async ({
@@ -596,10 +588,12 @@ test.describe('Participant Preferences Access', () => {
     });
     await mockPlanRoutes(page, plan);
 
-    await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Add Owner Test Plan')).toBeVisible({
-      timeout: 10000,
-    });
+    await page.goto(`/manage-participants/${plan.planId}`);
+    await expect(
+      page.getByRole('heading', { name: 'Manage Participants' })
+    ).toBeVisible({ timeout: 10000 });
+
+    await page.getByText('Group Details').click();
 
     const makeOwnerBtn = page.getByTestId('make-owner');
     await expect(makeOwnerBtn).toBeVisible({ timeout: 5000 });
