@@ -475,6 +475,7 @@
     "addOwnerCancel": "ביטול"
   },
   "invite": {
+    "inviteButton": "הזמנה",
     "copied": "קישור הזמנה הועתק!",
     "copiedAfterCreate": "המשתתף נוסף! קישור ההזמנה הועתק ללוח.",
     "copyLink": "העתקת קישור הזמנה",

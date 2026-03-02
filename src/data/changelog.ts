@@ -6,6 +6,12 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: '2026-03-03',
+    title: 'Invite button on plan page',
+    description:
+      'Added a clear Invite button on the plan page that copies the current plan URL to the clipboard. Shows "Invite link copied!" toast on success.',
+  },
+  {
     date: '2026-03-02',
     title: 'Approve / Reject join requests',
     description:

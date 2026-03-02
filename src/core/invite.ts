@@ -43,3 +43,34 @@ export async function shareInviteLink(
   const copied = await copyInviteLink(planId, inviteToken);
   return copied ? 'copied' : 'failed';
 }
+
+export async function copyPlanUrl(): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    return true;
+  } catch (err) {
+    console.warn(
+      `[Invite] Copy plan URL failed. Error: ${err instanceof Error ? err.message : String(err)}`
+    );
+    return false;
+  }
+}
+
+export async function sharePlanUrl(
+  planTitle: string
+): Promise<'shared' | 'copied' | 'failed'> {
+  if (typeof navigator.share === 'function') {
+    try {
+      await navigator.share({
+        title: i18n.t('invite.shareTitle'),
+        text: i18n.t('invite.shareText', { title: planTitle }),
+        url: window.location.href,
+      });
+      return 'shared';
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') return 'failed';
+    }
+  }
+  const copied = await copyPlanUrl();
+  return copied ? 'copied' : 'failed';
+}
