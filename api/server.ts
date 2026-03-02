@@ -462,6 +462,7 @@ export async function buildServer(
         ...plan,
         items: planItems,
         participants: planParticipants,
+        joinRequests: [],
       });
     }
   );

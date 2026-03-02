@@ -116,10 +116,16 @@ function ParticipantCard({
 
   const peopleParts: string[] = [];
   if (p.adultsCount != null && p.adultsCount > 0) {
-    peopleParts.push(t('participantDetails.adults', { count: p.adultsCount }));
+    const key =
+      p.adultsCount === 1
+        ? 'participantDetails.adult'
+        : 'participantDetails.adults';
+    peopleParts.push(t(key, { count: p.adultsCount }));
   }
   if (p.kidsCount != null && p.kidsCount > 0) {
-    peopleParts.push(t('participantDetails.kids', { count: p.kidsCount }));
+    const key =
+      p.kidsCount === 1 ? 'participantDetails.kid' : 'participantDetails.kids';
+    peopleParts.push(t(key, { count: p.kidsCount }));
   }
 
   const foodParts: string[] = [];
