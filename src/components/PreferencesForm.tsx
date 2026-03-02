@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import { FormLabel } from './shared/FormLabel';
-import { FormInput, FormTextarea } from './shared/FormInput';
+import PreferencesFields from './shared/PreferencesFields';
 
 export type PreferencesFormValues = {
   rsvpStatus?: 'confirmed' | 'not_sure' | null;
@@ -125,65 +125,7 @@ export default function PreferencesForm({
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <FormLabel>{t('preferences.adultsCount')}</FormLabel>
-            <FormInput
-              type="number"
-              min={1}
-              {...register('adultsCount')}
-              placeholder={t('preferences.adultsCountPlaceholder')}
-              compact
-            />
-            {errors.adultsCount && (
-              <p className="text-sm text-red-600 mt-1">
-                {errors.adultsCount.message}
-              </p>
-            )}
-          </div>
-          <div>
-            <FormLabel>{t('preferences.kidsCount')}</FormLabel>
-            <FormInput
-              type="number"
-              min={0}
-              {...register('kidsCount')}
-              placeholder={t('preferences.kidsCountPlaceholder')}
-              compact
-            />
-            {errors.kidsCount && (
-              <p className="text-sm text-red-600 mt-1">
-                {errors.kidsCount.message}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <FormLabel>{t('preferences.foodPreferences')}</FormLabel>
-          <FormTextarea
-            rows={2}
-            {...register('foodPreferences')}
-            placeholder={t('preferences.foodPreferencesPlaceholder')}
-          />
-        </div>
-
-        <div>
-          <FormLabel>{t('preferences.allergies')}</FormLabel>
-          <FormTextarea
-            rows={2}
-            {...register('allergies')}
-            placeholder={t('preferences.allergiesPlaceholder')}
-          />
-        </div>
-
-        <div>
-          <FormLabel>{t('preferences.notes')}</FormLabel>
-          <FormTextarea
-            rows={2}
-            {...register('notes')}
-            placeholder={t('preferences.notesPlaceholder')}
-          />
-        </div>
+        <PreferencesFields register={register} errors={errors} compact />
       </div>
 
       <div className="flex gap-3 mt-6">

@@ -236,6 +236,17 @@ export async function createJoinRequest(
   return joinRequestSchema.parse(data);
 }
 
+export async function updateJoinRequestStatus(
+  planId: string,
+  requestId: string,
+  status: 'approved' | 'rejected'
+): Promise<unknown> {
+  return request<unknown>(`/plans/${planId}/join-requests/${requestId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  });
+}
+
 export async function createPlanWithOwner(
   plan: PlanCreateWithOwner
 ): Promise<PlanWithDetails> {

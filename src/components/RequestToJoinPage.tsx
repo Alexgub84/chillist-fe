@@ -11,17 +11,15 @@ import { useLanguage } from '../contexts/useLanguage';
 import { createJoinRequest } from '../core/api';
 import { getApiErrorMessage } from '../core/error-utils';
 import {
-  combinePhone,
-  detectCountryFromPhone,
-  getDefaultCountryByLanguage,
-} from '../data/country-codes';
+  splitFullName,
+  parseExistingPhone,
+  updateUserProfile,
+} from '../core/profile-utils';
+import { combinePhone } from '../data/country-codes';
 import type { NotParticipantResponse } from '../core/schemas/plan';
 import type { JoinRequest } from '../core/schemas/join-request';
-import { FormLabel } from './shared/FormLabel';
-import { FormInput, FormTextarea } from './shared/FormInput';
-import { PhoneInput } from './PhoneInput';
-
-const labelClass = 'block text-sm font-semibold text-gray-700 mb-1';
+import ProfileFields from './shared/ProfileFields';
+import PreferencesFields from './shared/PreferencesFields';
 
 function formatDateShort(iso: string): string {
   const d = new Date(iso);
@@ -31,32 +29,30 @@ function formatDateShort(iso: string): string {
   return `${day}.${month}.${year}`;
 }
 
-function parsePhone(
-  rawPhone: string | undefined,
-  lang: string
-): { country: string; local: string } {
-  if (!rawPhone)
-    return { country: getDefaultCountryByLanguage(lang), local: '' };
-  const detected = detectCountryFromPhone(rawPhone);
-  if (detected)
-    return { country: detected.countryCode, local: detected.localNumber };
-  return { country: getDefaultCountryByLanguage(lang), local: rawPhone };
+function buildJoinRequestSchema(t: (key: string) => string) {
+  return z.object({
+    firstName: z.string().min(1, 'Name is required').max(255),
+    lastName: z.string().min(1, 'Last name is required').max(255),
+    phoneCountry: z.string().optional().or(z.literal('')),
+    phone: z.string().min(1, 'Phone is required').max(50),
+    email: z.string().optional().or(z.literal('')),
+    adultsCount: z.coerce
+      .number({ invalid_type_error: t('validation.adultsCountInvalid') })
+      .int()
+      .min(1, t('validation.adultsCountMin'))
+      .optional(),
+    kidsCount: z.coerce
+      .number({ invalid_type_error: t('validation.kidsCountInvalid') })
+      .int()
+      .min(0, t('validation.kidsCountMin'))
+      .optional(),
+    foodPreferences: z.string().optional(),
+    allergies: z.string().optional(),
+    notes: z.string().optional(),
+  });
 }
 
-const joinRequestFormSchema = z.object({
-  name: z.string().min(1, 'Name is required').max(255),
-  lastName: z.string().min(1, 'Last name is required').max(255),
-  phoneCountry: z.string().optional().or(z.literal('')),
-  contactPhone: z.string().min(1, 'Phone is required').max(50),
-  contactEmail: z.string().optional().or(z.literal('')),
-  adultsCount: z.coerce.number().int().min(1).optional(),
-  kidsCount: z.coerce.number().int().min(0).optional(),
-  foodPreferences: z.string().optional().or(z.literal('')),
-  allergies: z.string().optional().or(z.literal('')),
-  notes: z.string().optional().or(z.literal('')),
-});
-
-type JoinRequestFormValues = z.infer<typeof joinRequestFormSchema>;
+type JoinRequestFormValues = z.infer<ReturnType<typeof buildJoinRequestSchema>>;
 
 interface RequestToJoinPageProps {
   planId: string;
@@ -173,32 +169,29 @@ function JoinRequestForm({ planId }: { planId: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const metadata = user?.user_metadata ?? {};
-  const rawPhone = parsePhone(metadata.phone as string | undefined, language);
-  const firstName =
-    (metadata.first_name as string | undefined) ??
-    (metadata.full_name as string | undefined)?.trim().split(/\s+/)[0] ??
-    '';
-  const lastName =
-    (metadata.last_name as string | undefined) ??
-    (metadata.full_name as string | undefined)
-      ?.trim()
-      .split(/\s+/)
-      .slice(1)
-      .join(' ') ??
-    '';
+  const { first, last } = splitFullName(metadata.full_name as string);
+  const existingPhone = parseExistingPhone(
+    metadata.phone as string | undefined,
+    language
+  );
+  const firstName = (metadata.first_name as string | undefined) ?? first;
+  const lastName = (metadata.last_name as string | undefined) ?? last;
 
+  const schema = buildJoinRequestSchema(t);
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<JoinRequestFormValues>({
-    resolver: zodResolver(joinRequestFormSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
-      name: firstName,
-      lastName: lastName,
-      phoneCountry: rawPhone.country,
-      contactPhone: rawPhone.local,
-      contactEmail: user?.email ?? '',
+      firstName,
+      lastName,
+      phoneCountry: existingPhone.country,
+      phone: existingPhone.local,
+      email: user?.email ?? '',
       adultsCount: 1,
       kidsCount: undefined,
       foodPreferences: '',
@@ -211,16 +204,26 @@ function JoinRequestForm({ planId }: { planId: string }) {
     setIsSubmitting(true);
     try {
       await createJoinRequest(planId, {
-        name: values.name.trim(),
+        name: values.firstName.trim(),
         lastName: values.lastName.trim(),
-        contactPhone: combinePhone(values.phoneCountry, values.contactPhone),
-        contactEmail: values.contactEmail?.trim() || undefined,
+        contactPhone: combinePhone(values.phoneCountry, values.phone),
+        contactEmail: values.email?.trim() || undefined,
         adultsCount: values.adultsCount,
         kidsCount: values.kidsCount,
         foodPreferences: values.foodPreferences?.trim() || undefined,
         allergies: values.allergies?.trim() || undefined,
         notes: values.notes?.trim() || undefined,
       });
+
+      await updateUserProfile({
+        firstName: values.firstName.trim(),
+        lastName: values.lastName.trim(),
+        phoneCountry: values.phoneCountry,
+        phone: values.phone,
+        currentEmail: user?.email,
+        newEmail: values.email?.trim() || undefined,
+      });
+
       toast.success(t('joinRequest.successTitle'));
       queryClient.invalidateQueries({ queryKey: ['plan', planId] });
     } catch (err) {
@@ -251,131 +254,16 @@ function JoinRequestForm({ planId }: { planId: string }) {
         data-testid="join-request-form-element"
         className="space-y-4"
       >
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="jr-name" className={labelClass}>
-              {t('addParticipant.firstName')}
-            </label>
-            <FormInput
-              id="jr-name"
-              compact
-              autoComplete="given-name"
-              {...register('name')}
-            />
-            {errors.name && (
-              <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="jr-lastName" className={labelClass}>
-              {t('addParticipant.lastName')}
-            </label>
-            <FormInput
-              id="jr-lastName"
-              compact
-              autoComplete="family-name"
-              {...register('lastName')}
-            />
-            {errors.lastName && (
-              <p className="mt-1 text-xs text-red-600">
-                {errors.lastName.message}
-              </p>
-            )}
-          </div>
-        </div>
+        <ProfileFields
+          register={register}
+          errors={errors}
+          watch={watch}
+          setValue={setValue}
+          compact
+        />
 
-        <div>
-          <FormLabel>{t('addParticipant.phone')}</FormLabel>
-          <PhoneInput
-            countryProps={register('phoneCountry')}
-            phoneProps={register('contactPhone')}
-            countrySelectAriaLabel={t('profile.phoneCountry')}
-            phoneCountryDefaultLabel={t('profile.phoneCountryDefault')}
-            phonePlaceholder={t('addParticipant.phonePlaceholder')}
-            compact
-            error={errors.contactPhone?.message}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="jr-email" className={labelClass}>
-            {t('addParticipant.email')}
-          </label>
-          <FormInput
-            id="jr-email"
-            type="email"
-            compact
-            autoComplete="email"
-            {...register('contactEmail')}
-          />
-        </div>
-
-        <div className="border-t border-gray-100 pt-4 grid grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="jr-adults" className={labelClass}>
-              {t('preferences.adultsCount')}
-            </label>
-            <FormInput
-              id="jr-adults"
-              type="number"
-              compact
-              min={1}
-              {...register('adultsCount')}
-            />
-            {errors.adultsCount && (
-              <p className="mt-1 text-xs text-red-600">
-                {errors.adultsCount.message}
-              </p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="jr-kids" className={labelClass}>
-              {t('preferences.kidsCount')}
-            </label>
-            <FormInput
-              id="jr-kids"
-              type="number"
-              compact
-              min={0}
-              {...register('kidsCount')}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="jr-food" className={labelClass}>
-            {t('preferences.foodPreferences')}
-          </label>
-          <FormInput
-            id="jr-food"
-            compact
-            {...register('foodPreferences')}
-            placeholder={t('preferences.foodPreferencesPlaceholder')}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="jr-allergies" className={labelClass}>
-            {t('preferences.allergies')}
-          </label>
-          <FormInput
-            id="jr-allergies"
-            compact
-            {...register('allergies')}
-            placeholder={t('preferences.allergiesPlaceholder')}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="jr-notes" className={labelClass}>
-            {t('preferences.notes')}
-          </label>
-          <FormTextarea
-            id="jr-notes"
-            rows={3}
-            {...register('notes')}
-            placeholder={t('preferences.notesPlaceholder')}
-          />
+        <div className="border-t border-gray-100 pt-4 space-y-4">
+          <PreferencesFields register={register} errors={errors} compact />
         </div>
 
         <button

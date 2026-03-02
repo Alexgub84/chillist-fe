@@ -1,0 +1,141 @@
+import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
+import { useCreateItem } from './useCreateItem';
+import { useUpdateItem } from './useUpdateItem';
+import { useUpdateParticipant } from './useUpdateParticipant';
+import { useDeletePlan } from './useDeletePlan';
+import { useUpdatePlan } from './useUpdatePlan';
+import { getApiErrorMessage } from '../core/error-utils';
+import type { ItemPatch } from '../core/schemas/item';
+import type { PlanPatch } from '../core/schemas/plan';
+import type { ItemFormValues } from '../components/ItemForm';
+import type { PreferencesFormValues } from '../components/PreferencesForm';
+
+function toItemPayload(values: ItemFormValues) {
+  return {
+    name: values.name,
+    category: values.category,
+    subcategory: values.subcategory || null,
+    quantity: values.quantity,
+    unit: values.unit,
+    status: values.status,
+    notes: values.notes || null,
+    assignedParticipantId: values.assignedParticipantId || null,
+  };
+}
+
+function handleMutationError(context: string, err: unknown) {
+  console.error(
+    `[PlanActions] ${context}. Error: ${err instanceof Error ? err.message : String(err)}`
+  );
+  const { title, message } = getApiErrorMessage(
+    err instanceof Error ? err : new Error(String(err))
+  );
+  toast.error(`${title}: ${message}`);
+}
+
+export function usePlanActions(planId: string) {
+  const { t } = useTranslation();
+  const createItemMutation = useCreateItem(planId);
+  const updateItemMutation = useUpdateItem(planId);
+  const updateParticipantMutation = useUpdateParticipant(planId);
+  const deletePlanMutation = useDeletePlan();
+  const updatePlanMutation = useUpdatePlan(planId);
+
+  async function updateSingleItem(itemId: string, updates: ItemPatch) {
+    try {
+      await updateItemMutation.mutateAsync({ itemId, updates });
+    } catch (err) {
+      handleMutationError(
+        `updateSingleItem failed — planId="${planId}", itemId="${itemId}"`,
+        err
+      );
+    }
+  }
+
+  async function createOrUpdateItem(
+    values: ItemFormValues,
+    editingItemId: string | null
+  ) {
+    if (editingItemId) {
+      await updateSingleItem(editingItemId, toItemPayload(values));
+    } else {
+      await createItemMutation.mutateAsync(toItemPayload(values));
+    }
+  }
+
+  async function updateParticipantPreferences(
+    participantId: string,
+    values: PreferencesFormValues
+  ) {
+    try {
+      await updateParticipantMutation.mutateAsync({
+        participantId,
+        updates: {
+          adultsCount: values.adultsCount ?? null,
+          kidsCount: values.kidsCount ?? null,
+          foodPreferences: values.foodPreferences || null,
+          allergies: values.allergies || null,
+          notes: values.notes || null,
+        },
+      });
+      toast.success(t('preferences.updated'));
+    } catch (err) {
+      handleMutationError(
+        `updateParticipantPreferences failed — planId="${planId}", participantId="${participantId}"`,
+        err
+      );
+    }
+  }
+
+  async function deletePlan(): Promise<boolean> {
+    try {
+      await deletePlanMutation.mutateAsync(planId);
+      toast.success(t('plan.deleted'));
+      return true;
+    } catch (err) {
+      handleMutationError(`deletePlan failed — planId="${planId}"`, err);
+      return false;
+    }
+  }
+
+  async function updatePlanDetails(updates: PlanPatch): Promise<boolean> {
+    try {
+      await updatePlanMutation.mutateAsync(updates);
+      toast.success(t('plan.updated'));
+      return true;
+    } catch (err) {
+      handleMutationError(`updatePlanDetails failed — planId="${planId}"`, err);
+      return false;
+    }
+  }
+
+  async function transferPlanOwnership(participantId: string) {
+    try {
+      await updateParticipantMutation.mutateAsync({
+        participantId,
+        updates: { role: 'owner' },
+      });
+      toast.success(t('participantDetails.addOwnerSuccess'));
+    } catch (err) {
+      handleMutationError(
+        `transferPlanOwnership failed — planId="${planId}", participantId="${participantId}"`,
+        err
+      );
+    }
+  }
+
+  return {
+    updateSingleItem,
+    createOrUpdateItem,
+    updateParticipantPreferences,
+    deletePlan,
+    updatePlanDetails,
+    transferPlanOwnership,
+    isCreatingItem: createItemMutation.isPending,
+    isUpdatingItem: updateItemMutation.isPending,
+    isDeletingPlan: deletePlanMutation.isPending,
+    isUpdatingPlan: updatePlanMutation.isPending,
+    isUpdatingParticipant: updateParticipantMutation.isPending,
+  };
+}

@@ -19,6 +19,7 @@
   "signIn": {
     "title": "Sign in",
     "subtitle": "Welcome back to Chillist.",
+    "planRedirectSubtitle": "Sign in to view this plan or request to join.",
     "email": "Email",
     "password": "Password",
     "emailPlaceholder": "you@example.com",
@@ -33,6 +34,7 @@
   "signUp": {
     "title": "Create an account",
     "subtitle": "Sign up to start planning with Chillist.",
+    "planRedirectSubtitle": "Create an account to view this plan or request to join.",
     "email": "Email",
     "password": "Password",
     "emailPlaceholder": "you@example.com",
@@ -448,7 +450,11 @@
     "requestStatus_pending": "Pending",
     "requestStatus_approved": "Approved",
     "requestStatus_rejected": "Rejected",
-    "participantAdded": "Participant added"
+    "participantAdded": "Participant added",
+    "approveRequest": "Approve",
+    "rejectRequest": "Reject",
+    "requestApproved": "Join request approved",
+    "requestRejected": "Join request rejected"
   },
   "participantDetails": {
     "title": "Group Details",

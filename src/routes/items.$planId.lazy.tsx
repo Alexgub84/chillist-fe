@@ -14,11 +14,14 @@ import { useUpdateItem } from '../hooks/useUpdateItem';
 import { addGuestItem, updateGuestItem } from '../core/api';
 import { getApiErrorMessage } from '../core/error-utils';
 import type { Participant } from '../core/schemas/participant';
-import { isNotParticipantResponse } from '../core/schemas/plan';
+import {
+  isNotParticipantResponse,
+  type PlanWithDetails,
+} from '../core/schemas/plan';
 import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import { useQueryClient } from '@tanstack/react-query';
-import { useAuth } from '../contexts/useAuth';
 import { useBulkAssign } from '../hooks/useBulkAssign';
+import { usePlanRole } from '../hooks/usePlanRole';
 import ErrorPage from './ErrorPage';
 import ItemsView from '../components/ItemsView';
 
@@ -41,13 +44,13 @@ function ItemsPage() {
 
 function AuthItemsPage({ planId }: { planId: string }) {
   const { t } = useTranslation();
-  const { user } = useAuth();
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
-  const bulkAssign = useBulkAssign(
-    planId,
-    plan && !isNotParticipantResponse(plan) ? plan.participants : []
+  const hasPlan = !!plan && !isNotParticipantResponse(plan);
+  const bulkAssign = useBulkAssign(planId, hasPlan ? plan.participants : []);
+  const { isOwner, currentParticipant } = usePlanRole(
+    hasPlan ? plan : ({ participants: [] } as unknown as PlanWithDetails)
   );
 
   useScrollRestore(`items-${planId}`, !isLoading && !!plan);
@@ -62,13 +65,6 @@ function AuthItemsPage({ planId }: { planId: string }) {
   if (isNotParticipantResponse(plan)) {
     return null;
   }
-
-  const isOwner =
-    !!user &&
-    plan.participants.some((p) => p.role === 'owner' && p.userId === user.id);
-  const currentParticipant = user
-    ? plan.participants.find((p) => p.userId === user.id)
-    : undefined;
 
   return (
     <ItemsView

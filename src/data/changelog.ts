@@ -7,6 +7,54 @@ export interface ChangelogEntry {
 export const changelog: ChangelogEntry[] = [
   {
     date: '2026-03-02',
+    title: 'Approve / Reject join requests',
+    description:
+      'Plan owners can now approve or reject pending join requests directly from the Manage Participants page. Approving a request automatically creates a new participant linked to the requester. Both actions show confirmation toasts and refresh the plan data.',
+  },
+  {
+    date: '2026-03-02',
+    title: 'OpenAPI spec sync & schema fix',
+    description:
+      'Synced the frontend OpenAPI spec with the latest backend release. Fixed schema reference numbering shift (def-25/28 → def-33/36) caused by the new join-request management endpoint.',
+  },
+  {
+    date: '2026-03-02',
+    title: 'Shared profile fields component',
+    description:
+      'Extracted first name, last name, phone, and email inputs into a reusable ProfileFields component. Used by both the complete-profile page and the join-request form, ensuring consistent validation and Supabase profile sync.',
+  },
+  {
+    date: '2026-03-02',
+    title: 'Searchable phone country selector',
+    description:
+      'Rewrote the phone country code dropdown as a Headless UI Combobox. Users can now search by country name or dial code instead of scrolling through a long list.',
+  },
+  {
+    date: '2026-03-02',
+    title: 'Shared preferences fields component',
+    description:
+      'Extracted adults count, kids count, food preferences, allergies, and notes into a reusable PreferencesFields component shared between the preferences form and the join-request form.',
+  },
+  {
+    date: '2026-03-02',
+    title: 'Profile sync on join request',
+    description:
+      'When a user submits a join request, their profile details (name, phone, email) are now also synced to Supabase user_metadata — keeping profile data consistent across the app.',
+  },
+  {
+    date: '2026-03-02',
+    title: 'Plan route refactoring',
+    description:
+      'Broke the 600-line plan route into focused modules: usePlanRole (role derivation), usePlanActions (mutations), utils-plan-items (counting/filtering), TransferOwnershipModal, and SectionLink. Each module is independently testable.',
+  },
+  {
+    date: '2026-03-02',
+    title: 'Auth redirect context messages',
+    description:
+      'When unauthenticated users are redirected to sign-in from a plan page, a contextual message now explains they need to log in to view or join the plan. The redirect param is preserved when toggling between sign-in and sign-up.',
+  },
+  {
+    date: '2026-03-02',
     title: 'Request to Join plan',
     description:
       "Invited users who aren't yet participants now see a plan preview and a form to request access instead of a crash. Once submitted, the page shows a pending status badge until the owner approves.",

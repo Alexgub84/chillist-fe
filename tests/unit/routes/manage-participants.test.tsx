@@ -39,6 +39,12 @@ vi.mock('../../../src/hooks/useUpdateParticipant', () => ({
   })),
 }));
 
+const mockUpdateJoinRequestStatus = vi.fn();
+vi.mock('../../../src/core/api', () => ({
+  updateJoinRequestStatus: (...args: unknown[]) =>
+    mockUpdateJoinRequestStatus(...args),
+}));
+
 vi.mock('react-hot-toast', async (importOriginal) => {
   const actual = await importOriginal<typeof import('react-hot-toast')>();
   return {
@@ -329,6 +335,178 @@ describe('Manage Participants route', () => {
     expect(mockNavigate).toHaveBeenCalledWith({
       to: '/plan/$planId',
       params: { planId: 'plan-1' },
+    });
+  });
+
+  it('shows approve and reject buttons for pending join requests', async () => {
+    const { usePlan } = await import('../../../src/hooks/usePlan');
+    vi.mocked(usePlan).mockReturnValue({
+      data: buildPlan({ joinRequests: [buildJoinRequest()] }),
+      isLoading: false,
+      error: null,
+    } as ReturnType<typeof usePlan>);
+
+    window.history.pushState({}, '', '/manage-participants/plan-1');
+
+    const router = createRouter({ routeTree });
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Bob Requester')).toBeInTheDocument();
+    });
+
+    expect(
+      screen.getByTestId('approve-join-request-req-1')
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('reject-join-request-req-1')).toBeInTheDocument();
+  });
+
+  it('does not show approve/reject buttons for already-approved requests', async () => {
+    const { usePlan } = await import('../../../src/hooks/usePlan');
+    vi.mocked(usePlan).mockReturnValue({
+      data: buildPlan({
+        joinRequests: [buildJoinRequest({ status: 'approved' })],
+      }),
+      isLoading: false,
+      error: null,
+    } as ReturnType<typeof usePlan>);
+
+    window.history.pushState({}, '', '/manage-participants/plan-1');
+
+    const router = createRouter({ routeTree });
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Bob Requester')).toBeInTheDocument();
+    });
+
+    expect(screen.getByText('Approved')).toBeInTheDocument();
+    expect(
+      screen.queryByTestId('approve-join-request-req-1')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('reject-join-request-req-1')
+    ).not.toBeInTheDocument();
+  });
+
+  it('calls updateJoinRequestStatus with approved when Approve is clicked', async () => {
+    mockUpdateJoinRequestStatus.mockResolvedValue({});
+
+    const { usePlan } = await import('../../../src/hooks/usePlan');
+    vi.mocked(usePlan).mockReturnValue({
+      data: buildPlan({ joinRequests: [buildJoinRequest()] }),
+      isLoading: false,
+      error: null,
+    } as ReturnType<typeof usePlan>);
+
+    window.history.pushState({}, '', '/manage-participants/plan-1');
+
+    const router = createRouter({ routeTree });
+    const user = userEvent.setup();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByTestId('approve-join-request-req-1')
+      ).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('approve-join-request-req-1'));
+
+    await waitFor(() => {
+      expect(mockUpdateJoinRequestStatus).toHaveBeenCalledWith(
+        'plan-1',
+        'req-1',
+        'approved'
+      );
+    });
+  });
+
+  it('calls updateJoinRequestStatus with rejected when Reject is clicked', async () => {
+    mockUpdateJoinRequestStatus.mockResolvedValue({});
+
+    const { usePlan } = await import('../../../src/hooks/usePlan');
+    vi.mocked(usePlan).mockReturnValue({
+      data: buildPlan({ joinRequests: [buildJoinRequest()] }),
+      isLoading: false,
+      error: null,
+    } as ReturnType<typeof usePlan>);
+
+    window.history.pushState({}, '', '/manage-participants/plan-1');
+
+    const router = createRouter({ routeTree });
+    const user = userEvent.setup();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByTestId('reject-join-request-req-1')
+      ).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('reject-join-request-req-1'));
+
+    await waitFor(() => {
+      expect(mockUpdateJoinRequestStatus).toHaveBeenCalledWith(
+        'plan-1',
+        'req-1',
+        'rejected'
+      );
+    });
+  });
+
+  it('shows error toast when approve fails', async () => {
+    mockUpdateJoinRequestStatus.mockRejectedValue(new Error('Network error'));
+
+    const { usePlan } = await import('../../../src/hooks/usePlan');
+    vi.mocked(usePlan).mockReturnValue({
+      data: buildPlan({ joinRequests: [buildJoinRequest()] }),
+      isLoading: false,
+      error: null,
+    } as ReturnType<typeof usePlan>);
+
+    window.history.pushState({}, '', '/manage-participants/plan-1');
+
+    const router = createRouter({ routeTree });
+    const user = userEvent.setup();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByTestId('approve-join-request-req-1')
+      ).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('approve-join-request-req-1'));
+
+    const toast = (await import('react-hot-toast')).default;
+    await waitFor(() => {
+      expect(toast.error).toHaveBeenCalled();
     });
   });
 });

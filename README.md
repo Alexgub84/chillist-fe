@@ -55,8 +55,8 @@ Generated route tree:
 ## Folder Map
 
 - `src/routes/`: route-level composition and page entry points
-- `src/components/`: UI components and shared primitives
-- `src/hooks/`: data and behavior hooks per domain (`usePlan`, `useInvitePlan`, `useUpdateItem`, etc.)
+- `src/components/`: UI components and shared primitives (`shared/PreferencesFields`, `shared/SectionLink`, `shared/Modal`, etc.)
+- `src/hooks/`: data and behavior hooks per domain (`usePlan`, `usePlanRole`, `usePlanActions`, `useInvitePlan`, `useUpdateItem`, etc.)
 - `src/core/`: API clients, request helpers, schemas, auth error bus, shared core logic
 - `src/contexts/`: app providers (`AuthProvider`, `LanguageProvider`)
 - `src/i18n/`: i18n setup and locale files
@@ -70,6 +70,7 @@ Generated route tree:
 ### Auth UI and Auth State
 
 - Routes: `src/routes/signin.tsx`, `src/routes/signin.lazy.tsx`, `src/routes/signup.tsx`, `src/routes/signup.lazy.tsx`, `src/routes/complete-profile.lazy.tsx`
+- Sign-in/sign-up pages show a contextual subtitle when redirected from a plan page (`?redirect=/plan/...`). The `redirect` param is preserved when toggling between sign-in and sign-up.
 - Auth context: `src/contexts/AuthProvider.tsx`
 - Auth hook: `src/contexts/useAuth.ts`, auth modal: `src/components/AuthErrorModal.tsx`
 - Supabase + token use: `src/lib/supabase.ts`, `src/core/api.ts`, `src/core/api-client.ts`
@@ -78,12 +79,16 @@ Generated route tree:
 
 - Route/page: `src/routes/plan.$planId.lazy.tsx`
 - Manage Participants (owner-only): `src/routes/manage-participants.$planId.lazy.tsx`
+- Plan role and permissions: `src/hooks/usePlanRole.ts` (derives `isOwner`, `currentParticipant`, `canEditItem`)
+- Plan mutation actions: `src/hooks/usePlanActions.ts` (item CRUD, plan delete/update, preferences, ownership transfer)
+- Item counting and filtering: `src/core/utils-plan-items.ts` (pure functions for per-participant counts, status/tab filters)
 - Main view components: `src/components/Plan.tsx`, `src/components/ParticipantDetails.tsx`, `src/components/ManageParticipantsList.tsx`, `src/components/EditPlanForm.tsx`
+- Shared UI: `src/components/shared/SectionLink.tsx` (navigation cards), `src/components/shared/PreferencesFields.tsx` (reusable preference fields used by `PreferencesForm` and `RequestToJoinPage`), `src/components/TransferOwnershipModal.tsx`
 - Item rendering and permissions: `src/components/ItemsList.tsx`, `src/components/CategorySection.tsx`, `src/components/ItemCard.tsx`
 
 ### Owner and Admin Flows
 
-- Owner gating and edits: `src/routes/plan.$planId.lazy.tsx`, `src/components/Plan.tsx`
+- Owner gating and edits: `src/routes/plan.$planId.lazy.tsx`, `src/hooks/usePlanRole.ts`, `src/components/Plan.tsx`
 - Admin delete UI: `src/components/PlansList.tsx`
 - Auth role detection: `src/contexts/AuthProvider.tsx`
 

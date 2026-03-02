@@ -380,10 +380,10 @@ export default function PlanForm({
             <div>
               <FormLabel>{t('planForm.phone')}</FormLabel>
               <PhoneInput
-                countryProps={register('ownerPhoneCountry')}
+                countryValue={watch('ownerPhoneCountry') ?? ''}
+                onCountryChange={(code) => setValue('ownerPhoneCountry', code)}
                 phoneProps={register('ownerPhone')}
                 countrySelectAriaLabel={t('planForm.phoneCountry')}
-                phoneCountryDefaultLabel={t('planForm.phoneCountryDefault')}
                 phonePlaceholder={t('planForm.phonePlaceholder')}
                 compact
                 error={errors.ownerPhone?.message}
@@ -450,12 +450,14 @@ export default function PlanForm({
                 </div>
                 <div>
                   <PhoneInput
-                    countryProps={register(
-                      `participants.${index}.phoneCountry`
-                    )}
+                    countryValue={
+                      watch(`participants.${index}.phoneCountry`) ?? ''
+                    }
+                    onCountryChange={(code) =>
+                      setValue(`participants.${index}.phoneCountry`, code)
+                    }
                     phoneProps={register(`participants.${index}.contactPhone`)}
                     countrySelectAriaLabel={t('planForm.phoneCountry')}
-                    phoneCountryDefaultLabel={t('planForm.phoneCountryDefault')}
                     phonePlaceholder={t('planForm.phonePlaceholder')}
                     compact
                     hasLabel={false}

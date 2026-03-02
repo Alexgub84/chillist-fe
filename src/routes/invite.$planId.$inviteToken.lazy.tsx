@@ -347,6 +347,7 @@ export function InvitePlanPage() {
           <Link
             to="/signin"
             search={{ redirect: `/plan/${planId}` }}
+            data-testid="invite-signin-link"
             onClick={() => storePendingInvite(planId, inviteToken)}
             className="block w-full text-center rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors"
           >

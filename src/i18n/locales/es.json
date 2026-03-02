@@ -19,6 +19,7 @@
   "signIn": {
     "title": "Iniciar sesión",
     "subtitle": "Bienvenido de vuelta a Chillist.",
+    "planRedirectSubtitle": "Inicia sesión para ver este plan o solicitar unirte.",
     "email": "Correo electrónico",
     "password": "Contraseña",
     "emailPlaceholder": "tu@ejemplo.com",
@@ -33,6 +34,7 @@
   "signUp": {
     "title": "Crear una cuenta",
     "subtitle": "Regístrate para empezar a planificar con Chillist.",
+    "planRedirectSubtitle": "Crea una cuenta para ver este plan o solicitar unirte.",
     "email": "Correo electrónico",
     "password": "Contraseña",
     "emailPlaceholder": "tu@ejemplo.com",
