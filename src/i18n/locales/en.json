@@ -475,6 +475,7 @@
     "addOwnerCancel": "Cancel"
   },
   "invite": {
+    "inviteButton": "Invite",
     "copied": "Invite link copied!",
     "copiedAfterCreate": "Participant added! Invite link copied to clipboard.",
     "copyLink": "Copy invite link",

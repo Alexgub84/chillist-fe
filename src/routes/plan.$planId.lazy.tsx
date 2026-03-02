@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import {
   createLazyFileRoute,
@@ -26,7 +27,6 @@ import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
 import RequestToJoinPage from '../components/RequestToJoinPage';
 import Forecast from '../components/Forecast';
-import ParticipantDetails from '../components/ParticipantDetails';
 import ItemsList from '../components/ItemsList';
 import ItemForm, { type ItemFormValues } from '../components/ItemForm';
 import EditPlanForm from '../components/EditPlanForm';
@@ -37,6 +37,7 @@ import CollapsibleSection from '../components/shared/CollapsibleSection';
 import SectionLink from '../components/shared/SectionLink';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
+import { copyPlanUrl, sharePlanUrl } from '../core/invite';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanPage,
@@ -156,16 +157,52 @@ function PlanPage() {
     setTransferTargetParticipantId(null);
   }
 
+  async function handleCopyPlanUrl() {
+    const copied = await copyPlanUrl();
+    if (copied) toast.success(t('invite.copied'));
+  }
+
+  async function handleSharePlanUrl() {
+    if (!plan) return;
+    const planTitle = isNotParticipantResponse(plan)
+      ? plan.preview.title
+      : plan.title;
+    const result = await sharePlanUrl(planTitle);
+    if (result === 'copied') toast.success(t('invite.copied'));
+  }
+
   return (
     <div className="w-full px-3 sm:px-0">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-4 sm:mb-6">
+        <div className="mb-4 sm:mb-6 flex items-center justify-between gap-3">
           <Link
             to="/plans"
             className="text-blue-500 hover:underline text-sm sm:text-base"
           >
             {t('plan.backToPlans')}
           </Link>
+          <button
+            type="button"
+            data-testid="invite-button"
+            onClick={handleCopyPlanUrl}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors shrink-0"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+            {t('invite.inviteButton')}
+          </button>
         </div>
 
         <CollapsibleSection
@@ -186,6 +223,54 @@ function PlanPage() {
             isDeleting={actions.isDeletingPlan}
           />
         </CollapsibleSection>
+        <div className="flex items-center gap-3 shrink-0 mt-2">
+          <button
+            type="button"
+            data-testid="copy-plan-url-button"
+            title={t('invite.copyLink')}
+            onClick={handleCopyPlanUrl}
+            className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50 border border-gray-200 hover:border-blue-200"
+          >
+            <svg
+              className="w-5 h-5 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+            <span>{t('invite.copyLink')}</span>
+          </button>
+          <button
+            type="button"
+            data-testid="share-plan-url-button"
+            title={t('invite.shareLink')}
+            onClick={handleSharePlanUrl}
+            className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50 border border-gray-200 hover:border-blue-200"
+          >
+            <svg
+              className="w-5 h-5 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+              />
+            </svg>
+            <span>{t('invite.shareLink')}</span>
+          </button>
+        </div>
 
         <div className="mt-4 sm:mt-6">
           <Forecast
@@ -221,20 +306,6 @@ function PlanPage() {
             title={t('manageParticipants.linkTitle')}
             subtitle={t('manageParticipants.linkDesc')}
           />
-        )}
-
-        {plan.participants.length > 0 && (
-          <div className="mt-6 sm:mt-8">
-            <ParticipantDetails
-              participants={plan.participants}
-              planId={planId}
-              planTitle={plan.title}
-              isOwner={isOwner}
-              currentParticipantId={currentParticipant?.participantId}
-              onEditPreferences={setEditingParticipantId}
-              onMakeOwner={isOwner ? setTransferTargetParticipantId : undefined}
-            />
-          </div>
         )}
 
         <SectionLink
