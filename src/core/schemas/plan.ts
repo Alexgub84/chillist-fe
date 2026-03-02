@@ -7,6 +7,7 @@ import {
   participantSchema,
   participantCreateSchema,
 } from './participant';
+import { joinRequestSchema } from './join-request';
 
 type BEPlan = components['schemas']['def-5'];
 
@@ -55,6 +56,7 @@ export const planWithItemsSchema = planSchema.extend({
 export const planWithDetailsSchema = planSchema.extend({
   items: z.array(itemSchema),
   participants: z.array(participantSchema),
+  joinRequests: z.array(joinRequestSchema).optional(),
 });
 
 export const ownerBodySchema = z.object({

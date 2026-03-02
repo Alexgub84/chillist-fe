@@ -387,6 +387,7 @@ export function InvitePlanPage() {
         open={showPreferences}
         onClose={() => setShowPreferences(false)}
         title={t('invite.guestPreferencesTitle')}
+        testId="guest-preferences-modal"
       >
         <PreferencesForm
           onSubmit={handleGuestPreferences}

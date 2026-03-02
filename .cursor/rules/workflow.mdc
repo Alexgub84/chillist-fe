@@ -11,6 +11,11 @@ If a task requires backend changes, stop and tell the user to switch to the back
 
 The ONE exception: you MAY read and write files in /Users/alexguberman/Projects/chillist/chillist-docs/ (the shared docs repo) to read rules/docs and update dev-lessons, guides, specs, or rules when needed.
 
+# Issue Creation
+
+When asked to create GitHub issues: see `../chillist-docs/guides/issue-management.md`.
+
+
 # Git Safety (NEVER BREAK THESE)
 
 - NEVER push directly to `main` or `staging`. Always create a feature branch.
@@ -55,6 +60,10 @@ After EVERY bug fix or feature implementation, you MUST update the relevant docs
 3. **Rules** (/Users/alexguberman/Projects/chillist/chillist-docs/rules/frontend.md) — Update when:
    - A fix implies a pattern that should be followed going forward
    - A new convention is established (e.g., data attributes for scroll tracking)
+
+# Element Selection in Tests
+
+**Always use `data-testid` for testable elements.** Add `data-testid` (or `testId` prop on Modal, etc.) on buttons, links, dialogs, forms. In tests, prefer `getByTestId` over `getByText`/`getByRole`/`getByLabel` — test IDs are stable across i18n, layout changes, and Headless UI transitions.
 
 4. **Guides** (/Users/alexguberman/Projects/chillist/chillist-docs/guides/frontend.md) — Update when:
    - Setup steps, scripts, or dev workflow changed

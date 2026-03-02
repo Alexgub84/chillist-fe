@@ -16,9 +16,10 @@ async function addItemViaUI(
 ): Promise<void> {
   await page.getByRole('button', { name: /Add Item/i }).click();
 
-  const form = page.locator('form:has(button[type="submit"])').last();
-  await expect(form).toBeVisible();
+  const modal = page.getByTestId('add-item-modal');
+  await expect(modal).toBeVisible();
 
+  const form = modal.locator('form');
   const nameInput = form.getByPlaceholder('Item name');
   await nameInput.fill(name);
   const option = page.getByRole('option', { name, exact: true });
@@ -31,7 +32,7 @@ async function addItemViaUI(
   const submitBtn = form.locator('button[type="submit"]');
   await expect(submitBtn).toBeVisible();
   await submitBtn.click({ force: true });
-  await expect(form).toBeHidden({ timeout: 10000 });
+  await expect(modal).toBeHidden({ timeout: 10000 });
 }
 
 function buildTestPlan() {
@@ -84,6 +85,7 @@ function assignItemsToParticipants(plan: ReturnType<typeof buildTestPlan>) {
 test.describe('Plan creation via UI', () => {
   test('creates a plan with owner and navigates to detail page', async ({
     page,
+    isMobile,
   }) => {
     await injectUserSession(page);
     await mockPlansListRoutes(page);
@@ -110,7 +112,8 @@ test.describe('Plan creation via UI', () => {
 
     const skipBtn = page.getByRole('button', { name: /skip for now/i });
     await expect(skipBtn).toBeVisible({ timeout: 15000 });
-    await skipBtn.click({ force: true });
+    await skipBtn.scrollIntoViewIfNeeded();
+    await skipBtn.click({ force: isMobile });
 
     await expect(page).toHaveURL(/\/plan\//, { timeout: 15000 });
     await expect(page.getByText('E2E Test Trip')).toBeVisible({
@@ -343,6 +346,135 @@ test.describe('Edit Plan', () => {
 
     await page.goto(`/plan/${plan.planId}`);
     await expect(page).toHaveURL(/\/signin/, { timeout: 10000 });
+  });
+});
+
+test.describe('Manage Participants route', () => {
+  test('owner sees Manage Participants link and can navigate to manage page', async ({
+    page,
+  }) => {
+    await injectUserSession(page);
+
+    const plan = buildPlan({
+      title: 'Manage Participants Test',
+      participants: [
+        {
+          name: 'Regular',
+          lastName: 'User',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'regular-user-id',
+        },
+        { name: 'Bob', lastName: 'Helper', phone: '555-0200' },
+      ],
+      items: [{ name: 'Tent', category: 'equipment', quantity: 1 }],
+    });
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/plan/${plan.planId}`);
+    await expect(page.getByText('Manage Participants Test')).toBeVisible({
+      timeout: 10000,
+    });
+
+    const manageLink = page.getByTestId('manage-participants-link');
+    await expect(manageLink).toBeVisible();
+    await expect(manageLink).toHaveAttribute(
+      'href',
+      `/manage-participants/${plan.planId}`
+    );
+    await manageLink.click();
+
+    await expect(page).toHaveURL(`/manage-participants/${plan.planId}`, {
+      timeout: 10000,
+    });
+    await expect(
+      page.getByRole('heading', { name: 'Manage Participants' })
+    ).toBeVisible({
+      timeout: 10000,
+    });
+  });
+
+  test('owner can add participant on manage-participants page', async ({
+    page,
+  }) => {
+    await injectUserSession(page);
+
+    const plan = buildPlan({
+      title: 'Add Participant Test',
+      participants: [
+        {
+          name: 'Regular',
+          lastName: 'User',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'regular-user-id',
+        },
+      ],
+      items: [],
+    });
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/manage-participants/${plan.planId}`);
+    await expect(
+      page.getByRole('heading', { name: 'Manage Participants' })
+    ).toBeVisible({
+      timeout: 10000,
+    });
+
+    await page.getByTestId('add-participant-button').click();
+    const dialog = page.getByTestId('add-participant-modal');
+    await expect(dialog).toBeVisible({ timeout: 5000 });
+    await expect(dialog.getByPlaceholder('First name')).toBeVisible();
+
+    await dialog.getByPlaceholder('First name').fill('Jane');
+    await dialog.getByPlaceholder('Last name').fill('Doe');
+    await dialog.getByPlaceholder('Phone number').fill('555-1234');
+    await dialog.getByPlaceholder('Email (optional)').fill('jane@test.com');
+
+    const submitBtn = dialog.getByRole('button', { name: /add participant/i });
+    await expect(submitBtn).toBeVisible();
+    await submitBtn.click();
+
+    await expect(dialog).toBeHidden({ timeout: 10000 });
+    await expect(page.getByText('Participant added')).toBeVisible({
+      timeout: 10000,
+    });
+    await expect(page.getByText('Jane Doe')).toBeVisible();
+  });
+
+  test('non-owner is redirected to plan page when accessing manage-participants', async ({
+    page,
+  }) => {
+    await injectUserSession(page);
+
+    const plan = buildPlan({
+      title: 'Other Owner Plan',
+      participants: [
+        {
+          name: 'Other',
+          lastName: 'Owner',
+          phone: '555-0100',
+          role: 'owner',
+          userId: 'different-user-id',
+        },
+        {
+          name: 'Regular',
+          lastName: 'User',
+          phone: '555-0200',
+          role: 'participant',
+          userId: 'regular-user-id',
+        },
+      ],
+      items: [],
+    });
+    await mockPlanRoutes(page, plan);
+
+    await page.goto(`/manage-participants/${plan.planId}`);
+
+    await expect(page).toHaveURL(`/plan/${plan.planId}`, { timeout: 10000 });
+    await expect(page.getByText('Other Owner Plan')).toBeVisible({
+      timeout: 10000,
+    });
   });
 });
 
@@ -738,18 +870,20 @@ test.describe('Invite Landing Page', () => {
       name: /continue without signing in/i,
     });
     await expect(continueBtn).toBeVisible();
-    await continueBtn.click();
+    await continueBtn.scrollIntoViewIfNeeded();
+    await continueBtn.click({ force: isMobile });
 
-    await expect(page.getByText('Your Preferences')).toBeVisible({
+    const preferencesModal = page.getByTestId('guest-preferences-modal');
+    await expect(preferencesModal).toBeVisible({
       timeout: 5000,
     });
 
     if (isMobile) return;
 
-    await page.getByPlaceholder('1').fill('2');
-    await page.getByPlaceholder('0').fill('1');
+    await preferencesModal.getByPlaceholder('1').fill('2');
+    await preferencesModal.getByPlaceholder('0').fill('1');
 
-    await page
+    await preferencesModal
       .getByRole('button', { name: /save preferences/i })
       .click({ force: true });
 
@@ -759,7 +893,10 @@ test.describe('Invite Landing Page', () => {
     await expect(page).toHaveURL(/\/invite\//);
   });
 
-  test('guest can skip preferences and redirect to plan', async ({ page }) => {
+  test('guest can skip preferences and redirect to plan', async ({
+    page,
+    isMobile,
+  }) => {
     const plan = buildPlan({
       title: 'Day Hike',
       participants: [
@@ -779,15 +916,14 @@ test.describe('Invite Landing Page', () => {
       .getByRole('button', { name: /continue without signing in/i })
       .click();
 
-    await expect(page.getByText('Your Preferences')).toBeVisible({
-      timeout: 5000,
-    });
+    const preferencesModal = page.getByTestId('guest-preferences-modal');
+    await expect(preferencesModal).toBeVisible({ timeout: 5000 });
 
-    await page.getByRole('button', { name: /skip/i }).click();
+    const skipBtn = page.getByRole('button', { name: /skip/i });
+    await skipBtn.scrollIntoViewIfNeeded();
+    await skipBtn.click({ force: isMobile });
 
-    await expect(page.getByText('Your Preferences')).toBeHidden({
-      timeout: 10000,
-    });
+    await expect(preferencesModal).toBeHidden({ timeout: 10000 });
     await expect(page).toHaveURL(/\/invite\//);
   });
 

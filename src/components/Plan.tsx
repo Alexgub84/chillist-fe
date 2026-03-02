@@ -1,25 +1,8 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import type { PlanWithDetails } from '../core/schemas/plan';
-import type {
-  Participant,
-  ParticipantCreate,
-} from '../core/schemas/participant';
-import { FormLabel } from './shared/FormLabel';
-import { ManageParticipantsList } from './ManageParticipantsList';
-import { FormInput } from './shared/FormInput';
 import Modal from './shared/Modal';
 import LocationMap from './LocationMap';
-import {
-  combinePhone,
-  getDefaultCountryByLanguage,
-} from '../data/country-codes';
-import { useLanguage } from '../contexts/useLanguage';
-import { PhoneInput } from './PhoneInput';
 
 function formatDateShort(iso: string): string {
   const d = new Date(iso);
@@ -29,168 +12,28 @@ function formatDateShort(iso: string): string {
   return `${day}.${month}.${year}`;
 }
 
-function avatarBorderColor(role: Participant['role']) {
-  if (role === 'viewer') return 'border-gray-300';
-  return 'border-emerald-400';
-}
-
-const addParticipantSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
-  phoneCountry: z.string().optional().or(z.literal('')),
-  contactPhone: z.string().min(1, 'Phone is required'),
-  contactEmail: z.string().optional(),
-});
-
-type AddParticipantFormValues = z.infer<typeof addParticipantSchema>;
-
-function AddParticipantForm({
-  onSubmit,
-  onCancel,
-  isSubmitting,
-}: {
-  onSubmit: (values: ParticipantCreate) => void | Promise<void>;
-  onCancel: () => void;
-  isSubmitting: boolean;
-}) {
-  const { t } = useTranslation();
-  const { language } = useLanguage();
-  const defaultPhoneCountry = getDefaultCountryByLanguage(language);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AddParticipantFormValues>({
-    resolver: zodResolver(addParticipantSchema),
-    defaultValues: {
-      name: '',
-      lastName: '',
-      phoneCountry: defaultPhoneCountry,
-      contactPhone: '',
-      contactEmail: '',
-    },
-  });
-
-  async function handleFormSubmit(values: AddParticipantFormValues) {
-    await onSubmit({
-      name: values.name.trim(),
-      lastName: values.lastName.trim(),
-      contactPhone: combinePhone(values.phoneCountry, values.contactPhone),
-      contactEmail: values.contactEmail?.trim() || undefined,
-    });
-  }
-
-  return (
-    <form
-      onSubmit={handleSubmit(handleFormSubmit)}
-      className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-3"
-    >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div>
-          <FormLabel>{t('addParticipant.firstName')}</FormLabel>
-          <FormInput
-            {...register('name')}
-            placeholder={t('addParticipant.firstNamePlaceholder')}
-            compact
-          />
-          {errors.name && (
-            <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>
-          )}
-        </div>
-        <div>
-          <FormLabel>{t('addParticipant.lastName')}</FormLabel>
-          <FormInput
-            {...register('lastName')}
-            placeholder={t('addParticipant.lastNamePlaceholder')}
-            compact
-          />
-          {errors.lastName && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.lastName.message}
-            </p>
-          )}
-        </div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div>
-          <FormLabel>{t('addParticipant.phone')}</FormLabel>
-          <PhoneInput
-            countryProps={register('phoneCountry')}
-            phoneProps={register('contactPhone')}
-            countrySelectAriaLabel={t('profile.phoneCountry')}
-            phoneCountryDefaultLabel={t('profile.phoneCountryDefault')}
-            phonePlaceholder={t('addParticipant.phonePlaceholder')}
-            compact
-            error={errors.contactPhone?.message}
-          />
-        </div>
-        <div>
-          <FormLabel>{t('addParticipant.email')}</FormLabel>
-          <FormInput
-            {...register('contactEmail')}
-            placeholder={t('addParticipant.emailPlaceholder')}
-            compact
-          />
-        </div>
-      </div>
-      <div className="flex gap-3 pt-1">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="flex-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
-        >
-          {isSubmitting
-            ? t('addParticipant.submitting')
-            : t('addParticipant.submit')}
-        </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors text-sm"
-        >
-          {t('addParticipant.cancel')}
-        </button>
-      </div>
-    </form>
-  );
-}
-
 interface PlanProps {
   plan: PlanWithDetails;
-  onAddParticipant?: (participant: ParticipantCreate) => Promise<void>;
-  isAddingParticipant?: boolean;
   isOwner?: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
   isDeleting?: boolean;
-  onMakeOwner?: (participantId: string) => void;
 }
 
 export function Plan({
   plan,
-  onAddParticipant,
-  isAddingParticipant = false,
   isOwner = false,
   onEdit,
   onDelete,
   isDeleting = false,
-  onMakeOwner,
 }: PlanProps) {
   const { t } = useTranslation();
-  const [showManageModal, setShowManageModal] = useState(false);
-  const [showAddForm, setShowAddForm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const { title, description, startDate, endDate, participants, location } =
     plan;
   const owners = participants.filter((p) => p.role === 'owner');
   const owner = owners[0];
-
-  async function handleAddParticipant(participant: ParticipantCreate) {
-    if (!onAddParticipant) return;
-    await onAddParticipant(participant);
-    setShowAddForm(false);
-  }
 
   return (
     <div className="w-full">
@@ -273,50 +116,6 @@ export function Plan({
           </div>
         )}
 
-        <div>
-          <p className="text-xs font-medium text-blue-500 uppercase tracking-wider mb-2">
-            {t('plan.participants')} ({participants.length})
-          </p>
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-1 rtl:space-x-reverse">
-              {participants.map((p) => (
-                <div
-                  key={p.participantId}
-                  title={`${p.name} ${p.lastName}`}
-                  className={clsx(
-                    'w-9 h-9 rounded-full border-2 bg-white flex items-center justify-center text-xs font-bold text-gray-600',
-                    avatarBorderColor(p.role)
-                  )}
-                >
-                  {p.name.charAt(0)}
-                </div>
-              ))}
-              {onAddParticipant && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowAddForm(true);
-                    setShowManageModal(true);
-                  }}
-                  title={t('plan.addParticipant')}
-                  className="w-9 h-9 rounded-full border-2 border-dashed border-gray-300 bg-white flex items-center justify-center text-gray-400 hover:border-blue-400 hover:text-blue-500 transition-colors"
-                >
-                  +
-                </button>
-              )}
-            </div>
-            {isOwner && (
-              <button
-                type="button"
-                onClick={() => setShowManageModal(true)}
-                className="ms-2 px-4 py-1.5 border border-gray-300 text-gray-600 rounded-full text-sm font-medium hover:bg-gray-50 active:bg-gray-100 transition-colors"
-              >
-                {t('plan.manage')}
-              </button>
-            )}
-          </div>
-        </div>
-
         {isOwner && (onEdit || onDelete) && (
           <div className="border-t border-gray-200 pt-4 flex gap-3">
             {onEdit && (
@@ -341,46 +140,6 @@ export function Plan({
           </div>
         )}
       </div>
-
-      <Modal
-        open={showManageModal}
-        onClose={() => {
-          setShowManageModal(false);
-          setShowAddForm(false);
-        }}
-        title={t('plan.participants')}
-      >
-        <div className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-3">
-          <ManageParticipantsList
-            participants={participants}
-            planId={plan.planId}
-            planTitle={title}
-            isOwner={isOwner}
-            onMakeOwner={onMakeOwner}
-          />
-
-          {participants.length === 0 && !showAddForm && (
-            <p className="text-gray-500 text-sm">{t('plan.noParticipants')}</p>
-          )}
-
-          {onAddParticipant &&
-            (showAddForm ? (
-              <AddParticipantForm
-                onSubmit={handleAddParticipant}
-                onCancel={() => setShowAddForm(false)}
-                isSubmitting={isAddingParticipant}
-              />
-            ) : (
-              <button
-                type="button"
-                onClick={() => setShowAddForm(true)}
-                className="w-full px-4 py-2 border-2 border-dashed border-gray-300 text-gray-600 rounded-lg hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
-              >
-                {t('plan.addParticipant')}
-              </button>
-            ))}
-        </div>
-      </Modal>
 
       <Modal
         open={showDeleteConfirm}

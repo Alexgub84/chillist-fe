@@ -12,7 +12,6 @@ import { usePlan } from '../hooks/usePlan';
 import { useScrollRestore } from '../hooks/useScrollRestore';
 import { useCreateItem } from '../hooks/useCreateItem';
 import { useUpdateItem } from '../hooks/useUpdateItem';
-import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { useDeletePlan } from '../hooks/useDeletePlan';
 import { useUpdatePlan } from '../hooks/useUpdatePlan';
@@ -48,7 +47,6 @@ function PlanDetails() {
   const { data: plan, isLoading, error } = usePlan(planId);
   const createItem = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
-  const createParticipantMutation = useCreateParticipant(planId);
   const updateParticipantMutation = useUpdateParticipant(planId);
   const deletePlanMutation = useDeletePlan();
   const updatePlanMutation = useUpdatePlan(planId);
@@ -282,15 +280,10 @@ function PlanDetails() {
         >
           <Plan
             plan={plan}
-            onAddParticipant={async (p) => {
-              await createParticipantMutation.mutateAsync(p);
-            }}
-            isAddingParticipant={createParticipantMutation.isPending}
             isOwner={isOwner}
             onEdit={() => setShowEditPlanModal(true)}
             onDelete={handleDeletePlan}
             isDeleting={deletePlanMutation.isPending}
-            onMakeOwner={isOwner ? setTransferTargetParticipantId : undefined}
           />
         </CollapsibleSection>
 
@@ -301,6 +294,56 @@ function PlanDetails() {
             endDate={plan.endDate}
           />
         </div>
+
+        {isOwner && plan.participants.length > 0 && (
+          <Link
+            data-testid="manage-participants-link"
+            to="/manage-participants/$planId"
+            params={{ planId }}
+            className="mt-4 sm:mt-5 mb-4 block bg-white rounded-lg shadow-sm border border-amber-100 hover:border-amber-300 hover:shadow-md transition-all p-4 sm:p-5 group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-full bg-amber-50 group-hover:bg-amber-100 flex items-center justify-center transition-colors">
+                <svg
+                  className="w-5 h-5 text-amber-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-amber-700 transition-colors">
+                  {t('manageParticipants.linkTitle')}
+                </p>
+                <p className="text-xs sm:text-sm text-gray-500">
+                  {t('manageParticipants.linkDesc')}
+                </p>
+              </div>
+              <svg
+                className="w-5 h-5 text-gray-400 group-hover:text-amber-500 ms-auto shrink-0 transition-colors"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </Link>
+        )}
 
         {plan.participants.length > 0 && (
           <div className="mt-6 sm:mt-8">
@@ -451,6 +494,7 @@ function PlanDetails() {
           open={!!itemModalId}
           onClose={closeItemModal}
           title={isCreating ? t('items.addItemLabel') : t('items.editItem')}
+          testId="add-item-modal"
         >
           <ItemForm
             key={itemModalId ?? 'closed'}
