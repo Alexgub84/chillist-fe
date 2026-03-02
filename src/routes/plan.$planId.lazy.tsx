@@ -494,6 +494,7 @@ function PlanDetails() {
           open={!!itemModalId}
           onClose={closeItemModal}
           title={isCreating ? t('items.addItemLabel') : t('items.editItem')}
+          testId="add-item-modal"
         >
           <ItemForm
             key={itemModalId ?? 'closed'}
