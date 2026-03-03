@@ -84,7 +84,9 @@
     "emptyUpcoming": "No upcoming plans. Create one to get started!",
     "emptyPast": "No past plans yet.",
     "emptyOwned": "You haven't created any plans yet.",
-    "emptyInvited": "You haven't been invited to any plans yet."
+    "emptyInvited": "You haven't been invited to any plans yet.",
+    "pendingRequestsTitle": "Pending join requests",
+    "pendingForApproval": "Pending for approval"
   },
   "plan": {
     "details": "Details",

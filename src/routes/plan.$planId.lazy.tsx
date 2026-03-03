@@ -206,12 +206,11 @@ function PlanPage() {
           </button>
         </div>
 
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+          {t('plan.planDetails')}
+        </h2>
         <CollapsibleSection
-          title={
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-              {t('plan.planDetails')}
-            </h2>
-          }
+          title={<span className="sr-only">{t('plan.planDetails')}</span>}
           defaultOpen={planDetailsOpen}
           wrapperClassName="bg-white rounded-xl shadow-sm overflow-hidden"
           panelContentClassName="border-t border-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-5"

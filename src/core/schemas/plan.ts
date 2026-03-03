@@ -99,6 +99,19 @@ export const planPreviewSchema = z.object({
   endDate: z.string().nullish(),
 });
 
+const pendingRequestLocationSchema = z
+  .object({ name: z.string().nullish() })
+  .catchall(z.unknown())
+  .nullish();
+
+export const pendingRequestPlanSchema = z.object({
+  planId: z.string(),
+  title: z.string(),
+  startDate: z.string().nullish(),
+  endDate: z.string().nullish(),
+  location: pendingRequestLocationSchema,
+});
+
 export const notParticipantResponseSchema = z.object({
   status: z.literal('not_participant'),
   preview: planPreviewSchema,
@@ -113,6 +126,7 @@ export type PlanWithDetails = z.infer<typeof planWithDetailsSchema>;
 export type PlanCreateWithOwner = z.infer<typeof planCreateWithOwnerSchema>;
 export type PlanPatch = z.infer<typeof planPatchSchema>;
 export type PlanPreview = z.infer<typeof planPreviewSchema>;
+export type PendingRequestPlan = z.infer<typeof pendingRequestPlanSchema>;
 export type NotParticipantResponse = z.infer<
   typeof notParticipantResponseSchema
 >;

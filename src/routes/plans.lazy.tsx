@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import { createLazyFileRoute, Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { usePlans } from '../hooks/usePlans';
+import { usePendingRequests } from '../hooks/usePendingRequests';
 import { useAuth } from '../contexts/useAuth';
 import { PlansList } from '../components/PlansList';
+import { PendingRequestsList } from '../components/PendingRequestsList';
 import { getApiErrorMessage } from '../core/error-utils';
 
 export const Route = createLazyFileRoute('/plans')({
@@ -15,6 +17,7 @@ export function Plans() {
   const { user, loading: authLoading } = useAuth();
   const isAuthenticated = !!user;
   const { data: plans, isLoading, error, refetch } = usePlans(isAuthenticated);
+  const { data: pendingRequests } = usePendingRequests(isAuthenticated);
 
   useEffect(() => {
     if (error) {
@@ -90,5 +93,12 @@ export function Plans() {
     );
   }
 
-  return <PlansList plans={plans ?? []} />;
+  return (
+    <>
+      {(pendingRequests?.length ?? 0) > 0 && (
+        <PendingRequestsList plans={pendingRequests ?? []} />
+      )}
+      <PlansList plans={plans ?? []} />
+    </>
+  );
 }

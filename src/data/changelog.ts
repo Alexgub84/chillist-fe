@@ -7,6 +7,12 @@ export interface ChangelogEntry {
 export const changelog: ChangelogEntry[] = [
   {
     date: '2026-03-03',
+    title: 'Pending join requests on plans page',
+    description:
+      'When you have pending join requests, a "Pending join requests" section now appears above your plans list. Each item shows the plan title, dates, location, and a "Pending for approval" badge. Items are read-only until the plan owner approves or rejects your request.',
+  },
+  {
+    date: '2026-03-03',
     title: 'Invite button on plan page',
     description:
       'Added a clear Invite button on the plan page that copies the current plan URL to the clipboard. Shows "Invite link copied!" toast on success.',

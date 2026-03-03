@@ -84,7 +84,9 @@
     "emptyUpcoming": "No hay planes próximos. ¡Crea uno para empezar!",
     "emptyPast": "No hay planes pasados aún.",
     "emptyOwned": "Aún no has creado ningún plan.",
-    "emptyInvited": "Aún no has sido invitado a ningún plan."
+    "emptyInvited": "Aún no has sido invitado a ningún plan.",
+    "pendingRequestsTitle": "Solicitudes de unión pendientes",
+    "pendingForApproval": "Pendiente de aprobación"
   },
   "plan": {
     "details": "Detalles",

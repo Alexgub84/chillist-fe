@@ -23,10 +23,12 @@ import {
 } from './schemas/participant';
 import {
   notParticipantResponseSchema,
+  pendingRequestPlanSchema,
   planCreateWithOwnerSchema,
   planPatchSchema,
   planSchema,
   planWithDetailsSchema,
+  type PendingRequestPlan,
   type Plan,
   type PlanWithDetails,
   type NotParticipantResponse,
@@ -182,6 +184,11 @@ async function publicRequest<T>(
 export async function fetchPlans(): Promise<Plan[]> {
   const data = await request<unknown>('/plans');
   return z.array(planSchema).parse(data);
+}
+
+export async function fetchPendingRequests(): Promise<PendingRequestPlan[]> {
+  const data = await request<unknown>('/plans/pending-requests');
+  return z.array(pendingRequestPlanSchema).parse(data);
 }
 
 export async function fetchPlan(
