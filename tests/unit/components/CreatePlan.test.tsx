@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import PlanForm from '../../../src/components/PlanForm';
 import type { DefaultOwner } from '../../../src/components/PlanForm';
@@ -143,6 +143,8 @@ describe('CreatePlan - PlanForm', () => {
 
       const startDateInput = getInputByLabel(/start date/i);
       await user.type(startDateInput, '2025-12-20');
+      const endDateInput = getInputByLabel(/end date/i);
+      await user.clear(endDateInput);
 
       const submitButton = screen.getByRole('button', {
         name: /create plan/i,
@@ -199,8 +201,12 @@ describe('CreatePlan - PlanForm', () => {
       });
 
       await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
-      await user.type(getInputByLabel(/start time/i), '10:00');
-      await user.type(getInputByLabel(/end time/i), '16:00');
+      fireEvent.change(getInputByLabel(/start time/i), {
+        target: { value: '10:00' },
+      });
+      fireEvent.change(getInputByLabel(/end time/i), {
+        target: { value: '16:00' },
+      });
 
       await user.type(
         screen.getByPlaceholderText(/e\.g\. picnic, friends, summer/i),
@@ -246,11 +252,15 @@ describe('CreatePlan - PlanForm', () => {
       await fillOwnerFields(user);
 
       await user.type(getInputByLabel(/start date/i), '2025-12-20');
-      await user.type(getInputByLabel(/start time/i), '09:00');
+      fireEvent.change(getInputByLabel(/start time/i), {
+        target: { value: '09:00' },
+      });
       await user.clear(getInputByLabel(/end date/i));
       await user.type(getInputByLabel(/end date/i), '2025-12-22');
       await user.clear(getInputByLabel(/end time/i));
-      await user.type(getInputByLabel(/end time/i), '18:00');
+      fireEvent.change(getInputByLabel(/end time/i), {
+        target: { value: '18:00' },
+      });
 
       await user.type(
         screen.getByPlaceholderText(/e\.g\. picnic, friends, summer/i),

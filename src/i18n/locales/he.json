@@ -86,7 +86,8 @@
     "emptyOwned": "עדיין לא יצרת תוכניות.",
     "emptyInvited": "עדיין לא הוזמנת לתוכניות.",
     "pendingRequestsTitle": "בקשת הצטרפות ממתינות",
-    "pendingForApproval": "ממתין לאישור"
+    "pendingForApproval": "ממתין לאישור",
+    "otherPlansTitle": "תוכניות של אחרים"
   },
   "plan": {
     "details": "פרטים",

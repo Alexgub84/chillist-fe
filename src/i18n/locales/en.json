@@ -86,7 +86,8 @@
     "emptyOwned": "You haven't created any plans yet.",
     "emptyInvited": "You haven't been invited to any plans yet.",
     "pendingRequestsTitle": "Pending join requests",
-    "pendingForApproval": "Pending for approval"
+    "pendingForApproval": "Pending for approval",
+    "otherPlansTitle": "Others' Plans"
   },
   "plan": {
     "details": "Details",

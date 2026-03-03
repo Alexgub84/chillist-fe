@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import type { ItemCreate } from '../core/schemas/item';
 import { useTranslation } from 'react-i18next';
 import {
   createLazyFileRoute,
@@ -39,6 +40,8 @@ import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
 import { copyPlanUrl, sharePlanUrl } from '../core/invite';
 import ParticipantDetails from '../components/ParticipantDetails';
+import BulkAddModal from '../components/BulkAddModal';
+import FloatingActions from '../components/shared/FloatingActions';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanPage,
@@ -61,6 +64,7 @@ function PlanPage() {
   );
 
   const [itemModalId, setItemModalId] = useState<string | null>(null);
+  const [bulkAddOpen, setBulkAddOpen] = useState(false);
   const [editingParticipantId, setEditingParticipantId] = useState<
     string | null
   >(null);
@@ -172,6 +176,34 @@ function PlanPage() {
     if (result === 'copied') toast.success(t('invite.copied'));
   }
 
+  async function handleBulkAdd(payloads: ItemCreate[]) {
+    const results = await Promise.allSettled(
+      payloads.map((payload) => actions.createItem(payload))
+    );
+    const succeeded = results.filter((r) => r.status === 'fulfilled').length;
+    const failed = results.filter((r) => r.status === 'rejected').length;
+
+    if (failed === 0) {
+      toast.success(t('items.bulkAddSuccess', { count: succeeded }));
+    } else if (succeeded > 0) {
+      toast.error(
+        t('items.bulkAddPartial', {
+          successCount: succeeded,
+          errorCount: failed,
+        })
+      );
+    } else {
+      toast.error(t('items.bulkAddError'));
+      const firstErr = results.find((r) => r.status === 'rejected');
+      if (firstErr && firstErr.status === 'rejected') {
+        console.error(
+          '[PlanPage] handleBulkAdd failed. Error:',
+          firstErr.reason
+        );
+      }
+    }
+  }
+
   return (
     <div className="w-full px-3 sm:px-0">
       <div className="max-w-4xl mx-auto">
@@ -206,11 +238,19 @@ function PlanPage() {
           </button>
         </div>
 
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-          {t('plan.planDetails')}
-        </h2>
+        <h1
+          data-testid="plan-title"
+          className="text-xl sm:text-2xl font-bold text-gray-800 line-clamp-2 my-4"
+        >
+          {plan.title}
+        </h1>
+
         <CollapsibleSection
-          title={<span className="sr-only">{t('plan.planDetails')}</span>}
+          title={
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+              {t('plan.planDetails')}
+            </h2>
+          }
           defaultOpen={planDetailsOpen}
           wrapperClassName="bg-white rounded-xl shadow-sm overflow-hidden"
           panelContentClassName="border-t border-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-5"
@@ -489,6 +529,7 @@ function PlanPage() {
               onCancel={() => setEditingParticipantId(null)}
               isSubmitting={actions.isUpdatingParticipant}
               inModal
+              showRsvp
             />
           )}
         </Modal>
@@ -516,31 +557,16 @@ function PlanPage() {
         />
       </div>
 
-      <div className="fixed bottom-6 inset-x-0 z-40 max-w-4xl mx-auto px-3 sm:px-0 pointer-events-none">
-        <button
-          type="button"
-          onClick={() => setItemModalId('new')}
-          className="pointer-events-auto ms-auto flex items-center gap-2 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 active:bg-green-800 hover:shadow-xl transition-colors cursor-pointer px-4 py-3"
-        >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2.5}
-              d="M12 4v16m8-8H4"
-            />
-          </svg>
-          <span className="text-sm font-semibold">
-            {t('items.addItemLabel')}
-          </span>
-        </button>
-      </div>
+      <FloatingActions
+        onAddItem={() => setItemModalId('new')}
+        onBulkAdd={() => setBulkAddOpen(true)}
+      />
+
+      <BulkAddModal
+        open={bulkAddOpen}
+        onClose={() => setBulkAddOpen(false)}
+        onAdd={handleBulkAdd}
+      />
     </div>
   );
 }

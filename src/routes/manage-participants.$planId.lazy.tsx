@@ -99,6 +99,7 @@ function ManageParticipantsPage() {
           foodPreferences: values.foodPreferences || null,
           allergies: values.allergies || null,
           notes: values.notes || null,
+          rsvpStatus: values.rsvpStatus ?? undefined,
         },
       });
       toast.success(t('preferences.updated'));
@@ -199,7 +200,10 @@ function ManageParticipantsPage() {
           </Link>
         </div>
 
-        <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6">
+        <h1
+          data-testid="manage-participants-title"
+          className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6"
+        >
           {t('manageParticipants.title')}
         </h1>
 
@@ -292,11 +296,13 @@ function ManageParticipantsPage() {
                   editingParticipant.foodPreferences ?? undefined,
                 allergies: editingParticipant.allergies ?? undefined,
                 notes: editingParticipant.notes ?? undefined,
+                rsvpStatus: editingParticipant.rsvpStatus,
               }}
               onSubmit={handlePreferencesSubmit}
               onCancel={() => setEditingParticipantId(null)}
               isSubmitting={updateParticipantMutation.isPending}
               inModal
+              showRsvp
             />
           )}
         </Modal>

@@ -49,6 +49,10 @@ function isPlanInvitedTo(plan: Plan, userId: string): boolean {
   return !!match;
 }
 
+function isMyPlan(plan: Plan, userId: string): boolean {
+  return isPlanOwnedBy(plan, userId) || isPlanInvitedTo(plan, userId);
+}
+
 function isPastPlan(plan: {
   startDate?: string | null;
   endDate?: string | null;
@@ -73,13 +77,21 @@ export function PlansList({ plans }: PlansListProps) {
     ? plans.find((p) => p.planId === deletingPlanId)
     : null;
 
+  const { myPlans, otherPlans } = useMemo(() => {
+    if (!isAdmin || !user) return { myPlans: plans, otherPlans: [] as Plan[] };
+    return {
+      myPlans: plans.filter((p) => isMyPlan(p, user.id)),
+      otherPlans: plans.filter((p) => !isMyPlan(p, user.id)),
+    };
+  }, [plans, isAdmin, user]);
+
   const membershipFilteredPlans = useMemo(() => {
-    if (!user) return plans;
-    if (membershipFilter === 'all') return plans;
+    if (!user) return myPlans;
+    if (membershipFilter === 'all') return myPlans;
     if (membershipFilter === 'owned')
-      return plans.filter((p) => isPlanOwnedBy(p, user.id));
-    return plans.filter((p) => isPlanInvitedTo(p, user.id));
-  }, [plans, user, membershipFilter]);
+      return myPlans.filter((p) => isPlanOwnedBy(p, user.id));
+    return myPlans.filter((p) => isPlanInvitedTo(p, user.id));
+  }, [myPlans, user, membershipFilter]);
 
   const filteredPlans = useMemo(() => {
     if (timeFilter === 'all') return membershipFilteredPlans;
@@ -88,12 +100,18 @@ export function PlansList({ plans }: PlansListProps) {
     return membershipFilteredPlans.filter((p) => !isPastPlan(p));
   }, [membershipFilteredPlans, timeFilter]);
 
+  const filteredOtherPlans = useMemo(() => {
+    if (timeFilter === 'all') return otherPlans;
+    if (timeFilter === 'past') return otherPlans.filter(isPastPlan);
+    return otherPlans.filter((p) => !isPastPlan(p));
+  }, [otherPlans, timeFilter]);
+
   const membershipCounts = useMemo(() => {
-    if (!user) return { all: plans.length, owned: 0, invited: 0 };
-    const owned = plans.filter((p) => isPlanOwnedBy(p, user.id)).length;
-    const invited = plans.filter((p) => isPlanInvitedTo(p, user.id)).length;
-    return { all: plans.length, owned, invited };
-  }, [plans, user]);
+    if (!user) return { all: myPlans.length, owned: 0, invited: 0 };
+    const owned = myPlans.filter((p) => isPlanOwnedBy(p, user.id)).length;
+    const invited = myPlans.filter((p) => isPlanInvitedTo(p, user.id)).length;
+    return { all: myPlans.length, owned, invited };
+  }, [myPlans, user]);
 
   const timeCounts = useMemo(() => {
     const past = membershipFilteredPlans.filter(isPastPlan).length;
@@ -113,7 +131,7 @@ export function PlansList({ plans }: PlansListProps) {
   }
 
   function getEmptyMessage(): string {
-    if (plans.length === 0) return t('plans.empty');
+    if (myPlans.length === 0) return t('plans.empty');
     if (membershipFilter === 'owned' && membershipCounts.owned === 0)
       return t('plans.emptyOwned');
     if (membershipFilter === 'invited' && membershipCounts.invited === 0)
@@ -122,6 +140,73 @@ export function PlansList({ plans }: PlansListProps) {
     if (timeFilter === 'upcoming') return t('plans.emptyUpcoming');
     if (timeFilter === 'past') return t('plans.emptyPast');
     return t('plans.empty');
+  }
+
+  function renderPlanCard(plan: Plan) {
+    const meta: string[] = [];
+    if (plan.startDate) {
+      meta.push(formatDate(plan.startDate));
+    }
+    if (plan.location?.name) {
+      meta.push(plan.location.name);
+    }
+    if (plan.participantIds && plan.participantIds.length > 0) {
+      meta.push(t('plans.participant', { count: plan.participantIds.length }));
+    }
+
+    return (
+      <li
+        key={plan.planId}
+        className="px-4 sm:px-6 py-3 sm:py-4 hover:bg-gray-50 transition-colors active:bg-gray-100"
+      >
+        <div className="flex items-center gap-2">
+          <Link
+            to="/plan/$planId"
+            params={{ planId: plan.planId }}
+            className="block group flex-1 min-w-0"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
+              <span className="text-base sm:text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                {plan.title}
+              </span>
+              <span
+                className={clsx(
+                  'inline-flex self-start sm:self-auto items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
+                  statusClassName[plan.status]
+                )}
+              >
+                {t(`planStatus.${plan.status}`)}
+              </span>
+            </div>
+            {meta.length > 0 && (
+              <p className="mt-1 text-sm text-gray-400">{meta.join('  ·  ')}</p>
+            )}
+          </Link>
+          {isAdmin && (
+            <button
+              type="button"
+              data-testid={`admin-delete-${plan.planId}`}
+              onClick={() => setDeletingPlanId(plan.planId)}
+              aria-label={t('admin.deletePlan')}
+              className="shrink-0 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
+      </li>
+    );
   }
 
   async function handleDeletePlan() {
@@ -152,7 +237,7 @@ export function PlansList({ plans }: PlansListProps) {
         </Link>
       </div>
 
-      {plans.length > 0 && (
+      {myPlans.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <div
             className="inline-flex rounded-xl border border-gray-200 bg-gray-50 p-1 gap-1"
@@ -242,77 +327,39 @@ export function PlansList({ plans }: PlansListProps) {
           data-testid="plans-list"
           className="bg-white rounded-lg shadow-sm divide-y divide-gray-200 overflow-hidden"
         >
-          {filteredPlans.map((plan) => {
-            const meta: string[] = [];
-            if (plan.startDate) {
-              meta.push(formatDate(plan.startDate));
-            }
-            if (plan.location?.name) {
-              meta.push(plan.location.name);
-            }
-            if (plan.participantIds && plan.participantIds.length > 0) {
-              meta.push(
-                t('plans.participant', { count: plan.participantIds.length })
-              );
-            }
-
-            return (
-              <li
-                key={plan.planId}
-                className="px-4 sm:px-6 py-3 sm:py-4 hover:bg-gray-50 transition-colors active:bg-gray-100"
-              >
-                <div className="flex items-center gap-2">
-                  <Link
-                    to="/plan/$planId"
-                    params={{ planId: plan.planId }}
-                    className="block group flex-1 min-w-0"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-2">
-                      <span className="text-base sm:text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
-                        {plan.title}
-                      </span>
-                      <span
-                        className={clsx(
-                          'inline-flex self-start sm:self-auto items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
-                          statusClassName[plan.status]
-                        )}
-                      >
-                        {t(`planStatus.${plan.status}`)}
-                      </span>
-                    </div>
-                    {meta.length > 0 && (
-                      <p className="mt-1 text-sm text-gray-400">
-                        {meta.join('  ·  ')}
-                      </p>
-                    )}
-                  </Link>
-                  {isAdmin && (
-                    <button
-                      type="button"
-                      data-testid={`admin-delete-${plan.planId}`}
-                      onClick={() => setDeletingPlanId(plan.planId)}
-                      aria-label={t('admin.deletePlan')}
-                      className="shrink-0 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="w-5 h-5"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  )}
-                </div>
-              </li>
-            );
-          })}
+          {filteredPlans.map(renderPlanCard)}
         </ul>
+      )}
+
+      {isAdmin && otherPlans.length > 0 && (
+        <div className="mt-10">
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-600">
+              {t('plans.otherPlansTitle')}
+            </h2>
+            <span className="inline-flex items-center justify-center min-w-6 h-6 px-2 rounded-full text-xs font-semibold tabular-nums bg-amber-100 text-amber-700">
+              {filteredOtherPlans.length}
+            </span>
+          </div>
+          {filteredOtherPlans.length === 0 ? (
+            <div className="bg-white rounded-lg shadow-sm p-6 text-center">
+              <p className="text-gray-500 text-sm">
+                {timeFilter === 'upcoming'
+                  ? t('plans.emptyUpcoming')
+                  : timeFilter === 'past'
+                    ? t('plans.emptyPast')
+                    : t('plans.empty')}
+              </p>
+            </div>
+          ) : (
+            <ul
+              data-testid="other-plans-list"
+              className="bg-white rounded-lg shadow-sm divide-y divide-gray-200 overflow-hidden border border-amber-200"
+            >
+              {filteredOtherPlans.map(renderPlanCard)}
+            </ul>
+          )}
+        </div>
       )}
 
       <Modal

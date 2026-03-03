@@ -106,7 +106,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-8'];
+          'application/json': components['schemas']['def-10'];
         };
       };
       responses: {
@@ -116,7 +116,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-23'];
+            'application/json': components['schemas']['def-25'];
           };
         };
         /** @description Default Response */
@@ -163,6 +163,63 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/plans/pending-requests': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List plans with pending join requests
+     * @description Returns minimal plan details (planId, title, dates, location) for plans where the user has a pending join request. JWT required.
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-8'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/plans/{planId}/preview': {
     parameters: {
       query?: never;
@@ -191,7 +248,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-25'];
+            'application/json': components['schemas']['def-27'];
           };
         };
         /** @description Default Response */
@@ -278,8 +335,8 @@ export interface paths {
           };
           content: {
             'application/json':
-              | components['schemas']['def-23']
-              | components['schemas']['def-29'];
+              | components['schemas']['def-25']
+              | components['schemas']['def-31'];
           };
         };
         /** @description Default Response */
@@ -343,7 +400,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-11'];
+            'application/json': components['schemas']['def-13'];
           };
         };
         /** @description Default Response */
@@ -401,7 +458,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-9'];
+          'application/json': components['schemas']['def-11'];
         };
       };
       responses: {
@@ -482,7 +539,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-18'];
+            'application/json': components['schemas']['def-20'];
           };
         };
         /** @description Default Response */
@@ -530,7 +587,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-19'];
+          'application/json': components['schemas']['def-21'];
         };
       };
       responses: {
@@ -540,7 +597,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -615,7 +672,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -670,7 +727,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-22'];
+            'application/json': components['schemas']['def-24'];
           };
         };
         /** @description Default Response */
@@ -728,7 +785,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-20'];
+          'application/json': components['schemas']['def-22'];
         };
       };
       responses: {
@@ -738,7 +795,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -821,7 +878,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-38'];
+            'application/json': components['schemas']['def-40'];
           };
         };
         /** @description Default Response */
@@ -887,7 +944,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-13'];
+            'application/json': components['schemas']['def-15'];
           };
         };
         /** @description Default Response */
@@ -935,7 +992,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-14'];
+          'application/json': components['schemas']['def-16'];
         };
       };
       responses: {
@@ -945,7 +1002,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-12'];
+            'application/json': components['schemas']['def-14'];
           };
         };
         /** @description Default Response */
@@ -1020,7 +1077,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-15'];
+          'application/json': components['schemas']['def-17'];
         };
       };
       responses: {
@@ -1030,7 +1087,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-12'];
+            'application/json': components['schemas']['def-14'];
           };
         };
         /** @description Default Response */
@@ -1097,7 +1154,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-44'];
+          'application/json': components['schemas']['def-46'];
         };
       };
       responses: {
@@ -1107,7 +1164,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1116,7 +1173,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1166,7 +1223,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-46'];
+          'application/json': components['schemas']['def-48'];
         };
       };
       responses: {
@@ -1176,7 +1233,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1185,7 +1242,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1239,7 +1296,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-36'];
+            'application/json': components['schemas']['def-38'];
           };
         };
         /** @description Default Response */
@@ -1308,7 +1365,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-39'];
+          'application/json': components['schemas']['def-41'];
         };
       };
       responses: {
@@ -1318,7 +1375,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-40'];
+            'application/json': components['schemas']['def-42'];
           };
         };
         /** @description Default Response */
@@ -1386,7 +1443,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-42'];
+          'application/json': components['schemas']['def-44'];
         };
       };
       responses: {
@@ -1396,7 +1453,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-12'];
+            'application/json': components['schemas']['def-14'];
           };
         };
         /** @description Default Response */
@@ -1473,7 +1530,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-43'];
+          'application/json': components['schemas']['def-45'];
         };
       };
       responses: {
@@ -1483,7 +1540,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-12'];
+            'application/json': components['schemas']['def-14'];
           };
         };
         /** @description Default Response */
@@ -1560,7 +1617,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-49'];
+          'application/json': components['schemas']['def-51'];
         };
       };
       responses: {
@@ -1570,7 +1627,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1579,7 +1636,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1630,7 +1687,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-51'];
+          'application/json': components['schemas']['def-53'];
         };
       };
       responses: {
@@ -1640,7 +1697,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1649,7 +1706,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-48'];
+            'application/json': components['schemas']['def-50'];
           };
         };
         /** @description Default Response */
@@ -1754,7 +1811,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-53'];
+            'application/json': components['schemas']['def-55'];
           };
         };
       };
@@ -1777,7 +1834,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-54'];
+          'application/json': components['schemas']['def-56'];
         };
       };
       responses: {
@@ -1787,7 +1844,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-55'];
+            'application/json': components['schemas']['def-57'];
           };
         };
       };
@@ -1884,7 +1941,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-17'];
+            'application/json': components['schemas']['def-19'];
           };
         };
         /** @description Default Response */
@@ -1964,7 +2021,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-31'];
+          'application/json': components['schemas']['def-33'];
         };
       };
       responses: {
@@ -1974,7 +2031,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-26'];
+            'application/json': components['schemas']['def-28'];
           };
         };
         /** @description Default Response */
@@ -1983,7 +2040,7 @@ export interface paths {
             [name: string]: unknown;
           };
           content: {
-            'application/json': components['schemas']['def-26'];
+            'application/json': components['schemas']['def-28'];
           };
         };
         /** @description Default Response */
@@ -2077,7 +2134,7 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          'application/json': components['schemas']['def-28'];
+          'application/json': components['schemas']['def-30'];
         };
       };
       responses: {
@@ -2225,8 +2282,21 @@ export interface components {
     };
     /** PlanList */
     'def-6': components['schemas']['def-5'][];
-    /** OwnerBody */
+    /** PendingJoinRequestPreview */
     'def-7': {
+      /** Format: uuid */
+      planId: string;
+      title: string;
+      /** Format: date-time */
+      startDate?: string | null;
+      /** Format: date-time */
+      endDate?: string | null;
+      location?: components['schemas']['def-4'] | null;
+    };
+    /** PendingJoinRequestPreviewList */
+    'def-8': components['schemas']['def-7'][];
+    /** OwnerBody */
+    'def-9': {
       name: string;
       lastName: string;
       contactPhone: string;
@@ -2235,7 +2305,7 @@ export interface components {
       contactEmail?: string;
     };
     /** CreatePlanBody */
-    'def-8': {
+    'def-10': {
       title: string;
       description?: string | null;
       /** @enum {string} */
@@ -2246,11 +2316,11 @@ export interface components {
       /** Format: date-time */
       endDate?: string | null;
       tags?: string[] | null;
-      owner: components['schemas']['def-7'];
-      participants?: components['schemas']['def-19'][];
+      owner: components['schemas']['def-9'];
+      participants?: components['schemas']['def-21'][];
     };
     /** UpdatePlanBody */
-    'def-9': {
+    'def-11': {
       title?: string;
       description?: string | null;
       /** @enum {string} */
@@ -2265,16 +2335,16 @@ export interface components {
       tags?: string[] | null;
     };
     /** PlanIdParam */
-    'def-10': {
+    'def-12': {
       /** Format: uuid */
       planId: string;
     };
     /** DeletePlanResponse */
-    'def-11': {
+    'def-13': {
       ok: boolean;
     };
     /** Item */
-    'def-12': {
+    'def-14': {
       /** Format: uuid */
       itemId: string;
       /** Format: uuid */
@@ -2308,9 +2378,9 @@ export interface components {
       updatedAt: string;
     };
     /** ItemList */
-    'def-13': components['schemas']['def-12'][];
+    'def-15': components['schemas']['def-14'][];
     /** CreateItemBody */
-    'def-14': {
+    'def-16': {
       name: string;
       /** @enum {string} */
       category: 'equipment' | 'food';
@@ -2336,7 +2406,7 @@ export interface components {
       assignedParticipantId?: string | null;
     };
     /** UpdateItemBody */
-    'def-15': {
+    'def-17': {
       name?: string;
       /** @enum {string} */
       category?: 'equipment' | 'food';
@@ -2362,12 +2432,12 @@ export interface components {
       assignedParticipantId?: string | null;
     };
     /** ItemIdParam */
-    'def-16': {
+    'def-18': {
       /** Format: uuid */
       itemId: string;
     };
     /** Participant */
-    'def-17': {
+    'def-19': {
       /** Format: uuid */
       participantId: string;
       /** Format: uuid */
@@ -2400,9 +2470,9 @@ export interface components {
       updatedAt: string;
     };
     /** ParticipantList */
-    'def-18': components['schemas']['def-17'][];
+    'def-20': components['schemas']['def-19'][];
     /** CreateParticipantBody */
-    'def-19': {
+    'def-21': {
       name: string;
       lastName: string;
       contactPhone: string;
@@ -2418,7 +2488,7 @@ export interface components {
       notes?: string;
     };
     /** UpdateParticipantBody */
-    'def-20': {
+    'def-22': {
       name?: string;
       lastName?: string;
       contactPhone?: string;
@@ -2436,16 +2506,16 @@ export interface components {
       rsvpStatus?: 'pending' | 'confirmed' | 'not_sure';
     };
     /** ParticipantIdParam */
-    'def-21': {
+    'def-23': {
       /** Format: uuid */
       participantId: string;
     };
     /** DeleteParticipantResponse */
-    'def-22': {
+    'def-24': {
       ok: boolean;
     };
     /** PlanWithDetails */
-    'def-23': {
+    'def-25': {
       /** Format: uuid */
       planId: string;
       title: string;
@@ -2468,17 +2538,17 @@ export interface components {
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
-      items: components['schemas']['def-13'];
-      participants: components['schemas']['def-18'];
-      joinRequests?: components['schemas']['def-30'];
+      items: components['schemas']['def-15'];
+      participants: components['schemas']['def-20'];
+      joinRequests?: components['schemas']['def-32'];
     };
     /** PlanNotLoggedInResponse */
-    'def-24': {
+    'def-26': {
       /** @enum {string} */
       status: 'not_logged_in';
     };
     /** PlanPreviewFields */
-    'def-25': {
+    'def-27': {
       title: string;
       description?: string | null;
       location?: components['schemas']['def-4'] | null;
@@ -2488,7 +2558,7 @@ export interface components {
       endDate?: string | null;
     };
     /** JoinRequest */
-    'def-26': {
+    'def-28': {
       /** Format: uuid */
       requestId: string;
       /** Format: uuid */
@@ -2513,28 +2583,28 @@ export interface components {
       updatedAt: string;
     };
     /** JoinRequestActionParams */
-    'def-27': {
+    'def-29': {
       /** Format: uuid */
       planId: string;
       /** Format: uuid */
       requestId: string;
     };
     /** UpdateJoinRequestStatusBody */
-    'def-28': {
+    'def-30': {
       /** @enum {string} */
       status: 'approved' | 'rejected';
     };
     /** PlanNotParticipantResponse */
-    'def-29': {
+    'def-31': {
       /** @enum {string} */
       status: 'not_participant';
-      preview: components['schemas']['def-25'];
-      joinRequest: components['schemas']['def-26'] | null;
+      preview: components['schemas']['def-27'];
+      joinRequest: components['schemas']['def-28'] | null;
     };
     /** JoinRequestList */
-    'def-30': components['schemas']['def-26'][];
+    'def-32': components['schemas']['def-28'][];
     /** CreateJoinRequestBody */
-    'def-31': {
+    'def-33': {
       name: string;
       lastName: string;
       contactPhone: string;
@@ -2547,13 +2617,13 @@ export interface components {
       notes?: string;
     };
     /** InviteParams */
-    'def-32': {
+    'def-34': {
       /** Format: uuid */
       planId: string;
       inviteToken: string;
     };
     /** InviteParticipant */
-    'def-33': {
+    'def-35': {
       /** Format: uuid */
       participantId: string;
       displayName?: string | null;
@@ -2561,9 +2631,9 @@ export interface components {
       role: 'owner' | 'participant' | 'viewer';
     };
     /** InviteParticipantList */
-    'def-34': components['schemas']['def-33'][];
+    'def-36': components['schemas']['def-35'][];
     /** InviteMyPreferences */
-    'def-35': {
+    'def-37': {
       adultsCount?: number | null;
       kidsCount?: number | null;
       foodPreferences?: string | null;
@@ -2571,7 +2641,7 @@ export interface components {
       notes?: string | null;
     };
     /** InvitePlanResponse */
-    'def-36': {
+    'def-38': {
       /** Format: uuid */
       planId: string;
       title: string;
@@ -2588,27 +2658,27 @@ export interface components {
       createdAt: string;
       /** Format: date-time */
       updatedAt: string;
-      items: components['schemas']['def-13'];
-      participants: components['schemas']['def-34'];
+      items: components['schemas']['def-15'];
+      participants: components['schemas']['def-36'];
       /** Format: uuid */
       myParticipantId: string;
       /** @enum {string} */
       myRsvpStatus: 'pending' | 'confirmed' | 'not_sure';
-      myPreferences: components['schemas']['def-35'];
+      myPreferences: components['schemas']['def-37'];
     };
     /** RegenerateTokenParams */
-    'def-37': {
+    'def-39': {
       /** Format: uuid */
       planId: string;
       /** Format: uuid */
       participantId: string;
     };
     /** RegenerateTokenResponse */
-    'def-38': {
+    'def-40': {
       inviteToken: string;
     };
     /** UpdateInvitePreferencesBody */
-    'def-39': {
+    'def-41': {
       displayName?: string | null;
       adultsCount?: number | null;
       kidsCount?: number | null;
@@ -2619,7 +2689,7 @@ export interface components {
       rsvpStatus?: 'confirmed' | 'not_sure';
     };
     /** InvitePreferencesResponse */
-    'def-40': {
+    'def-42': {
       /** Format: uuid */
       participantId: string;
       displayName?: string | null;
@@ -2634,7 +2704,7 @@ export interface components {
       notes?: string | null;
     };
     /** InviteItemParams */
-    'def-41': {
+    'def-43': {
       /** Format: uuid */
       planId: string;
       inviteToken: string;
@@ -2642,7 +2712,7 @@ export interface components {
       itemId: string;
     };
     /** CreateInviteItemBody */
-    'def-42': {
+    'def-44': {
       name: string;
       /** @enum {string} */
       category: 'equipment' | 'food';
@@ -2664,7 +2734,7 @@ export interface components {
       notes?: string | null;
     };
     /** UpdateInviteItemBody */
-    'def-43': {
+    'def-45': {
       name?: string;
       /** @enum {string} */
       category?: 'equipment' | 'food';
@@ -2688,11 +2758,11 @@ export interface components {
       notes?: string | null;
     };
     /** BulkCreateItemBody */
-    'def-44': {
-      items: components['schemas']['def-14'][];
+    'def-46': {
+      items: components['schemas']['def-16'][];
     };
     /** BulkUpdateItemEntry */
-    'def-45': {
+    'def-47': {
       /** Format: uuid */
       itemId: string;
       name?: string;
@@ -2720,25 +2790,25 @@ export interface components {
       assignedParticipantId?: string | null;
     };
     /** BulkUpdateItemBody */
-    'def-46': {
-      items: components['schemas']['def-45'][];
+    'def-48': {
+      items: components['schemas']['def-47'][];
     };
     /** BulkItemError */
-    'def-47': {
+    'def-49': {
       name: string;
       message: string;
     };
     /** BulkItemResponse */
-    'def-48': {
-      items: components['schemas']['def-13'];
-      errors: components['schemas']['def-47'][];
+    'def-50': {
+      items: components['schemas']['def-15'];
+      errors: components['schemas']['def-49'][];
     };
     /** BulkCreateInviteItemBody */
-    'def-49': {
-      items: components['schemas']['def-42'][];
+    'def-51': {
+      items: components['schemas']['def-44'][];
     };
     /** BulkUpdateInviteItemEntry */
-    'def-50': {
+    'def-52': {
       /** Format: uuid */
       itemId: string;
       name?: string;
@@ -2764,11 +2834,11 @@ export interface components {
       notes?: string | null;
     };
     /** BulkUpdateInviteItemBody */
-    'def-51': {
-      items: components['schemas']['def-50'][];
+    'def-53': {
+      items: components['schemas']['def-52'][];
     };
     /** UserPreferences */
-    'def-52': {
+    'def-54': {
       /** @description Free-text dietary preferences, e.g. "vegetarian, no shellfish" */
       foodPreferences?: string | null;
       /** @description Free-text allergy list, e.g. "nuts, gluten, dairy" */
@@ -2777,17 +2847,17 @@ export interface components {
       defaultEquipment?: string[] | null;
     };
     /** ProfileResponse */
-    'def-53': {
+    'def-55': {
       user: {
         id: string;
         email: string;
         role: string;
       };
       /** @description App preferences for this user. Null if the user has never saved preferences. */
-      preferences: components['schemas']['def-52'] | null;
+      preferences: components['schemas']['def-54'] | null;
     };
     /** UpdateProfileBody */
-    'def-54': {
+    'def-56': {
       /** @description Free-text dietary preferences, e.g. "vegetarian, no shellfish". Send null to clear. */
       foodPreferences?: string | null;
       /** @description Free-text allergy list, e.g. "nuts, gluten, dairy". Send null to clear. */
@@ -2796,8 +2866,8 @@ export interface components {
       defaultEquipment?: string[] | null;
     };
     /** UpdateProfileResponse */
-    'def-55': {
-      preferences: components['schemas']['def-52'];
+    'def-57': {
+      preferences: components['schemas']['def-54'];
     };
   };
   responses: never;

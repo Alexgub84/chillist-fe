@@ -3,8 +3,8 @@ import type { components } from '../api.generated';
 import { locationSchema } from './location';
 import { itemSchema } from './item';
 
-type BEInviteParticipant = components['schemas']['def-33'];
-type BEInvitePlanResponse = components['schemas']['def-36'];
+type BEInviteParticipant = components['schemas']['def-35'];
+type BEInvitePlanResponse = components['schemas']['def-38'];
 
 const INVITE_ROLE_VALUES = [
   'owner',

@@ -164,12 +164,18 @@ export function InvitePlanPage() {
   const listCounts: Record<ListFilter, number> = { buying: 0, packing: 0 };
   for (const item of items) {
     if (item.status === 'pending') listCounts.buying++;
-    if (item.status === 'purchased') listCounts.packing++;
+    if (item.status === 'purchased' || item.status === 'packed')
+      listCounts.packing++;
   }
 
   const filteredItems = items.filter((item) => {
     if (listFilter === 'buying' && item.status !== 'pending') return false;
-    if (listFilter === 'packing' && item.status !== 'purchased') return false;
+    if (
+      listFilter === 'packing' &&
+      item.status !== 'purchased' &&
+      item.status !== 'packed'
+    )
+      return false;
     return true;
   });
 
@@ -398,10 +404,7 @@ export function InvitePlanPage() {
           inModal
           showRsvp
           defaultValues={{
-            rsvpStatus:
-              myRsvpStatus === 'confirmed' || myRsvpStatus === 'not_sure'
-                ? myRsvpStatus
-                : undefined,
+            rsvpStatus: myRsvpStatus,
             adultsCount: myPreferences?.adultsCount ?? 1,
             kidsCount: myPreferences?.kidsCount ?? undefined,
             foodPreferences: myPreferences?.foodPreferences ?? '',
@@ -579,7 +582,10 @@ export function InvitePlanPage() {
     try {
       await saveGuestPreferences(planId, inviteToken, {
         ...values,
-        rsvpStatus: values.rsvpStatus ?? undefined,
+        rsvpStatus:
+          values.rsvpStatus === 'confirmed' || values.rsvpStatus === 'not_sure'
+            ? values.rsvpStatus
+            : undefined,
       });
       console.info(
         `[InvitePage] Guest preferences saved — planId="${planId}", token="${inviteToken.slice(0, 8)}…".`

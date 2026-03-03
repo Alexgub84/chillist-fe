@@ -32,7 +32,6 @@ export default function ItemsList({
     category,
     items: items.filter((item) => item.category === category),
   }));
-
   return (
     <div className="space-y-4 mb-4">
       {itemsByCategory.map(({ category, items: catItems }) => (

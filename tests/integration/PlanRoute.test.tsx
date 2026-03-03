@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { routeTree } from '../../src/routeTree.gen';
@@ -238,19 +239,7 @@ describe('PlanRoute — Integration', () => {
   }
 
   describe('owner sees full plan with role-based UI', () => {
-    it('renders plan title and details', async () => {
-      renderPlanRoute();
-
-      await waitFor(() => {
-        expect(screen.getByText('Summer BBQ')).toBeInTheDocument();
-      });
-
-      expect(
-        screen.getByText('Annual neighborhood cookout')
-      ).toBeInTheDocument();
-    });
-
-    it('shows manage participants link for owner', async () => {
+    it('renders plan title, details, and manage participants link for owner', async () => {
       renderPlanRoute();
 
       await waitFor(() => {
@@ -258,6 +247,11 @@ describe('PlanRoute — Integration', () => {
           screen.getByTestId('manage-participants-link')
         ).toBeInTheDocument();
       });
+      const titles = screen.getAllByTestId('plan-title');
+      expect(titles[0]).toHaveTextContent('Summer BBQ');
+      expect(
+        screen.getByText('Annual neighborhood cookout')
+      ).toBeInTheDocument();
     });
 
     it('shows items list with correct items', async () => {
@@ -286,6 +280,39 @@ describe('PlanRoute — Integration', () => {
       await waitFor(() => {
         expect(screen.getByText('Add Item')).toBeInTheDocument();
       });
+    });
+
+    it('renders the Add Multiple FAB button for owner', async () => {
+      renderPlanRoute();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('bulk-add-fab')).toBeInTheDocument();
+      });
+      expect(screen.getByTestId('bulk-add-fab')).toHaveTextContent(
+        /Add Multiple/i
+      );
+    });
+
+    it('opens BulkAddModal when Add Multiple FAB is clicked', async () => {
+      const user = userEvent.setup();
+      renderPlanRoute();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('bulk-add-fab')).toBeInTheDocument();
+      });
+
+      await user.click(screen.getByTestId('bulk-add-fab'));
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole('heading', { name: /Add Multiple Items/i })
+        ).toBeInTheDocument();
+      });
+      const dialog = screen.getByRole('dialog', {
+        name: /Add Multiple Items/i,
+      });
+      expect(within(dialog).getByText('Equipment')).toBeInTheDocument();
+      expect(within(dialog).getByText('Food')).toBeInTheDocument();
     });
   });
 
