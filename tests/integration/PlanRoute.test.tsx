@@ -238,19 +238,7 @@ describe('PlanRoute — Integration', () => {
   }
 
   describe('owner sees full plan with role-based UI', () => {
-    it('renders plan title and details', async () => {
-      renderPlanRoute();
-
-      await waitFor(() => {
-        expect(screen.getByText('Summer BBQ')).toBeInTheDocument();
-      });
-
-      expect(
-        screen.getByText('Annual neighborhood cookout')
-      ).toBeInTheDocument();
-    });
-
-    it('shows manage participants link for owner', async () => {
+    it('renders plan title, details, and manage participants link for owner', async () => {
       renderPlanRoute();
 
       await waitFor(() => {
@@ -258,6 +246,11 @@ describe('PlanRoute — Integration', () => {
           screen.getByTestId('manage-participants-link')
         ).toBeInTheDocument();
       });
+      const titles = screen.getAllByTestId('plan-title');
+      expect(titles[0]).toHaveTextContent('Summer BBQ');
+      expect(
+        screen.getByText('Annual neighborhood cookout')
+      ).toBeInTheDocument();
     });
 
     it('shows items list with correct items', async () => {
