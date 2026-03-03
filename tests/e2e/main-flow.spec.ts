@@ -116,9 +116,12 @@ test.describe('Plan creation via UI', () => {
     await skipBtn.click({ force: isMobile });
 
     await expect(page).toHaveURL(/\/plan\//, { timeout: 15000 });
-    await expect(page.getByText('E2E Test Trip')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'E2E Test Trip',
+      {
+        timeout: 10000,
+      }
+    );
     await expect(page.getByText('Alex Test').first()).toBeVisible();
   });
 });
@@ -132,9 +135,12 @@ test.describe('Item CRUD', () => {
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('E2E Test Trip')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'E2E Test Trip',
+      {
+        timeout: 10000,
+      }
+    );
 
     await addItemViaUI(page, 'Sleeping Bag', 1);
     await expect(
@@ -208,9 +214,12 @@ test.describe('Item CRUD', () => {
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('E2E Test Trip')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'E2E Test Trip',
+      {
+        timeout: 10000,
+      }
+    );
 
     await page.getByText('Manage Items').click();
     await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
@@ -272,9 +281,12 @@ test.describe('Edit Plan', () => {
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Original Trip Name')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'Original Trip Name',
+      {
+        timeout: 10000,
+      }
+    );
 
     const editBtn = page.getByTestId('edit-plan-button');
     await expect(editBtn).toBeVisible();
@@ -296,9 +308,12 @@ test.describe('Edit Plan', () => {
     ]);
     await expect(editForm).toBeHidden({ timeout: 10000 });
 
-    await expect(page.getByText('Updated Trip Name')).toBeVisible({
-      timeout: 5000,
-    });
+    await expect(page.getByTestId('plan-title')).toHaveText(
+      'Updated Trip Name',
+      {
+        timeout: 5000,
+      }
+    );
   });
 
   test('non-owner cannot see edit button', async ({ page }) => {
@@ -321,9 +336,12 @@ test.describe('Edit Plan', () => {
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Someone Else Plan')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'Someone Else Plan',
+      {
+        timeout: 10000,
+      }
+    );
 
     await expect(page.getByTestId('edit-plan-button')).toBeHidden();
   });
@@ -372,12 +390,16 @@ test.describe('Manage Participants route', () => {
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
-    await expect(page.getByText('Manage Participants Test')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'Manage Participants Test',
+      {
+        timeout: 10000,
+      }
+    );
 
     const manageLink = page.getByTestId('manage-participants-link');
     await expect(manageLink).toBeVisible();
+    await manageLink.scrollIntoViewIfNeeded();
     await expect(manageLink).toHaveAttribute(
       'href',
       `/manage-participants/${plan.planId}`
@@ -387,9 +409,7 @@ test.describe('Manage Participants route', () => {
     await expect(page).toHaveURL(`/manage-participants/${plan.planId}`, {
       timeout: 10000,
     });
-    await expect(
-      page.getByRole('heading', { name: 'Manage Participants' })
-    ).toBeVisible({
+    await expect(page.getByTestId('manage-participants-title')).toBeVisible({
       timeout: 10000,
     });
   });
@@ -472,9 +492,12 @@ test.describe('Manage Participants route', () => {
     await page.goto(`/manage-participants/${plan.planId}`);
 
     await expect(page).toHaveURL(`/plan/${plan.planId}`, { timeout: 10000 });
-    await expect(page.getByText('Other Owner Plan')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'Other Owner Plan',
+      {
+        timeout: 10000,
+      }
+    );
   });
 });
 
@@ -693,6 +716,9 @@ test.describe('Filters', () => {
     await expect(
       page.locator('[class*="border-l-"]').filter({ hasText: 'Tent' })
     ).toBeHidden();
+    await expect(
+      page.locator('[class*="border-l-"]').filter({ hasText: 'Bread' })
+    ).toBeHidden();
 
     await statusTabs.locator('button', { hasText: /^All/ }).click();
     await expect(
@@ -836,9 +862,12 @@ test.describe('Invite Landing Page', () => {
     await page.goto(`/invite/${plan.planId}/${inviteToken}`);
 
     await expect(page).toHaveURL(`/plan/${plan.planId}`, { timeout: 15000 });
-    await expect(page.getByText('Camping Trip')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(page.getByTestId('plan-title').first()).toHaveText(
+      'Camping Trip',
+      {
+        timeout: 10000,
+      }
+    );
   });
 
   test('guest can continue without signing in and sees preferences modal', async ({

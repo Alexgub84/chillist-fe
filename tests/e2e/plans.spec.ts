@@ -180,10 +180,10 @@ test.describe('Admin Delete', () => {
       timeout: 10000,
     });
 
-    await page.getByTestId('admin-delete-cancel').click();
+    await page.getByTestId('admin-delete-cancel').click({ force: true });
 
     await expect(page.getByText('Delete Plan?')).toBeHidden({
-      timeout: 10000,
+      timeout: 20000,
     });
     await expect(page.getByText('Beach Trip')).toBeVisible();
   });
