@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { render, screen, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import BulkAddModal from '../../../src/components/BulkAddModal';
+import BulkItemAddWizard from '../../../src/components/BulkItemAddWizard';
 
 vi.mock('../../../src/components/shared/Modal', () => ({
   default: ({
@@ -46,27 +46,27 @@ async function goToSubcategories(
   user: ReturnType<typeof userEvent.setup>,
   category: 'Equipment' | 'Food' = 'Equipment'
 ) {
-  render(<BulkAddModal {...defaultProps} />);
+  render(<BulkItemAddWizard {...defaultProps} />);
   await user.click(screen.getByText(category));
 }
 
 async function goToItems(user: ReturnType<typeof userEvent.setup>) {
-  render(<BulkAddModal {...defaultProps} />);
+  render(<BulkItemAddWizard {...defaultProps} />);
   await user.click(screen.getByText('Equipment'));
   await user.click(screen.getByText('First Aid and Safety'));
 }
 
-describe('BulkAddModal', () => {
+describe('BulkItemAddWizard', () => {
   describe('Step 1 — Category', () => {
     it('renders category selection buttons', () => {
-      render(<BulkAddModal {...defaultProps} />);
+      render(<BulkItemAddWizard {...defaultProps} />);
 
       expect(screen.getByText('Equipment')).toBeInTheDocument();
       expect(screen.getByText('Food')).toBeInTheDocument();
     });
 
     it('does not render when closed', () => {
-      render(<BulkAddModal {...defaultProps} open={false} />);
+      render(<BulkItemAddWizard {...defaultProps} open={false} />);
 
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
@@ -184,7 +184,7 @@ describe('BulkAddModal', () => {
     it('calls onAdd with selected items on submit', async () => {
       const user = userEvent.setup();
       const onAdd = vi.fn().mockResolvedValue(undefined);
-      render(<BulkAddModal open onClose={vi.fn()} onAdd={onAdd} />);
+      render(<BulkItemAddWizard open onClose={vi.fn()} onAdd={onAdd} />);
 
       await user.click(screen.getByText('Equipment'));
       await user.click(screen.getByText('First Aid and Safety'));

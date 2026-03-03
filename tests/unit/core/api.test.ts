@@ -54,6 +54,7 @@ import {
   fetchPlan,
   fetchPlanByInvite,
   fetchPlans,
+  fetchAdminPlans,
   fetchPendingRequests,
   claimInvite,
   saveGuestPreferences,
@@ -179,6 +180,25 @@ describe('API Client', () => {
         expect.objectContaining({
           headers: expect.not.objectContaining({
             'Content-Type': 'application/json',
+          }),
+        })
+      );
+    });
+
+    it('fetches admin plans via GET /admin/plans', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(mockResponse([mockPlan]));
+
+      const plans = await fetchAdminPlans();
+      expect(plans).toEqual([mockPlan]);
+      expect(fetchMock).toHaveBeenCalledWith(
+        'http://api.test/admin/plans',
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: `Bearer ${DEFAULT_SESSION.access_token}`,
           }),
         })
       );

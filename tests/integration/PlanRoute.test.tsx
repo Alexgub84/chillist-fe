@@ -293,7 +293,7 @@ describe('PlanRoute — Integration', () => {
       );
     });
 
-    it('opens BulkAddModal when Add Multiple FAB is clicked', async () => {
+    it('opens BulkItemAddWizard when Add Multiple FAB is clicked', async () => {
       const user = userEvent.setup();
       renderPlanRoute();
 

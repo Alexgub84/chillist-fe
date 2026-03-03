@@ -194,17 +194,26 @@ function cloneData(data: MockData): MutableStore {
   };
 }
 
-function extractUserIdFromJwt(authHeader?: string): string | null {
+function extractJwtPayload(
+  authHeader?: string
+): Record<string, unknown> | null {
   if (!authHeader?.startsWith('Bearer ')) return null;
   const token = authHeader.slice(7);
   const parts = token.split('.');
   if (parts.length < 2) return null;
   try {
-    const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString());
-    return payload.sub ?? null;
+    return JSON.parse(Buffer.from(parts[1], 'base64').toString()) as Record<
+      string,
+      unknown
+    >;
   } catch {
     return null;
   }
+}
+
+function extractUserIdFromJwt(authHeader?: string): string | null {
+  const payload = extractJwtPayload(authHeader);
+  return (payload?.sub as string) ?? null;
 }
 
 function requireJwt(authHeader?: string): string {
@@ -213,6 +222,20 @@ function requireJwt(authHeader?: string): string {
     throw new HttpError('Authentication required', 401);
   }
   return userId;
+}
+
+function requireAdminJwt(authHeader?: string): string {
+  const payload = extractJwtPayload(authHeader);
+  if (!payload?.sub) {
+    throw new HttpError('Authentication required', 401);
+  }
+  const appMetadata = payload.app_metadata as
+    | Record<string, unknown>
+    | undefined;
+  if (appMetadata?.role !== 'admin') {
+    throw new HttpError('Admin access required', 403);
+  }
+  return payload.sub as string;
 }
 
 function ensurePlan(store: MutableStore, planId: string): Plan {
@@ -360,6 +383,11 @@ export async function buildServer(
 
   app.get('/plans', async (request, reply) => {
     requireJwt(request.headers.authorization as string | undefined);
+    void reply.send(store.plans);
+  });
+
+  app.get('/admin/plans', async (request, reply) => {
+    requireAdminJwt(request.headers.authorization as string | undefined);
     void reply.send(store.plans);
   });
 

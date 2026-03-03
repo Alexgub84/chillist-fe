@@ -1,7 +1,8 @@
 {
   "nav": {
     "plans": "Plans",
-    "about": "About"
+    "about": "About",
+    "adminPlans": "Admin Plans"
   },
   "auth": {
     "signIn": "Sign In",
@@ -534,6 +535,7 @@
     "alreadySentMessage": "Your request to join this plan is being reviewed."
   },
   "admin": {
+    "plansTitle": "Admin — All Plans",
     "deletePlan": "Delete",
     "deleteConfirmTitle": "Delete Plan?",
     "deleteConfirmMessage": "Are you sure you want to delete <strong>{{title}}</strong>? This action cannot be undone.",

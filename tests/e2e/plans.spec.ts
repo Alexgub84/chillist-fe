@@ -176,13 +176,15 @@ test.describe('Admin Delete', () => {
 
     await page.getByTestId(`admin-delete-${plan.planId}`).click();
 
-    await expect(page.getByText('Delete Plan?')).toBeVisible({
+    await expect(page.getByTestId('admin-delete-modal')).toBeVisible({
       timeout: 10000,
     });
 
-    await page.getByTestId('admin-delete-cancel').click({ force: true });
+    const cancelBtn = page.getByTestId('admin-delete-cancel');
+    await cancelBtn.scrollIntoViewIfNeeded();
+    await cancelBtn.click({ force: true });
 
-    await expect(page.getByText('Delete Plan?')).toBeHidden({
+    await expect(page.getByTestId('admin-delete-modal')).toBeHidden({
       timeout: 20000,
     });
     await expect(page.getByText('Beach Trip')).toBeVisible();

@@ -40,7 +40,7 @@ import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
 import { copyPlanUrl, sharePlanUrl } from '../core/invite';
 import ParticipantDetails from '../components/ParticipantDetails';
-import BulkAddModal from '../components/BulkAddModal';
+import BulkItemAddWizard from '../components/BulkItemAddWizard';
 import FloatingActions from '../components/shared/FloatingActions';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
@@ -562,7 +562,7 @@ function PlanPage() {
         onBulkAdd={() => setBulkAddOpen(true)}
       />
 
-      <BulkAddModal
+      <BulkItemAddWizard
         open={bulkAddOpen}
         onClose={() => setBulkAddOpen(false)}
         onAdd={handleBulkAdd}
