@@ -31,8 +31,19 @@ async function addItemViaUI(
 
   const submitBtn = form.locator('button[type="submit"]');
   await expect(submitBtn).toBeVisible();
-  await submitBtn.click({ force: true });
-  await expect(modal).toBeHidden({ timeout: 20000 });
+
+  await Promise.all([
+    page.waitForResponse(
+      (r) => r.url().includes('/items') && r.request().method() === 'POST'
+    ),
+    submitBtn.click({ force: true }),
+  ]);
+
+  await expect(modal).toBeHidden({ timeout: 10000 });
+
+  await expect(
+    page.locator('[class*="border-l-"]').filter({ hasText: name })
+  ).toBeVisible({ timeout: 20000 });
 }
 
 function buildTestPlan() {

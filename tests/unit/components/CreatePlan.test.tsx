@@ -159,6 +159,34 @@ describe('CreatePlan - PlanForm', () => {
     });
   });
 
+  describe('Date-to-time picker flow', () => {
+    it('should auto-fill end time when end date is selected in multi-day mode', async () => {
+      const user = userEvent.setup();
+      renderForm();
+
+      await user.type(getInputByLabel(/title/i), 'Multi Day');
+      await fillOwnerFields(user);
+
+      fireEvent.change(getInputByLabel(/start date/i), {
+        target: { value: '2025-12-20' },
+      });
+      fireEvent.change(getInputByLabel(/end date/i), {
+        target: { value: '' },
+      });
+      fireEvent.change(getInputByLabel(/end time/i), {
+        target: { value: '' },
+      });
+
+      fireEvent.change(getInputByLabel(/end date/i), {
+        target: { value: '2025-12-22' },
+      });
+
+      await waitFor(() => {
+        expect(getInputByLabel(/end time/i)).toHaveValue('08:00');
+      });
+    });
+  });
+
   describe('One-day toggle behavior', () => {
     it('should show single date fields when one-day is checked', async () => {
       const user = userEvent.setup();

@@ -170,6 +170,28 @@ export default function PlanForm({
   const locationNameRef = useRef<HTMLInputElement | null>(null);
   const singleStartTimeRef = useRef<HTMLInputElement | null>(null);
   const startDateTimeRef = useRef<HTMLInputElement | null>(null);
+  const endDateDateRef = useRef<HTMLInputElement | null>(null);
+  const endDateTimeRef = useRef<HTMLInputElement | null>(null);
+  const skipEndDateShowPickerRef = useRef(false);
+  const skipStartTimeChainRef = useRef(false);
+  function openPicker(inputRef: { current: HTMLInputElement | null }) {
+    setTimeout(() => {
+      if (!inputRef.current) return;
+      try {
+        inputRef.current.dataset.pickerOpenedMs = String(Date.now());
+        inputRef.current.showPicker?.();
+      } catch {
+        /* showPicker may throw outside user-gesture contexts */
+      }
+    }, 50);
+  }
+
+  function handleStartTimeBlur() {
+    const val = startDateTimeRef.current?.value;
+    if (!val || !/^\d{2}:\d{2}$/.test(val)) return;
+    openPicker(endDateDateRef);
+  }
+
   const { ref: locationNameFormRef, ...locationNameRest } = register(
     'location.name' as const
   );
@@ -177,6 +199,10 @@ export default function PlanForm({
     register('singleStartTime');
   const { ref: startDateTimeFormRef, ...startDateTimeRest } =
     register('startDateTime');
+  const { ref: endDateDateFormRef, ...endDateDateRest } =
+    register('endDateDate');
+  const { ref: endDateTimeFormRef, ...endDateTimeRest } =
+    register('endDateTime');
 
   function handlePlaceSelect(place: PlaceResult) {
     setValue('location', {
@@ -219,13 +245,7 @@ export default function PlanForm({
             : '08:00';
           setValue('singleStartTime', startTime);
           setValue('singleEndTime', startTime);
-          setTimeout(() => {
-            try {
-              singleStartTimeRef.current?.showPicker?.();
-            } catch {
-              /* showPicker may throw outside user-gesture contexts */
-            }
-          }, 50);
+          openPicker(singleStartTimeRef);
         }
         return;
       }
@@ -235,6 +255,23 @@ export default function PlanForm({
           /^\d{2}:\d{2}$/.test(values.singleStartTime)
         ) {
           setValue('singleEndTime', values.singleStartTime);
+        }
+        return;
+      }
+      if (name === 'endDateDate' && !values.oneDay) {
+        if (skipEndDateShowPickerRef.current) {
+          skipEndDateShowPickerRef.current = false;
+          return;
+        }
+        if (
+          values.endDateDate &&
+          /^\d{4}-\d{2}-\d{2}$/.test(values.endDateDate)
+        ) {
+          const endTime = isDateToday(values.endDateDate)
+            ? getCurrentHour00()
+            : '08:00';
+          setValue('endDateTime', endTime);
+          openPicker(endDateTimeRef);
         }
         return;
       }
@@ -250,7 +287,9 @@ export default function PlanForm({
         startTime = isDateToday(values.startDateDate)
           ? getCurrentHour00()
           : '08:00';
+        skipStartTimeChainRef.current = true;
         setValue('startDateTime', startTime);
+        skipEndDateShowPickerRef.current = true;
         setValue(
           'endDateDate',
           (() => {
@@ -260,13 +299,11 @@ export default function PlanForm({
           })()
         );
         setValue('endDateTime', startTime);
-        setTimeout(() => {
-          try {
-            startDateTimeRef.current?.showPicker?.();
-          } catch {
-            /* showPicker may throw outside user-gesture contexts */
-          }
-        }, 50);
+        openPicker(startDateTimeRef);
+        return;
+      }
+      if (skipStartTimeChainRef.current) {
+        skipStartTimeChainRef.current = false;
         return;
       }
       if (!startTime || !/^\d{2}:\d{2}$/.test(startTime)) return;
@@ -274,6 +311,7 @@ export default function PlanForm({
       const [year, month, day] = values.startDateDate.split('-').map(Number);
       const d = new Date(year, month - 1, day + 1);
       const endDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      skipEndDateShowPickerRef.current = true;
       setValue('endDateDate', endDate);
     });
     return () => subscription.unsubscribe();
@@ -681,12 +719,24 @@ export default function PlanForm({
                     startDateTimeFormRef(el);
                     startDateTimeRef.current = el;
                   }}
+                  onBlur={(e) => {
+                    startDateTimeRest.onBlur(e);
+                    handleStartTimeBlur();
+                  }}
                   compact
                 />
               </div>
               <div>
                 <FormLabel>{t('planForm.endDate')}</FormLabel>
-                <FormInput type="date" {...register('endDateDate')} compact />
+                <FormInput
+                  type="date"
+                  {...endDateDateRest}
+                  ref={(el) => {
+                    endDateDateFormRef(el);
+                    endDateDateRef.current = el;
+                  }}
+                  compact
+                />
                 {errors.endDateDate && (
                   <p className="text-sm text-red-600 mt-1">
                     {errors.endDateDate.message}
@@ -695,7 +745,15 @@ export default function PlanForm({
               </div>
               <div>
                 <FormLabel>{t('planForm.endTime')}</FormLabel>
-                <FormInput type="time" {...register('endDateTime')} compact />
+                <FormInput
+                  type="time"
+                  {...endDateTimeRest}
+                  ref={(el) => {
+                    endDateTimeFormRef(el);
+                    endDateTimeRef.current = el;
+                  }}
+                  compact
+                />
               </div>
             </div>
           )}
