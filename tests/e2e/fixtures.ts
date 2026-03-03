@@ -466,6 +466,20 @@ export async function mockInviteRoute(
   );
 }
 
-const test = base;
+const test = base.extend({
+  page: async ({ page }, run) => {
+    await page.addInitScript(() => {
+      const inject = () => {
+        const s = document.createElement('style');
+        s.textContent =
+          '*, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }';
+        document.head.appendChild(s);
+      };
+      if (document.head) inject();
+      else document.addEventListener('DOMContentLoaded', inject);
+    });
+    await run(page);
+  },
+});
 
 export { test, expect, type Page, type MockPlan };
