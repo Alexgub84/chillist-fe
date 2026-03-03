@@ -24,17 +24,17 @@ interface SelectedItem {
 
 type Step = 'category' | 'subcategory' | 'items';
 
-interface BulkAddModalProps {
+interface BulkItemAddWizardProps {
   open: boolean;
   onClose: () => void;
   onAdd: (items: ItemCreate[]) => Promise<void>;
 }
 
-export default function BulkAddModal({
+export default function BulkItemAddWizard({
   open,
   onClose,
   onAdd,
-}: BulkAddModalProps) {
+}: BulkItemAddWizardProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
 
@@ -221,7 +221,7 @@ export default function BulkAddModal({
       open={open}
       onClose={handleClose}
       title={modalTitle}
-      testId="bulk-add-modal"
+      testId="bulk-item-add-wizard"
       showCloseButton
     >
       <div className="px-4 sm:px-6 pb-4 sm:pb-6">

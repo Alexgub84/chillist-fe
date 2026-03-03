@@ -12,7 +12,7 @@ import ListTabs from './StatusFilter';
 import ParticipantFilter from './ParticipantFilter';
 import Modal from './shared/Modal';
 import FloatingActions from './shared/FloatingActions';
-import BulkAddModal from './BulkAddModal';
+import BulkItemAddWizard from './BulkItemAddWizard';
 
 interface BackLinkPlan {
   kind: 'plan';
@@ -310,7 +310,7 @@ export default function ItemsView({
         onBulkAdd={() => setBulkAddOpen(true)}
       />
 
-      <BulkAddModal
+      <BulkItemAddWizard
         open={bulkAddOpen}
         onClose={() => setBulkAddOpen(false)}
         onAdd={handleBulkAdd}
