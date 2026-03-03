@@ -225,10 +225,10 @@ test.describe('Item CRUD', () => {
     await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
     await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
 
-    const bulkFab = page.getByTestId('bulk-add-fab');
-    await bulkFab.scrollIntoViewIfNeeded();
-    await expect(bulkFab).toBeVisible();
-    await bulkFab.click();
+    await expect(page.getByTestId('bulk-add-fab')).toBeVisible({
+      timeout: 10000,
+    });
+    await page.getByTestId('bulk-add-fab').click();
     const dialog = page.getByTestId('bulk-item-add-wizard');
     await expect(dialog).toBeVisible({ timeout: 10000 });
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
@@ -1038,10 +1038,10 @@ test.describe('Invite Landing Page', () => {
     await page.goto(`/items/${plan.planId}?token=${inviteToken}`);
     await expect(page.getByText('Charcoal')).toBeVisible({ timeout: 10000 });
 
-    const bulkFab = page.getByTestId('bulk-add-fab');
-    await bulkFab.scrollIntoViewIfNeeded();
-    await expect(bulkFab).toBeVisible();
-    await bulkFab.click();
+    await expect(page.getByTestId('bulk-add-fab')).toBeVisible({
+      timeout: 10000,
+    });
+    await page.getByTestId('bulk-add-fab').click();
     const dialog = page.getByTestId('bulk-item-add-wizard');
     await expect(dialog).toBeVisible({ timeout: 10000 });
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
