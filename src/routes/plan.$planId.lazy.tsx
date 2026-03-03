@@ -38,6 +38,7 @@ import SectionLink from '../components/shared/SectionLink';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
 import { copyPlanUrl, sharePlanUrl } from '../core/invite';
+import ParticipantDetails from '../components/ParticipantDetails';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanPage,
@@ -278,6 +279,20 @@ function PlanPage() {
             endDate={plan.endDate}
           />
         </div>
+
+        {!isOwner == plan.participants.length > 0 && (
+          <div className="mt-6 sm:mt-8">
+            <ParticipantDetails
+              participants={plan.participants}
+              planId={planId}
+              planTitle={plan.title}
+              isOwner={isOwner}
+              currentParticipantId={currentParticipant?.participantId}
+              onEditPreferences={setEditingParticipantId}
+              onMakeOwner={isOwner ? setTransferTargetParticipantId : undefined}
+            />
+          </div>
+        )}
 
         {isOwner && plan.participants.length > 0 && (
           <SectionLink
