@@ -457,6 +457,31 @@ export async function buildServer(
     });
   });
 
+  app.get('/plans/pending-requests', async (request, reply) => {
+    const jwtUserId = requireJwt(
+      request.headers.authorization as string | undefined
+    );
+    const pendingForUser = store.joinRequests.filter(
+      (jr) => jr.supabaseUserId === jwtUserId && jr.status === 'pending'
+    );
+    const planIds = [...new Set(pendingForUser.map((jr) => jr.planId))];
+    const result = planIds
+      .map((planId) => {
+        const plan = store.plans.find((p) => p.planId === planId);
+        return plan
+          ? {
+              planId: plan.planId,
+              title: plan.title,
+              startDate: plan.startDate ?? null,
+              endDate: plan.endDate ?? null,
+              location: plan.location ?? null,
+            }
+          : null;
+      })
+      .filter((p): p is NonNullable<typeof p> => p !== null);
+    void reply.send(result);
+  });
+
   app.get<{ Params: { planId: string } }>(
     '/plans/:planId',
     async (request, reply) => {

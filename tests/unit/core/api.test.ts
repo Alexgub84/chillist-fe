@@ -54,6 +54,7 @@ import {
   fetchPlan,
   fetchPlanByInvite,
   fetchPlans,
+  fetchPendingRequests,
   claimInvite,
   saveGuestPreferences,
   syncProfile,
@@ -160,6 +161,14 @@ describe('API Client', () => {
   };
 
   describe('Plans', () => {
+    const mockPendingRequestPlan = {
+      planId: 'plan-2',
+      title: 'Camping Trip',
+      startDate: '2025-06-01T00:00:00Z',
+      endDate: '2025-06-05T00:00:00Z',
+      location: { name: 'Yosemite', locationId: 'loc-1' },
+    };
+
     it('fetches all plans', async () => {
       fetchMock.mockResolvedValueOnce(mockResponse([mockPlan]));
 
@@ -173,6 +182,49 @@ describe('API Client', () => {
           }),
         })
       );
+    });
+
+    it('fetches pending join requests', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(mockResponse([mockPendingRequestPlan]));
+
+      const pending = await fetchPendingRequests();
+      expect(pending).toEqual([mockPendingRequestPlan]);
+      expect(fetchMock).toHaveBeenCalledWith(
+        'http://api.test/plans/pending-requests',
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Authorization: `Bearer ${DEFAULT_SESSION.access_token}`,
+          }),
+        })
+      );
+    });
+
+    it('returns empty array when no pending requests', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: DEFAULT_SESSION },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(mockResponse([]));
+
+      const pending = await fetchPendingRequests();
+      expect(pending).toEqual([]);
+    });
+
+    it('rejects with 401 when no JWT for pending requests', async () => {
+      supabaseMock.auth.getSession.mockResolvedValueOnce({
+        data: { session: null },
+        error: null,
+      });
+      fetchMock.mockResolvedValueOnce(
+        mockResponse({ message: 'Unauthorized' }, { ok: false, status: 401 })
+      );
+
+      await expect(fetchPendingRequests()).rejects.toThrow('Unauthorized');
+      expect(supabaseMock.auth.refreshSession).not.toHaveBeenCalled();
     });
 
     it('fetches a single plan with items and participants', async () => {
