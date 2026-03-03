@@ -153,14 +153,24 @@ export default function Header() {
                 </Link>
               </li>
               {isAdmin && (
-                <li>
-                  <Link
-                    to="/admin/last-updated"
-                    className="block px-3 py-2 text-base sm:text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
-                  >
-                    Last Updated
-                  </Link>
-                </li>
+                <>
+                  <li>
+                    <Link
+                      to="/admin/plans"
+                      className="block px-3 py-2 text-base sm:text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
+                    >
+                      {t('nav.adminPlans')}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/last-updated"
+                      className="block px-3 py-2 text-base sm:text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
+                    >
+                      Last Updated
+                    </Link>
+                  </li>
+                </>
               )}
             </ul>
 
@@ -333,15 +343,26 @@ export default function Header() {
                 </Link>
               </li>
               {isAdmin && (
-                <li className="border-b border-gray-100">
-                  <Link
-                    to="/admin/last-updated"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
-                  >
-                    Last Updated
-                  </Link>
-                </li>
+                <>
+                  <li className="border-b border-gray-100">
+                    <Link
+                      to="/admin/plans"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
+                    >
+                      {t('nav.adminPlans')}
+                    </Link>
+                  </li>
+                  <li className="border-b border-gray-100">
+                    <Link
+                      to="/admin/last-updated"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
+                    >
+                      Last Updated
+                    </Link>
+                  </li>
+                </>
               )}
               <li className="border-b border-gray-100">
                 <button

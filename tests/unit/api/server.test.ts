@@ -68,6 +68,19 @@ function mockJwt(sub = 'test-user-id', email = 'test@chillist.dev') {
   return `Bearer ${header}.${payload}.mock-signature`;
 }
 
+function mockJwtAdmin(sub = 'admin-user-id', email = 'admin@chillist.dev') {
+  const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+  const payload = btoa(
+    JSON.stringify({
+      sub,
+      email,
+      role: 'authenticated',
+      app_metadata: { role: 'admin' },
+    })
+  );
+  return `Bearer ${header}.${payload}.mock-signature`;
+}
+
 describe('mock server', () => {
   it('lists existing plans', async () => {
     const server = await buildServer({
@@ -86,6 +99,46 @@ describe('mock server', () => {
       const payload = response.json() as unknown;
       expect(Array.isArray(payload)).toBe(true);
       expect((payload as Array<Record<string, unknown>>).length).toBe(1);
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('GET /admin/plans returns all plans for admin user', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/admin/plans',
+        headers: { authorization: mockJwtAdmin() },
+      });
+      expect(response.statusCode).toBe(200);
+
+      const payload = response.json() as unknown;
+      expect(Array.isArray(payload)).toBe(true);
+      expect((payload as Array<Record<string, unknown>>).length).toBe(1);
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('GET /admin/plans returns 403 for non-admin user', async () => {
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'GET',
+        url: '/admin/plans',
+        headers: { authorization: mockJwt() },
+      });
+      expect(response.statusCode).toBe(403);
     } finally {
       await server.close();
     }

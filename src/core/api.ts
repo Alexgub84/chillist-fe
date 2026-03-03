@@ -186,6 +186,11 @@ export async function fetchPlans(): Promise<Plan[]> {
   return z.array(planSchema).parse(data);
 }
 
+export async function fetchAdminPlans(): Promise<Plan[]> {
+  const data = await request<unknown>('/admin/plans');
+  return z.array(planSchema).parse(data);
+}
+
 export async function fetchPendingRequests(): Promise<PendingRequestPlan[]> {
   const data = await request<unknown>('/plans/pending-requests');
   return z.array(pendingRequestPlanSchema).parse(data);

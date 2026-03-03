@@ -14,6 +14,7 @@ type MembershipFilter = 'all' | 'owned' | 'invited';
 
 interface PlansListProps {
   plans: Plan[];
+  titleKey?: string;
 }
 
 const statusClassName: Record<PlanStatus, string> = {
@@ -64,7 +65,7 @@ function isPastPlan(plan: {
   return new Date(dateStr) < today;
 }
 
-export function PlansList({ plans }: PlansListProps) {
+export function PlansList({ plans, titleKey = 'plans.title' }: PlansListProps) {
   const { t } = useTranslation();
   const { user, isAdmin } = useAuth();
   const deletePlanMutation = useDeletePlan();
@@ -227,7 +228,7 @@ export function PlansList({ plans }: PlansListProps) {
     <div className="w-full">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
-          {t('plans.title')}
+          {t(titleKey)}
         </h1>
         <Link
           to="/create-plan"

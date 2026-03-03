@@ -1,7 +1,8 @@
 {
   "nav": {
     "plans": "תוכניות",
-    "about": "אודות"
+    "about": "אודות",
+    "adminPlans": "תוכניות מנהל"
   },
   "auth": {
     "signIn": "התחברות",
@@ -534,6 +535,7 @@
     "alreadySentMessage": "בקשתך להצטרף לתוכנית זו נמצאת בבדיקה."
   },
   "admin": {
+    "plansTitle": "מנהל — כל התוכניות",
     "deletePlan": "מחיקה",
     "deleteConfirmTitle": "למחוק את התוכנית?",
     "deleteConfirmMessage": "האם אתה בטוח שברצונך למחוק את <strong>{{title}}</strong>? לא ניתן לבטל פעולה זו.",
