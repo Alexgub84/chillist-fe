@@ -7,6 +7,30 @@ export interface ChangelogEntry {
 export const changelog: ChangelogEntry[] = [
   {
     date: '2026-03-03',
+    title: 'Admin plans page',
+    description:
+      'Added an admin-only route at /admin/plans that displays all plans via GET /admin/plans. Accessible from the header for users with admin role. Shows the same plans list as the regular plans page but fetches from the admin endpoint.',
+  },
+  {
+    date: '2026-03-03',
+    title: 'Packing list shows purchased and packed only',
+    description:
+      'The Packing list tab now shows only items you\'ve bought (purchased) or already packed — pending items stay in the Buying list. This keeps "to buy" and "to pack" clearly separate.',
+  },
+  {
+    date: '2026-03-03',
+    title: 'Plan form auto-fills date and time',
+    description:
+      'When you select the first date for a plan, the form now auto-fills start time (current hour if today, else 08:00), end time, and end date. For multi-day plans, end date defaults to start date + 24 hours. Time picker opens automatically.',
+  },
+  {
+    date: '2026-03-03',
+    title: 'Add Multiple floating button on plan page',
+    description:
+      'A floating "Add Multiple" button appears on the plan page for quick access to the bulk add wizard. Select a category, subcategory, and items to add many items at once without opening the single-item form repeatedly.',
+  },
+  {
+    date: '2026-03-03',
     title: 'Pending join requests on plans page',
     description:
       'When you have pending join requests, a "Pending join requests" section now appears above your plans list. Each item shows the plan title, dates, location, and a "Pending for approval" badge. Items are read-only until the plan owner approves or rejects your request.',
