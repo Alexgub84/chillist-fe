@@ -6,7 +6,7 @@ import { useUpdateParticipant } from './useUpdateParticipant';
 import { useDeletePlan } from './useDeletePlan';
 import { useUpdatePlan } from './useUpdatePlan';
 import { getApiErrorMessage } from '../core/error-utils';
-import type { ItemPatch } from '../core/schemas/item';
+import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import type { PlanPatch } from '../core/schemas/plan';
 import type { ItemFormValues } from '../components/ItemForm';
 import type { PreferencesFormValues } from '../components/PreferencesForm';
@@ -53,6 +53,15 @@ export function usePlanActions(planId: string) {
     }
   }
 
+  async function createItem(payload: ItemCreate) {
+    try {
+      await createItemMutation.mutateAsync(payload);
+    } catch (err) {
+      handleMutationError(`createItem failed — planId="${planId}"`, err);
+      throw err;
+    }
+  }
+
   async function createOrUpdateItem(
     values: ItemFormValues,
     editingItemId: string | null
@@ -60,7 +69,7 @@ export function usePlanActions(planId: string) {
     if (editingItemId) {
       await updateSingleItem(editingItemId, toItemPayload(values));
     } else {
-      await createItemMutation.mutateAsync(toItemPayload(values));
+      await createItem(toItemPayload(values));
     }
   }
 
@@ -127,6 +136,7 @@ export function usePlanActions(planId: string) {
   }
 
   return {
+    createItem,
     updateSingleItem,
     createOrUpdateItem,
     updateParticipantPreferences,

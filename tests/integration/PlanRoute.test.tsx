@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { routeTree } from '../../src/routeTree.gen';
@@ -279,6 +280,39 @@ describe('PlanRoute — Integration', () => {
       await waitFor(() => {
         expect(screen.getByText('Add Item')).toBeInTheDocument();
       });
+    });
+
+    it('renders the Add Multiple FAB button for owner', async () => {
+      renderPlanRoute();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('bulk-add-fab')).toBeInTheDocument();
+      });
+      expect(screen.getByTestId('bulk-add-fab')).toHaveTextContent(
+        /Add Multiple/i
+      );
+    });
+
+    it('opens BulkAddModal when Add Multiple FAB is clicked', async () => {
+      const user = userEvent.setup();
+      renderPlanRoute();
+
+      await waitFor(() => {
+        expect(screen.getByTestId('bulk-add-fab')).toBeInTheDocument();
+      });
+
+      await user.click(screen.getByTestId('bulk-add-fab'));
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole('heading', { name: /Add Multiple Items/i })
+        ).toBeInTheDocument();
+      });
+      const dialog = screen.getByRole('dialog', {
+        name: /Add Multiple Items/i,
+      });
+      expect(within(dialog).getByText('Equipment')).toBeInTheDocument();
+      expect(within(dialog).getByText('Food')).toBeInTheDocument();
     });
   });
 

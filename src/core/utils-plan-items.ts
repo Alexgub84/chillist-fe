@@ -34,11 +34,9 @@ export function filterItemsByAssignedParticipant(
 export function countItemsByListTab(items: Item[]): Record<ListFilter, number> {
   const counts: Record<ListFilter, number> = { buying: 0, packing: 0 };
   for (const item of items) {
-    if (item.status === 'pending') {
-      counts.buying++;
+    if (item.status === 'pending') counts.buying++;
+    if (item.status === 'purchased' || item.status === 'packed')
       counts.packing++;
-    }
-    if (item.status === 'purchased') counts.packing++;
   }
   return counts;
 }
@@ -52,7 +50,7 @@ export function filterItemsByStatusTab(
     return items.filter((i) => i.status === 'pending');
   if (listFilter === 'packing')
     return items.filter(
-      (i) => i.status === 'purchased' || i.status === 'pending'
+      (i) => i.status === 'purchased' || i.status === 'packed'
     );
   return items;
 }

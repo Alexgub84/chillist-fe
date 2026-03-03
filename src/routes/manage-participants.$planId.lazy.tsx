@@ -200,7 +200,10 @@ function ManageParticipantsPage() {
           </Link>
         </div>
 
-        <h1 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6">
+        <h1
+          data-testid="manage-participants-title"
+          className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6"
+        >
           {t('manageParticipants.title')}
         </h1>
 

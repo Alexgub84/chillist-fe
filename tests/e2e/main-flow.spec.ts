@@ -227,7 +227,7 @@ test.describe('Item CRUD', () => {
 
     await page.getByRole('button', { name: /add multiple/i }).click();
 
-    const dialog = page.getByRole('dialog');
+    const dialog = page.getByTestId('bulk-add-modal');
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
       timeout: 5000,
     });
@@ -1037,7 +1037,7 @@ test.describe('Invite Landing Page', () => {
 
     await page.getByRole('button', { name: /add multiple/i }).click();
 
-    const dialog = page.getByRole('dialog');
+    const dialog = page.getByTestId('bulk-add-modal');
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
       timeout: 5000,
     });

@@ -212,7 +212,12 @@ export default function BulkAddModal({
           : t('items.bulkAddSelectItems');
 
   return (
-    <Modal open={open} onClose={handleClose} title={modalTitle}>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      title={modalTitle}
+      testId="bulk-add-modal"
+    >
       <div className="px-4 sm:px-6 pb-4 sm:pb-6">
         {step === 'category' && (
           <CategoryStep
