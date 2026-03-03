@@ -28,13 +28,6 @@ export const FormInput = forwardRef<
   const hasPicker = pickerTypes.has(props.type ?? '');
 
   function handleClick(e: MouseEvent<HTMLInputElement>) {
-    if (hasPicker) {
-      try {
-        e.currentTarget.showPicker();
-      } catch {
-        /* showPicker() may throw in non-user-gesture contexts */
-      }
-    }
     onClick?.(e);
   }
 
