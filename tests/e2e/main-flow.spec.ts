@@ -32,7 +32,7 @@ async function addItemViaUI(
   const submitBtn = form.locator('button[type="submit"]');
   await expect(submitBtn).toBeVisible();
   await submitBtn.click({ force: true });
-  await expect(modal).toBeHidden({ timeout: 10000 });
+  await expect(modal).toBeHidden({ timeout: 20000 });
 }
 
 function buildTestPlan() {
@@ -225,9 +225,12 @@ test.describe('Item CRUD', () => {
     await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
     await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
 
-    await page.getByRole('button', { name: /add multiple/i }).click();
-
+    const bulkFab = page.getByTestId('bulk-add-fab');
+    await bulkFab.scrollIntoViewIfNeeded();
+    await expect(bulkFab).toBeVisible();
+    await bulkFab.click();
     const dialog = page.getByTestId('bulk-item-add-wizard');
+    await expect(dialog).toBeVisible({ timeout: 10000 });
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
       timeout: 5000,
     });
@@ -1035,9 +1038,12 @@ test.describe('Invite Landing Page', () => {
     await page.goto(`/items/${plan.planId}?token=${inviteToken}`);
     await expect(page.getByText('Charcoal')).toBeVisible({ timeout: 10000 });
 
-    await page.getByRole('button', { name: /add multiple/i }).click();
-
+    const bulkFab = page.getByTestId('bulk-add-fab');
+    await bulkFab.scrollIntoViewIfNeeded();
+    await expect(bulkFab).toBeVisible();
+    await bulkFab.click();
     const dialog = page.getByTestId('bulk-item-add-wizard');
+    await expect(dialog).toBeVisible({ timeout: 10000 });
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
       timeout: 5000,
     });

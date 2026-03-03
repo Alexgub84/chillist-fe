@@ -367,6 +367,7 @@ export function PlansList({ plans, titleKey = 'plans.title' }: PlansListProps) {
         open={deletingPlanId !== null}
         onClose={() => setDeletingPlanId(null)}
         title={t('admin.deleteConfirmTitle')}
+        testId="admin-delete-modal"
       >
         <div className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-4">
           <p className="text-sm text-gray-600">
