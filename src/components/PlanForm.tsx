@@ -168,9 +168,15 @@ export default function PlanForm({
   const oneDay = watch('oneDay');
   const locationData = watch('location');
   const locationNameRef = useRef<HTMLInputElement | null>(null);
+  const singleStartTimeRef = useRef<HTMLInputElement | null>(null);
+  const startDateTimeRef = useRef<HTMLInputElement | null>(null);
   const { ref: locationNameFormRef, ...locationNameRest } = register(
     'location.name' as const
   );
+  const { ref: singleStartRef, ...singleStartRest } =
+    register('singleStartTime');
+  const { ref: startDateTimeFormRef, ...startDateTimeRest } =
+    register('startDateTime');
 
   function handlePlaceSelect(place: PlaceResult) {
     setValue('location', {
@@ -184,24 +190,91 @@ export default function PlanForm({
     });
   }
 
+  function getCurrentHour00(): string {
+    const now = new Date();
+    return `${String(now.getHours()).padStart(2, '0')}:00`;
+  }
+
+  function isDateToday(dateStr: string): boolean {
+    if (!dateStr || !/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const selected = new Date(y, m - 1, d);
+    const today = new Date();
+    return (
+      selected.getFullYear() === today.getFullYear() &&
+      selected.getMonth() === today.getMonth() &&
+      selected.getDate() === today.getDate()
+    );
+  }
+
   useEffect(() => {
     const subscription = watch((values, { name }) => {
-      if (name !== 'startDateTime' && name !== 'startDateDate') return;
+      if (name === 'singleDate' && values.oneDay) {
+        if (
+          values.singleDate &&
+          /^\d{4}-\d{2}-\d{2}$/.test(values.singleDate)
+        ) {
+          const startTime = isDateToday(values.singleDate)
+            ? getCurrentHour00()
+            : '08:00';
+          setValue('singleStartTime', startTime);
+          setValue('singleEndTime', startTime);
+          setTimeout(() => {
+            try {
+              singleStartTimeRef.current?.showPicker?.();
+            } catch {
+              /* showPicker may throw outside user-gesture contexts */
+            }
+          }, 50);
+        }
+        return;
+      }
+      if (name === 'singleStartTime' && values.oneDay) {
+        if (
+          values.singleStartTime &&
+          /^\d{2}:\d{2}$/.test(values.singleStartTime)
+        ) {
+          setValue('singleEndTime', values.singleStartTime);
+        }
+        return;
+      }
+      if (name !== 'startDateDate' && name !== 'startDateTime') return;
       if (values.oneDay) return;
       if (
         !values.startDateDate ||
         !/^\d{4}-\d{2}-\d{2}$/.test(values.startDateDate)
       )
         return;
-      if (!values.startDateTime || !/^\d{2}:\d{2}$/.test(values.startDateTime))
+      let startTime = values.startDateTime;
+      if (name === 'startDateDate') {
+        startTime = isDateToday(values.startDateDate)
+          ? getCurrentHour00()
+          : '08:00';
+        setValue('startDateTime', startTime);
+        setValue(
+          'endDateDate',
+          (() => {
+            const [y, m, d] = values.startDateDate!.split('-').map(Number);
+            const end = new Date(y, m - 1, d + 1);
+            return `${end.getFullYear()}-${String(end.getMonth() + 1).padStart(2, '0')}-${String(end.getDate()).padStart(2, '0')}`;
+          })()
+        );
+        setValue('endDateTime', startTime);
+        setTimeout(() => {
+          try {
+            startDateTimeRef.current?.showPicker?.();
+          } catch {
+            /* showPicker may throw outside user-gesture contexts */
+          }
+        }, 50);
         return;
-      if (values.endDateDate) return;
-
+      }
+      if (!startTime || !/^\d{2}:\d{2}$/.test(startTime)) return;
+      setValue('endDateTime', startTime);
       const [year, month, day] = values.startDateDate.split('-').map(Number);
       const d = new Date(year, month - 1, day + 1);
       const endDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
       setValue('endDateDate', endDate);
-      setValue('endDateTime', values.startDateTime);
     });
     return () => subscription.unsubscribe();
   }, [watch, setValue]);
@@ -575,7 +648,11 @@ export default function PlanForm({
                 <FormLabel>{t('planForm.startTime')}</FormLabel>
                 <FormInput
                   type="time"
-                  {...register('singleStartTime')}
+                  {...singleStartRest}
+                  ref={(el) => {
+                    singleStartRef(el);
+                    singleStartTimeRef.current = el;
+                  }}
                   compact
                 />
               </div>
@@ -597,7 +674,15 @@ export default function PlanForm({
               </div>
               <div>
                 <FormLabel>{t('planForm.startTime')}</FormLabel>
-                <FormInput type="time" {...register('startDateTime')} compact />
+                <FormInput
+                  type="time"
+                  {...startDateTimeRest}
+                  ref={(el) => {
+                    startDateTimeFormRef(el);
+                    startDateTimeRef.current = el;
+                  }}
+                  compact
+                />
               </div>
               <div>
                 <FormLabel>{t('planForm.endDate')}</FormLabel>

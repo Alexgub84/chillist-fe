@@ -161,13 +161,21 @@ export default function ItemsView({
 
   const listCounts: Record<ListFilter, number> = { buying: 0, packing: 0 };
   for (const item of participantScopedItems) {
-    if (item.status === 'pending') listCounts.buying++;
+    if (item.status === 'pending') {
+      listCounts.buying++;
+      listCounts.packing++;
+    }
     if (item.status === 'purchased') listCounts.packing++;
   }
 
   const filteredItems = participantScopedItems.filter((item) => {
     if (listFilter === 'buying' && item.status !== 'pending') return false;
-    if (listFilter === 'packing' && item.status !== 'purchased') return false;
+    if (
+      listFilter === 'packing' &&
+      item.status !== 'purchased' &&
+      item.status !== 'pending'
+    )
+      return false;
     return true;
   });
 

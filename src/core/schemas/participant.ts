@@ -1,15 +1,23 @@
 import { z } from 'zod';
 import type { components } from '../api.generated';
 
-type BEParticipant = components['schemas']['def-17'];
-type BECreateParticipant = components['schemas']['def-19'];
-type BEUpdateParticipant = components['schemas']['def-20'];
+type BEParticipant = components['schemas']['def-19'];
+type BECreateParticipant = components['schemas']['def-21'];
+type BEUpdateParticipant = components['schemas']['def-22'];
 
 const ROLE_VALUES = [
   'owner',
   'participant',
   'viewer',
 ] as const satisfies readonly BEParticipant['role'][];
+type _AssertRoleExact =
+  (typeof ROLE_VALUES)[number] extends BEParticipant['role']
+    ? BEParticipant['role'] extends (typeof ROLE_VALUES)[number]
+      ? true
+      : never
+    : never;
+const _assertRoleMatch: _AssertRoleExact = true;
+void _assertRoleMatch;
 const CREATE_ROLE_VALUES = [
   'participant',
   'viewer',
@@ -20,11 +28,31 @@ const RSVP_STATUS_VALUES = [
   'confirmed',
   'not_sure',
 ] as const satisfies readonly BEParticipant['rsvpStatus'][];
+type _AssertRsvpExact =
+  (typeof RSVP_STATUS_VALUES)[number] extends BEParticipant['rsvpStatus']
+    ? BEParticipant['rsvpStatus'] extends (typeof RSVP_STATUS_VALUES)[number]
+      ? true
+      : never
+    : never;
+const _assertRsvpMatch: _AssertRsvpExact = true;
+void _assertRsvpMatch;
 const INVITE_STATUS_VALUES = [
   'pending',
   'invited',
   'accepted',
 ] as const satisfies readonly NonNullable<BEParticipant['inviteStatus']>[];
+type _AssertInviteStatusExact =
+  (typeof INVITE_STATUS_VALUES)[number] extends NonNullable<
+    BEParticipant['inviteStatus']
+  >
+    ? NonNullable<
+        BEParticipant['inviteStatus']
+      > extends (typeof INVITE_STATUS_VALUES)[number]
+      ? true
+      : never
+    : never;
+const _assertInviteStatusMatch: _AssertInviteStatusExact = true;
+void _assertInviteStatusMatch;
 
 export const participantRoleSchema = z.enum(ROLE_VALUES);
 export const participantCreateRoleSchema = z.enum(CREATE_ROLE_VALUES);
@@ -84,9 +112,11 @@ export const participantPatchSchema = z.object({
   foodPreferences: z.string().nullish(),
   allergies: z.string().nullish(),
   notes: z.string().nullish(),
+  rsvpStatus: rsvpStatusSchema.optional(),
 });
 
 export type ParticipantRole = z.infer<typeof participantRoleSchema>;
+export type RsvpStatus = z.infer<typeof rsvpStatusSchema>;
 export type Participant = z.infer<typeof participantSchema>;
 export type ParticipantCreate = z.infer<typeof participantCreateSchema>;
 export type ParticipantPatch = z.infer<typeof participantPatchSchema>;

@@ -77,6 +77,7 @@ export function usePlanActions(planId: string) {
           foodPreferences: values.foodPreferences || null,
           allergies: values.allergies || null,
           notes: values.notes || null,
+          rsvpStatus: values.rsvpStatus ?? undefined,
         },
       });
       toast.success(t('preferences.updated'));

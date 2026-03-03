@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import { FormLabel } from './shared/FormLabel';
 import PreferencesFields from './shared/PreferencesFields';
+import { type RsvpStatus } from '../core/schemas/participant';
 
 export type PreferencesFormValues = {
   rsvpStatus?: 'confirmed' | 'not_sure' | null;
@@ -14,6 +15,11 @@ export type PreferencesFormValues = {
   allergies?: string;
   notes?: string;
 };
+
+export type PreferencesFormDefaultValues = Omit<
+  Partial<PreferencesFormValues>,
+  'rsvpStatus'
+> & { rsvpStatus?: RsvpStatus | null };
 
 function buildPreferencesSchema(t: (key: string) => string) {
   return z.object({
@@ -35,7 +41,7 @@ function buildPreferencesSchema(t: (key: string) => string) {
 }
 
 interface PreferencesFormProps {
-  defaultValues?: Partial<PreferencesFormValues>;
+  defaultValues?: PreferencesFormDefaultValues;
   onSubmit: (values: PreferencesFormValues) => void | Promise<void>;
   onSkip?: () => void;
   onCancel?: () => void;
@@ -63,7 +69,10 @@ export default function PreferencesForm({
   } = useForm<PreferencesFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      rsvpStatus: defaultValues?.rsvpStatus ?? undefined,
+      rsvpStatus:
+        defaultValues?.rsvpStatus === 'pending'
+          ? undefined
+          : (defaultValues?.rsvpStatus ?? undefined),
       adultsCount: defaultValues?.adultsCount ?? 1,
       kidsCount: defaultValues?.kidsCount ?? undefined,
       foodPreferences: defaultValues?.foodPreferences ?? '',

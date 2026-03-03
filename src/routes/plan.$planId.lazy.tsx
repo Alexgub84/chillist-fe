@@ -206,11 +206,19 @@ function PlanPage() {
           </button>
         </div>
 
-        <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-          {t('plan.planDetails')}
-        </h2>
+        <h1
+          data-testid="plan-title"
+          className="text-xl sm:text-2xl font-bold text-gray-800 line-clamp-2 my-4"
+        >
+          {plan.title}
+        </h1>
+
         <CollapsibleSection
-          title={<span className="sr-only">{t('plan.planDetails')}</span>}
+          title={
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+              {t('plan.planDetails')}
+            </h2>
+          }
           defaultOpen={planDetailsOpen}
           wrapperClassName="bg-white rounded-xl shadow-sm overflow-hidden"
           panelContentClassName="border-t border-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-5"
@@ -489,6 +497,7 @@ function PlanPage() {
               onCancel={() => setEditingParticipantId(null)}
               isSubmitting={actions.isUpdatingParticipant}
               inModal
+              showRsvp
             />
           )}
         </Modal>

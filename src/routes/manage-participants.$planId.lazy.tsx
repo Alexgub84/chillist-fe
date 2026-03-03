@@ -99,6 +99,7 @@ function ManageParticipantsPage() {
           foodPreferences: values.foodPreferences || null,
           allergies: values.allergies || null,
           notes: values.notes || null,
+          rsvpStatus: values.rsvpStatus ?? undefined,
         },
       });
       toast.success(t('preferences.updated'));
@@ -292,11 +293,13 @@ function ManageParticipantsPage() {
                   editingParticipant.foodPreferences ?? undefined,
                 allergies: editingParticipant.allergies ?? undefined,
                 notes: editingParticipant.notes ?? undefined,
+                rsvpStatus: editingParticipant.rsvpStatus,
               }}
               onSubmit={handlePreferencesSubmit}
               onCancel={() => setEditingParticipantId(null)}
               isSubmitting={updateParticipantMutation.isPending}
               inModal
+              showRsvp
             />
           )}
         </Modal>

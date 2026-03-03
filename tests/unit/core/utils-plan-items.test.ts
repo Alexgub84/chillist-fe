@@ -118,7 +118,7 @@ describe('filterItemsByAssignedParticipant', () => {
 });
 
 describe('countItemsByListTab', () => {
-  it('counts pending as buying and purchased as packing', () => {
+  it('counts pending as buying and purchased+pending as packing', () => {
     const items = [
       makeItem({ name: 'a', category: 'food', status: 'pending' }),
       makeItem({ name: 'b', category: 'food', status: 'pending' }),
@@ -128,7 +128,7 @@ describe('countItemsByListTab', () => {
 
     const result = countItemsByListTab(items);
     expect(result.buying).toBe(2);
-    expect(result.packing).toBe(1);
+    expect(result.packing).toBe(3);
   });
 
   it('returns zeros for empty list', () => {
@@ -153,9 +153,12 @@ describe('filterItemsByStatusTab', () => {
     expect(result[0].status).toBe('pending');
   });
 
-  it('filters packing tab to purchased items', () => {
+  it('filters packing tab to purchased and pending items', () => {
     const result = filterItemsByStatusTab(items, 'packing');
-    expect(result).toHaveLength(1);
-    expect(result[0].status).toBe('purchased');
+    expect(result).toHaveLength(2);
+    expect(result.map((i) => i.status).sort()).toEqual([
+      'pending',
+      'purchased',
+    ]);
   });
 });
