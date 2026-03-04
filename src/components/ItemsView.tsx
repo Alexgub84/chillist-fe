@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
 import toast from 'react-hot-toast';
@@ -6,6 +6,10 @@ import type { Item, ItemCreate, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import { getApiErrorMessage } from '../core/error-utils';
+import {
+  ALL_PARTICIPANTS_VALUE,
+  aggregateAllParticipantItems,
+} from '../core/utils-plan-items';
 import ItemsList from './ItemsList';
 import ItemForm, { type ItemFormValues } from './ItemForm';
 import ListTabs from './StatusFilter';
@@ -63,6 +67,17 @@ export default function ItemsView({
   );
   const [bulkAddOpen, setBulkAddOpen] = useState(false);
 
+  const existingItems = useMemo(
+    () => new Map(items.map((i) => [i.name.toLowerCase(), i.itemId])),
+    [items]
+  );
+
+  async function handleBulkCancel(itemIds: string[]) {
+    for (const itemId of itemIds) {
+      await onUpdateItem(itemId, { status: 'canceled' });
+    }
+  }
+
   const isCreatingNew = itemModalId === 'new';
   const editingItem =
     itemModalId && itemModalId !== 'new'
@@ -74,6 +89,7 @@ export default function ItemsView({
   }
 
   function toPayload(values: ItemFormValues) {
+    const isAll = values.assignedParticipantId === ALL_PARTICIPANTS_VALUE;
     return {
       name: values.name,
       category: values.category,
@@ -82,7 +98,10 @@ export default function ItemsView({
       unit: values.unit,
       status: values.status,
       notes: values.notes || null,
-      assignedParticipantId: values.assignedParticipantId || null,
+      assignedParticipantId: isAll
+        ? null
+        : values.assignedParticipantId || null,
+      assignedToAll: isAll || undefined,
     };
   }
 
@@ -146,6 +165,7 @@ export default function ItemsView({
     participantCounts[p.participantId] = 0;
   }
   for (const item of items) {
+    if (item.status === 'canceled') continue;
     if (item.assignedParticipantId) {
       participantCounts[item.assignedParticipantId] =
         (participantCounts[item.assignedParticipantId] ?? 0) + 1;
@@ -153,6 +173,7 @@ export default function ItemsView({
       participantCounts['unassigned']++;
     }
   }
+  const nonCanceledCount = items.filter((i) => i.status !== 'canceled').length;
 
   const participantScopedItems = items.filter((item) => {
     if (!participantFilter) return true;
@@ -163,7 +184,7 @@ export default function ItemsView({
   const listCounts: Record<ListFilter, number> = { buying: 0, packing: 0 };
   for (const item of participantScopedItems) {
     if (item.status === 'pending') listCounts.buying++;
-    if (item.status === 'purchased' || item.status === 'packed')
+    if (item.status === 'purchased' || item.status === 'pending')
       listCounts.packing++;
   }
 
@@ -172,13 +193,19 @@ export default function ItemsView({
     if (
       listFilter === 'packing' &&
       item.status !== 'purchased' &&
-      item.status !== 'packed'
+      item.status !== 'pending'
     )
       return false;
     return true;
   });
 
   const myParticipantId = isGuest ? guestParticipantId : selfParticipantId;
+  const isOwner = !myParticipantId;
+
+  const displayItems = useMemo(
+    () => aggregateAllParticipantItems(filteredItems, isOwner),
+    [filteredItems, isOwner]
+  );
 
   const canEditItem = myParticipantId
     ? (item: Item) => item.assignedParticipantId === myParticipantId
@@ -233,7 +260,7 @@ export default function ItemsView({
                   selected={participantFilter}
                   onChange={setParticipantFilter}
                   counts={participantCounts}
-                  total={items.length}
+                  total={nonCanceledCount}
                   currentParticipantId={myParticipantId}
                 />
               </div>
@@ -262,7 +289,7 @@ export default function ItemsView({
 
         {items.length > 0 && (
           <ItemsList
-            items={filteredItems}
+            items={displayItems}
             participants={participants}
             listFilter={listFilter}
             selfAssignParticipantId={myParticipantId}
@@ -291,8 +318,9 @@ export default function ItemsView({
                     unit: editingItem.unit,
                     status: editingItem.status,
                     notes: editingItem.notes ?? '',
-                    assignedParticipantId:
-                      editingItem.assignedParticipantId ?? '',
+                    assignedParticipantId: editingItem.isAllParticipants
+                      ? ALL_PARTICIPANTS_VALUE
+                      : (editingItem.assignedParticipantId ?? ''),
                   }
                 : undefined
             }
@@ -314,6 +342,8 @@ export default function ItemsView({
         open={bulkAddOpen}
         onClose={() => setBulkAddOpen(false)}
         onAdd={handleBulkAdd}
+        existingItems={existingItems}
+        onCancel={handleBulkCancel}
       />
     </div>
   );

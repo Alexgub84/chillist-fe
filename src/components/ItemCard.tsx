@@ -1,10 +1,15 @@
 import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import type { Item, ItemPatch } from '../core/schemas/item';
+import type { ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import { STATUS_OPTIONS, UNIT_OPTIONS } from '../core/constants/item';
+import {
+  ALL_PARTICIPANTS_VALUE,
+  buildParticipantOptions,
+} from '../core/utils-plan-items';
+import type { DisplayItem } from '../core/utils-plan-items';
 import InlineSelect from './shared/InlineSelect';
 import InlineQuantityInput from './shared/InlineQuantityInput';
 
@@ -32,7 +37,7 @@ const QUICK_ACTIONS: Record<string, QuickActionConfig> = {
 };
 
 interface ItemCardProps {
-  item: Item;
+  item: DisplayItem;
   participants?: Participant[];
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
@@ -79,16 +84,18 @@ export default function ItemCard({
     [participants, item.assignedParticipantId]
   );
 
-  const assignmentOptions = useMemo(() => {
-    const opts = [{ value: '', label: t('items.unassigned') }];
-    for (const p of participants) {
-      opts.push({
-        value: p.participantId,
-        label: `${p.name} ${p.lastName}`,
-      });
-    }
-    return opts;
-  }, [participants, t]);
+  const assignmentOptions = useMemo(
+    () =>
+      buildParticipantOptions(
+        participants,
+        {
+          unassigned: t('items.unassigned'),
+          allParticipants: t('items.allParticipants'),
+        },
+        { includeUnassigned: true, includeAll: true }
+      ),
+    [participants, t]
+  );
 
   function handleCheck() {
     if (!onUpdate || !quickAction || isChecking) return;
@@ -239,7 +246,25 @@ export default function ItemCard({
               </span>
             )}
 
-            {isAssignedToMe ? (
+            {item.isAllParticipants ? (
+              <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-purple-50 text-purple-700 border border-purple-200">
+                <svg
+                  className="w-3 h-3"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                {t('items.allParticipants')}
+              </span>
+            ) : isAssignedToMe ? (
               <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
                 <svg
                   className="w-3 h-3"
@@ -430,18 +455,33 @@ export default function ItemCard({
               <>
                 {isEditable ? (
                   <InlineSelect
-                    value={item.assignedParticipantId ?? ''}
-                    onChange={(participantId) =>
-                      onUpdate!({
-                        assignedParticipantId: participantId || null,
-                      })
+                    value={
+                      item.isAllParticipants
+                        ? ALL_PARTICIPANTS_VALUE
+                        : (item.assignedParticipantId ?? '')
                     }
+                    onChange={(value) => {
+                      if (value === ALL_PARTICIPANTS_VALUE) {
+                        onUpdate!({ assignedToAll: true });
+                      } else if (item.isAllParticipants) {
+                        onUpdate!({
+                          assignedToAll: false,
+                          assignedParticipantId: value || null,
+                        });
+                      } else {
+                        onUpdate!({
+                          assignedParticipantId: value || null,
+                        });
+                      }
+                    }}
                     options={assignmentOptions}
                     buttonClassName={clsx(
                       'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium transition-colors',
-                      item.assignedParticipantId
-                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                        : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300 hover:border-gray-400'
+                      item.isAllParticipants
+                        ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                        : item.assignedParticipantId
+                          ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                          : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300 hover:border-gray-400'
                     )}
                     ariaLabel={`Assign ${item.name} to participant`}
                   />
@@ -449,9 +489,11 @@ export default function ItemCard({
                   <span
                     className={clsx(
                       'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium',
-                      assignedParticipant
-                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                        : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300'
+                      item.isAllParticipants
+                        ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                        : assignedParticipant
+                          ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                          : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300'
                     )}
                   >
                     <svg
@@ -465,12 +507,18 @@ export default function ItemCard({
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        d={
+                          item.isAllParticipants
+                            ? 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'
+                            : 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                        }
                       />
                     </svg>
-                    {assignedParticipant
-                      ? `${assignedParticipant.name} ${assignedParticipant.lastName}`
-                      : t('items.unassigned')}
+                    {item.isAllParticipants
+                      ? t('items.allParticipants')
+                      : assignedParticipant
+                        ? `${assignedParticipant.name} ${assignedParticipant.lastName}`
+                        : t('items.unassigned')}
                   </span>
                 )}
               </>

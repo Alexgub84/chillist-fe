@@ -55,6 +55,8 @@ function createTestData(): MockData {
         unit: 'pcs',
         status: 'pending',
         category: 'equipment',
+        isAllParticipants: false,
+        allParticipantsGroupId: null,
         createdAt: now,
         updatedAt: now,
       },

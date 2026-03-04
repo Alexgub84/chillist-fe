@@ -164,7 +164,7 @@ export function InvitePlanPage() {
   const listCounts: Record<ListFilter, number> = { buying: 0, packing: 0 };
   for (const item of items) {
     if (item.status === 'pending') listCounts.buying++;
-    if (item.status === 'purchased' || item.status === 'packed')
+    if (item.status === 'purchased' || item.status === 'pending')
       listCounts.packing++;
   }
 
@@ -173,7 +173,7 @@ export function InvitePlanPage() {
     if (
       listFilter === 'packing' &&
       item.status !== 'purchased' &&
-      item.status !== 'packed'
+      item.status !== 'pending'
     )
       return false;
     return true;

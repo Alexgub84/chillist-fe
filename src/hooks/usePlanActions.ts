@@ -10,8 +10,10 @@ import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import type { PlanPatch } from '../core/schemas/plan';
 import type { ItemFormValues } from '../components/ItemForm';
 import type { PreferencesFormValues } from '../components/PreferencesForm';
+import { ALL_PARTICIPANTS_VALUE } from '../core/utils-plan-items';
 
 function toItemPayload(values: ItemFormValues) {
+  const isAll = values.assignedParticipantId === ALL_PARTICIPANTS_VALUE;
   return {
     name: values.name,
     category: values.category,
@@ -20,7 +22,8 @@ function toItemPayload(values: ItemFormValues) {
     unit: values.unit,
     status: values.status,
     notes: values.notes || null,
-    assignedParticipantId: values.assignedParticipantId || null,
+    assignedParticipantId: isAll ? null : values.assignedParticipantId || null,
+    assignedToAll: isAll || undefined,
   };
 }
 

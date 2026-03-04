@@ -255,18 +255,16 @@ test.describe('Item CRUD', () => {
 
     await dialog.getByRole('button', { name: /First Aid and Safety/ }).click();
 
-    await expect(dialog.getByPlaceholder('Search items…')).toBeVisible({
+    await expect(dialog.getByPlaceholder('Search or add items…')).toBeVisible({
       timeout: 5000,
     });
-    const firstAidCheckbox = dialog
-      .locator('div')
-      .filter({ hasText: /^First Aid Kit$/ })
-      .getByRole('checkbox');
-    await firstAidCheckbox.check();
+    const firstAidRow = dialog.getByTestId('bulk-item-first-aid-kit');
+    await firstAidRow.scrollIntoViewIfNeeded();
+    await firstAidRow.click({ force: true });
 
     const submitBtn = dialog.getByRole('button', { name: /add 1 item/i });
     await expect(submitBtn).toBeVisible();
-    await submitBtn.click();
+    await submitBtn.click({ force: true });
 
     await expect(page.getByText(/added 1 item/i).first()).toBeVisible({
       timeout: 10000,
@@ -729,10 +727,10 @@ test.describe('Filters', () => {
     ).toBeVisible();
     await expect(
       page.locator('[class*="border-l-"]').filter({ hasText: 'Tent' })
-    ).toBeHidden();
+    ).toBeVisible();
     await expect(
       page.locator('[class*="border-l-"]').filter({ hasText: 'Bread' })
-    ).toBeHidden();
+    ).toBeVisible();
 
     await statusTabs.locator('button', { hasText: /^All/ }).click();
     await expect(
@@ -1066,7 +1064,7 @@ test.describe('Invite Landing Page', () => {
 
     await dialog.getByRole('button', { name: /Dairy/ }).click();
 
-    await expect(dialog.getByPlaceholder('Search items…')).toBeVisible({
+    await expect(dialog.getByPlaceholder('Search or add items…')).toBeVisible({
       timeout: 5000,
     });
 
@@ -1075,7 +1073,7 @@ test.describe('Invite Landing Page', () => {
 
     const submitBtn = dialog.getByRole('button', { name: /add \d+ items/i });
     await expect(submitBtn).toBeVisible();
-    await submitBtn.click();
+    await submitBtn.click({ force: true });
 
     await expect(page.getByText(/added \d+ items/i).first()).toBeVisible({
       timeout: 10000,

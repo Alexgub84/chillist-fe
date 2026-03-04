@@ -38,6 +38,8 @@ interface MockItem {
   subcategory?: string | null;
   notes: string | null;
   assignedParticipantId: string | null;
+  isAllParticipants: boolean;
+  allParticipantsGroupId: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -121,6 +123,8 @@ export function buildItem(
     subcategory: i.subcategory ?? null,
     notes: i.notes ?? null,
     assignedParticipantId: i.assignedParticipantId ?? null,
+    isAllParticipants: false,
+    allParticipantsGroupId: null,
     createdAt: timestamp(),
     updatedAt: timestamp(),
   };

@@ -10,6 +10,8 @@ describe('itemSchema date-time and format validation', () => {
     quantity: 2,
     unit: 'pcs' as const,
     status: 'pending' as const,
+    isAllParticipants: false,
+    allParticipantsGroupId: null,
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   };
@@ -65,6 +67,26 @@ describe('itemSchema date-time and format validation', () => {
       notes: 'Bring extra stakes',
     });
     expect(result.success).toBe(true);
+  });
+
+  it('accepts item without isAllParticipants and defaults to false', () => {
+    const itemWithoutField = {
+      itemId: validItem.itemId,
+      planId: validItem.planId,
+      name: validItem.name,
+      quantity: validItem.quantity,
+      unit: validItem.unit,
+      status: validItem.status,
+      category: validItem.category,
+      allParticipantsGroupId: validItem.allParticipantsGroupId,
+      createdAt: validItem.createdAt,
+      updatedAt: validItem.updatedAt,
+    };
+    const result = itemSchema.safeParse(itemWithoutField);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.isAllParticipants).toBe(false);
+    }
   });
 });
 

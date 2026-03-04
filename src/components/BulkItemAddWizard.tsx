@@ -1,5 +1,6 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 import Modal from './shared/Modal';
 import { useLanguage } from '../contexts/useLanguage';
 import type { ItemCategory } from '../core/schemas/item';
@@ -28,12 +29,16 @@ interface BulkItemAddWizardProps {
   open: boolean;
   onClose: () => void;
   onAdd: (items: ItemCreate[]) => Promise<void>;
+  existingItems?: Map<string, string>;
+  onCancel?: (itemIds: string[]) => Promise<void>;
 }
 
 export default function BulkItemAddWizard({
   open,
   onClose,
   onAdd,
+  existingItems,
+  onCancel,
 }: BulkItemAddWizardProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
@@ -44,8 +49,10 @@ export default function BulkItemAddWizard({
   const [selected, setSelected] = useState<Map<string, SelectedItem>>(
     new Map()
   );
+  const [uncheckedExisting, setUncheckedExisting] = useState<Set<string>>(
+    new Set()
+  );
   const [search, setSearch] = useState('');
-  const [customName, setCustomName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function reset() {
@@ -53,8 +60,8 @@ export default function BulkItemAddWizard({
     setCategory(null);
     setSubcategory(null);
     setSelected(new Map());
+    setUncheckedExisting(new Set());
     setSearch('');
-    setCustomName('');
     setIsSubmitting(false);
   }
 
@@ -98,40 +105,126 @@ export default function BulkItemAddWizard({
     );
   }, [subcategoryItems, search]);
 
+  const getExistingItemId = useCallback(
+    (name: string): string | undefined =>
+      existingItems?.get(name.toLowerCase()),
+    [existingItems]
+  );
+
   const allFilteredSelected = useMemo(() => {
     if (filteredItems.length === 0) return false;
-    return filteredItems.every((item) => selected.has(item.name));
-  }, [filteredItems, selected]);
+    return filteredItems.every(
+      (item) =>
+        selected.has(item.name) ||
+        (getExistingItemId(item.name) !== undefined &&
+          !uncheckedExisting.has(getExistingItemId(item.name)!))
+    );
+  }, [filteredItems, selected, getExistingItemId, uncheckedExisting]);
 
-  const toggleItem = useCallback(
-    (item: CommonItemBase) => {
-      setSelected((prev) => {
-        const next = new Map(prev);
-        if (next.has(item.name)) {
-          next.delete(item.name);
-        } else {
+  useEffect(() => {
+    if (step !== 'items' || !category || !subcategory || !existingItems?.size)
+      return;
+    setSelected((prev) => {
+      const next = new Map(prev);
+      for (const item of subcategoryItems) {
+        const itemId = existingItems.get(item.name.toLowerCase());
+        if (itemId && !uncheckedExisting.has(itemId) && !next.has(item.name)) {
           next.set(item.name, {
             name: item.name,
             category: item.category,
-            subcategory: subcategory ?? '',
+            subcategory: subcategory,
             unit: item.unit,
             quantity: 1,
           });
         }
-        return next;
-      });
+      }
+      return next;
+    });
+  }, [
+    step,
+    category,
+    subcategory,
+    existingItems,
+    subcategoryItems,
+    uncheckedExisting,
+  ]);
+
+  const toggleItem = useCallback(
+    (item: CommonItemBase) => {
+      const itemId = getExistingItemId(item.name);
+      if (itemId) {
+        setUncheckedExisting((prev) => {
+          const next = new Set(prev);
+          if (next.has(itemId)) {
+            next.delete(itemId);
+            setSelected((s) => {
+              const m = new Map(s);
+              m.set(item.name, {
+                name: item.name,
+                category: item.category,
+                subcategory: subcategory ?? '',
+                unit: item.unit,
+                quantity: 1,
+              });
+              return m;
+            });
+          } else {
+            next.add(itemId);
+            setSelected((s) => {
+              const m = new Map(s);
+              m.delete(item.name);
+              return m;
+            });
+          }
+          return next;
+        });
+      } else {
+        setSelected((prev) => {
+          const next = new Map(prev);
+          if (next.has(item.name)) {
+            next.delete(item.name);
+          } else {
+            next.set(item.name, {
+              name: item.name,
+              category: item.category,
+              subcategory: subcategory ?? '',
+              unit: item.unit,
+              quantity: 1,
+            });
+          }
+          return next;
+        });
+      }
     },
-    [subcategory]
+    [subcategory, getExistingItemId]
   );
 
   function toggleSelectAll() {
-    setSelected((prev) => {
-      const next = new Map(prev);
-      if (allFilteredSelected) {
+    if (allFilteredSelected) {
+      setUncheckedExisting((prev) => {
+        const next = new Set(prev);
         for (const item of filteredItems) {
-          next.delete(item.name);
+          const itemId = getExistingItemId(item.name);
+          if (itemId) next.add(itemId);
         }
-      } else {
+        return next;
+      });
+      setSelected((prev) => {
+        const next = new Map(prev);
+        for (const item of filteredItems) next.delete(item.name);
+        return next;
+      });
+    } else {
+      setUncheckedExisting((prev) => {
+        const next = new Set(prev);
+        for (const item of filteredItems) {
+          const itemId = getExistingItemId(item.name);
+          if (itemId) next.delete(itemId);
+        }
+        return next;
+      });
+      setSelected((prev) => {
+        const next = new Map(prev);
         for (const item of filteredItems) {
           if (!next.has(item.name)) {
             next.set(item.name, {
@@ -143,9 +236,9 @@ export default function BulkItemAddWizard({
             });
           }
         }
-      }
-      return next;
-    });
+        return next;
+      });
+    }
   }
 
   function updateQuantity(name: string, delta: number) {
@@ -160,7 +253,7 @@ export default function BulkItemAddWizard({
   }
 
   function addCustomItem() {
-    const trimmed = customName.trim();
+    const trimmed = search.trim();
     if (!trimmed || !category || !subcategory) return;
     if (selected.has(trimmed)) return;
     setSelected((prev) => {
@@ -175,37 +268,55 @@ export default function BulkItemAddWizard({
       });
       return next;
     });
-    setCustomName('');
+    setSearch('');
   }
 
+  const newItemsToAdd = useMemo(
+    () =>
+      Array.from(selected.values()).filter(
+        (s) => !existingItems?.has(s.name.toLowerCase())
+      ),
+    [selected, existingItems]
+  );
+
+  const hasWork =
+    newItemsToAdd.length > 0 || (uncheckedExisting.size > 0 && !!onCancel);
+
   async function handleSubmit() {
-    if (selected.size === 0) return;
+    if (!hasWork) return;
     setIsSubmitting(true);
-    const payloads: ItemCreate[] = Array.from(selected.values()).map((s) => ({
-      name: s.name,
-      category: s.category,
-      quantity: s.quantity,
-      unit: s.unit as ItemCreate['unit'],
-      status: 'pending' as const,
-      subcategory: s.subcategory || null,
-      notes: null,
-      assignedParticipantId: null,
-    }));
 
     try {
-      await onAdd(payloads);
+      if (newItemsToAdd.length > 0) {
+        const payloads: ItemCreate[] = newItemsToAdd.map((s) => ({
+          name: s.name,
+          category: s.category,
+          quantity: s.quantity,
+          unit: s.unit as ItemCreate['unit'],
+          status: 'pending' as const,
+          subcategory: s.subcategory || null,
+          notes: null,
+          assignedParticipantId: null,
+        }));
+        await onAdd(payloads);
+      }
+      if (uncheckedExisting.size > 0 && onCancel) {
+        await onCancel(Array.from(uncheckedExisting));
+      }
       setStep('subcategory');
       setSubcategory(null);
       setSearch('');
       setSelected(new Map());
-      setCustomName('');
-      setIsSubmitting(false);
+      setUncheckedExisting(new Set());
     } catch {
+      // keep state for retry
+    } finally {
       setIsSubmitting(false);
     }
   }
 
-  const selectedCount = selected.size;
+  const selectedCount =
+    newItemsToAdd.length + (onCancel ? uncheckedExisting.size : 0);
 
   const modalTitle =
     step === 'category'
@@ -251,14 +362,16 @@ export default function BulkItemAddWizard({
         {step === 'items' && (
           <ItemsStep
             filteredItems={filteredItems}
+            subcategoryItems={subcategoryItems}
             selected={selected}
             allFilteredSelected={allFilteredSelected}
             search={search}
-            customName={customName}
             selectedCount={selectedCount}
+            hasWork={hasWork}
             isSubmitting={isSubmitting}
+            getExistingItemId={getExistingItemId}
+            uncheckedExisting={uncheckedExisting}
             onSearchChange={setSearch}
-            onCustomNameChange={setCustomName}
             onAddCustom={addCustomItem}
             onToggleItem={toggleItem}
             onToggleSelectAll={toggleSelectAll}
@@ -371,18 +484,18 @@ function SubcategoryStep({
         {t('items.bulkAddBack')}
       </button>
       <div className="max-h-80 overflow-y-auto -mx-4 sm:-mx-6 px-4 sm:px-6">
-        <div className="space-y-1">
+        <div className="space-y-1.5">
           {subcategories.map((sub) => (
             <button
               key={sub.name}
               type="button"
               onClick={() => onSelect(sub.name)}
-              className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors text-start cursor-pointer"
+              className="w-full flex items-center justify-between gap-2 py-2.5 px-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-300 transition-colors text-start cursor-pointer"
             >
               <span className="text-sm font-medium text-gray-800">
                 {t(`subcategories.${sub.name}`, sub.name)}
               </span>
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-gray-400 shrink-0">
                 {t('items.bulkAddItemCount', { count: sub.count })}
               </span>
             </button>
@@ -395,14 +508,16 @@ function SubcategoryStep({
 
 function ItemsStep({
   filteredItems,
+  subcategoryItems,
   selected,
   allFilteredSelected,
   search,
-  customName,
   selectedCount,
+  hasWork,
   isSubmitting,
+  getExistingItemId,
+  uncheckedExisting,
   onSearchChange,
-  onCustomNameChange,
   onAddCustom,
   onToggleItem,
   onToggleSelectAll,
@@ -411,14 +526,16 @@ function ItemsStep({
   onBack,
 }: {
   filteredItems: CommonItemBase[];
+  subcategoryItems: CommonItemBase[];
   selected: Map<string, SelectedItem>;
   allFilteredSelected: boolean;
   search: string;
-  customName: string;
   selectedCount: number;
+  hasWork: boolean;
   isSubmitting: boolean;
+  getExistingItemId: (name: string) => string | undefined;
+  uncheckedExisting: Set<string>;
   onSearchChange: (v: string) => void;
-  onCustomNameChange: (v: string) => void;
   onAddCustom: () => void;
   onToggleItem: (item: CommonItemBase) => void;
   onToggleSelectAll: () => void;
@@ -456,6 +573,12 @@ function ItemsStep({
         type="text"
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            onAddCustom();
+          }
+        }}
         placeholder={t('items.bulkAddSearch')}
         className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none mb-3"
       />
@@ -473,41 +596,69 @@ function ItemsStep({
       )}
 
       <div className="max-h-64 overflow-y-auto -mx-4 sm:-mx-6 px-4 sm:px-6 mb-3">
-        <div className="space-y-0.5">
+        <div className="space-y-1.5">
           {filteredItems.map((item) => {
+            const existingItemId = getExistingItemId(item.name);
             const entry = selected.get(item.name);
-            const isChecked = !!entry;
+            const isChecked =
+              !!entry ||
+              (existingItemId !== undefined &&
+                !uncheckedExisting.has(existingItemId));
+            const isNewItem = !existingItemId;
             return (
               <div
                 key={item.name}
-                className="flex items-center gap-2 py-1.5 px-2 rounded-md hover:bg-gray-50"
+                role="button"
+                data-testid={`bulk-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                tabIndex={0}
+                onClick={() => onToggleItem(item)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onToggleItem(item);
+                  }
+                }}
+                className={clsx(
+                  'flex items-center gap-2 py-2 px-3 rounded-lg border text-start cursor-pointer transition-colors',
+                  isChecked
+                    ? 'bg-blue-50 border-blue-200 hover:bg-blue-100'
+                    : 'bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300'
+                )}
               >
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={() => onToggleItem(item)}
-                  className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer shrink-0"
-                />
-                <span className="text-sm text-gray-800 flex-1 min-w-0 truncate">
+                <span
+                  className={clsx(
+                    'text-sm font-medium flex-1 min-w-0',
+                    isChecked ? 'text-blue-800' : 'text-gray-800'
+                  )}
+                >
                   {item.name}
                 </span>
-                {isChecked && entry && (
-                  <div className="flex items-center gap-1 shrink-0">
+                {isChecked && isNewItem && entry && (
+                  <div
+                    className="flex items-center gap-1 shrink-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <button
                       type="button"
-                      onClick={() => onUpdateQuantity(item.name, -1)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onUpdateQuantity(item.name, -1);
+                      }}
                       disabled={entry.quantity <= 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed"
+                      className="w-6 h-6 flex items-center justify-center rounded bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-bold disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed"
                     >
                       −
                     </button>
-                    <span className="text-xs font-medium text-gray-700 w-5 text-center">
+                    <span className="text-xs font-medium text-blue-800 w-5 text-center">
                       {entry.quantity}
                     </span>
                     <button
                       type="button"
-                      onClick={() => onUpdateQuantity(item.name, 1)}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs font-bold cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onUpdateQuantity(item.name, 1);
+                      }}
+                      className="w-6 h-6 flex items-center justify-center rounded bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-bold cursor-pointer"
                     >
                       +
                     </button>
@@ -516,87 +667,106 @@ function ItemsStep({
               </div>
             );
           })}
+
+          {Array.from(selected.values())
+            .filter((s) => s.isCustom)
+            .map((s) => (
+              <div
+                key={s.name}
+                role="button"
+                tabIndex={0}
+                data-testid={`bulk-item-${s.name.toLowerCase().replace(/\s+/g, '-')}`}
+                onClick={() =>
+                  onToggleItem({
+                    name: s.name,
+                    category: s.category,
+                    subcategory: s.subcategory,
+                    unit: s.unit,
+                  })
+                }
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onToggleItem({
+                      name: s.name,
+                      category: s.category,
+                      subcategory: s.subcategory,
+                      unit: s.unit,
+                    });
+                  }
+                }}
+                className="flex items-center gap-2 py-2 px-3 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 text-start cursor-pointer transition-colors"
+              >
+                <span className="text-sm font-medium text-blue-800 flex-1 min-w-0 italic">
+                  {s.name}
+                </span>
+                <div
+                  className="flex items-center gap-1 shrink-0"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onUpdateQuantity(s.name, -1);
+                    }}
+                    disabled={s.quantity <= 1}
+                    className="w-6 h-6 flex items-center justify-center rounded bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-bold disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed"
+                  >
+                    −
+                  </button>
+                  <span className="text-xs font-medium text-blue-800 w-5 text-center">
+                    {s.quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onUpdateQuantity(s.name, 1);
+                    }}
+                    className="w-6 h-6 flex items-center justify-center rounded bg-blue-100 hover:bg-blue-200 text-blue-700 text-xs font-bold cursor-pointer"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            ))}
         </div>
 
-        {selected.size > 0 && (
-          <>
-            {Array.from(selected.values())
-              .filter((s) => s.isCustom)
-              .map((s) => (
-                <div
-                  key={s.name}
-                  className="flex items-center gap-2 py-1.5 px-2 rounded-md bg-blue-50"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    onChange={() => {
-                      onToggleItem({
-                        name: s.name,
-                        category: s.category,
-                        subcategory: s.subcategory,
-                        unit: s.unit,
-                      });
-                    }}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer shrink-0"
-                  />
-                  <span className="text-sm text-blue-800 flex-1 min-w-0 truncate italic">
-                    {s.name}
-                  </span>
-                  <div className="flex items-center gap-1 shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => onUpdateQuantity(s.name, -1)}
-                      disabled={s.quantity <= 1}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-blue-100 hover:bg-blue-200 text-blue-600 text-xs font-bold disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed"
-                    >
-                      −
-                    </button>
-                    <span className="text-xs font-medium text-blue-700 w-5 text-center">
-                      {s.quantity}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => onUpdateQuantity(s.name, 1)}
-                      className="w-6 h-6 flex items-center justify-center rounded bg-blue-100 hover:bg-blue-200 text-blue-600 text-xs font-bold cursor-pointer"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))}
-          </>
-        )}
-      </div>
-
-      <div className="flex items-center gap-2 mb-4">
-        <input
-          type="text"
-          value={customName}
-          onChange={(e) => onCustomNameChange(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              onAddCustom();
-            }
-          }}
-          placeholder={t('items.bulkAddCustomPlaceholder')}
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-        />
-        <button
-          type="button"
-          onClick={onAddCustom}
-          disabled={!customName.trim()}
-          className="px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
-        >
-          {t('items.bulkAddCustomAdd')}
-        </button>
+        {(() => {
+          const trimmed = search.trim();
+          const matchesCommon =
+            trimmed &&
+            subcategoryItems.some(
+              (item) => item.name.toLowerCase() === trimmed.toLowerCase()
+            );
+          const matchesSelectedCustom =
+            trimmed && selected.has(trimmed) && selected.get(trimmed)?.isCustom;
+          const showAddCustom =
+            trimmed && !matchesCommon && !matchesSelectedCustom;
+          if (!showAddCustom) return null;
+          return (
+            <div className="space-y-0.5 pt-1">
+              <button
+                type="button"
+                onClick={onAddCustom}
+                className="w-full flex items-center gap-2 py-1.5 px-2 rounded-md hover:bg-blue-50 text-blue-600 text-sm font-medium text-start cursor-pointer"
+                data-testid="bulk-add-custom-row"
+              >
+                <span className="shrink-0">+</span>
+                <span className="truncate">
+                  {t('items.bulkAddAddCustom', { name: trimmed })}
+                </span>
+              </button>
+            </div>
+          );
+        })()}
       </div>
 
       <button
         type="button"
         onClick={onSubmit}
-        disabled={selectedCount === 0 || isSubmitting}
+        disabled={!hasWork || isSubmitting}
         className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 active:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
       >
         {isSubmitting

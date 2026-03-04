@@ -106,7 +106,9 @@ describe('BulkItemAddWizard', () => {
       const user = userEvent.setup();
       await goToItems(user);
 
-      expect(screen.getByPlaceholderText('Search items…')).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText('Search or add items…')
+      ).toBeInTheDocument();
       expect(screen.getByText('Select all')).toBeInTheDocument();
       expect(screen.getByText('First Aid Kit')).toBeInTheDocument();
     });
@@ -115,7 +117,7 @@ describe('BulkItemAddWizard', () => {
       const user = userEvent.setup();
       await goToItems(user);
 
-      const searchInput = screen.getByPlaceholderText('Search items…');
+      const searchInput = screen.getByPlaceholderText('Search or add items…');
       await user.type(searchInput, 'antiseptic');
 
       expect(screen.getByText('Antiseptic Wipes')).toBeInTheDocument();
@@ -126,14 +128,11 @@ describe('BulkItemAddWizard', () => {
       const user = userEvent.setup();
       await goToItems(user);
 
-      const firstAidKit = screen.getByText('First Aid Kit');
-      const row = firstAidKit.closest('div')!;
-      const checkbox = within(row).getByRole('checkbox');
-
-      await user.click(checkbox);
+      const card = screen.getByRole('button', { name: 'First Aid Kit' });
+      await user.click(card);
       expect(screen.getByText('Add 1 item')).toBeInTheDocument();
 
-      await user.click(checkbox);
+      await user.click(card);
       expect(screen.getByText('Select items to add')).toBeInTheDocument();
     });
 
@@ -143,26 +142,36 @@ describe('BulkItemAddWizard', () => {
 
       await user.click(screen.getByText('Select all'));
       expect(screen.getByText('Deselect all')).toBeInTheDocument();
-
-      const checkboxes = screen.getAllByRole('checkbox');
-      const checkedCount = checkboxes.filter(
-        (cb) => (cb as HTMLInputElement).checked
-      ).length;
-      expect(checkedCount).toBeGreaterThan(0);
+      expect(screen.getByText(/Add \d+ items?/)).toBeInTheDocument();
 
       await user.click(screen.getByText('Deselect all'));
       expect(screen.getByText('Select all')).toBeInTheDocument();
+      expect(screen.getByText('Select items to add')).toBeInTheDocument();
     });
 
-    it('adds a custom item', async () => {
+    it('adds a custom item via search', async () => {
       const user = userEvent.setup();
       await goToItems(user);
 
-      const customInput = screen.getByPlaceholderText('Add custom item…');
-      await user.type(customInput, 'My Custom Item');
-      await user.click(screen.getByRole('button', { name: 'Add' }));
+      const searchInput = screen.getByPlaceholderText('Search or add items…');
+      await user.type(searchInput, 'My Custom Item');
+
+      const addCustomRow = screen.getByTestId('bulk-add-custom-row');
+      expect(addCustomRow).toBeInTheDocument();
+      await user.click(addCustomRow);
 
       expect(screen.getByText('My Custom Item')).toBeInTheDocument();
+      expect(screen.getByText('Add 1 item')).toBeInTheDocument();
+    });
+
+    it('adds custom item via Enter key in search', async () => {
+      const user = userEvent.setup();
+      await goToItems(user);
+
+      const searchInput = screen.getByPlaceholderText('Search or add items…');
+      await user.type(searchInput, 'Custom Tent{Enter}');
+
+      expect(screen.getByText('Custom Tent')).toBeInTheDocument();
       expect(screen.getByText('Add 1 item')).toBeInTheDocument();
     });
 
@@ -170,15 +179,13 @@ describe('BulkItemAddWizard', () => {
       const user = userEvent.setup();
       await goToItems(user);
 
-      const firstAidKit = screen.getByText('First Aid Kit');
-      const row = firstAidKit.closest('div')!;
-      const checkbox = within(row).getByRole('checkbox');
-      await user.click(checkbox);
+      const card = screen.getByRole('button', { name: 'First Aid Kit' });
+      await user.click(card);
 
-      const plusBtn = within(row).getByText('+');
+      const plusBtn = within(card).getByText('+');
       await user.click(plusBtn);
 
-      expect(within(row).getByText('2')).toBeInTheDocument();
+      expect(within(card).getByText('2')).toBeInTheDocument();
     });
 
     it('calls onAdd with selected items on submit', async () => {
@@ -189,10 +196,8 @@ describe('BulkItemAddWizard', () => {
       await user.click(screen.getByText('Equipment'));
       await user.click(screen.getByText('First Aid and Safety'));
 
-      const firstAidKit = screen.getByText('First Aid Kit');
-      const row = firstAidKit.closest('div')!;
-      const checkbox = within(row).getByRole('checkbox');
-      await user.click(checkbox);
+      const card = screen.getByRole('button', { name: 'First Aid Kit' });
+      await user.click(card);
 
       await user.click(screen.getByText('Add 1 item'));
 

@@ -51,8 +51,8 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * List all plans
-     * @description Retrieve all plans ordered by creation date
+     * List plans owned by user
+     * @description Retrieve plans created by the authenticated user, ordered by creation date
      */
     get: {
       parameters: {
@@ -157,6 +157,72 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/admin/plans': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Admin: list all plans
+     * @description Returns all plans in the system. Admin only. JWT required.
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-6'];
+          };
+        };
+        /** @description Default Response */
+        403: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Default Response */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
     delete?: never;
     options?: never;
     head?: never;
@@ -2372,6 +2438,9 @@ export interface components {
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
+      isAllParticipants: boolean;
+      /** Format: uuid */
+      allParticipantsGroupId?: string | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -2404,6 +2473,7 @@ export interface components {
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
+      assignedToAll?: boolean;
     };
     /** UpdateItemBody */
     'def-17': {
@@ -2430,6 +2500,7 @@ export interface components {
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
+      assignedToAll?: boolean;
     };
     /** ItemIdParam */
     'def-18': {

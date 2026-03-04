@@ -83,6 +83,7 @@ Generated route tree:
 - Plan mutation actions: `src/hooks/usePlanActions.ts` (item CRUD, plan delete/update, preferences, ownership transfer)
 - Item counting and filtering: `src/core/utils-plan-items.ts` (pure functions for per-participant counts, status/tab filters)
 - Main view components: `src/components/Plan.tsx`, `src/components/ParticipantDetails.tsx`, `src/components/ManageParticipantsList.tsx`, `src/components/EditPlanForm.tsx`
+- Bulk add items: `src/components/BulkItemAddWizard.tsx` (3-step wizard: category → subcategory → items; single search filters list and adds custom items; line layout with borders and selected background)
 - Shared UI: `src/components/shared/SectionLink.tsx` (navigation cards), `src/components/shared/PreferencesFields.tsx` (reusable preference fields used by `PreferencesForm` and `RequestToJoinPage`), `src/components/TransferOwnershipModal.tsx`
 - Item rendering and permissions: `src/components/ItemsList.tsx`, `src/components/CategorySection.tsx`, `src/components/ItemCard.tsx`
 

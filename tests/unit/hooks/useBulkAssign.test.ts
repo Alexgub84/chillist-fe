@@ -39,6 +39,8 @@ const successResponse: BulkItemResponse = {
       unit: 'pcs',
       status: 'pending',
       assignedParticipantId: 'p-1',
+      isAllParticipants: false,
+      allParticipantsGroupId: null,
       createdAt: '2025-01-01T00:00:00Z',
       updatedAt: '2025-01-01T00:00:00Z',
     },

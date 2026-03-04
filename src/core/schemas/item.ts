@@ -41,6 +41,8 @@ const baseItemSchema = z.object({
   status: itemStatusSchema,
   subcategory: z.string().nullish(),
   assignedParticipantId: z.string().nullish(),
+  isAllParticipants: z.boolean().default(false),
+  allParticipantsGroupId: z.string().nullish(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -67,6 +69,7 @@ export const itemCreateSchema = z.object({
   subcategory: z.string().nullish(),
   notes: z.string().nullish(),
   assignedParticipantId: z.string().nullish(),
+  assignedToAll: z.boolean().optional(),
 });
 
 export const itemPatchSchema = itemCreateSchema.partial();
