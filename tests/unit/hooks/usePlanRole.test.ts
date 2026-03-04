@@ -36,6 +36,8 @@ function makeItem(assignedTo: string | null): Item {
     unit: 'pcs',
     status: 'pending',
     assignedParticipantId: assignedTo,
+    isAllParticipants: false,
+    allParticipantsGroupId: null,
     createdAt: ts,
     updatedAt: ts,
   } as Item;

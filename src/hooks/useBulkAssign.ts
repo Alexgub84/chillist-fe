@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { bulkUpdateItems } from '../core/api';
 import type { Participant } from '../core/schemas/participant';
+import { ALL_PARTICIPANTS_VALUE } from '../core/utils-plan-items';
 
 interface BulkAssignVariables {
   itemIds: string[];
@@ -15,19 +16,27 @@ export function useBulkAssign(planId: string, participants: Participant[]) {
 
   return useMutation({
     mutationFn: ({ itemIds, participantId }: BulkAssignVariables) => {
+      const isAll = participantId === ALL_PARTICIPANTS_VALUE;
       const entries = itemIds.map((id) => ({
         itemId: id,
-        assignedParticipantId: participantId,
+        ...(isAll
+          ? { assignedToAll: true }
+          : { assignedParticipantId: participantId }),
       }));
       return bulkUpdateItems(planId, entries);
     },
     onSuccess: (result, { participantId }) => {
-      const participant = participants.find(
-        (p) => p.participantId === participantId
-      );
-      const name = participant
-        ? `${participant.name} ${participant.lastName}`
-        : '';
+      const isAll = participantId === ALL_PARTICIPANTS_VALUE;
+      const name = isAll
+        ? t('items.allParticipants')
+        : (() => {
+            const participant = participants.find(
+              (p) => p.participantId === participantId
+            );
+            return participant
+              ? `${participant.name} ${participant.lastName}`
+              : '';
+          })();
 
       if (result.errors.length > 0) {
         toast.error(

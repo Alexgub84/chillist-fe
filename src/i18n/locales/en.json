@@ -208,9 +208,10 @@
     "bulkAddPickCategory": "What are you adding?",
     "bulkAddPickSubcategory": "Choose a subcategory",
     "bulkAddSelectItems": "Select items",
-    "bulkAddSearch": "Search items…",
+    "bulkAddSearch": "Search or add items…",
     "bulkAddSelectAll": "Select all",
     "bulkAddDeselectAll": "Deselect all",
+    "bulkAddAddCustom": "Add \"{{name}}\"",
     "bulkAddCustomPlaceholder": "Add custom item…",
     "bulkAddCustomAdd": "Add",
     "bulkAddConfirm": "Add {{count}} items",
@@ -230,7 +231,9 @@
     "bulkAssignConflictTitle": "Some items are already assigned",
     "bulkAssignConflictMessage": "{{conflictCount}} of {{totalCount}} items are assigned to someone else. Assign all to {{name}}?",
     "bulkAssignAll": "Assign all",
-    "bulkAssignOnlyUnassigned": "Only unassigned"
+    "bulkAssignOnlyUnassigned": "Only unassigned",
+    "allParticipants": "All participants",
+    "assignToAll": "Assign to all participants"
   },
   "categories": {
     "equipment": "Equipment",
@@ -484,6 +487,8 @@
     "copiedAfterCreate": "Participant added! Invite link copied to clipboard.",
     "copyLink": "Copy invite link",
     "shareLink": "Share invite link",
+    "inviteFriendInstruction": "Invite your friends and family",
+    "shareCopyInstruction": "Share or copy the link",
     "shareTitle": "Join my plan on Chillist",
     "shareText": "You've been invited to join \"{{title}}\"",
     "pageTitle": "You're Invited!",

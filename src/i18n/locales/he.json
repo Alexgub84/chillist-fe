@@ -2,7 +2,7 @@
   "nav": {
     "plans": "תוכניות",
     "about": "אודות",
-    "adminPlans": "תוכניות מנהל"
+    "adminPlans": "תוכניות אדמין"
   },
   "auth": {
     "signIn": "התחברות",
@@ -208,9 +208,10 @@
     "bulkAddPickCategory": "מה מוסיפים?",
     "bulkAddPickSubcategory": "בחרו תת-קטגוריה",
     "bulkAddSelectItems": "בחרו פריטים",
-    "bulkAddSearch": "חיפוש פריטים…",
+    "bulkAddSearch": "חיפוש או הוספת פריטים…",
     "bulkAddSelectAll": "בחר הכל",
     "bulkAddDeselectAll": "בטל בחירה",
+    "bulkAddAddCustom": "הוסף \"{{name}}\"",
     "bulkAddCustomPlaceholder": "הוספת פריט מותאם…",
     "bulkAddCustomAdd": "הוסף",
     "bulkAddConfirm": "הוספת {{count}} פריטים",
@@ -230,7 +231,9 @@
     "bulkAssignConflictTitle": "חלק מהפריטים כבר מוקצים",
     "bulkAssignConflictMessage": "{{conflictCount}} מתוך {{totalCount}} פריטים מוקצים למישהו אחר. להקצות הכל ל{{name}}?",
     "bulkAssignAll": "הקצה הכל",
-    "bulkAssignOnlyUnassigned": "רק לא מוקצים"
+    "bulkAssignOnlyUnassigned": "רק לא מוקצים",
+    "allParticipants": "כל המשתתפים",
+    "assignToAll": "הקצה לכל המשתתפים"
   },
   "categories": {
     "equipment": "ציוד",
@@ -484,6 +487,8 @@
     "copiedAfterCreate": "המשתתף נוסף! קישור ההזמנה הועתק ללוח.",
     "copyLink": "העתקת קישור הזמנה",
     "shareLink": "שיתוף קישור הזמנה",
+    "inviteFriendInstruction": "הזמן את חבריך ומשפחתך",
+    "shareCopyInstruction": "שתף או העתק את הקישור",
     "shareTitle": "הצטרף לתוכנית שלי ב-Chillist",
     "shareText": "הוזמנת להצטרף ל-\"{{title}}\"",
     "pageTitle": "הוזמנת!",

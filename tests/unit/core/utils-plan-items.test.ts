@@ -19,6 +19,8 @@ function makeItem(
     quantity: 1,
     unit: 'pcs',
     status: 'pending',
+    isAllParticipants: false,
+    allParticipantsGroupId: null,
     createdAt: ts,
     updatedAt: ts,
     ...overrides,
@@ -85,6 +87,35 @@ describe('countItemsPerParticipant', () => {
     expect(result['p-unknown']).toBe(1);
     expect(result['p-1']).toBe(0);
   });
+
+  it('excludes canceled items from participant counts', () => {
+    const participants = [makeParticipant('p-1'), makeParticipant('p-2')];
+    const items = [
+      makeItem({
+        name: 'a',
+        category: 'food',
+        assignedParticipantId: 'p-1',
+        status: 'pending',
+      }),
+      makeItem({
+        name: 'b',
+        category: 'food',
+        assignedParticipantId: 'p-1',
+        status: 'canceled',
+      }),
+      makeItem({
+        name: 'c',
+        category: 'food',
+        assignedParticipantId: null,
+        status: 'canceled',
+      }),
+    ];
+
+    const result = countItemsPerParticipant(participants, items);
+    expect(result['p-1']).toBe(1);
+    expect(result['p-2']).toBe(0);
+    expect(result['unassigned']).toBe(0);
+  });
 });
 
 describe('filterItemsByAssignedParticipant', () => {
@@ -118,7 +149,7 @@ describe('filterItemsByAssignedParticipant', () => {
 });
 
 describe('countItemsByListTab', () => {
-  it('counts pending as buying and purchased+packed as packing', () => {
+  it('counts pending as buying and purchased+pending as packing', () => {
     const items = [
       makeItem({ name: 'a', category: 'food', status: 'pending' }),
       makeItem({ name: 'b', category: 'food', status: 'pending' }),
@@ -128,7 +159,7 @@ describe('countItemsByListTab', () => {
 
     const result = countItemsByListTab(items);
     expect(result.buying).toBe(2);
-    expect(result.packing).toBe(2);
+    expect(result.packing).toBe(3);
   });
 
   it('returns zeros for empty list', () => {
@@ -153,9 +184,12 @@ describe('filterItemsByStatusTab', () => {
     expect(result[0].status).toBe('pending');
   });
 
-  it('filters packing tab to purchased and packed items', () => {
+  it('filters packing tab to purchased and pending items', () => {
     const result = filterItemsByStatusTab(items, 'packing');
     expect(result).toHaveLength(2);
-    expect(result.map((i) => i.status).sort()).toEqual(['packed', 'purchased']);
+    expect(result.map((i) => i.status).sort()).toEqual([
+      'pending',
+      'purchased',
+    ]);
   });
 });

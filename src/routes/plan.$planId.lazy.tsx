@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import type { ItemCreate } from '../core/schemas/item';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +23,7 @@ import {
   filterItemsByAssignedParticipant,
   countItemsByListTab,
   filterItemsByStatusTab,
+  aggregateAllParticipantItems,
 } from '../core/utils-plan-items';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
@@ -41,6 +42,7 @@ import ParticipantFilter from '../components/ParticipantFilter';
 import { copyPlanUrl, sharePlanUrl } from '../core/invite';
 import ParticipantDetails from '../components/ParticipantDetails';
 import BulkItemAddWizard from '../components/BulkItemAddWizard';
+import PlanShareSection from '../components/PlanShareSection';
 import FloatingActions from '../components/shared/FloatingActions';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
@@ -79,6 +81,12 @@ function PlanPage() {
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
 
+  const existingItems = useMemo(() => {
+    if (!plan || isNotParticipantResponse(plan))
+      return new Map<string, string>();
+    return new Map(plan.items.map((i) => [i.name.toLowerCase(), i.itemId]));
+  }, [plan]);
+
   if (isLoading) {
     return <div className="text-center">{t('plan.loading')}</div>;
   }
@@ -111,15 +119,28 @@ function PlanPage() {
     plan.participants,
     plan.items
   );
+  const nonCanceledCount = plan.items.filter(
+    (i) => i.status !== 'canceled'
+  ).length;
   const participantScopedItems = filterItemsByAssignedParticipant(
     plan.items,
     participantFilter
   );
   const listCounts = countItemsByListTab(participantScopedItems);
-  const filteredItems = filterItemsByStatusTab(
+  const statusFilteredItems = filterItemsByStatusTab(
     participantScopedItems,
     listFilter
   );
+  const filteredItems = aggregateAllParticipantItems(
+    statusFilteredItems,
+    isOwner
+  );
+
+  async function handleBulkCancel(itemIds: string[]) {
+    for (const itemId of itemIds) {
+      await actions.updateSingleItem(itemId, { status: 'canceled' });
+    }
+  }
 
   const transferTargetName = (() => {
     const target = plan.participants.find(
@@ -263,54 +284,10 @@ function PlanPage() {
             isDeleting={actions.isDeletingPlan}
           />
         </CollapsibleSection>
-        <div className="flex items-center gap-3 shrink-0 mt-2">
-          <button
-            type="button"
-            data-testid="copy-plan-url-button"
-            title={t('invite.copyLink')}
-            onClick={handleCopyPlanUrl}
-            className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50 border border-gray-200 hover:border-blue-200"
-          >
-            <svg
-              className="w-5 h-5 shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
-            <span>{t('invite.copyLink')}</span>
-          </button>
-          <button
-            type="button"
-            data-testid="share-plan-url-button"
-            title={t('invite.shareLink')}
-            onClick={handleSharePlanUrl}
-            className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors rounded-lg hover:bg-blue-50 border border-gray-200 hover:border-blue-200"
-          >
-            <svg
-              className="w-5 h-5 shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
-            </svg>
-            <span>{t('invite.shareLink')}</span>
-          </button>
-        </div>
+        <PlanShareSection
+          onCopy={handleCopyPlanUrl}
+          onShare={handleSharePlanUrl}
+        />
 
         <div className="mt-4 sm:mt-6">
           <Forecast
@@ -421,7 +398,7 @@ function PlanPage() {
                     })
                   }
                   counts={participantCounts}
-                  total={plan.items.length}
+                  total={nonCanceledCount}
                   currentParticipantId={currentParticipant?.participantId}
                 />
               </div>
@@ -494,8 +471,9 @@ function PlanPage() {
                     unit: editingItem.unit,
                     status: editingItem.status,
                     notes: editingItem.notes ?? '',
-                    assignedParticipantId:
-                      editingItem.assignedParticipantId ?? '',
+                    assignedParticipantId: editingItem.isAllParticipants
+                      ? '__all__'
+                      : (editingItem.assignedParticipantId ?? ''),
                   }
                 : undefined
             }
@@ -566,6 +544,8 @@ function PlanPage() {
         open={bulkAddOpen}
         onClose={() => setBulkAddOpen(false)}
         onAdd={handleBulkAdd}
+        existingItems={existingItems}
+        onCancel={handleBulkCancel}
       />
     </div>
   );

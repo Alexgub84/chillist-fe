@@ -117,6 +117,8 @@ describe('API Client', () => {
         unit: 'pcs',
         status: 'pending',
         category: 'equipment',
+        isAllParticipants: false,
+        allParticipantsGroupId: null,
         createdAt: '2025-01-01T00:00:00Z',
         updatedAt: '2025-01-01T00:00:00Z',
       },
@@ -157,6 +159,8 @@ describe('API Client', () => {
     unit: 'pcs',
     status: 'pending',
     category: 'equipment',
+    isAllParticipants: false,
+    allParticipantsGroupId: null,
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   };
@@ -262,6 +266,33 @@ describe('API Client', () => {
           }),
         })
       );
+    });
+
+    it('fetches plan with items omitting isAllParticipants (BE compatibility)', async () => {
+      const planWithoutIsAllParticipants = {
+        ...mockPlanWithDetails,
+        items: [
+          {
+            itemId: 'item-1',
+            planId: 'plan-1',
+            name: 'Tent',
+            quantity: 1,
+            unit: 'pcs',
+            status: 'pending',
+            category: 'equipment',
+            allParticipantsGroupId: null,
+            createdAt: '2025-01-01T00:00:00Z',
+            updatedAt: '2025-01-01T00:00:00Z',
+          },
+        ],
+      };
+      fetchMock.mockResolvedValueOnce(
+        mockResponse(planWithoutIsAllParticipants)
+      );
+
+      const plan = await fetchPlan('plan-1');
+      expect(plan.items).toHaveLength(1);
+      expect(plan.items[0].isAllParticipants).toBe(false);
     });
 
     it('updates a plan', async () => {
@@ -772,6 +803,8 @@ describe('API Client', () => {
             status: 'pending',
             notes: null,
             assignedParticipantId: null,
+            isAllParticipants: false,
+            allParticipantsGroupId: null,
             createdAt: '2026-01-01T00:00:00.123456',
             updatedAt: '2026-01-01T00:00:00.654321',
           },
@@ -782,6 +815,33 @@ describe('API Client', () => {
       const result = await fetchPlanByInvite('plan-1', 'token-ok');
       expect(result.items).toHaveLength(1);
       expect(result.items[0].createdAt).toBe('2026-01-01T00:00:00.123456');
+    });
+
+    it('accepts items without isAllParticipants field (BE compatibility)', async () => {
+      const beResponse = {
+        ...mockInviteResponse,
+        items: [
+          {
+            itemId: 'i-1',
+            planId: 'plan-1',
+            name: 'Water',
+            category: 'food',
+            quantity: 2,
+            unit: 'l',
+            status: 'pending',
+            notes: null,
+            assignedParticipantId: null,
+            allParticipantsGroupId: null,
+            createdAt: '2026-01-01T00:00:00Z',
+            updatedAt: '2026-01-01T00:00:00Z',
+          },
+        ],
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(beResponse));
+
+      const result = await fetchPlanByInvite('plan-1', 'token-ok');
+      expect(result.items).toHaveLength(1);
+      expect(result.items[0].isAllParticipants).toBe(false);
     });
 
     it('logs schema errors to console on validation failure', async () => {

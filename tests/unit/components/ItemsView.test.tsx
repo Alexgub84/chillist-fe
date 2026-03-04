@@ -167,6 +167,34 @@ describe('ItemsView', () => {
     expect(screen.getByText(/Packing List/i)).toBeInTheDocument();
   });
 
+  it('excludes canceled items from Participant filter total', () => {
+    const itemsWithCanceled: Item[] = [
+      ...mockItems,
+      {
+        itemId: 'item-canceled',
+        planId: PLAN_ID,
+        name: 'Canceled Item',
+        category: 'food',
+        quantity: 1,
+        unit: 'pcs',
+        status: 'canceled',
+        createdAt: '2025-01-01T00:00:00Z',
+        updatedAt: '2025-01-01T00:00:00Z',
+      },
+    ];
+
+    render(
+      <ItemsView
+        {...defaultProps}
+        items={itemsWithCanceled}
+        participants={mockParticipants}
+      />
+    );
+
+    const allButton = screen.getByRole('button', { name: /All/i });
+    expect(allButton).toHaveTextContent('2');
+  });
+
   it('does not render list filter tabs when no items', () => {
     render(<ItemsView {...defaultProps} items={[]} />);
 

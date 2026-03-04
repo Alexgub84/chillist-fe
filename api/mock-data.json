@@ -19,11 +19,7 @@
       },
       "startDate": "2026-03-14T00:00:00.000Z",
       "endDate": "2026-03-16T00:00:00.000Z",
-      "tags": [
-        "outdoors",
-        "family",
-        "camping"
-      ],
+      "tags": ["outdoors", "family", "camping"],
       "participantIds": [
         "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
         "457393e1-822f-4c1c-a081-8207aa6b9fe1",
@@ -136,9 +132,7 @@
       "ownerParticipantId": "f0ea72ba-feaf-4126-ad40-99f078317913",
       "startDate": "1987-04-23T10:00:00Z",
       "endDate": "1987-04-23T23:00:00Z",
-      "participantIds": [
-        "f0ea72ba-feaf-4126-ad40-99f078317913"
-      ],
+      "participantIds": ["f0ea72ba-feaf-4126-ad40-99f078317913"],
       "createdAt": "2026-02-23T11:14:29.287Z",
       "updatedAt": "2026-02-23T11:14:29.287Z"
     },
@@ -161,11 +155,7 @@
       },
       "startDate": "2026-04-10T14:00:00.000Z",
       "endDate": "2026-04-12T12:00:00.000Z",
-      "tags": [
-        "קמפינג",
-        "טבע",
-        "חברים"
-      ],
+      "tags": ["קמפינג", "טבע", "חברים"],
       "participantIds": [
         "c1a20001-d5e6-4f78-9abc-def012340001",
         "c1a20002-d5e6-4f78-9abc-def012340002",
@@ -548,7 +538,9 @@
       "createdAt": "2025-05-02T10:00:00.000Z",
       "updatedAt": "2026-02-15T07:48:16.012Z",
       "category": "equipment",
-      "subcategory": "Venue Setup and Layout"
+      "subcategory": "Venue Setup and Layout",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "404954b1-04f3-4512-abae-42683bffad2b",
@@ -561,7 +553,9 @@
       "createdAt": "2025-05-03T14:20:00.000Z",
       "updatedAt": "2025-05-09T18:45:00.000Z",
       "category": "food",
-      "subcategory": "Snacks and Chips"
+      "subcategory": "Snacks and Chips",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "4741a1b6-33b8-46d7-864c-7e61c748ff12",
@@ -575,7 +569,9 @@
       "createdAt": "2025-05-04T11:05:00.000Z",
       "updatedAt": "2026-02-15T07:48:19.630Z",
       "category": "equipment",
-      "subcategory": "Comfort and Climate Control"
+      "subcategory": "Comfort and Climate Control",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "ccab3332-cc4f-449b-aec6-4130855cb0bf",
@@ -589,7 +585,9 @@
       "createdAt": "2025-05-06T09:40:00.000Z",
       "updatedAt": "2026-02-15T07:48:17.808Z",
       "category": "equipment",
-      "subcategory": "Cooking and Heating Equipment"
+      "subcategory": "Cooking and Heating Equipment",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "bfd3aa99-197f-4b40-8607-11a7bc59e8f8",
@@ -603,7 +601,9 @@
       "createdAt": "2025-05-06T09:45:00.000Z",
       "updatedAt": "2026-02-15T07:48:21.196Z",
       "category": "equipment",
-      "subcategory": "Cooking and Heating Equipment"
+      "subcategory": "Cooking and Heating Equipment",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "10ad45f4-4afb-40c3-b0e7-676e293fada1",
@@ -616,7 +616,9 @@
       "createdAt": "2025-05-07T13:30:00.000Z",
       "updatedAt": "2025-05-10T07:20:00.000Z",
       "category": "equipment",
-      "subcategory": "Lighting and Visibility"
+      "subcategory": "Lighting and Visibility",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "f38b7f87-e468-4d32-9c53-bd7cd2820283",
@@ -629,7 +631,9 @@
       "createdAt": "2025-05-05T15:25:00.000Z",
       "updatedAt": "2025-05-09T18:45:00.000Z",
       "category": "food",
-      "subcategory": "Snacks and Chips"
+      "subcategory": "Snacks and Chips",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "7c5393a6-3450-4615-ae03-0a62447fcdaf",
@@ -642,7 +646,9 @@
       "createdAt": "2025-05-08T08:00:00.000Z",
       "updatedAt": "2025-05-09T20:00:00.000Z",
       "category": "food",
-      "subcategory": "Ready-to-Eat and Prepared Foods"
+      "subcategory": "Ready-to-Eat and Prepared Foods",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "59ea2733-e7cf-4700-a3ef-189c44203d68",
@@ -655,7 +661,9 @@
       "createdAt": "2025-05-07T09:10:00.000Z",
       "updatedAt": "2025-05-09T18:45:00.000Z",
       "category": "food",
-      "subcategory": "Beverages (non-alcoholic)"
+      "subcategory": "Beverages (non-alcoholic)",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "fbf1ccf5-4107-416b-bd67-12b4b4868557",
@@ -668,7 +676,9 @@
       "createdAt": "2025-05-08T12:20:00.000Z",
       "updatedAt": "2025-05-09T19:05:00.000Z",
       "category": "food",
-      "subcategory": "Water and Ice"
+      "subcategory": "Water and Ice",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "90c92f2b-17b9-4406-8492-6065a9e0f212",
@@ -681,7 +691,9 @@
       "createdAt": "2026-02-09T20:18:35.623Z",
       "updatedAt": "2026-02-11T11:20:35.532Z",
       "category": "equipment",
-      "subcategory": "Venue Setup and Layout"
+      "subcategory": "Venue Setup and Layout",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "b1a2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -694,7 +706,9 @@
       "createdAt": "2025-05-08T14:00:00.000Z",
       "updatedAt": "2025-05-10T08:00:00.000Z",
       "category": "equipment",
-      "subcategory": "First Aid and Safety"
+      "subcategory": "First Aid and Safety",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "c2b3d4e5-f6a7-8901-bcde-f12345678901",
@@ -707,7 +721,9 @@
       "createdAt": "2025-05-05T10:00:00.000Z",
       "updatedAt": "2025-05-08T16:30:00.000Z",
       "category": "equipment",
-      "subcategory": "Comfort and Climate Control"
+      "subcategory": "Comfort and Climate Control",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "d3c4e5f6-a7b8-9012-cdef-123456789012",
@@ -720,7 +736,9 @@
       "createdAt": "2025-05-06T11:15:00.000Z",
       "updatedAt": "2025-05-09T09:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Comfort and Climate Control"
+      "subcategory": "Comfort and Climate Control",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "e4d5f6a7-b8c9-0123-defa-234567890123",
@@ -733,7 +751,9 @@
       "createdAt": "2025-05-07T16:00:00.000Z",
       "updatedAt": "2025-05-09T18:50:00.000Z",
       "category": "food",
-      "subcategory": "Meat and Poultry"
+      "subcategory": "Meat and Poultry",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "f5e6a7b8-c9d0-1234-efab-345678901234",
@@ -746,7 +766,9 @@
       "createdAt": "2025-05-08T09:30:00.000Z",
       "updatedAt": "2025-05-10T07:45:00.000Z",
       "category": "food",
-      "subcategory": "Grains and Pasta"
+      "subcategory": "Grains and Pasta",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "a6f7b8c9-d0e1-2345-fabc-456789012345",
@@ -759,7 +781,9 @@
       "createdAt": "2025-05-07T10:00:00.000Z",
       "updatedAt": "2025-05-09T14:20:00.000Z",
       "category": "food",
-      "subcategory": "Grains and Pasta"
+      "subcategory": "Grains and Pasta",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "b7a8c9d0-e1f2-3456-abcd-567890123456",
@@ -772,7 +796,9 @@
       "createdAt": "2025-12-15T11:00:00.000Z",
       "updatedAt": "2025-12-15T12:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Games and Activities"
+      "subcategory": "Games and Activities",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "c8b9d0e1-f2a3-4567-bcde-678901234567",
@@ -785,7 +811,9 @@
       "createdAt": "2025-12-15T11:05:00.000Z",
       "updatedAt": "2025-12-15T12:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Games and Activities"
+      "subcategory": "Games and Activities",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "d9c0e1f2-a3b4-5678-cdef-789012345678",
@@ -798,7 +826,9 @@
       "createdAt": "2025-12-15T11:10:00.000Z",
       "updatedAt": "2025-12-15T11:10:00.000Z",
       "category": "food",
-      "subcategory": "Ready-to-Eat and Prepared Foods"
+      "subcategory": "Ready-to-Eat and Prepared Foods",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "e0d1f2a3-b4c5-6789-defa-890123456789",
@@ -811,7 +841,9 @@
       "createdAt": "2025-12-15T11:15:00.000Z",
       "updatedAt": "2025-12-15T12:30:00.000Z",
       "category": "food",
-      "subcategory": "Beverages (non-alcoholic)"
+      "subcategory": "Beverages (non-alcoholic)",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "f1e2a3b4-c5d6-7890-efab-901234567890",
@@ -824,7 +856,9 @@
       "createdAt": "2025-12-15T11:20:00.000Z",
       "updatedAt": "2025-12-15T11:20:00.000Z",
       "category": "food",
-      "subcategory": "Fresh Fruit"
+      "subcategory": "Fresh Fruit",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "a2f3b4c5-d6e7-8901-fabc-012345678901",
@@ -837,7 +871,9 @@
       "createdAt": "2025-12-15T11:25:00.000Z",
       "updatedAt": "2025-12-15T12:05:00.000Z",
       "category": "equipment",
-      "subcategory": "Games and Activities"
+      "subcategory": "Games and Activities",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "b3a4c5d6-e7f8-9012-abcd-123456789abc",
@@ -850,7 +886,9 @@
       "createdAt": "2025-12-15T11:30:00.000Z",
       "updatedAt": "2025-12-15T13:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Music and Media"
+      "subcategory": "Music and Media",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "b59a06d7-3de6-46e5-80c0-0b6b9cc53632",
@@ -864,7 +902,9 @@
       "createdAt": "2026-02-14T19:41:47.035Z",
       "updatedAt": "2026-02-14T19:41:47.035Z",
       "category": "equipment",
-      "subcategory": "Venue Setup and Layout"
+      "subcategory": "Venue Setup and Layout",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "aa01bb02-cc03-dd04-ee05-ff0611111111",
@@ -878,7 +918,9 @@
       "createdAt": "2025-05-09T08:00:00.000Z",
       "updatedAt": "2025-05-10T07:30:00.000Z",
       "category": "equipment",
-      "subcategory": "Games and Activities"
+      "subcategory": "Games and Activities",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "aa01bb02-cc03-dd04-ee05-ff0622222222",
@@ -892,7 +934,9 @@
       "createdAt": "2025-05-09T09:00:00.000Z",
       "updatedAt": "2025-05-10T07:45:00.000Z",
       "category": "equipment",
-      "subcategory": "Documentation and Access"
+      "subcategory": "Documentation and Access",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "aa01bb02-cc03-dd04-ee05-ff0633333333",
@@ -906,7 +950,9 @@
       "createdAt": "2025-05-09T10:00:00.000Z",
       "updatedAt": "2025-05-09T10:00:00.000Z",
       "category": "food",
-      "subcategory": "Fresh Fruit"
+      "subcategory": "Fresh Fruit",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "bb02cc03-dd04-ee05-ff06-aa0111111111",
@@ -920,7 +966,9 @@
       "createdAt": "2025-12-15T11:35:00.000Z",
       "updatedAt": "2025-12-15T12:10:00.000Z",
       "category": "equipment",
-      "subcategory": "Hygiene and Bathroom Supplies"
+      "subcategory": "Hygiene and Bathroom Supplies",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "bb02cc03-dd04-ee05-ff06-aa0122222222",
@@ -934,7 +982,9 @@
       "createdAt": "2025-12-15T11:40:00.000Z",
       "updatedAt": "2025-12-15T11:40:00.000Z",
       "category": "food",
-      "subcategory": "Sauces, Condiments, and Spreads"
+      "subcategory": "Sauces, Condiments, and Spreads",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "bb02cc03-dd04-ee05-ff06-aa0133333333",
@@ -948,7 +998,9 @@
       "createdAt": "2025-12-15T11:45:00.000Z",
       "updatedAt": "2025-12-15T12:15:00.000Z",
       "category": "equipment",
-      "subcategory": "Games and Activities"
+      "subcategory": "Games and Activities",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0211111111",
@@ -962,7 +1014,9 @@
       "createdAt": "2025-12-15T11:00:00.000Z",
       "updatedAt": "2025-12-15T11:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Venue Setup and Layout"
+      "subcategory": "Venue Setup and Layout",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0222222222",
@@ -976,7 +1030,9 @@
       "createdAt": "2025-12-15T11:05:00.000Z",
       "updatedAt": "2025-12-16T08:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Food Storage and Cooling"
+      "subcategory": "Food Storage and Cooling",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0233333333",
@@ -990,7 +1046,9 @@
       "createdAt": "2025-12-15T11:10:00.000Z",
       "updatedAt": "2025-12-15T14:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Tools and Quick Repairs"
+      "subcategory": "Tools and Quick Repairs",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0244444444",
@@ -1004,7 +1062,9 @@
       "createdAt": "2025-12-15T11:15:00.000Z",
       "updatedAt": "2025-12-16T08:10:00.000Z",
       "category": "equipment",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0255555555",
@@ -1018,7 +1078,9 @@
       "createdAt": "2025-12-15T11:20:00.000Z",
       "updatedAt": "2025-12-15T14:30:00.000Z",
       "category": "food",
-      "subcategory": "Beverages (non-alcoholic)"
+      "subcategory": "Beverages (non-alcoholic)",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0266666666",
@@ -1032,7 +1094,9 @@
       "createdAt": "2025-12-15T11:25:00.000Z",
       "updatedAt": "2025-12-15T11:25:00.000Z",
       "category": "food",
-      "subcategory": "Snacks and Chips"
+      "subcategory": "Snacks and Chips",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0277777777",
@@ -1046,7 +1110,9 @@
       "createdAt": "2025-12-15T11:30:00.000Z",
       "updatedAt": "2025-12-15T15:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Cooking and Heating Equipment"
+      "subcategory": "Cooking and Heating Equipment",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0288888888",
@@ -1060,7 +1126,9 @@
       "createdAt": "2025-12-15T11:35:00.000Z",
       "updatedAt": "2025-12-16T08:20:00.000Z",
       "category": "food",
-      "subcategory": "Fresh Fruit"
+      "subcategory": "Fresh Fruit",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0311111111",
@@ -1074,7 +1142,9 @@
       "createdAt": "2026-02-14T16:00:00.000Z",
       "updatedAt": "2026-02-14T18:00:00.000Z",
       "category": "food",
-      "subcategory": "Alcohol and Mixers"
+      "subcategory": "Alcohol and Mixers",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0322222222",
@@ -1088,7 +1158,9 @@
       "createdAt": "2026-02-14T16:05:00.000Z",
       "updatedAt": "2026-02-14T16:05:00.000Z",
       "category": "equipment",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0333333333",
@@ -1102,7 +1174,9 @@
       "createdAt": "2026-02-14T16:10:00.000Z",
       "updatedAt": "2026-02-14T16:10:00.000Z",
       "category": "food",
-      "subcategory": "Leafy Greens and Salads"
+      "subcategory": "Leafy Greens and Salads",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0344444444",
@@ -1116,7 +1190,9 @@
       "createdAt": "2026-02-14T16:15:00.000Z",
       "updatedAt": "2026-02-14T18:30:00.000Z",
       "category": "food",
-      "subcategory": "Meat and Poultry"
+      "subcategory": "Meat and Poultry",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0355555555",
@@ -1130,7 +1206,9 @@
       "createdAt": "2026-02-14T16:20:00.000Z",
       "updatedAt": "2026-02-14T19:00:00.000Z",
       "category": "food",
-      "subcategory": "Bread and Bakery"
+      "subcategory": "Bread and Bakery",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0366666666",
@@ -1144,7 +1222,9 @@
       "createdAt": "2026-02-14T16:25:00.000Z",
       "updatedAt": "2026-02-23T08:40:14.584Z",
       "category": "food",
-      "subcategory": "Sweets and Desserts"
+      "subcategory": "Sweets and Desserts",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0377777777",
@@ -1158,7 +1238,9 @@
       "createdAt": "2026-02-14T16:30:00.000Z",
       "updatedAt": "2026-02-14T19:10:00.000Z",
       "category": "equipment",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "1a2842b5-a06e-42cf-af12-b12b46023e86",
@@ -1172,7 +1254,9 @@
       "createdAt": "2026-02-21T12:01:02.836Z",
       "updatedAt": "2026-02-21T21:52:57.671Z",
       "category": "food",
-      "subcategory": "Vegan"
+      "subcategory": "Vegan",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "3aa08c45-f9c6-45db-b23f-e7d718f7742f",
@@ -1186,7 +1270,9 @@
       "createdAt": "2026-02-23T09:47:35.023Z",
       "updatedAt": "2026-02-23T09:47:35.023Z",
       "category": "food",
-      "subcategory": "Vegan"
+      "subcategory": "Vegan",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "5eb0c010-9cac-458f-83e3-f40ccb2a2d56",
@@ -1200,7 +1286,9 @@
       "createdAt": "2026-02-23T09:56:43.399Z",
       "updatedAt": "2026-02-23T09:56:43.399Z",
       "category": "equipment",
-      "subcategory": "Hygiene and Bathroom Supplies"
+      "subcategory": "Hygiene and Bathroom Supplies",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "item-1772020401941",
@@ -1214,7 +1302,9 @@
       "createdAt": "2026-02-25T11:53:21.941Z",
       "updatedAt": "2026-02-25T11:53:21.941Z",
       "category": "equipment",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0001-aaaa-bbbb-ccccdddd0001",
@@ -1228,7 +1318,9 @@
       "createdAt": "2026-03-05T10:00:00.000Z",
       "updatedAt": "2026-03-10T08:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Venue Setup and Layout"
+      "subcategory": "Venue Setup and Layout",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0002-aaaa-bbbb-ccccdddd0002",
@@ -1242,7 +1334,9 @@
       "createdAt": "2026-03-05T10:05:00.000Z",
       "updatedAt": "2026-03-10T08:05:00.000Z",
       "category": "equipment",
-      "subcategory": "Comfort and Climate Control"
+      "subcategory": "Comfort and Climate Control",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0003-aaaa-bbbb-ccccdddd0003",
@@ -1256,7 +1350,9 @@
       "createdAt": "2026-03-05T10:10:00.000Z",
       "updatedAt": "2026-03-08T12:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Comfort and Climate Control"
+      "subcategory": "Comfort and Climate Control",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0004-aaaa-bbbb-ccccdddd0004",
@@ -1270,7 +1366,9 @@
       "createdAt": "2026-03-05T10:15:00.000Z",
       "updatedAt": "2026-03-05T10:15:00.000Z",
       "category": "equipment",
-      "subcategory": "Comfort and Climate Control"
+      "subcategory": "Comfort and Climate Control",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0005-aaaa-bbbb-ccccdddd0005",
@@ -1284,7 +1382,9 @@
       "createdAt": "2026-03-05T10:20:00.000Z",
       "updatedAt": "2026-03-10T08:10:00.000Z",
       "category": "equipment",
-      "subcategory": "Lighting and Visibility"
+      "subcategory": "Lighting and Visibility",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0006-aaaa-bbbb-ccccdddd0006",
@@ -1298,7 +1398,9 @@
       "createdAt": "2026-03-05T10:25:00.000Z",
       "updatedAt": "2026-03-10T08:15:00.000Z",
       "category": "equipment",
-      "subcategory": "Cooking and Heating Equipment"
+      "subcategory": "Cooking and Heating Equipment",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0007-aaaa-bbbb-ccccdddd0007",
@@ -1312,7 +1414,9 @@
       "createdAt": "2026-03-05T10:30:00.000Z",
       "updatedAt": "2026-03-08T14:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Food Storage and Cooling"
+      "subcategory": "Food Storage and Cooling",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0008-aaaa-bbbb-ccccdddd0008",
@@ -1326,7 +1430,9 @@
       "createdAt": "2026-03-05T10:35:00.000Z",
       "updatedAt": "2026-03-10T08:20:00.000Z",
       "category": "equipment",
-      "subcategory": "First Aid and Safety"
+      "subcategory": "First Aid and Safety",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0009-aaaa-bbbb-ccccdddd0009",
@@ -1340,7 +1446,9 @@
       "createdAt": "2026-03-05T10:40:00.000Z",
       "updatedAt": "2026-03-05T10:40:00.000Z",
       "category": "equipment",
-      "subcategory": "Tools and Quick Repairs"
+      "subcategory": "Tools and Quick Repairs",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0010-aaaa-bbbb-ccccdddd0010",
@@ -1354,7 +1462,9 @@
       "createdAt": "2026-03-05T10:45:00.000Z",
       "updatedAt": "2026-03-07T09:00:00.000Z",
       "category": "equipment",
-      "subcategory": "Other"
+      "subcategory": "Other",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0011-aaaa-bbbb-ccccdddd0011",
@@ -1368,7 +1478,9 @@
       "createdAt": "2026-03-06T09:00:00.000Z",
       "updatedAt": "2026-03-09T11:00:00.000Z",
       "category": "food",
-      "subcategory": "Meat and Poultry"
+      "subcategory": "Meat and Poultry",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0012-aaaa-bbbb-ccccdddd0012",
@@ -1382,7 +1494,9 @@
       "createdAt": "2026-03-06T09:05:00.000Z",
       "updatedAt": "2026-03-06T09:05:00.000Z",
       "category": "food",
-      "subcategory": "Bread and Bakery"
+      "subcategory": "Bread and Bakery",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0013-aaaa-bbbb-ccccdddd0013",
@@ -1396,7 +1510,9 @@
       "createdAt": "2026-03-06T09:10:00.000Z",
       "updatedAt": "2026-03-09T11:30:00.000Z",
       "category": "food",
-      "subcategory": "Beverages (non-alcoholic)"
+      "subcategory": "Beverages (non-alcoholic)",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0014-aaaa-bbbb-ccccdddd0014",
@@ -1410,7 +1526,9 @@
       "createdAt": "2026-03-06T09:15:00.000Z",
       "updatedAt": "2026-03-10T08:30:00.000Z",
       "category": "food",
-      "subcategory": "Hot Drinks (coffee, tea, cocoa)"
+      "subcategory": "Hot Drinks (coffee, tea, cocoa)",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0015-aaaa-bbbb-ccccdddd0015",
@@ -1424,7 +1542,9 @@
       "createdAt": "2026-03-06T09:20:00.000Z",
       "updatedAt": "2026-03-06T09:20:00.000Z",
       "category": "food",
-      "subcategory": "Fresh Fruit"
+      "subcategory": "Fresh Fruit",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0016-aaaa-bbbb-ccccdddd0016",
@@ -1438,7 +1558,9 @@
       "createdAt": "2026-03-06T09:25:00.000Z",
       "updatedAt": "2026-03-09T12:00:00.000Z",
       "category": "food",
-      "subcategory": "Snacks and Chips"
+      "subcategory": "Snacks and Chips",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0017-aaaa-bbbb-ccccdddd0017",
@@ -1452,7 +1574,9 @@
       "createdAt": "2026-03-06T09:30:00.000Z",
       "updatedAt": "2026-03-09T12:15:00.000Z",
       "category": "food",
-      "subcategory": "Snacks and Chips"
+      "subcategory": "Snacks and Chips",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     },
     {
       "itemId": "camp-item-0018-aaaa-bbbb-ccccdddd0018",
@@ -1466,7 +1590,9 @@
       "createdAt": "2026-03-06T09:35:00.000Z",
       "updatedAt": "2026-03-10T08:35:00.000Z",
       "category": "food",
-      "subcategory": "Canned and Jarred Foods"
+      "subcategory": "Canned and Jarred Foods",
+      "isAllParticipants": false,
+      "allParticipantsGroupId": null
     }
   ]
 }

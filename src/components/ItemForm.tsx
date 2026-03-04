@@ -16,6 +16,7 @@ import {
   STATUS_OPTIONS,
   UNIT_GROUPS,
 } from '../core/constants/item';
+import { buildParticipantOptions } from '../core/utils-plan-items';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 import Autocomplete from './shared/Autocomplete';
@@ -276,10 +277,16 @@ export default function ItemForm({
         <div>
           <FormLabel>{t('items.assignTo')}</FormLabel>
           <FormSelect {...register('assignedParticipantId')} compact>
-            <option value="">{t('items.unassigned')}</option>
-            {participants.map((p) => (
-              <option key={p.participantId} value={p.participantId}>
-                {p.name} {p.lastName}
+            {buildParticipantOptions(
+              participants,
+              {
+                unassigned: t('items.unassigned'),
+                allParticipants: t('items.allParticipants'),
+              },
+              { includeUnassigned: true, includeAll: true }
+            ).map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
               </option>
             ))}
           </FormSelect>

@@ -12,10 +12,10 @@ export const changelog: ChangelogEntry[] = [
       'Added an admin-only route at /admin/plans that displays all plans via GET /admin/plans. Accessible from the header for users with admin role. Shows the same plans list as the regular plans page but fetches from the admin endpoint.',
   },
   {
-    date: '2026-03-03',
-    title: 'Packing list shows purchased and packed only',
+    date: '2026-03-04',
+    title: 'Packing list shows purchased and pending items',
     description:
-      'The Packing list tab now shows only items you\'ve bought (purchased) or already packed — pending items stay in the Buying list. This keeps "to buy" and "to pack" clearly separate.',
+      "The Packing list tab now shows items you've bought (purchased) and items still to buy (pending), so you can plan what to pack before shopping and track bought items in one view.",
   },
   {
     date: '2026-03-03',

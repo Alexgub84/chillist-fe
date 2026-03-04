@@ -133,6 +133,7 @@ const itemCreateSchema = z.object({
   subcategory: z.string().nullable().optional(),
   notes: z.string().nullable().optional(),
   assignedParticipantId: z.string().nullable().optional(),
+  assignedToAll: z.boolean().optional(),
 });
 
 const itemPatchSchema = itemCreateSchema.partial();
@@ -772,6 +773,8 @@ export async function buildServer(
         subcategory: body.subcategory ? String(body.subcategory) : null,
         notes: body.notes ? String(body.notes) : null,
         assignedParticipantId: tokenMatch.participantId,
+        isAllParticipants: false,
+        allParticipantsGroupId: null,
         createdAt: now,
         updatedAt: now,
       };
@@ -972,29 +975,63 @@ export async function buildServer(
   app.post<{ Params: { planId: string } }>(
     '/plans/:planId/items',
     async (request, reply) => {
-      ensurePlan(store, request.params.planId);
+      const plan = ensurePlan(store, request.params.planId);
       const parsed = itemCreateSchema.parse(request.body);
       const now = new Date().toISOString();
-      const item: Item = {
-        itemId: randomUUID(),
-        planId: request.params.planId,
-        name: parsed.name,
-        category: parsed.category,
-        quantity: parsed.quantity,
-        unit: parsed.unit ?? 'pcs',
-        status: parsed.status,
-        subcategory: parsed.subcategory ?? null,
-        notes: parsed.notes,
-        assignedParticipantId: parsed.assignedParticipantId,
-        createdAt: now,
-        updatedAt: now,
-      };
 
-      store.items.push(item);
+      if (parsed.assignedToAll) {
+        const participantIds = new Set(plan.participantIds ?? []);
+        const planParticipants = store.participants.filter((p) =>
+          participantIds.has(p.participantId)
+        );
+        const groupId = randomUUID();
+        const createdItems: Item[] = [];
 
-      await persistData(store, shouldPersist, filePath);
+        for (const p of planParticipants) {
+          const item: Item = {
+            itemId: randomUUID(),
+            planId: request.params.planId,
+            name: parsed.name,
+            category: parsed.category,
+            quantity: parsed.quantity,
+            unit: parsed.unit ?? 'pcs',
+            status: parsed.status,
+            subcategory: parsed.subcategory ?? null,
+            notes: parsed.notes,
+            assignedParticipantId: p.participantId,
+            isAllParticipants: true,
+            allParticipantsGroupId: groupId,
+            createdAt: now,
+            updatedAt: now,
+          };
+          store.items.push(item);
+          createdItems.push(item);
+        }
 
-      void reply.status(201).send(item);
+        await persistData(store, shouldPersist, filePath);
+        void reply.status(201).send(createdItems[0]);
+      } else {
+        const item: Item = {
+          itemId: randomUUID(),
+          planId: request.params.planId,
+          name: parsed.name,
+          category: parsed.category,
+          quantity: parsed.quantity,
+          unit: parsed.unit ?? 'pcs',
+          status: parsed.status,
+          subcategory: parsed.subcategory ?? null,
+          notes: parsed.notes,
+          assignedParticipantId: parsed.assignedParticipantId,
+          isAllParticipants: false,
+          allParticipantsGroupId: null,
+          createdAt: now,
+          updatedAt: now,
+        };
+
+        store.items.push(item);
+        await persistData(store, shouldPersist, filePath);
+        void reply.status(201).send(item);
+      }
     }
   );
 
@@ -1013,7 +1050,83 @@ export async function buildServer(
       const updates = itemPatchSchema.parse(request.body ?? {});
       const now = new Date().toISOString();
 
-      Object.assign(item, updates, { updatedAt: now });
+      if (updates.assignedToAll === true && !item.isAllParticipants) {
+        const plan = store.plans.find((p) => p.planId === item.planId);
+        if (plan) {
+          const participantIds = new Set(plan.participantIds ?? []);
+          const planParticipants = store.participants.filter((p) =>
+            participantIds.has(p.participantId)
+          );
+          const groupId = randomUUID();
+          item.isAllParticipants = true;
+          item.allParticipantsGroupId = groupId;
+          item.assignedParticipantId =
+            planParticipants[0]?.participantId ?? null;
+          item.updatedAt = now;
+
+          for (let i = 1; i < planParticipants.length; i++) {
+            const copy: Item = {
+              ...structuredClone(item),
+              itemId: randomUUID(),
+              assignedParticipantId: planParticipants[i].participantId,
+              createdAt: now,
+              updatedAt: now,
+            };
+            store.items.push(copy);
+          }
+        }
+      } else if (updates.assignedToAll === false && item.isAllParticipants) {
+        const groupId = item.allParticipantsGroupId;
+        if (groupId) {
+          const siblings = store.items.filter(
+            (i) =>
+              i.allParticipantsGroupId === groupId && i.itemId !== item.itemId
+          );
+          for (const sib of siblings) {
+            sib.status = 'canceled';
+            sib.isAllParticipants = false;
+            sib.updatedAt = now;
+          }
+        }
+        item.isAllParticipants = false;
+        if (updates.assignedParticipantId !== undefined) {
+          item.assignedParticipantId = updates.assignedParticipantId;
+        }
+        item.updatedAt = now;
+      } else if (item.isAllParticipants && item.allParticipantsGroupId) {
+        const cascadeFields = [
+          'name',
+          'quantity',
+          'unit',
+          'category',
+          'subcategory',
+          'notes',
+        ] as const;
+        const hasCascade = cascadeFields.some(
+          (f) => (updates as Record<string, unknown>)[f] !== undefined
+        );
+        if (hasCascade) {
+          const siblings = store.items.filter(
+            (i) =>
+              i.allParticipantsGroupId === item.allParticipantsGroupId &&
+              i.itemId !== item.itemId
+          );
+          for (const sib of siblings) {
+            for (const f of cascadeFields) {
+              const val = (updates as Record<string, unknown>)[f];
+              if (val !== undefined) {
+                (sib as Record<string, unknown>)[f] = val;
+              }
+            }
+            sib.updatedAt = now;
+          }
+        }
+        Object.assign(item, updates, { updatedAt: now });
+        delete (item as Record<string, unknown>).assignedToAll;
+      } else {
+        Object.assign(item, updates, { updatedAt: now });
+        delete (item as Record<string, unknown>).assignedToAll;
+      }
 
       await persistData(store, shouldPersist, filePath);
 
