@@ -1045,7 +1045,7 @@ export interface paths {
     put?: never;
     /**
      * Add an item to a plan
-     * @description Create a new item in the specified plan. Equipment items always use pcs as the unit. Food items require a unit.
+     * @description Create a new item in the specified plan. Equipment items always use pcs as the unit. Food items require a unit. Send assignedToAll=true to assign to every participant.
      */
     post: {
       parameters: {
@@ -1130,7 +1130,7 @@ export interface paths {
     head?: never;
     /**
      * Update an item
-     * @description Update an existing item by its ID
+     * @description Update an existing item by its ID. Supports all-participants assignment: send assignedToAll=true to assign to all, assignedParticipantId=<uuid> to reassign from all to one, assignedParticipantId=null or assignedToAll=false to unassign all. Core field changes on all-participants items cascade to every copy; status changes apply only to the target item.
      */
     patch: {
       parameters: {
@@ -1207,7 +1207,7 @@ export interface paths {
     put?: never;
     /**
      * Bulk create items in a plan
-     * @description Create multiple items at once. Each item is validated independently — valid items are created, invalid items are reported in the errors array with their name.
+     * @description Create multiple items at once. Each item is validated independently — valid items are created, invalid items are reported in the errors array. Supports assignedToAll per item (same logic as single-item POST).
      */
     post: {
       parameters: {
@@ -1276,7 +1276,7 @@ export interface paths {
     head?: never;
     /**
      * Bulk update items in a plan
-     * @description Update multiple items at once. Each item is validated independently — valid items are updated, invalid items are reported in the errors array with their name.
+     * @description Update multiple items at once. Each item is validated independently — valid items are updated, invalid items are reported in the errors array. Supports assignedToAll per item (same logic as single-item PATCH).
      */
     patch: {
       parameters: {
@@ -2438,8 +2438,12 @@ export interface components {
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
+      /** @description True when this item is part of an all-participants group (one copy per participant). */
       isAllParticipants: boolean;
-      /** Format: uuid */
+      /**
+       * Format: uuid
+       * @description Shared UUID linking all copies in an all-participants group. Null for regular items.
+       */
       allParticipantsGroupId?: string | null;
       /** Format: date-time */
       createdAt: string;
@@ -2473,6 +2477,7 @@ export interface components {
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
+      /** @description Set true to assign this item to all participants (creates one copy per participant). Ignored if assignedParticipantId is also set. */
       assignedToAll?: boolean;
     };
     /** UpdateItemBody */
@@ -2500,6 +2505,7 @@ export interface components {
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
+      /** @description Set true to assign to all participants. Set false (or send assignedParticipantId/null) to switch from all to specific/unassigned. */
       assignedToAll?: boolean;
     };
     /** ItemIdParam */
@@ -2859,6 +2865,8 @@ export interface components {
       notes?: string | null;
       /** Format: uuid */
       assignedParticipantId?: string | null;
+      /** @description Set true to assign to all participants. Set false (or send assignedParticipantId/null) to switch from all to specific/unassigned. */
+      assignedToAll?: boolean;
     };
     /** BulkUpdateItemBody */
     'def-48': {
