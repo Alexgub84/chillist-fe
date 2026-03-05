@@ -478,13 +478,20 @@ export async function updateItem(
   itemId: string,
   updates: ItemPatch
 ): Promise<Item> {
-  // Validate input before sending
   const validUpdates = itemPatchSchema.parse(updates);
+
+  console.log('[TEMP] PATCH /items/' + itemId);
+  console.log('[TEMP] raw updates:', JSON.stringify(updates));
+  console.log('[TEMP] after Zod parse:', JSON.stringify(validUpdates));
+  console.log('[TEMP] body sent:', JSON.stringify(validUpdates));
 
   const data = await request<unknown>(`/items/${itemId}`, {
     method: 'PATCH',
     body: JSON.stringify(validUpdates),
   });
+
+  console.log('[TEMP] response data:', JSON.stringify(data));
+
   return itemSchema.parse(data);
 }
 

@@ -22,6 +22,7 @@ import type { InviteParticipant } from '../core/schemas/invite';
 import type { ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
+import { isAssignedTo } from '../core/utils-plan-items';
 import LocationMap from '../components/LocationMap';
 import Modal from '../components/shared/Modal';
 import CollapsibleSection from '../components/shared/CollapsibleSection';
@@ -292,8 +293,7 @@ export function InvitePlanPage() {
                 listFilter={listFilter}
                 selfAssignParticipantId={myParticipantId}
                 canEditItem={(item) =>
-                  !!myParticipantId &&
-                  item.assignedParticipantId === myParticipantId
+                  !!myParticipantId && isAssignedTo(item, myParticipantId)
                 }
                 onEditItem={(itemId) => setEditingItemId(itemId)}
                 onUpdateItem={handleUpdateItem}

@@ -1,59 +1,62 @@
-import type { Item, ItemStatus } from './schemas/item';
+import type { Item, ItemPatch, ItemStatus } from './schemas/item';
 import type { Participant } from './schemas/participant';
 import type { ListFilter } from './schemas/plan-search';
 
 export const ALL_PARTICIPANTS_VALUE = '__all__';
 
-export interface AggregatedGroupMeta {
-  groupId: string;
-  copies: Item[];
-  statusSummary: Record<ItemStatus, number>;
+// --- Assignment helpers ---
+
+export function isAssignedTo(item: Item, participantId: string): boolean {
+  return item.assignmentStatusList.some(
+    (a) => a.participantId === participantId
+  );
 }
 
-export type DisplayItem = Item & {
-  _aggregatedGroup?: AggregatedGroupMeta;
-};
+export function isItemUnassigned(item: Item): boolean {
+  return item.assignmentStatusList.length === 0;
+}
 
-export function aggregateAllParticipantItems(
-  items: Item[],
-  isOwner: boolean
-): DisplayItem[] {
-  if (!isOwner) return items;
+export function getAssignmentSelectValue(item: Item): string {
+  if (item.isAllParticipants) return ALL_PARTICIPANTS_VALUE;
+  if (item.assignmentStatusList.length === 1)
+    return item.assignmentStatusList[0].participantId;
+  return '';
+}
 
-  const groups = new Map<string, Item[]>();
-  const standalone: DisplayItem[] = [];
-
-  for (const item of items) {
-    if (item.isAllParticipants && item.allParticipantsGroupId) {
-      const existing = groups.get(item.allParticipantsGroupId);
-      if (existing) {
-        existing.push(item);
-      } else {
-        groups.set(item.allParticipantsGroupId, [item]);
-      }
-    } else {
-      standalone.push(item);
-    }
-  }
-
-  const aggregated: DisplayItem[] = [];
-  for (const [groupId, copies] of groups) {
-    const representative: DisplayItem = { ...copies[0] };
-    const statusSummary: Record<ItemStatus, number> = {
-      pending: 0,
-      purchased: 0,
-      packed: 0,
-      canceled: 0,
+export function buildAssignmentPayload(
+  selectValue: string,
+  participants: Participant[],
+  status: ItemStatus = 'pending'
+): Partial<ItemPatch> {
+  if (selectValue === ALL_PARTICIPANTS_VALUE) {
+    return {
+      assignmentStatusList: participants.map((p) => ({
+        participantId: p.participantId,
+        status,
+      })),
+      isAllParticipants: true,
     };
-    for (const copy of copies) {
-      statusSummary[copy.status]++;
-    }
-    representative._aggregatedGroup = { groupId, copies, statusSummary };
-    aggregated.push(representative);
   }
-
-  return [...aggregated, ...standalone];
+  if (selectValue) {
+    return {
+      assignmentStatusList: [{ participantId: selectValue, status }],
+      isAllParticipants: false,
+    };
+  }
+  return { assignmentStatusList: [], isAllParticipants: false };
 }
+
+export function getParticipantStatus(
+  item: Item,
+  participantId: string
+): ItemStatus | undefined {
+  const entry = item.assignmentStatusList.find(
+    (a) => a.participantId === participantId
+  );
+  return entry?.status;
+}
+
+// --- Participant options ---
 
 export interface ParticipantOption {
   value: string;
@@ -81,6 +84,8 @@ export function buildParticipantOptions(
   return result;
 }
 
+// --- Counting & filtering ---
+
 export function countItemsPerParticipant(
   participants: Participant[],
   items: Item[]
@@ -91,11 +96,12 @@ export function countItemsPerParticipant(
   }
   for (const item of items) {
     if (item.status === 'canceled') continue;
-    if (item.assignedParticipantId) {
-      counts[item.assignedParticipantId] =
-        (counts[item.assignedParticipantId] ?? 0) + 1;
-    } else {
+    if (isItemUnassigned(item)) {
       counts['unassigned']++;
+    } else {
+      for (const a of item.assignmentStatusList) {
+        counts[a.participantId] = (counts[a.participantId] ?? 0) + 1;
+      }
     }
   }
   return counts;
@@ -107,8 +113,8 @@ export function filterItemsByAssignedParticipant(
 ): Item[] {
   if (!participantFilter) return items;
   if (participantFilter === 'unassigned')
-    return items.filter((i) => !i.assignedParticipantId);
-  return items.filter((i) => i.assignedParticipantId === participantFilter);
+    return items.filter((i) => isItemUnassigned(i));
+  return items.filter((i) => isAssignedTo(i, participantFilter));
 }
 
 export function countItemsByListTab(items: Item[]): Record<ListFilter, number> {

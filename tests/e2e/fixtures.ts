@@ -37,9 +37,8 @@ interface MockItem {
   status: string;
   subcategory?: string | null;
   notes: string | null;
-  assignedParticipantId: string | null;
   isAllParticipants: boolean;
-  allParticipantsGroupId: string | null;
+  assignmentStatusList: Array<{ participantId: string; status: string }>;
   createdAt: string;
   updatedAt: string;
 }
@@ -108,7 +107,8 @@ export function buildItem(
     quantity: number;
     status?: string;
     subcategory?: string | null;
-    assignedParticipantId?: string | null;
+    assignmentStatusList?: Array<{ participantId: string; status: string }>;
+    isAllParticipants?: boolean;
     notes?: string | null;
   }
 ): MockItem {
@@ -122,9 +122,8 @@ export function buildItem(
     status: i.status ?? 'pending',
     subcategory: i.subcategory ?? null,
     notes: i.notes ?? null,
-    assignedParticipantId: i.assignedParticipantId ?? null,
-    isAllParticipants: false,
-    allParticipantsGroupId: null,
+    isAllParticipants: i.isAllParticipants ?? false,
+    assignmentStatusList: i.assignmentStatusList ?? [],
     createdAt: timestamp(),
     updatedAt: timestamp(),
   };
@@ -144,7 +143,8 @@ export function buildPlan(opts?: {
     category: 'equipment' | 'food';
     quantity: number;
     status?: string;
-    assignedParticipantId?: string | null;
+    assignmentStatusList?: Array<{ participantId: string; status: string }>;
+    isAllParticipants?: boolean;
     notes?: string | null;
   }>;
 }): MockPlan {
@@ -476,7 +476,7 @@ const test = base.extend({
       const inject = () => {
         const s = document.createElement('style');
         s.textContent =
-          '*, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }';
+          '*, *::before, *::after { transition-duration: 10ms !important; animation-duration: 10ms !important; }';
         document.head.appendChild(s);
       };
       if (document.head) inject();

@@ -21,7 +21,8 @@ const equipmentItem: Item = {
   unit: 'pcs',
   status: 'pending',
   subcategory: 'Venue Setup and Layout',
-  assignedParticipantId: null,
+  isAllParticipants: false,
+  assignmentStatusList: [],
   createdAt: '2025-01-01T00:00:00Z',
   updatedAt: '2025-01-01T00:00:00Z',
 };
@@ -35,7 +36,8 @@ const foodItem: Item = {
   unit: 'pcs',
   status: 'pending',
   subcategory: 'Fresh Fruit',
-  assignedParticipantId: null,
+  isAllParticipants: false,
+  assignmentStatusList: [],
   createdAt: '2025-01-01T00:00:00Z',
   updatedAt: '2025-01-01T00:00:00Z',
 };

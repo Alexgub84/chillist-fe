@@ -7,8 +7,13 @@ import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import { getApiErrorMessage } from '../core/error-utils';
 import {
-  ALL_PARTICIPANTS_VALUE,
-  aggregateAllParticipantItems,
+  buildAssignmentPayload,
+  getAssignmentSelectValue,
+  isAssignedTo,
+  countItemsPerParticipant,
+  filterItemsByAssignedParticipant,
+  countItemsByListTab,
+  filterItemsByStatusTab,
 } from '../core/utils-plan-items';
 import ItemsList from './ItemsList';
 import ItemForm, { type ItemFormValues } from './ItemForm';
@@ -89,7 +94,6 @@ export default function ItemsView({
   }
 
   function toPayload(values: ItemFormValues) {
-    const isAll = values.assignedParticipantId === ALL_PARTICIPANTS_VALUE;
     return {
       name: values.name,
       category: values.category,
@@ -98,10 +102,10 @@ export default function ItemsView({
       unit: values.unit,
       status: values.status,
       notes: values.notes || null,
-      assignedParticipantId: isAll
-        ? null
-        : values.assignedParticipantId || null,
-      assignedToAll: isAll || undefined,
+      ...buildAssignmentPayload(
+        values.assignedParticipantId ?? '',
+        participants
+      ),
     };
   }
 
@@ -160,55 +164,33 @@ export default function ItemsView({
     }
   }
 
-  const participantCounts: Record<string, number> = { unassigned: 0 };
-  for (const p of participants) {
-    participantCounts[p.participantId] = 0;
-  }
-  for (const item of items) {
-    if (item.status === 'canceled') continue;
-    if (item.assignedParticipantId) {
-      participantCounts[item.assignedParticipantId] =
-        (participantCounts[item.assignedParticipantId] ?? 0) + 1;
-    } else {
-      participantCounts['unassigned']++;
-    }
-  }
+  const participantCounts = useMemo(
+    () => countItemsPerParticipant(participants, items),
+    [participants, items]
+  );
   const nonCanceledCount = items.filter((i) => i.status !== 'canceled').length;
 
-  const participantScopedItems = items.filter((item) => {
-    if (!participantFilter) return true;
-    if (participantFilter === 'unassigned') return !item.assignedParticipantId;
-    return item.assignedParticipantId === participantFilter;
-  });
-
-  const listCounts: Record<ListFilter, number> = { buying: 0, packing: 0 };
-  for (const item of participantScopedItems) {
-    if (item.status === 'pending') listCounts.buying++;
-    if (item.status === 'purchased' || item.status === 'pending')
-      listCounts.packing++;
-  }
-
-  const filteredItems = participantScopedItems.filter((item) => {
-    if (listFilter === 'buying' && item.status !== 'pending') return false;
-    if (
-      listFilter === 'packing' &&
-      item.status !== 'purchased' &&
-      item.status !== 'pending'
-    )
-      return false;
-    return true;
-  });
-
-  const myParticipantId = isGuest ? guestParticipantId : selfParticipantId;
-  const isOwner = !myParticipantId;
-
-  const displayItems = useMemo(
-    () => aggregateAllParticipantItems(filteredItems, isOwner),
-    [filteredItems, isOwner]
+  const participantScopedItems = useMemo(
+    () =>
+      filterItemsByAssignedParticipant(items, participantFilter ?? undefined),
+    [items, participantFilter]
   );
 
+  const listCounts = useMemo(
+    () => countItemsByListTab(participantScopedItems),
+    [participantScopedItems]
+  );
+
+  const filteredItems = useMemo(
+    () =>
+      filterItemsByStatusTab(participantScopedItems, listFilter ?? undefined),
+    [participantScopedItems, listFilter]
+  );
+
+  const myParticipantId = isGuest ? guestParticipantId : selfParticipantId;
+
   const canEditItem = myParticipantId
-    ? (item: Item) => item.assignedParticipantId === myParticipantId
+    ? (item: Item) => isAssignedTo(item, myParticipantId)
     : undefined;
 
   return (
@@ -289,7 +271,7 @@ export default function ItemsView({
 
         {items.length > 0 && (
           <ItemsList
-            items={displayItems}
+            items={filteredItems}
             participants={participants}
             listFilter={listFilter}
             selfAssignParticipantId={myParticipantId}
@@ -318,13 +300,13 @@ export default function ItemsView({
                     unit: editingItem.unit,
                     status: editingItem.status,
                     notes: editingItem.notes ?? '',
-                    assignedParticipantId: editingItem.isAllParticipants
-                      ? ALL_PARTICIPANTS_VALUE
-                      : (editingItem.assignedParticipantId ?? ''),
+                    assignedParticipantId:
+                      getAssignmentSelectValue(editingItem),
                   }
                 : undefined
             }
             participants={isGuest ? [] : participants}
+            showAssignAll={!myParticipantId}
             onSubmit={handleItemFormSubmit}
             onCancel={closeItemModal}
             isSubmitting={isCreating}

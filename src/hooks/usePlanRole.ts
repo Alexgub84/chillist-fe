@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/useAuth';
 import type { PlanWithDetails } from '../core/schemas/plan';
 import type { Participant } from '../core/schemas/participant';
 import type { Item } from '../core/schemas/item';
+import { isAssignedTo } from '../core/utils-plan-items';
 
 interface PlanRole {
   isOwner: boolean;
@@ -26,7 +27,7 @@ export function usePlanRole(plan: PlanWithDetails): PlanRole {
       ? undefined
       : (item: Item) =>
           !!currentParticipant &&
-          item.assignedParticipantId === currentParticipant.participantId;
+          isAssignedTo(item, currentParticipant.participantId);
 
     return { isOwner, currentParticipant, canEditItem };
   }, [user, plan.participants]);

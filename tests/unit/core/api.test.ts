@@ -118,7 +118,7 @@ describe('API Client', () => {
         status: 'pending',
         category: 'equipment',
         isAllParticipants: false,
-        allParticipantsGroupId: null,
+        assignmentStatusList: [],
         createdAt: '2025-01-01T00:00:00Z',
         updatedAt: '2025-01-01T00:00:00Z',
       },
@@ -160,7 +160,7 @@ describe('API Client', () => {
     status: 'pending',
     category: 'equipment',
     isAllParticipants: false,
-    allParticipantsGroupId: null,
+    assignmentStatusList: [],
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   };
@@ -280,7 +280,6 @@ describe('API Client', () => {
             unit: 'pcs',
             status: 'pending',
             category: 'equipment',
-            allParticipantsGroupId: null,
             createdAt: '2025-01-01T00:00:00Z',
             updatedAt: '2025-01-01T00:00:00Z',
           },
@@ -546,6 +545,107 @@ describe('API Client', () => {
       );
     });
 
+    it('creates an item with isAllParticipants', async () => {
+      const responseItem = {
+        ...mockItem,
+        isAllParticipants: true,
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(responseItem));
+
+      const payload = {
+        name: 'Tent',
+        category: 'equipment' as const,
+        quantity: 1,
+        status: 'pending' as const,
+        isAllParticipants: true,
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      };
+
+      await createItem('plan-1', payload);
+      const sentBody = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+      expect(sentBody).toEqual(payload);
+    });
+
+    it('creates an item with assignmentStatusList', async () => {
+      const responseItem = {
+        ...mockItem,
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(responseItem));
+
+      const payload = {
+        name: 'Tent',
+        category: 'equipment' as const,
+        quantity: 1,
+        status: 'pending' as const,
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      };
+
+      await createItem('plan-1', payload);
+      expect(fetchMock).toHaveBeenCalledWith(
+        'http://api.test/plans/plan-1/items',
+        expect.objectContaining({
+          method: 'POST',
+          body: JSON.stringify(payload),
+        })
+      );
+    });
+
+    it('updates an item with isAllParticipants', async () => {
+      const responseItem = {
+        ...mockItem,
+        isAllParticipants: true,
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(responseItem));
+
+      const updates = {
+        isAllParticipants: true,
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      };
+      await updateItem('item-1', updates);
+      const sentBody = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+      expect(sentBody).toEqual(updates);
+    });
+
+    it('updates an item with assignmentStatusList', async () => {
+      const responseItem = {
+        ...mockItem,
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      };
+      fetchMock.mockResolvedValueOnce(mockResponse(responseItem));
+
+      const updates = {
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+        isAllParticipants: false,
+      };
+      await updateItem('item-1', updates);
+      expect(fetchMock).toHaveBeenCalledWith(
+        'http://api.test/items/item-1',
+        expect.objectContaining({
+          method: 'PATCH',
+          body: JSON.stringify(updates),
+        })
+      );
+    });
+
+    it('updates an item with empty assignmentStatusList (unassign)', async () => {
+      fetchMock.mockResolvedValueOnce(mockResponse(mockItem));
+
+      const updates = { assignmentStatusList: [], isAllParticipants: false };
+      await updateItem('item-1', updates);
+      const sentBody = JSON.parse(fetchMock.mock.calls[0][1].body as string);
+      expect(sentBody).toEqual({
+        assignmentStatusList: [],
+        isAllParticipants: false,
+      });
+      expect(fetchMock).toHaveBeenCalledWith(
+        'http://api.test/items/item-1',
+        expect.objectContaining({ method: 'PATCH' })
+      );
+    });
+
     it('deletes an item', async () => {
       fetchMock.mockResolvedValueOnce(mockResponse({ ok: true }));
 
@@ -802,9 +902,8 @@ describe('API Client', () => {
             unit: 'pcs',
             status: 'pending',
             notes: null,
-            assignedParticipantId: null,
             isAllParticipants: false,
-            allParticipantsGroupId: null,
+            assignmentStatusList: [],
             createdAt: '2026-01-01T00:00:00.123456',
             updatedAt: '2026-01-01T00:00:00.654321',
           },
@@ -830,8 +929,7 @@ describe('API Client', () => {
             unit: 'l',
             status: 'pending',
             notes: null,
-            assignedParticipantId: null,
-            allParticipantsGroupId: null,
+            assignmentStatusList: [],
             createdAt: '2026-01-01T00:00:00Z',
             updatedAt: '2026-01-01T00:00:00Z',
           },

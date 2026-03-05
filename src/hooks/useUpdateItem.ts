@@ -1,11 +1,26 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateItem } from '../core/api';
-import type { ItemPatch } from '../core/schemas/item';
+import type { Item, ItemPatch } from '../core/schemas/item';
 import type { PlanWithDetails } from '../core/schemas/plan';
 
 interface UpdateItemVariables {
   itemId: string;
   updates: ItemPatch;
+}
+
+function applyOptimisticUpdate(item: Item, updates: ItemPatch): Item {
+  const { assignmentStatusList, isAllParticipants, ...rest } = updates;
+
+  const merged: Item = { ...item, ...rest };
+
+  if (assignmentStatusList !== undefined) {
+    merged.assignmentStatusList = assignmentStatusList;
+  }
+  if (isAllParticipants !== undefined) {
+    merged.isAllParticipants = isAllParticipants;
+  }
+
+  return merged;
 }
 
 export function useUpdateItem(planId: string) {
@@ -27,7 +42,7 @@ export function useUpdateItem(planId: string) {
         return {
           ...old,
           items: old.items.map((item) =>
-            item.itemId === itemId ? { ...item, ...updates } : item
+            item.itemId === itemId ? applyOptimisticUpdate(item, updates) : item
           ),
         };
       });

@@ -27,6 +27,31 @@ vi.mock('../../../src/hooks/useUpdatePlan', () => ({
 const mockToast = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn() }));
 vi.mock('react-hot-toast', () => ({ default: mockToast }));
 
+const mockParticipants = [
+  {
+    participantId: 'p-1',
+    planId: 'plan-1',
+    name: 'Alex',
+    lastName: 'Smith',
+    contactPhone: '',
+    role: 'owner' as const,
+    rsvpStatus: 'confirmed' as const,
+    createdAt: '2025-01-01T00:00:00Z',
+    updatedAt: '2025-01-01T00:00:00Z',
+  },
+  {
+    participantId: 'p-2',
+    planId: 'plan-1',
+    name: 'Bob',
+    lastName: 'Jones',
+    contactPhone: '',
+    role: 'participant' as const,
+    rsvpStatus: 'confirmed' as const,
+    createdAt: '2025-01-01T00:00:00Z',
+    updatedAt: '2025-01-01T00:00:00Z',
+  },
+];
+
 describe('usePlanActions', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -38,7 +63,9 @@ describe('usePlanActions', () => {
   });
 
   it('createOrUpdateItem calls createItem when no editingItemId', async () => {
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     await act(() =>
       result.current.createOrUpdateItem(
@@ -63,7 +90,9 @@ describe('usePlanActions', () => {
   });
 
   it('createOrUpdateItem calls updateItem when editingItemId is provided', async () => {
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     await act(() =>
       result.current.createOrUpdateItem(
@@ -89,7 +118,9 @@ describe('usePlanActions', () => {
   });
 
   it('deletePlan returns true on success and shows toast', async () => {
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     let success = false;
     await act(async () => {
@@ -104,7 +135,9 @@ describe('usePlanActions', () => {
   it('deletePlan returns false on error and shows error toast', async () => {
     mockDeletePlan.mutateAsync.mockRejectedValue(new Error('fail'));
 
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     let success = true;
     await act(async () => {
@@ -116,7 +149,9 @@ describe('usePlanActions', () => {
   });
 
   it('updatePlanDetails returns true on success', async () => {
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     let success = false;
     await act(async () => {
@@ -133,7 +168,9 @@ describe('usePlanActions', () => {
   it('updatePlanDetails returns false on error', async () => {
     mockUpdatePlan.mutateAsync.mockRejectedValue(new Error('fail'));
 
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     let success = true;
     await act(async () => {
@@ -145,7 +182,9 @@ describe('usePlanActions', () => {
   });
 
   it('transferPlanOwnership calls updateParticipant with owner role', async () => {
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     await act(() => result.current.transferPlanOwnership('p-2'));
 
@@ -159,7 +198,9 @@ describe('usePlanActions', () => {
   it('transferPlanOwnership shows error toast on failure', async () => {
     mockUpdateParticipant.mutateAsync.mockRejectedValue(new Error('fail'));
 
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     await act(() => result.current.transferPlanOwnership('p-2'));
 
@@ -167,7 +208,9 @@ describe('usePlanActions', () => {
   });
 
   it('updateParticipantPreferences shows success toast', async () => {
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     await act(() =>
       result.current.updateParticipantPreferences('p-1', {
@@ -189,7 +232,9 @@ describe('usePlanActions', () => {
   it('updateSingleItem shows error toast on failure', async () => {
     mockUpdateItem.mutateAsync.mockRejectedValue(new Error('fail'));
 
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     await act(() =>
       result.current.updateSingleItem('item-1', { status: 'purchased' })
@@ -198,8 +243,10 @@ describe('usePlanActions', () => {
     expect(mockToast.error).toHaveBeenCalled();
   });
 
-  it('toItemPayload converts empty strings to null', async () => {
-    const { result } = renderHook(() => usePlanActions('plan-1'));
+  it('toItemPayload converts empty strings to null and uses buildAssignmentPayload', async () => {
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
 
     await act(() =>
       result.current.createOrUpdateItem(
@@ -221,8 +268,133 @@ describe('usePlanActions', () => {
       expect.objectContaining({
         subcategory: null,
         notes: null,
-        assignedParticipantId: null,
+        assignmentStatusList: [],
+        isAllParticipants: false,
       })
     );
+  });
+
+  it('create with specific participant sends assignmentStatusList', async () => {
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
+
+    await act(() =>
+      result.current.createOrUpdateItem(
+        {
+          name: 'Tent',
+          category: 'equipment',
+          subcategory: '',
+          quantity: 1,
+          unit: 'pcs',
+          status: 'pending',
+          notes: '',
+          assignedParticipantId: 'p-1',
+        },
+        null
+      )
+    );
+
+    expect(mockCreateItem.mutateAsync).toHaveBeenCalledWith(
+      expect.objectContaining({
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+        isAllParticipants: false,
+      })
+    );
+  });
+
+  it('create with __all__ sends isAllParticipants: true and all participants in assignmentStatusList', async () => {
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
+
+    await act(() =>
+      result.current.createOrUpdateItem(
+        {
+          name: 'Tent',
+          category: 'equipment',
+          subcategory: '',
+          quantity: 1,
+          unit: 'pcs',
+          status: 'pending',
+          notes: '',
+          assignedParticipantId: '__all__',
+        },
+        null
+      )
+    );
+
+    expect(mockCreateItem.mutateAsync).toHaveBeenCalledWith(
+      expect.objectContaining({
+        isAllParticipants: true,
+        assignmentStatusList: [
+          { participantId: 'p-1', status: 'pending' },
+          { participantId: 'p-2', status: 'pending' },
+        ],
+      })
+    );
+  });
+
+  it('update with specific participant sends assignmentStatusList', async () => {
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
+
+    await act(() =>
+      result.current.createOrUpdateItem(
+        {
+          name: 'Tent',
+          category: 'equipment',
+          subcategory: '',
+          quantity: 1,
+          unit: 'pcs',
+          status: 'pending',
+          notes: '',
+          assignedParticipantId: 'p-2',
+        },
+        'item-1'
+      )
+    );
+
+    expect(mockUpdateItem.mutateAsync).toHaveBeenCalledWith({
+      itemId: 'item-1',
+      updates: expect.objectContaining({
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+        isAllParticipants: false,
+      }),
+    });
+  });
+
+  it('update with __all__ sends isAllParticipants: true', async () => {
+    const { result } = renderHook(() =>
+      usePlanActions('plan-1', mockParticipants)
+    );
+
+    await act(() =>
+      result.current.createOrUpdateItem(
+        {
+          name: 'Tent',
+          category: 'equipment',
+          subcategory: '',
+          quantity: 1,
+          unit: 'pcs',
+          status: 'pending',
+          notes: '',
+          assignedParticipantId: '__all__',
+        },
+        'item-1'
+      )
+    );
+
+    expect(mockUpdateItem.mutateAsync).toHaveBeenCalledWith({
+      itemId: 'item-1',
+      updates: expect.objectContaining({
+        isAllParticipants: true,
+        assignmentStatusList: [
+          { participantId: 'p-1', status: 'pending' },
+          { participantId: 'p-2', status: 'pending' },
+        ],
+      }),
+    });
   });
 });

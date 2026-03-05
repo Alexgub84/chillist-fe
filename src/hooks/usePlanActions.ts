@@ -7,13 +7,13 @@ import { useDeletePlan } from './useDeletePlan';
 import { useUpdatePlan } from './useUpdatePlan';
 import { getApiErrorMessage } from '../core/error-utils';
 import type { ItemCreate, ItemPatch } from '../core/schemas/item';
+import type { Participant } from '../core/schemas/participant';
 import type { PlanPatch } from '../core/schemas/plan';
 import type { ItemFormValues } from '../components/ItemForm';
 import type { PreferencesFormValues } from '../components/PreferencesForm';
-import { ALL_PARTICIPANTS_VALUE } from '../core/utils-plan-items';
+import { buildAssignmentPayload } from '../core/utils-plan-items';
 
-function toItemPayload(values: ItemFormValues) {
-  const isAll = values.assignedParticipantId === ALL_PARTICIPANTS_VALUE;
+function toItemPayload(values: ItemFormValues, participants: Participant[]) {
   return {
     name: values.name,
     category: values.category,
@@ -22,8 +22,7 @@ function toItemPayload(values: ItemFormValues) {
     unit: values.unit,
     status: values.status,
     notes: values.notes || null,
-    assignedParticipantId: isAll ? null : values.assignedParticipantId || null,
-    assignedToAll: isAll || undefined,
+    ...buildAssignmentPayload(values.assignedParticipantId ?? '', participants),
   };
 }
 
@@ -37,7 +36,10 @@ function handleMutationError(context: string, err: unknown) {
   toast.error(`${title}: ${message}`);
 }
 
-export function usePlanActions(planId: string) {
+export function usePlanActions(
+  planId: string,
+  participants: Participant[] = []
+) {
   const { t } = useTranslation();
   const createItemMutation = useCreateItem(planId);
   const updateItemMutation = useUpdateItem(planId);
@@ -70,9 +72,12 @@ export function usePlanActions(planId: string) {
     editingItemId: string | null
   ) {
     if (editingItemId) {
-      await updateSingleItem(editingItemId, toItemPayload(values));
+      await updateSingleItem(
+        editingItemId,
+        toItemPayload(values, participants)
+      );
     } else {
-      await createItem(toItemPayload(values));
+      await createItem(toItemPayload(values, participants));
     }
   }
 

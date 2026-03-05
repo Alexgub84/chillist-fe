@@ -124,6 +124,11 @@ const planCreateWithOwnerSchema = z.object({
   participants: z.array(participantCreateSchema).optional(),
 });
 
+const assignmentStatusEntrySchema = z.object({
+  participantId: z.string(),
+  status: itemStatusSchema,
+});
+
 const itemCreateSchema = z.object({
   name: z.string().min(1).max(255),
   category: itemCategorySchema,
@@ -132,11 +137,21 @@ const itemCreateSchema = z.object({
   status: itemStatusSchema,
   subcategory: z.string().nullable().optional(),
   notes: z.string().nullable().optional(),
-  assignedParticipantId: z.string().nullable().optional(),
-  assignedToAll: z.boolean().optional(),
+  assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),
+  isAllParticipants: z.boolean().optional(),
 });
 
-const itemPatchSchema = itemCreateSchema.partial();
+const itemPatchSchema = z.object({
+  name: z.string().min(1).max(255).optional(),
+  category: itemCategorySchema.optional(),
+  quantity: z.number().int().min(1).optional(),
+  unit: unitSchema.optional(),
+  status: itemStatusSchema.optional(),
+  subcategory: z.string().nullable().optional(),
+  notes: z.string().nullable().optional(),
+  assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),
+  isAllParticipants: z.boolean().optional(),
+});
 
 export interface BuildServerOptions {
   dataFilePath?: string;
@@ -772,9 +787,13 @@ export async function buildServer(
         status: 'pending',
         subcategory: body.subcategory ? String(body.subcategory) : null,
         notes: body.notes ? String(body.notes) : null,
-        assignedParticipantId: tokenMatch.participantId,
         isAllParticipants: false,
-        allParticipantsGroupId: null,
+        assignmentStatusList: [
+          {
+            participantId: tokenMatch.participantId,
+            status: 'pending' as const,
+          },
+        ],
         createdAt: now,
         updatedAt: now,
       };
@@ -806,7 +825,11 @@ export async function buildServer(
       );
       if (!item) throw new HttpError('Item not found', 404);
 
-      if (item.assignedParticipantId !== tokenMatch.participantId) {
+      const isAssigned =
+        item.assignmentStatusList.some(
+          (a) => a.participantId === tokenMatch.participantId
+        ) || item.assignmentStatusList.length === 0;
+      if (!isAssigned) {
         throw new HttpError('Cannot edit items assigned to others', 403);
       }
 
@@ -975,63 +998,29 @@ export async function buildServer(
   app.post<{ Params: { planId: string } }>(
     '/plans/:planId/items',
     async (request, reply) => {
-      const plan = ensurePlan(store, request.params.planId);
+      ensurePlan(store, request.params.planId);
       const parsed = itemCreateSchema.parse(request.body);
       const now = new Date().toISOString();
 
-      if (parsed.assignedToAll) {
-        const participantIds = new Set(plan.participantIds ?? []);
-        const planParticipants = store.participants.filter((p) =>
-          participantIds.has(p.participantId)
-        );
-        const groupId = randomUUID();
-        const createdItems: Item[] = [];
+      const item: Item = {
+        itemId: randomUUID(),
+        planId: request.params.planId,
+        name: parsed.name,
+        category: parsed.category,
+        quantity: parsed.quantity,
+        unit: parsed.unit ?? 'pcs',
+        status: parsed.status,
+        subcategory: parsed.subcategory ?? null,
+        notes: parsed.notes,
+        isAllParticipants: parsed.isAllParticipants ?? false,
+        assignmentStatusList: parsed.assignmentStatusList ?? [],
+        createdAt: now,
+        updatedAt: now,
+      };
 
-        for (const p of planParticipants) {
-          const item: Item = {
-            itemId: randomUUID(),
-            planId: request.params.planId,
-            name: parsed.name,
-            category: parsed.category,
-            quantity: parsed.quantity,
-            unit: parsed.unit ?? 'pcs',
-            status: parsed.status,
-            subcategory: parsed.subcategory ?? null,
-            notes: parsed.notes,
-            assignedParticipantId: p.participantId,
-            isAllParticipants: true,
-            allParticipantsGroupId: groupId,
-            createdAt: now,
-            updatedAt: now,
-          };
-          store.items.push(item);
-          createdItems.push(item);
-        }
-
-        await persistData(store, shouldPersist, filePath);
-        void reply.status(201).send(createdItems[0]);
-      } else {
-        const item: Item = {
-          itemId: randomUUID(),
-          planId: request.params.planId,
-          name: parsed.name,
-          category: parsed.category,
-          quantity: parsed.quantity,
-          unit: parsed.unit ?? 'pcs',
-          status: parsed.status,
-          subcategory: parsed.subcategory ?? null,
-          notes: parsed.notes,
-          assignedParticipantId: parsed.assignedParticipantId,
-          isAllParticipants: false,
-          allParticipantsGroupId: null,
-          createdAt: now,
-          updatedAt: now,
-        };
-
-        store.items.push(item);
-        await persistData(store, shouldPersist, filePath);
-        void reply.status(201).send(item);
-      }
+      store.items.push(item);
+      await persistData(store, shouldPersist, filePath);
+      void reply.status(201).send(item);
     }
   );
 
@@ -1050,84 +1039,18 @@ export async function buildServer(
       const updates = itemPatchSchema.parse(request.body ?? {});
       const now = new Date().toISOString();
 
-      if (updates.assignedToAll === true && !item.isAllParticipants) {
-        const plan = store.plans.find((p) => p.planId === item.planId);
-        if (plan) {
-          const participantIds = new Set(plan.participantIds ?? []);
-          const planParticipants = store.participants.filter((p) =>
-            participantIds.has(p.participantId)
-          );
-          const groupId = randomUUID();
-          item.isAllParticipants = true;
-          item.allParticipantsGroupId = groupId;
-          item.assignedParticipantId =
-            planParticipants[0]?.participantId ?? null;
-          item.updatedAt = now;
-
-          for (let i = 1; i < planParticipants.length; i++) {
-            const copy: Item = {
-              ...structuredClone(item),
-              itemId: randomUUID(),
-              assignedParticipantId: planParticipants[i].participantId,
-              createdAt: now,
-              updatedAt: now,
-            };
-            store.items.push(copy);
-          }
-        }
-      } else if (updates.assignedToAll === false && item.isAllParticipants) {
-        const groupId = item.allParticipantsGroupId;
-        if (groupId) {
-          const siblings = store.items.filter(
-            (i) =>
-              i.allParticipantsGroupId === groupId && i.itemId !== item.itemId
-          );
-          for (const sib of siblings) {
-            sib.status = 'canceled';
-            sib.isAllParticipants = false;
-            sib.updatedAt = now;
-          }
-        }
-        item.isAllParticipants = false;
-        if (updates.assignedParticipantId !== undefined) {
-          item.assignedParticipantId = updates.assignedParticipantId;
-        }
-        item.updatedAt = now;
-      } else if (item.isAllParticipants && item.allParticipantsGroupId) {
-        const cascadeFields = [
-          'name',
-          'quantity',
-          'unit',
-          'category',
-          'subcategory',
-          'notes',
-        ] as const;
-        const hasCascade = cascadeFields.some(
-          (f) => (updates as Record<string, unknown>)[f] !== undefined
-        );
-        if (hasCascade) {
-          const siblings = store.items.filter(
-            (i) =>
-              i.allParticipantsGroupId === item.allParticipantsGroupId &&
-              i.itemId !== item.itemId
-          );
-          for (const sib of siblings) {
-            for (const f of cascadeFields) {
-              const val = (updates as Record<string, unknown>)[f];
-              if (val !== undefined) {
-                (sib as Record<string, unknown>)[f] = val;
-              }
-            }
-            sib.updatedAt = now;
-          }
-        }
-        Object.assign(item, updates, { updatedAt: now });
-        delete (item as Record<string, unknown>).assignedToAll;
-      } else {
-        Object.assign(item, updates, { updatedAt: now });
-        delete (item as Record<string, unknown>).assignedToAll;
+      if (updates.assignmentStatusList !== undefined) {
+        item.assignmentStatusList = updates.assignmentStatusList;
       }
+      if (updates.isAllParticipants !== undefined) {
+        item.isAllParticipants = updates.isAllParticipants;
+      }
+      const { assignmentStatusList, isAllParticipants, ...rest } = updates;
+      void assignmentStatusList;
+      void isAllParticipants;
+      Object.assign(item, rest);
 
+      item.updatedAt = now;
       await persistData(store, shouldPersist, filePath);
 
       void reply.send(item);

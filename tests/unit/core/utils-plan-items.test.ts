@@ -20,7 +20,7 @@ function makeItem(
     unit: 'pcs',
     status: 'pending',
     isAllParticipants: false,
-    allParticipantsGroupId: null,
+    assignmentStatusList: [],
     createdAt: ts,
     updatedAt: ts,
     ...overrides,
@@ -45,9 +45,21 @@ describe('countItemsPerParticipant', () => {
   it('counts items assigned to each participant', () => {
     const participants = [makeParticipant('p-1'), makeParticipant('p-2')];
     const items = [
-      makeItem({ name: 'a', category: 'food', assignedParticipantId: 'p-1' }),
-      makeItem({ name: 'b', category: 'food', assignedParticipantId: 'p-1' }),
-      makeItem({ name: 'c', category: 'food', assignedParticipantId: 'p-2' }),
+      makeItem({
+        name: 'a',
+        category: 'food',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      }),
+      makeItem({
+        name: 'b',
+        category: 'food',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      }),
+      makeItem({
+        name: 'c',
+        category: 'food',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      }),
     ];
 
     const result = countItemsPerParticipant(participants, items);
@@ -59,7 +71,7 @@ describe('countItemsPerParticipant', () => {
   it('counts unassigned items', () => {
     const participants = [makeParticipant('p-1')];
     const items = [
-      makeItem({ name: 'a', category: 'food', assignedParticipantId: null }),
+      makeItem({ name: 'a', category: 'food', assignmentStatusList: [] }),
       makeItem({ name: 'b', category: 'food' }),
     ];
 
@@ -79,7 +91,9 @@ describe('countItemsPerParticipant', () => {
       makeItem({
         name: 'a',
         category: 'food',
-        assignedParticipantId: 'p-unknown',
+        assignmentStatusList: [
+          { participantId: 'p-unknown', status: 'pending' },
+        ],
       }),
     ];
 
@@ -94,19 +108,19 @@ describe('countItemsPerParticipant', () => {
       makeItem({
         name: 'a',
         category: 'food',
-        assignedParticipantId: 'p-1',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
         status: 'pending',
       }),
       makeItem({
         name: 'b',
         category: 'food',
-        assignedParticipantId: 'p-1',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
         status: 'canceled',
       }),
       makeItem({
         name: 'c',
         category: 'food',
-        assignedParticipantId: null,
+        assignmentStatusList: [],
         status: 'canceled',
       }),
     ];
@@ -120,9 +134,17 @@ describe('countItemsPerParticipant', () => {
 
 describe('filterItemsByAssignedParticipant', () => {
   const items = [
-    makeItem({ name: 'a', category: 'food', assignedParticipantId: 'p-1' }),
-    makeItem({ name: 'b', category: 'food', assignedParticipantId: 'p-2' }),
-    makeItem({ name: 'c', category: 'food', assignedParticipantId: null }),
+    makeItem({
+      name: 'a',
+      category: 'food',
+      assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+    }),
+    makeItem({
+      name: 'b',
+      category: 'food',
+      assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+    }),
+    makeItem({ name: 'c', category: 'food', assignmentStatusList: [] }),
   ];
 
   it('returns all items when filter is undefined', () => {

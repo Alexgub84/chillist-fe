@@ -296,7 +296,6 @@ export default function BulkItemAddWizard({
           status: 'pending' as const,
           subcategory: s.subcategory || null,
           notes: null,
-          assignedParticipantId: null,
         }));
         await onAdd(payloads);
       }
