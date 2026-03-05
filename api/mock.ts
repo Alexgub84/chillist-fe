@@ -63,6 +63,11 @@ const participantSchema = z
   })
   .passthrough();
 
+const assignmentStatusEntrySchema = z.object({
+  participantId: z.string(),
+  status: z.enum(['pending', 'purchased', 'packed', 'canceled']),
+});
+
 const equipmentItemSchema = z.object({
   itemId: z.string(),
   planId: z.string(),
@@ -71,7 +76,8 @@ const equipmentItemSchema = z.object({
   unit: z.enum(['pcs', 'kg', 'g', 'lb', 'oz', 'l', 'ml', 'pack', 'set']),
   notes: z.string().nullish(),
   status: z.enum(['pending', 'purchased', 'packed', 'canceled']),
-  assignedParticipantId: z.string().nullish(),
+  isAllParticipants: z.boolean().default(false),
+  assignmentStatusList: z.array(assignmentStatusEntrySchema).default([]),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),
   category: z.literal('equipment'),

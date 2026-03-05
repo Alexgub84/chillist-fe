@@ -52,9 +52,14 @@ const ITEM_FORM_DEFAULTS: ItemFormValues = {
   assignedParticipantId: '',
 };
 
+// NOTE: assignedParticipantId is a UI-only field in this form schema.
+// It holds the select value: '' (unassigned), ALL_PARTICIPANTS_VALUE, or a participantId.
+// The parent converts it to the correct API payload via buildAssignmentPayload().
+
 interface ItemFormProps {
   defaultValues?: Partial<ItemFormValues>;
   participants?: Participant[];
+  showAssignAll?: boolean;
   onSubmit: (values: ItemFormValues) => void | Promise<void>;
   onCancel?: () => void;
   isSubmitting?: boolean;
@@ -64,6 +69,7 @@ interface ItemFormProps {
 export default function ItemForm({
   defaultValues,
   participants = [],
+  showAssignAll = true,
   onSubmit,
   onCancel,
   isSubmitting = false,
@@ -283,7 +289,7 @@ export default function ItemForm({
                 unassigned: t('items.unassigned'),
                 allParticipants: t('items.allParticipants'),
               },
-              { includeUnassigned: true, includeAll: true }
+              { includeUnassigned: true, includeAll: showAssignAll }
             ).map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}

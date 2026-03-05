@@ -6,6 +6,8 @@ import type { Participant } from '../core/schemas/participant';
 import {
   ALL_PARTICIPANTS_VALUE,
   buildParticipantOptions,
+  isItemUnassigned,
+  isAssignedTo,
 } from '../core/utils-plan-items';
 import BulkAssignDialog from './BulkAssignDialog';
 
@@ -35,7 +37,7 @@ export default function BulkAssignButton({
   } | null>(null);
 
   const effectiveItems = restrictToUnassignedOnly
-    ? items.filter((i) => !i.assignedParticipantId)
+    ? items.filter((i) => isItemUnassigned(i))
     : items;
 
   const effectiveParticipants =
@@ -70,16 +72,10 @@ export default function BulkAssignButton({
 
     const allIds = effectiveItems.map((i) => i.itemId);
     const conflicts = effectiveItems.filter(
-      (i) =>
-        i.assignedParticipantId !== null &&
-        i.assignedParticipantId !== undefined &&
-        i.assignedParticipantId !== selectedValue
+      (i) => !isItemUnassigned(i) && !isAssignedTo(i, selectedValue)
     );
     const unassignedIds = effectiveItems
-      .filter(
-        (i) =>
-          !i.assignedParticipantId || i.assignedParticipantId === selectedValue
-      )
+      .filter((i) => isItemUnassigned(i) || isAssignedTo(i, selectedValue))
       .map((i) => i.itemId);
 
     if (restrictToUnassignedOnly || conflicts.length === 0) {

@@ -88,8 +88,12 @@ function assignItemsToParticipants(plan: ReturnType<typeof buildTestPlan>) {
   const carol = plan.participants.find((p) => p.name === 'Carol')!;
   const tent = plan.items.find((i) => i.name === 'Tent')!;
   const water = plan.items.find((i) => i.name === 'Water')!;
-  tent.assignedParticipantId = bob.participantId;
-  water.assignedParticipantId = carol.participantId;
+  tent.assignmentStatusList = [
+    { participantId: bob.participantId, status: 'pending' },
+  ];
+  water.assignmentStatusList = [
+    { participantId: carol.participantId, status: 'pending' },
+  ];
   return plan;
 }
 
@@ -241,9 +245,8 @@ test.describe('Item CRUD', () => {
     });
     await page.getByTestId('bulk-add-fab').click();
     const dialog = page.getByTestId('bulk-item-add-wizard');
-    await expect(dialog).toBeVisible({ timeout: 10000 });
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
-      timeout: 5000,
+      timeout: 10000,
     });
 
     await dialog
@@ -1052,9 +1055,8 @@ test.describe('Invite Landing Page', () => {
     });
     await page.getByTestId('bulk-add-fab').click();
     const dialog = page.getByTestId('bulk-item-add-wizard');
-    await expect(dialog).toBeVisible({ timeout: 10000 });
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
-      timeout: 5000,
+      timeout: 10000,
     });
 
     await dialog.getByRole('button', { name: 'Food', exact: true }).click();

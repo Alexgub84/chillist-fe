@@ -38,9 +38,8 @@ const successResponse: BulkItemResponse = {
       quantity: 1,
       unit: 'pcs',
       status: 'pending',
-      assignedParticipantId: 'p-1',
       isAllParticipants: false,
-      allParticipantsGroupId: null,
+      assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
       createdAt: '2025-01-01T00:00:00Z',
       updatedAt: '2025-01-01T00:00:00Z',
     },
@@ -87,7 +86,11 @@ describe('useBulkAssign', () => {
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
     expect(mockBulk).toHaveBeenCalledWith('plan-1', [
-      { itemId: 'i-1', assignedParticipantId: 'p-1' },
+      {
+        itemId: 'i-1',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+        isAllParticipants: false,
+      },
     ]);
   });
 

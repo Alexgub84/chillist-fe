@@ -1,15 +1,17 @@
 import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import type { ItemPatch } from '../core/schemas/item';
+import type { Item, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import { STATUS_OPTIONS, UNIT_OPTIONS } from '../core/constants/item';
 import {
-  ALL_PARTICIPANTS_VALUE,
   buildParticipantOptions,
+  getAssignmentSelectValue,
+  buildAssignmentPayload,
+  isAssignedTo,
+  isItemUnassigned,
 } from '../core/utils-plan-items';
-import type { DisplayItem } from '../core/utils-plan-items';
 import InlineSelect from './shared/InlineSelect';
 import InlineQuantityInput from './shared/InlineQuantityInput';
 
@@ -37,7 +39,7 @@ const QUICK_ACTIONS: Record<string, QuickActionConfig> = {
 };
 
 interface ItemCardProps {
-  item: DisplayItem;
+  item: Item;
   participants?: Participant[];
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
@@ -78,10 +80,20 @@ export default function ItemCard({
       : null;
   const [isChecking, setIsChecking] = useState(false);
 
-  const assignedParticipant = useMemo(
+  const assignmentSelectValue = useMemo(
+    () => getAssignmentSelectValue(item),
+    [item]
+  );
+
+  const firstAssignedParticipant = useMemo(
     () =>
-      participants.find((p) => p.participantId === item.assignedParticipantId),
-    [participants, item.assignedParticipantId]
+      item.assignmentStatusList.length > 0
+        ? participants.find(
+            (p) =>
+              p.participantId === item.assignmentStatusList[0].participantId
+          )
+        : undefined,
+    [participants, item.assignmentStatusList]
   );
 
   const assignmentOptions = useMemo(
@@ -106,8 +118,7 @@ export default function ItemCard({
   }
 
   const isAssignedToMe =
-    !!selfAssignParticipantId &&
-    item.assignedParticipantId === selfAssignParticipantId;
+    !!selfAssignParticipantId && isAssignedTo(item, selfAssignParticipantId);
 
   function renderSelfAssign() {
     if (!onUpdate || !selfAssignParticipantId) return null;
@@ -132,7 +143,13 @@ export default function ItemCard({
           {t('items.assignedToMe')}
           <button
             type="button"
-            onClick={() => onUpdate({ assignedParticipantId: null })}
+            onClick={() =>
+              onUpdate({
+                assignmentStatusList: item.assignmentStatusList.filter(
+                  (a) => a.participantId !== selfAssignParticipantId
+                ),
+              })
+            }
             className="ms-0.5 text-indigo-400 hover:text-indigo-700 transition-colors"
             aria-label={t('items.unassignItem', { name: item.name })}
           >
@@ -155,7 +172,7 @@ export default function ItemCard({
       );
     }
 
-    if (item.assignedParticipantId && assignedParticipant) {
+    if (!isItemUnassigned(item) && firstAssignedParticipant) {
       return (
         <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-gray-100 text-gray-500 border border-gray-200">
           <svg
@@ -172,7 +189,7 @@ export default function ItemCard({
               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
             />
           </svg>
-          {assignedParticipant.name} {assignedParticipant.lastName}
+          {firstAssignedParticipant.name} {firstAssignedParticipant.lastName}
         </span>
       );
     }
@@ -181,7 +198,12 @@ export default function ItemCard({
       <button
         type="button"
         onClick={() =>
-          onUpdate({ assignedParticipantId: selfAssignParticipantId })
+          onUpdate({
+            assignmentStatusList: [
+              ...item.assignmentStatusList,
+              { participantId: selfAssignParticipantId!, status: 'pending' },
+            ],
+          })
         }
         className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-blue-50 text-blue-600 border border-dashed border-blue-300 hover:bg-blue-100 hover:border-blue-400 transition-colors cursor-pointer"
       >
@@ -283,7 +305,7 @@ export default function ItemCard({
                 {t('items.assignedToMe')}
               </span>
             ) : (
-              assignedParticipant && (
+              firstAssignedParticipant && (
                 <span className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
                   <svg
                     className="w-3 h-3"
@@ -299,7 +321,8 @@ export default function ItemCard({
                       d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                     />
                   </svg>
-                  {assignedParticipant.name} {assignedParticipant.lastName}
+                  {firstAssignedParticipant.name}{' '}
+                  {firstAssignedParticipant.lastName}
                 </span>
               )
             )}
@@ -455,31 +478,16 @@ export default function ItemCard({
               <>
                 {isEditable ? (
                   <InlineSelect
-                    value={
-                      item.isAllParticipants
-                        ? ALL_PARTICIPANTS_VALUE
-                        : (item.assignedParticipantId ?? '')
-                    }
+                    value={assignmentSelectValue}
                     onChange={(value) => {
-                      if (value === ALL_PARTICIPANTS_VALUE) {
-                        onUpdate!({ assignedToAll: true });
-                      } else if (item.isAllParticipants) {
-                        onUpdate!({
-                          assignedToAll: false,
-                          assignedParticipantId: value || null,
-                        });
-                      } else {
-                        onUpdate!({
-                          assignedParticipantId: value || null,
-                        });
-                      }
+                      onUpdate!(buildAssignmentPayload(value, participants));
                     }}
                     options={assignmentOptions}
                     buttonClassName={clsx(
                       'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium transition-colors',
                       item.isAllParticipants
                         ? 'bg-purple-50 text-purple-700 border border-purple-200'
-                        : item.assignedParticipantId
+                        : !isItemUnassigned(item)
                           ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                           : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300 hover:border-gray-400'
                     )}
@@ -491,7 +499,7 @@ export default function ItemCard({
                       'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs sm:text-sm font-medium',
                       item.isAllParticipants
                         ? 'bg-purple-50 text-purple-700 border border-purple-200'
-                        : assignedParticipant
+                        : firstAssignedParticipant
                           ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                           : 'bg-gray-50 text-gray-400 border border-dashed border-gray-300'
                     )}
@@ -516,8 +524,8 @@ export default function ItemCard({
                     </svg>
                     {item.isAllParticipants
                       ? t('items.allParticipants')
-                      : assignedParticipant
-                        ? `${assignedParticipant.name} ${assignedParticipant.lastName}`
+                      : firstAssignedParticipant
+                        ? `${firstAssignedParticipant.name} ${firstAssignedParticipant.lastName}`
                         : t('items.unassigned')}
                   </span>
                 )}

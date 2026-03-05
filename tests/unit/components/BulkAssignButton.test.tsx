@@ -47,7 +47,8 @@ function buildItem(overrides: Partial<Item> = {}): Item {
     quantity: 1,
     unit: 'pcs',
     status: 'pending',
-    assignedParticipantId: null,
+    isAllParticipants: false,
+    assignmentStatusList: [],
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
     ...overrides,
@@ -101,8 +102,8 @@ describe('BulkAssignButton', () => {
     const user = userEvent.setup();
     const onAssign = vi.fn();
     const items = [
-      buildItem({ itemId: 'i-1', assignedParticipantId: null }),
-      buildItem({ itemId: 'i-2', assignedParticipantId: null }),
+      buildItem({ itemId: 'i-1', assignmentStatusList: [] }),
+      buildItem({ itemId: 'i-2', assignmentStatusList: [] }),
     ];
 
     render(
@@ -123,8 +124,14 @@ describe('BulkAssignButton', () => {
     const user = userEvent.setup();
     const onAssign = vi.fn();
     const items = [
-      buildItem({ itemId: 'i-1', assignedParticipantId: 'p-1' }),
-      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-1' }),
+      buildItem({
+        itemId: 'i-1',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      }),
+      buildItem({
+        itemId: 'i-2',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      }),
     ];
 
     render(
@@ -145,8 +152,11 @@ describe('BulkAssignButton', () => {
     const user = userEvent.setup();
     const onAssign = vi.fn();
     const items = [
-      buildItem({ itemId: 'i-1', assignedParticipantId: null }),
-      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-2' }),
+      buildItem({ itemId: 'i-1', assignmentStatusList: [] }),
+      buildItem({
+        itemId: 'i-2',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      }),
     ];
 
     render(
@@ -168,8 +178,11 @@ describe('BulkAssignButton', () => {
     const user = userEvent.setup();
     const onAssign = vi.fn();
     const items = [
-      buildItem({ itemId: 'i-1', assignedParticipantId: null }),
-      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-2' }),
+      buildItem({ itemId: 'i-1', assignmentStatusList: [] }),
+      buildItem({
+        itemId: 'i-2',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      }),
     ];
 
     render(
@@ -191,9 +204,15 @@ describe('BulkAssignButton', () => {
     const user = userEvent.setup();
     const onAssign = vi.fn();
     const items = [
-      buildItem({ itemId: 'i-1', assignedParticipantId: null }),
-      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-2' }),
-      buildItem({ itemId: 'i-3', assignedParticipantId: 'p-1' }),
+      buildItem({ itemId: 'i-1', assignmentStatusList: [] }),
+      buildItem({
+        itemId: 'i-2',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      }),
+      buildItem({
+        itemId: 'i-3',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      }),
     ];
 
     render(
@@ -215,8 +234,11 @@ describe('BulkAssignButton', () => {
     const user = userEvent.setup();
     const onAssign = vi.fn();
     const items = [
-      buildItem({ itemId: 'i-1', assignedParticipantId: null }),
-      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-2' }),
+      buildItem({ itemId: 'i-1', assignmentStatusList: [] }),
+      buildItem({
+        itemId: 'i-2',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      }),
     ];
 
     render(
@@ -241,8 +263,14 @@ describe('BulkAssignButton', () => {
 
   it('with restrictToUnassignedOnly renders nothing when no unassigned items', () => {
     const items = [
-      buildItem({ itemId: 'i-1', assignedParticipantId: 'p-2' }),
-      buildItem({ itemId: 'i-2', assignedParticipantId: 'p-2' }),
+      buildItem({
+        itemId: 'i-1',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      }),
+      buildItem({
+        itemId: 'i-2',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+      }),
     ];
 
     const { container } = render(

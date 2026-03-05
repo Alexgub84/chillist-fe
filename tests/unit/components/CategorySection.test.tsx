@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CategorySection from '../../../src/components/CategorySection';
 import type { Item } from '../../../src/core/schemas/item';
+import { isAssignedTo } from '../../../src/core/utils-plan-items';
 
 const equipmentItems: Item[] = [
   {
@@ -12,7 +13,8 @@ const equipmentItems: Item[] = [
     quantity: 1,
     unit: 'pcs',
     status: 'pending',
-    assignedParticipantId: 'p-me',
+    isAllParticipants: false,
+    assignmentStatusList: [{ participantId: 'p-me', status: 'pending' }],
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   },
@@ -24,7 +26,8 @@ const equipmentItems: Item[] = [
     quantity: 2,
     unit: 'pcs',
     status: 'packed',
-    assignedParticipantId: 'p-other',
+    isAllParticipants: false,
+    assignmentStatusList: [{ participantId: 'p-other', status: 'pending' }],
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   },
@@ -61,7 +64,7 @@ describe('CategorySection', () => {
         <CategorySection
           category="equipment"
           items={equipmentItems}
-          canEditItem={(item) => item.assignedParticipantId === 'p-me'}
+          canEditItem={(item) => isAssignedTo(item, 'p-me')}
           onEditItem={noop}
           onUpdateItem={noop}
         />

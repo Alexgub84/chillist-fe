@@ -534,13 +534,17 @@
       "unit": "pcs",
       "notes": "Check stakes before departure",
       "status": "packed",
-      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
       "createdAt": "2025-05-02T10:00:00.000Z",
       "updatedAt": "2026-02-15T07:48:16.012Z",
       "category": "equipment",
       "subcategory": "Venue Setup and Layout",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "404954b1-04f3-4512-abae-42683bffad2b",
@@ -555,7 +559,7 @@
       "category": "food",
       "subcategory": "Snacks and Chips",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "4741a1b6-33b8-46d7-864c-7e61c748ff12",
@@ -565,13 +569,17 @@
       "unit": "pcs",
       "notes": "Two rated for 20°F",
       "status": "packed",
-      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
       "createdAt": "2025-05-04T11:05:00.000Z",
       "updatedAt": "2026-02-15T07:48:19.630Z",
       "category": "equipment",
       "subcategory": "Comfort and Climate Control",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "ccab3332-cc4f-449b-aec6-4130855cb0bf",
@@ -581,13 +589,17 @@
       "unit": "pcs",
       "notes": "Need to borrow from Taylor",
       "status": "pending",
-      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
       "createdAt": "2025-05-06T09:40:00.000Z",
       "updatedAt": "2026-02-15T07:48:17.808Z",
       "category": "equipment",
       "subcategory": "Cooking and Heating Equipment",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "bfd3aa99-197f-4b40-8607-11a7bc59e8f8",
@@ -597,13 +609,17 @@
       "unit": "pcs",
       "notes": "Pick up at REI on Thursday",
       "status": "pending",
-      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
       "createdAt": "2025-05-06T09:45:00.000Z",
       "updatedAt": "2026-02-15T07:48:21.196Z",
       "category": "equipment",
       "subcategory": "Cooking and Heating Equipment",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "10ad45f4-4afb-40c3-b0e7-676e293fada1",
@@ -618,7 +634,7 @@
       "category": "equipment",
       "subcategory": "Lighting and Visibility",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "f38b7f87-e468-4d32-9c53-bd7cd2820283",
@@ -633,7 +649,7 @@
       "category": "food",
       "subcategory": "Snacks and Chips",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "7c5393a6-3450-4615-ae03-0a62447fcdaf",
@@ -648,7 +664,7 @@
       "category": "food",
       "subcategory": "Ready-to-Eat and Prepared Foods",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "59ea2733-e7cf-4700-a3ef-189c44203d68",
@@ -663,7 +679,7 @@
       "category": "food",
       "subcategory": "Beverages (non-alcoholic)",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "fbf1ccf5-4107-416b-bd67-12b4b4868557",
@@ -678,7 +694,7 @@
       "category": "food",
       "subcategory": "Water and Ice",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "90c92f2b-17b9-4406-8492-6065a9e0f212",
@@ -693,7 +709,7 @@
       "category": "equipment",
       "subcategory": "Venue Setup and Layout",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "b1a2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -708,7 +724,7 @@
       "category": "equipment",
       "subcategory": "First Aid and Safety",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "c2b3d4e5-f6a7-8901-bcde-f12345678901",
@@ -723,7 +739,7 @@
       "category": "equipment",
       "subcategory": "Comfort and Climate Control",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "d3c4e5f6-a7b8-9012-cdef-123456789012",
@@ -738,7 +754,7 @@
       "category": "equipment",
       "subcategory": "Comfort and Climate Control",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "e4d5f6a7-b8c9-0123-defa-234567890123",
@@ -753,7 +769,7 @@
       "category": "food",
       "subcategory": "Meat and Poultry",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "f5e6a7b8-c9d0-1234-efab-345678901234",
@@ -768,7 +784,7 @@
       "category": "food",
       "subcategory": "Grains and Pasta",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "a6f7b8c9-d0e1-2345-fabc-456789012345",
@@ -783,7 +799,7 @@
       "category": "food",
       "subcategory": "Grains and Pasta",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "b7a8c9d0-e1f2-3456-abcd-567890123456",
@@ -798,7 +814,7 @@
       "category": "equipment",
       "subcategory": "Games and Activities",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "c8b9d0e1-f2a3-4567-bcde-678901234567",
@@ -813,7 +829,7 @@
       "category": "equipment",
       "subcategory": "Games and Activities",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "d9c0e1f2-a3b4-5678-cdef-789012345678",
@@ -828,7 +844,7 @@
       "category": "food",
       "subcategory": "Ready-to-Eat and Prepared Foods",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "e0d1f2a3-b4c5-6789-defa-890123456789",
@@ -843,7 +859,7 @@
       "category": "food",
       "subcategory": "Beverages (non-alcoholic)",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "f1e2a3b4-c5d6-7890-efab-901234567890",
@@ -858,7 +874,7 @@
       "category": "food",
       "subcategory": "Fresh Fruit",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "a2f3b4c5-d6e7-8901-fabc-012345678901",
@@ -873,7 +889,7 @@
       "category": "equipment",
       "subcategory": "Games and Activities",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "b3a4c5d6-e7f8-9012-abcd-123456789abc",
@@ -888,7 +904,7 @@
       "category": "equipment",
       "subcategory": "Music and Media",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "b59a06d7-3de6-46e5-80c0-0b6b9cc53632",
@@ -898,13 +914,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": "42205c9b-9242-489b-a367-232528213b7d",
       "createdAt": "2026-02-14T19:41:47.035Z",
       "updatedAt": "2026-02-14T19:41:47.035Z",
       "category": "equipment",
       "subcategory": "Venue Setup and Layout",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "42205c9b-9242-489b-a367-232528213b7d",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "aa01bb02-cc03-dd04-ee05-ff0611111111",
@@ -914,13 +934,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
       "createdAt": "2025-05-09T08:00:00.000Z",
       "updatedAt": "2025-05-10T07:30:00.000Z",
       "category": "equipment",
       "subcategory": "Games and Activities",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "1e6f5d21-b8d2-4991-9a23-8803d8aa3428",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "aa01bb02-cc03-dd04-ee05-ff0622222222",
@@ -930,13 +954,17 @@
       "unit": "pcs",
       "notes": "Download offline version too",
       "status": "purchased",
-      "assignedParticipantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
       "createdAt": "2025-05-09T09:00:00.000Z",
       "updatedAt": "2025-05-10T07:45:00.000Z",
       "category": "equipment",
       "subcategory": "Documentation and Access",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "457393e1-822f-4c1c-a081-8207aa6b9fe1",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "aa01bb02-cc03-dd04-ee05-ff0633333333",
@@ -946,13 +974,17 @@
       "unit": "pack",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": "399dcf24-f8c4-45f8-96fb-4478d578908f",
       "createdAt": "2025-05-09T10:00:00.000Z",
       "updatedAt": "2025-05-09T10:00:00.000Z",
       "category": "food",
       "subcategory": "Fresh Fruit",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "399dcf24-f8c4-45f8-96fb-4478d578908f",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "bb02cc03-dd04-ee05-ff06-aa0111111111",
@@ -962,13 +994,17 @@
       "unit": "pack",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
       "createdAt": "2025-12-15T11:35:00.000Z",
       "updatedAt": "2025-12-15T12:10:00.000Z",
       "category": "equipment",
       "subcategory": "Hygiene and Bathroom Supplies",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "bb02cc03-dd04-ee05-ff06-aa0122222222",
@@ -978,13 +1014,17 @@
       "unit": "pcs",
       "notes": "Get the spicy one",
       "status": "pending",
-      "assignedParticipantId": "de0bf12f-97de-534c-9930-27ebd6e0f944",
       "createdAt": "2025-12-15T11:40:00.000Z",
       "updatedAt": "2025-12-15T11:40:00.000Z",
       "category": "food",
       "subcategory": "Sauces, Condiments, and Spreads",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "de0bf12f-97de-534c-9930-27ebd6e0f944",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "bb02cc03-dd04-ee05-ff06-aa0133333333",
@@ -994,13 +1034,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "purchased",
-      "assignedParticipantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
       "createdAt": "2025-12-15T11:45:00.000Z",
       "updatedAt": "2025-12-15T12:15:00.000Z",
       "category": "equipment",
       "subcategory": "Games and Activities",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0211111111",
@@ -1010,13 +1054,17 @@
       "unit": "pcs",
       "notes": "Foldable preferred",
       "status": "pending",
-      "assignedParticipantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
       "createdAt": "2025-12-15T11:00:00.000Z",
       "updatedAt": "2025-12-15T11:00:00.000Z",
       "category": "equipment",
       "subcategory": "Venue Setup and Layout",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0222222222",
@@ -1026,13 +1074,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "de0bf12f-97de-534c-9930-27ebd6e0f944",
       "createdAt": "2025-12-15T11:05:00.000Z",
       "updatedAt": "2025-12-16T08:00:00.000Z",
       "category": "equipment",
       "subcategory": "Food Storage and Cooling",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "de0bf12f-97de-534c-9930-27ebd6e0f944",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0233333333",
@@ -1042,13 +1094,17 @@
       "unit": "set",
       "notes": "25m each",
       "status": "purchased",
-      "assignedParticipantId": "3238777c-8513-5c60-8964-99397eacfa28",
       "createdAt": "2025-12-15T11:10:00.000Z",
       "updatedAt": "2025-12-15T14:00:00.000Z",
       "category": "equipment",
       "subcategory": "Tools and Quick Repairs",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "3238777c-8513-5c60-8964-99397eacfa28",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0244444444",
@@ -1058,13 +1114,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
       "createdAt": "2025-12-15T11:15:00.000Z",
       "updatedAt": "2025-12-16T08:10:00.000Z",
       "category": "equipment",
       "subcategory": "Other",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0255555555",
@@ -1074,13 +1134,17 @@
       "unit": "l",
       "notes": null,
       "status": "purchased",
-      "assignedParticipantId": "de0bf12f-97de-534c-9930-27ebd6e0f944",
       "createdAt": "2025-12-15T11:20:00.000Z",
       "updatedAt": "2025-12-15T14:30:00.000Z",
       "category": "food",
       "subcategory": "Beverages (non-alcoholic)",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "de0bf12f-97de-534c-9930-27ebd6e0f944",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0266666666",
@@ -1090,13 +1154,17 @@
       "unit": "pack",
       "notes": "Nut-free option for Dana",
       "status": "pending",
-      "assignedParticipantId": "3238777c-8513-5c60-8964-99397eacfa28",
       "createdAt": "2025-12-15T11:25:00.000Z",
       "updatedAt": "2025-12-15T11:25:00.000Z",
       "category": "food",
       "subcategory": "Snacks and Chips",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "3238777c-8513-5c60-8964-99397eacfa28",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0277777777",
@@ -1106,13 +1174,12 @@
       "unit": "pack",
       "notes": "Replaced with lighter",
       "status": "canceled",
-      "assignedParticipantId": null,
       "createdAt": "2025-12-15T11:30:00.000Z",
       "updatedAt": "2025-12-15T15:00:00.000Z",
       "category": "equipment",
       "subcategory": "Cooking and Heating Equipment",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "cc03dd04-ee05-ff06-aa01-bb0288888888",
@@ -1122,13 +1189,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
       "createdAt": "2025-12-15T11:35:00.000Z",
       "updatedAt": "2025-12-16T08:20:00.000Z",
       "category": "food",
       "subcategory": "Fresh Fruit",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "3cdcb33e-eebd-5716-8164-7da2b8158993",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0311111111",
@@ -1138,13 +1209,17 @@
       "unit": "pcs",
       "notes": "Red preferred",
       "status": "purchased",
-      "assignedParticipantId": "a6cb8858-8c2d-4d29-9ffe-337cbad8f98a",
       "createdAt": "2026-02-14T16:00:00.000Z",
       "updatedAt": "2026-02-14T18:00:00.000Z",
       "category": "food",
       "subcategory": "Alcohol and Mixers",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "a6cb8858-8c2d-4d29-9ffe-337cbad8f98a",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0322222222",
@@ -1154,13 +1229,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": "c17f4193-955c-4418-bb7a-7092b0ed3790",
       "createdAt": "2026-02-14T16:05:00.000Z",
       "updatedAt": "2026-02-14T16:05:00.000Z",
       "category": "equipment",
       "subcategory": "Other",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c17f4193-955c-4418-bb7a-7092b0ed3790",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0333333333",
@@ -1170,13 +1249,17 @@
       "unit": "kg",
       "notes": "Wash and chop ahead of time",
       "status": "pending",
-      "assignedParticipantId": "d08cfbe9-3da9-4e9a-818c-7fb7f198367a",
       "createdAt": "2026-02-14T16:10:00.000Z",
       "updatedAt": "2026-02-14T16:10:00.000Z",
       "category": "food",
       "subcategory": "Leafy Greens and Salads",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "d08cfbe9-3da9-4e9a-818c-7fb7f198367a",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0344444444",
@@ -1186,13 +1269,17 @@
       "unit": "kg",
       "notes": "Marinate night before",
       "status": "purchased",
-      "assignedParticipantId": "42205c9b-9242-489b-a367-232528213b7d",
       "createdAt": "2026-02-14T16:15:00.000Z",
       "updatedAt": "2026-02-14T18:30:00.000Z",
       "category": "food",
       "subcategory": "Meat and Poultry",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "42205c9b-9242-489b-a367-232528213b7d",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0355555555",
@@ -1202,13 +1289,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "a6cb8858-8c2d-4d29-9ffe-337cbad8f98a",
       "createdAt": "2026-02-14T16:20:00.000Z",
       "updatedAt": "2026-02-14T19:00:00.000Z",
       "category": "food",
       "subcategory": "Bread and Bakery",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "a6cb8858-8c2d-4d29-9ffe-337cbad8f98a",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0366666666",
@@ -1218,13 +1309,17 @@
       "unit": "pcs",
       "notes": "Chocolate flavor",
       "status": "pending",
-      "assignedParticipantId": "c17f4193-955c-4418-bb7a-7092b0ed3790",
       "createdAt": "2026-02-14T16:25:00.000Z",
       "updatedAt": "2026-02-23T08:40:14.584Z",
       "category": "food",
       "subcategory": "Sweets and Desserts",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c17f4193-955c-4418-bb7a-7092b0ed3790",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "dd04ee05-ff06-aa01-bb02-cc0377777777",
@@ -1234,13 +1329,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "d08cfbe9-3da9-4e9a-818c-7fb7f198367a",
       "createdAt": "2026-02-14T16:30:00.000Z",
       "updatedAt": "2026-02-14T19:10:00.000Z",
       "category": "equipment",
       "subcategory": "Other",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "d08cfbe9-3da9-4e9a-818c-7fb7f198367a",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "1a2842b5-a06e-42cf-af12-b12b46023e86",
@@ -1250,13 +1349,17 @@
       "unit": "kg",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
       "createdAt": "2026-02-21T12:01:02.836Z",
       "updatedAt": "2026-02-21T21:52:57.671Z",
       "category": "food",
       "subcategory": "Vegan",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "9a69465a-6421-4298-b0b7-2c3d61ef9a2f",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "3aa08c45-f9c6-45db-b23f-e7d718f7742f",
@@ -1266,13 +1369,12 @@
       "unit": "g",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": null,
       "createdAt": "2026-02-23T09:47:35.023Z",
       "updatedAt": "2026-02-23T09:47:35.023Z",
       "category": "food",
       "subcategory": "Vegan",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "5eb0c010-9cac-458f-83e3-f40ccb2a2d56",
@@ -1282,13 +1384,12 @@
       "unit": "pcs",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": null,
       "createdAt": "2026-02-23T09:56:43.399Z",
       "updatedAt": "2026-02-23T09:56:43.399Z",
       "category": "equipment",
       "subcategory": "Hygiene and Bathroom Supplies",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "item-1772020401941",
@@ -1298,13 +1399,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": "0426cdd6-249b-46b1-8d97-7aff8232a551",
       "createdAt": "2026-02-25T11:53:21.941Z",
       "updatedAt": "2026-02-25T11:53:21.941Z",
       "category": "equipment",
       "subcategory": "Other",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "0426cdd6-249b-46b1-8d97-7aff8232a551",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0001-aaaa-bbbb-ccccdddd0001",
@@ -1314,13 +1419,17 @@
       "unit": "pcs",
       "notes": "אוהל ל-4 אנשים",
       "status": "packed",
-      "assignedParticipantId": "c1a20001-d5e6-4f78-9abc-def012340001",
       "createdAt": "2026-03-05T10:00:00.000Z",
       "updatedAt": "2026-03-10T08:00:00.000Z",
       "category": "equipment",
       "subcategory": "Venue Setup and Layout",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20001-d5e6-4f78-9abc-def012340001",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0002-aaaa-bbbb-ccccdddd0002",
@@ -1330,13 +1439,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "c1a20001-d5e6-4f78-9abc-def012340001",
       "createdAt": "2026-03-05T10:05:00.000Z",
       "updatedAt": "2026-03-10T08:05:00.000Z",
       "category": "equipment",
       "subcategory": "Comfort and Climate Control",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20001-d5e6-4f78-9abc-def012340001",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0003-aaaa-bbbb-ccccdddd0003",
@@ -1346,13 +1459,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "purchased",
-      "assignedParticipantId": "c1a20002-d5e6-4f78-9abc-def012340002",
       "createdAt": "2026-03-05T10:10:00.000Z",
       "updatedAt": "2026-03-08T12:00:00.000Z",
       "category": "equipment",
       "subcategory": "Comfort and Climate Control",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20002-d5e6-4f78-9abc-def012340002",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0004-aaaa-bbbb-ccccdddd0004",
@@ -1362,13 +1479,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": "c1a20003-d5e6-4f78-9abc-def012340003",
       "createdAt": "2026-03-05T10:15:00.000Z",
       "updatedAt": "2026-03-05T10:15:00.000Z",
       "category": "equipment",
       "subcategory": "Comfort and Climate Control",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20003-d5e6-4f78-9abc-def012340003",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0005-aaaa-bbbb-ccccdddd0005",
@@ -1378,13 +1499,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "c1a20004-d5e6-4f78-9abc-def012340004",
       "createdAt": "2026-03-05T10:20:00.000Z",
       "updatedAt": "2026-03-10T08:10:00.000Z",
       "category": "equipment",
       "subcategory": "Lighting and Visibility",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20004-d5e6-4f78-9abc-def012340004",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0006-aaaa-bbbb-ccccdddd0006",
@@ -1394,13 +1519,17 @@
       "unit": "pcs",
       "notes": "כולל בלון גז קטן",
       "status": "packed",
-      "assignedParticipantId": "c1a20001-d5e6-4f78-9abc-def012340001",
       "createdAt": "2026-03-05T10:25:00.000Z",
       "updatedAt": "2026-03-10T08:15:00.000Z",
       "category": "equipment",
       "subcategory": "Cooking and Heating Equipment",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20001-d5e6-4f78-9abc-def012340001",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0007-aaaa-bbbb-ccccdddd0007",
@@ -1410,13 +1539,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "purchased",
-      "assignedParticipantId": "c1a20005-d5e6-4f78-9abc-def012340005",
       "createdAt": "2026-03-05T10:30:00.000Z",
       "updatedAt": "2026-03-08T14:00:00.000Z",
       "category": "equipment",
       "subcategory": "Food Storage and Cooling",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20005-d5e6-4f78-9abc-def012340005",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0008-aaaa-bbbb-ccccdddd0008",
@@ -1426,13 +1559,17 @@
       "unit": "pcs",
       "notes": "לבדוק תאריכי תפוגה",
       "status": "packed",
-      "assignedParticipantId": "c1a20004-d5e6-4f78-9abc-def012340004",
       "createdAt": "2026-03-05T10:35:00.000Z",
       "updatedAt": "2026-03-10T08:20:00.000Z",
       "category": "equipment",
       "subcategory": "First Aid and Safety",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20004-d5e6-4f78-9abc-def012340004",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0009-aaaa-bbbb-ccccdddd0009",
@@ -1442,13 +1579,17 @@
       "unit": "set",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": "c1a20003-d5e6-4f78-9abc-def012340003",
       "createdAt": "2026-03-05T10:40:00.000Z",
       "updatedAt": "2026-03-05T10:40:00.000Z",
       "category": "equipment",
       "subcategory": "Tools and Quick Repairs",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20003-d5e6-4f78-9abc-def012340003",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0010-aaaa-bbbb-ccccdddd0010",
@@ -1458,13 +1599,12 @@
       "unit": "pcs",
       "notes": "יש שולחן באתר הקמפינג",
       "status": "canceled",
-      "assignedParticipantId": null,
       "createdAt": "2026-03-05T10:45:00.000Z",
       "updatedAt": "2026-03-07T09:00:00.000Z",
       "category": "equipment",
       "subcategory": "Other",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": []
     },
     {
       "itemId": "camp-item-0011-aaaa-bbbb-ccccdddd0011",
@@ -1474,13 +1614,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "purchased",
-      "assignedParticipantId": "c1a20005-d5e6-4f78-9abc-def012340005",
       "createdAt": "2026-03-06T09:00:00.000Z",
       "updatedAt": "2026-03-09T11:00:00.000Z",
       "category": "food",
       "subcategory": "Meat and Poultry",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20005-d5e6-4f78-9abc-def012340005",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0012-aaaa-bbbb-ccccdddd0012",
@@ -1490,13 +1634,17 @@
       "unit": "pack",
       "notes": null,
       "status": "pending",
-      "assignedParticipantId": "c1a20002-d5e6-4f78-9abc-def012340002",
       "createdAt": "2026-03-06T09:05:00.000Z",
       "updatedAt": "2026-03-06T09:05:00.000Z",
       "category": "food",
       "subcategory": "Bread and Bakery",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20002-d5e6-4f78-9abc-def012340002",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0013-aaaa-bbbb-ccccdddd0013",
@@ -1506,13 +1654,17 @@
       "unit": "l",
       "notes": "מיכלי 2 ליטר",
       "status": "purchased",
-      "assignedParticipantId": "c1a20003-d5e6-4f78-9abc-def012340003",
       "createdAt": "2026-03-06T09:10:00.000Z",
       "updatedAt": "2026-03-09T11:30:00.000Z",
       "category": "food",
       "subcategory": "Beverages (non-alcoholic)",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20003-d5e6-4f78-9abc-def012340003",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0014-aaaa-bbbb-ccccdddd0014",
@@ -1522,13 +1674,17 @@
       "unit": "pack",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "c1a20001-d5e6-4f78-9abc-def012340001",
       "createdAt": "2026-03-06T09:15:00.000Z",
       "updatedAt": "2026-03-10T08:30:00.000Z",
       "category": "food",
       "subcategory": "Hot Drinks (coffee, tea, cocoa)",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20001-d5e6-4f78-9abc-def012340001",
+          "status": "packed"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0015-aaaa-bbbb-ccccdddd0015",
@@ -1538,13 +1694,17 @@
       "unit": "kg",
       "notes": "תפוחים ובננות",
       "status": "pending",
-      "assignedParticipantId": "c1a20004-d5e6-4f78-9abc-def012340004",
       "createdAt": "2026-03-06T09:20:00.000Z",
       "updatedAt": "2026-03-06T09:20:00.000Z",
       "category": "food",
       "subcategory": "Fresh Fruit",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20004-d5e6-4f78-9abc-def012340004",
+          "status": "pending"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0016-aaaa-bbbb-ccccdddd0016",
@@ -1554,13 +1714,17 @@
       "unit": "pack",
       "notes": null,
       "status": "purchased",
-      "assignedParticipantId": "c1a20002-d5e6-4f78-9abc-def012340002",
       "createdAt": "2026-03-06T09:25:00.000Z",
       "updatedAt": "2026-03-09T12:00:00.000Z",
       "category": "food",
       "subcategory": "Snacks and Chips",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20002-d5e6-4f78-9abc-def012340002",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0017-aaaa-bbbb-ccccdddd0017",
@@ -1570,13 +1734,17 @@
       "unit": "pack",
       "notes": "למדורה",
       "status": "purchased",
-      "assignedParticipantId": "c1a20005-d5e6-4f78-9abc-def012340005",
       "createdAt": "2026-03-06T09:30:00.000Z",
       "updatedAt": "2026-03-09T12:15:00.000Z",
       "category": "food",
       "subcategory": "Snacks and Chips",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20005-d5e6-4f78-9abc-def012340005",
+          "status": "purchased"
+        }
+      ]
     },
     {
       "itemId": "camp-item-0018-aaaa-bbbb-ccccdddd0018",
@@ -1586,13 +1754,17 @@
       "unit": "pcs",
       "notes": null,
       "status": "packed",
-      "assignedParticipantId": "c1a20001-d5e6-4f78-9abc-def012340001",
       "createdAt": "2026-03-06T09:35:00.000Z",
       "updatedAt": "2026-03-10T08:35:00.000Z",
       "category": "food",
       "subcategory": "Canned and Jarred Foods",
       "isAllParticipants": false,
-      "allParticipantsGroupId": null
+      "assignmentStatusList": [
+        {
+          "participantId": "c1a20001-d5e6-4f78-9abc-def012340001",
+          "status": "packed"
+        }
+      ]
     }
   ]
 }

@@ -2,6 +2,9 @@ import { z } from 'zod';
 import type { components } from '../api.generated';
 
 type BEItem = components['schemas']['def-14'];
+type BECreateItemBody = components['schemas']['def-16'];
+type BEUpdateItemBody = components['schemas']['def-17'];
+type BEBulkUpdateItemEntry = components['schemas']['def-47'];
 
 const CATEGORY_VALUES = [
   'equipment',
@@ -31,6 +34,11 @@ export const itemCategorySchema = z.enum(CATEGORY_VALUES);
 export const itemStatusSchema = z.enum(STATUS_VALUES);
 export const unitSchema = z.enum(UNIT_VALUES);
 
+export const assignmentStatusEntrySchema = z.object({
+  participantId: z.string(),
+  status: itemStatusSchema,
+});
+
 const baseItemSchema = z.object({
   itemId: z.string(),
   planId: z.string(),
@@ -40,9 +48,8 @@ const baseItemSchema = z.object({
   notes: z.string().nullish(),
   status: itemStatusSchema,
   subcategory: z.string().nullish(),
-  assignedParticipantId: z.string().nullish(),
   isAllParticipants: z.boolean().default(false),
-  allParticipantsGroupId: z.string().nullish(),
+  assignmentStatusList: z.array(assignmentStatusEntrySchema).default([]),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -68,15 +75,49 @@ export const itemCreateSchema = z.object({
   status: itemStatusSchema,
   subcategory: z.string().nullish(),
   notes: z.string().nullish(),
-  assignedParticipantId: z.string().nullish(),
-  assignedToAll: z.boolean().optional(),
+  assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),
+  isAllParticipants: z.boolean().optional(),
 });
 
-export const itemPatchSchema = itemCreateSchema.partial();
+type _AssertCreateKeys = keyof z.infer<typeof itemCreateSchema> extends
+  | keyof BECreateItemBody
+  | 'quantity'
+  ? true
+  : never;
+const _assertCreate: _AssertCreateKeys = true;
+void _assertCreate;
+
+export const itemPatchSchema = z.object({
+  name: z.string().min(1).max(255).optional(),
+  category: itemCategorySchema.optional(),
+  quantity: z.number().int().min(1).optional(),
+  unit: unitSchema.optional(),
+  status: itemStatusSchema.optional(),
+  subcategory: z.string().nullish(),
+  notes: z.string().nullish(),
+  assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),
+  isAllParticipants: z.boolean().optional(),
+});
+
+type _AssertPatchKeys = keyof z.infer<
+  typeof itemPatchSchema
+> extends keyof BEUpdateItemBody
+  ? true
+  : never;
+const _assertPatch: _AssertPatchKeys = true;
+void _assertPatch;
 
 export const bulkUpdateItemEntrySchema = z
   .object({ itemId: z.string() })
   .merge(itemPatchSchema);
+
+type _AssertBulkKeys = keyof z.infer<
+  typeof bulkUpdateItemEntrySchema
+> extends keyof BEBulkUpdateItemEntry
+  ? true
+  : never;
+const _assertBulk: _AssertBulkKeys = true;
+void _assertBulk;
 
 export const bulkItemErrorSchema = z.object({
   name: z.string(),
@@ -88,6 +129,7 @@ export const bulkItemResponseSchema = z.object({
   errors: z.array(bulkItemErrorSchema),
 });
 
+export type AssignmentStatusEntry = z.infer<typeof assignmentStatusEntrySchema>;
 export type ItemCategory = z.infer<typeof itemCategorySchema>;
 export type ItemStatus = z.infer<typeof itemStatusSchema>;
 export type Unit = z.infer<typeof unitSchema>;

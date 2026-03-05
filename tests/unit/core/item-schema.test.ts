@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { itemSchema, itemCreateSchema } from '../../../src/core/schemas/item';
+import {
+  itemSchema,
+  itemCreateSchema,
+  itemPatchSchema,
+} from '../../../src/core/schemas/item';
 
 describe('itemSchema date-time and format validation', () => {
   const validItem = {
@@ -11,7 +15,7 @@ describe('itemSchema date-time and format validation', () => {
     unit: 'pcs' as const,
     status: 'pending' as const,
     isAllParticipants: false,
-    allParticipantsGroupId: null,
+    assignmentStatusList: [],
     createdAt: '2025-01-01T00:00:00Z',
     updatedAt: '2025-01-01T00:00:00Z',
   };
@@ -78,7 +82,6 @@ describe('itemSchema date-time and format validation', () => {
       unit: validItem.unit,
       status: validItem.status,
       category: validItem.category,
-      allParticipantsGroupId: validItem.allParticipantsGroupId,
       createdAt: validItem.createdAt,
       updatedAt: validItem.updatedAt,
     };
@@ -211,5 +214,74 @@ describe('itemCreateSchema', () => {
     if (result.success) {
       expect(result.data.notes).toBeUndefined();
     }
+  });
+
+  it('accepts isAllParticipants boolean', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 1,
+      status: 'pending',
+      isAllParticipants: true,
+      assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.isAllParticipants).toBe(true);
+    }
+  });
+
+  it('accepts assignmentStatusList array', () => {
+    const result = itemCreateSchema.safeParse({
+      name: 'Tent',
+      category: 'equipment',
+      quantity: 1,
+      status: 'pending',
+      assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.assignmentStatusList).toEqual([
+        { participantId: 'p-1', status: 'pending' },
+      ]);
+    }
+  });
+});
+
+describe('itemPatchSchema', () => {
+  it('accepts assignmentStatusList array', () => {
+    const result = itemPatchSchema.safeParse({
+      assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.assignmentStatusList).toEqual([
+        { participantId: 'p-1', status: 'pending' },
+      ]);
+    }
+  });
+
+  it('accepts empty assignmentStatusList (unassign)', () => {
+    const result = itemPatchSchema.safeParse({
+      assignmentStatusList: [],
+      isAllParticipants: false,
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.assignmentStatusList).toEqual([]);
+    }
+  });
+
+  it('accepts isAllParticipants boolean', () => {
+    const result = itemPatchSchema.safeParse({ isAllParticipants: true });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.isAllParticipants).toBe(true);
+    }
+  });
+
+  it('accepts empty object (no-op update)', () => {
+    const result = itemPatchSchema.safeParse({});
+    expect(result.success).toBe(true);
   });
 });

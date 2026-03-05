@@ -189,7 +189,6 @@ export default function BulkAddModal({
       status: 'pending' as const,
       subcategory: s.subcategory || null,
       notes: null,
-      assignedParticipantId: null,
     }));
 
     try {

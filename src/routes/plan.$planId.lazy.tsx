@@ -23,7 +23,7 @@ import {
   filterItemsByAssignedParticipant,
   countItemsByListTab,
   filterItemsByStatusTab,
-  aggregateAllParticipantItems,
+  getAssignmentSelectValue,
 } from '../core/utils-plan-items';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
@@ -59,11 +59,10 @@ function PlanPage() {
     from: '/plan/$planId',
   });
 
-  const actions = usePlanActions(planId);
-  const bulkAssign = useBulkAssign(
-    planId,
-    plan && !isNotParticipantResponse(plan) ? plan.participants : []
-  );
+  const planParticipants =
+    plan && !isNotParticipantResponse(plan) ? plan.participants : [];
+  const actions = usePlanActions(planId, planParticipants);
+  const bulkAssign = useBulkAssign(planId, planParticipants);
 
   const [itemModalId, setItemModalId] = useState<string | null>(null);
   const [bulkAddOpen, setBulkAddOpen] = useState(false);
@@ -127,13 +126,9 @@ function PlanPage() {
     participantFilter
   );
   const listCounts = countItemsByListTab(participantScopedItems);
-  const statusFilteredItems = filterItemsByStatusTab(
+  const filteredItems = filterItemsByStatusTab(
     participantScopedItems,
     listFilter
-  );
-  const filteredItems = aggregateAllParticipantItems(
-    statusFilteredItems,
-    isOwner
   );
 
   async function handleBulkCancel(itemIds: string[]) {
@@ -471,13 +466,13 @@ function PlanPage() {
                     unit: editingItem.unit,
                     status: editingItem.status,
                     notes: editingItem.notes ?? '',
-                    assignedParticipantId: editingItem.isAllParticipants
-                      ? '__all__'
-                      : (editingItem.assignedParticipantId ?? ''),
+                    assignedParticipantId:
+                      getAssignmentSelectValue(editingItem),
                   }
                 : undefined
             }
             participants={plan.participants}
+            showAssignAll={isOwner}
             onSubmit={handleItemFormSubmit}
             onCancel={() => setItemModalId(null)}
             isSubmitting={

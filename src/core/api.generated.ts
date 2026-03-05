@@ -24,8 +24,17 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Server and database are healthy */
         200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-3'];
+          };
+        };
+        /** @description Database unreachable */
+        503: {
           headers: {
             [name: string]: unknown;
           };
@@ -63,7 +72,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description List of plans owned by the authenticated user */
         200: {
           headers: {
             [name: string]: unknown;
@@ -72,7 +81,16 @@ export interface paths {
             'application/json': components['schemas']['def-6'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -81,7 +99,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -110,7 +128,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Plan created successfully with owner and participants */
         201: {
           headers: {
             [name: string]: unknown;
@@ -119,7 +137,7 @@ export interface paths {
             'application/json': components['schemas']['def-25'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -128,7 +146,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -137,7 +155,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -146,7 +164,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -183,7 +201,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description List of all plans (admin only) */
         200: {
           headers: {
             [name: string]: unknown;
@@ -192,7 +210,16 @@ export interface paths {
             'application/json': components['schemas']['def-6'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Forbidden — insufficient permissions */
         403: {
           headers: {
             [name: string]: unknown;
@@ -201,7 +228,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -210,7 +237,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -249,7 +276,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description List of plans with pending join requests for the user */
         200: {
           headers: {
             [name: string]: unknown;
@@ -258,7 +285,16 @@ export interface paths {
             'application/json': components['schemas']['def-8'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -267,7 +303,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -308,7 +344,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Plan preview for non-participant */
         200: {
           headers: {
             [name: string]: unknown;
@@ -317,7 +353,7 @@ export interface paths {
             'application/json': components['schemas']['def-27'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -326,7 +362,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -335,7 +371,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan does not exist or you do not have access */
         404: {
           headers: {
             [name: string]: unknown;
@@ -344,7 +380,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -353,7 +389,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -394,7 +430,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Full plan for participants, or preview+joinRequest for non-participants */
         200: {
           headers: {
             [name: string]: unknown;
@@ -405,7 +441,7 @@ export interface paths {
               | components['schemas']['def-31'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -414,7 +450,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan does not exist or you do not have access */
         404: {
           headers: {
             [name: string]: unknown;
@@ -423,7 +459,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -432,7 +468,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -460,7 +496,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Plan deleted successfully */
         200: {
           headers: {
             [name: string]: unknown;
@@ -469,7 +505,7 @@ export interface paths {
             'application/json': components['schemas']['def-13'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -478,7 +514,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan does not exist or you do not have access */
         404: {
           headers: {
             [name: string]: unknown;
@@ -487,7 +523,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -496,7 +532,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -528,7 +564,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Updated plan */
         200: {
           headers: {
             [name: string]: unknown;
@@ -537,7 +573,7 @@ export interface paths {
             'application/json': components['schemas']['def-5'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -546,7 +582,16 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — plan does not exist or you do not have access */
         404: {
           headers: {
             [name: string]: unknown;
@@ -555,7 +600,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -564,7 +609,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -599,7 +644,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description List of participants */
         200: {
           headers: {
             [name: string]: unknown;
@@ -608,7 +653,16 @@ export interface paths {
             'application/json': components['schemas']['def-20'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — participant or plan does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -617,7 +671,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -626,7 +680,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -657,7 +711,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Created participant */
         201: {
           headers: {
             [name: string]: unknown;
@@ -666,7 +720,7 @@ export interface paths {
             'application/json': components['schemas']['def-19'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -675,7 +729,16 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — participant or plan does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -684,7 +747,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -693,7 +756,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -732,7 +795,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Participant details */
         200: {
           headers: {
             [name: string]: unknown;
@@ -741,7 +804,16 @@ export interface paths {
             'application/json': components['schemas']['def-19'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — participant or plan does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -750,7 +822,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -759,7 +831,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -787,7 +859,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Participant deleted */
         200: {
           headers: {
             [name: string]: unknown;
@@ -796,7 +868,7 @@ export interface paths {
             'application/json': components['schemas']['def-24'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -805,7 +877,16 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — participant or plan does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -814,7 +895,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -823,7 +904,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -855,7 +936,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Updated participant */
         200: {
           headers: {
             [name: string]: unknown;
@@ -864,7 +945,7 @@ export interface paths {
             'application/json': components['schemas']['def-19'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -873,7 +954,16 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Forbidden — insufficient permissions */
         403: {
           headers: {
             [name: string]: unknown;
@@ -882,7 +972,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — participant or plan does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -891,7 +981,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -900,7 +990,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -938,7 +1028,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Regenerated invite token */
         200: {
           headers: {
             [name: string]: unknown;
@@ -947,7 +1037,16 @@ export interface paths {
             'application/json': components['schemas']['def-40'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — participant or plan does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -956,7 +1055,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -965,7 +1064,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1004,7 +1103,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description List of items */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1013,7 +1112,16 @@ export interface paths {
             'application/json': components['schemas']['def-15'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — plan or item does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1022,7 +1130,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1031,7 +1139,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1045,7 +1153,7 @@ export interface paths {
     put?: never;
     /**
      * Add an item to a plan
-     * @description Create a new item in the specified plan. Equipment items always use pcs as the unit. Food items require a unit. Send assignedToAll=true to assign to every participant.
+     * @description Create a new item. Equipment items always use pcs. Assignment fields (owner-only): send assignmentStatusList with participant entries + isAllParticipants=true to assign all, or a subset with isAllParticipants=false. Omit both to create unassigned.
      */
     post: {
       parameters: {
@@ -1062,7 +1170,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Created item */
         201: {
           headers: {
             [name: string]: unknown;
@@ -1071,7 +1179,7 @@ export interface paths {
             'application/json': components['schemas']['def-14'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -1080,7 +1188,16 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — plan or item does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1089,7 +1206,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1098,7 +1215,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1130,7 +1247,7 @@ export interface paths {
     head?: never;
     /**
      * Update an item
-     * @description Update an existing item by its ID. Supports all-participants assignment: send assignedToAll=true to assign to all, assignedParticipantId=<uuid> to reassign from all to one, assignedParticipantId=null or assignedToAll=false to unassign all. Core field changes on all-participants items cascade to every copy; status changes apply only to the target item.
+     * @description Update an item. Send the full desired state. For assignments: owner sends any assignmentStatusList + isAllParticipants. Non-owner sends the full list but may only change their own entry (update status or remove self). To assign all: send all participants + isAllParticipants=true. To unassign all: send [] + isAllParticipants=false.
      */
     patch: {
       parameters: {
@@ -1147,7 +1264,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Updated item */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1156,7 +1273,7 @@ export interface paths {
             'application/json': components['schemas']['def-14'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -1165,7 +1282,16 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — plan or item does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1174,7 +1300,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1183,7 +1309,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1207,7 +1333,7 @@ export interface paths {
     put?: never;
     /**
      * Bulk create items in a plan
-     * @description Create multiple items at once. Each item is validated independently — valid items are created, invalid items are reported in the errors array. Supports assignedToAll per item (same logic as single-item POST).
+     * @description Create multiple items at once. Each item is validated independently. Send assignmentStatusList and isAllParticipants per item.
      */
     post: {
       parameters: {
@@ -1224,7 +1350,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Bulk operation results — all succeeded */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1233,7 +1359,7 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Partial success — some items failed, check errors array */
         207: {
           headers: {
             [name: string]: unknown;
@@ -1242,7 +1368,16 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — plan or item does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1251,7 +1386,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1260,7 +1395,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1276,7 +1411,7 @@ export interface paths {
     head?: never;
     /**
      * Bulk update items in a plan
-     * @description Update multiple items at once. Each item is validated independently — valid items are updated, invalid items are reported in the errors array. Supports assignedToAll per item (same logic as single-item PATCH).
+     * @description Update multiple items at once. Each item is validated independently. Send assignmentStatusList and isAllParticipants per item.
      */
     patch: {
       parameters: {
@@ -1293,7 +1428,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Bulk operation results — all succeeded */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1302,7 +1437,7 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Partial success — some items failed, check errors array */
         207: {
           headers: {
             [name: string]: unknown;
@@ -1311,7 +1446,25 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Not found — plan or item does not exist */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1320,7 +1473,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1356,7 +1509,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Plan and items returned for the invite token */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1365,7 +1518,7 @@ export interface paths {
             'application/json': components['schemas']['def-38'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan, item, or invite token is invalid */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1374,7 +1527,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1383,7 +1536,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1435,7 +1588,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Guest preferences updated */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1444,7 +1597,7 @@ export interface paths {
             'application/json': components['schemas']['def-42'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -1453,7 +1606,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan, item, or invite token is invalid */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1462,7 +1615,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1471,7 +1624,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1513,7 +1666,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Item created */
         201: {
           headers: {
             [name: string]: unknown;
@@ -1522,7 +1675,7 @@ export interface paths {
             'application/json': components['schemas']['def-14'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -1531,7 +1684,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan, item, or invite token is invalid */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1540,7 +1693,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1549,7 +1702,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1600,7 +1753,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Item updated */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1609,7 +1762,7 @@ export interface paths {
             'application/json': components['schemas']['def-14'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -1618,7 +1771,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Forbidden — insufficient permissions */
         403: {
           headers: {
             [name: string]: unknown;
@@ -1627,7 +1780,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan, item, or invite token is invalid */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1636,7 +1789,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1645,7 +1798,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1687,7 +1840,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description All items created successfully */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1696,7 +1849,7 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Partial success — some items created, some had validation errors */
         207: {
           headers: {
             [name: string]: unknown;
@@ -1705,7 +1858,7 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan, item, or invite token is invalid */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1714,7 +1867,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1723,7 +1876,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1757,7 +1910,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description All items updated successfully */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1766,7 +1919,7 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Partial success — some items updated, some had validation or permission errors */
         207: {
           headers: {
             [name: string]: unknown;
@@ -1775,7 +1928,7 @@ export interface paths {
             'application/json': components['schemas']['def-50'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan, item, or invite token is invalid */
         404: {
           headers: {
             [name: string]: unknown;
@@ -1784,7 +1937,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -1793,7 +1946,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -1826,7 +1979,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Authenticated user identity */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1839,6 +1992,15 @@ export interface paths {
                 role: string;
               };
             };
+          };
+        };
+        /** @description JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
           };
         };
       };
@@ -1871,13 +2033,22 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description User identity and preferences */
         200: {
           headers: {
             [name: string]: unknown;
           };
           content: {
             'application/json': components['schemas']['def-55'];
+          };
+        };
+        /** @description JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
           };
         };
       };
@@ -1904,13 +2075,22 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Updated preferences */
         200: {
           headers: {
             [name: string]: unknown;
           };
           content: {
             'application/json': components['schemas']['def-57'];
+          };
+        };
+        /** @description JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
           };
         };
       };
@@ -1939,7 +2119,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Number of participant records synced */
         200: {
           headers: {
             [name: string]: unknown;
@@ -1950,7 +2130,7 @@ export interface paths {
             };
           };
         };
-        /** @description Default Response */
+        /** @description JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -1959,7 +2139,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -2001,7 +2181,7 @@ export interface paths {
       };
       requestBody?: never;
       responses: {
-        /** @description Default Response */
+        /** @description Participant claimed successfully */
         200: {
           headers: {
             [name: string]: unknown;
@@ -2010,7 +2190,7 @@ export interface paths {
             'application/json': components['schemas']['def-19'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -2019,7 +2199,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -2028,7 +2208,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — invite token or plan is invalid */
         404: {
           headers: {
             [name: string]: unknown;
@@ -2037,7 +2217,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -2046,7 +2226,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -2091,7 +2271,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Join request already exists — returned existing */
         200: {
           headers: {
             [name: string]: unknown;
@@ -2100,7 +2280,7 @@ export interface paths {
             'application/json': components['schemas']['def-28'];
           };
         };
-        /** @description Default Response */
+        /** @description Join request created */
         201: {
           headers: {
             [name: string]: unknown;
@@ -2109,7 +2289,7 @@ export interface paths {
             'application/json': components['schemas']['def-28'];
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -2118,7 +2298,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -2127,7 +2307,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -2136,7 +2316,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Conflict — duplicate join request */
         409: {
           headers: {
             [name: string]: unknown;
@@ -2145,7 +2325,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -2154,7 +2334,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -2204,7 +2384,7 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Default Response */
+        /** @description Join request approved or rejected */
         200: {
           headers: {
             [name: string]: unknown;
@@ -2213,7 +2393,7 @@ export interface paths {
             'application/json': unknown;
           };
         };
-        /** @description Default Response */
+        /** @description Bad request — check the message field for details */
         400: {
           headers: {
             [name: string]: unknown;
@@ -2222,7 +2402,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Authentication required — JWT token missing or invalid */
         401: {
           headers: {
             [name: string]: unknown;
@@ -2231,7 +2411,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Forbidden — only the plan owner can manage requests */
         403: {
           headers: {
             [name: string]: unknown;
@@ -2240,7 +2420,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Not found — plan or join request does not exist */
         404: {
           headers: {
             [name: string]: unknown;
@@ -2249,7 +2429,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Conflict — request already approved or rejected */
         409: {
           headers: {
             [name: string]: unknown;
@@ -2258,7 +2438,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Internal server error */
         500: {
           headers: {
             [name: string]: unknown;
@@ -2267,7 +2447,7 @@ export interface paths {
             'application/json': components['schemas']['def-0'];
           };
         };
-        /** @description Default Response */
+        /** @description Service temporarily unavailable */
         503: {
           headers: {
             [name: string]: unknown;
@@ -2436,15 +2616,15 @@ export interface components {
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
-      /** Format: uuid */
-      assignedParticipantId?: string | null;
-      /** @description True when this item is part of an all-participants group (one copy per participant). */
+      /** @description True when this item is assigned to all participants. When a new participant joins the plan, they are automatically added to items with this flag. */
       isAllParticipants: boolean;
-      /**
-       * Format: uuid
-       * @description Shared UUID linking all copies in an all-participants group. Null for regular items.
-       */
-      allParticipantsGroupId?: string | null;
+      /** @description Per-participant assignment and status tracking. Each entry is { participantId, status }. */
+      assignmentStatusList: {
+        /** Format: uuid */
+        participantId: string;
+        /** @enum {string} */
+        status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      }[];
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -2475,10 +2655,15 @@ export interface components {
       status: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
-      /** Format: uuid */
-      assignedParticipantId?: string | null;
-      /** @description Set true to assign this item to all participants (creates one copy per participant). Ignored if assignedParticipantId is also set. */
-      assignedToAll?: boolean;
+      /** @description The full list of participant assignments for this item. To assign to all participants: send every participant with status "pending" and set isAllParticipants=true. To assign a subset: send only those participants and set isAllParticipants=false (or omit it). To leave unassigned: omit this field or send []. Owner-only on create. */
+      assignmentStatusList?: {
+        /** Format: uuid */
+        participantId: string;
+        /** @enum {string} */
+        status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      }[];
+      /** @description Set true when assigning to all participants (new joiners will be auto-added). Set false or omit for subset/single/no assignment. Owner-only on create. */
+      isAllParticipants?: boolean;
     };
     /** UpdateItemBody */
     'def-17': {
@@ -2503,10 +2688,15 @@ export interface components {
       status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
-      /** Format: uuid */
-      assignedParticipantId?: string | null;
-      /** @description Set true to assign to all participants. Set false (or send assignedParticipantId/null) to switch from all to specific/unassigned. */
-      assignedToAll?: boolean;
+      /** @description Send the full desired assignment list. Owner can set any list. Non-owner can only change their own entry (update status or remove self). To toggle assign-all ON: send all participants with status "pending" + isAllParticipants=true. To toggle assign-all OFF: send [] + isAllParticipants=false. To update one status: send the full list with that entry changed. */
+      assignmentStatusList?: {
+        /** Format: uuid */
+        participantId: string;
+        /** @enum {string} */
+        status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      }[];
+      /** @description Set true to mark as assigned to all (new joiners auto-added). Set false to unmark. Only the plan owner can change this flag. */
+      isAllParticipants?: boolean;
     };
     /** ItemIdParam */
     'def-18': {
@@ -2863,10 +3053,15 @@ export interface components {
       status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
-      /** Format: uuid */
-      assignedParticipantId?: string | null;
-      /** @description Set true to assign to all participants. Set false (or send assignedParticipantId/null) to switch from all to specific/unassigned. */
-      assignedToAll?: boolean;
+      /** @description Send the full desired assignment list. Same rules as single-item PATCH: owner can set any list, non-owner can only change their own entry. */
+      assignmentStatusList?: {
+        /** Format: uuid */
+        participantId: string;
+        /** @enum {string} */
+        status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      }[];
+      /** @description Set true to mark as assigned to all (new joiners auto-added). Set false to unmark. Owner-only. */
+      isAllParticipants?: boolean;
     };
     /** BulkUpdateItemBody */
     'def-48': {

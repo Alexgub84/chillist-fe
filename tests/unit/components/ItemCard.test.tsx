@@ -11,6 +11,8 @@ const baseItem: Item = {
   quantity: 2,
   unit: 'pcs',
   status: 'pending',
+  isAllParticipants: false,
+  assignmentStatusList: [],
   createdAt: '2025-01-01T00:00:00Z',
   updatedAt: '2025-01-01T00:00:00Z',
 };
@@ -114,7 +116,7 @@ describe('ItemCard', () => {
     it('shows "Assigned to me" badge when item is assigned to self and canEdit is false', () => {
       const assignedItem: Item = {
         ...baseItem,
-        assignedParticipantId: 'p-me',
+        assignmentStatusList: [{ participantId: 'p-me', status: 'pending' }],
       };
       render(
         <ItemCard

@@ -35,9 +35,10 @@ function makeItem(assignedTo: string | null): Item {
     quantity: 1,
     unit: 'pcs',
     status: 'pending',
-    assignedParticipantId: assignedTo,
     isAllParticipants: false,
-    allParticipantsGroupId: null,
+    assignmentStatusList: assignedTo
+      ? [{ participantId: assignedTo, status: 'pending' as const }]
+      : [],
     createdAt: ts,
     updatedAt: ts,
   } as Item;

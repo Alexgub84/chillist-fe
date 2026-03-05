@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { bulkUpdateItems } from '../core/api';
 import type { Participant } from '../core/schemas/participant';
-import { ALL_PARTICIPANTS_VALUE } from '../core/utils-plan-items';
+import {
+  ALL_PARTICIPANTS_VALUE,
+  buildAssignmentPayload,
+} from '../core/utils-plan-items';
 
 interface BulkAssignVariables {
   itemIds: string[];
@@ -16,12 +19,13 @@ export function useBulkAssign(planId: string, participants: Participant[]) {
 
   return useMutation({
     mutationFn: ({ itemIds, participantId }: BulkAssignVariables) => {
-      const isAll = participantId === ALL_PARTICIPANTS_VALUE;
+      const assignmentFields = buildAssignmentPayload(
+        participantId,
+        participants
+      );
       const entries = itemIds.map((id) => ({
         itemId: id,
-        ...(isAll
-          ? { assignedToAll: true }
-          : { assignedParticipantId: participantId }),
+        ...assignmentFields,
       }));
       return bulkUpdateItems(planId, entries);
     },
