@@ -34,7 +34,6 @@ interface MockItem {
   category: 'equipment' | 'food';
   quantity: number;
   unit: string;
-  status: string;
   subcategory?: string | null;
   notes: string | null;
   isAllParticipants: boolean;
@@ -105,7 +104,6 @@ export function buildItem(
     name: string;
     category: 'equipment' | 'food';
     quantity: number;
-    status?: string;
     subcategory?: string | null;
     assignmentStatusList?: Array<{ participantId: string; status: string }>;
     isAllParticipants?: boolean;
@@ -119,7 +117,6 @@ export function buildItem(
     category: i.category,
     quantity: i.quantity,
     unit: 'pcs',
-    status: i.status ?? 'pending',
     subcategory: i.subcategory ?? null,
     notes: i.notes ?? null,
     isAllParticipants: i.isAllParticipants ?? false,
@@ -142,7 +139,6 @@ export function buildPlan(opts?: {
     name: string;
     category: 'equipment' | 'food';
     quantity: number;
-    status?: string;
     assignmentStatusList?: Array<{ participantId: string; status: string }>;
     isAllParticipants?: boolean;
     notes?: string | null;

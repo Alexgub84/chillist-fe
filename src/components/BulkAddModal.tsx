@@ -186,7 +186,6 @@ export default function BulkAddModal({
       category: s.category,
       quantity: s.quantity,
       unit: s.unit as ItemCreate['unit'],
-      status: 'pending' as const,
       subcategory: s.subcategory || null,
       notes: null,
     }));

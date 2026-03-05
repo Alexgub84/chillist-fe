@@ -24,6 +24,8 @@ import {
   countItemsByListTab,
   filterItemsByStatusTab,
   getAssignmentSelectValue,
+  getItemStatus,
+  buildStatusUpdate,
 } from '../core/utils-plan-items';
 import ErrorPage from './ErrorPage';
 import { Plan } from '../components/Plan';
@@ -118,22 +120,37 @@ function PlanPage() {
     plan.participants,
     plan.items
   );
+  const myParticipantId = currentParticipant?.participantId;
+  const statusParticipantId =
+    participantFilter && participantFilter !== 'unassigned'
+      ? participantFilter
+      : myParticipantId;
   const nonCanceledCount = plan.items.filter(
-    (i) => i.status !== 'canceled'
+    (i) => getItemStatus(i, myParticipantId) !== 'canceled'
   ).length;
   const participantScopedItems = filterItemsByAssignedParticipant(
     plan.items,
     participantFilter
   );
-  const listCounts = countItemsByListTab(participantScopedItems);
+  const listCounts = countItemsByListTab(
+    participantScopedItems,
+    statusParticipantId
+  );
   const filteredItems = filterItemsByStatusTab(
     participantScopedItems,
-    listFilter
+    listFilter,
+    statusParticipantId
   );
 
+  const planItems = plan.items;
   async function handleBulkCancel(itemIds: string[]) {
     for (const itemId of itemIds) {
-      await actions.updateSingleItem(itemId, { status: 'canceled' });
+      const item = planItems.find((i) => i.itemId === itemId);
+      if (!item) continue;
+      await actions.updateSingleItem(
+        itemId,
+        buildStatusUpdate(item, 'canceled', statusParticipantId)
+      );
     }
   }
 
@@ -145,10 +162,7 @@ function PlanPage() {
   })();
 
   async function handleItemFormSubmit(values: ItemFormValues) {
-    await actions.createOrUpdateItem(
-      values,
-      editingItem ? editingItem.itemId : null
-    );
+    await actions.createOrUpdateItem(values, editingItem ?? null);
     setItemModalId(null);
   }
 
@@ -432,6 +446,7 @@ function PlanPage() {
           <ItemsList
             items={filteredItems}
             participants={plan.participants}
+            currentParticipantId={statusParticipantId}
             listFilter={listFilter}
             selfAssignParticipantId={
               isOwner ? undefined : currentParticipant?.participantId
@@ -464,7 +479,6 @@ function PlanPage() {
                         .subcategory ?? undefined,
                     quantity: editingItem.quantity,
                     unit: editingItem.unit,
-                    status: editingItem.status,
                     notes: editingItem.notes ?? '',
                     assignedParticipantId:
                       getAssignmentSelectValue(editingItem),

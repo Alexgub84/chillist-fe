@@ -8,6 +8,7 @@ const CATEGORIES: ItemCategory[] = ['equipment', 'food'];
 export interface ItemsListProps {
   items: Item[];
   participants: Participant[];
+  currentParticipantId?: string;
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
   canEditItem?: (item: Item) => boolean;
@@ -20,6 +21,7 @@ export interface ItemsListProps {
 export default function ItemsList({
   items,
   participants,
+  currentParticipantId,
   listFilter,
   selfAssignParticipantId,
   canEditItem,
@@ -40,6 +42,7 @@ export default function ItemsList({
           category={category}
           items={catItems}
           participants={participants}
+          currentParticipantId={currentParticipantId}
           listFilter={listFilter}
           selfAssignParticipantId={selfAssignParticipantId}
           canEditItem={canEditItem}

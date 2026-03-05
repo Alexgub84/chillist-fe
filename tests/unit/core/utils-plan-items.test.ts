@@ -4,6 +4,7 @@ import {
   filterItemsByAssignedParticipant,
   countItemsByListTab,
   filterItemsByStatusTab,
+  getItemStatus,
 } from '../../../src/core/utils-plan-items';
 import type { Item } from '../../../src/core/schemas/item';
 import type { Participant } from '../../../src/core/schemas/participant';
@@ -18,7 +19,6 @@ function makeItem(
     planId: 'plan-1',
     quantity: 1,
     unit: 'pcs',
-    status: 'pending',
     isAllParticipants: false,
     assignmentStatusList: [],
     createdAt: ts,
@@ -109,19 +109,16 @@ describe('countItemsPerParticipant', () => {
         name: 'a',
         category: 'food',
         assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
-        status: 'pending',
       }),
       makeItem({
         name: 'b',
         category: 'food',
-        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
-        status: 'canceled',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'canceled' }],
       }),
       makeItem({
         name: 'c',
         category: 'food',
-        assignmentStatusList: [],
-        status: 'canceled',
+        assignmentStatusList: [{ participantId: 'p-2', status: 'canceled' }],
       }),
     ];
 
@@ -173,13 +170,29 @@ describe('filterItemsByAssignedParticipant', () => {
 describe('countItemsByListTab', () => {
   it('counts pending as buying and purchased+pending as packing', () => {
     const items = [
-      makeItem({ name: 'a', category: 'food', status: 'pending' }),
-      makeItem({ name: 'b', category: 'food', status: 'pending' }),
-      makeItem({ name: 'c', category: 'food', status: 'purchased' }),
-      makeItem({ name: 'd', category: 'food', status: 'packed' }),
+      makeItem({
+        name: 'a',
+        category: 'food',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      }),
+      makeItem({
+        name: 'b',
+        category: 'food',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
+      }),
+      makeItem({
+        name: 'c',
+        category: 'food',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'purchased' }],
+      }),
+      makeItem({
+        name: 'd',
+        category: 'food',
+        assignmentStatusList: [{ participantId: 'p-1', status: 'packed' }],
+      }),
     ];
 
-    const result = countItemsByListTab(items);
+    const result = countItemsByListTab(items, 'p-1');
     expect(result.buying).toBe(2);
     expect(result.packing).toBe(3);
   });
@@ -190,10 +203,23 @@ describe('countItemsByListTab', () => {
 });
 
 describe('filterItemsByStatusTab', () => {
+  const participantId = 'p-1';
   const items = [
-    makeItem({ name: 'a', category: 'food', status: 'pending' }),
-    makeItem({ name: 'b', category: 'food', status: 'purchased' }),
-    makeItem({ name: 'c', category: 'food', status: 'packed' }),
+    makeItem({
+      name: 'a',
+      category: 'food',
+      assignmentStatusList: [{ participantId, status: 'pending' }],
+    }),
+    makeItem({
+      name: 'b',
+      category: 'food',
+      assignmentStatusList: [{ participantId, status: 'purchased' }],
+    }),
+    makeItem({
+      name: 'c',
+      category: 'food',
+      assignmentStatusList: [{ participantId, status: 'packed' }],
+    }),
   ];
 
   it('returns all items when filter is undefined', () => {
@@ -201,15 +227,15 @@ describe('filterItemsByStatusTab', () => {
   });
 
   it('filters buying tab to pending items', () => {
-    const result = filterItemsByStatusTab(items, 'buying');
+    const result = filterItemsByStatusTab(items, 'buying', participantId);
     expect(result).toHaveLength(1);
-    expect(result[0].status).toBe('pending');
+    expect(getItemStatus(result[0], participantId)).toBe('pending');
   });
 
   it('filters packing tab to purchased and pending items', () => {
-    const result = filterItemsByStatusTab(items, 'packing');
+    const result = filterItemsByStatusTab(items, 'packing', participantId);
     expect(result).toHaveLength(2);
-    expect(result.map((i) => i.status).sort()).toEqual([
+    expect(result.map((i) => getItemStatus(i, participantId)).sort()).toEqual([
       'pending',
       'purchased',
     ]);

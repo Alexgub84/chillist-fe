@@ -191,7 +191,6 @@
     "name": "Name *",
     "namePlaceholder": "Item name",
     "category": "Category *",
-    "status": "Status *",
     "quantity": "Quantity *",
     "unit": "Unit",
     "notes": "Notes",

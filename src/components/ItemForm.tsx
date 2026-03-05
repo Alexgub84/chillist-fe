@@ -6,16 +6,11 @@ import { useTranslation } from 'react-i18next';
 
 import {
   itemCategorySchema,
-  itemStatusSchema,
   unitSchema,
   type ItemCategory,
   type Unit,
 } from '../core/schemas/item';
-import {
-  CATEGORY_OPTIONS,
-  STATUS_OPTIONS,
-  UNIT_GROUPS,
-} from '../core/constants/item';
+import { CATEGORY_OPTIONS, UNIT_GROUPS } from '../core/constants/item';
 import { buildParticipantOptions } from '../core/utils-plan-items';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
@@ -34,7 +29,6 @@ const itemFormSchema = z.object({
   subcategory: z.string().optional(),
   quantity: z.coerce.number().int().min(1, 'Quantity must be at least 1'),
   unit: unitSchema,
-  status: itemStatusSchema,
   notes: z.string().optional(),
   assignedParticipantId: z.string().optional(),
 });
@@ -47,7 +41,6 @@ const ITEM_FORM_DEFAULTS: ItemFormValues = {
   subcategory: undefined,
   quantity: 1,
   unit: 'kg',
-  status: 'pending',
   notes: '',
   assignedParticipantId: '',
 };
@@ -198,36 +191,18 @@ export default function ItemForm({
         )}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <FormLabel>{t('items.category')}</FormLabel>
-          <FormSelect {...register('category')} compact>
-            {CATEGORY_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {t(opt.labelKey)}
-              </option>
-            ))}
-          </FormSelect>
-          {errors.category && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.category.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <FormLabel>{t('items.status')}</FormLabel>
-          <FormSelect {...register('status')} compact>
-            {STATUS_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {t(opt.labelKey)}
-              </option>
-            ))}
-          </FormSelect>
-          {errors.status && (
-            <p className="text-sm text-red-600 mt-1">{errors.status.message}</p>
-          )}
-        </div>
+      <div>
+        <FormLabel>{t('items.category')}</FormLabel>
+        <FormSelect {...register('category')} compact>
+          {CATEGORY_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {t(opt.labelKey)}
+            </option>
+          ))}
+        </FormSelect>
+        {errors.category && (
+          <p className="text-sm text-red-600 mt-1">{errors.category.message}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

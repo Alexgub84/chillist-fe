@@ -25,16 +25,13 @@ const getInputByLabel = (labelText: RegExp) => {
 
 describe('ItemForm', () => {
   describe('Default values and rendering', () => {
-    it('renders with default values: category=food, unit=kg, status=pending, quantity=1', () => {
+    it('renders with default values: category=food, unit=kg, quantity=1', () => {
       render(<ItemForm onSubmit={vi.fn()} />);
 
       const categorySelect = getInputByLabel(
         /category \*/i
       ) as HTMLSelectElement;
       expect(categorySelect.value).toBe('food');
-
-      const statusSelect = getInputByLabel(/status \*/i) as HTMLSelectElement;
-      expect(statusSelect.value).toBe('pending');
 
       const unitSelect = getInputByLabel(/^unit$/i) as HTMLSelectElement;
       expect(unitSelect.value).toBe('kg');
@@ -218,8 +215,6 @@ describe('ItemForm', () => {
 
       await user.selectOptions(getInputByLabel(/category \*/i), 'food');
       await user.selectOptions(getInputByLabel(/^unit$/i), 'kg');
-      await user.selectOptions(getInputByLabel(/status \*/i), 'purchased');
-
       const notesTextarea = screen.getByPlaceholderText(/optional notes/i);
       await user.type(notesTextarea, 'Basmati');
 
@@ -233,7 +228,6 @@ describe('ItemForm', () => {
             category: 'food',
             quantity: 5,
             unit: 'kg',
-            status: 'purchased',
             notes: 'Basmati',
           }),
           expect.anything()

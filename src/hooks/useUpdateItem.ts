@@ -8,27 +8,30 @@ interface UpdateItemVariables {
   updates: ItemPatch;
 }
 
-function applyOptimisticUpdate(item: Item, updates: ItemPatch): Item {
-  const { assignmentStatusList, isAllParticipants, ...rest } = updates;
+export function enrichUpdates(item: Item, updates: ItemPatch): ItemPatch {
+  const enriched = { ...updates };
 
-  const merged: Item = { ...item, ...rest };
-
-  if (assignmentStatusList !== undefined) {
-    merged.assignmentStatusList = assignmentStatusList;
-  }
-  if (isAllParticipants !== undefined) {
-    merged.isAllParticipants = isAllParticipants;
+  if (enriched.assignmentStatusList === undefined) {
+    enriched.assignmentStatusList = [...item.assignmentStatusList];
   }
 
-  return merged;
+  if (enriched.isAllParticipants === undefined) {
+    enriched.isAllParticipants = item.isAllParticipants;
+  }
+
+  return enriched;
 }
 
 export function useUpdateItem(planId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ itemId, updates }: UpdateItemVariables) =>
-      updateItem(itemId, updates),
+    mutationFn: ({ itemId, updates }: UpdateItemVariables) => {
+      const plan = queryClient.getQueryData<PlanWithDetails>(['plan', planId]);
+      const item = plan?.items.find((i) => i.itemId === itemId);
+      const finalUpdates = item ? enrichUpdates(item, updates) : updates;
+      return updateItem(itemId, finalUpdates);
+    },
     onMutate: async ({ itemId, updates }) => {
       await queryClient.cancelQueries({ queryKey: ['plan', planId] });
 
@@ -39,10 +42,12 @@ export function useUpdateItem(planId: string) {
 
       queryClient.setQueryData<PlanWithDetails>(['plan', planId], (old) => {
         if (!old) return old;
+        const item = old.items.find((i) => i.itemId === itemId);
+        const enriched = item ? enrichUpdates(item, updates) : updates;
         return {
           ...old,
-          items: old.items.map((item) =>
-            item.itemId === itemId ? applyOptimisticUpdate(item, updates) : item
+          items: old.items.map((i) =>
+            i.itemId === itemId ? { ...i, ...enriched } : i
           ),
         };
       });

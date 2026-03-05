@@ -134,7 +134,6 @@ const itemCreateSchema = z.object({
   category: itemCategorySchema,
   quantity: z.number().int().min(1),
   unit: unitSchema.optional(),
-  status: itemStatusSchema,
   subcategory: z.string().nullable().optional(),
   notes: z.string().nullable().optional(),
   assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),
@@ -146,7 +145,6 @@ const itemPatchSchema = z.object({
   category: itemCategorySchema.optional(),
   quantity: z.number().int().min(1).optional(),
   unit: unitSchema.optional(),
-  status: itemStatusSchema.optional(),
   subcategory: z.string().nullable().optional(),
   notes: z.string().nullable().optional(),
   assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),
@@ -784,7 +782,6 @@ export async function buildServer(
         category: String(body.category ?? 'equipment'),
         quantity: Number(body.quantity ?? 1),
         unit: String(body.unit ?? 'pcs'),
-        status: 'pending',
         subcategory: body.subcategory ? String(body.subcategory) : null,
         notes: body.notes ? String(body.notes) : null,
         isAllParticipants: false,
@@ -840,7 +837,8 @@ export async function buildServer(
         'quantity',
         'unit',
         'notes',
-        'status',
+        'assignmentStatusList',
+        'isAllParticipants',
       ];
       for (const field of allowedFields) {
         if (field in body) {
@@ -1009,7 +1007,6 @@ export async function buildServer(
         category: parsed.category,
         quantity: parsed.quantity,
         unit: parsed.unit ?? 'pcs',
-        status: parsed.status,
         subcategory: parsed.subcategory ?? null,
         notes: parsed.notes,
         isAllParticipants: parsed.isAllParticipants ?? false,
