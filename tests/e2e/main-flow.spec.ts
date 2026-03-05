@@ -65,19 +65,16 @@ function buildTestPlan() {
         name: 'Tent',
         category: 'equipment',
         quantity: 2,
-        status: 'pending',
       },
       {
         name: 'Water',
         category: 'food',
         quantity: 3,
-        status: 'purchased',
       },
       {
         name: 'Bread',
         category: 'food',
         quantity: 2,
-        status: 'pending',
       },
     ],
   });
@@ -92,7 +89,7 @@ function assignItemsToParticipants(plan: ReturnType<typeof buildTestPlan>) {
     { participantId: bob.participantId, status: 'pending' },
   ];
   water.assignmentStatusList = [
-    { participantId: carol.participantId, status: 'pending' },
+    { participantId: carol.participantId, status: 'purchased' },
   ];
   return plan;
 }
@@ -182,7 +179,6 @@ test.describe('Item CRUD', () => {
 
     await editForm.locator('input[type="number"]').fill('5');
     await editForm.locator('select[name="unit"]').selectOption('kg');
-    await editForm.locator('select[name="status"]').selectOption('purchased');
     await editForm.locator('textarea').fill('Organic whole grain');
     await editForm
       .locator('select[name="assignedParticipantId"]')
@@ -199,7 +195,7 @@ test.describe('Item CRUD', () => {
     await expect(itemCard).toBeVisible({ timeout: 5000 });
     await expect(itemCard).toContainText('5');
     await expect(itemCard).toContainText('Kilogram');
-    await expect(itemCard).toContainText('Purchased');
+    await expect(itemCard).toContainText('Pending');
     await expect(itemCard).toContainText('Organic whole grain');
     await expect(itemCard).toContainText('Bob Helper');
   });
@@ -207,6 +203,11 @@ test.describe('Item CRUD', () => {
   test('changes item status inline', async ({ page }) => {
     await injectUserSession(page);
     const plan = buildTestPlan();
+    const owner = plan.participants.find((p) => p.role === 'owner')!;
+    const tent = plan.items.find((i) => i.name === 'Tent')!;
+    tent.assignmentStatusList = [
+      { participantId: owner.participantId, status: 'pending' },
+    ];
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);
@@ -703,6 +704,11 @@ test.describe('Filters', () => {
   test('status filter tabs show correct items per list', async ({ page }) => {
     await injectUserSession(page);
     const plan = assignItemsToParticipants(buildTestPlan());
+    const owner = plan.participants.find((p) => p.role === 'owner')!;
+    const bread = plan.items.find((i) => i.name === 'Bread')!;
+    bread.assignmentStatusList = [
+      { participantId: owner.participantId, status: 'pending' },
+    ];
     await mockPlanRoutes(page, plan);
 
     await page.goto(`/plan/${plan.planId}`);

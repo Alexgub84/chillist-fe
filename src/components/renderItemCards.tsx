@@ -1,11 +1,13 @@
 import type { Item, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
+import { getItemStatus } from '../core/utils-plan-items';
 import ItemCard from './ItemCard';
 
 export interface ItemListRendererProps {
   items: Item[];
   participants: Participant[];
+  currentParticipantId?: string;
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
   canEditItem?: (item: Item) => boolean;
@@ -16,6 +18,7 @@ export interface ItemListRendererProps {
 export function renderItemCards({
   items,
   participants,
+  currentParticipantId,
   listFilter,
   selfAssignParticipantId,
   canEditItem,
@@ -29,6 +32,8 @@ export function renderItemCards({
         key={item.itemId}
         item={item}
         participants={participants}
+        participantStatus={getItemStatus(item, currentParticipantId)}
+        currentParticipantId={currentParticipantId}
         listFilter={listFilter}
         selfAssignParticipantId={selfAssignParticipantId}
         canEdit={editable}

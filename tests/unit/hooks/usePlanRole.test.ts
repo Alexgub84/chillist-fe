@@ -34,7 +34,6 @@ function makeItem(assignedTo: string | null): Item {
     category: 'equipment',
     quantity: 1,
     unit: 'pcs',
-    status: 'pending',
     isAllParticipants: false,
     assignmentStatusList: assignedTo
       ? [{ participantId: assignedTo, status: 'pending' as const }]

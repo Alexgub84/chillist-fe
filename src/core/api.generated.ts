@@ -1090,7 +1090,7 @@ export interface paths {
     };
     /**
      * List all items for a plan
-     * @description Retrieve all items belonging to a specific plan
+     * @description Retrieve all items belonging to a specific plan. Response filtering: owners see the full assignmentStatusList for each item; non-owners (participants) see only their own entry in assignmentStatusList. There is no top-level status field — check assignmentStatusList entries for per-participant status.
      */
     get: {
       parameters: {
@@ -1153,7 +1153,7 @@ export interface paths {
     put?: never;
     /**
      * Add an item to a plan
-     * @description Create a new item. Equipment items always use pcs. Assignment fields (owner-only): send assignmentStatusList with participant entries + isAllParticipants=true to assign all, or a subset with isAllParticipants=false. Omit both to create unassigned.
+     * @description Create a new item (no top-level status field — per-participant status lives in assignmentStatusList). Equipment items always use pcs. Assignment fields (owner-only): send assignmentStatusList with participant entries (each has participantId + status) and isAllParticipants=true to assign all, or a subset with isAllParticipants=false. Omit both to create unassigned.
      */
     post: {
       parameters: {
@@ -1247,7 +1247,7 @@ export interface paths {
     head?: never;
     /**
      * Update an item
-     * @description Update an item. Send the full desired state. For assignments: owner sends any assignmentStatusList + isAllParticipants. Non-owner sends the full list but may only change their own entry (update status or remove self). To assign all: send all participants + isAllParticipants=true. To unassign all: send [] + isAllParticipants=false.
+     * @description Update an item. No top-level status field — use assignmentStatusList to change per-participant status. Owner: send the full assignmentStatusList array (replaces existing) + isAllParticipants. Non-owner: send assignmentStatusList with ONLY your own entry (e.g. [{ participantId: "your-id", status: "purchased" }]) — the backend merges it into the full list, preserving other participants. Response: owners see the full assignmentStatusList; non-owners see only their own entry.
      */
     patch: {
       parameters: {
@@ -1333,7 +1333,7 @@ export interface paths {
     put?: never;
     /**
      * Bulk create items in a plan
-     * @description Create multiple items at once. Each item is validated independently. Send assignmentStatusList and isAllParticipants per item.
+     * @description Create multiple items at once. Each item is validated independently. No top-level status field — per-participant status lives in assignmentStatusList. Assignment fields (owner-only): send assignmentStatusList and isAllParticipants per item.
      */
     post: {
       parameters: {
@@ -1411,7 +1411,7 @@ export interface paths {
     head?: never;
     /**
      * Bulk update items in a plan
-     * @description Update multiple items at once. Each item is validated independently. Send assignmentStatusList and isAllParticipants per item.
+     * @description Update multiple items at once. Each item is validated independently. No top-level status field — use assignmentStatusList per item. Owner: send the full assignmentStatusList (replaces). Non-owner: send only your own entry per item — backend merges. Response: non-owners see only their own entry in each item's assignmentStatusList.
      */
     patch: {
       parameters: {
@@ -1495,7 +1495,7 @@ export interface paths {
     };
     /**
      * Access a plan via invite link
-     * @description Public endpoint. Validates the invite token and returns plan data with items. Participant PII is stripped — only displayName and role are included.
+     * @description Public endpoint. Validates the invite token and returns plan data with items. Items are filtered to only those assigned to the guest or unassigned. Each item's assignmentStatusList is filtered to show only the guest's own entry. Participant PII is stripped — only displayName and role are included. There is no top-level status on items — check assignmentStatusList for per-participant status.
      */
     get: {
       parameters: {
@@ -1648,7 +1648,7 @@ export interface paths {
     put?: never;
     /**
      * Create an item as a guest via invite token
-     * @description Creates a new item auto-assigned to the participant matched by the invite token. Equipment items default to pcs; food items require a unit.
+     * @description Creates a new item (no top-level status field). Equipment items default to pcs; food items require a unit. The item is not auto-assigned — send assignmentStatusList separately via PATCH if needed.
      */
     post: {
       parameters: {
@@ -1734,7 +1734,7 @@ export interface paths {
     head?: never;
     /**
      * Update an item as a guest via invite token
-     * @description Updates an existing item. Allowed if the item is assigned to the participant matched by the invite token OR unassigned. Returns 403 if the item belongs to another participant.
+     * @description Updates an existing item. Allowed if the item is assigned to the guest or unassigned. Returns 403 if assigned to a different participant. No top-level status field — to update your status, send assignmentStatusList with your own entry: [{ participantId: "your-id", status: "purchased" }]. Backend merges into the full list. Response returns assignmentStatusList filtered to only your entry.
      */
     patch: {
       parameters: {
@@ -1822,7 +1822,7 @@ export interface paths {
     put?: never;
     /**
      * Bulk create items as a guest via invite token
-     * @description Creates multiple items auto-assigned to the participant matched by the invite token. Each item is validated independently — valid items are created, invalid items are reported in the errors array.
+     * @description Creates multiple items (no top-level status field). Each item is validated independently — valid items are created, invalid items are reported in the errors array. Items are not auto-assigned.
      */
     post: {
       parameters: {
@@ -1892,7 +1892,7 @@ export interface paths {
     head?: never;
     /**
      * Bulk update items as a guest via invite token
-     * @description Updates multiple items. Only allowed for items assigned to the participant matched by the invite token or unassigned items. Items assigned to other participants are reported in errors.
+     * @description Updates multiple items. No top-level status field — to update your status per item, send assignmentStatusList with your own entry: [{ participantId: "your-id", status: "purchased" }]. Backend merges into the full list for each item. Only allowed for items assigned to the guest or unassigned. Response returns each item's assignmentStatusList filtered to only your entry.
      */
     patch: {
       parameters: {
@@ -2612,13 +2612,11 @@ export interface components {
         | 'cm'
         | 'pack'
         | 'set';
-      /** @enum {string} */
-      status: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
       /** @description True when this item is assigned to all participants. When a new participant joins the plan, they are automatically added to items with this flag. */
       isAllParticipants: boolean;
-      /** @description Per-participant assignment and status tracking. Each entry is { participantId, status }. */
+      /** @description Per-participant assignment and status tracking (replaces the old top-level status field). Each entry is { participantId, status } where status is one of: pending, purchased, packed, canceled. For non-owner responses, this array is filtered to only the requesting participant's entry. */
       assignmentStatusList: {
         /** Format: uuid */
         participantId: string;
@@ -2651,8 +2649,6 @@ export interface components {
         | 'cm'
         | 'pack'
         | 'set';
-      /** @enum {string} */
-      status: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
       /** @description The full list of participant assignments for this item. To assign to all participants: send every participant with status "pending" and set isAllParticipants=true. To assign a subset: send only those participants and set isAllParticipants=false (or omit it). To leave unassigned: omit this field or send []. Owner-only on create. */
@@ -2684,11 +2680,9 @@ export interface components {
         | 'cm'
         | 'pack'
         | 'set';
-      /** @enum {string} */
-      status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
-      /** @description Send the full desired assignment list. Owner can set any list. Non-owner can only change their own entry (update status or remove self). To toggle assign-all ON: send all participants with status "pending" + isAllParticipants=true. To toggle assign-all OFF: send [] + isAllParticipants=false. To update one status: send the full list with that entry changed. */
+      /** @description Owner: send the full desired assignment list. Non-owner: send only your own entry with updated status — backend merges into the full list. To toggle assign-all ON (owner): send all participants + isAllParticipants=true. To toggle assign-all OFF (owner): send [] + isAllParticipants=false. */
       assignmentStatusList?: {
         /** Format: uuid */
         participantId: string;
@@ -3019,10 +3013,15 @@ export interface components {
         | 'cm'
         | 'pack'
         | 'set';
-      /** @enum {string} */
-      status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
+      /** @description Send only your own entry with updated status. Backend merges into the full list. */
+      assignmentStatusList?: {
+        /** Format: uuid */
+        participantId: string;
+        /** @enum {string} */
+        status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      }[];
     };
     /** BulkCreateItemBody */
     'def-46': {
@@ -3049,11 +3048,9 @@ export interface components {
         | 'cm'
         | 'pack'
         | 'set';
-      /** @enum {string} */
-      status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
-      /** @description Send the full desired assignment list. Same rules as single-item PATCH: owner can set any list, non-owner can only change their own entry. */
+      /** @description Owner: send the full desired assignment list. Non-owner: send only your own entry — backend merges. Same rules as single-item PATCH. */
       assignmentStatusList?: {
         /** Format: uuid */
         participantId: string;
@@ -3102,10 +3099,15 @@ export interface components {
         | 'cm'
         | 'pack'
         | 'set';
-      /** @enum {string} */
-      status?: 'pending' | 'purchased' | 'packed' | 'canceled';
       subcategory?: string | null;
       notes?: string | null;
+      /** @description Send only your own entry with updated status. Backend merges into the full list. */
+      assignmentStatusList?: {
+        /** Format: uuid */
+        participantId: string;
+        /** @enum {string} */
+        status: 'pending' | 'purchased' | 'packed' | 'canceled';
+      }[];
     };
     /** BulkUpdateInviteItemBody */
     'def-53': {

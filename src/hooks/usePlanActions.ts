@@ -6,23 +6,33 @@ import { useUpdateParticipant } from './useUpdateParticipant';
 import { useDeletePlan } from './useDeletePlan';
 import { useUpdatePlan } from './useUpdatePlan';
 import { getApiErrorMessage } from '../core/error-utils';
-import type { ItemCreate, ItemPatch } from '../core/schemas/item';
+import type { Item, ItemCreate, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { PlanPatch } from '../core/schemas/plan';
 import type { ItemFormValues } from '../components/ItemForm';
 import type { PreferencesFormValues } from '../components/PreferencesForm';
 import { buildAssignmentPayload } from '../core/utils-plan-items';
 
-function toItemPayload(values: ItemFormValues, participants: Participant[]) {
+function toItemPayload(
+  values: ItemFormValues,
+  participants: Participant[],
+  existingList: {
+    participantId: string;
+    status: import('../core/schemas/item').ItemStatus;
+  }[] = []
+) {
   return {
     name: values.name,
     category: values.category,
     subcategory: values.subcategory || null,
     quantity: values.quantity,
     unit: values.unit,
-    status: values.status,
     notes: values.notes || null,
-    ...buildAssignmentPayload(values.assignedParticipantId ?? '', participants),
+    ...buildAssignmentPayload(
+      values.assignedParticipantId ?? '',
+      participants,
+      existingList
+    ),
   };
 }
 
@@ -69,12 +79,12 @@ export function usePlanActions(
 
   async function createOrUpdateItem(
     values: ItemFormValues,
-    editingItemId: string | null
+    editingItem: Item | null
   ) {
-    if (editingItemId) {
+    if (editingItem) {
       await updateSingleItem(
-        editingItemId,
-        toItemPayload(values, participants)
+        editingItem.itemId,
+        toItemPayload(values, participants, editingItem.assignmentStatusList)
       );
     } else {
       await createItem(toItemPayload(values, participants));

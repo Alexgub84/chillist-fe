@@ -37,7 +37,6 @@ const successResponse: BulkItemResponse = {
       category: 'equipment',
       quantity: 1,
       unit: 'pcs',
-      status: 'pending',
       isAllParticipants: false,
       assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
       createdAt: '2025-01-01T00:00:00Z',

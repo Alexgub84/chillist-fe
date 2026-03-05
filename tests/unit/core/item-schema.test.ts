@@ -13,7 +13,6 @@ describe('itemSchema date-time and format validation', () => {
     category: 'equipment' as const,
     quantity: 2,
     unit: 'pcs' as const,
-    status: 'pending' as const,
     isAllParticipants: false,
     assignmentStatusList: [],
     createdAt: '2025-01-01T00:00:00Z',
@@ -80,7 +79,6 @@ describe('itemSchema date-time and format validation', () => {
       name: validItem.name,
       quantity: validItem.quantity,
       unit: validItem.unit,
-      status: validItem.status,
       category: validItem.category,
       createdAt: validItem.createdAt,
       updatedAt: validItem.updatedAt,
@@ -99,7 +97,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 1,
-      status: 'pending',
     });
     expect(result.success).toBe(true);
   });
@@ -124,7 +121,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 0,
-      status: 'pending',
     });
     expect(result.success).toBe(false);
   });
@@ -134,7 +130,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: -1,
-      status: 'pending',
     });
     expect(result.success).toBe(false);
   });
@@ -144,7 +139,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 1.5,
-      status: 'pending',
     });
     expect(result.success).toBe(false);
   });
@@ -154,7 +148,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 1,
-      status: 'pending',
     });
     expect(result.success).toBe(true);
     if (result.success) {
@@ -167,17 +160,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'clothing',
       quantity: 1,
-      status: 'pending',
-    });
-    expect(result.success).toBe(false);
-  });
-
-  it('rejects invalid status value', () => {
-    const result = itemCreateSchema.safeParse({
-      name: 'Tent',
-      category: 'equipment',
-      quantity: 1,
-      status: 'archived',
     });
     expect(result.success).toBe(false);
   });
@@ -187,7 +169,6 @@ describe('itemCreateSchema', () => {
       name: 'A'.repeat(256),
       category: 'equipment',
       quantity: 1,
-      status: 'pending',
     });
     expect(result.success).toBe(false);
   });
@@ -197,7 +178,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 1,
-      status: 'pending',
       notes: null,
     });
     expect(result.success).toBe(true);
@@ -208,7 +188,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 1,
-      status: 'pending',
     });
     expect(result.success).toBe(true);
     if (result.success) {
@@ -221,7 +200,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 1,
-      status: 'pending',
       isAllParticipants: true,
       assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
     });
@@ -236,7 +214,6 @@ describe('itemCreateSchema', () => {
       name: 'Tent',
       category: 'equipment',
       quantity: 1,
-      status: 'pending',
       assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
     });
     expect(result.success).toBe(true);

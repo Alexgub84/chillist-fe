@@ -8,7 +8,9 @@ import type { ListFilter } from '../core/schemas/plan-search';
 import { getApiErrorMessage } from '../core/error-utils';
 import {
   buildAssignmentPayload,
+  buildStatusUpdate,
   getAssignmentSelectValue,
+  getItemStatus,
   isAssignedTo,
   countItemsPerParticipant,
   filterItemsByAssignedParticipant,
@@ -72,6 +74,12 @@ export default function ItemsView({
   );
   const [bulkAddOpen, setBulkAddOpen] = useState(false);
 
+  const myParticipantId = isGuest ? guestParticipantId : selfParticipantId;
+  const statusParticipantId =
+    participantFilter && participantFilter !== 'unassigned'
+      ? participantFilter
+      : myParticipantId;
+
   const existingItems = useMemo(
     () => new Map(items.map((i) => [i.name.toLowerCase(), i.itemId])),
     [items]
@@ -79,7 +87,12 @@ export default function ItemsView({
 
   async function handleBulkCancel(itemIds: string[]) {
     for (const itemId of itemIds) {
-      await onUpdateItem(itemId, { status: 'canceled' });
+      const item = items.find((i) => i.itemId === itemId);
+      if (!item) continue;
+      await onUpdateItem(
+        itemId,
+        buildStatusUpdate(item, 'canceled', statusParticipantId)
+      );
     }
   }
 
@@ -93,18 +106,18 @@ export default function ItemsView({
     setItemModalId(null);
   }
 
-  function toPayload(values: ItemFormValues) {
+  function toPayload(values: ItemFormValues, existingItem?: Item) {
     return {
       name: values.name,
       category: values.category,
       subcategory: values.subcategory || null,
       quantity: values.quantity,
       unit: values.unit,
-      status: values.status,
       notes: values.notes || null,
       ...buildAssignmentPayload(
         values.assignedParticipantId ?? '',
-        participants
+        participants,
+        existingItem?.assignmentStatusList ?? []
       ),
     };
   }
@@ -114,7 +127,7 @@ export default function ItemsView({
       if (isCreatingNew) {
         await onCreateItem(toPayload(values));
       } else if (editingItem) {
-        await onUpdateItem(editingItem.itemId, toPayload(values));
+        await onUpdateItem(editingItem.itemId, toPayload(values, editingItem));
       }
       closeItemModal();
     } catch (err) {
@@ -168,7 +181,9 @@ export default function ItemsView({
     () => countItemsPerParticipant(participants, items),
     [participants, items]
   );
-  const nonCanceledCount = items.filter((i) => i.status !== 'canceled').length;
+  const nonCanceledCount = items.filter(
+    (i) => getItemStatus(i, myParticipantId) !== 'canceled'
+  ).length;
 
   const participantScopedItems = useMemo(
     () =>
@@ -177,17 +192,19 @@ export default function ItemsView({
   );
 
   const listCounts = useMemo(
-    () => countItemsByListTab(participantScopedItems),
-    [participantScopedItems]
+    () => countItemsByListTab(participantScopedItems, statusParticipantId),
+    [participantScopedItems, statusParticipantId]
   );
 
   const filteredItems = useMemo(
     () =>
-      filterItemsByStatusTab(participantScopedItems, listFilter ?? undefined),
-    [participantScopedItems, listFilter]
+      filterItemsByStatusTab(
+        participantScopedItems,
+        listFilter ?? undefined,
+        statusParticipantId
+      ),
+    [participantScopedItems, listFilter, statusParticipantId]
   );
-
-  const myParticipantId = isGuest ? guestParticipantId : selfParticipantId;
 
   const canEditItem = myParticipantId
     ? (item: Item) => isAssignedTo(item, myParticipantId)
@@ -273,6 +290,7 @@ export default function ItemsView({
           <ItemsList
             items={filteredItems}
             participants={participants}
+            currentParticipantId={statusParticipantId}
             listFilter={listFilter}
             selfAssignParticipantId={myParticipantId}
             canEditItem={canEditItem}
@@ -298,7 +316,6 @@ export default function ItemsView({
                     subcategory: editingItem.subcategory ?? undefined,
                     quantity: editingItem.quantity,
                     unit: editingItem.unit,
-                    status: editingItem.status,
                     notes: editingItem.notes ?? '',
                     assignedParticipantId:
                       getAssignmentSelectValue(editingItem),

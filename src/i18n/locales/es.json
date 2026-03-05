@@ -190,7 +190,6 @@
     "name": "Nombre *",
     "namePlaceholder": "Nombre del elemento",
     "category": "Categoría *",
-    "status": "Estado *",
     "quantity": "Cantidad *",
     "unit": "Unidad",
     "notes": "Notas",
