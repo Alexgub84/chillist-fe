@@ -53,7 +53,6 @@ function createTestData(): MockData {
         name: 'Tent',
         quantity: 1,
         unit: 'pcs',
-        status: 'pending',
         category: 'equipment',
         isAllParticipants: false,
         assignmentStatusList: [],
@@ -311,7 +310,6 @@ describe('mock server', () => {
           name: 'Lantern',
           category: 'equipment',
           quantity: 2,
-          status: 'pending',
         },
       });
 
@@ -320,7 +318,6 @@ describe('mock server', () => {
       expect(payload.itemId).toEqual(expect.any(String));
       expect(payload.planId).toBe('plan-1');
       expect(payload.quantity).toBe(2);
-      expect(payload.status).toBe('pending');
     } finally {
       await server.close();
     }

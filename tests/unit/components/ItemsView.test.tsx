@@ -45,7 +45,6 @@ const mockItems: Item[] = [
     category: 'equipment',
     quantity: 1,
     unit: 'pcs',
-    status: 'pending',
     isAllParticipants: false,
     assignmentStatusList: [],
     createdAt: '2025-01-01T00:00:00Z',
@@ -58,7 +57,6 @@ const mockItems: Item[] = [
     category: 'food',
     quantity: 5,
     unit: 'l',
-    status: 'purchased',
     isAllParticipants: false,
     assignmentStatusList: [],
     createdAt: '2025-01-01T00:00:00Z',
@@ -181,9 +179,8 @@ describe('ItemsView', () => {
         category: 'food',
         quantity: 1,
         unit: 'pcs',
-        status: 'canceled',
         isAllParticipants: false,
-        assignmentStatusList: [],
+        assignmentStatusList: [{ participantId: 'p-1', status: 'canceled' }],
         createdAt: '2025-01-01T00:00:00Z',
         updatedAt: '2025-01-01T00:00:00Z',
       },
@@ -228,7 +225,6 @@ describe('ItemsView', () => {
           category: 'food',
           quantity: 2,
           unit: 'pack',
-          status: 'pending',
           isAllParticipants: false,
           assignmentStatusList: [
             { participantId: 'p-guest', status: 'pending' },
@@ -247,6 +243,109 @@ describe('ItemsView', () => {
     });
   });
 
+  describe('assign-all items and participant filter', () => {
+    const twoParticipants: Participant[] = [
+      {
+        participantId: 'p-1',
+        planId: PLAN_ID,
+        name: 'Alex',
+        lastName: 'G',
+        contactPhone: '123',
+        role: 'owner',
+        rsvpStatus: 'confirmed',
+        createdAt: '2025-01-01T00:00:00Z',
+        updatedAt: '2025-01-01T00:00:00Z',
+      },
+      {
+        participantId: 'p-2',
+        planId: PLAN_ID,
+        name: 'Bob',
+        lastName: 'H',
+        contactPhone: '456',
+        role: 'participant',
+        rsvpStatus: 'confirmed',
+        createdAt: '2025-01-01T00:00:00Z',
+        updatedAt: '2025-01-01T00:00:00Z',
+      },
+    ];
+
+    const allAssignedItem: Item = {
+      itemId: 'item-all',
+      planId: PLAN_ID,
+      name: 'Sunscreen',
+      category: 'equipment',
+      quantity: 1,
+      unit: 'pcs',
+      isAllParticipants: true,
+      assignmentStatusList: [
+        { participantId: 'p-1', status: 'pending' },
+        { participantId: 'p-2', status: 'pending' },
+      ],
+      createdAt: '2025-01-01T00:00:00Z',
+      updatedAt: '2025-01-01T00:00:00Z',
+    };
+
+    it('shows assign-all item under each participant filter', async () => {
+      const user = userEvent.setup();
+      render(
+        <ItemsView
+          {...defaultProps}
+          items={[allAssignedItem]}
+          participants={twoParticipants}
+        />
+      );
+
+      expect(screen.getByText('Sunscreen')).toBeInTheDocument();
+
+      await user.click(screen.getByRole('button', { name: /Alex G/i }));
+      expect(screen.getByText('Sunscreen')).toBeInTheDocument();
+
+      await user.click(screen.getByRole('button', { name: /Bob H/i }));
+      expect(screen.getByText('Sunscreen')).toBeInTheDocument();
+    });
+
+    it('shows participant count including assign-all items', () => {
+      render(
+        <ItemsView
+          {...defaultProps}
+          items={[allAssignedItem]}
+          participants={twoParticipants}
+        />
+      );
+
+      const alexBtn = screen.getByRole('button', { name: /Alex G/i });
+      const bobBtn = screen.getByRole('button', { name: /Bob H/i });
+      expect(alexBtn).toHaveTextContent('1');
+      expect(bobBtn).toHaveTextContent('1');
+    });
+
+    it('calls onUpdateItem with status change on assign-all item', async () => {
+      const onUpdateItem = vi.fn();
+      const user = userEvent.setup();
+      render(
+        <ItemsView
+          {...defaultProps}
+          items={[allAssignedItem]}
+          participants={twoParticipants}
+          selfParticipantId="p-1"
+          onUpdateItem={onUpdateItem}
+        />
+      );
+
+      await user.click(
+        screen.getByRole('button', { name: /Change status for Sunscreen/i })
+      );
+      await user.click(screen.getByRole('option', { name: /Purchased/i }));
+
+      expect(onUpdateItem).toHaveBeenCalledWith('item-all', {
+        assignmentStatusList: [
+          { participantId: 'p-1', status: 'purchased' },
+          { participantId: 'p-2', status: 'pending' },
+        ],
+      });
+    });
+  });
+
   describe('non-owner permission gating', () => {
     const assignedItem: Item = {
       itemId: 'item-assigned',
@@ -255,7 +354,6 @@ describe('ItemsView', () => {
       category: 'equipment',
       quantity: 1,
       unit: 'pcs',
-      status: 'pending',
       isAllParticipants: false,
       assignmentStatusList: [{ participantId: 'p-me', status: 'pending' }],
       createdAt: '2025-01-01T00:00:00Z',
@@ -269,7 +367,6 @@ describe('ItemsView', () => {
       category: 'equipment',
       quantity: 1,
       unit: 'pcs',
-      status: 'pending',
       isAllParticipants: false,
       assignmentStatusList: [{ participantId: 'p-other', status: 'pending' }],
       createdAt: '2025-01-01T00:00:00Z',

@@ -210,7 +210,6 @@ describe('BulkItemAddWizard', () => {
         name: 'First Aid Kit',
         category: 'equipment',
         quantity: 1,
-        status: 'pending',
         subcategory: 'First Aid and Safety',
       });
     });

@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
+import type { Item } from '../../../src/core/schemas/item';
 import { usePlanActions } from '../../../src/hooks/usePlanActions';
 
 const mockCreateItem = { mutateAsync: vi.fn(), isPending: false };
@@ -52,6 +53,19 @@ const mockParticipants = [
   },
 ];
 
+const mockItem: Item = {
+  itemId: 'item-1',
+  planId: 'plan-1',
+  name: 'Tent',
+  category: 'equipment',
+  quantity: 1,
+  unit: 'pcs',
+  isAllParticipants: false,
+  assignmentStatusList: [{ participantId: 'p-2', status: 'purchased' }],
+  createdAt: '2025-01-01T00:00:00Z',
+  updatedAt: '2025-01-01T00:00:00Z',
+};
+
 describe('usePlanActions', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -75,7 +89,6 @@ describe('usePlanActions', () => {
           subcategory: '',
           quantity: 1,
           unit: 'pcs',
-          status: 'pending',
           notes: '',
           assignedParticipantId: '',
         },
@@ -89,7 +102,7 @@ describe('usePlanActions', () => {
     expect(mockUpdateItem.mutateAsync).not.toHaveBeenCalled();
   });
 
-  it('createOrUpdateItem calls updateItem when editingItemId is provided', async () => {
+  it('createOrUpdateItem calls updateItem when editingItem is provided', async () => {
     const { result } = renderHook(() =>
       usePlanActions('plan-1', mockParticipants)
     );
@@ -102,11 +115,10 @@ describe('usePlanActions', () => {
           subcategory: '',
           quantity: 2,
           unit: 'pcs',
-          status: 'pending',
           notes: '',
           assignedParticipantId: '',
         },
-        'item-1'
+        mockItem
       )
     );
 
@@ -256,7 +268,6 @@ describe('usePlanActions', () => {
           subcategory: '',
           quantity: 1,
           unit: 'l',
-          status: 'pending',
           notes: '',
           assignedParticipantId: '',
         },
@@ -287,7 +298,6 @@ describe('usePlanActions', () => {
           subcategory: '',
           quantity: 1,
           unit: 'pcs',
-          status: 'pending',
           notes: '',
           assignedParticipantId: 'p-1',
         },
@@ -316,7 +326,6 @@ describe('usePlanActions', () => {
           subcategory: '',
           quantity: 1,
           unit: 'pcs',
-          status: 'pending',
           notes: '',
           assignedParticipantId: '__all__',
         },
@@ -335,7 +344,7 @@ describe('usePlanActions', () => {
     );
   });
 
-  it('update with specific participant sends assignmentStatusList', async () => {
+  it('update with specific participant preserves existing status', async () => {
     const { result } = renderHook(() =>
       usePlanActions('plan-1', mockParticipants)
     );
@@ -348,24 +357,32 @@ describe('usePlanActions', () => {
           subcategory: '',
           quantity: 1,
           unit: 'pcs',
-          status: 'pending',
           notes: '',
           assignedParticipantId: 'p-2',
         },
-        'item-1'
+        mockItem
       )
     );
 
     expect(mockUpdateItem.mutateAsync).toHaveBeenCalledWith({
       itemId: 'item-1',
       updates: expect.objectContaining({
-        assignmentStatusList: [{ participantId: 'p-2', status: 'pending' }],
+        assignmentStatusList: [{ participantId: 'p-2', status: 'purchased' }],
         isAllParticipants: false,
       }),
     });
   });
 
-  it('update with __all__ sends isAllParticipants: true', async () => {
+  it('update with __all__ preserves existing statuses', async () => {
+    const allItem: Item = {
+      ...mockItem,
+      isAllParticipants: true,
+      assignmentStatusList: [
+        { participantId: 'p-1', status: 'packed' },
+        { participantId: 'p-2', status: 'purchased' },
+      ],
+    };
+
     const { result } = renderHook(() =>
       usePlanActions('plan-1', mockParticipants)
     );
@@ -378,11 +395,10 @@ describe('usePlanActions', () => {
           subcategory: '',
           quantity: 1,
           unit: 'pcs',
-          status: 'pending',
           notes: '',
           assignedParticipantId: '__all__',
         },
-        'item-1'
+        allItem
       )
     );
 
@@ -391,8 +407,8 @@ describe('usePlanActions', () => {
       updates: expect.objectContaining({
         isAllParticipants: true,
         assignmentStatusList: [
-          { participantId: 'p-1', status: 'pending' },
-          { participantId: 'p-2', status: 'pending' },
+          { participantId: 'p-1', status: 'packed' },
+          { participantId: 'p-2', status: 'purchased' },
         ],
       }),
     });

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import type { Item, ItemPatch } from '../core/schemas/item';
+import type { Item, ItemPatch, ItemStatus } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
 import { STATUS_OPTIONS, UNIT_OPTIONS } from '../core/constants/item';
@@ -9,6 +9,7 @@ import {
   buildParticipantOptions,
   getAssignmentSelectValue,
   buildAssignmentPayload,
+  buildStatusUpdate,
   isAssignedTo,
   isItemUnassigned,
 } from '../core/utils-plan-items';
@@ -41,6 +42,8 @@ const QUICK_ACTIONS: Record<string, QuickActionConfig> = {
 interface ItemCardProps {
   item: Item;
   participants?: Participant[];
+  participantStatus?: ItemStatus;
+  currentParticipantId?: string;
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
   canEdit?: boolean;
@@ -51,6 +54,8 @@ interface ItemCardProps {
 export default function ItemCard({
   item,
   participants = [],
+  participantStatus,
+  currentParticipantId,
   listFilter,
   selfAssignParticipantId,
   canEdit = true,
@@ -70,9 +75,9 @@ export default function ItemCard({
   );
 
   const statusOption = resolvedStatusOptions.find(
-    (s) => s.value === item.status
+    (s) => s.value === participantStatus
   );
-  const isCanceled = item.status === 'canceled';
+  const isCanceled = participantStatus === 'canceled';
   const isEquipment = item.category === 'equipment';
   const quickAction =
     listFilter && listFilter in QUICK_ACTIONS
@@ -113,7 +118,9 @@ export default function ItemCard({
     if (!onUpdate || !quickAction || isChecking) return;
     setIsChecking(true);
     setTimeout(() => {
-      onUpdate({ status: quickAction.targetStatus });
+      onUpdate(
+        buildStatusUpdate(item, quickAction.targetStatus, currentParticipantId)
+      );
     }, 300);
   }
 
@@ -233,7 +240,8 @@ export default function ItemCard({
         data-scroll-item-id={item.itemId}
         className={clsx(
           'border-l-4 px-4 sm:px-5 py-3 sm:py-4 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:bg-gray-50/80 select-none',
-          STATUS_ACCENT[item.status] ?? 'border-l-gray-300',
+          (participantStatus && STATUS_ACCENT[participantStatus]) ??
+            'border-l-gray-300',
           isChecking && 'opacity-40'
         )}
       >
@@ -338,7 +346,8 @@ export default function ItemCard({
       data-scroll-item-id={item.itemId}
       className={clsx(
         'border-l-4 px-4 sm:px-5 py-3 sm:py-4 transition-colors hover:bg-gray-50/80',
-        STATUS_ACCENT[item.status] ?? 'border-l-gray-300'
+        (participantStatus && STATUS_ACCENT[participantStatus]) ??
+          'border-l-gray-300'
       )}
     >
       <div className="flex items-center justify-between gap-3 mb-2">
@@ -352,29 +361,34 @@ export default function ItemCard({
         </span>
 
         <div className="flex items-center gap-2 shrink-0">
-          {isEditable ? (
-            <InlineSelect
-              value={item.status}
-              onChange={(status) => onUpdate!({ status })}
-              options={resolvedStatusOptions}
-              buttonClassName={clsx(
-                'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium hover:opacity-80 transition-opacity',
-                statusOption?.bg,
-                statusOption?.text
-              )}
-              ariaLabel={`Change status for ${item.name}`}
-            />
-          ) : (
-            <span
-              className={clsx(
-                'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium',
-                statusOption?.bg,
-                statusOption?.text
-              )}
-            >
-              {statusOption?.label ?? t(`itemStatus.${item.status}`)}
-            </span>
-          )}
+          {participantStatus &&
+            (isEditable ? (
+              <InlineSelect
+                value={participantStatus}
+                onChange={(newStatus) =>
+                  onUpdate!(
+                    buildStatusUpdate(item, newStatus, currentParticipantId)
+                  )
+                }
+                options={resolvedStatusOptions}
+                buttonClassName={clsx(
+                  'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium hover:opacity-80 transition-opacity',
+                  statusOption?.bg,
+                  statusOption?.text
+                )}
+                ariaLabel={`Change status for ${item.name}`}
+              />
+            ) : (
+              <span
+                className={clsx(
+                  'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium',
+                  statusOption?.bg,
+                  statusOption?.text
+                )}
+              >
+                {statusOption?.label ?? t(`itemStatus.${participantStatus}`)}
+              </span>
+            ))}
 
           {isEditable && onEdit && (
             <button
@@ -400,10 +414,14 @@ export default function ItemCard({
             </button>
           )}
 
-          {isEditable && !isCanceled && (
+          {isEditable && !isCanceled && participantStatus && (
             <button
               type="button"
-              onClick={() => onUpdate!({ status: 'canceled' })}
+              onClick={() =>
+                onUpdate!(
+                  buildStatusUpdate(item, 'canceled', currentParticipantId)
+                )
+              }
               className="inline-flex items-center justify-center w-8 h-8 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
               aria-label={`Cancel ${item.name}`}
             >
@@ -480,7 +498,13 @@ export default function ItemCard({
                   <InlineSelect
                     value={assignmentSelectValue}
                     onChange={(value) => {
-                      onUpdate!(buildAssignmentPayload(value, participants));
+                      onUpdate!(
+                        buildAssignmentPayload(
+                          value,
+                          participants,
+                          item.assignmentStatusList
+                        )
+                      );
                     }}
                     options={assignmentOptions}
                     buttonClassName={clsx(

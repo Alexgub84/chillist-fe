@@ -46,7 +46,6 @@ function buildItem(overrides: Partial<Item> = {}): Item {
     category: 'equipment',
     quantity: 1,
     unit: 'pcs',
-    status: 'pending',
     isAllParticipants: false,
     assignmentStatusList: [],
     createdAt: '2025-01-01T00:00:00Z',

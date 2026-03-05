@@ -75,7 +75,6 @@ const equipmentItemSchema = z.object({
   quantity: z.number().int(),
   unit: z.enum(['pcs', 'kg', 'g', 'lb', 'oz', 'l', 'ml', 'pack', 'set']),
   notes: z.string().nullish(),
-  status: z.enum(['pending', 'purchased', 'packed', 'canceled']),
   isAllParticipants: z.boolean().default(false),
   assignmentStatusList: z.array(assignmentStatusEntrySchema).default([]),
   createdAt: z.string().datetime(),

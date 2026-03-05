@@ -15,7 +15,7 @@ const STATUS_VALUES = [
   'purchased',
   'packed',
   'canceled',
-] as const satisfies readonly BEItem['status'][];
+] as const satisfies readonly BEItem['assignmentStatusList'][number]['status'][];
 const UNIT_VALUES = [
   'pcs',
   'kg',
@@ -46,7 +46,6 @@ const baseItemSchema = z.object({
   quantity: z.number().int(),
   unit: unitSchema,
   notes: z.string().nullish(),
-  status: itemStatusSchema,
   subcategory: z.string().nullish(),
   isAllParticipants: z.boolean().default(false),
   assignmentStatusList: z.array(assignmentStatusEntrySchema).default([]),
@@ -72,7 +71,6 @@ export const itemCreateSchema = z.object({
   category: itemCategorySchema,
   quantity: z.number().int().min(1),
   unit: unitSchema.optional(),
-  status: itemStatusSchema,
   subcategory: z.string().nullish(),
   notes: z.string().nullish(),
   assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),
@@ -92,7 +90,6 @@ export const itemPatchSchema = z.object({
   category: itemCategorySchema.optional(),
   quantity: z.number().int().min(1).optional(),
   unit: unitSchema.optional(),
-  status: itemStatusSchema.optional(),
   subcategory: z.string().nullish(),
   notes: z.string().nullish(),
   assignmentStatusList: z.array(assignmentStatusEntrySchema).optional(),

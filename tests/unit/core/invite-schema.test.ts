@@ -58,7 +58,6 @@ describe('invitePlanResponseSchema', () => {
         category: 'equipment',
         quantity: 1,
         unit: 'pcs',
-        status: 'pending',
         notes: null,
         isAllParticipants: false,
         assignmentStatusList: [],

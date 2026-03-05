@@ -115,7 +115,6 @@ describe('API Client', () => {
         name: 'Tent',
         quantity: 1,
         unit: 'pcs',
-        status: 'pending',
         category: 'equipment',
         isAllParticipants: false,
         assignmentStatusList: [],
@@ -157,7 +156,6 @@ describe('API Client', () => {
     name: 'Tent',
     quantity: 1,
     unit: 'pcs',
-    status: 'pending',
     category: 'equipment',
     isAllParticipants: false,
     assignmentStatusList: [],
@@ -278,7 +276,6 @@ describe('API Client', () => {
             name: 'Tent',
             quantity: 1,
             unit: 'pcs',
-            status: 'pending',
             category: 'equipment',
             createdAt: '2025-01-01T00:00:00Z',
             updatedAt: '2025-01-01T00:00:00Z',
@@ -493,7 +490,6 @@ describe('API Client', () => {
         name: 'Tent',
         category: 'equipment' as const,
         quantity: 1,
-        status: 'pending' as const,
       };
 
       const item = await createItem('plan-1', newItem);
@@ -557,7 +553,6 @@ describe('API Client', () => {
         name: 'Tent',
         category: 'equipment' as const,
         quantity: 1,
-        status: 'pending' as const,
         isAllParticipants: true,
         assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
       };
@@ -578,7 +573,6 @@ describe('API Client', () => {
         name: 'Tent',
         category: 'equipment' as const,
         quantity: 1,
-        status: 'pending' as const,
         assignmentStatusList: [{ participantId: 'p-1', status: 'pending' }],
       };
 
@@ -900,7 +894,6 @@ describe('API Client', () => {
             category: 'equipment',
             quantity: 1,
             unit: 'pcs',
-            status: 'pending',
             notes: null,
             isAllParticipants: false,
             assignmentStatusList: [],
@@ -927,7 +920,6 @@ describe('API Client', () => {
             category: 'food',
             quantity: 2,
             unit: 'l',
-            status: 'pending',
             notes: null,
             assignmentStatusList: [],
             createdAt: '2026-01-01T00:00:00Z',

@@ -26,20 +26,31 @@ export function getAssignmentSelectValue(item: Item): string {
 export function buildAssignmentPayload(
   selectValue: string,
   participants: Participant[],
-  status: ItemStatus = 'pending'
+  existingList: { participantId: string; status: ItemStatus }[] = []
 ): Partial<ItemPatch> {
   if (selectValue === ALL_PARTICIPANTS_VALUE) {
     return {
-      assignmentStatusList: participants.map((p) => ({
-        participantId: p.participantId,
-        status,
-      })),
+      assignmentStatusList: participants.map((p) => {
+        const existing = existingList.find(
+          (e) => e.participantId === p.participantId
+        );
+        return {
+          participantId: p.participantId,
+          status: existing?.status ?? 'pending',
+        };
+      }),
       isAllParticipants: true,
     };
   }
   if (selectValue) {
+    const existing = existingList.find((e) => e.participantId === selectValue);
     return {
-      assignmentStatusList: [{ participantId: selectValue, status }],
+      assignmentStatusList: [
+        {
+          participantId: selectValue,
+          status: existing?.status ?? 'pending',
+        },
+      ],
       isAllParticipants: false,
     };
   }
@@ -54,6 +65,48 @@ export function getParticipantStatus(
     (a) => a.participantId === participantId
   );
   return entry?.status;
+}
+
+export function getItemStatus(
+  item: Item,
+  participantId?: string
+): ItemStatus | undefined {
+  if (participantId) {
+    const own = item.assignmentStatusList.find(
+      (a) => a.participantId === participantId
+    );
+    if (own) return own.status;
+  }
+  if (item.assignmentStatusList.length === 1)
+    return item.assignmentStatusList[0].status;
+  return undefined;
+}
+
+export function buildStatusUpdate(
+  item: Item,
+  newStatus: ItemStatus,
+  participantId?: string
+): Partial<ItemPatch> {
+  if (participantId) {
+    const hasEntry = item.assignmentStatusList.some(
+      (a) => a.participantId === participantId
+    );
+    if (hasEntry) {
+      return {
+        assignmentStatusList: item.assignmentStatusList.map((a) =>
+          a.participantId === participantId ? { ...a, status: newStatus } : a
+        ),
+      };
+    }
+  }
+  if (item.assignmentStatusList.length === 1) {
+    return {
+      assignmentStatusList: [
+        { ...item.assignmentStatusList[0], status: newStatus },
+      ],
+    };
+  }
+  return {};
 }
 
 // --- Participant options ---
@@ -95,7 +148,7 @@ export function countItemsPerParticipant(
     counts[p.participantId] = 0;
   }
   for (const item of items) {
-    if (item.status === 'canceled') continue;
+    if (getItemStatus(item) === 'canceled') continue;
     if (isItemUnassigned(item)) {
       counts['unassigned']++;
     } else {
@@ -117,26 +170,31 @@ export function filterItemsByAssignedParticipant(
   return items.filter((i) => isAssignedTo(i, participantFilter));
 }
 
-export function countItemsByListTab(items: Item[]): Record<ListFilter, number> {
+export function countItemsByListTab(
+  items: Item[],
+  participantId?: string
+): Record<ListFilter, number> {
   const counts: Record<ListFilter, number> = { buying: 0, packing: 0 };
   for (const item of items) {
-    if (item.status === 'pending') counts.buying++;
-    if (item.status === 'purchased' || item.status === 'pending')
-      counts.packing++;
+    const s = getItemStatus(item, participantId);
+    if (s === 'pending') counts.buying++;
+    if (s === 'purchased' || s === 'pending') counts.packing++;
   }
   return counts;
 }
 
 export function filterItemsByStatusTab(
   items: Item[],
-  listFilter: ListFilter | undefined
+  listFilter: ListFilter | undefined,
+  participantId?: string
 ): Item[] {
   if (!listFilter) return items;
   if (listFilter === 'buying')
-    return items.filter((i) => i.status === 'pending');
+    return items.filter((i) => getItemStatus(i, participantId) === 'pending');
   if (listFilter === 'packing')
-    return items.filter(
-      (i) => i.status === 'purchased' || i.status === 'pending'
-    );
+    return items.filter((i) => {
+      const s = getItemStatus(i, participantId);
+      return s === 'purchased' || s === 'pending';
+    });
   return items;
 }

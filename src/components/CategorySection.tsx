@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import type { Item, ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
+import { getItemStatus } from '../core/utils-plan-items';
 import {
   EQUIPMENT_SUBCATEGORIES,
   FOOD_SUBCATEGORIES,
@@ -17,6 +18,7 @@ interface CategorySectionProps {
   category: ItemCategory;
   items: Item[];
   participants?: Participant[];
+  currentParticipantId?: string;
   listFilter?: ListFilter | null;
   selfAssignParticipantId?: string;
   canEditItem?: (item: Item) => boolean;
@@ -60,6 +62,7 @@ export default function CategorySection({
   category,
   items,
   participants = [],
+  currentParticipantId,
   listFilter,
   selfAssignParticipantId,
   canEditItem,
@@ -105,6 +108,7 @@ export default function CategorySection({
                     selfParticipantId={selfAssignParticipantId}
                     cardProps={{
                       participants,
+                      currentParticipantId,
                       listFilter,
                       selfAssignParticipantId,
                       canEditItem,
@@ -134,6 +138,11 @@ export default function CategorySection({
                             key={item.itemId}
                             item={item}
                             participants={participants}
+                            participantStatus={getItemStatus(
+                              item,
+                              currentParticipantId
+                            )}
+                            currentParticipantId={currentParticipantId}
                             listFilter={listFilter}
                             selfAssignParticipantId={selfAssignParticipantId}
                             canEdit={editable}
@@ -161,6 +170,11 @@ export default function CategorySection({
                       key={item.itemId}
                       item={item}
                       participants={participants}
+                      participantStatus={getItemStatus(
+                        item,
+                        currentParticipantId
+                      )}
+                      currentParticipantId={currentParticipantId}
                       listFilter={listFilter}
                       selfAssignParticipantId={selfAssignParticipantId}
                       canEdit={editable}

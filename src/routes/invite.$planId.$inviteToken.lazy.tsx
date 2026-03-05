@@ -22,7 +22,11 @@ import type { InviteParticipant } from '../core/schemas/invite';
 import type { ItemCategory, ItemPatch } from '../core/schemas/item';
 import type { Participant } from '../core/schemas/participant';
 import type { ListFilter } from '../core/schemas/plan-search';
-import { isAssignedTo } from '../core/utils-plan-items';
+import {
+  isAssignedTo,
+  countItemsByListTab,
+  filterItemsByStatusTab,
+} from '../core/utils-plan-items';
 import LocationMap from '../components/LocationMap';
 import Modal from '../components/shared/Modal';
 import CollapsibleSection from '../components/shared/CollapsibleSection';
@@ -162,23 +166,13 @@ export function InvitePlanPage() {
 
   const hasResponded = myRsvpStatus !== 'pending';
 
-  const listCounts: Record<ListFilter, number> = { buying: 0, packing: 0 };
-  for (const item of items) {
-    if (item.status === 'pending') listCounts.buying++;
-    if (item.status === 'purchased' || item.status === 'pending')
-      listCounts.packing++;
-  }
+  const listCounts = countItemsByListTab(items, myParticipantId);
 
-  const filteredItems = items.filter((item) => {
-    if (listFilter === 'buying' && item.status !== 'pending') return false;
-    if (
-      listFilter === 'packing' &&
-      item.status !== 'purchased' &&
-      item.status !== 'pending'
-    )
-      return false;
-    return true;
-  });
+  const filteredItems = filterItemsByStatusTab(
+    items,
+    listFilter ?? undefined,
+    myParticipantId
+  );
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -290,6 +284,7 @@ export function InvitePlanPage() {
               <ItemsList
                 items={filteredItems}
                 participants={participantsAsFullType}
+                currentParticipantId={myParticipantId}
                 listFilter={listFilter}
                 selfAssignParticipantId={myParticipantId}
                 canEditItem={(item) =>

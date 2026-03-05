@@ -10,7 +10,6 @@ const baseItem: Item = {
   category: 'equipment',
   quantity: 2,
   unit: 'pcs',
-  status: 'pending',
   isAllParticipants: false,
   assignmentStatusList: [],
   createdAt: '2025-01-01T00:00:00Z',
@@ -28,7 +27,7 @@ describe('ItemCard', () => {
   });
 
   it('renders the correct status badge', () => {
-    render(<ItemCard item={baseItem} />);
+    render(<ItemCard item={baseItem} participantStatus="pending" />);
 
     expect(screen.getByText('Pending')).toBeInTheDocument();
   });
@@ -36,9 +35,14 @@ describe('ItemCard', () => {
   it('applies line-through styling for canceled items', () => {
     const canceledItem: Item = {
       ...baseItem,
-      status: 'canceled',
     };
-    render(<ItemCard item={canceledItem} />);
+    render(
+      <ItemCard
+        item={canceledItem}
+        participantStatus="canceled"
+        currentParticipantId="p-me"
+      />
+    );
 
     const nameEl = screen.getByText('Tent');
     expect(nameEl).toHaveClass('line-through');
@@ -63,7 +67,13 @@ describe('ItemCard', () => {
   describe('permission gating (canEdit)', () => {
     it('shows edit button and inline controls when canEdit is true', () => {
       render(
-        <ItemCard item={baseItem} canEdit onEdit={noop} onUpdate={noop} />
+        <ItemCard
+          item={baseItem}
+          participantStatus="pending"
+          canEdit
+          onEdit={noop}
+          onUpdate={noop}
+        />
       );
 
       expect(
@@ -81,6 +91,7 @@ describe('ItemCard', () => {
       render(
         <ItemCard
           item={baseItem}
+          participantStatus="pending"
           canEdit={false}
           onEdit={noop}
           onUpdate={noop}
