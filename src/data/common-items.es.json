@@ -3,4302 +3,5329 @@
     "name": "Paquetes de açaí",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Venda elástica ACE",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Paracetamol",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Calabaza bellota",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Figuras de acción",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Crema para picaduras",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Jarabe de agave",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Colchón inflable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Bomba de aire",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Medicamento para alergias",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Mantequilla de almendras",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Leche de almendras",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Almendras",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Gel de aloe vera",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Jugo de aloe vera",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Papel aluminio",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Serving and Tableware"
+    "subcategory": "Serving and Tableware",
+    "isPersonal": false
   },
   {
     "name": "Galletas de animalitos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Pastillas antiácidas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Medicamento antidiarreico",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Crema antipicazón",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Ungüento antibiótico",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Antihistamínico",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Toallitas antisépticas",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Vinagre de sidra de manzana",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Manzanas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Bolsas de puré de manzana",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Alcachofas",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Rúcula",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Espárragos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Aspirina",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Aguacate",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Aceite de aguacate",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Hacha",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Bañera para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Manta para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Gel de baño para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Biberones",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Portabebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Cereal para bebé",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Botiquín para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Frascos de comida para bebé",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Bolsas de comida para bebé",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Fórmula para bebé",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Puerta de seguridad para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Repelente de insectos para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Chaleco salvavidas para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Loción para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Monitor para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Champú para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Saco de dormir para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Sombrero de sol para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Gafas de sol para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Protector solar para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Pañales de baño para bebé",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Traje de baño para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Termómetro para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Toalla para bebé",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Toallitas para bebé",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Mochila",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Tocino",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Set de bádminton",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Bagels",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Frijoles horneados",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Vinagre balsámico",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Plátanos",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Curitas (para niños)",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Vendas (surtidas)",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Pantalón térmico",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Camiseta térmica",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Salsa BBQ",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Pelota de playa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Sombrilla de playa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Gorro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Contenedor anti-osos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Spray anti-osos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Cerveza",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Remolachas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Pimientos",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Beyond Meat",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Baberos",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Bicicleta",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Casco de bicicleta",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Portabicicletas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Binoculares",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "name": "Jabón biodegradable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Frijoles negros",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Parches para ampollas",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Arándanos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Juego de mesa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Set de bochas",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Gel de ducha",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Libro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Asiento elevador",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Cepillo para biberones",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Abrebotellas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Preparation Tools"
+    "subcategory": "Food Preparation Tools",
+    "isPersonal": false
   },
   {
     "name": "Calienta biberones",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Pan",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Brócoli",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Arroz integral",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "name": "Azúcar morena",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Brownies",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Coles de Bruselas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Burbujas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Alforfón",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Kit atrapa insectos",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Bloques de construcción",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Bulgur",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cuerdas elásticas",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Panes de hamburguesa",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Hamburguesas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Gel para quemaduras",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Mantequilla",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Vendas mariposa",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Calabaza butternut",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Repollo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cerraduras de gabinete",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Mezcla para pastel",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Sweets and Desserts"
+    "subcategory": "Sweets and Desserts",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Loción de calamina",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Cámara",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Manta de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Catre de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Calentador de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Colchoneta de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Almohada de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Ducha de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Fregadero de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Cocina de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Permiso de campamento",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Abrelatas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Preparation Tools"
+    "subcategory": "Food Preparation Tools",
+    "isPersonal": false
   },
   {
     "name": "Frijoles enlatados",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Maíz enlatado",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Sopa enlatada",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tomates enlatados",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Atún enlatado",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Remo de canoa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Toldo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Cargador de auto",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Silla de auto",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Mosquetones",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Detector de monóxido de carbono",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Red de carga",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Zanahorias",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Efectivo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Mantequilla de anacardo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Anacardos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Sartén de hierro fundido",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Comida para gato",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Coliflor",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Apio",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cereal",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Cambiador de pañales",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Carbón",
     "category": "equipment",
     "unit": "kg",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Queso",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.05,
+    "isPersonal": false
   },
   {
     "name": "Palitos de queso",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Cerezas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Semillas de chía",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Pechuga de pollo",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Nuggets de pollo",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Muslos de pollo",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Alitas de pollo",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Garbanzos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Chili",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Chile en polvo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Papas fritas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Chocolate",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Barras de chocolate",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Leche con chocolate",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Sidra",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Canela",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Velas de citronela",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "name": "Tendedero",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Pinzas para ropa",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Mezclador de cócteles",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Crema de coco",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Leche de coco",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Aceite de coco",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Agua de coco",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Yogur de coco",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Dairy"
+    "subcategory": "Dairy",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Café",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Filtros de café",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Compresa fría (instantánea)",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Mezcla para ensalada de col",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Balde plegable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Lápices de colores",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Libros para colorear",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Manta de confort",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Brújula",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "name": "Acondicionador",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Solución para lentes de contacto",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Galletas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Olla",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Spray para cocinar",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Nevera portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Bolsa nevera",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Mazorca de maíz",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Protectores de esquina",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Set de cornhole",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Algodón",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Hisopos de algodón",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Cuscús",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Máscara de RCP",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Galletas saladas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Crampones",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Crayones",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Queso crema",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Crema para café",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Tarjetas de crédito",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Croissants",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Pepino",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Comino",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Vasos",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Set de cubiertos",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Tabla de cortar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Chocolate oscuro",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Jarabe de dátil",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Dátiles",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mochila de día",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Desodorante",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Bolsa de pañales",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Crema para pañal",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Bolsas para desechar pañales",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Pañales",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Jabón para platos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Cubiertos desechables",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Serving and Tableware"
+    "subcategory": "Serving and Tableware",
+    "isPersonal": false
   },
   {
     "name": "Guantes desechables",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Serving and Tableware"
+    "subcategory": "Serving and Tableware",
+    "isPersonal": false
   },
   {
     "name": "Cama para perro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Collar para perro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Comida para perro",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Arnés para perro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Correa para perro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Chaleco salvavidas para perro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Premios para perro",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Muñecas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Chaqueta de plumas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Arándanos secos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Frutas secas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mango seco",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Bolsa impermeable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Cinta adhesiva",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Bolsa de viaje",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Horno holandés",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Tapones para oídos",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Edamame",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Berenjena",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Huevos",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Venda elástica",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Adaptador eléctrico (RV)",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Sobres de electrolitos",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Manta de emergencia",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Barras energéticas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Muffins ingleses",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "EpiPen",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Cable de extensión",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Gotas para los ojos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Falafel",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Hinojo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Guía de campo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "name": "Extintor",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Iniciador de fuego",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Leña",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Botiquín de primeros auxilios",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Manual de primeros auxilios",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Palitos de pescado",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Carnada de pesca",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Licencia de pesca",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Caña de pescar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Caja de aparejos de pesca",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Marcadores de bandera",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Linterna",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "name": "Semillas de linaza",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Aceite de linaza",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Chaqueta polar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Chanclas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Flotadores",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Harina",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "name": "Silla plegable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Mesa plegable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Recipientes para alimentos",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Balón de fútbol americano",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Fruta liofilizada",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Hierbas frescas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Jugo recién exprimido",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Frisbee",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Hamburguesas congeladas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Fruta congelada",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Pizza congelada",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Verduras congeladas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Vasos de fruta",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Rollitos de fruta",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Snacks de fruta",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Cartucho de combustible",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Polainas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Ajo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Ajo en polvo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Gasas",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Rollo de gasa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Cinta de reparación de equipo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Jengibre",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Guantes",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Barras luminosas",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "name": "Bayas de goji",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Galletas Goldfish",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Galletas Graham",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Granola",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Barras de granola",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Uvas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Judías verdes",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Té verde",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Parrilla",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Rejilla de parrilla",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Carne molida",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Lona de suelo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Guacamole",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Ligas para el cabello",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Cepillo de cabello",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Jamón",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Martillo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Hamaca",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Gel antibacterial",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Calentadores de manos",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Seltzer con alcohol",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Sombrero",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Lámpara frontal",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "name": "Semillas de cáñamo",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Té de hierbas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Botas de senderismo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Pantalones de senderismo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Miel",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Set de herraduras",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Mezcla de chocolate caliente",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Panes de hot dog",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Hot dogs",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Compresa caliente (instantánea)",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Salsa picante",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Hula hula",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Hummus",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mochila de hidratación",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Crema de hidrocortisona",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Agua oxigenada",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Ibuprofeno",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Hielo",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Helado",
     "category": "food",
     "unit": "l",
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Bolsas de hielo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Té helado",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Identificación / Licencia de conducir",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Tylenol infantil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Piscina inflable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Inhalador",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Repelente de insectos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Café instantáneo",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Fideos instantáneos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Avena instantánea",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Tarjetas de seguro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Condimento italiano",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Jalapeños",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mermelada",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Vasos de gelatina",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cecina",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Diario",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Jugo",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Cajitas de jugo",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Cuerda para saltar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Cables de arranque",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Col rizada",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Chips de col rizada",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Kayak",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Portakayak",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Kétchup",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Tetera",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Frijoles rojos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mochila para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Casco de bicicleta para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Binoculares para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Libros para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Sombrero para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Auriculares para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Botas de lluvia para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Chaqueta de lluvia para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Saco de dormir para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Protector solar para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Botella de agua para niños",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Bolsas de agua para niños",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Kimchi",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Cuchillo de cocina",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Cometa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Kombucha",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Cucharón",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Chuletas de cordero",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Farol",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "name": "Bolsa de lavandería",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Limonada",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Limones",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Lentejas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Lechuga",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Bloques niveladores (RV)",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Chaleco salvavidas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Encendedor",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Limas",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Bálsamo labial",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Macarrones con queso",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Lupa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Mango",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Mapa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "name": "Jarabe de arce",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Malvaviscos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Matcha",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Fósforos",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Mayonesa",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Cinta médica",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Toallas sanitarias",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Leche",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Mini bagels",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mini muffins",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Mini panqueques",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Mini sándwiches",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Espejo (pequeño)",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Pasta de miso",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Frutos secos mixtos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Molesquín",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Mosquitero",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Pastillas para el mareo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Muffins",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Herramienta multiusos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Champiñones",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mostaza",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Cortaúñas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Servilletas",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Tarjetas de búsqueda del tesoro natural",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Braga de cuello",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Luz nocturna",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Aspirador nasal",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Nutella",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Levadura nutricional",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Leche de avena",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Aceite de oliva",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Aceitunas",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Cebolla en polvo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Cebollas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Sales de rehidratación oral",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Naranjas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Tapas de enchufes",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Mezcla de avena nocturna",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Chupete",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Corralito portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Cubos organizadores",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Tabla de paddle",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Mezcla para panqueques",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Platos de papel",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Toallas de papel",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Pimentón",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Paracord",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Papel pergamino",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Pasaporte",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Pasta",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Ingredientes para sándwich de mantequilla y mermelada",
     "category": "food",
     "unit": "set",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Duraznos",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Mantequilla de maní",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cacahuates",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Peras",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Pedialyte",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Bolígrafo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Pimienta",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Pepperoni",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tazones para mascota",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Transportadora para mascota",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Botiquín para mascotas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Collar antipulgas para mascota",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Toalla para mascota",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Bolsas para desechos de mascota",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Vaselina",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Pepinillos",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Manta de picnic",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Pastel",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Piña",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Pistachos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Pan pita",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Vasos de plástico",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Envoltura plástica",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Platos",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Plastilina",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Cartas de juego",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Navaja",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Fideos de piscina",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Refugio emergente",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Palomitas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Paletas heladas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Chuletas de cerdo",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cuna portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Botella de agua portátil para perro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "name": "Reproductor DVD portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Ventilador portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Generador portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Bocina portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Music and Media"
+    "subcategory": "Music and Media",
+    "isPersonal": false
   },
   {
     "name": "Baño portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Champiñones portobello",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Papas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Batería portátil",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Medicamentos recetados",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Pretzels",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Pantalla de privacidad",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Tanque de propano",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Barras de proteína",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Proteína en polvo",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Vasos de pudín",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Puffs (snack para bebé)",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cerdo deshilachado",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Semillas de calabaza",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Rompecabezas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Camiseta de secado rápido",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Quinoa",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Rábanos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Sobretecho impermeable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Chaqueta impermeable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Poncho impermeable",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Cajitas de pasas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Pasas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Frambuesas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Rasuradora",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Chaleco reflectante",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Relish",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Parches de reparación",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Impresiones de reservación",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Costillas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Arroz",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "name": "Tortitas de arroz",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Fideos de arroz",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Galletas de arroz",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Bengalas de carretera",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Pimientos rojos asados",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cofre de techo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Correas de portaequipaje",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Cuerda",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Manguera de desagüe (RV)",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Imperdibles",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Aderezo para ensalada",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Mezcla de ensalada",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Salami",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Gotas de solución salina",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Solución salina para heridas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Filete de salmón",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Salsa",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Sal",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Juguetes de arena",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Sandalias",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Bolsas para sándwich",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Chucrut",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Salchichas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Sierra (plegable)",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Bufanda",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Tijeras (médicas)",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Patineta",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Snacks de alga",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Seitán",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cucharas de servir",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Kit de costura",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Champú",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Crema de afeitar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Pantalones cortos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Pala (de campamento)",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Tienda de ducha",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Camarones",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Vasos con tapa",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Brochetas",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Gafas de esquí",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Antifaz para dormir",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Saco de dormir",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Colchoneta para dormir",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Queso en rebanadas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Detector de humo (portátil)",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Salmón ahumado",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mezcla para batido",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Kit de s'mores",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Recipientes para snacks",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Kit para mordedura de serpiente",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Guisantes dulces",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Set de snorkel",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Cadenas para nieve",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Raquetas de nieve",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Balón de fútbol",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Refresco",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Cargador solar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Leche de soja",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Salsa de soja",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Baterías de repuesto",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Gafas de repuesto",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Agua con gas",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Espátula",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Grifo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Espinacas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Licores",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Espirulina",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tapete protector",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Férula",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Esponja",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Bebida deportiva",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Yogur en tubo",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Dairy"
+    "subcategory": "Dairy",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Sriracha",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Carta estelar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "name": "Bistec",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Guantes estériles",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Stickers",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Parches para picaduras",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Fresas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Popotes",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Queso en tiras",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Luces de cadena",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "name": "Carriola",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Bolsa de compresión",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Peluche",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Azúcar",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "name": "Tomates secados al sol",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Spray para quemaduras solares",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Semillas de girasol",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Gafas de sol",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Protector solar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Pegamento instantáneo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Arrullador",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Batatas",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Traje de baño",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Acelga",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tableta",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Tahini",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Tamari",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Tampones",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Lona",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Bolsas de té",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Teddy Grahams",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Galletas para dentición",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mordedor",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Tempeh",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tienda de campaña",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Huella de tienda",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Estacas de tienda",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Ropa interior térmica",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Termómetro",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Termo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Extractor de garrapatas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Kit de reparación de llantas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Pañuelos",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Tazones para niños pequeños",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Cubiertos para niños pequeños",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Platos para niños pequeños",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Barras de snack para niños",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tofu",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Papel higiénico",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Tomates",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Pinzas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "Depresores linguales",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Cepillo de dientes",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Pasta de dientes",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Palillos de dientes",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Totopos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Tortillas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Torniquete",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Correa de remolque",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Toallas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Carritos de juguete",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Mezcla de frutos secos y semillas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Bolsas de basura",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "name": "Silla alta de viaje",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Almohada de viaje",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Bastones de trekking",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Vendaje triangular",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Trípode",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "name": "Filetes de atún",
     "category": "food",
     "unit": "kg",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Rebanadas de pavo",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cúrcuma",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Pinzas de depilar",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "name": "Cable de carga USB",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "name": "Mantequilla vegana",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Queso vegano",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Galletas veganas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Mayonesa vegana",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Yogur vegano",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Aceite vegetal",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Hamburguesas vegetarianas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Chips de verduras",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Hot dogs vegetarianos",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Salchichas vegetarianas",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Pajitas de verduras",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Vinagre",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Balón de voleibol",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "name": "Walkie-talkies",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "name": "Nueces",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Capas de abrigo",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Palangana",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Agua",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Bolsa de agua",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Botella de agua",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Filtro de agua",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Pistolas de agua",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Manguera de agua",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Jarra de agua",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Regulador de presión de agua",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Pastillas purificadoras de agua",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "name": "Zapatos acuáticos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Sandía",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Fósforos impermeables",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "name": "WD-40",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Toallitas húmedas",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "name": "Cuñas para ruedas",
     "category": "equipment",
     "unit": "set",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Silbato",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "name": "Máquina de ruido blanco",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "name": "Leche entera",
     "category": "food",
     "unit": "l",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "name": "Pan integral",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Pasta integral",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tortillas integrales",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Arroz salvaje",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Cortavientos",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "name": "Raspador de parabrisas",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "name": "Vino",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "name": "Calcetines de lana",
     "category": "equipment",
     "unit": "pcs",
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "name": "Salsa Worcestershire",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "name": "Yogur",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "name": "Tubos de yogur",
     "category": "food",
     "unit": "pack",
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "name": "Cinchos de plástico",
     "category": "equipment",
     "unit": "pack",
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "name": "Calabacín",
     "category": "food",
     "unit": "pcs",
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   }
 ]

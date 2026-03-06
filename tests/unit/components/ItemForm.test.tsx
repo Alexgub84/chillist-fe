@@ -7,6 +7,11 @@ vi.mock('../../../src/contexts/useLanguage', () => ({
   useLanguage: () => mockLanguage,
 }));
 
+let mockPlanCtx: { plan: unknown; planPoints: number } | null = null;
+vi.mock('../../../src/hooks/usePlanContext', () => ({
+  usePlanContext: () => mockPlanCtx,
+}));
+
 import ItemForm from '../../../src/components/ItemForm';
 
 beforeAll(() => {
@@ -197,6 +202,82 @@ describe('ItemForm', () => {
       ).not.toBeInTheDocument();
 
       mockLanguage.language = 'en';
+    });
+  });
+
+  describe('Quantity suggestion', () => {
+    it('auto-fills suggested quantity when selecting a food item with planContext', async () => {
+      mockPlanCtx = { plan: {}, planPoints: 10 };
+      const user = userEvent.setup();
+      render(<ItemForm onSubmit={vi.fn()} />);
+
+      const nameInput = screen.getByPlaceholderText(/item name/i);
+      await user.type(nameInput, 'Bread');
+
+      const breadOption = await screen.findByRole('option', { name: 'Bread' });
+      await user.click(breadOption);
+
+      const quantityInput = getInputByLabel(/quantity \*/i) as HTMLInputElement;
+      await waitFor(() => {
+        expect(Number(quantityInput.value)).toBe(2);
+      });
+
+      mockPlanCtx = null;
+    });
+
+    it('keeps quantity as 1 when selecting an equipment item even with planContext', async () => {
+      mockPlanCtx = { plan: {}, planPoints: 10 };
+      const user = userEvent.setup();
+      render(<ItemForm onSubmit={vi.fn()} />);
+
+      const nameInput = screen.getByPlaceholderText(/item name/i);
+      await user.type(nameInput, 'Tent');
+
+      const tentOption = await screen.findByRole('option', { name: 'Tent' });
+      await user.click(tentOption);
+
+      const quantityInput = getInputByLabel(/quantity \*/i) as HTMLInputElement;
+      await waitFor(() => {
+        expect(Number(quantityInput.value)).toBe(1);
+      });
+
+      mockPlanCtx = null;
+    });
+
+    it('keeps quantity as 1 when planContext is null', async () => {
+      mockPlanCtx = null;
+      const user = userEvent.setup();
+      render(<ItemForm onSubmit={vi.fn()} />);
+
+      const nameInput = screen.getByPlaceholderText(/item name/i);
+      await user.type(nameInput, 'Bread');
+
+      const breadOption = await screen.findByRole('option', { name: 'Bread' });
+      await user.click(breadOption);
+
+      const quantityInput = getInputByLabel(/quantity \*/i) as HTMLInputElement;
+      await waitFor(() => {
+        expect(Number(quantityInput.value)).toBe(1);
+      });
+    });
+
+    it('scales quantity with higher planPoints', async () => {
+      mockPlanCtx = { plan: {}, planPoints: 40 };
+      const user = userEvent.setup();
+      render(<ItemForm onSubmit={vi.fn()} />);
+
+      const nameInput = screen.getByPlaceholderText(/item name/i);
+      await user.type(nameInput, 'Bread');
+
+      const breadOption = await screen.findByRole('option', { name: 'Bread' });
+      await user.click(breadOption);
+
+      const quantityInput = getInputByLabel(/quantity \*/i) as HTMLInputElement;
+      await waitFor(() => {
+        expect(Number(quantityInput.value)).toBe(6);
+      });
+
+      mockPlanCtx = null;
     });
   });
 

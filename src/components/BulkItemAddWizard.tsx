@@ -13,6 +13,7 @@ import {
   getCommonItems,
   type CommonItemBase,
 } from '../data/common-items-registry';
+import { calculateSuggestedQuantity } from '../core/utils-plan-points';
 
 interface SelectedItem {
   name: string;
@@ -31,6 +32,7 @@ interface BulkItemAddWizardProps {
   onAdd: (items: ItemCreate[]) => Promise<void>;
   existingItems?: Map<string, string>;
   onCancel?: (itemIds: string[]) => Promise<void>;
+  planPoints?: number;
 }
 
 export default function BulkItemAddWizard({
@@ -39,9 +41,23 @@ export default function BulkItemAddWizard({
   onAdd,
   existingItems,
   onCancel,
+  planPoints,
 }: BulkItemAddWizardProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
+
+  const defaultQuantity = useCallback(
+    (item: CommonItemBase): number => {
+      if (!planPoints || item.category !== 'food' || !item.quantityPerPoint)
+        return 1;
+      return calculateSuggestedQuantity({
+        planPoints,
+        quantityPerPoint: item.quantityPerPoint,
+        isPersonal: item.isPersonal,
+      });
+    },
+    [planPoints]
+  );
 
   const [step, setStep] = useState<Step>('category');
   const [category, setCategory] = useState<ItemCategory | null>(null);
@@ -134,7 +150,7 @@ export default function BulkItemAddWizard({
             category: item.category,
             subcategory: subcategory,
             unit: item.unit,
-            quantity: 1,
+            quantity: defaultQuantity(item),
           });
         }
       }
@@ -147,10 +163,12 @@ export default function BulkItemAddWizard({
     existingItems,
     subcategoryItems,
     uncheckedExisting,
+    defaultQuantity,
   ]);
 
   const toggleItem = useCallback(
     (item: CommonItemBase) => {
+      const qty = defaultQuantity(item);
       const itemId = getExistingItemId(item.name);
       if (itemId) {
         setUncheckedExisting((prev) => {
@@ -164,7 +182,7 @@ export default function BulkItemAddWizard({
                 category: item.category,
                 subcategory: subcategory ?? '',
                 unit: item.unit,
-                quantity: 1,
+                quantity: qty,
               });
               return m;
             });
@@ -189,14 +207,14 @@ export default function BulkItemAddWizard({
               category: item.category,
               subcategory: subcategory ?? '',
               unit: item.unit,
-              quantity: 1,
+              quantity: qty,
             });
           }
           return next;
         });
       }
     },
-    [subcategory, getExistingItemId]
+    [subcategory, getExistingItemId, defaultQuantity]
   );
 
   function toggleSelectAll() {
@@ -232,7 +250,7 @@ export default function BulkItemAddWizard({
               category: item.category,
               subcategory: subcategory ?? '',
               unit: item.unit,
-              quantity: 1,
+              quantity: defaultQuantity(item),
             });
           }
         }

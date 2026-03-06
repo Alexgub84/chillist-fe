@@ -51,6 +51,7 @@ export interface ItemsViewProps {
   onUpdateItem: (itemId: string, updates: ItemPatch) => Promise<void>;
   onBulkAssign?: (itemIds: string[], participantId: string) => void;
   isCreating?: boolean;
+  planPoints?: number;
 }
 
 export default function ItemsView({
@@ -65,6 +66,7 @@ export default function ItemsView({
   onUpdateItem,
   onBulkAssign,
   isCreating,
+  planPoints,
 }: ItemsViewProps) {
   const { t } = useTranslation();
   const [itemModalId, setItemModalId] = useState<string | null>(null);
@@ -343,6 +345,7 @@ export default function ItemsView({
         onAdd={handleBulkAdd}
         existingItems={existingItems}
         onCancel={handleBulkCancel}
+        planPoints={planPoints}
       />
     </div>
   );
