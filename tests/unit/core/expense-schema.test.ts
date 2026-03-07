@@ -64,6 +64,27 @@ describe('expenseSchema', () => {
       expect(typeof result.data.amount).toBe('string');
     }
   });
+
+  it('accepts expense with itemIds', () => {
+    const result = expenseSchema.safeParse({
+      ...validExpense,
+      itemIds: ['item-1', 'item-2'],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts expense without itemIds', () => {
+    const result = expenseSchema.safeParse(validExpense);
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts expense with empty itemIds', () => {
+    const result = expenseSchema.safeParse({
+      ...validExpense,
+      itemIds: [],
+    });
+    expect(result.success).toBe(true);
+  });
 });
 
 describe('expenseSummarySchema', () => {
@@ -172,6 +193,23 @@ describe('expenseCreateSchema', () => {
     const result = expenseCreateSchema.safeParse({ participantId: 'p-1' });
     expect(result.success).toBe(false);
   });
+
+  it('accepts create body with itemIds', () => {
+    const result = expenseCreateSchema.safeParse({
+      participantId: 'p-1',
+      amount: 29.99,
+      itemIds: ['item-1', 'item-2'],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts create body without itemIds', () => {
+    const result = expenseCreateSchema.safeParse({
+      participantId: 'p-1',
+      amount: 10,
+    });
+    expect(result.success).toBe(true);
+  });
 });
 
 describe('expensePatchSchema', () => {
@@ -213,5 +251,19 @@ describe('expensePatchSchema', () => {
   it('rejects negative amount', () => {
     const result = expensePatchSchema.safeParse({ amount: -1 });
     expect(result.success).toBe(false);
+  });
+
+  it('accepts patch with itemIds', () => {
+    const result = expensePatchSchema.safeParse({
+      itemIds: ['item-1'],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts patch with empty itemIds', () => {
+    const result = expensePatchSchema.safeParse({
+      itemIds: [],
+    });
+    expect(result.success).toBe(true);
   });
 });

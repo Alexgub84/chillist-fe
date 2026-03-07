@@ -12,6 +12,7 @@ export const expenseSchema = z.object({
   amount: z.string(),
   description: z.string().nullish(),
   createdByUserId: z.string().nullish(),
+  itemIds: z.array(z.string()).default([]),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
@@ -40,6 +41,7 @@ export const expenseCreateSchema = z.object({
   participantId: z.string().min(1),
   amount: z.number().positive(),
   description: z.string().optional(),
+  itemIds: z.array(z.string()).optional(),
 });
 
 type _AssertCreateKeys = keyof z.infer<
@@ -53,6 +55,7 @@ void _assertCreate;
 export const expensePatchSchema = z.object({
   amount: z.number().positive().optional(),
   description: z.string().nullish(),
+  itemIds: z.array(z.string()).optional(),
 });
 
 type _AssertPatchKeys = keyof z.infer<

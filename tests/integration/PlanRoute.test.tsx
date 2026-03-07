@@ -274,23 +274,25 @@ describe('PlanRoute — Integration', () => {
       expect(screen.getByTestId('items-count')).toHaveTextContent('(2)');
     });
 
-    it('renders the add item FAB button', async () => {
+    it('renders the speed-dial trigger FAB button', async () => {
       renderPlanRoute();
 
       await waitFor(() => {
-        expect(screen.getByText('Add Item')).toBeInTheDocument();
+        expect(screen.getByTestId('speed-dial-trigger')).toBeInTheDocument();
       });
     });
 
-    it('renders the Add Multiple FAB button for owner', async () => {
+    it('renders the Add Multiple FAB action for owner via speed dial', async () => {
+      const user = userEvent.setup();
       renderPlanRoute();
 
       await waitFor(() => {
-        expect(screen.getByTestId('bulk-add-fab')).toBeInTheDocument();
+        expect(screen.getByTestId('speed-dial-trigger')).toBeInTheDocument();
       });
-      expect(screen.getByTestId('bulk-add-fab')).toHaveTextContent(
-        /Add Multiple/i
-      );
+
+      await user.click(screen.getByTestId('speed-dial-trigger'));
+
+      expect(screen.getByTestId('bulk-add-fab')).toBeInTheDocument();
     });
 
     it('opens BulkItemAddWizard when Add Multiple FAB is clicked', async () => {
@@ -298,9 +300,10 @@ describe('PlanRoute — Integration', () => {
       renderPlanRoute();
 
       await waitFor(() => {
-        expect(screen.getByTestId('bulk-add-fab')).toBeInTheDocument();
+        expect(screen.getByTestId('speed-dial-trigger')).toBeInTheDocument();
       });
 
+      await user.click(screen.getByTestId('speed-dial-trigger'));
       await user.click(screen.getByTestId('bulk-add-fab'));
 
       await waitFor(() => {
@@ -347,7 +350,7 @@ describe('PlanRoute — Integration', () => {
         expect(screen.getByTestId('item-card-item-1')).toBeInTheDocument();
       });
 
-      expect(screen.getByText('Add Item')).toBeInTheDocument();
+      expect(screen.getByTestId('speed-dial-trigger')).toBeInTheDocument();
     });
   });
 

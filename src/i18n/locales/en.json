@@ -565,7 +565,18 @@
     "updateSuccess": "Expense updated",
     "deleteSuccess": "Expense deleted",
     "saving": "Saving…",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "linkedItems": "Linked Items",
+    "selectItems": "Link to plan items",
+    "searchItems": "Search items…",
+    "noItemsInPlan": "No items in this plan yet",
+    "itemsSelected": "{{count}} item linked",
+    "itemsSelected_other": "{{count}} items linked",
+    "settlementTitle": "Settlement",
+    "fairShare": "Fair share per person",
+    "settled": "Settled",
+    "allSettled": "All settled! Everyone has paid equally.",
+    "transfersTitle": "Who pays whom"
   },
   "admin": {
     "plansTitle": "Admin — All Plans",

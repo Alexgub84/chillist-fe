@@ -565,7 +565,18 @@
     "updateSuccess": "ההוצאה עודכנה",
     "deleteSuccess": "ההוצאה נמחקה",
     "saving": "שומר…",
-    "cancel": "ביטול"
+    "cancel": "ביטול",
+    "linkedItems": "פריטים מקושרים",
+    "selectItems": "קישור לפריטי התוכנית",
+    "searchItems": "חיפוש פריטים…",
+    "noItemsInPlan": "אין עדיין פריטים בתוכנית",
+    "itemsSelected": "פריט אחד מקושר",
+    "itemsSelected_other": "{{count}} פריטים מקושרים",
+    "settlementTitle": "התחשבנות",
+    "fairShare": "חלק שווה לאדם",
+    "settled": "מסולק",
+    "allSettled": "הכל מסולק! כולם שילמו באופן שווה.",
+    "transfersTitle": "מי משלם למי"
   },
   "admin": {
     "plansTitle": "מנהל — כל התוכניות",

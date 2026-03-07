@@ -143,19 +143,18 @@ describe('ItemsView', () => {
     );
   });
 
-  it('renders Add Item FAB button', () => {
+  it('renders speed-dial trigger button', () => {
     render(<ItemsView {...defaultProps} />);
 
-    expect(
-      screen.getByRole('button', { name: /Add Item/i })
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('speed-dial-trigger')).toBeInTheDocument();
   });
 
-  it('opens add item modal when FAB is clicked', async () => {
+  it('opens add item modal when FAB speed-dial action is clicked', async () => {
     const user = userEvent.setup();
     render(<ItemsView {...defaultProps} />);
 
-    await user.click(screen.getByRole('button', { name: /Add Item/i }));
+    await user.click(screen.getByTestId('speed-dial-trigger'));
+    await user.click(screen.getByTestId('add-item-fab'));
 
     expect(
       screen.getByText('Add Item', { selector: 'h2' })

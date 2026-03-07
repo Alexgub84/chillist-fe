@@ -227,44 +227,42 @@ export default function ItemForm({
         )}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <FormLabel>{t('items.quantity')}</FormLabel>
-          <FormInput
-            type="number"
-            min={1}
-            step={1}
-            {...register('quantity')}
-            compact
-          />
-          {errors.quantity && (
-            <p className="text-sm text-red-600 mt-1">
-              {errors.quantity.message}
-            </p>
-          )}
+      <div>
+        <FormLabel>{t('items.quantity')}</FormLabel>
+        <div className="flex gap-2">
+          <div className="w-20 shrink-0">
+            <FormInput
+              type="number"
+              min={1}
+              step={1}
+              {...register('quantity')}
+              compact
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <FormSelect {...register('unit')} disabled={isEquipment} compact>
+              {isEquipment ? (
+                <option value="pcs">{t('units.pcs')}</option>
+              ) : (
+                UNIT_GROUPS.map((group) => (
+                  <optgroup
+                    key={group.groupLabelKey}
+                    label={t(group.groupLabelKey)}
+                  >
+                    {group.options.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {t(opt.labelKey)}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))
+              )}
+            </FormSelect>
+          </div>
         </div>
-
-        <div>
-          <FormLabel>{t('items.unit')}</FormLabel>
-          <FormSelect {...register('unit')} disabled={isEquipment} compact>
-            {isEquipment ? (
-              <option value="pcs">{t('units.pcs')}</option>
-            ) : (
-              UNIT_GROUPS.map((group) => (
-                <optgroup
-                  key={group.groupLabelKey}
-                  label={t(group.groupLabelKey)}
-                >
-                  {group.options.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {t(opt.labelKey)}
-                    </option>
-                  ))}
-                </optgroup>
-              ))
-            )}
-          </FormSelect>
-        </div>
+        {errors.quantity && (
+          <p className="text-sm text-red-600 mt-1">{errors.quantity.message}</p>
+        )}
       </div>
 
       <div>

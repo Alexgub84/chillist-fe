@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createLazyFileRoute, Link, useParams } from '@tanstack/react-router';
 import toast from 'react-hot-toast';
@@ -15,6 +15,7 @@ import {
   type PlanWithDetails,
 } from '../core/schemas/plan';
 import type { Expense } from '../core/schemas/expense';
+import { computeSettlement } from '../core/compute-settlement';
 import type { ExpenseFormValues } from '../components/ExpenseForm';
 import ExpenseForm from '../components/ExpenseForm';
 import Modal from '../components/shared/Modal';
@@ -77,7 +78,10 @@ function ExpensesContent({
   useScrollRestore(`expenses-${planId}`, !isLoading);
 
   const expenses = expensesData?.expenses ?? [];
-  const summary = expensesData?.summary ?? [];
+  const summary = useMemo(
+    () => expensesData?.summary ?? [],
+    [expensesData?.summary]
+  );
 
   function canEditExpense(expense: Expense): boolean {
     if (isOwner) return true;
@@ -87,6 +91,11 @@ function ExpensesContent({
   function getParticipantName(participantId: string): string {
     const p = plan.participants.find((x) => x.participantId === participantId);
     return p ? `${p.name} ${p.lastName}` : participantId.slice(0, 8);
+  }
+
+  function getItemName(itemId: string): string {
+    const item = plan.items.find((i) => i.itemId === itemId);
+    return item?.name ?? itemId.slice(0, 8);
   }
 
   function formatAmount(amount: string): string {
@@ -118,6 +127,7 @@ function ExpensesContent({
         updates: {
           amount: values.amount,
           description: values.description || null,
+          itemIds: values.itemIds,
         },
       });
       toast.success(t('expenses.updateSuccess'));
@@ -151,6 +161,12 @@ function ExpensesContent({
   }
 
   const grandTotal = summary.reduce((acc, s) => acc + s.totalAmount, 0);
+
+  const settlement = useMemo(() => {
+    const ids = plan.participants.map((p) => p.participantId);
+    const map = new Map(summary.map((s) => [s.participantId, s.totalAmount]));
+    return computeSettlement(ids, map, grandTotal);
+  }, [plan.participants, summary, grandTotal]);
 
   return (
     <div className="w-full px-3 sm:px-0">
@@ -223,6 +239,96 @@ function ExpensesContent({
           </div>
         )}
 
+        {grandTotal > 0 && plan.participants.length > 1 && (
+          <div
+            data-testid="settlement-card"
+            className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-6"
+          >
+            <h2 className="text-lg font-semibold text-gray-800 mb-3">
+              {t('expenses.settlementTitle')}
+            </h2>
+
+            {settlement.transfers.length === 0 ? (
+              <p className="text-sm text-gray-500">
+                {t('expenses.allSettled')}
+              </p>
+            ) : (
+              <>
+                <p className="text-xs text-gray-400 mb-3">
+                  {t('expenses.fairShare')}: {settlement.fairShare.toFixed(2)}{' '}
+                  {planCurrency}
+                </p>
+
+                <div className="space-y-2 mb-4">
+                  {settlement.balances.map((b) => (
+                    <div
+                      key={b.participantId}
+                      className="flex justify-between items-center py-1.5"
+                    >
+                      <span className="text-sm text-gray-700">
+                        {getParticipantName(b.participantId)}
+                      </span>
+                      <span
+                        className={`text-sm font-medium ${
+                          b.balance > 0.01
+                            ? 'text-green-600'
+                            : b.balance < -0.01
+                              ? 'text-red-600'
+                              : 'text-gray-400'
+                        }`}
+                      >
+                        {b.balance > 0.01
+                          ? `+${b.balance.toFixed(2)} ${planCurrency}`
+                          : b.balance < -0.01
+                            ? `${b.balance.toFixed(2)} ${planCurrency}`
+                            : t('expenses.settled')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t border-gray-200 pt-3">
+                  <h3 className="text-sm font-medium text-gray-700 mb-2">
+                    {t('expenses.transfersTitle')}
+                  </h3>
+                  <div className="space-y-2">
+                    {settlement.transfers.map((tr, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 text-sm bg-gray-50 rounded-lg px-3 py-2"
+                      >
+                        <span className="font-medium text-gray-800">
+                          {getParticipantName(tr.from)}
+                        </span>
+                        <svg
+                          className="w-4 h-4 text-gray-400 shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                        <span className="font-medium text-gray-800">
+                          {getParticipantName(tr.to)}
+                        </span>
+                        <span className="ms-auto font-semibold text-gray-900">
+                          {tr.amount.toFixed(2)} {planCurrency}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
         {isLoading && (
           <div className="text-center py-10 text-gray-500">
             {t('plan.loading')}
@@ -259,6 +365,18 @@ function ExpensesContent({
                       <p className="text-sm text-gray-600 mt-1 truncate">
                         {expense.description}
                       </p>
+                    )}
+                    {expense.itemIds && expense.itemIds.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-1.5">
+                        {expense.itemIds.map((itemId) => (
+                          <span
+                            key={itemId}
+                            className="inline-block px-1.5 py-0.5 text-xs bg-blue-50 text-blue-600 rounded"
+                          >
+                            {getItemName(itemId)}
+                          </span>
+                        ))}
+                      </div>
                     )}
                     <p className="text-xs text-gray-400 mt-1">
                       {new Date(expense.createdAt).toLocaleDateString()}
@@ -325,6 +443,7 @@ function ExpensesContent({
           <ExpenseForm
             key={addModalOpen ? 'open' : 'closed'}
             participants={plan.participants}
+            items={plan.items}
             isOwner={isOwner}
             currentParticipantId={currentParticipant?.participantId}
             onSubmit={handleCreate}
@@ -347,8 +466,10 @@ function ExpensesContent({
                 participantId: editingExpense.participantId,
                 amount: parseFloat(editingExpense.amount),
                 description: editingExpense.description ?? '',
+                itemIds: editingExpense.itemIds ?? [],
               }}
               participants={plan.participants}
+              items={plan.items}
               isOwner={isOwner}
               currentParticipantId={currentParticipant?.participantId}
               onSubmit={handleUpdate}
