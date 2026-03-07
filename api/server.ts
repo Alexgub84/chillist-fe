@@ -1260,6 +1260,20 @@ export async function buildServer(
       };
 
       store.expenses.push(expense);
+
+      if (expense.itemIds?.length) {
+        for (const item of store.items) {
+          if (!expense.itemIds.includes(item.itemId)) continue;
+          if (item.planId !== request.params.planId) continue;
+          item.assignmentStatusList = item.assignmentStatusList.map((entry) =>
+            entry.participantId === expense.participantId &&
+            entry.status === 'pending'
+              ? { ...entry, status: 'purchased' as const }
+              : entry
+          );
+        }
+      }
+
       void reply.status(201).send(expense);
     }
   );

@@ -236,9 +236,23 @@ describe('ExpenseForm', () => {
         planId: 'plan-1',
         name: 'Tent',
         category: 'equipment',
+        subcategory: 'Venue Setup and Layout',
         quantity: 1,
         unit: 'pcs',
-        assignmentStatusList: [],
+        assignmentStatusList: [{ participantId: 'p-owner', status: 'pending' }],
+        isAllParticipants: false,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+      {
+        itemId: 'item-3',
+        planId: 'plan-1',
+        name: 'Flashlight',
+        category: 'equipment',
+        subcategory: 'Venue Setup and Layout',
+        quantity: 2,
+        unit: 'pcs',
+        assignmentStatusList: [{ participantId: 'p-owner', status: 'pending' }],
         isAllParticipants: false,
         createdAt: '2026-01-01T00:00:00Z',
         updatedAt: '2026-01-01T00:00:00Z',
@@ -248,9 +262,36 @@ describe('ExpenseForm', () => {
         planId: 'plan-1',
         name: 'Water Bottles',
         category: 'food',
+        subcategory: 'Beverages (non-alcoholic)',
         quantity: 6,
         unit: 'pcs',
+        assignmentStatusList: [{ participantId: 'p-owner', status: 'pending' }],
+        isAllParticipants: false,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+      {
+        itemId: 'item-4',
+        planId: 'plan-1',
+        name: 'Shared Cooler',
+        category: 'equipment',
+        subcategory: 'Food Storage and Cooling',
+        quantity: 1,
+        unit: 'pcs',
         assignmentStatusList: [],
+        isAllParticipants: true,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+      {
+        itemId: 'item-5',
+        planId: 'plan-1',
+        name: 'Bob Only Snacks',
+        category: 'food',
+        subcategory: 'Snacks and Chips',
+        quantity: 3,
+        unit: 'pcs',
+        assignmentStatusList: [{ participantId: 'p-bob', status: 'pending' }],
         isAllParticipants: false,
         createdAt: '2026-01-01T00:00:00Z',
         updatedAt: '2026-01-01T00:00:00Z',
@@ -259,16 +300,21 @@ describe('ExpenseForm', () => {
 
     function renderWithItems(props?: {
       defaultValues?: Record<string, unknown>;
+      isOwner?: boolean;
+      currentParticipantId?: string;
     }) {
       return render(
         <ExpenseForm
           participants={participants}
           items={items}
-          isOwner={true}
-          currentParticipantId="p-owner"
+          isOwner={props?.isOwner ?? true}
+          currentParticipantId={props?.currentParticipantId ?? 'p-owner'}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
-          defaultValues={props?.defaultValues}
+          defaultValues={{
+            participantId: 'p-owner',
+            ...props?.defaultValues,
+          }}
         />
       );
     }
@@ -285,37 +331,122 @@ describe('ExpenseForm', () => {
       ).not.toBeInTheDocument();
     });
 
-    it('expands item list and shows items grouped by category', async () => {
+    it('filters items by selected participant', () => {
+      renderWithItems();
+      expect(screen.getByTestId('toggle-item-select')).toBeInTheDocument();
+      expect(screen.queryByText('Bob Only Snacks')).not.toBeInTheDocument();
+    });
+
+    it('shows isAllParticipants items for any participant', () => {
+      renderWithItems({ defaultValues: { participantId: 'p-bob' } });
+      expect(screen.getByTestId('toggle-item-select')).toBeInTheDocument();
+    });
+
+    it('shows no items message when participant has no assigned items', () => {
+      const noAssignmentItems: Item[] = [
+        {
+          itemId: 'item-x',
+          planId: 'plan-1',
+          name: 'Unassigned Item',
+          category: 'equipment',
+          quantity: 1,
+          unit: 'pcs',
+          assignmentStatusList: [{ participantId: 'p-bob', status: 'pending' }],
+          isAllParticipants: false,
+          createdAt: '2026-01-01T00:00:00Z',
+          updatedAt: '2026-01-01T00:00:00Z',
+        },
+      ];
+      render(
+        <ExpenseForm
+          participants={participants}
+          items={noAssignmentItems}
+          isOwner={true}
+          currentParticipantId="p-owner"
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          defaultValues={{ participantId: 'p-owner' }}
+        />
+      );
+      expect(
+        screen.getByText(/no items assigned to this participant/i)
+      ).toBeInTheDocument();
+    });
+
+    it('expands item list and shows items grouped by subcategory', async () => {
       renderWithItems();
       const user = userEvent.setup();
       await user.click(screen.getByTestId('toggle-item-select'));
       expect(screen.getByText('Tent')).toBeInTheDocument();
       expect(screen.getByText('Water Bottles')).toBeInTheDocument();
+      expect(screen.getByText('Shared Cooler')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('subcat-Venue Setup and Layout')
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId('subcat-Food Storage and Cooling')
+      ).toBeInTheDocument();
     });
 
-    it('selects and deselects items via checkbox', async () => {
+    it('selects and deselects an item via checkbox', async () => {
       renderWithItems();
       const user = userEvent.setup();
       await user.click(screen.getByTestId('toggle-item-select'));
 
-      const checkboxes = screen.getAllByRole('checkbox');
-      await user.click(checkboxes[0]);
-      expect(checkboxes[0]).toBeChecked();
+      const tentLabel = screen.getByText('Tent').closest('label')!;
+      const tentCheckbox = tentLabel.querySelector(
+        'input[type="checkbox"]'
+      ) as HTMLInputElement;
+      await user.click(tentCheckbox);
+      expect(tentCheckbox).toBeChecked();
 
-      await user.click(checkboxes[0]);
-      expect(checkboxes[0]).not.toBeChecked();
+      await user.click(tentCheckbox);
+      expect(tentCheckbox).not.toBeChecked();
+    });
+
+    it('bulk-selects all items in a subcategory', async () => {
+      renderWithItems();
+      const user = userEvent.setup();
+      await user.click(screen.getByTestId('toggle-item-select'));
+
+      const subcatLabel = screen.getByTestId('subcat-Venue Setup and Layout');
+      const subcatCheckbox = subcatLabel.querySelector(
+        'input[type="checkbox"]'
+      ) as HTMLInputElement;
+      await user.click(subcatCheckbox);
+
+      const tentInList = screen
+        .getAllByText('Tent')
+        .find((el) => el.closest('label'))!;
+      const tentCheckbox = tentInList
+        .closest('label')!
+        .querySelector('input[type="checkbox"]') as HTMLInputElement;
+      const flashInList = screen
+        .getAllByText('Flashlight')
+        .find((el) => el.closest('label'))!;
+      const flashCheckbox = flashInList
+        .closest('label')!
+        .querySelector('input[type="checkbox"]') as HTMLInputElement;
+      expect(tentCheckbox).toBeChecked();
+      expect(flashCheckbox).toBeChecked();
+
+      await user.click(subcatCheckbox);
+      expect(tentCheckbox).not.toBeChecked();
+      expect(flashCheckbox).not.toBeChecked();
     });
 
     it('submits with selected itemIds', async () => {
       renderWithItems();
       const user = userEvent.setup();
 
-      await user.selectOptions(screen.getByRole('combobox'), 'p-owner');
       await user.type(getAmountInput(), '50');
       await user.click(screen.getByTestId('toggle-item-select'));
 
-      const checkboxes = screen.getAllByRole('checkbox');
-      await user.click(checkboxes[0]);
+      const tentLabel = screen.getByText('Tent').closest('label')!;
+      const tentCheckbox = tentLabel.querySelector(
+        'input[type="checkbox"]'
+      ) as HTMLInputElement;
+      await user.click(tentCheckbox);
 
       await user.click(screen.getByTestId('expense-form-submit'));
 

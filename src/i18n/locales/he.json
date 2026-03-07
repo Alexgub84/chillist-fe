@@ -570,6 +570,7 @@
     "selectItems": "קישור לפריטי התוכנית",
     "searchItems": "חיפוש פריטים…",
     "noItemsInPlan": "אין עדיין פריטים בתוכנית",
+    "noItemsForParticipant": "אין פריטים משויכים למשתתף זה",
     "itemsSelected": "פריט אחד מקושר",
     "itemsSelected_other": "{{count}} פריטים מקושרים",
     "settlementTitle": "התחשבנות",

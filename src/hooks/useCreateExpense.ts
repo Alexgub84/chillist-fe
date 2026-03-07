@@ -9,6 +9,7 @@ export function useCreateExpense(planId: string) {
     mutationFn: (body: ExpenseCreate) => createExpense(planId, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expenses', planId] });
+      queryClient.invalidateQueries({ queryKey: ['plan', planId] });
     },
   });
 }

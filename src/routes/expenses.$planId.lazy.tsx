@@ -301,7 +301,7 @@ function ExpensesContent({
                           {getParticipantName(tr.from)}
                         </span>
                         <svg
-                          className="w-4 h-4 text-gray-400 shrink-0"
+                          className="w-4 h-4 text-gray-400 shrink-0 rtl:-scale-x-100"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
