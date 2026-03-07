@@ -783,7 +783,6 @@ test.describe('Invite Landing Page', () => {
     await expect(page.getByText('Sunscreen')).toBeVisible();
     await expect(page.getByText('Burgers')).toBeVisible();
 
-    await page.getByText('Participants').click();
     await expect(page.getByText('Alex Smith')).toBeVisible();
     await expect(page.getByText('Bob Jones')).toBeVisible();
   });
