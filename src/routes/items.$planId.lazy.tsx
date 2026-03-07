@@ -22,6 +22,11 @@ import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import { useQueryClient } from '@tanstack/react-query';
 import { useBulkAssign } from '../hooks/useBulkAssign';
 import { usePlanRole } from '../hooks/usePlanRole';
+import {
+  aggregateParticipantCounts,
+  calculatePlanPoints,
+  getDurationMultiplier,
+} from '../core/utils-plan-points';
 import ErrorPage from './ErrorPage';
 import ItemsView from '../components/ItemsView';
 
@@ -66,6 +71,15 @@ function AuthItemsPage({ planId }: { planId: string }) {
     return null;
   }
 
+  const { totalAdults, totalKids } = aggregateParticipantCounts(
+    plan.participants
+  );
+  const planPointsValue = calculatePlanPoints({
+    adultsCount: totalAdults,
+    kidsCount: totalKids,
+    durationMultiplier: getDurationMultiplier(plan.startDate, plan.endDate),
+  });
+
   return (
     <ItemsView
       planId={planId}
@@ -87,6 +101,7 @@ function AuthItemsPage({ planId }: { planId: string }) {
         bulkAssign.mutate({ itemIds: ids, participantId: pid })
       }
       isCreating={createItem.isPending}
+      planPoints={planPointsValue}
     />
   );
 }

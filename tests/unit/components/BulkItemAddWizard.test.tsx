@@ -36,7 +36,7 @@ beforeAll(() => {
   };
 });
 
-const defaultProps = {
+const defaultProps: Parameters<typeof BulkItemAddWizard>[0] = {
   open: true,
   onClose: vi.fn(),
   onAdd: vi.fn().mockResolvedValue(undefined),
@@ -222,6 +222,118 @@ describe('BulkItemAddWizard', () => {
 
       expect(screen.getByText('Venue Setup and Layout')).toBeInTheDocument();
       expect(screen.getByText('First Aid and Safety')).toBeInTheDocument();
+    });
+  });
+
+  describe('Quantity suggestion with planPoints', () => {
+    async function goToFoodItems(
+      user: ReturnType<typeof userEvent.setup>,
+      props: Partial<Parameters<typeof BulkItemAddWizard>[0]> = {}
+    ) {
+      render(<BulkItemAddWizard {...defaultProps} {...props} />);
+      await user.click(screen.getByText('Food'));
+      await user.click(screen.getByText('Breakfast Staples'));
+    }
+
+    it('uses suggested quantity for food items when planPoints is provided', async () => {
+      const user = userEvent.setup();
+      const onAdd = vi.fn().mockResolvedValue(undefined);
+      await goToFoodItems(user, { onAdd, planPoints: 10 });
+
+      const breadCard = screen.getByTestId('bulk-item-bread');
+      await user.click(breadCard);
+
+      expect(within(breadCard).getByText('2')).toBeInTheDocument();
+
+      await user.click(screen.getByText('Add 1 item'));
+
+      await waitFor(() => {
+        expect(onAdd).toHaveBeenCalledOnce();
+      });
+      const payloads = onAdd.mock.calls[0][0];
+      expect(payloads[0]).toMatchObject({
+        name: 'Bread',
+        category: 'food',
+        quantity: 2,
+      });
+    });
+
+    it('uses quantity 1 for food items when planPoints is not provided', async () => {
+      const user = userEvent.setup();
+      const onAdd = vi.fn().mockResolvedValue(undefined);
+      await goToFoodItems(user, { onAdd });
+
+      const breadCard = screen.getByTestId('bulk-item-bread');
+      await user.click(breadCard);
+
+      expect(within(breadCard).getByText('1')).toBeInTheDocument();
+    });
+
+    it('uses quantity 1 for equipment items even with planPoints', async () => {
+      const user = userEvent.setup();
+      const onAdd = vi.fn().mockResolvedValue(undefined);
+      render(
+        <BulkItemAddWizard {...defaultProps} onAdd={onAdd} planPoints={10} />
+      );
+      await user.click(screen.getByText('Equipment'));
+      await user.click(screen.getByText('First Aid and Safety'));
+
+      const kitCard = screen.getByTestId('bulk-item-first-aid-kit');
+      await user.click(kitCard);
+
+      expect(within(kitCard).getByText('1')).toBeInTheDocument();
+    });
+
+    it('uses quantity 1 for personal equipment items with planPoints', async () => {
+      const user = userEvent.setup();
+      const onAdd = vi.fn().mockResolvedValue(undefined);
+      render(
+        <BulkItemAddWizard {...defaultProps} onAdd={onAdd} planPoints={40} />
+      );
+      await user.click(screen.getByText('Equipment'));
+      await user.click(screen.getByText('Comfort and Climate Control'));
+
+      const sbCard = screen.getByTestId('bulk-item-sleeping-bag');
+      await user.click(sbCard);
+
+      expect(within(sbCard).getByText('1')).toBeInTheDocument();
+
+      await user.click(screen.getByText('Add 1 item'));
+
+      await waitFor(() => {
+        expect(onAdd).toHaveBeenCalledOnce();
+      });
+      expect(onAdd.mock.calls[0][0][0]).toMatchObject({
+        name: 'Sleeping Bag',
+        category: 'equipment',
+        quantity: 1,
+      });
+    });
+
+    it('scales quantity with higher planPoints', async () => {
+      const user = userEvent.setup();
+      await goToFoodItems(user, { planPoints: 40 });
+
+      const breadCard = screen.getByTestId('bulk-item-bread');
+      await user.click(breadCard);
+
+      expect(within(breadCard).getByText('6')).toBeInTheDocument();
+    });
+
+    it('applies suggested quantities when selecting all', async () => {
+      const user = userEvent.setup();
+      const onAdd = vi.fn().mockResolvedValue(undefined);
+      await goToFoodItems(user, { onAdd, planPoints: 10 });
+
+      await user.click(screen.getByText('Select all'));
+      await user.click(screen.getByText(/Add \d+ items?/));
+
+      await waitFor(() => {
+        expect(onAdd).toHaveBeenCalledOnce();
+      });
+      const payloads = onAdd.mock.calls[0][0];
+      const bread = payloads.find((p: { name: string }) => p.name === 'Bread');
+      expect(bread.quantity).toBe(2);
     });
   });
 });

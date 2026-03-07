@@ -60,8 +60,8 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * List plans owned by user
-     * @description Retrieve plans created by the authenticated user, ordered by creation date
+     * List plans the user participates in
+     * @description Retrieve plans where the authenticated user is a participant (owner or member), ordered by creation date
      */
     get: {
       parameters: {
@@ -1153,7 +1153,7 @@ export interface paths {
     put?: never;
     /**
      * Add an item to a plan
-     * @description Create a new item (no top-level status field — per-participant status lives in assignmentStatusList). Equipment items always use pcs. Assignment fields (owner-only): send assignmentStatusList with participant entries (each has participantId + status) and isAllParticipants=true to assign all, or a subset with isAllParticipants=false. Omit both to create unassigned.
+     * @description Create a new item. No top-level status field exists; status is tracked per participant in assignmentStatusList. Equipment items always use pcs. Assignment payload on create is owner/admin only: send full assignmentStatusList + isAllParticipants=true for assign-to-all, or subset list + isAllParticipants=false for normal assignment. Omit assignment fields to create unassigned item.
      */
     post: {
       parameters: {
@@ -1247,7 +1247,7 @@ export interface paths {
     head?: never;
     /**
      * Update an item
-     * @description Update an item. No top-level status field — use assignmentStatusList to change per-participant status. Owner: send the full assignmentStatusList array (replaces existing) + isAllParticipants. Non-owner: send assignmentStatusList with ONLY your own entry (e.g. [{ participantId: "your-id", status: "purchased" }]) — the backend merges it into the full list, preserving other participants. Response: owners see the full assignmentStatusList; non-owners see only their own entry.
+     * @description Update an item. No top-level status field exists; use assignmentStatusList for per-participant status. Owner/admin: assignmentStatusList is treated as full desired list (replace semantics) and may update isAllParticipants. Non-owner: send only your own assignment entry to update status or self-assign, or send unassign=true to remove yourself. Response visibility: owner/admin sees full assignmentStatusList, non-owner sees only own entry.
      */
     patch: {
       parameters: {
@@ -1411,7 +1411,7 @@ export interface paths {
     head?: never;
     /**
      * Bulk update items in a plan
-     * @description Update multiple items at once. Each item is validated independently. No top-level status field — use assignmentStatusList per item. Owner: send the full assignmentStatusList (replaces). Non-owner: send only your own entry per item — backend merges. Response: non-owners see only their own entry in each item's assignmentStatusList.
+     * @description Update multiple items at once. Each item is validated independently. No top-level status field exists; use assignmentStatusList per item. Owner/admin uses full-list replace semantics and may set isAllParticipants. Non-owner sends only their own assignment entry per item (merge semantics) or unassign=true. Response for non-owners is filtered to their own assignment entries.
      */
     patch: {
       parameters: {
@@ -1734,7 +1734,7 @@ export interface paths {
     head?: never;
     /**
      * Update an item as a guest via invite token
-     * @description Updates an existing item. Allowed if the item is assigned to the guest or unassigned. Returns 403 if assigned to a different participant. No top-level status field — to update your status, send assignmentStatusList with your own entry: [{ participantId: "your-id", status: "purchased" }]. Backend merges into the full list. Response returns assignmentStatusList filtered to only your entry.
+     * @description Updates an existing item for the invite participant. Allowed only when item is currently unassigned or assigned to this participant; returns 403 if assigned only to others. No top-level status field exists. To update status or self-assign, send assignmentStatusList with your own single entry. To remove yourself, send unassign=true (without assignmentStatusList). Response is filtered to your own assignment entry.
      */
     patch: {
       parameters: {
@@ -1892,7 +1892,7 @@ export interface paths {
     head?: never;
     /**
      * Bulk update items as a guest via invite token
-     * @description Updates multiple items. No top-level status field — to update your status per item, send assignmentStatusList with your own entry: [{ participantId: "your-id", status: "purchased" }]. Backend merges into the full list for each item. Only allowed for items assigned to the guest or unassigned. Response returns each item's assignmentStatusList filtered to only your entry.
+     * @description Updates multiple items for the invite participant. No top-level status field exists. For each item, send assignmentStatusList with your own single entry to update status/self-assign, or send unassign=true to remove yourself. Updates are allowed only for items currently unassigned or assigned to this participant. Response returns each item's assignmentStatusList filtered to the caller entry.
      */
     patch: {
       parameters: {
@@ -2460,6 +2460,335 @@ export interface paths {
     };
     trace?: never;
   };
+  '/plans/{planId}/expenses': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * List all expenses for a plan with per-participant totals
+     * @description Returns every expense entry for the plan plus a summary array with the total amount per participant.
+     */
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Expenses list and per-participant summary */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-62'];
+          };
+        };
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Plan not found or access denied */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Service temporarily unavailable */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    put?: never;
+    /**
+     * Add an expense to a plan
+     * @description Create a new expense entry for a participant. Owner/admin can add expenses for any participant; linked participants can only add expenses for themselves.
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-63'];
+        };
+      };
+      responses: {
+        /** @description Created expense */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-58'];
+          };
+        };
+        /** @description Bad request — check the message field for details */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Forbidden — insufficient permissions */
+        403: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Plan or participant not found */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Service temporarily unavailable */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/expenses/{expenseId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * Delete an expense
+     * @description Delete an expense. Owner/admin can delete any expense; the participant it belongs to can delete their own.
+     */
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          expenseId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Expense deleted */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-66'];
+          };
+        };
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Forbidden — insufficient permissions */
+        403: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Expense not found */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Service temporarily unavailable */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    /**
+     * Update an expense
+     * @description Update an existing expense. Owner/admin can update any expense; the participant it belongs to can update their own.
+     */
+    patch: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          expenseId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-64'];
+        };
+      };
+      responses: {
+        /** @description Updated expense */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-58'];
+          };
+        };
+        /** @description Bad request — check the message field for details */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Authentication required — JWT token missing or invalid */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Forbidden — insufficient permissions */
+        403: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Expense not found */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Service temporarily unavailable */
+        503: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2521,6 +2850,10 @@ export interface components {
       /** Format: date-time */
       endDate?: string | null;
       tags?: string[] | null;
+      /** @description ISO 639-1 language code for the plan UI (e.g. en, he) */
+      defaultLang?: string | null;
+      /** @description ISO 4217 currency code (e.g. USD, EUR, ILS) */
+      currency?: string | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -2562,6 +2895,10 @@ export interface components {
       /** Format: date-time */
       endDate?: string | null;
       tags?: string[] | null;
+      /** @description ISO 639-1 language code (e.g. en, he) */
+      defaultLang?: string;
+      /** @description ISO 4217 currency code (e.g. USD, EUR, ILS) */
+      currency?: string;
       owner: components['schemas']['def-9'];
       participants?: components['schemas']['def-21'][];
     };
@@ -2579,6 +2916,10 @@ export interface components {
       /** Format: date-time */
       endDate?: string | null;
       tags?: string[] | null;
+      /** @description ISO 639-1 language code (e.g. en, he). Send null to clear. */
+      defaultLang?: string | null;
+      /** @description ISO 4217 currency code (e.g. USD, EUR, ILS). Send null to clear. */
+      currency?: string | null;
     };
     /** PlanIdParam */
     'def-12': {
@@ -2616,7 +2957,7 @@ export interface components {
       notes?: string | null;
       /** @description True when this item is assigned to all participants. When a new participant joins the plan, they are automatically added to items with this flag. */
       isAllParticipants: boolean;
-      /** @description Per-participant assignment and status tracking (replaces the old top-level status field). Each entry is { participantId, status } where status is one of: pending, purchased, packed, canceled. For non-owner responses, this array is filtered to only the requesting participant's entry. */
+      /** @description Per-participant assignment and status tracking (replaces the old top-level status field). Each entry is { participantId, status } where status is one of: pending, purchased, packed, canceled. Response visibility: owner/admin sees full list; non-owner sees only their own entry. */
       assignmentStatusList: {
         /** Format: uuid */
         participantId: string;
@@ -2651,14 +2992,14 @@ export interface components {
         | 'set';
       subcategory?: string | null;
       notes?: string | null;
-      /** @description The full list of participant assignments for this item. To assign to all participants: send every participant with status "pending" and set isAllParticipants=true. To assign a subset: send only those participants and set isAllParticipants=false (or omit it). To leave unassigned: omit this field or send []. Owner-only on create. */
+      /** @description Owner-only on create. Send the full desired assignment list. Assign all: include every participant and set isAllParticipants=true. Assign subset/single: include only those participants and keep isAllParticipants=false (or omit it). Unassigned item: omit this field or send []. */
       assignmentStatusList?: {
         /** Format: uuid */
         participantId: string;
         /** @enum {string} */
         status: 'pending' | 'purchased' | 'packed' | 'canceled';
       }[];
-      /** @description Set true when assigning to all participants (new joiners will be auto-added). Set false or omit for subset/single/no assignment. Owner-only on create. */
+      /** @description Owner-only on create. true means this item is for all participants and new participants should be auto-added later. false (or omitted) means regular assignment list behavior. */
       isAllParticipants?: boolean;
     };
     /** UpdateItemBody */
@@ -2682,15 +3023,17 @@ export interface components {
         | 'set';
       subcategory?: string | null;
       notes?: string | null;
-      /** @description Owner: send the full desired assignment list. Non-owner: send only your own entry with updated status — backend merges into the full list. To toggle assign-all ON (owner): send all participants + isAllParticipants=true. To toggle assign-all OFF (owner): send [] + isAllParticipants=false. */
+      /** @description PATCH behavior depends on caller role. Owner/admin: send the full desired list (replaces current list). Non-owner: send exactly one entry for yourself only (for status update or self-assign); backend merges it with current list. If using unassign=true, do not send assignmentStatusList. */
       assignmentStatusList?: {
         /** Format: uuid */
         participantId: string;
         /** @enum {string} */
         status: 'pending' | 'purchased' | 'packed' | 'canceled';
       }[];
-      /** @description Set true to mark as assigned to all (new joiners auto-added). Set false to unmark. Only the plan owner can change this flag. */
+      /** @description Owner/admin only. true marks item as "assign to all participants" and future participants are auto-added. false removes that mode. */
       isAllParticipants?: boolean;
+      /** @description Participant self-unassign helper. Set true to remove your own entry from assignmentStatusList. Cannot be combined with assignmentStatusList in the same request. */
+      unassign?: boolean;
     };
     /** ItemIdParam */
     'def-18': {
@@ -2795,6 +3138,10 @@ export interface components {
       /** Format: date-time */
       endDate?: string | null;
       tags?: string[] | null;
+      /** @description ISO 639-1 language code for the plan UI (e.g. en, he) */
+      defaultLang?: string | null;
+      /** @description ISO 4217 currency code (e.g. USD, EUR, ILS) */
+      currency?: string | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -3015,13 +3362,15 @@ export interface components {
         | 'set';
       subcategory?: string | null;
       notes?: string | null;
-      /** @description Send only your own entry with updated status. Backend merges into the full list. */
+      /** @description Invite/guest PATCH rule: send only your own entry (participantId must be your participant) to update status or self-assign. Backend merges into the full assignment list. */
       assignmentStatusList?: {
         /** Format: uuid */
         participantId: string;
         /** @enum {string} */
         status: 'pending' | 'purchased' | 'packed' | 'canceled';
       }[];
+      /** @description Set true to remove your own assignment entry from this item. Cannot be combined with assignmentStatusList in the same request. */
+      unassign?: boolean;
     };
     /** BulkCreateItemBody */
     'def-46': {
@@ -3050,15 +3399,17 @@ export interface components {
         | 'set';
       subcategory?: string | null;
       notes?: string | null;
-      /** @description Owner: send the full desired assignment list. Non-owner: send only your own entry — backend merges. Same rules as single-item PATCH. */
+      /** @description Same rules as single-item PATCH. Owner/admin sends full desired list. Non-owner sends only their own single entry; backend merges. */
       assignmentStatusList?: {
         /** Format: uuid */
         participantId: string;
         /** @enum {string} */
         status: 'pending' | 'purchased' | 'packed' | 'canceled';
       }[];
-      /** @description Set true to mark as assigned to all (new joiners auto-added). Set false to unmark. Owner-only. */
+      /** @description Owner/admin only. true enables assign-to-all mode; false disables it. */
       isAllParticipants?: boolean;
+      /** @description Participant self-unassign helper for bulk PATCH. Set true to remove your own entry. Cannot be combined with assignmentStatusList. */
+      unassign?: boolean;
     };
     /** BulkUpdateItemBody */
     'def-48': {
@@ -3101,13 +3452,15 @@ export interface components {
         | 'set';
       subcategory?: string | null;
       notes?: string | null;
-      /** @description Send only your own entry with updated status. Backend merges into the full list. */
+      /** @description Same invite/guest rule as single PATCH: each item may include only your own single assignment entry; backend merges into full list. */
       assignmentStatusList?: {
         /** Format: uuid */
         participantId: string;
         /** @enum {string} */
         status: 'pending' | 'purchased' | 'packed' | 'canceled';
       }[];
+      /** @description Bulk self-unassign helper. Set true to remove your own assignment entry. Cannot be combined with assignmentStatusList. */
+      unassign?: boolean;
     };
     /** BulkUpdateInviteItemBody */
     'def-53': {
@@ -3144,6 +3497,75 @@ export interface components {
     /** UpdateProfileResponse */
     'def-57': {
       preferences: components['schemas']['def-54'];
+    };
+    /** Expense */
+    'def-58': {
+      /** Format: uuid */
+      expenseId: string;
+      /**
+       * Format: uuid
+       * @description The participant who made this expense
+       */
+      participantId: string;
+      /** Format: uuid */
+      planId: string;
+      /** @description Expense amount as a decimal string (e.g. "29.99"). Stored as numeric(10,2) in the database. */
+      amount: string;
+      /** @description Optional description of what the expense was for */
+      description?: string | null;
+      /** Format: uuid */
+      createdByUserId?: string | null;
+      /** Format: date-time */
+      createdAt: string;
+      /** Format: date-time */
+      updatedAt: string;
+    };
+    /** ExpenseList */
+    'def-59': components['schemas']['def-58'][];
+    /** ExpenseSummary */
+    'def-60': {
+      /** Format: uuid */
+      participantId: string;
+      /** @description Sum of all expenses for this participant */
+      totalAmount: number;
+    };
+    /** ExpenseSummaryList */
+    'def-61': components['schemas']['def-60'][];
+    /**
+     * ExpensesResponse
+     * @description All expenses for a plan plus per-participant totals. Currency is defined on the plan itself.
+     */
+    'def-62': {
+      expenses: components['schemas']['def-59'];
+      summary: components['schemas']['def-61'];
+    };
+    /** CreateExpenseBody */
+    'def-63': {
+      /**
+       * Format: uuid
+       * @description The participant this expense belongs to
+       */
+      participantId: string;
+      /** @description Expense amount (must be greater than 0) */
+      amount: number;
+      /** @description Optional description of what the expense was for */
+      description?: string;
+    };
+    /** UpdateExpenseBody */
+    'def-64': {
+      /** @description Updated expense amount (must be greater than 0) */
+      amount?: number;
+      /** @description Updated description (send null to clear) */
+      description?: string | null;
+    };
+    /** ExpenseIdParam */
+    'def-65': {
+      /** Format: uuid */
+      expenseId: string;
+    };
+    /** DeleteExpenseResponse */
+    'def-66': {
+      ok: boolean;
     };
   };
   responses: never;

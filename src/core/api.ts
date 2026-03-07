@@ -506,6 +506,56 @@ export async function bulkUpdateItems(
   return bulkItemResponseSchema.parse(data);
 }
 
+// --- Expenses ---
+
+import {
+  expenseCreateSchema,
+  expensePatchSchema,
+  expenseSchema,
+  expensesResponseSchema,
+  type Expense,
+  type ExpenseCreate,
+  type ExpensePatch,
+  type ExpensesResponse,
+} from './schemas/expense';
+
+export type { Expense, ExpenseCreate, ExpensePatch, ExpensesResponse };
+
+export async function fetchExpenses(planId: string): Promise<ExpensesResponse> {
+  const data = await request<unknown>(`/plans/${planId}/expenses`);
+  return expensesResponseSchema.parse(data);
+}
+
+export async function createExpense(
+  planId: string,
+  body: ExpenseCreate
+): Promise<Expense> {
+  const validBody = expenseCreateSchema.parse(body);
+  const data = await request<unknown>(`/plans/${planId}/expenses`, {
+    method: 'POST',
+    body: JSON.stringify(validBody),
+  });
+  return expenseSchema.parse(data);
+}
+
+export async function updateExpense(
+  expenseId: string,
+  updates: ExpensePatch
+): Promise<Expense> {
+  const validUpdates = expensePatchSchema.parse(updates);
+  const data = await request<unknown>(`/expenses/${expenseId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(validUpdates),
+  });
+  return expenseSchema.parse(data);
+}
+
+export async function deleteExpense(expenseId: string): Promise<void> {
+  await request(`/expenses/${expenseId}`, {
+    method: 'DELETE',
+  });
+}
+
 // --- Auth ---
 
 import { authMeResponseSchema, type AuthMeResponse } from './auth-api';

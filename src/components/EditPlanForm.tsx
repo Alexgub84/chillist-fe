@@ -7,13 +7,19 @@ import { useTranslation } from 'react-i18next';
 
 import {
   planStatusSchema,
-  planVisibilitySchema,
   type PlanWithDetails,
   type PlanPatch,
 } from '../core/schemas/plan';
+import {
+  SUPPORTED_LANGUAGES,
+  SUPPORTED_CURRENCIES,
+  LANGUAGE_META,
+  isSupportedLanguage,
+  DEFAULT_PLAN_LANGUAGE,
+  DEFAULT_PLAN_CURRENCY,
+} from '../contexts/language-context';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
-import { useAuth } from '../contexts/useAuth';
 import LocationAutocomplete from './LocationAutocomplete';
 import type { PlaceResult } from './LocationAutocomplete';
 
@@ -33,7 +39,8 @@ const editPlanFormSchema = z
     title: z.string().min(1, 'Title is required'),
     description: z.string().optional(),
     status: planStatusSchema,
-    visibility: planVisibilitySchema,
+    defaultLang: z.string().max(10).optional(),
+    currency: z.string().max(10).optional(),
     tagsCsv: z.string().optional(),
     oneDay: z.boolean().optional(),
     singleDate: z
@@ -94,8 +101,6 @@ export default function EditPlanForm({
   isSubmitting = false,
 }: EditPlanFormProps) {
   const { t } = useTranslation();
-  const { user } = useAuth();
-  const isAuthenticated = !!user;
 
   const oneDay = isSameDate(plan.startDate, plan.endDate);
 
@@ -111,7 +116,15 @@ export default function EditPlanForm({
       title: plan.title,
       description: plan.description ?? '',
       status: plan.status,
-      visibility: plan.visibility,
+      defaultLang:
+        plan.defaultLang && isSupportedLanguage(plan.defaultLang)
+          ? plan.defaultLang
+          : DEFAULT_PLAN_LANGUAGE,
+      currency:
+        plan.currency &&
+        SUPPORTED_CURRENCIES.some((c) => c.code === plan.currency)
+          ? plan.currency
+          : DEFAULT_PLAN_CURRENCY,
       tagsCsv: plan.tags?.join(', ') ?? '',
       oneDay,
       singleDate: oneDay ? parseISODate(plan.startDate) : '',
@@ -194,7 +207,8 @@ export default function EditPlanForm({
       title: values.title,
       description: values.description || null,
       status: values.status,
-      visibility: values.visibility,
+      defaultLang: values.defaultLang ?? null,
+      currency: values.currency ?? null,
       startDate: values.oneDay
         ? makeDateTime(values.singleDate, values.singleStartTime)
         : makeDateTime(values.startDateDate, values.startDateTime),
@@ -241,29 +255,35 @@ export default function EditPlanForm({
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <FormLabel>{t('planForm.status')}</FormLabel>
           <FormSelect {...register('status')}>
-            <option value="draft">{t('planStatus.draft')}</option>
             <option value="active">{t('planStatus.active')}</option>
+            <option value="draft">{t('planStatus.draft')}</option>
             <option value="archived">{t('planStatus.archived')}</option>
           </FormSelect>
         </div>
 
         <div>
-          <FormLabel>{t('planForm.visibility')}</FormLabel>
-          <FormSelect {...register('visibility')}>
-            {isAuthenticated ? (
-              <>
-                <option value="private">{t('planVisibility.private')}</option>
-                <option value="invite_only">
-                  {t('planVisibility.invite_only')}
-                </option>
-              </>
-            ) : (
-              <option value="public">{t('planVisibility.public')}</option>
-            )}
+          <FormLabel>{t('planForm.defaultLang')}</FormLabel>
+          <FormSelect {...register('defaultLang')}>
+            {SUPPORTED_LANGUAGES.map((code) => (
+              <option key={code} value={code}>
+                {LANGUAGE_META[code].nativeLabel}
+              </option>
+            ))}
+          </FormSelect>
+        </div>
+
+        <div>
+          <FormLabel>{t('planForm.currency')}</FormLabel>
+          <FormSelect {...register('currency')}>
+            {SUPPORTED_CURRENCIES.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.symbol} {c.label}
+              </option>
+            ))}
           </FormSelect>
         </div>
       </div>
@@ -338,8 +358,8 @@ export default function EditPlanForm({
         </div>
 
         {oneDayWatch ? (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-blue-50 p-4 rounded-lg">
-            <div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
+            <div className="col-span-2 sm:col-span-1">
               <FormLabel>{t('planForm.date')}</FormLabel>
               <FormInput type="date" {...register('singleDate')} compact />
               {errors.singleDate && (
@@ -358,7 +378,7 @@ export default function EditPlanForm({
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-blue-50 p-4 rounded-lg">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
             <div>
               <FormLabel>{t('planForm.startDate')}</FormLabel>
               <FormInput type="date" {...register('startDateDate')} compact />

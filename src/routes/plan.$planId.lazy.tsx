@@ -46,6 +46,17 @@ import ParticipantDetails from '../components/ParticipantDetails';
 import BulkItemAddWizard from '../components/BulkItemAddWizard';
 import PlanShareSection from '../components/PlanShareSection';
 import FloatingActions from '../components/shared/FloatingActions';
+import PlanProvider from '../contexts/PlanProvider';
+import { useCreateExpense } from '../hooks/useCreateExpense';
+import ExpenseForm from '../components/ExpenseForm';
+import type { ExpenseFormValues } from '../components/ExpenseForm';
+import { usePlanContext } from '../hooks/usePlanContext';
+import { getApiErrorMessage } from '../core/error-utils';
+import {
+  aggregateParticipantCounts,
+  calculatePlanPoints,
+  getDurationMultiplier,
+} from '../core/utils-plan-points';
 
 export const Route = createLazyFileRoute('/plan/$planId')({
   component: PlanPage,
@@ -66,8 +77,11 @@ function PlanPage() {
   const actions = usePlanActions(planId, planParticipants);
   const bulkAssign = useBulkAssign(planId, planParticipants);
 
+  const createExpenseMutation = useCreateExpense(planId);
+
   const [itemModalId, setItemModalId] = useState<string | null>(null);
   const [bulkAddOpen, setBulkAddOpen] = useState(false);
+  const [addExpenseOpen, setAddExpenseOpen] = useState(false);
   const [editingParticipantId, setEditingParticipantId] = useState<
     string | null
   >(null);
@@ -103,6 +117,15 @@ function PlanPage() {
   if (isNotParticipantResponse(plan)) {
     return <RequestToJoinPage planId={planId} response={plan} />;
   }
+
+  const { totalAdults, totalKids } = aggregateParticipantCounts(
+    plan.participants
+  );
+  const planPoints = calculatePlanPoints({
+    adultsCount: totalAdults,
+    kidsCount: totalKids,
+    durationMultiplier: getDurationMultiplier(plan.startDate, plan.endDate),
+  });
 
   const planDetailsOpen =
     isOwner || currentParticipant?.rsvpStatus !== 'confirmed';
@@ -234,102 +257,41 @@ function PlanPage() {
     }
   }
 
+  async function handleAddExpense(values: ExpenseFormValues) {
+    try {
+      await createExpenseMutation.mutateAsync(values);
+      toast.success(t('expenses.addSuccess'));
+      setAddExpenseOpen(false);
+    } catch (err) {
+      console.error(
+        `[PlanPage] createExpense failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
   return (
-    <div className="w-full px-3 sm:px-0">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-4 sm:mb-6 flex items-center justify-between gap-3">
-          <Link
-            to="/plans"
-            className="text-blue-500 hover:underline text-sm sm:text-base"
-          >
-            {t('plan.backToPlans')}
-          </Link>
-          <button
-            type="button"
-            data-testid="invite-button"
-            onClick={handleCopyPlanUrl}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors shrink-0"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
+    <PlanProvider plan={plan}>
+      <div className="w-full px-3 sm:px-0">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-4 sm:mb-6 flex items-center justify-between gap-3">
+            <Link
+              to="/plans"
+              className="text-blue-500 hover:underline text-sm sm:text-base"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
-            {t('invite.inviteButton')}
-          </button>
-        </div>
-
-        <h1
-          data-testid="plan-title"
-          className="text-xl sm:text-2xl font-bold text-gray-800 line-clamp-2 my-4"
-        >
-          {plan.title}
-        </h1>
-
-        <CollapsibleSection
-          title={
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-              {t('plan.planDetails')}
-            </h2>
-          }
-          defaultOpen={planDetailsOpen}
-          wrapperClassName="bg-white rounded-xl shadow-sm overflow-hidden"
-          panelContentClassName="border-t border-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-5"
-        >
-          <Plan
-            plan={plan}
-            isOwner={isOwner}
-            onEdit={() => setShowEditPlanModal(true)}
-            onDelete={handleDeletePlan}
-            isDeleting={actions.isDeletingPlan}
-          />
-        </CollapsibleSection>
-        <PlanShareSection
-          onCopy={handleCopyPlanUrl}
-          onShare={handleSharePlanUrl}
-        />
-
-        <div className="mt-4 sm:mt-6">
-          <Forecast
-            location={plan.location}
-            startDate={plan.startDate}
-            endDate={plan.endDate}
-          />
-        </div>
-
-        {!isOwner == plan.participants.length > 0 && (
-          <div className="mt-6 sm:mt-8">
-            <ParticipantDetails
-              participants={plan.participants}
-              planId={planId}
-              planTitle={plan.title}
-              isOwner={isOwner}
-              currentParticipantId={currentParticipant?.participantId}
-              onEditPreferences={setEditingParticipantId}
-              onMakeOwner={isOwner ? setTransferTargetParticipantId : undefined}
-            />
-          </div>
-        )}
-
-        {isOwner && plan.participants.length > 0 && (
-          <SectionLink
-            to="/manage-participants/$planId"
-            params={{ planId }}
-            testId="manage-participants-link"
-            colorScheme="amber"
-            className="mt-4 sm:mt-5 mb-4"
-            icon={
+              {t('plan.backToPlans')}
+            </Link>
+            <button
+              type="button"
+              data-testid="invite-button"
+              onClick={handleCopyPlanUrl}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors shrink-0"
+            >
               <svg
-                className="w-5 h-5 text-amber-600"
+                className="w-4 h-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -339,223 +301,377 @@ function PlanPage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+              {t('invite.inviteButton')}
+            </button>
+          </div>
+
+          <h1
+            data-testid="plan-title"
+            className="text-xl sm:text-2xl font-bold text-gray-800 line-clamp-2 my-4"
+          >
+            {plan.title}
+          </h1>
+
+          <CollapsibleSection
+            title={
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+                {t('plan.planDetails')}
+              </h2>
+            }
+            defaultOpen={planDetailsOpen}
+            wrapperClassName="bg-white rounded-xl shadow-sm overflow-hidden"
+            panelContentClassName="border-t border-gray-200 p-4 sm:p-6 space-y-4 sm:space-y-5"
+          >
+            <Plan
+              plan={plan}
+              isOwner={isOwner}
+              onEdit={() => setShowEditPlanModal(true)}
+              onDelete={handleDeletePlan}
+              isDeleting={actions.isDeletingPlan}
+            />
+          </CollapsibleSection>
+          <PlanShareSection
+            onCopy={handleCopyPlanUrl}
+            onShare={handleSharePlanUrl}
+          />
+
+          <div className="mt-4 sm:mt-6">
+            <Forecast
+              location={plan.location}
+              startDate={plan.startDate}
+              endDate={plan.endDate}
+            />
+          </div>
+
+          {!isOwner == plan.participants.length > 0 && (
+            <div className="mt-6 sm:mt-8">
+              <ParticipantDetails
+                participants={plan.participants}
+                planId={planId}
+                planTitle={plan.title}
+                isOwner={isOwner}
+                currentParticipantId={currentParticipant?.participantId}
+                onEditPreferences={setEditingParticipantId}
+                onMakeOwner={
+                  isOwner ? setTransferTargetParticipantId : undefined
+                }
+              />
+            </div>
+          )}
+
+          {isOwner && plan.participants.length > 0 && (
+            <SectionLink
+              to="/manage-participants/$planId"
+              params={{ planId }}
+              testId="manage-participants-link"
+              colorScheme="amber"
+              className="mt-4 sm:mt-5 mb-4"
+              icon={
+                <svg
+                  className="w-5 h-5 text-amber-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              }
+              title={t('manageParticipants.linkTitle')}
+              subtitle={t('manageParticipants.linkDesc')}
+            />
+          )}
+
+          <SectionLink
+            to="/items/$planId"
+            params={{ planId }}
+            colorScheme="blue"
+            className="mt-6 sm:mt-8 mb-4"
+            icon={
+              <svg
+                className="w-5 h-5 text-blue-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
                 />
               </svg>
             }
-            title={t('manageParticipants.linkTitle')}
-            subtitle={t('manageParticipants.linkDesc')}
+            title={t('items.manageItems')}
+            subtitle={t('items.manageItemsDesc')}
           />
-        )}
 
-        <SectionLink
-          to="/items/$planId"
-          params={{ planId }}
-          colorScheme="blue"
-          className="mt-6 sm:mt-8 mb-4"
-          icon={
-            <svg
-              className="w-5 h-5 text-blue-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-              />
-            </svg>
-          }
-          title={t('items.manageItems')}
-          subtitle={t('items.manageItemsDesc')}
-        />
-
-        <div className="flex items-center justify-between mb-3 sm:mb-4">
-          <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
-            {t('items.title')}
-            {plan.items.length > 0 && (
-              <span
-                data-testid="items-count"
-                className="ms-2 text-sm font-normal text-gray-500"
+          <SectionLink
+            to="/expenses/$planId"
+            params={{ planId }}
+            testId="expenses-link"
+            colorScheme="green"
+            className="mb-4"
+            icon={
+              <svg
+                className="w-5 h-5 text-green-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
               >
-                ({plan.items.length})
-              </span>
-            )}
-          </h2>
-        </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            }
+            title={t('expenses.linkTitle')}
+            subtitle={t('expenses.linkDesc')}
+          />
 
-        {plan.items.length > 0 && (
-          <div className="mb-4 sm:mb-6 space-y-3">
-            {plan.participants.length > 0 && (
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+              {t('items.title')}
+              {plan.items.length > 0 && (
+                <span
+                  data-testid="items-count"
+                  className="ms-2 text-sm font-normal text-gray-500"
+                >
+                  ({plan.items.length})
+                </span>
+              )}
+            </h2>
+          </div>
+
+          {plan.items.length > 0 && (
+            <div className="mb-4 sm:mb-6 space-y-3">
+              {plan.participants.length > 0 && (
+                <div>
+                  <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
+                    {t('plan.filterByPerson')}
+                  </p>
+                  <ParticipantFilter
+                    participants={plan.participants}
+                    selected={participantFilter ?? null}
+                    onChange={(participantId) =>
+                      navigate({
+                        search: {
+                          list: listFilter,
+                          participant: participantId ?? undefined,
+                        },
+                        replace: true,
+                      })
+                    }
+                    counts={participantCounts}
+                    total={nonCanceledCount}
+                    currentParticipantId={currentParticipant?.participantId}
+                  />
+                </div>
+              )}
+              {plan.participants.length > 0 && (
+                <div className="border-t border-gray-200" />
+              )}
               <div>
-                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
-                  {t('plan.filterByPerson')}
-                </p>
-                <ParticipantFilter
-                  participants={plan.participants}
-                  selected={participantFilter ?? null}
-                  onChange={(participantId) =>
+                <ListTabs
+                  selected={listFilter ?? null}
+                  onChange={(filter) =>
                     navigate({
                       search: {
-                        list: listFilter,
-                        participant: participantId ?? undefined,
+                        list: filter ?? undefined,
+                        participant: participantFilter,
                       },
                       replace: true,
                     })
                   }
-                  counts={participantCounts}
-                  total={nonCanceledCount}
-                  currentParticipantId={currentParticipant?.participantId}
+                  counts={listCounts}
+                  total={participantScopedItems.length}
                 />
               </div>
-            )}
-            {plan.participants.length > 0 && (
-              <div className="border-t border-gray-200" />
-            )}
-            <div>
-              <ListTabs
-                selected={listFilter ?? null}
-                onChange={(filter) =>
-                  navigate({
-                    search: {
-                      list: filter ?? undefined,
-                      participant: participantFilter,
-                    },
-                    replace: true,
-                  })
-                }
-                counts={listCounts}
-                total={participantScopedItems.length}
-              />
             </div>
-          </div>
-        )}
+          )}
 
-        {plan.items.length === 0 && (
-          <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center mb-4">
-            <p className="text-gray-500 text-sm sm:text-base">
-              {t('items.empty')}
-            </p>
-          </div>
-        )}
+          {plan.items.length === 0 && (
+            <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center mb-4">
+              <p className="text-gray-500 text-sm sm:text-base">
+                {t('items.empty')}
+              </p>
+            </div>
+          )}
 
-        {plan.items.length > 0 && (
-          <ItemsList
-            items={filteredItems}
-            participants={plan.participants}
-            currentParticipantId={statusParticipantId}
-            listFilter={listFilter}
-            selfAssignParticipantId={
-              isOwner ? undefined : currentParticipant?.participantId
-            }
-            canEditItem={canEditItem}
-            onEditItem={(itemId) => setItemModalId(itemId)}
-            onUpdateItem={actions.updateSingleItem}
-            onBulkAssign={(ids, pid) =>
-              bulkAssign.mutate({ itemIds: ids, participantId: pid })
-            }
-            groupBySubcategory
-          />
-        )}
-
-        <Modal
-          open={!!itemModalId}
-          onClose={() => setItemModalId(null)}
-          title={isCreating ? t('items.addItemLabel') : t('items.editItem')}
-          testId="add-item-modal"
-        >
-          <ItemForm
-            key={itemModalId ?? 'closed'}
-            defaultValues={
-              editingItem
-                ? {
-                    name: editingItem.name,
-                    category: editingItem.category,
-                    subcategory:
-                      (editingItem as { subcategory?: string | null })
-                        .subcategory ?? undefined,
-                    quantity: editingItem.quantity,
-                    unit: editingItem.unit,
-                    notes: editingItem.notes ?? '',
-                    assignedParticipantId:
-                      getAssignmentSelectValue(editingItem),
-                  }
-                : undefined
-            }
-            participants={plan.participants}
-            showAssignAll={isOwner}
-            onSubmit={handleItemFormSubmit}
-            onCancel={() => setItemModalId(null)}
-            isSubmitting={
-              isCreating ? actions.isCreatingItem : actions.isUpdatingItem
-            }
-            submitLabel={isCreating ? undefined : t('items.updateItem')}
-          />
-        </Modal>
-
-        <Modal
-          open={!!editingParticipant}
-          onClose={() => setEditingParticipantId(null)}
-          title={`${editingParticipant?.name ?? ''} ${editingParticipant?.lastName ?? ''}`}
-        >
-          {editingParticipant && (
-            <PreferencesForm
-              key={editingParticipant.participantId}
-              defaultValues={{
-                adultsCount: editingParticipant.adultsCount ?? undefined,
-                kidsCount: editingParticipant.kidsCount ?? undefined,
-                foodPreferences:
-                  editingParticipant.foodPreferences ?? undefined,
-                allergies: editingParticipant.allergies ?? undefined,
-                notes: editingParticipant.notes ?? undefined,
-              }}
-              onSubmit={handlePreferencesSubmit}
-              onCancel={() => setEditingParticipantId(null)}
-              isSubmitting={actions.isUpdatingParticipant}
-              inModal
-              showRsvp
+          {plan.items.length > 0 && (
+            <ItemsList
+              items={filteredItems}
+              participants={plan.participants}
+              currentParticipantId={statusParticipantId}
+              listFilter={listFilter}
+              selfAssignParticipantId={
+                isOwner ? undefined : currentParticipant?.participantId
+              }
+              canEditItem={canEditItem}
+              onEditItem={(itemId) => setItemModalId(itemId)}
+              onUpdateItem={actions.updateSingleItem}
+              onBulkAssign={(ids, pid) =>
+                bulkAssign.mutate({ itemIds: ids, participantId: pid })
+              }
+              groupBySubcategory
             />
           )}
-        </Modal>
 
-        <Modal
-          open={showEditPlanModal}
-          onClose={() => setShowEditPlanModal(false)}
-          title={t('plan.editPlan')}
-        >
-          <EditPlanForm
-            key={showEditPlanModal ? 'open' : 'closed'}
-            plan={plan}
-            onSubmit={handleEditPlan}
-            onCancel={() => setShowEditPlanModal(false)}
-            isSubmitting={actions.isUpdatingPlan}
+          <Modal
+            open={!!itemModalId}
+            onClose={() => setItemModalId(null)}
+            title={isCreating ? t('items.addItemLabel') : t('items.editItem')}
+            testId="add-item-modal"
+          >
+            <ItemForm
+              key={itemModalId ?? 'closed'}
+              defaultValues={
+                editingItem
+                  ? {
+                      name: editingItem.name,
+                      category: editingItem.category,
+                      subcategory:
+                        (editingItem as { subcategory?: string | null })
+                          .subcategory ?? undefined,
+                      quantity: editingItem.quantity,
+                      unit: editingItem.unit,
+                      notes: editingItem.notes ?? '',
+                      assignedParticipantId:
+                        getAssignmentSelectValue(editingItem),
+                    }
+                  : undefined
+              }
+              participants={plan.participants}
+              showAssignAll={isOwner}
+              onSubmit={handleItemFormSubmit}
+              onCancel={() => setItemModalId(null)}
+              isSubmitting={
+                isCreating ? actions.isCreatingItem : actions.isUpdatingItem
+              }
+              submitLabel={isCreating ? undefined : t('items.updateItem')}
+            />
+          </Modal>
+
+          <Modal
+            open={!!editingParticipant}
+            onClose={() => setEditingParticipantId(null)}
+            title={`${editingParticipant?.name ?? ''} ${editingParticipant?.lastName ?? ''}`}
+          >
+            {editingParticipant && (
+              <PreferencesForm
+                key={editingParticipant.participantId}
+                defaultValues={{
+                  adultsCount: editingParticipant.adultsCount ?? undefined,
+                  kidsCount: editingParticipant.kidsCount ?? undefined,
+                  foodPreferences:
+                    editingParticipant.foodPreferences ?? undefined,
+                  allergies: editingParticipant.allergies ?? undefined,
+                  notes: editingParticipant.notes ?? undefined,
+                }}
+                onSubmit={handlePreferencesSubmit}
+                onCancel={() => setEditingParticipantId(null)}
+                isSubmitting={actions.isUpdatingParticipant}
+                inModal
+                showRsvp
+              />
+            )}
+          </Modal>
+
+          <Modal
+            open={showEditPlanModal}
+            onClose={() => setShowEditPlanModal(false)}
+            title={t('plan.editPlan')}
+          >
+            <EditPlanForm
+              key={showEditPlanModal ? 'open' : 'closed'}
+              plan={plan}
+              onSubmit={handleEditPlan}
+              onCancel={() => setShowEditPlanModal(false)}
+              isSubmitting={actions.isUpdatingPlan}
+            />
+          </Modal>
+
+          <Modal
+            open={addExpenseOpen}
+            onClose={() => setAddExpenseOpen(false)}
+            title={t('expenses.addExpense')}
+            testId="quick-add-expense-modal"
+          >
+            <QuickAddExpenseForm
+              plan={plan}
+              isOwner={isOwner}
+              currentParticipantId={currentParticipant?.participantId}
+              onSubmit={handleAddExpense}
+              onCancel={() => setAddExpenseOpen(false)}
+              isSubmitting={createExpenseMutation.isPending}
+            />
+          </Modal>
+
+          <TransferOwnershipModal
+            open={transferTargetParticipantId !== null}
+            onClose={() => setTransferTargetParticipantId(null)}
+            onConfirm={handleTransferOwnership}
+            participantName={transferTargetName}
+            isPending={actions.isUpdatingParticipant}
           />
-        </Modal>
+        </div>
 
-        <TransferOwnershipModal
-          open={transferTargetParticipantId !== null}
-          onClose={() => setTransferTargetParticipantId(null)}
-          onConfirm={handleTransferOwnership}
-          participantName={transferTargetName}
-          isPending={actions.isUpdatingParticipant}
+        <FloatingActions
+          onAddItem={() => setItemModalId('new')}
+          onBulkAdd={() => setBulkAddOpen(true)}
+          onAddExpense={() => setAddExpenseOpen(true)}
+        />
+
+        <BulkItemAddWizard
+          open={bulkAddOpen}
+          onClose={() => setBulkAddOpen(false)}
+          onAdd={handleBulkAdd}
+          existingItems={existingItems}
+          onCancel={handleBulkCancel}
+          planPoints={planPoints}
         />
       </div>
+    </PlanProvider>
+  );
+}
 
-      <FloatingActions
-        onAddItem={() => setItemModalId('new')}
-        onBulkAdd={() => setBulkAddOpen(true)}
-      />
-
-      <BulkItemAddWizard
-        open={bulkAddOpen}
-        onClose={() => setBulkAddOpen(false)}
-        onAdd={handleBulkAdd}
-        existingItems={existingItems}
-        onCancel={handleBulkCancel}
-      />
-    </div>
+function QuickAddExpenseForm({
+  plan,
+  isOwner,
+  currentParticipantId,
+  onSubmit,
+  onCancel,
+  isSubmitting,
+}: {
+  plan: PlanWithDetails;
+  isOwner: boolean;
+  currentParticipantId?: string;
+  onSubmit: (values: ExpenseFormValues) => void | Promise<void>;
+  onCancel: () => void;
+  isSubmitting: boolean;
+}) {
+  const planCtx = usePlanContext();
+  return (
+    <ExpenseForm
+      participants={plan.participants}
+      isOwner={isOwner}
+      currentParticipantId={currentParticipantId}
+      onSubmit={onSubmit}
+      onCancel={onCancel}
+      isSubmitting={isSubmitting}
+      currency={planCtx?.planCurrency ?? ''}
+    />
   );
 }

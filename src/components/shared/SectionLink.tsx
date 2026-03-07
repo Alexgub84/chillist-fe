@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
 
-type ColorScheme = 'amber' | 'blue';
+type ColorScheme = 'amber' | 'blue' | 'green';
 
 const colorMap: Record<
   ColorScheme,
@@ -30,6 +30,14 @@ const colorMap: Record<
     hoverIconBg: 'group-hover:bg-blue-100',
     hoverText: 'group-hover:text-blue-700',
     hoverChevron: 'group-hover:text-blue-500',
+  },
+  green: {
+    border: 'border-green-100',
+    hoverBorder: 'hover:border-green-300',
+    iconBg: 'bg-green-50',
+    hoverIconBg: 'group-hover:bg-green-100',
+    hoverText: 'group-hover:text-green-700',
+    hoverChevron: 'group-hover:text-green-500',
   },
 };
 

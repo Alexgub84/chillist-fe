@@ -11,6 +11,19 @@ export const SUPPORTED_LANGUAGES = ['en', 'he', 'es'] as const;
 
 export type AppLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
+export interface CurrencyMeta {
+  code: string;
+  symbol: string;
+  label: string;
+}
+
+export const SUPPORTED_CURRENCIES: CurrencyMeta[] = [
+  { code: 'ILS', symbol: '₪', label: 'Israeli Shekel' },
+  { code: 'USD', symbol: '$', label: 'US Dollar' },
+  { code: 'EUR', symbol: '€', label: 'Euro' },
+  { code: 'GBP', symbol: '£', label: 'British Pound' },
+];
+
 const RTL_LANGUAGES = new Set<AppLanguage>(['he']);
 
 export const LANGUAGE_META: Record<AppLanguage, LanguageMeta> = {
@@ -33,6 +46,9 @@ export const LANGUAGE_META: Record<AppLanguage, LanguageMeta> = {
     currencyCode: 'EUR',
   },
 };
+
+export const DEFAULT_PLAN_LANGUAGE: AppLanguage = 'he';
+export const DEFAULT_PLAN_CURRENCY = 'ILS';
 
 export function getCurrency(lang: AppLanguage): string {
   return LANGUAGE_META[lang].currencyCode;

@@ -20,6 +20,8 @@ import {
   getCommonItems,
   getEnrichedItems,
 } from '../data/common-items-registry';
+import { usePlanContext } from '../hooks/usePlanContext';
+import { calculateSuggestedQuantity } from '../core/utils-plan-points';
 
 import type { Participant } from '../core/schemas/participant';
 
@@ -70,6 +72,7 @@ export default function ItemForm({
 }: ItemFormProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const planCtx = usePlanContext();
 
   const {
     register,
@@ -86,7 +89,8 @@ export default function ItemForm({
   const category = watch('category');
   const isEquipment = category === 'equipment';
 
-  const items = useMemo(() => getCommonItems(language), [language]);
+  const planLanguage = planCtx?.planLanguage ?? language;
+  const items = useMemo(() => getCommonItems(planLanguage), [planLanguage]);
   const enrichedItems = useMemo(() => getEnrichedItems(), []);
 
   const itemNames = useMemo(() => items.map((i) => i.name), [items]);
@@ -94,14 +98,22 @@ export default function ItemForm({
   const itemLookup = useMemo(() => {
     const map = new Map<
       string,
-      { category: ItemCategory; unit: Unit; subcategory?: string }
+      {
+        category: ItemCategory;
+        unit: Unit;
+        subcategory?: string;
+        quantityPerPoint?: number;
+        isPersonal?: boolean;
+      }
     >();
-    if (language === 'en') {
+    if (planLanguage === 'en') {
       for (const item of enrichedItems) {
         const entry = {
           category: item.category,
           unit: item.unit as Unit,
           subcategory: item.subcategory,
+          quantityPerPoint: item.quantityPerPoint,
+          isPersonal: item.isPersonal,
         };
         map.set(item.name.toLowerCase(), entry);
         for (const alias of item.aliases) {
@@ -114,15 +126,17 @@ export default function ItemForm({
           category: item.category,
           unit: item.unit as Unit,
           subcategory: item.subcategory,
+          quantityPerPoint: item.quantityPerPoint,
+          isPersonal: item.isPersonal,
         });
       }
     }
     return map;
-  }, [language, items, enrichedItems]);
+  }, [planLanguage, items, enrichedItems]);
 
   const searchIndex = useMemo(() => {
     const map = new Map<string, string[]>();
-    if (language === 'en') {
+    if (planLanguage === 'en') {
       for (const item of enrichedItems) {
         const terms = [
           item.name.toLowerCase(),
@@ -137,7 +151,7 @@ export default function ItemForm({
       }
     }
     return map;
-  }, [language, items, enrichedItems]);
+  }, [planLanguage, items, enrichedItems]);
 
   const filterFn = useCallback(
     (itemName: string, query: string) => {
@@ -157,6 +171,14 @@ export default function ItemForm({
       setValue('unit', match.unit);
       if (match.subcategory) {
         setValue('subcategory', match.subcategory);
+      }
+      if (planCtx && match.category === 'food' && match.quantityPerPoint) {
+        const suggested = calculateSuggestedQuantity({
+          planPoints: planCtx.planPoints,
+          quantityPerPoint: match.quantityPerPoint,
+          isPersonal: match.isPersonal,
+        });
+        setValue('quantity', suggested);
       }
     }
   }

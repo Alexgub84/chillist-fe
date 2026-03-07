@@ -4,16 +4,6 @@ import userEvent from '@testing-library/user-event';
 import EditPlanForm from '../../../src/components/EditPlanForm';
 import type { PlanWithDetails } from '../../../src/core/schemas/plan';
 
-vi.mock('../../../src/contexts/useAuth', () => ({
-  useAuth: () => ({
-    session: null,
-    user: { id: 'test-user' },
-    loading: false,
-    isAdmin: false,
-    signOut: vi.fn(),
-  }),
-}));
-
 vi.mock('uuid', () => ({
   v5: vi.fn(
     (name: string) => `uuid-${name.toLowerCase().replace(/\s+/g, '-')}`
@@ -176,7 +166,6 @@ describe('EditPlanForm', () => {
     expect(payload.title).toBe('Updated Beach Trip');
     expect(payload.description).toBe('A fun day at the beach');
     expect(payload.status).toBe('active');
-    expect(payload.visibility).toBe('private');
     expect(payload.tags).toEqual(['beach', 'summer']);
   });
 

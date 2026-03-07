@@ -6,7 +6,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "ace-wrap",
@@ -15,7 +17,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "acetaminophen",
@@ -24,7 +27,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "acorn-squash",
@@ -33,7 +37,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "action-figures",
@@ -42,7 +48,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "after-bite",
@@ -51,7 +58,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "agave-syrup",
@@ -60,7 +68,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "air-mattress",
@@ -69,7 +79,8 @@
     "unit": "pcs",
     "aliases": ["Inflatable Mattress", "Air Bed", "מזרן מתנפח"],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "air-pump",
@@ -78,7 +89,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "allergy-medication",
@@ -87,7 +99,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "almond-butter",
@@ -96,7 +109,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "almond-milk",
@@ -105,7 +120,9 @@
     "unit": "l",
     "aliases": ["Almond Mylk"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "almonds",
@@ -114,7 +131,9 @@
     "unit": "pack",
     "aliases": ["שקדים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "aloe-vera-gel",
@@ -123,7 +142,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "aloe-vera-juice",
@@ -132,7 +152,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "aluminum-foil",
@@ -141,7 +163,8 @@
     "unit": "pcs",
     "aliases": ["Tin Foil", "Aluminium Foil", "Foil", "נייר אלומיניום", "רדיד"],
     "tags": [],
-    "subcategory": "Serving and Tableware"
+    "subcategory": "Serving and Tableware",
+    "isPersonal": false
   },
   {
     "id": "animal-crackers",
@@ -150,7 +173,9 @@
     "unit": "pack",
     "aliases": ["ביסקוויטים"],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "antacid-tablets",
@@ -159,7 +184,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "anti-diarrhea-medication",
@@ -168,7 +194,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "anti-itch-cream",
@@ -177,7 +204,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "antibiotic-ointment",
@@ -186,7 +214,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "antihistamine",
@@ -195,7 +224,8 @@
     "unit": "pcs",
     "aliases": ["אנטיהיסטמין"],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "antiseptic-wipes",
@@ -204,7 +234,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "apple-cider-vinegar",
@@ -213,7 +244,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "apples",
@@ -222,7 +255,9 @@
     "unit": "kg",
     "aliases": ["Apple", "תפוחים"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "applesauce-pouches",
@@ -231,7 +266,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit", "kids", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "artichokes",
@@ -240,7 +277,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "arugula",
@@ -249,7 +288,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "asparagus",
@@ -258,7 +299,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "aspirin",
@@ -267,7 +310,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "avocado",
@@ -276,7 +320,9 @@
     "unit": "pcs",
     "aliases": ["Avocados", "Avo", "אבוקדו"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "avocado-oil",
@@ -285,7 +331,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "axe",
@@ -294,7 +342,8 @@
     "unit": "pcs",
     "aliases": ["גרזן"],
     "tags": ["cooking", "tools"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "baby-bathtub",
@@ -303,7 +352,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-blanket",
@@ -312,7 +362,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-body-wash",
@@ -321,7 +372,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-bottles",
@@ -330,7 +382,8 @@
     "unit": "pcs",
     "aliases": ["בקבוקי תינוק", "בקבוקים"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-carrier",
@@ -339,7 +392,8 @@
     "unit": "pcs",
     "aliases": ["מנשא תינוק", "מנשא"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-cereal",
@@ -348,7 +402,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby", "breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "baby-first-aid-kit",
@@ -357,7 +413,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "first-aid"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-food-jars",
@@ -366,7 +423,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "baby-food-pouches",
@@ -375,7 +434,9 @@
     "unit": "pack",
     "aliases": ["מחיות לתינוק"],
     "tags": ["baby"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "baby-formula",
@@ -384,7 +445,9 @@
     "unit": "pack",
     "aliases": ["תרכובת מזון לתינוק", "תמ\"ל"],
     "tags": ["baby"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "baby-gate",
@@ -393,7 +456,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-insect-repellent",
@@ -402,7 +466,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-life-jacket",
@@ -411,7 +476,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "beach"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-lotion",
@@ -420,7 +486,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-monitor",
@@ -429,7 +496,8 @@
     "unit": "pcs",
     "aliases": ["מוניטור לתינוק", "מעקב תינוק"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-shampoo",
@@ -438,7 +506,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-sleeping-bag",
@@ -447,7 +516,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "sleep"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-sun-hat",
@@ -456,7 +526,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "clothing"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-sunglasses",
@@ -465,7 +536,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "clothing"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-sunscreen",
@@ -474,7 +546,8 @@
     "unit": "pcs",
     "aliases": ["קרם הגנה לתינוק"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-swim-diapers",
@@ -483,7 +556,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby", "beach"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-swimsuit",
@@ -492,7 +566,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "clothing"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-thermometer",
@@ -501,7 +576,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "first-aid"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-towel",
@@ -510,7 +586,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "baby-wipes",
@@ -519,7 +596,8 @@
     "unit": "pack",
     "aliases": ["מגבונים"],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "backpack",
@@ -528,7 +606,8 @@
     "unit": "pcs",
     "aliases": ["Backpacks", "Rucksack", "תרמיל", "תיק גב"],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": true
   },
   {
     "id": "bacon",
@@ -537,7 +616,9 @@
     "unit": "pack",
     "aliases": ["Rashers", "בייקון"],
     "tags": ["breakfast", "protein"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "badminton-set",
@@ -546,7 +627,8 @@
     "unit": "set",
     "aliases": ["סט בדמינטון"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "bagels",
@@ -555,7 +637,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "baked-beans",
@@ -564,7 +648,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "balsamic-vinegar",
@@ -573,7 +659,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "bananas",
@@ -582,7 +670,9 @@
     "unit": "kg",
     "aliases": ["Banana", "בננות"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "band-aids-kids",
@@ -591,7 +681,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby", "first-aid"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "bandages-assorted",
@@ -600,7 +691,8 @@
     "unit": "pack",
     "aliases": ["תחבושות", "פלסטרים"],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "base-layer-bottom",
@@ -609,7 +701,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "base-layer-top",
@@ -618,7 +711,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "bbq-sauce",
@@ -627,7 +721,9 @@
     "unit": "pcs",
     "aliases": ["Barbecue Sauce", "רוטב ברביקיו"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "beach-ball",
@@ -636,7 +732,8 @@
     "unit": "pcs",
     "aliases": ["כדור ים"],
     "tags": ["beach", "kids"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "beach-umbrella",
@@ -645,7 +742,8 @@
     "unit": "pcs",
     "aliases": ["Beach Umbrellas", "Sun Umbrella", "שמשייה", "שמשיית חוף"],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "beanie",
@@ -654,7 +752,8 @@
     "unit": "pcs",
     "aliases": ["כובע צמר", "כיפה"],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "bear-canister",
@@ -663,7 +762,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "bear-spray",
@@ -672,7 +772,8 @@
     "unit": "pcs",
     "aliases": ["Pepper Spray", "ספריי דובים"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "beer",
@@ -681,7 +782,9 @@
     "unit": "pack",
     "aliases": ["Beers", "Brews", "Lager", "Ale", "בירה"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "beets",
@@ -690,7 +793,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "bell-peppers",
@@ -699,7 +804,9 @@
     "unit": "pcs",
     "aliases": ["Capsicum", "Bell Pepper", "פלפל", "גמבה"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "beyond-meat",
@@ -708,7 +815,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "bibs",
@@ -717,7 +826,8 @@
     "unit": "pack",
     "aliases": ["סינרים"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "bike",
@@ -726,7 +836,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "bike-helmet",
@@ -735,7 +846,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": true
   },
   {
     "id": "bike-rack",
@@ -744,7 +856,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "binoculars",
@@ -753,7 +866,8 @@
     "unit": "pcs",
     "aliases": ["Binos", "משקפת"],
     "tags": ["navigation"],
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "id": "biodegradable-soap",
@@ -762,7 +876,8 @@
     "unit": "pcs",
     "aliases": ["סבון מתכלה"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "black-beans",
@@ -771,7 +886,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "blister-pads",
@@ -780,7 +897,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "blueberries",
@@ -789,7 +907,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "board-game",
@@ -798,7 +918,8 @@
     "unit": "pcs",
     "aliases": ["משחק קופסה"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "bocce-ball-set",
@@ -807,7 +928,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "body-wash",
@@ -816,7 +938,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "book",
@@ -825,7 +948,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": true
   },
   {
     "id": "booster-seat",
@@ -834,7 +958,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "bottle-brush",
@@ -843,7 +968,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "bottle-opener",
@@ -852,7 +978,8 @@
     "unit": "pcs",
     "aliases": ["Bottle Openers", "פותחן בקבוקים"],
     "tags": [],
-    "subcategory": "Food Preparation Tools"
+    "subcategory": "Food Preparation Tools",
+    "isPersonal": false
   },
   {
     "id": "bottle-warmer",
@@ -861,7 +988,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "bread",
@@ -870,7 +998,9 @@
     "unit": "pcs",
     "aliases": ["Loaf", "לחם"],
     "tags": ["breakfast", "pantry"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "broccoli",
@@ -879,7 +1009,9 @@
     "unit": "pcs",
     "aliases": ["ברוקולי"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "brown-rice",
@@ -888,7 +1020,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "id": "brown-sugar",
@@ -897,7 +1031,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "brownies",
@@ -906,7 +1042,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "brussels-sprouts",
@@ -915,7 +1053,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "bubbles",
@@ -924,7 +1064,8 @@
     "unit": "pcs",
     "aliases": ["בועות סבון"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "buckwheat",
@@ -933,7 +1074,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "bug-catcher-kit",
@@ -942,7 +1085,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "building-blocks",
@@ -951,7 +1095,8 @@
     "unit": "set",
     "aliases": ["קוביות", "לגו"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "bulgur",
@@ -960,7 +1105,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "bungee-cords",
@@ -969,7 +1116,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "burger-buns",
@@ -978,7 +1126,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "burger-patties",
@@ -987,7 +1137,9 @@
     "unit": "pack",
     "aliases": ["Hamburger Patties", "Beef Patties", "קציצות המבורגר"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "burn-gel",
@@ -996,7 +1148,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "butter",
@@ -1005,7 +1158,9 @@
     "unit": "pack",
     "aliases": ["Margarine", "חמאה"],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "butterfly-bandages",
@@ -1014,7 +1169,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "butternut-squash",
@@ -1023,7 +1179,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "cabbage",
@@ -1032,7 +1190,9 @@
     "unit": "pcs",
     "aliases": ["כרוב"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "cabinet-locks",
@@ -1041,7 +1201,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "cake-mix",
@@ -1050,7 +1211,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Sweets and Desserts"
+    "subcategory": "Sweets and Desserts",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "calamine-lotion",
@@ -1059,7 +1222,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "camera",
@@ -1068,7 +1232,8 @@
     "unit": "pcs",
     "aliases": ["Cameras", "מצלמה"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": true
   },
   {
     "id": "camp-blanket",
@@ -1077,7 +1242,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "camping-cot",
@@ -1086,7 +1252,8 @@
     "unit": "pcs",
     "aliases": ["מיטת שדה"],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "camping-heater",
@@ -1095,7 +1262,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["power", "winter"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "camping-mat",
@@ -1104,7 +1272,8 @@
     "unit": "pcs",
     "aliases": ["מזרן קמפינג"],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "camping-pillow",
@@ -1113,7 +1282,8 @@
     "unit": "pcs",
     "aliases": ["Camp Pillow", "כרית קמפינג"],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "camping-shower",
@@ -1122,7 +1292,8 @@
     "unit": "pcs",
     "aliases": ["מקלחת שדה"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "camping-sink",
@@ -1131,7 +1302,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "camping-stove",
@@ -1146,7 +1318,8 @@
       "בַּבּוּשׁקָה"
     ],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "campsite-permit",
@@ -1155,7 +1328,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "can-opener",
@@ -1164,7 +1338,8 @@
     "unit": "pcs",
     "aliases": ["Tin Opener", "פותחן קופסאות"],
     "tags": [],
-    "subcategory": "Food Preparation Tools"
+    "subcategory": "Food Preparation Tools",
+    "isPersonal": false
   },
   {
     "id": "canned-beans",
@@ -1173,7 +1348,9 @@
     "unit": "pcs",
     "aliases": ["שעועית בקופסה"],
     "tags": ["pantry", "protein"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "canned-corn",
@@ -1182,7 +1359,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "canned-soup",
@@ -1191,7 +1370,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "canned-tomatoes",
@@ -1200,7 +1381,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "canned-tuna",
@@ -1209,7 +1392,9 @@
     "unit": "pcs",
     "aliases": ["טונה בקופסה", "טונה"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "canoe-paddle",
@@ -1218,7 +1403,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "canopy",
@@ -1227,7 +1413,8 @@
     "unit": "pcs",
     "aliases": ["גזיבו", "סוכך"],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "car-charger",
@@ -1236,7 +1423,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car", "power"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "car-seat",
@@ -1245,7 +1433,8 @@
     "unit": "pcs",
     "aliases": ["כיסא בטיחות", "מושב בטיחות"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "carabiners",
@@ -1254,7 +1443,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "carbon-monoxide-detector",
@@ -1263,7 +1453,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "cargo-net",
@@ -1272,7 +1463,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "carrots",
@@ -1281,7 +1473,9 @@
     "unit": "kg",
     "aliases": ["Carrot", "גזר"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "cash",
@@ -1290,7 +1484,8 @@
     "unit": "pcs",
     "aliases": ["מזומן", "כסף מזומן"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "cashew-butter",
@@ -1299,7 +1494,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "cashews",
@@ -1308,7 +1505,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "cast-iron-skillet",
@@ -1317,7 +1516,8 @@
     "unit": "pcs",
     "aliases": ["מחבת יצוקה", "מחבת ברזל"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "cat-food",
@@ -1326,7 +1526,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["pets"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "cauliflower",
@@ -1335,7 +1537,9 @@
     "unit": "pcs",
     "aliases": ["כרובית"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "celery",
@@ -1344,7 +1548,9 @@
     "unit": "pcs",
     "aliases": ["סלרי"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "cereal",
@@ -1353,7 +1559,9 @@
     "unit": "pack",
     "aliases": ["דגני בוקר"],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "changing-pad",
@@ -1362,7 +1570,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "charcoal",
@@ -1371,7 +1580,8 @@
     "unit": "kg",
     "aliases": ["Briquettes", "פחם"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "cheese",
@@ -1380,7 +1590,9 @@
     "unit": "kg",
     "aliases": ["Cheddar", "גבינה"],
     "tags": [],
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.05,
+    "isPersonal": false
   },
   {
     "id": "cheese-sticks",
@@ -1389,7 +1601,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "cherries",
@@ -1398,7 +1612,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "chia-seeds",
@@ -1407,7 +1623,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "chicken-breast",
@@ -1416,7 +1634,9 @@
     "unit": "kg",
     "aliases": ["Chicken Breasts", "חזה עוף"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "chicken-nuggets",
@@ -1425,7 +1645,9 @@
     "unit": "pack",
     "aliases": ["נאגטס", "שניצלונים"],
     "tags": ["kids", "protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "chicken-thighs",
@@ -1434,7 +1656,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "chicken-wings",
@@ -1443,7 +1667,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "chickpeas",
@@ -1452,7 +1678,9 @@
     "unit": "pack",
     "aliases": ["Garbanzo Beans", "חומוס (גרגירים)"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "chili",
@@ -1461,7 +1689,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "chili-powder",
@@ -1470,7 +1700,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "chips",
@@ -1479,7 +1711,9 @@
     "unit": "pack",
     "aliases": ["Crisps", "Potato Chips", "צ'יפס", "חטיפים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "chocolate",
@@ -1488,7 +1722,9 @@
     "unit": "pack",
     "aliases": ["שוקולד"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "chocolate-bars",
@@ -1497,7 +1733,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "chocolate-milk",
@@ -1506,7 +1744,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink", "kids"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "cider",
@@ -1515,7 +1755,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "cinnamon",
@@ -1524,7 +1766,9 @@
     "unit": "pcs",
     "aliases": ["קינמון"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "citronella-candles",
@@ -1533,7 +1777,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["lighting"],
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "id": "clothesline",
@@ -1542,7 +1787,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "clothespins",
@@ -1551,7 +1797,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "cocktail-mixer",
@@ -1560,7 +1807,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "coconut-cream",
@@ -1569,7 +1818,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "coconut-milk",
@@ -1578,7 +1829,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "coconut-oil",
@@ -1587,7 +1840,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "coconut-water",
@@ -1596,7 +1851,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "coconut-yogurt",
@@ -1605,7 +1862,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Dairy"
+    "subcategory": "Dairy",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "coffee",
@@ -1614,7 +1873,9 @@
     "unit": "pack",
     "aliases": ["Ground Coffee", "Coffee Beans", "קפה"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "coffee-filters",
@@ -1623,7 +1884,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "cold-pack-instant",
@@ -1632,7 +1894,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "coleslaw-mix",
@@ -1641,7 +1904,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "collapsible-bucket",
@@ -1650,7 +1915,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "id": "colored-pencils",
@@ -1659,7 +1925,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "coloring-books",
@@ -1668,7 +1935,8 @@
     "unit": "pcs",
     "aliases": ["חוברות צביעה"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "comfort-blanket",
@@ -1677,7 +1945,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "compass",
@@ -1686,7 +1955,8 @@
     "unit": "pcs",
     "aliases": ["Compasses", "מצפן"],
     "tags": ["navigation"],
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "id": "conditioner",
@@ -1695,7 +1965,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "contact-lens-solution",
@@ -1704,7 +1975,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "cookies",
@@ -1713,7 +1985,9 @@
     "unit": "pack",
     "aliases": ["עוגיות"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "cooking-pot",
@@ -1722,7 +1996,8 @@
     "unit": "pcs",
     "aliases": ["סיר בישול"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "cooking-spray",
@@ -1731,7 +2006,9 @@
     "unit": "pcs",
     "aliases": ["תרסיס שמן"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "cooler",
@@ -1740,7 +2017,8 @@
     "unit": "pcs",
     "aliases": ["Coolers", "Ice Chest", "Esky", "צידנית"],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "cooler-bag",
@@ -1749,7 +2027,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "corn-on-the-cob",
@@ -1758,7 +2037,9 @@
     "unit": "pcs",
     "aliases": ["תירס", "קלחי תירס"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "corner-protectors",
@@ -1767,7 +2048,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "cornhole-set",
@@ -1776,7 +2058,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "cotton-balls",
@@ -1785,7 +2068,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "cotton-swabs",
@@ -1794,7 +2078,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "couscous",
@@ -1803,7 +2088,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "cpr-mask",
@@ -1812,7 +2099,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "crackers",
@@ -1821,7 +2109,9 @@
     "unit": "pack",
     "aliases": ["Cracker", "Biscuits", "קרקרים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "crampons",
@@ -1830,7 +2120,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "crayons",
@@ -1839,7 +2130,8 @@
     "unit": "pack",
     "aliases": ["צבעי שעווה"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "cream-cheese",
@@ -1848,7 +2140,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "creamer",
@@ -1857,7 +2151,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "credit-cards",
@@ -1866,7 +2162,8 @@
     "unit": "pcs",
     "aliases": ["כרטיסי אשראי"],
     "tags": [],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "croissants",
@@ -1875,7 +2172,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "cucumber",
@@ -1884,7 +2183,9 @@
     "unit": "pcs",
     "aliases": ["Cucumbers", "מלפפון", "מלפפונים"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "cumin",
@@ -1893,7 +2194,9 @@
     "unit": "pcs",
     "aliases": ["כמון"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "cups",
@@ -1902,7 +2205,8 @@
     "unit": "set",
     "aliases": ["Cup", "כוסות"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "cutlery-set",
@@ -1911,7 +2215,8 @@
     "unit": "set",
     "aliases": ["Utensils", "Silverware", "סט סכום", "סכום"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "cutting-board",
@@ -1920,7 +2225,8 @@
     "unit": "pcs",
     "aliases": ["Chopping Board", "קרש חיתוך"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "dark-chocolate",
@@ -1929,7 +2235,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "date-syrup",
@@ -1938,7 +2246,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "dates",
@@ -1947,7 +2257,9 @@
     "unit": "pack",
     "aliases": ["תמרים"],
     "tags": ["fruit", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "daypack",
@@ -1956,7 +2268,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": true
   },
   {
     "id": "deodorant",
@@ -1965,7 +2278,8 @@
     "unit": "pcs",
     "aliases": ["Antiperspirant", "דאודורנט"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "diaper-bag",
@@ -1974,7 +2288,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "storage"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "diaper-cream",
@@ -1983,7 +2298,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "diaper-disposal-bags",
@@ -1992,7 +2308,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "diapers",
@@ -2001,7 +2318,8 @@
     "unit": "pack",
     "aliases": ["Nappies", "חיתולים"],
     "tags": ["baby", "hygiene"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "dish-soap",
@@ -2010,7 +2328,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "disposable-cutlery",
@@ -2019,7 +2338,8 @@
     "unit": "pack",
     "aliases": ["Plastic Cutlery", "Plastic Utensils", "סכום חד פעמי"],
     "tags": [],
-    "subcategory": "Serving and Tableware"
+    "subcategory": "Serving and Tableware",
+    "isPersonal": false
   },
   {
     "id": "disposable-gloves",
@@ -2028,7 +2348,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Serving and Tableware"
+    "subcategory": "Serving and Tableware",
+    "isPersonal": false
   },
   {
     "id": "dog-bed",
@@ -2037,7 +2358,8 @@
     "unit": "pcs",
     "aliases": ["מיטת כלב"],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "dog-collar",
@@ -2046,7 +2368,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "dog-food",
@@ -2055,7 +2378,9 @@
     "unit": "kg",
     "aliases": ["Kibble", "אוכל לכלבים", "מזון לכלבים"],
     "tags": ["pets"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "dog-harness",
@@ -2064,7 +2389,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "dog-leash",
@@ -2073,7 +2399,8 @@
     "unit": "pcs",
     "aliases": ["Dog Lead", "רצועת כלב", "רצועה"],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "dog-life-jacket",
@@ -2082,7 +2409,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["beach", "pets"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "dog-treats",
@@ -2091,7 +2419,9 @@
     "unit": "pack",
     "aliases": ["חטיפים לכלב"],
     "tags": ["pets"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "dolls",
@@ -2100,7 +2430,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "down-jacket",
@@ -2109,7 +2440,8 @@
     "unit": "pcs",
     "aliases": ["מעיל פוך"],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "dried-cranberries",
@@ -2118,7 +2450,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "dried-fruit",
@@ -2127,7 +2461,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "dried-mango",
@@ -2136,7 +2472,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "dry-bag",
@@ -2145,7 +2483,8 @@
     "unit": "pcs",
     "aliases": ["Waterproof Bag", "Dry Sack", "Drybag", "תיק יבש", "שק יבש"],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "duct-tape",
@@ -2154,7 +2493,8 @@
     "unit": "pcs",
     "aliases": ["Gaffer Tape", "טייפ חבלה", "דאקט טייפ"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "duffel-bag",
@@ -2163,7 +2503,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "dutch-oven",
@@ -2172,7 +2513,8 @@
     "unit": "pcs",
     "aliases": ["סיר הולנדי"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "ear-plugs",
@@ -2181,7 +2523,8 @@
     "unit": "pack",
     "aliases": ["אטמי אוזניים"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "edamame",
@@ -2190,7 +2533,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein", "snack"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "eggplant",
@@ -2199,7 +2544,9 @@
     "unit": "pcs",
     "aliases": ["חציל"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "eggs",
@@ -2208,7 +2555,9 @@
     "unit": "pcs",
     "aliases": ["Egg", "ביצים"],
     "tags": ["breakfast", "protein"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "elastic-bandage",
@@ -2217,7 +2566,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "electrical-adapter-rv",
@@ -2226,7 +2576,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "electrolyte-packets",
@@ -2235,7 +2586,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "emergency-blanket",
@@ -2250,7 +2602,8 @@
       "שמיכת הצלה"
     ],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "energy-bars",
@@ -2259,7 +2612,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "english-muffins",
@@ -2268,7 +2623,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "epipen",
@@ -2277,7 +2634,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "extension-cord",
@@ -2286,7 +2644,8 @@
     "unit": "pcs",
     "aliases": ["כבל מאריך"],
     "tags": ["power"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "eye-drops",
@@ -2295,7 +2654,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "falafel",
@@ -2304,7 +2664,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "fennel",
@@ -2313,7 +2675,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "field-guide",
@@ -2322,7 +2686,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["navigation"],
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "id": "fire-extinguisher",
@@ -2331,7 +2696,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "fire-starter",
@@ -2340,7 +2706,8 @@
     "unit": "pack",
     "aliases": ["מצת אש"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "firewood",
@@ -2349,7 +2716,8 @@
     "unit": "pack",
     "aliases": ["Fire Wood", "Logs", "עצי הסקה", "עצים"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "first-aid-kit",
@@ -2363,7 +2731,8 @@
       "תיק עזרה ראשונה"
     ],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "first-aid-manual",
@@ -2372,7 +2741,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "fish-sticks",
@@ -2381,7 +2751,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids", "protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "fishing-bait",
@@ -2390,7 +2762,8 @@
     "unit": "pack",
     "aliases": ["פיתיון דיג"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "fishing-license",
@@ -2399,7 +2772,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "fishing-rod",
@@ -2408,7 +2782,8 @@
     "unit": "pcs",
     "aliases": ["Fishing Pole", "חכה", "חכת דיג"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "fishing-tackle-box",
@@ -2417,7 +2792,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "flag-markers",
@@ -2426,7 +2802,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "flashlight",
@@ -2435,7 +2812,8 @@
     "unit": "pcs",
     "aliases": ["Torch", "Flashlights", "פנס", "פנס יד"],
     "tags": ["lighting"],
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": true
   },
   {
     "id": "flax-seeds",
@@ -2444,7 +2822,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "flaxseed-oil",
@@ -2453,7 +2833,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "fleece-jacket",
@@ -2462,7 +2844,8 @@
     "unit": "pcs",
     "aliases": ["פליז", "מעיל פליז"],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "flip-flops",
@@ -2471,7 +2854,8 @@
     "unit": "pcs",
     "aliases": ["כפכפים"],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "floaties",
@@ -2480,7 +2864,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["beach", "kids"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "flour",
@@ -2489,7 +2874,9 @@
     "unit": "kg",
     "aliases": ["קמח"],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "id": "folding-chair",
@@ -2498,7 +2885,8 @@
     "unit": "pcs",
     "aliases": ["Camp Chair", "Folding Chairs", "כיסא מתקפל", "כיסא קמפינג"],
     "tags": [],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": false
   },
   {
     "id": "folding-table",
@@ -2507,7 +2895,8 @@
     "unit": "pcs",
     "aliases": ["Camp Table", "Folding Tables", "שולחן מתקפל", "שולחן קמפינג"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "food-storage-containers",
@@ -2516,7 +2905,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "football",
@@ -2525,7 +2915,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "freeze-dried-fruit",
@@ -2534,7 +2925,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "fresh-herbs",
@@ -2543,7 +2936,9 @@
     "unit": "pack",
     "aliases": ["עשבי תיבול"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "fresh-squeezed-juice",
@@ -2552,7 +2947,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "frisbee",
@@ -2561,7 +2958,8 @@
     "unit": "pcs",
     "aliases": ["פריזבי"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "frozen-burgers",
@@ -2570,7 +2968,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["frozen", "protein"],
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "frozen-fruit",
@@ -2579,7 +2979,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["frozen", "fruit"],
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "frozen-pizza",
@@ -2588,7 +2990,9 @@
     "unit": "pcs",
     "aliases": ["פיצה קפואה"],
     "tags": ["frozen"],
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "frozen-vegetables",
@@ -2597,7 +3001,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["frozen", "vegetables"],
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "fruit-cups",
@@ -2606,7 +3012,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit", "kids", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "fruit-leather",
@@ -2615,7 +3023,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "fruit-snacks",
@@ -2624,7 +3034,9 @@
     "unit": "pack",
     "aliases": ["חטיפי פירות"],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "fuel-canister",
@@ -2633,7 +3045,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "gaiters",
@@ -2642,7 +3055,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "garlic",
@@ -2651,7 +3065,9 @@
     "unit": "pcs",
     "aliases": ["שום"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "garlic-powder",
@@ -2660,7 +3076,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "gauze-pads",
@@ -2669,7 +3087,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "gauze-roll",
@@ -2678,7 +3097,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "gear-repair-tape",
@@ -2687,7 +3107,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "ginger",
@@ -2696,7 +3117,9 @@
     "unit": "pcs",
     "aliases": ["ג'ינג'ר", "זנגביל"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "gloves",
@@ -2705,7 +3128,8 @@
     "unit": "pcs",
     "aliases": ["כפפות"],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "glow-sticks",
@@ -2714,7 +3138,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["lighting"],
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "id": "goji-berries",
@@ -2723,7 +3148,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "goldfish-crackers",
@@ -2732,7 +3159,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "graham-crackers",
@@ -2741,7 +3170,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "granola",
@@ -2750,7 +3181,9 @@
     "unit": "pack",
     "aliases": ["גרנולה"],
     "tags": ["breakfast", "snack"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "granola-bars",
@@ -2759,7 +3192,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "grapes",
@@ -2768,7 +3203,9 @@
     "unit": "kg",
     "aliases": ["ענבים"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "green-beans",
@@ -2777,7 +3214,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "green-tea",
@@ -2786,7 +3225,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "grill",
@@ -2795,7 +3236,8 @@
     "unit": "pcs",
     "aliases": ["BBQ", "Barbecue", "מנגל", "גריל"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "grill-grate",
@@ -2804,7 +3246,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "ground-beef",
@@ -2813,7 +3256,9 @@
     "unit": "kg",
     "aliases": ["Mince", "Ground Meat", "Minced Beef", "בשר טחון"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "groundsheet",
@@ -2822,7 +3267,8 @@
     "unit": "pcs",
     "aliases": ["יריעת קרקע"],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "guacamole",
@@ -2831,7 +3277,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "hair-ties",
@@ -2840,7 +3288,8 @@
     "unit": "pack",
     "aliases": ["גומיות לשיער"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "hairbrush",
@@ -2849,7 +3298,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "ham",
@@ -2858,7 +3308,9 @@
     "unit": "pack",
     "aliases": ["חזיר מעושן"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "hammer",
@@ -2867,7 +3319,8 @@
     "unit": "pcs",
     "aliases": ["פטיש"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "hammock",
@@ -2876,7 +3329,8 @@
     "unit": "pcs",
     "aliases": ["Hammocks", "ערסל"],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": false
   },
   {
     "id": "hand-sanitizer",
@@ -2885,7 +3339,8 @@
     "unit": "pcs",
     "aliases": ["Hand Sanitiser", "Hand Gel", "ג'ל חיטוי", "אלכוג'ל"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "hand-warmers",
@@ -2894,7 +3349,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "hard-seltzer",
@@ -2903,7 +3359,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "hat",
@@ -2912,7 +3370,8 @@
     "unit": "pcs",
     "aliases": ["כובע"],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "headlamp",
@@ -2921,7 +3380,8 @@
     "unit": "pcs",
     "aliases": ["Headlamps", "Head Torch", "פנס ראש"],
     "tags": ["lighting"],
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": true
   },
   {
     "id": "hemp-seeds",
@@ -2930,7 +3390,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "herbal-tea",
@@ -2939,7 +3401,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "hiking-boots",
@@ -2948,7 +3412,8 @@
     "unit": "pcs",
     "aliases": ["Hiking Shoes", "Trail Boots", "נעלי הליכה", "נעלי טיול"],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "hiking-pants",
@@ -2957,7 +3422,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "honey",
@@ -2966,7 +3432,9 @@
     "unit": "pcs",
     "aliases": ["דבש"],
     "tags": ["breakfast", "condiments"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "horseshoe-set",
@@ -2975,7 +3443,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "hot-chocolate-mix",
@@ -2984,7 +3453,9 @@
     "unit": "pack",
     "aliases": ["שוקו חם", "קקאו"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "hot-dog-buns",
@@ -2993,7 +3464,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "hot-dogs",
@@ -3008,7 +3481,9 @@
       "הוט דוג"
     ],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "hot-pack-instant",
@@ -3017,7 +3492,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "hot-sauce",
@@ -3026,7 +3502,9 @@
     "unit": "pcs",
     "aliases": ["רוטב חריף"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "hula-hoop",
@@ -3035,7 +3513,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "hummus",
@@ -3044,7 +3523,9 @@
     "unit": "pcs",
     "aliases": ["Houmous", "Humous", "חומוס"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "hydration-pack",
@@ -3053,7 +3534,8 @@
     "unit": "pcs",
     "aliases": ["Camelback", "Water Bladder Pack", "שלוקר", "תיק שתייה"],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": true
   },
   {
     "id": "hydrocortisone-cream",
@@ -3062,7 +3544,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "hydrogen-peroxide",
@@ -3071,7 +3554,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "ibuprofen",
@@ -3080,7 +3564,8 @@
     "unit": "pcs",
     "aliases": ["איבופרופן", "נורופן"],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "ice",
@@ -3089,7 +3574,9 @@
     "unit": "kg",
     "aliases": ["Ice Cubes", "Bag of Ice", "קרח"],
     "tags": ["frozen"],
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "ice-cream",
@@ -3098,7 +3585,9 @@
     "unit": "l",
     "aliases": ["גלידה"],
     "tags": ["frozen"],
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "ice-packs",
@@ -3107,7 +3596,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "iced-tea",
@@ -3116,7 +3606,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "id-driver-license",
@@ -3125,7 +3617,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "infant-tylenol",
@@ -3134,7 +3627,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "first-aid"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "inflatable-pool",
@@ -3143,7 +3637,8 @@
     "unit": "pcs",
     "aliases": ["בריכה מתנפחת"],
     "tags": ["beach", "kids"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "inhaler",
@@ -3152,7 +3647,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "insect-repellent",
@@ -3166,7 +3662,8 @@
       "ספריי יתושים"
     ],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "instant-coffee",
@@ -3175,7 +3672,9 @@
     "unit": "pack",
     "aliases": ["קפה נמס"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "instant-noodles",
@@ -3184,7 +3683,9 @@
     "unit": "pack",
     "aliases": ["נודלס מהיר", "אטריות מהירות"],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "instant-oatmeal",
@@ -3193,7 +3694,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "insurance-cards",
@@ -3202,7 +3705,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "italian-seasoning",
@@ -3211,7 +3715,9 @@
     "unit": "pcs",
     "aliases": ["תבלין איטלקי"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "jalapenos",
@@ -3220,7 +3726,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "jam",
@@ -3229,7 +3737,9 @@
     "unit": "pcs",
     "aliases": ["ריבה"],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "jello-cups",
@@ -3238,7 +3748,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "jerky",
@@ -3247,7 +3759,9 @@
     "unit": "pack",
     "aliases": ["Beef Jerky", "Biltong", "בשר מיובש"],
     "tags": ["protein", "snack"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "journal",
@@ -3256,7 +3770,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": true
   },
   {
     "id": "juice",
@@ -3265,7 +3780,9 @@
     "unit": "l",
     "aliases": ["Fruit Juice", "מיץ"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "juice-boxes",
@@ -3274,7 +3791,9 @@
     "unit": "pack",
     "aliases": ["קרטוני מיץ"],
     "tags": ["drink", "kids"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "jump-rope",
@@ -3283,7 +3802,8 @@
     "unit": "pcs",
     "aliases": ["חבל קפיצה"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "jumper-cables",
@@ -3292,7 +3812,8 @@
     "unit": "pcs",
     "aliases": ["Jump Leads", "Booster Cables", "כבלי הנעה", "כבלים"],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "kale",
@@ -3301,7 +3822,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "kale-chips",
@@ -3310,7 +3833,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "kayak",
@@ -3319,7 +3844,8 @@
     "unit": "pcs",
     "aliases": ["Kayaks", "קיאק"],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "kayak-rack",
@@ -3328,7 +3854,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "ketchup",
@@ -3337,7 +3864,9 @@
     "unit": "pcs",
     "aliases": ["Tomato Sauce", "Catsup", "קטשופ"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "kettle",
@@ -3346,7 +3875,8 @@
     "unit": "pcs",
     "aliases": ["קומקום"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "kidney-beans",
@@ -3355,7 +3885,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "kids-backpack",
@@ -3364,7 +3896,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids", "storage"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": true
   },
   {
     "id": "kids-bike-helmet",
@@ -3373,7 +3906,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": true
   },
   {
     "id": "kids-binoculars",
@@ -3382,7 +3916,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": true
   },
   {
     "id": "kids-books",
@@ -3391,7 +3926,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": true
   },
   {
     "id": "kids-hat",
@@ -3400,7 +3936,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "kids"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "kids-headphones",
@@ -3409,7 +3946,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": true
   },
   {
     "id": "kids-rain-boots",
@@ -3418,7 +3956,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "kids"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "kids-rain-jacket",
@@ -3427,7 +3966,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "kids"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "kids-sleeping-bag",
@@ -3436,7 +3976,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "kids", "sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "kids-sunscreen",
@@ -3445,7 +3986,8 @@
     "unit": "pcs",
     "aliases": ["קרם הגנה לילדים"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": true
   },
   {
     "id": "kids-water-bottle",
@@ -3454,7 +3996,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": true
   },
   {
     "id": "kids-water-pouches",
@@ -3463,7 +4006,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["drink", "kids"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "kimchi",
@@ -3472,7 +4017,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "kitchen-knife",
@@ -3481,7 +4028,8 @@
     "unit": "pcs",
     "aliases": ["Chef Knife", "Camp Knife", "סכין מטבח", "סכין"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "kite",
@@ -3490,7 +4038,8 @@
     "unit": "pcs",
     "aliases": ["עפיפון"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "kombucha",
@@ -3499,7 +4048,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "ladle",
@@ -3508,7 +4059,8 @@
     "unit": "pcs",
     "aliases": ["מצקת"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "lamb-chops",
@@ -3517,7 +4069,9 @@
     "unit": "kg",
     "aliases": ["צלעות כבש"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "lantern",
@@ -3526,7 +4080,8 @@
     "unit": "pcs",
     "aliases": ["Lanterns", "Camp Lantern", "פנס קמפינג", "עששית"],
     "tags": ["lighting"],
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "id": "laundry-bag",
@@ -3535,7 +4090,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "lemonade",
@@ -3544,7 +4100,9 @@
     "unit": "l",
     "aliases": ["לימונדה"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "lemons",
@@ -3553,7 +4111,9 @@
     "unit": "pcs",
     "aliases": ["לימונים"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "lentils",
@@ -3562,7 +4122,9 @@
     "unit": "pack",
     "aliases": ["עדשים"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "lettuce",
@@ -3571,7 +4133,9 @@
     "unit": "pcs",
     "aliases": ["Salad Greens", "חסה"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "leveling-blocks-rv",
@@ -3580,7 +4144,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "life-jacket",
@@ -3589,7 +4154,8 @@
     "unit": "pcs",
     "aliases": ["Life Vest", "PFD", "אפוד הצלה"],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "lighter",
@@ -3598,7 +4164,8 @@
     "unit": "pcs",
     "aliases": ["Lighters", "מצית"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "limes",
@@ -3607,7 +4174,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "lip-balm",
@@ -3616,7 +4185,8 @@
     "unit": "pcs",
     "aliases": ["שפתון לחות"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "mac-and-cheese",
@@ -3625,7 +4195,9 @@
     "unit": "pack",
     "aliases": ["מק אנד צ'יז", "פסטה עם גבינה"],
     "tags": ["kids"],
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "magnifying-glass",
@@ -3634,7 +4206,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "mango",
@@ -3643,7 +4216,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "map",
@@ -3652,7 +4227,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["navigation"],
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "id": "maple-syrup",
@@ -3661,7 +4237,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["breakfast", "condiments"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "marshmallows",
@@ -3670,7 +4248,9 @@
     "unit": "pack",
     "aliases": ["Marshmallow", "מרשמלו"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "matcha",
@@ -3679,7 +4259,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "matches",
@@ -3688,7 +4270,8 @@
     "unit": "pack",
     "aliases": ["Match", "גפרורים"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "mayonnaise",
@@ -3697,7 +4280,9 @@
     "unit": "pcs",
     "aliases": ["מיונז"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "medical-tape",
@@ -3706,7 +4291,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "menstrual-pads",
@@ -3715,7 +4301,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "milk",
@@ -3724,7 +4311,9 @@
     "unit": "l",
     "aliases": ["Whole Milk", "חלב"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "mini-bagels",
@@ -3733,7 +4322,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "mini-muffins",
@@ -3742,7 +4333,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast", "kids"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "mini-pancakes",
@@ -3751,7 +4344,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast", "kids"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "mini-sandwiches",
@@ -3760,7 +4355,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "mirror-small",
@@ -3769,7 +4366,8 @@
     "unit": "pcs",
     "aliases": ["מראה קטנה"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "miso-paste",
@@ -3778,7 +4376,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "mixed-nuts",
@@ -3787,7 +4387,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "moleskin",
@@ -3796,7 +4398,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "mosquito-net",
@@ -3805,7 +4408,8 @@
     "unit": "pcs",
     "aliases": ["Mosquito Nets", "Bug Net", "רשת יתושים", "כילה"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "motion-sickness-pills",
@@ -3814,7 +4418,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "muffins",
@@ -3823,7 +4428,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "multi-tool",
@@ -3832,7 +4439,8 @@
     "unit": "pcs",
     "aliases": ["Multitool", "Leatherman", "אולר רב שימושי"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "mushrooms",
@@ -3841,7 +4449,9 @@
     "unit": "pack",
     "aliases": ["Mushroom", "פטריות"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "mustard",
@@ -3850,7 +4460,9 @@
     "unit": "pcs",
     "aliases": ["חרדל"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "nail-clippers",
@@ -3859,7 +4471,8 @@
     "unit": "pcs",
     "aliases": ["גוזז ציפורניים"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "napkins",
@@ -3868,7 +4481,8 @@
     "unit": "pack",
     "aliases": ["Napkin", "Serviettes", "מפיות"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "nature-scavenger-hunt-cards",
@@ -3877,7 +4491,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "neck-gaiter",
@@ -3886,7 +4501,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "night-light",
@@ -3895,7 +4511,8 @@
     "unit": "pcs",
     "aliases": ["מנורת לילה"],
     "tags": ["baby", "lighting"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "nose-aspirator",
@@ -3904,7 +4521,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "first-aid"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "nutella",
@@ -3913,7 +4531,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "nutritional-yeast",
@@ -3922,7 +4542,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "oat-milk",
@@ -3931,7 +4553,9 @@
     "unit": "l",
     "aliases": ["Oatmilk", "חלב שיבולת שועל"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "olive-oil",
@@ -3940,7 +4564,9 @@
     "unit": "pcs",
     "aliases": ["EVOO", "Extra Virgin Olive Oil", "שמן זית"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "olives",
@@ -3949,7 +4575,9 @@
     "unit": "pcs",
     "aliases": ["זיתים"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "onion-powder",
@@ -3958,7 +4586,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "onions",
@@ -3967,7 +4597,9 @@
     "unit": "kg",
     "aliases": ["Onion", "בצל"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "oral-rehydration-salts",
@@ -3976,7 +4608,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "oranges",
@@ -3985,7 +4618,9 @@
     "unit": "kg",
     "aliases": ["Orange", "תפוזים"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "outlet-covers",
@@ -3994,7 +4629,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "overnight-oats-mix",
@@ -4003,7 +4639,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "pacifier",
@@ -4012,7 +4650,8 @@
     "unit": "pcs",
     "aliases": ["Dummy", "Soother", "מוצץ"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "pack-and-play",
@@ -4021,7 +4660,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "packing-cubes",
@@ -4030,7 +4670,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "paddleboard",
@@ -4039,7 +4680,8 @@
     "unit": "pcs",
     "aliases": ["SUP", "Stand Up Paddleboard"],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "pancake-mix",
@@ -4048,7 +4690,9 @@
     "unit": "pack",
     "aliases": ["תערובת פנקייקים"],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "paper-plates",
@@ -4057,7 +4701,8 @@
     "unit": "pack",
     "aliases": ["Disposable Plates", "צלחות חד פעמיות", "צלחות נייר"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "paper-towels",
@@ -4066,7 +4711,8 @@
     "unit": "pack",
     "aliases": ["Kitchen Roll", "מגבות נייר", "נייר סופג"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "paprika",
@@ -4075,7 +4721,9 @@
     "unit": "pcs",
     "aliases": ["פפריקה"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "paracord",
@@ -4084,7 +4732,8 @@
     "unit": "pcs",
     "aliases": ["Para Cord", "550 Cord"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "parchment-paper",
@@ -4093,7 +4742,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "passport",
@@ -4102,7 +4752,8 @@
     "unit": "pcs",
     "aliases": ["Passports", "דרכון"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "pasta",
@@ -4111,7 +4762,9 @@
     "unit": "pack",
     "aliases": ["Noodles", "Spaghetti", "פסטה", "אטריות"],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "pbandj-supplies",
@@ -4120,7 +4773,9 @@
     "unit": "set",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "peaches",
@@ -4129,7 +4784,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "peanut-butter",
@@ -4138,7 +4795,9 @@
     "unit": "pcs",
     "aliases": ["PB", "חמאת בוטנים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "peanuts",
@@ -4147,7 +4806,9 @@
     "unit": "pack",
     "aliases": ["בוטנים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "pears",
@@ -4156,7 +4817,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "pedialyte",
@@ -4165,7 +4828,9 @@
     "unit": "pack",
     "aliases": ["משקה אלקטרוליטים לילדים"],
     "tags": ["drink", "kids"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "pen",
@@ -4174,7 +4839,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": true
   },
   {
     "id": "pepper",
@@ -4183,7 +4849,9 @@
     "unit": "pcs",
     "aliases": ["Black Pepper", "פלפל שחור"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "pepperoni",
@@ -4192,7 +4860,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "pet-bowls",
@@ -4201,7 +4871,8 @@
     "unit": "set",
     "aliases": ["קערות לחיות"],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "pet-carrier",
@@ -4210,7 +4881,8 @@
     "unit": "pcs",
     "aliases": ["כלוב נשיאה"],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "pet-first-aid-kit",
@@ -4219,7 +4891,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid", "pets"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "pet-tick-collar",
@@ -4228,7 +4901,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "pet-towel",
@@ -4237,7 +4911,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "pet-waste-bags",
@@ -4246,7 +4921,8 @@
     "unit": "pack",
     "aliases": ["שקיות לכלב"],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "petroleum-jelly",
@@ -4255,7 +4931,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "pickles",
@@ -4264,7 +4941,9 @@
     "unit": "pcs",
     "aliases": ["מלפפון חמוץ", "חמוצים"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "picnic-blanket",
@@ -4273,7 +4952,8 @@
     "unit": "pcs",
     "aliases": ["Picnic Rug", "Picnic Blankets", "שמיכת פיקניק"],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "pie",
@@ -4282,7 +4962,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "pineapple",
@@ -4291,7 +4973,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "pistachios",
@@ -4300,7 +4984,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "pita-bread",
@@ -4309,7 +4995,9 @@
     "unit": "pack",
     "aliases": ["פיתות", "לחם פיתה"],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "plastic-cups",
@@ -4318,7 +5006,8 @@
     "unit": "pack",
     "aliases": ["Disposable Cups", "כוסות חד פעמיות", "כוסות פלסטיק"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "plastic-wrap",
@@ -4333,7 +5022,8 @@
       "ניילון למזון"
     ],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "plates",
@@ -4342,7 +5032,8 @@
     "unit": "set",
     "aliases": ["Plate", "צלחות"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "playdough",
@@ -4351,7 +5042,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "playing-cards",
@@ -4360,7 +5052,8 @@
     "unit": "pack",
     "aliases": ["קלפים"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "pocket-knife",
@@ -4369,7 +5062,8 @@
     "unit": "pcs",
     "aliases": ["אולר"],
     "tags": ["cooking", "tools"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "pool-noodles",
@@ -4378,7 +5072,8 @@
     "unit": "pcs",
     "aliases": ["נודלס בריכה"],
     "tags": ["beach", "kids"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "pop-up-shelter",
@@ -4387,7 +5082,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "popcorn",
@@ -4396,7 +5092,9 @@
     "unit": "pack",
     "aliases": ["פופקורן"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "popsicles",
@@ -4405,7 +5103,9 @@
     "unit": "pack",
     "aliases": ["Ice Pops", "Icy Poles", "Ice Lollies", "ארטיק", "שלגון"],
     "tags": ["frozen", "kids"],
-    "subcategory": "Frozen Foods"
+    "subcategory": "Frozen Foods",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "pork-chops",
@@ -4414,7 +5114,9 @@
     "unit": "kg",
     "aliases": ["צלעות חזיר"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "portable-crib",
@@ -4423,7 +5125,8 @@
     "unit": "pcs",
     "aliases": ["מיטת תינוק מתקפלת", "לול"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "portable-dog-water-bottle",
@@ -4432,7 +5135,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pets"],
-    "subcategory": "Pet Gear"
+    "subcategory": "Pet Gear",
+    "isPersonal": false
   },
   {
     "id": "portable-dvd-player",
@@ -4441,7 +5145,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "portable-fan",
@@ -4450,7 +5155,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["power"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "portable-generator",
@@ -4459,7 +5165,8 @@
     "unit": "pcs",
     "aliases": ["גנרטור נייד"],
     "tags": ["power"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "portable-speaker",
@@ -4468,7 +5175,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Music and Media"
+    "subcategory": "Music and Media",
+    "isPersonal": false
   },
   {
     "id": "portable-toilet",
@@ -4477,7 +5185,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "portobello-mushrooms",
@@ -4486,7 +5195,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "potatoes",
@@ -4495,7 +5206,9 @@
     "unit": "kg",
     "aliases": ["Potato", "Spuds", "תפוחי אדמה"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "power-bank",
@@ -4504,7 +5217,8 @@
     "unit": "pcs",
     "aliases": ["Battery Pack", "Portable Charger", "מטען נייד", "סוללת גיבוי"],
     "tags": ["power"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "prescription-medications",
@@ -4513,7 +5227,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "pretzels",
@@ -4522,7 +5237,9 @@
     "unit": "pack",
     "aliases": ["בייגלה", "פרצלים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "privacy-screen",
@@ -4531,7 +5248,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "propane-tank",
@@ -4540,7 +5258,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "protein-bars",
@@ -4549,7 +5268,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "protein-powder",
@@ -4558,7 +5279,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "pudding-cups",
@@ -4567,7 +5290,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "puffs-baby-snack",
@@ -4576,7 +5301,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "pulled-pork",
@@ -4585,7 +5312,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "pumpkin-seeds",
@@ -4594,7 +5323,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "puzzle",
@@ -4603,7 +5334,8 @@
     "unit": "pcs",
     "aliases": ["פאזל"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "quick-dry-shirt",
@@ -4612,7 +5344,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "quinoa",
@@ -4621,7 +5354,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "radishes",
@@ -4630,7 +5365,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "rain-fly",
@@ -4639,7 +5376,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "rain-jacket",
@@ -4648,7 +5386,8 @@
     "unit": "pcs",
     "aliases": ["Rain Coat", "Waterproof Jacket", "מעיל גשם"],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "rain-poncho",
@@ -4657,7 +5396,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "raisin-boxes",
@@ -4666,7 +5406,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit", "kids", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "raisins",
@@ -4675,7 +5417,9 @@
     "unit": "pack",
     "aliases": ["צימוקים"],
     "tags": ["fruit", "snack"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "raspberries",
@@ -4684,7 +5428,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "razor",
@@ -4693,7 +5439,8 @@
     "unit": "pcs",
     "aliases": ["סכין גילוח", "מכונת גילוח"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "reflective-vest",
@@ -4702,7 +5449,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "relish",
@@ -4711,7 +5459,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "repair-patches",
@@ -4720,7 +5470,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "reservation-printouts",
@@ -4729,7 +5480,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "ribs",
@@ -4738,7 +5490,9 @@
     "unit": "kg",
     "aliases": ["צלעות"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "rice",
@@ -4747,7 +5501,9 @@
     "unit": "kg",
     "aliases": ["White Rice", "אורז"],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "id": "rice-cakes",
@@ -4756,7 +5512,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "rice-noodles",
@@ -4765,7 +5523,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "rice-rusks",
@@ -4774,7 +5534,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "road-flares",
@@ -4783,7 +5545,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "roasted-red-peppers",
@@ -4792,7 +5555,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "roof-box",
@@ -4801,7 +5566,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "roof-rack-straps",
@@ -4810,7 +5576,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "rope",
@@ -4819,7 +5586,8 @@
     "unit": "pcs",
     "aliases": ["Ropes", "חבל"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "rv-sewer-hose",
@@ -4828,7 +5596,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "safety-pins",
@@ -4837,7 +5606,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "salad-dressing",
@@ -4846,7 +5616,9 @@
     "unit": "pcs",
     "aliases": ["רוטב סלט"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "salad-mix",
@@ -4855,7 +5627,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "salami",
@@ -4864,7 +5638,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "saline-drops",
@@ -4873,7 +5649,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby", "first-aid"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "saline-wound-wash",
@@ -4882,7 +5659,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "salmon-fillet",
@@ -4891,7 +5669,9 @@
     "unit": "kg",
     "aliases": ["פילה סלמון"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "salsa",
@@ -4900,7 +5680,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "salt",
@@ -4909,7 +5691,9 @@
     "unit": "pcs",
     "aliases": ["Table Salt", "Sea Salt", "מלח"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "sand-toys",
@@ -4918,7 +5702,8 @@
     "unit": "set",
     "aliases": ["צעצועי חול"],
     "tags": ["beach", "kids"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "sandals",
@@ -4927,7 +5712,8 @@
     "unit": "pcs",
     "aliases": ["Flip Flops", "Thongs", "סנדלים"],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "sandwich-bags",
@@ -4936,7 +5722,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "sauerkraut",
@@ -4945,7 +5732,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "sausages",
@@ -4954,7 +5743,9 @@
     "unit": "pack",
     "aliases": ["Sausage", "Bangers", "נקניקיות"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "saw-folding",
@@ -4963,7 +5754,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "scarf",
@@ -4972,7 +5764,8 @@
     "unit": "pcs",
     "aliases": ["צעיף"],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "scissors-medical",
@@ -4981,7 +5774,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "scooter",
@@ -4990,7 +5784,8 @@
     "unit": "pcs",
     "aliases": ["קורקינט"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "seaweed-snacks",
@@ -4999,7 +5794,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "seitan",
@@ -5008,7 +5805,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "serving-spoons",
@@ -5017,7 +5816,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "sewing-kit",
@@ -5026,7 +5826,8 @@
     "unit": "pcs",
     "aliases": ["ערכת תפירה"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "shampoo",
@@ -5035,7 +5836,8 @@
     "unit": "pcs",
     "aliases": ["Hair Shampoo", "שמפו"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "shaving-cream",
@@ -5044,7 +5846,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "shorts",
@@ -5053,7 +5856,8 @@
     "unit": "pcs",
     "aliases": ["מכנסיים קצרים"],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "shovel-camping",
@@ -5062,7 +5866,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "shower-tent",
@@ -5071,7 +5876,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "shrimp",
@@ -5080,7 +5886,9 @@
     "unit": "kg",
     "aliases": ["Prawns", "שרימפס", "חסילונים"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "sippy-cups",
@@ -5089,7 +5897,8 @@
     "unit": "pcs",
     "aliases": ["כוסות שתייה", "כוס קש"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "skewers",
@@ -5098,7 +5907,8 @@
     "unit": "set",
     "aliases": ["שיפודים"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "ski-goggles",
@@ -5107,7 +5917,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "sleep-mask",
@@ -5116,7 +5927,8 @@
     "unit": "pcs",
     "aliases": ["מסכת שינה"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "sleeping-bag",
@@ -5125,7 +5937,8 @@
     "unit": "pcs",
     "aliases": ["Sleeping Bags", "שק שינה"],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "sleeping-pad",
@@ -5134,7 +5947,8 @@
     "unit": "pcs",
     "aliases": ["Sleeping Pads", "Sleeping Mat", "מזרן שינה"],
     "tags": ["sleep"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "sliced-cheese",
@@ -5143,7 +5957,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "smoke-detector-portable",
@@ -5152,7 +5968,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "smoked-salmon",
@@ -5161,7 +5978,9 @@
     "unit": "pack",
     "aliases": ["סלמון מעושן"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "smoothie-mix",
@@ -5170,7 +5989,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "smores-kit",
@@ -5179,7 +6000,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "snack-containers",
@@ -5188,7 +6011,8 @@
     "unit": "set",
     "aliases": ["קופסאות חטיפים"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "snakebite-kit",
@@ -5197,7 +6021,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "snap-peas",
@@ -5206,7 +6031,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "snorkel-set",
@@ -5215,7 +6042,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "snow-chains",
@@ -5224,7 +6052,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["car", "winter"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "snowshoes",
@@ -5233,7 +6062,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "soccer-ball",
@@ -5242,7 +6072,8 @@
     "unit": "pcs",
     "aliases": ["כדורגל"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "soda",
@@ -5251,7 +6082,9 @@
     "unit": "l",
     "aliases": ["Pop", "Soft Drink", "Fizzy Drink", "שתייה מוגזת", "סודה"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "solar-charger",
@@ -5260,7 +6093,8 @@
     "unit": "pcs",
     "aliases": ["Solar Panel", "מטען סולארי"],
     "tags": ["power"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "soy-milk",
@@ -5269,7 +6103,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "soy-sauce",
@@ -5278,7 +6114,9 @@
     "unit": "pcs",
     "aliases": ["רוטב סויה"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "spare-batteries",
@@ -5287,7 +6125,8 @@
     "unit": "pack",
     "aliases": ["סוללות רזרביות", "סוללות"],
     "tags": ["power"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "spare-glasses",
@@ -5296,7 +6135,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "sparkling-water",
@@ -5305,7 +6145,9 @@
     "unit": "l",
     "aliases": ["מים מוגזים", "סודה"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "spatula",
@@ -5314,7 +6156,8 @@
     "unit": "pcs",
     "aliases": ["מרית"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "spigot",
@@ -5323,7 +6166,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "id": "spinach",
@@ -5332,7 +6176,9 @@
     "unit": "pack",
     "aliases": ["תרד"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "spirits",
@@ -5341,7 +6187,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "spirulina",
@@ -5350,7 +6198,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "splat-mat",
@@ -5359,7 +6209,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "splint",
@@ -5368,7 +6219,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "sponge",
@@ -5377,7 +6229,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "sports-drink",
@@ -5386,7 +6239,9 @@
     "unit": "l",
     "aliases": ["משקה ספורט"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "squeezable-yogurt",
@@ -5395,7 +6250,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Dairy"
+    "subcategory": "Dairy",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "sriracha",
@@ -5404,7 +6261,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "star-chart",
@@ -5413,7 +6272,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["navigation"],
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "id": "steak",
@@ -5422,7 +6282,9 @@
     "unit": "kg",
     "aliases": ["Steaks", "Beef Steak", "סטייק"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "sterile-gloves",
@@ -5431,7 +6293,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "stickers",
@@ -5440,7 +6303,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "sting-relief-pads",
@@ -5449,7 +6313,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "strawberries",
@@ -5458,7 +6323,9 @@
     "unit": "pack",
     "aliases": ["תותים"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "straws",
@@ -5467,7 +6334,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "string-cheese",
@@ -5476,7 +6344,9 @@
     "unit": "pack",
     "aliases": ["גבינת שרוך", "מקלות גבינה"],
     "tags": ["kids"],
-    "subcategory": "Cheese"
+    "subcategory": "Cheese",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "string-lights",
@@ -5485,7 +6355,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["lighting"],
-    "subcategory": "Lighting and Visibility"
+    "subcategory": "Lighting and Visibility",
+    "isPersonal": false
   },
   {
     "id": "stroller",
@@ -5494,7 +6365,8 @@
     "unit": "pcs",
     "aliases": ["Pushchair", "Pram", "Buggy", "עגלה", "עגלת תינוק"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "stuff-sack",
@@ -5503,7 +6375,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "stuffed-animal",
@@ -5512,7 +6385,8 @@
     "unit": "pcs",
     "aliases": ["בובה רכה", "דובי"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "sugar",
@@ -5521,7 +6395,9 @@
     "unit": "kg",
     "aliases": ["סוכר"],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.08,
+    "isPersonal": false
   },
   {
     "id": "sun-dried-tomatoes",
@@ -5530,7 +6406,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "sunburn-relief-spray",
@@ -5539,7 +6417,8 @@
     "unit": "pcs",
     "aliases": ["ספריי לכוויות שמש"],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "sunflower-seeds",
@@ -5548,7 +6427,9 @@
     "unit": "pack",
     "aliases": ["גרעיני חמנייה", "גרעינים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "sunglasses",
@@ -5557,7 +6438,8 @@
     "unit": "pcs",
     "aliases": ["משקפי שמש"],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "sunscreen",
@@ -5566,7 +6448,8 @@
     "unit": "pcs",
     "aliases": ["Sunblock", "Sun Cream", "SPF", "קרם הגנה", "קרם שמש"],
     "tags": ["beach"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "super-glue",
@@ -5575,7 +6458,8 @@
     "unit": "pcs",
     "aliases": ["דבק מהיר", "סופר גלו"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "swaddle",
@@ -5584,7 +6468,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "sweet-potatoes",
@@ -5593,7 +6478,9 @@
     "unit": "kg",
     "aliases": ["בטטה", "בטטות"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "swimsuit",
@@ -5608,7 +6495,8 @@
       "בגד ים"
     ],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "swiss-chard",
@@ -5617,7 +6505,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "tablet",
@@ -5626,7 +6516,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "tahini",
@@ -5635,7 +6526,9 @@
     "unit": "pcs",
     "aliases": ["טחינה"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "tamari",
@@ -5644,7 +6537,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "tampons",
@@ -5653,7 +6548,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "tarp",
@@ -5662,7 +6558,8 @@
     "unit": "pcs",
     "aliases": ["Tarps", "Tarpaulin", "ברזנט"],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "tea-bags",
@@ -5671,7 +6568,9 @@
     "unit": "pack",
     "aliases": ["שקיקי תה", "תה"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "teddy-grahams",
@@ -5680,7 +6579,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "teething-biscuits",
@@ -5689,7 +6590,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "teething-toy",
@@ -5698,7 +6601,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "tempeh",
@@ -5707,7 +6611,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "tent",
@@ -5716,7 +6622,8 @@
     "unit": "pcs",
     "aliases": ["Tents", "אוהל", "אוהלים"],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "tent-footprint",
@@ -5725,7 +6632,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "tent-stakes",
@@ -5734,7 +6642,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "thermal-underwear",
@@ -5743,7 +6652,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "thermometer",
@@ -5752,7 +6662,8 @@
     "unit": "pcs",
     "aliases": ["מד חום"],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "thermos",
@@ -5761,7 +6672,8 @@
     "unit": "pcs",
     "aliases": ["Flask", "Insulated Bottle", "תרמוס"],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": true
   },
   {
     "id": "tick-remover",
@@ -5770,7 +6682,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "tire-repair-kit",
@@ -5779,7 +6692,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "tissues",
@@ -5788,7 +6702,8 @@
     "unit": "pack",
     "aliases": ["טישו", "ממחטות"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "toddler-bowls",
@@ -5797,7 +6712,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "toddler-cutlery",
@@ -5806,7 +6722,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "toddler-plates",
@@ -5815,7 +6732,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "toddler-snack-bars",
@@ -5824,7 +6742,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "tofu",
@@ -5833,7 +6753,9 @@
     "unit": "kg",
     "aliases": ["Bean Curd", "טופו"],
     "tags": ["protein"],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "toilet-paper",
@@ -5842,7 +6764,8 @@
     "unit": "pack",
     "aliases": ["TP", "Loo Roll", "נייר טואלט"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "tomatoes",
@@ -5851,7 +6774,9 @@
     "unit": "kg",
     "aliases": ["Tomato", "עגבניות"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "tongs",
@@ -5860,7 +6785,8 @@
     "unit": "pcs",
     "aliases": ["BBQ Tongs", "Grilling Tongs", "מלקחיים"],
     "tags": ["cooking"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "tongue-depressors",
@@ -5869,7 +6795,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "toothbrush",
@@ -5878,7 +6805,8 @@
     "unit": "pcs",
     "aliases": ["מברשת שיניים"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "toothpaste",
@@ -5887,7 +6815,8 @@
     "unit": "pcs",
     "aliases": ["משחת שיניים"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": true
   },
   {
     "id": "toothpicks",
@@ -5896,7 +6825,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": false
   },
   {
     "id": "tortilla-chips",
@@ -5905,7 +6835,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "tortillas",
@@ -5914,7 +6846,9 @@
     "unit": "pack",
     "aliases": ["Wraps", "טורטיות"],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "tourniquet",
@@ -5923,7 +6857,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "tow-strap",
@@ -5932,7 +6867,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "towels",
@@ -5941,7 +6877,8 @@
     "unit": "pcs",
     "aliases": ["Towel", "מגבות"],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": true
   },
   {
     "id": "toy-cars",
@@ -5950,7 +6887,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "trail-mix",
@@ -5959,7 +6897,9 @@
     "unit": "pack",
     "aliases": ["GORP", "Scroggin", "תערובת גרעינים"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "trash-bags",
@@ -5974,7 +6914,8 @@
       "שקיות אשפה"
     ],
     "tags": ["storage"],
-    "subcategory": "Food Storage and Cooling"
+    "subcategory": "Food Storage and Cooling",
+    "isPersonal": false
   },
   {
     "id": "travel-high-chair",
@@ -5983,7 +6924,8 @@
     "unit": "pcs",
     "aliases": ["כיסא אוכל לתינוק"],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "travel-pillow",
@@ -5992,7 +6934,8 @@
     "unit": "pcs",
     "aliases": ["כרית נסיעות"],
     "tags": [],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "trekking-poles",
@@ -6001,7 +6944,8 @@
     "unit": "set",
     "aliases": ["מקלות הליכה"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "triangle-bandage",
@@ -6010,7 +6954,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "tripod",
@@ -6019,7 +6964,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Other"
+    "subcategory": "Other",
+    "isPersonal": true
   },
   {
     "id": "tuna-steaks",
@@ -6028,7 +6974,9 @@
     "unit": "kg",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "turkey-slices",
@@ -6037,7 +6985,9 @@
     "unit": "pack",
     "aliases": ["פרוסות הודו"],
     "tags": ["protein"],
-    "subcategory": "Meat and Poultry"
+    "subcategory": "Meat and Poultry",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "turmeric",
@@ -6046,7 +6996,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "tweezers",
@@ -6055,7 +7007,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["first-aid"],
-    "subcategory": "First Aid and Safety"
+    "subcategory": "First Aid and Safety",
+    "isPersonal": false
   },
   {
     "id": "usb-charging-cable",
@@ -6064,7 +7017,8 @@
     "unit": "pcs",
     "aliases": ["כבל טעינה"],
     "tags": ["power"],
-    "subcategory": "Power and Charging"
+    "subcategory": "Power and Charging",
+    "isPersonal": false
   },
   {
     "id": "vegan-butter",
@@ -6073,7 +7027,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "vegan-cheese",
@@ -6082,7 +7038,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "vegan-cookies",
@@ -6091,7 +7049,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": [],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "vegan-mayo",
@@ -6100,7 +7060,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "vegan-yogurt",
@@ -6109,7 +7071,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": [],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "vegetable-oil",
@@ -6118,7 +7082,9 @@
     "unit": "pcs",
     "aliases": ["שמן צמחי"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "veggie-burgers",
@@ -6127,7 +7093,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "veggie-chips",
@@ -6136,7 +7104,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "veggie-hot-dogs",
@@ -6145,7 +7115,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "veggie-sausages",
@@ -6154,7 +7126,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["protein"],
-    "subcategory": "Vegan"
+    "subcategory": "Vegan",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "veggie-straws",
@@ -6163,7 +7137,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "vinegar",
@@ -6172,7 +7148,9 @@
     "unit": "pcs",
     "aliases": ["חומץ"],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "volleyball",
@@ -6181,7 +7159,8 @@
     "unit": "pcs",
     "aliases": ["כדורעף"],
     "tags": ["games"],
-    "subcategory": "Games and Activities"
+    "subcategory": "Games and Activities",
+    "isPersonal": false
   },
   {
     "id": "walkie-talkies",
@@ -6190,7 +7169,8 @@
     "unit": "set",
     "aliases": ["Walkie Talkies", "Two-Way Radios", "ווקי טוקי"],
     "tags": ["navigation"],
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "id": "walnuts",
@@ -6199,7 +7179,9 @@
     "unit": "pack",
     "aliases": ["אגוזי מלך"],
     "tags": ["snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "warm-layers",
@@ -6208,7 +7190,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "wash-basin",
@@ -6217,7 +7200,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "water",
@@ -6226,7 +7210,9 @@
     "unit": "l",
     "aliases": ["Drinking Water", "Bottled Water", "מים"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "water-bladder",
@@ -6235,7 +7221,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": true
   },
   {
     "id": "water-bottle",
@@ -6244,7 +7231,8 @@
     "unit": "pcs",
     "aliases": ["Water Bottles", "בקבוק מים", "מימייה"],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": true
   },
   {
     "id": "water-filter",
@@ -6253,7 +7241,8 @@
     "unit": "pcs",
     "aliases": ["מסנן מים"],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "id": "water-guns",
@@ -6262,7 +7251,8 @@
     "unit": "pcs",
     "aliases": ["אקדחי מים"],
     "tags": ["kids"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "water-hose",
@@ -6271,7 +7261,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "id": "water-jug",
@@ -6280,7 +7271,8 @@
     "unit": "pcs",
     "aliases": ["מיכל מים", "ג'ריקן"],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "id": "water-pressure-regulator",
@@ -6289,7 +7281,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "id": "water-purification-tablets",
@@ -6298,7 +7291,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["water"],
-    "subcategory": "Drink and Beverage Equipment"
+    "subcategory": "Drink and Beverage Equipment",
+    "isPersonal": false
   },
   {
     "id": "water-shoes",
@@ -6307,7 +7301,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "watermelon",
@@ -6316,7 +7311,9 @@
     "unit": "pcs",
     "aliases": ["אבטיח"],
     "tags": ["fruit"],
-    "subcategory": "Fresh Fruit"
+    "subcategory": "Fresh Fruit",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "waterproof-matches",
@@ -6325,7 +7322,8 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["cooking", "tools"],
-    "subcategory": "Cooking and Heating Equipment"
+    "subcategory": "Cooking and Heating Equipment",
+    "isPersonal": false
   },
   {
     "id": "wd-40",
@@ -6334,7 +7332,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "wet-wipes",
@@ -6343,7 +7342,8 @@
     "unit": "pack",
     "aliases": ["Baby Wipes", "מגבונים לחים"],
     "tags": ["hygiene"],
-    "subcategory": "Hygiene and Bathroom Supplies"
+    "subcategory": "Hygiene and Bathroom Supplies",
+    "isPersonal": false
   },
   {
     "id": "wheel-chocks",
@@ -6352,7 +7352,8 @@
     "unit": "set",
     "aliases": [],
     "tags": ["car"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "whistle",
@@ -6361,7 +7362,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["navigation"],
-    "subcategory": "Documentation and Access"
+    "subcategory": "Documentation and Access",
+    "isPersonal": false
   },
   {
     "id": "white-noise-machine",
@@ -6370,7 +7372,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["baby"],
-    "subcategory": "Kids and Baby Gear"
+    "subcategory": "Kids and Baby Gear",
+    "isPersonal": false
   },
   {
     "id": "whole-milk",
@@ -6379,7 +7382,9 @@
     "unit": "l",
     "aliases": [],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.5,
+    "isPersonal": false
   },
   {
     "id": "whole-wheat-bread",
@@ -6388,7 +7393,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "whole-wheat-pasta",
@@ -6397,7 +7404,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "whole-wheat-tortillas",
@@ -6406,7 +7415,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "wild-rice",
@@ -6415,7 +7426,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["pantry"],
-    "subcategory": "Grains and Pasta"
+    "subcategory": "Grains and Pasta",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "windbreak",
@@ -6424,7 +7437,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["shelter"],
-    "subcategory": "Venue Setup and Layout"
+    "subcategory": "Venue Setup and Layout",
+    "isPersonal": false
   },
   {
     "id": "windshield-scraper",
@@ -6433,7 +7447,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["car", "winter"],
-    "subcategory": "Transport and Carry"
+    "subcategory": "Transport and Carry",
+    "isPersonal": false
   },
   {
     "id": "wine",
@@ -6442,7 +7457,9 @@
     "unit": "pcs",
     "aliases": ["Wines", "Red Wine", "White Wine", "יין"],
     "tags": ["drink"],
-    "subcategory": "Beverages (non-alcoholic)"
+    "subcategory": "Beverages (non-alcoholic)",
+    "quantityPerPoint": 0.2,
+    "isPersonal": false
   },
   {
     "id": "wool-socks",
@@ -6451,7 +7468,8 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["clothing", "winter"],
-    "subcategory": "Comfort and Climate Control"
+    "subcategory": "Comfort and Climate Control",
+    "isPersonal": true
   },
   {
     "id": "worcestershire-sauce",
@@ -6460,7 +7478,9 @@
     "unit": "pcs",
     "aliases": [],
     "tags": ["condiments"],
-    "subcategory": "Sauces, Condiments, and Spreads"
+    "subcategory": "Sauces, Condiments, and Spreads",
+    "quantityPerPoint": 0.1,
+    "isPersonal": false
   },
   {
     "id": "yogurt",
@@ -6469,7 +7489,9 @@
     "unit": "pcs",
     "aliases": ["Yoghurt", "יוגורט"],
     "tags": ["breakfast"],
-    "subcategory": "Breakfast Staples"
+    "subcategory": "Breakfast Staples",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   },
   {
     "id": "yogurt-tubes",
@@ -6478,7 +7500,9 @@
     "unit": "pack",
     "aliases": [],
     "tags": ["kids", "snack"],
-    "subcategory": "Snacks and Chips"
+    "subcategory": "Snacks and Chips",
+    "quantityPerPoint": 0.3,
+    "isPersonal": false
   },
   {
     "id": "zip-ties",
@@ -6487,7 +7511,8 @@
     "unit": "pack",
     "aliases": ["Cable Ties", "Zip-Ties", "אזיקונים"],
     "tags": ["tools"],
-    "subcategory": "Tools and Quick Repairs"
+    "subcategory": "Tools and Quick Repairs",
+    "isPersonal": false
   },
   {
     "id": "zucchini",
@@ -6496,6 +7521,8 @@
     "unit": "pcs",
     "aliases": ["קישוא"],
     "tags": ["vegetables"],
-    "subcategory": "Fresh Vegetables"
+    "subcategory": "Fresh Vegetables",
+    "quantityPerPoint": 0.15,
+    "isPersonal": false
   }
 ]

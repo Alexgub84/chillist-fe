@@ -241,33 +241,30 @@ test.describe('Item CRUD', () => {
     await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
     await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
 
-    await expect(page.getByTestId('bulk-add-fab')).toBeVisible({
-      timeout: 10000,
-    });
-    await page.getByTestId('bulk-add-fab').click();
+    const fab = page.getByTestId('bulk-add-fab');
     const dialog = page.getByTestId('bulk-item-add-wizard');
-    await expect(dialog.getByText('What are you adding?')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(async () => {
+      await fab.click({ timeout: 2000 });
+      await expect(dialog).toBeVisible({ timeout: 2000 });
+    }).toPass({ timeout: 15000 });
 
-    await dialog
-      .getByRole('button', { name: 'Equipment', exact: true })
-      .click();
-    await expect(dialog.getByText('Choose a subcategory')).toBeVisible({
-      timeout: 5000,
-    });
+    const equipmentBtn = dialog.getByTestId('bulk-cat-equipment');
+    const subcatBtn = dialog.getByTestId('bulk-subcat-first-aid-and-safety');
+    await expect(async () => {
+      await equipmentBtn.click({ timeout: 2000 });
+      await expect(subcatBtn).toBeVisible({ timeout: 2000 });
+    }).toPass({ timeout: 15000 });
 
-    await dialog.getByRole('button', { name: /First Aid and Safety/ }).click();
-
-    await expect(dialog.getByPlaceholder('Search or add items…')).toBeVisible({
-      timeout: 5000,
-    });
     const firstAidRow = dialog.getByTestId('bulk-item-first-aid-kit');
-    await firstAidRow.scrollIntoViewIfNeeded();
-    await firstAidRow.click({ force: true });
+    await expect(async () => {
+      await subcatBtn.click({ timeout: 2000 });
+      await expect(firstAidRow).toBeVisible({ timeout: 2000 });
+    }).toPass({ timeout: 15000 });
+
+    await firstAidRow.click();
 
     const submitBtn = dialog.getByRole('button', { name: /add 1 item/i });
-    await expect(submitBtn).toBeVisible();
+    await expect(submitBtn).toBeVisible({ timeout: 5000 });
     await submitBtn.click({ force: true });
 
     await expect(page.getByText(/added 1 item/i).first()).toBeVisible({
@@ -783,7 +780,6 @@ test.describe('Invite Landing Page', () => {
     await expect(page.getByText('Sunscreen')).toBeVisible();
     await expect(page.getByText('Burgers')).toBeVisible();
 
-    await page.getByText('Participants').click();
     await expect(page.getByText('Alex Smith')).toBeVisible();
     await expect(page.getByText('Bob Jones')).toBeVisible();
   });

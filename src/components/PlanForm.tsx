@@ -13,7 +13,13 @@ import {
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
 import { useLanguage } from '../contexts/useLanguage';
-import { useAuth } from '../contexts/useAuth';
+import {
+  DEFAULT_PLAN_LANGUAGE,
+  DEFAULT_PLAN_CURRENCY,
+  SUPPORTED_LANGUAGES,
+  SUPPORTED_CURRENCIES,
+  LANGUAGE_META,
+} from '../contexts/language-context';
 import {
   combinePhone,
   detectCountryFromPhone,
@@ -72,6 +78,8 @@ const createPlanFormSchema = z
     endDateDate: z.string().optional(),
     endDateTime: z.string().optional(),
     location: locationFormSchema,
+    defaultLang: z.string().max(10).optional(),
+    currency: z.string().max(10).optional(),
   })
   .refine((data) => !data.oneDay || !!data.singleDate, {
     message: 'Date is required',
@@ -134,8 +142,6 @@ export default function PlanForm({
 }: PlanFormProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
-  const { user } = useAuth();
-  const isAuthenticated = !!user;
   const ownerPhone = resolveOwnerPhone(defaultOwner, language);
   const defaultPhoneCountry = getDefaultCountryByLanguage(language);
   const {
@@ -148,8 +154,8 @@ export default function PlanForm({
   } = useForm<FormValues>({
     resolver: zodResolver(createPlanFormSchema),
     defaultValues: {
-      status: 'draft',
-      visibility: isAuthenticated ? 'private' : 'public',
+      status: 'active',
+      visibility: 'invite_only',
       oneDay: false,
       participants: [],
       ownerName: defaultOwner?.ownerName ?? '',
@@ -157,6 +163,8 @@ export default function PlanForm({
       ownerPhoneCountry: ownerPhone.country,
       ownerPhone: ownerPhone.local,
       ownerEmail: defaultOwner?.ownerEmail ?? '',
+      defaultLang: DEFAULT_PLAN_LANGUAGE,
+      currency: DEFAULT_PLAN_CURRENCY,
     },
   });
 
@@ -383,6 +391,8 @@ export default function PlanForm({
         ? makeDateTime(values.singleDate, values.singleEndTime)
         : makeDateTime(values.endDateDate, values.endDateTime),
       tags: parseTags(values.tagsCsv),
+      defaultLang: values.defaultLang ?? DEFAULT_PLAN_LANGUAGE,
+      currency: values.currency ?? DEFAULT_PLAN_CURRENCY,
       location: hasLocationData(values.location)
         ? {
             ...values.location,
@@ -423,12 +433,12 @@ export default function PlanForm({
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           <div>
             <FormLabel>{t('planForm.status')}</FormLabel>
             <FormSelect {...register('status')}>
-              <option value="draft">{t('planStatus.draft')}</option>
               <option value="active">{t('planStatus.active')}</option>
+              <option value="draft">{t('planStatus.draft')}</option>
               <option value="archived">{t('planStatus.archived')}</option>
             </FormSelect>
             {errors.status && (
@@ -439,18 +449,24 @@ export default function PlanForm({
           </div>
 
           <div>
-            <FormLabel>{t('planForm.visibility')}</FormLabel>
-            <FormSelect {...register('visibility')}>
-              {isAuthenticated ? (
-                <>
-                  <option value="private">{t('planVisibility.private')}</option>
-                  <option value="invite_only">
-                    {t('planVisibility.invite_only')}
-                  </option>
-                </>
-              ) : (
-                <option value="public">{t('planVisibility.public')}</option>
-              )}
+            <FormLabel>{t('planForm.defaultLang')}</FormLabel>
+            <FormSelect {...register('defaultLang')}>
+              {SUPPORTED_LANGUAGES.map((code) => (
+                <option key={code} value={code}>
+                  {LANGUAGE_META[code].nativeLabel}
+                </option>
+              ))}
+            </FormSelect>
+          </div>
+
+          <div>
+            <FormLabel>{t('planForm.currency')}</FormLabel>
+            <FormSelect {...register('currency')}>
+              {SUPPORTED_CURRENCIES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.symbol} {c.label}
+                </option>
+              ))}
             </FormSelect>
           </div>
         </div>
@@ -488,25 +504,29 @@ export default function PlanForm({
                 )}
               </div>
             </div>
-            <div>
-              <FormLabel>{t('planForm.phone')}</FormLabel>
-              <PhoneInput
-                countryValue={watch('ownerPhoneCountry') ?? ''}
-                onCountryChange={(code) => setValue('ownerPhoneCountry', code)}
-                phoneProps={register('ownerPhone')}
-                countrySelectAriaLabel={t('planForm.phoneCountry')}
-                phonePlaceholder={t('planForm.phonePlaceholder')}
-                compact
-                error={errors.ownerPhone?.message}
-              />
-            </div>
-            <div>
-              <FormLabel>{t('planForm.email')}</FormLabel>
-              <FormInput
-                {...register('ownerEmail')}
-                placeholder={t('planForm.emailPlaceholder')}
-                compact
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <FormLabel>{t('planForm.phone')}</FormLabel>
+                <PhoneInput
+                  countryValue={watch('ownerPhoneCountry') ?? ''}
+                  onCountryChange={(code) =>
+                    setValue('ownerPhoneCountry', code)
+                  }
+                  phoneProps={register('ownerPhone')}
+                  countrySelectAriaLabel={t('planForm.phoneCountry')}
+                  phonePlaceholder={t('planForm.phonePlaceholder')}
+                  compact
+                  error={errors.ownerPhone?.message}
+                />
+              </div>
+              <div>
+                <FormLabel>{t('planForm.email')}</FormLabel>
+                <FormInput
+                  {...register('ownerEmail')}
+                  placeholder={t('planForm.emailPlaceholder')}
+                  compact
+                />
+              </div>
             </div>
           </div>
         </fieldset>
@@ -559,28 +579,34 @@ export default function PlanForm({
                     )}
                   </div>
                 </div>
-                <div>
-                  <PhoneInput
-                    countryValue={
-                      watch(`participants.${index}.phoneCountry`) ?? ''
-                    }
-                    onCountryChange={(code) =>
-                      setValue(`participants.${index}.phoneCountry`, code)
-                    }
-                    phoneProps={register(`participants.${index}.contactPhone`)}
-                    countrySelectAriaLabel={t('planForm.phoneCountry')}
-                    phonePlaceholder={t('planForm.phonePlaceholder')}
-                    compact
-                    hasLabel={false}
-                    error={errors.participants?.[index]?.contactPhone?.message}
-                  />
-                </div>
-                <div>
-                  <FormInput
-                    {...register(`participants.${index}.contactEmail`)}
-                    placeholder={t('planForm.emailPlaceholder')}
-                    compact
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <PhoneInput
+                      countryValue={
+                        watch(`participants.${index}.phoneCountry`) ?? ''
+                      }
+                      onCountryChange={(code) =>
+                        setValue(`participants.${index}.phoneCountry`, code)
+                      }
+                      phoneProps={register(
+                        `participants.${index}.contactPhone`
+                      )}
+                      countrySelectAriaLabel={t('planForm.phoneCountry')}
+                      phonePlaceholder={t('planForm.phonePlaceholder')}
+                      compact
+                      hasLabel={false}
+                      error={
+                        errors.participants?.[index]?.contactPhone?.message
+                      }
+                    />
+                  </div>
+                  <div>
+                    <FormInput
+                      {...register(`participants.${index}.contactEmail`)}
+                      placeholder={t('planForm.emailPlaceholder')}
+                      compact
+                    />
+                  </div>
                 </div>
               </div>
             ))}
@@ -672,8 +698,8 @@ export default function PlanForm({
           </div>
 
           {oneDay ? (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-blue-50 p-4 rounded-lg">
-              <div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
+              <div className="col-span-2 sm:col-span-1">
                 <FormLabel>{t('planForm.date')}</FormLabel>
                 <FormInput type="date" {...register('singleDate')} compact />
                 {errors.singleDate && (
@@ -700,7 +726,7 @@ export default function PlanForm({
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-blue-50 p-4 rounded-lg">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
               <div>
                 <FormLabel>{t('planForm.startDate')}</FormLabel>
                 <FormInput type="date" {...register('startDateDate')} compact />

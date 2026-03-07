@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import Modal from './shared/Modal';
 import { useLanguage } from '../contexts/useLanguage';
+import { usePlanContext } from '../hooks/usePlanContext';
 import type { ItemCategory } from '../core/schemas/item';
 import type { ItemCreate } from '../core/schemas/item';
 import {
@@ -13,6 +14,7 @@ import {
   getCommonItems,
   type CommonItemBase,
 } from '../data/common-items-registry';
+import { calculateSuggestedQuantity } from '../core/utils-plan-points';
 
 interface SelectedItem {
   name: string;
@@ -31,6 +33,7 @@ interface BulkItemAddWizardProps {
   onAdd: (items: ItemCreate[]) => Promise<void>;
   existingItems?: Map<string, string>;
   onCancel?: (itemIds: string[]) => Promise<void>;
+  planPoints?: number;
 }
 
 export default function BulkItemAddWizard({
@@ -39,9 +42,25 @@ export default function BulkItemAddWizard({
   onAdd,
   existingItems,
   onCancel,
+  planPoints,
 }: BulkItemAddWizardProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const planCtx = usePlanContext();
+  const planLanguage = planCtx?.planLanguage ?? language;
+
+  const defaultQuantity = useCallback(
+    (item: CommonItemBase): number => {
+      if (!planPoints || item.category !== 'food' || !item.quantityPerPoint)
+        return 1;
+      return calculateSuggestedQuantity({
+        planPoints,
+        quantityPerPoint: item.quantityPerPoint,
+        isPersonal: item.isPersonal,
+      });
+    },
+    [planPoints]
+  );
 
   const [step, setStep] = useState<Step>('category');
   const [category, setCategory] = useState<ItemCategory | null>(null);
@@ -70,7 +89,7 @@ export default function BulkItemAddWizard({
     setTimeout(reset, 200);
   }
 
-  const items = useMemo(() => getCommonItems(language), [language]);
+  const items = useMemo(() => getCommonItems(planLanguage), [planLanguage]);
 
   const subcategories = useMemo(() => {
     if (!category) return [];
@@ -134,7 +153,7 @@ export default function BulkItemAddWizard({
             category: item.category,
             subcategory: subcategory,
             unit: item.unit,
-            quantity: 1,
+            quantity: defaultQuantity(item),
           });
         }
       }
@@ -147,10 +166,12 @@ export default function BulkItemAddWizard({
     existingItems,
     subcategoryItems,
     uncheckedExisting,
+    defaultQuantity,
   ]);
 
   const toggleItem = useCallback(
     (item: CommonItemBase) => {
+      const qty = defaultQuantity(item);
       const itemId = getExistingItemId(item.name);
       if (itemId) {
         setUncheckedExisting((prev) => {
@@ -164,7 +185,7 @@ export default function BulkItemAddWizard({
                 category: item.category,
                 subcategory: subcategory ?? '',
                 unit: item.unit,
-                quantity: 1,
+                quantity: qty,
               });
               return m;
             });
@@ -189,14 +210,14 @@ export default function BulkItemAddWizard({
               category: item.category,
               subcategory: subcategory ?? '',
               unit: item.unit,
-              quantity: 1,
+              quantity: qty,
             });
           }
           return next;
         });
       }
     },
-    [subcategory, getExistingItemId]
+    [subcategory, getExistingItemId, defaultQuantity]
   );
 
   function toggleSelectAll() {
@@ -232,7 +253,7 @@ export default function BulkItemAddWizard({
               category: item.category,
               subcategory: subcategory ?? '',
               unit: item.unit,
-              quantity: 1,
+              quantity: defaultQuantity(item),
             });
           }
         }
@@ -398,6 +419,7 @@ function CategoryStep({ onSelect }: { onSelect: (cat: ItemCategory) => void }) {
       <div className="grid grid-cols-2 gap-3">
         <button
           type="button"
+          data-testid="bulk-cat-equipment"
           onClick={() => onSelect('equipment')}
           className="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors cursor-pointer"
         >
@@ -421,6 +443,7 @@ function CategoryStep({ onSelect }: { onSelect: (cat: ItemCategory) => void }) {
         </button>
         <button
           type="button"
+          data-testid="bulk-cat-food"
           onClick={() => onSelect('food')}
           className="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-gray-200 hover:border-green-400 hover:bg-green-50 transition-colors cursor-pointer"
         >
@@ -487,6 +510,7 @@ function SubcategoryStep({
             <button
               key={sub.name}
               type="button"
+              data-testid={`bulk-subcat-${sub.name.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => onSelect(sub.name)}
               className="w-full flex items-center justify-between gap-2 py-2.5 px-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-300 transition-colors text-start cursor-pointer"
             >

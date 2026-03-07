@@ -8,6 +8,8 @@ export interface CommonItemBase {
   category: ItemCategory;
   subcategory?: string;
   unit: string;
+  quantityPerPoint?: number;
+  isPersonal?: boolean;
 }
 
 export interface CommonItemEnriched extends CommonItemBase {
