@@ -1,6 +1,11 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createLazyFileRoute, Link, useParams } from '@tanstack/react-router';
+import {
+  createLazyFileRoute,
+  Link,
+  Navigate,
+  useParams,
+} from '@tanstack/react-router';
 import toast from 'react-hot-toast';
 import { usePlan } from '../hooks/usePlan';
 import { useExpenses } from '../hooks/useExpenses';
@@ -43,7 +48,9 @@ export function ExpensesPage() {
   }
   if (planError) throw planError;
   if (!plan) throw new Error(t('plan.notFound'));
-  if (isNotParticipantResponse(plan)) return null;
+  if (isNotParticipantResponse(plan)) {
+    return <Navigate to="/plan/$planId" params={{ planId }} />;
+  }
 
   return (
     <PlanProvider plan={plan}>
@@ -90,7 +97,8 @@ function ExpensesContent({
 
   function getParticipantName(participantId: string): string {
     const p = plan.participants.find((x) => x.participantId === participantId);
-    return p ? `${p.name} ${p.lastName}` : participantId.slice(0, 8);
+    if (!p) return participantId.slice(0, 8);
+    return p.displayName || `${p.name} ${p.lastName}`.trim();
   }
 
   function getItemName(itemId: string): string {
@@ -127,7 +135,7 @@ function ExpensesContent({
         updates: {
           amount: values.amount,
           description: values.description || null,
-          itemIds: values.itemIds,
+          itemIds: values.itemIds ?? [],
         },
       });
       toast.success(t('expenses.updateSuccess'));
@@ -471,6 +479,7 @@ function ExpensesContent({
               participants={plan.participants}
               items={plan.items}
               isOwner={isOwner}
+              isEditMode
               currentParticipantId={currentParticipant?.participantId}
               onSubmit={handleUpdate}
               onCancel={() => setEditingExpense(null)}

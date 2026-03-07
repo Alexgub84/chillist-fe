@@ -227,6 +227,123 @@ describe('ExpenseForm', () => {
       expect(getAmountInput()).toHaveValue(42.5);
       expect(getDescriptionInput()).toHaveValue('Pre-filled');
     });
+
+    it('disables participant dropdown in edit mode for owner', () => {
+      render(
+        <ExpenseForm
+          participants={participants}
+          isOwner={true}
+          isEditMode={true}
+          currentParticipantId="p-owner"
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          defaultValues={{
+            participantId: 'p-bob',
+            amount: 42.5,
+          }}
+        />
+      );
+      const dropdown = screen.getByRole('combobox');
+      expect(dropdown).toBeDisabled();
+    });
+
+    it('keeps participant dropdown enabled in create mode for owner', () => {
+      renderOwnerForm();
+      const dropdown = screen.getByRole('combobox');
+      expect(dropdown).not.toBeDisabled();
+    });
+
+    it('keeps participant dropdown enabled when isEditMode is false', () => {
+      render(
+        <ExpenseForm
+          participants={participants}
+          isOwner={true}
+          isEditMode={false}
+          currentParticipantId="p-owner"
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+        />
+      );
+      const dropdown = screen.getByRole('combobox');
+      expect(dropdown).not.toBeDisabled();
+    });
+  });
+
+  describe('itemIds clearing behavior (Bug 2)', () => {
+    const items: Item[] = [
+      {
+        itemId: 'item-1',
+        planId: 'plan-1',
+        name: 'Tent',
+        category: 'equipment',
+        quantity: 1,
+        unit: 'pcs',
+        assignmentStatusList: [],
+        isAllParticipants: false,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+    ];
+
+    it('submits undefined itemIds when no items are selected (create mode)', async () => {
+      render(
+        <ExpenseForm
+          participants={participants}
+          items={items}
+          isOwner={true}
+          currentParticipantId="p-owner"
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+        />
+      );
+      const user = userEvent.setup();
+
+      await user.selectOptions(screen.getByRole('combobox'), 'p-owner');
+      await user.type(getAmountInput(), '10');
+      await user.click(screen.getByTestId('expense-form-submit'));
+
+      await waitFor(() => {
+        expect(handleSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            participantId: 'p-owner',
+            amount: 10,
+          })
+        );
+        const callArgs = handleSubmit.mock.calls[0][0];
+        expect(callArgs.itemIds).toBeUndefined();
+      });
+    });
+
+    it('submits undefined itemIds when all items are deselected', async () => {
+      render(
+        <ExpenseForm
+          participants={participants}
+          items={items}
+          isOwner={true}
+          currentParticipantId="p-owner"
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          defaultValues={{
+            participantId: 'p-owner',
+            amount: 10,
+            itemIds: ['item-1'],
+          }}
+        />
+      );
+      const user = userEvent.setup();
+
+      const checkboxes = screen.getAllByRole('checkbox');
+      await user.click(checkboxes[0]);
+      expect(checkboxes[0]).not.toBeChecked();
+
+      await user.click(screen.getByTestId('expense-form-submit'));
+
+      await waitFor(() => {
+        expect(handleSubmit).toHaveBeenCalled();
+        const callArgs = handleSubmit.mock.calls[0][0];
+        expect(callArgs.itemIds).toBeUndefined();
+      });
+    });
   });
 
   describe('item multi-select', () => {

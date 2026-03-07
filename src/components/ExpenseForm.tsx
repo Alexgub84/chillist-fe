@@ -23,6 +23,7 @@ interface ExpenseFormProps {
   participants: Participant[];
   items?: Item[];
   isOwner: boolean;
+  isEditMode?: boolean;
   currentParticipantId?: string;
   onSubmit: (values: ExpenseFormValues) => void | Promise<void>;
   onCancel?: () => void;
@@ -36,6 +37,7 @@ export default function ExpenseForm({
   participants,
   items = [],
   isOwner,
+  isEditMode,
   currentParticipantId,
   onSubmit,
   onCancel,
@@ -86,6 +88,7 @@ export default function ExpenseForm({
             id="participantId"
             {...register('participantId')}
             aria-invalid={!!errors.participantId}
+            disabled={!!isEditMode}
           >
             <option value="">{t('expenses.selectParticipant')}</option>
             {participants.map((p) => (
