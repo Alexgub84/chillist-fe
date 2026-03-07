@@ -27,3 +27,18 @@ input[type='week'] {
 @utility animate-fade-in {
   animation: fade-in 0.2s ease-out;
 }
+
+@keyframes speed-dial-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@utility animate-speed-dial-in {
+  animation: speed-dial-in 0.15s ease-out both;
+}

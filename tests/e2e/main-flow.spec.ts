@@ -14,7 +14,8 @@ async function addItemViaUI(
   name: string,
   quantity: number
 ): Promise<void> {
-  await page.getByRole('button', { name: /Add Item/i }).click();
+  await page.getByTestId('speed-dial-trigger').click();
+  await page.getByTestId('add-item-fab').click();
 
   const modal = page.getByTestId('add-item-modal');
   await expect(modal).toBeVisible();
@@ -241,10 +242,11 @@ test.describe('Item CRUD', () => {
     await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
     await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
 
-    const fab = page.getByTestId('bulk-add-fab');
+    const trigger = page.getByTestId('speed-dial-trigger');
     const dialog = page.getByTestId('bulk-item-add-wizard');
     await expect(async () => {
-      await fab.click({ timeout: 2000 });
+      await trigger.click({ timeout: 2000 });
+      await page.getByTestId('bulk-add-fab').click({ timeout: 2000 });
       await expect(dialog).toBeVisible({ timeout: 2000 });
     }).toPass({ timeout: 15000 });
 
@@ -1052,9 +1054,10 @@ test.describe('Invite Landing Page', () => {
     await page.goto(`/items/${plan.planId}?token=${inviteToken}`);
     await expect(page.getByText('Charcoal')).toBeVisible({ timeout: 10000 });
 
-    await expect(page.getByTestId('bulk-add-fab')).toBeVisible({
+    await expect(page.getByTestId('speed-dial-trigger')).toBeVisible({
       timeout: 10000,
     });
+    await page.getByTestId('speed-dial-trigger').click();
     await page.getByTestId('bulk-add-fab').click();
     const dialog = page.getByTestId('bulk-item-add-wizard');
     await expect(dialog.getByText('What are you adding?')).toBeVisible({
