@@ -186,6 +186,7 @@ interface ExpenseRecord {
   amount: string;
   description: string | null;
   createdByUserId: string | null;
+  itemIds?: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -1251,6 +1252,9 @@ export async function buildServer(
         amount: (body.amount as number).toFixed(2),
         description: (body.description as string) ?? null,
         createdByUserId: jwtUserId,
+        itemIds: Array.isArray(body.itemIds)
+          ? (body.itemIds as string[])
+          : undefined,
         createdAt: now,
         updatedAt: now,
       };
@@ -1280,6 +1284,11 @@ export async function buildServer(
       }
       if ('description' in body) {
         expense.description = (body.description as string) ?? null;
+      }
+      if ('itemIds' in body) {
+        expense.itemIds = Array.isArray(body.itemIds)
+          ? (body.itemIds as string[])
+          : undefined;
       }
       expense.updatedAt = new Date().toISOString();
 

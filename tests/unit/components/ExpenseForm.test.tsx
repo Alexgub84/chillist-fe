@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ExpenseForm from '../../../src/components/ExpenseForm';
 import type { Participant } from '../../../src/core/schemas/participant';
+import type { Item } from '../../../src/core/schemas/item';
 
 const participants: Participant[] = [
   {
@@ -116,8 +117,7 @@ describe('ExpenseForm', () => {
             participantId: 'p-owner',
             amount: 29.99,
             description: 'Groceries',
-          }),
-          expect.anything()
+          })
         );
       });
     });
@@ -135,8 +135,7 @@ describe('ExpenseForm', () => {
           expect.objectContaining({
             participantId: 'p-bob',
             amount: 15,
-          }),
-          expect.anything()
+          })
         );
       });
     });
@@ -184,8 +183,7 @@ describe('ExpenseForm', () => {
           expect.objectContaining({
             participantId: 'p-bob',
             amount: 20,
-          }),
-          expect.anything()
+          })
         );
       });
     });
@@ -228,6 +226,132 @@ describe('ExpenseForm', () => {
       });
       expect(getAmountInput()).toHaveValue(42.5);
       expect(getDescriptionInput()).toHaveValue('Pre-filled');
+    });
+  });
+
+  describe('item multi-select', () => {
+    const items: Item[] = [
+      {
+        itemId: 'item-1',
+        planId: 'plan-1',
+        name: 'Tent',
+        category: 'equipment',
+        quantity: 1,
+        unit: 'pcs',
+        assignmentStatusList: [],
+        isAllParticipants: false,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+      {
+        itemId: 'item-2',
+        planId: 'plan-1',
+        name: 'Water Bottles',
+        category: 'food',
+        quantity: 6,
+        unit: 'pcs',
+        assignmentStatusList: [],
+        isAllParticipants: false,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
+      },
+    ];
+
+    function renderWithItems(props?: {
+      defaultValues?: Record<string, unknown>;
+    }) {
+      return render(
+        <ExpenseForm
+          participants={participants}
+          items={items}
+          isOwner={true}
+          currentParticipantId="p-owner"
+          onSubmit={handleSubmit}
+          onCancel={handleCancel}
+          defaultValues={props?.defaultValues}
+        />
+      );
+    }
+
+    it('shows item select toggle when items are provided', () => {
+      renderWithItems();
+      expect(screen.getByTestId('toggle-item-select')).toBeInTheDocument();
+    });
+
+    it('does not show item select when no items', () => {
+      renderOwnerForm();
+      expect(
+        screen.queryByTestId('toggle-item-select')
+      ).not.toBeInTheDocument();
+    });
+
+    it('expands item list and shows items grouped by category', async () => {
+      renderWithItems();
+      const user = userEvent.setup();
+      await user.click(screen.getByTestId('toggle-item-select'));
+      expect(screen.getByText('Tent')).toBeInTheDocument();
+      expect(screen.getByText('Water Bottles')).toBeInTheDocument();
+    });
+
+    it('selects and deselects items via checkbox', async () => {
+      renderWithItems();
+      const user = userEvent.setup();
+      await user.click(screen.getByTestId('toggle-item-select'));
+
+      const checkboxes = screen.getAllByRole('checkbox');
+      await user.click(checkboxes[0]);
+      expect(checkboxes[0]).toBeChecked();
+
+      await user.click(checkboxes[0]);
+      expect(checkboxes[0]).not.toBeChecked();
+    });
+
+    it('submits with selected itemIds', async () => {
+      renderWithItems();
+      const user = userEvent.setup();
+
+      await user.selectOptions(screen.getByRole('combobox'), 'p-owner');
+      await user.type(getAmountInput(), '50');
+      await user.click(screen.getByTestId('toggle-item-select'));
+
+      const checkboxes = screen.getAllByRole('checkbox');
+      await user.click(checkboxes[0]);
+
+      await user.click(screen.getByTestId('expense-form-submit'));
+
+      await waitFor(() => {
+        expect(handleSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            participantId: 'p-owner',
+            amount: 50,
+            itemIds: ['item-1'],
+          })
+        );
+      });
+    });
+
+    it('pre-fills selected items from defaultValues', () => {
+      renderWithItems({
+        defaultValues: {
+          participantId: 'p-owner',
+          amount: 30,
+          itemIds: ['item-2'],
+        },
+      });
+      const chips = screen.getAllByText('Water Bottles');
+      expect(chips.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it('filters items by search', async () => {
+      renderWithItems();
+      const user = userEvent.setup();
+      await user.click(screen.getByTestId('toggle-item-select'));
+
+      const searchInput = screen.getByTestId('item-search-input');
+      await user.type(searchInput, 'tent');
+
+      expect(screen.getByText('Tent')).toBeInTheDocument();
+      expect(screen.queryByText('Water Bottles')).not.toBeInTheDocument();
     });
   });
 });

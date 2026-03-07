@@ -666,6 +666,7 @@ function QuickAddExpenseForm({
   return (
     <ExpenseForm
       participants={plan.participants}
+      items={plan.items}
       isOwner={isOwner}
       currentParticipantId={currentParticipantId}
       onSubmit={onSubmit}

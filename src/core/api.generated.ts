@@ -3513,6 +3513,8 @@ export interface components {
       amount: string;
       /** @description Optional description of what the expense was for */
       description?: string | null;
+      /** @description List of item IDs associated with this expense. Empty array if no items linked. */
+      itemIds: string[];
       /** Format: uuid */
       createdByUserId?: string | null;
       /** Format: date-time */
@@ -3550,6 +3552,8 @@ export interface components {
       amount: number;
       /** @description Optional description of what the expense was for */
       description?: string;
+      /** @description Optional list of item IDs this expense is for. All items must belong to the same plan. */
+      itemIds?: string[];
     };
     /** UpdateExpenseBody */
     'def-64': {
@@ -3557,6 +3561,8 @@ export interface components {
       amount?: number;
       /** @description Updated description (send null to clear) */
       description?: string | null;
+      /** @description Updated list of item IDs. Replaces the existing list entirely. All items must belong to the same plan. */
+      itemIds?: string[];
     };
     /** ExpenseIdParam */
     'def-65': {

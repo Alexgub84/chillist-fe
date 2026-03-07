@@ -28,6 +28,9 @@ const getInputByLabel = (labelText: RegExp) => {
   return container?.querySelector('input, textarea, select') as HTMLElement;
 };
 
+const getUnitSelect = () =>
+  document.querySelector('select[name="unit"]') as HTMLSelectElement;
+
 describe('ItemForm', () => {
   describe('Default values and rendering', () => {
     it('renders with default values: category=food, unit=kg, quantity=1', () => {
@@ -38,7 +41,7 @@ describe('ItemForm', () => {
       ) as HTMLSelectElement;
       expect(categorySelect.value).toBe('food');
 
-      const unitSelect = getInputByLabel(/^unit$/i) as HTMLSelectElement;
+      const unitSelect = getUnitSelect();
       expect(unitSelect.value).toBe('kg');
 
       const quantityInput = getInputByLabel(/quantity \*/i) as HTMLInputElement;
@@ -108,7 +111,7 @@ describe('ItemForm', () => {
       const categorySelect = getInputByLabel(/category \*/i);
       await user.selectOptions(categorySelect, 'equipment');
 
-      const unitSelect = getInputByLabel(/^unit$/i) as HTMLSelectElement;
+      const unitSelect = getUnitSelect();
 
       await waitFor(() => {
         expect(unitSelect).toBeDisabled();
@@ -123,7 +126,7 @@ describe('ItemForm', () => {
       const categorySelect = getInputByLabel(/category \*/i);
       await user.selectOptions(categorySelect, 'equipment');
 
-      const unitSelect = getInputByLabel(/^unit$/i);
+      const unitSelect = getUnitSelect();
       await waitFor(() => {
         expect(unitSelect).toBeDisabled();
       });
@@ -150,7 +153,7 @@ describe('ItemForm', () => {
       const categorySelect = getInputByLabel(
         /category \*/i
       ) as HTMLSelectElement;
-      const unitSelect = getInputByLabel(/^unit$/i) as HTMLSelectElement;
+      const unitSelect = getUnitSelect();
 
       await waitFor(() => {
         expect(categorySelect.value).toBe('equipment');
@@ -175,7 +178,7 @@ describe('ItemForm', () => {
       const categorySelect = getInputByLabel(
         /category \*/i
       ) as HTMLSelectElement;
-      const unitSelect = getInputByLabel(/^unit$/i) as HTMLSelectElement;
+      const unitSelect = getUnitSelect();
 
       await waitFor(() => {
         expect(categorySelect.value).toBe('equipment');
@@ -295,7 +298,7 @@ describe('ItemForm', () => {
       await user.type(quantityInput, '5');
 
       await user.selectOptions(getInputByLabel(/category \*/i), 'food');
-      await user.selectOptions(getInputByLabel(/^unit$/i), 'kg');
+      await user.selectOptions(getUnitSelect(), 'kg');
       const notesTextarea = screen.getByPlaceholderText(/optional notes/i);
       await user.type(notesTextarea, 'Basmati');
 
