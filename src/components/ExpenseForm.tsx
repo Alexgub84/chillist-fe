@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -66,7 +66,27 @@ export default function ExpenseForm({
   });
 
   const selectedItemIds = watch('itemIds') ?? [];
+  const selectedParticipantId = watch('participantId');
   const canSelectParticipant = isOwner;
+
+  const participantItems = useMemo(() => {
+    if (!selectedParticipantId) return [];
+    return items.filter(
+      (item) =>
+        item.isAllParticipants ||
+        item.assignmentStatusList.some(
+          (a) => a.participantId === selectedParticipantId
+        )
+    );
+  }, [items, selectedParticipantId]);
+
+  const prevParticipantIdRef = useRef(selectedParticipantId);
+  useEffect(() => {
+    if (prevParticipantIdRef.current !== selectedParticipantId) {
+      prevParticipantIdRef.current = selectedParticipantId;
+      setValue('itemIds', [], { shouldDirty: true });
+    }
+  }, [selectedParticipantId, setValue]);
 
   return (
     <form
@@ -132,12 +152,19 @@ export default function ExpenseForm({
         />
       </div>
 
-      {items.length > 0 && (
+      {participantItems.length > 0 ? (
         <ItemMultiSelect
-          items={items}
+          items={participantItems}
           selectedIds={selectedItemIds}
           onChange={(ids) => setValue('itemIds', ids, { shouldDirty: true })}
         />
+      ) : (
+        selectedParticipantId &&
+        items.length > 0 && (
+          <p className="text-sm text-gray-400 text-center py-2">
+            {t('expenses.noItemsForParticipant')}
+          </p>
+        )
       )}
 
       <div className="flex justify-end gap-3 pt-2">
@@ -185,12 +212,14 @@ function ItemMultiSelect({
   }, [items, search]);
 
   const grouped = useMemo(() => {
-    const map = new Map<string, Item[]>();
+    const map = new Map<string, Map<string, Item[]>>();
     for (const item of filtered) {
-      const key = item.category;
-      const list = map.get(key) ?? [];
-      list.push(item);
-      map.set(key, list);
+      const category = item.category;
+      const subcategory = item.subcategory ?? 'Other';
+      if (!map.has(category)) map.set(category, new Map());
+      const catMap = map.get(category)!;
+      if (!catMap.has(subcategory)) catMap.set(subcategory, []);
+      catMap.get(subcategory)!.push(item);
     }
     return map;
   }, [filtered]);
@@ -200,6 +229,20 @@ function ItemMultiSelect({
       ? selectedIds.filter((id) => id !== itemId)
       : [...selectedIds, itemId];
     onChange(next);
+  }
+
+  function toggleSubcategory(subcatItems: Item[]) {
+    const ids = subcatItems.map((i) => i.itemId);
+    const allSelected = ids.every((id) => selectedIds.includes(id));
+    if (allSelected) {
+      onChange(selectedIds.filter((id) => !ids.includes(id)));
+    } else {
+      const merged = [...selectedIds];
+      for (const id of ids) {
+        if (!merged.includes(id)) merged.push(id);
+      }
+      onChange(merged);
+    }
   }
 
   function getItemName(itemId: string): string {
@@ -291,38 +334,73 @@ function ItemMultiSelect({
                 {t('expenses.noItemsInPlan')}
               </p>
             )}
-            {Array.from(grouped.entries()).map(([category, categoryItems]) => (
+            {Array.from(grouped.entries()).map(([category, subcatMap]) => (
               <div key={category}>
-                <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase bg-gray-50 sticky top-0">
+                <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase bg-gray-50 sticky top-0 z-10">
                   {t(`items.${category}`)}
                 </div>
-                {categoryItems.map((item) => {
-                  const checked = selectedIds.includes(item.itemId);
-                  return (
-                    <label
-                      key={item.itemId}
-                      className={clsx(
-                        'flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-50 transition-colors',
-                        checked && 'bg-blue-50/50'
-                      )}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => toggleItem(item.itemId)}
-                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="text-sm text-gray-700 truncate">
-                        {item.name}
-                      </span>
-                      {item.quantity > 1 && (
-                        <span className="text-xs text-gray-400 shrink-0">
-                          ×{item.quantity}
-                        </span>
-                      )}
-                    </label>
-                  );
-                })}
+                {Array.from(subcatMap.entries()).map(
+                  ([subcategory, subcatItems]) => {
+                    const subcatIds = subcatItems.map((i) => i.itemId);
+                    const selectedCount = subcatIds.filter((id) =>
+                      selectedIds.includes(id)
+                    ).length;
+                    const allSelected = selectedCount === subcatIds.length;
+                    const someSelected = selectedCount > 0 && !allSelected;
+
+                    return (
+                      <div key={subcategory}>
+                        <label
+                          data-testid={`subcat-${subcategory}`}
+                          className="flex items-center gap-3 px-3 py-1.5 bg-gray-50/60 cursor-pointer hover:bg-gray-100 transition-colors border-t border-gray-100"
+                        >
+                          <input
+                            type="checkbox"
+                            ref={(el) => {
+                              if (el) el.indeterminate = someSelected;
+                            }}
+                            checked={allSelected}
+                            onChange={() => toggleSubcategory(subcatItems)}
+                            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-xs font-medium text-gray-600 truncate">
+                            {t(`subcategories.${subcategory}`, subcategory)}
+                          </span>
+                          <span className="text-xs text-gray-400 shrink-0">
+                            ({subcatItems.length})
+                          </span>
+                        </label>
+                        {subcatItems.map((item) => {
+                          const checked = selectedIds.includes(item.itemId);
+                          return (
+                            <label
+                              key={item.itemId}
+                              className={clsx(
+                                'flex items-center gap-3 ps-8 pe-3 py-2 cursor-pointer hover:bg-gray-50 transition-colors',
+                                checked && 'bg-blue-50/50'
+                              )}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={checked}
+                                onChange={() => toggleItem(item.itemId)}
+                                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                              />
+                              <span className="text-sm text-gray-700 truncate">
+                                {item.name}
+                              </span>
+                              {item.quantity > 1 && (
+                                <span className="text-xs text-gray-400 shrink-0">
+                                  ×{item.quantity}
+                                </span>
+                              )}
+                            </label>
+                          );
+                        })}
+                      </div>
+                    );
+                  }
+                )}
               </div>
             ))}
           </div>

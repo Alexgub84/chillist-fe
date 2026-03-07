@@ -570,6 +570,7 @@
     "selectItems": "Link to plan items",
     "searchItems": "Search items…",
     "noItemsInPlan": "No items in this plan yet",
+    "noItemsForParticipant": "No items assigned to this participant",
     "itemsSelected": "{{count}} item linked",
     "itemsSelected_other": "{{count}} items linked",
     "settlementTitle": "Settlement",

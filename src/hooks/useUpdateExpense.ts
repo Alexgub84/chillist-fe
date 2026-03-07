@@ -15,6 +15,7 @@ export function useUpdateExpense(planId: string) {
       updateExpense(expenseId, updates),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expenses', planId] });
+      queryClient.invalidateQueries({ queryKey: ['plan', planId] });
     },
   });
 }

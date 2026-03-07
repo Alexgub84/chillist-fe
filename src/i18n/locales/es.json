@@ -547,6 +547,7 @@
     "selectItems": "Vincular a artículos del plan",
     "searchItems": "Buscar artículos…",
     "noItemsInPlan": "Aún no hay artículos en este plan",
+    "noItemsForParticipant": "No hay artículos asignados a este participante",
     "itemsSelected": "{{count}} artículo vinculado",
     "itemsSelected_other": "{{count}} artículos vinculados",
     "settlementTitle": "Liquidación",
