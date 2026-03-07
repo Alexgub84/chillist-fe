@@ -482,4 +482,132 @@ const test = base.extend({
   },
 });
 
-export { test, expect, type Page, type MockPlan };
+interface MockExpense {
+  expenseId: string;
+  participantId: string;
+  planId: string;
+  amount: string;
+  description: string | null;
+  createdByUserId: string | null;
+  itemIds?: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export function buildExpense(
+  planId: string,
+  opts: {
+    participantId: string;
+    amount: number;
+    description?: string;
+    itemIds?: string[];
+    createdByUserId?: string;
+  }
+): MockExpense {
+  const now = timestamp();
+  return {
+    expenseId: randomUUID(),
+    participantId: opts.participantId,
+    planId,
+    amount: opts.amount.toFixed(2),
+    description: opts.description ?? null,
+    createdByUserId: opts.createdByUserId ?? null,
+    itemIds: opts.itemIds,
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
+function computeExpenseSummary(expenses: MockExpense[]) {
+  const map = new Map<string, number>();
+  for (const e of expenses) {
+    const current = map.get(e.participantId) ?? 0;
+    map.set(e.participantId, current + parseFloat(e.amount));
+  }
+  return Array.from(map.entries()).map(([participantId, totalAmount]) => ({
+    participantId,
+    totalAmount,
+  }));
+}
+
+export async function mockExpenseRoutes(
+  page: Page,
+  plan: MockPlan,
+  initialExpenses: MockExpense[] = []
+) {
+  const expenses = [...initialExpenses];
+
+  await page.route(
+    `${API_PATTERN}/plans/${plan.planId}/expenses`,
+    async (route) => {
+      const method = route.request().method();
+      if (method === 'GET') {
+        const planExpenses = expenses.filter((e) => e.planId === plan.planId);
+        await route.fulfill({
+          json: {
+            expenses: planExpenses,
+            summary: computeExpenseSummary(planExpenses),
+          },
+        });
+      } else if (method === 'POST') {
+        const body = route.request().postDataJSON();
+        const now = timestamp();
+        const expense: MockExpense = {
+          expenseId: randomUUID(),
+          participantId: body.participantId,
+          planId: plan.planId,
+          amount: (body.amount as number).toFixed(2),
+          description: body.description ?? null,
+          createdByUserId: 'regular-user-id',
+          itemIds: body.itemIds,
+          createdAt: now,
+          updatedAt: now,
+        };
+        expenses.push(expense);
+        await route.fulfill({ json: expense, status: 201 });
+      } else {
+        await route.continue();
+      }
+    }
+  );
+
+  await page.route(`${API_PATTERN}/expenses/*`, async (route) => {
+    const method = route.request().method();
+    const url = route.request().url();
+    const expenseId = url.split('/expenses/')[1].split('?')[0];
+
+    if (method === 'PATCH') {
+      const idx = expenses.findIndex((e) => e.expenseId === expenseId);
+      if (idx === -1) {
+        await route.fulfill({ status: 404, json: { message: 'Not found' } });
+        return;
+      }
+      const body = route.request().postDataJSON();
+      if (body.amount !== undefined) {
+        expenses[idx].amount = (body.amount as number).toFixed(2);
+      }
+      if ('description' in body) {
+        expenses[idx].description = (body.description as string) ?? null;
+      }
+      if ('itemIds' in body) {
+        expenses[idx].itemIds = body.itemIds;
+      }
+      expenses[idx].updatedAt = timestamp();
+      await route.fulfill({ json: expenses[idx] });
+    } else if (method === 'DELETE') {
+      const idx = expenses.findIndex((e) => e.expenseId === expenseId);
+      if (idx === -1) {
+        await route.fulfill({ status: 404, json: { message: 'Not found' } });
+        return;
+      }
+      expenses.splice(idx, 1);
+      await route.fulfill({ json: { ok: true } });
+    } else {
+      await route.continue();
+    }
+  });
+
+  return expenses;
+}
+
+export { test, expect, type Page, type MockPlan, type MockExpense };

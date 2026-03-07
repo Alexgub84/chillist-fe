@@ -337,7 +337,7 @@ function ItemMultiSelect({
             {Array.from(grouped.entries()).map(([category, subcatMap]) => (
               <div key={category}>
                 <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase bg-gray-50 sticky top-0 z-10">
-                  {t(`items.${category}`)}
+                  {t(`categories.${category}`)}
                 </div>
                 {Array.from(subcatMap.entries()).map(
                   ([subcategory, subcatItems]) => {

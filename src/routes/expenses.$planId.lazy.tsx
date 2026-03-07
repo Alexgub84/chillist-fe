@@ -209,7 +209,10 @@ function ExpensesContent({
         <p className="text-sm text-gray-500 mb-6">{plan.title}</p>
 
         {summary.length > 0 && (
-          <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-6">
+          <div
+            data-testid="expenses-summary"
+            className="bg-white rounded-xl shadow-sm p-4 sm:p-6 mb-6"
+          >
             <h2 className="text-lg font-semibold text-gray-800 mb-3">
               {t('expenses.summary')}
             </h2>
@@ -227,7 +230,10 @@ function ExpensesContent({
                   </span>
                 </div>
               ))}
-              <div className="flex justify-between items-center pt-2 border-t border-gray-300">
+              <div
+                data-testid="summary-total"
+                className="flex justify-between items-center pt-2 border-t border-gray-300"
+              >
                 <span className="text-sm font-semibold text-gray-800">
                   {t('expenses.totalExpenses')}
                 </span>
@@ -254,7 +260,10 @@ function ExpensesContent({
               </p>
             ) : (
               <>
-                <p className="text-xs text-gray-400 mb-3">
+                <p
+                  data-testid="settlement-fair-share"
+                  className="text-xs text-gray-400 mb-3"
+                >
                   {t('expenses.fairShare')}: {settlement.fairShare.toFixed(2)}{' '}
                   {planCurrency}
                 </p>
@@ -263,6 +272,7 @@ function ExpensesContent({
                   {settlement.balances.map((b) => (
                     <div
                       key={b.participantId}
+                      data-testid={`settlement-balance-${b.participantId}`}
                       className="flex justify-between items-center py-1.5"
                     >
                       <span className="text-sm text-gray-700">
@@ -295,6 +305,7 @@ function ExpensesContent({
                     {settlement.transfers.map((tr, idx) => (
                       <div
                         key={idx}
+                        data-testid={`settlement-transfer-${idx}`}
                         className="flex items-center gap-2 text-sm bg-gray-50 rounded-lg px-3 py-2"
                       >
                         <span className="font-medium text-gray-800">
@@ -336,7 +347,10 @@ function ExpensesContent({
         )}
 
         {!isLoading && expenses.length === 0 && (
-          <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center">
+          <div
+            data-testid="no-expenses"
+            className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center"
+          >
             <p className="text-gray-500 text-sm sm:text-base">
               {t('expenses.noExpenses')}
             </p>
@@ -350,6 +364,7 @@ function ExpensesContent({
               return (
                 <div
                   key={expense.expenseId}
+                  data-testid={`expense-card-${expense.expenseId}`}
                   className="bg-white rounded-lg shadow-sm p-4 flex items-start justify-between gap-3"
                 >
                   <div className="min-w-0 flex-1">
