@@ -4,16 +4,6 @@ import userEvent from '@testing-library/user-event';
 import PlanForm from '../../../src/components/PlanForm';
 import type { DefaultOwner } from '../../../src/components/PlanForm';
 
-vi.mock('../../../src/contexts/useAuth', () => ({
-  useAuth: () => ({
-    session: null,
-    user: null,
-    loading: false,
-    isAdmin: false,
-    signOut: vi.fn(),
-  }),
-}));
-
 vi.mock('uuid', () => ({
   v5: vi.fn(
     (name: string) => `uuid-${name.toLowerCase().replace(/\s+/g, '-')}`
@@ -249,6 +239,9 @@ describe('CreatePlan - PlanForm', () => {
           expect.objectContaining({
             title: 'Picnic Day',
             description: 'A fun day out',
+            visibility: 'invite_only',
+            defaultLang: 'he',
+            currency: 'ILS',
             owner: {
               name: 'Alice',
               lastName: 'Smith',
@@ -276,7 +269,6 @@ describe('CreatePlan - PlanForm', () => {
 
       await user.type(getInputByLabel(/title/i), 'Weekend Trip');
       await user.type(getInputByLabel(/description/i), 'Two day adventure');
-      await user.selectOptions(getInputByLabel(/status/i), 'active');
       await fillOwnerFields(user);
 
       await user.type(getInputByLabel(/start date/i), '2025-12-20');
@@ -303,6 +295,9 @@ describe('CreatePlan - PlanForm', () => {
           expect.objectContaining({
             title: 'Weekend Trip',
             description: 'Two day adventure',
+            visibility: 'invite_only',
+            defaultLang: 'he',
+            currency: 'ILS',
             owner: {
               name: 'Alice',
               lastName: 'Smith',

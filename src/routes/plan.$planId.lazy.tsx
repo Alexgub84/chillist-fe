@@ -47,6 +47,11 @@ import BulkItemAddWizard from '../components/BulkItemAddWizard';
 import PlanShareSection from '../components/PlanShareSection';
 import FloatingActions from '../components/shared/FloatingActions';
 import PlanProvider from '../contexts/PlanProvider';
+import { useCreateExpense } from '../hooks/useCreateExpense';
+import ExpenseForm from '../components/ExpenseForm';
+import type { ExpenseFormValues } from '../components/ExpenseForm';
+import { usePlanContext } from '../hooks/usePlanContext';
+import { getApiErrorMessage } from '../core/error-utils';
 import {
   aggregateParticipantCounts,
   calculatePlanPoints,
@@ -72,8 +77,11 @@ function PlanPage() {
   const actions = usePlanActions(planId, planParticipants);
   const bulkAssign = useBulkAssign(planId, planParticipants);
 
+  const createExpenseMutation = useCreateExpense(planId);
+
   const [itemModalId, setItemModalId] = useState<string | null>(null);
   const [bulkAddOpen, setBulkAddOpen] = useState(false);
+  const [addExpenseOpen, setAddExpenseOpen] = useState(false);
   const [editingParticipantId, setEditingParticipantId] = useState<
     string | null
   >(null);
@@ -249,6 +257,22 @@ function PlanPage() {
     }
   }
 
+  async function handleAddExpense(values: ExpenseFormValues) {
+    try {
+      await createExpenseMutation.mutateAsync(values);
+      toast.success(t('expenses.addSuccess'));
+      setAddExpenseOpen(false);
+    } catch (err) {
+      console.error(
+        `[PlanPage] createExpense failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
+      );
+      const { title, message } = getApiErrorMessage(
+        err instanceof Error ? err : new Error(String(err))
+      );
+      toast.error(`${title}: ${message}`);
+    }
+  }
+
   return (
     <PlanProvider plan={plan}>
       <div className="w-full px-3 sm:px-0">
@@ -389,6 +413,32 @@ function PlanPage() {
             }
             title={t('items.manageItems')}
             subtitle={t('items.manageItemsDesc')}
+          />
+
+          <SectionLink
+            to="/expenses/$planId"
+            params={{ planId }}
+            testId="expenses-link"
+            colorScheme="green"
+            className="mb-4"
+            icon={
+              <svg
+                className="w-5 h-5 text-green-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            }
+            title={t('expenses.linkTitle')}
+            subtitle={t('expenses.linkDesc')}
           />
 
           <div className="flex items-center justify-between mb-3 sm:mb-4">
@@ -553,6 +603,22 @@ function PlanPage() {
             />
           </Modal>
 
+          <Modal
+            open={addExpenseOpen}
+            onClose={() => setAddExpenseOpen(false)}
+            title={t('expenses.addExpense')}
+            testId="quick-add-expense-modal"
+          >
+            <QuickAddExpenseForm
+              plan={plan}
+              isOwner={isOwner}
+              currentParticipantId={currentParticipant?.participantId}
+              onSubmit={handleAddExpense}
+              onCancel={() => setAddExpenseOpen(false)}
+              isSubmitting={createExpenseMutation.isPending}
+            />
+          </Modal>
+
           <TransferOwnershipModal
             open={transferTargetParticipantId !== null}
             onClose={() => setTransferTargetParticipantId(null)}
@@ -565,6 +631,7 @@ function PlanPage() {
         <FloatingActions
           onAddItem={() => setItemModalId('new')}
           onBulkAdd={() => setBulkAddOpen(true)}
+          onAddExpense={() => setAddExpenseOpen(true)}
         />
 
         <BulkItemAddWizard
@@ -577,5 +644,34 @@ function PlanPage() {
         />
       </div>
     </PlanProvider>
+  );
+}
+
+function QuickAddExpenseForm({
+  plan,
+  isOwner,
+  currentParticipantId,
+  onSubmit,
+  onCancel,
+  isSubmitting,
+}: {
+  plan: PlanWithDetails;
+  isOwner: boolean;
+  currentParticipantId?: string;
+  onSubmit: (values: ExpenseFormValues) => void | Promise<void>;
+  onCancel: () => void;
+  isSubmitting: boolean;
+}) {
+  const planCtx = usePlanContext();
+  return (
+    <ExpenseForm
+      participants={plan.participants}
+      isOwner={isOwner}
+      currentParticipantId={currentParticipantId}
+      onSubmit={onSubmit}
+      onCancel={onCancel}
+      isSubmitting={isSubmitting}
+      currency={planCtx?.planCurrency ?? ''}
+    />
   );
 }

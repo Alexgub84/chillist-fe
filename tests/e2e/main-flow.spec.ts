@@ -243,32 +243,24 @@ test.describe('Item CRUD', () => {
 
     const fab = page.getByTestId('bulk-add-fab');
     await expect(fab).toBeVisible({ timeout: 10000 });
-    await fab.click({ force: true });
+    await fab.click();
+
+    const equipmentBtn = page.getByTestId('bulk-cat-equipment');
+    await expect(equipmentBtn).toBeVisible({ timeout: 10000 });
+    await equipmentBtn.click();
+
+    const subcatBtn = page.getByTestId('bulk-subcat-first-aid-and-safety');
+    await expect(subcatBtn).toBeVisible({ timeout: 10000 });
+    await subcatBtn.click();
+
+    const firstAidRow = page.getByTestId('bulk-item-first-aid-kit');
+    await expect(firstAidRow).toBeVisible({ timeout: 10000 });
+    await firstAidRow.click();
 
     const dialog = page.getByTestId('bulk-item-add-wizard');
-    const equipmentBtn = dialog.getByRole('button', {
-      name: 'Equipment',
-      exact: true,
-    });
-    await expect(equipmentBtn).toBeVisible({ timeout: 10000 });
-    await equipmentBtn.evaluate((el) => (el as HTMLElement).click());
-
-    const subcatBtn = dialog.getByRole('button', {
-      name: /First Aid and Safety/,
-    });
-    await expect(subcatBtn).toBeVisible({ timeout: 5000 });
-    await subcatBtn.evaluate((el) => (el as HTMLElement).click());
-
-    await expect(dialog.getByPlaceholder('Search or add items…')).toBeVisible({
-      timeout: 5000,
-    });
-    const firstAidRow = dialog.getByTestId('bulk-item-first-aid-kit');
-    await firstAidRow.scrollIntoViewIfNeeded();
-    await firstAidRow.click({ force: true });
-
     const submitBtn = dialog.getByRole('button', { name: /add 1 item/i });
-    await expect(submitBtn).toBeVisible();
-    await submitBtn.click({ force: true });
+    await expect(submitBtn).toBeVisible({ timeout: 5000 });
+    await submitBtn.click();
 
     await expect(page.getByText(/added 1 item/i).first()).toBeVisible({
       timeout: 10000,

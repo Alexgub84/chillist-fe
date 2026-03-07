@@ -120,6 +120,8 @@ const planCreateWithOwnerSchema = z.object({
   startDate: z.string().datetime().nullable().optional(),
   endDate: z.string().datetime().nullable().optional(),
   tags: z.array(z.string()).nullable().optional(),
+  defaultLang: z.string().max(10).optional(),
+  currency: z.string().max(10).optional(),
   owner: ownerBodySchema,
   participants: z.array(participantCreateSchema).optional(),
 });
@@ -177,11 +179,23 @@ interface JoinRequestRecord {
   updatedAt: string;
 }
 
+interface ExpenseRecord {
+  expenseId: string;
+  participantId: string;
+  planId: string;
+  amount: string;
+  description: string | null;
+  createdByUserId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface MutableStore {
   plans: Plan[];
   participants: Participant[];
   items: Item[];
   joinRequests: JoinRequestRecord[];
+  expenses: ExpenseRecord[];
 }
 
 function cloneData(data: MockData): MutableStore {
@@ -205,6 +219,7 @@ function cloneData(data: MockData): MutableStore {
     participants: structuredClone(data.participants),
     items: structuredClone(data.items),
     joinRequests: [],
+    expenses: [],
   };
 }
 
@@ -486,6 +501,8 @@ export async function buildServer(
       tags: parsed.tags,
       title: parsed.title,
       visibility: parsed.visibility ?? 'private',
+      defaultLang: parsed.defaultLang ?? null,
+      currency: parsed.currency ?? null,
     };
 
     store.plans.push(plan);
@@ -1181,12 +1198,117 @@ export async function buildServer(
     }
   );
 
+  // --- Expenses ---
+
+  app.get<{ Params: { planId: string } }>(
+    '/plans/:planId/expenses',
+    async (request, reply) => {
+      requireJwt(request.headers.authorization as string | undefined);
+      ensurePlan(store, request.params.planId);
+
+      const planExpenses = store.expenses.filter(
+        (e) => e.planId === request.params.planId
+      );
+
+      const summaryMap = new Map<string, number>();
+      for (const e of planExpenses) {
+        const current = summaryMap.get(e.participantId) ?? 0;
+        summaryMap.set(e.participantId, current + parseFloat(e.amount));
+      }
+      const summary = Array.from(summaryMap.entries()).map(
+        ([participantId, totalAmount]) => ({
+          participantId,
+          totalAmount,
+        })
+      );
+
+      void reply.send({ expenses: planExpenses, summary });
+    }
+  );
+
+  app.post<{ Params: { planId: string } }>(
+    '/plans/:planId/expenses',
+    async (request, reply) => {
+      const jwtUserId = requireJwt(
+        request.headers.authorization as string | undefined
+      );
+      ensurePlan(store, request.params.planId);
+      const body = request.body as Record<string, unknown>;
+
+      if (!body.participantId || typeof body.amount !== 'number') {
+        throw new HttpError('participantId and amount are required', 400);
+      }
+      if (body.amount <= 0) {
+        throw new HttpError('amount must be greater than 0', 400);
+      }
+
+      ensureParticipant(store, body.participantId as string);
+      const now = new Date().toISOString();
+      const expense: ExpenseRecord = {
+        expenseId: randomUUID(),
+        participantId: body.participantId as string,
+        planId: request.params.planId,
+        amount: (body.amount as number).toFixed(2),
+        description: (body.description as string) ?? null,
+        createdByUserId: jwtUserId,
+        createdAt: now,
+        updatedAt: now,
+      };
+
+      store.expenses.push(expense);
+      void reply.status(201).send(expense);
+    }
+  );
+
+  app.patch<{ Params: { expenseId: string } }>(
+    '/expenses/:expenseId',
+    async (request, reply) => {
+      requireJwt(request.headers.authorization as string | undefined);
+      const expense = store.expenses.find(
+        (e) => e.expenseId === request.params.expenseId
+      );
+      if (!expense) {
+        throw new HttpError('Expense not found', 404);
+      }
+
+      const body = request.body as Record<string, unknown>;
+      if (body.amount !== undefined) {
+        if (typeof body.amount !== 'number' || body.amount <= 0) {
+          throw new HttpError('amount must be greater than 0', 400);
+        }
+        expense.amount = body.amount.toFixed(2);
+      }
+      if ('description' in body) {
+        expense.description = (body.description as string) ?? null;
+      }
+      expense.updatedAt = new Date().toISOString();
+
+      void reply.send(expense);
+    }
+  );
+
+  app.delete<{ Params: { expenseId: string } }>(
+    '/expenses/:expenseId',
+    async (request, reply) => {
+      requireJwt(request.headers.authorization as string | undefined);
+      const index = store.expenses.findIndex(
+        (e) => e.expenseId === request.params.expenseId
+      );
+      if (index === -1) {
+        throw new HttpError('Expense not found', 404);
+      }
+      store.expenses.splice(index, 1);
+      void reply.send({ ok: true });
+    }
+  );
+
   app.post('/_reset', async (_request, reply) => {
     const fresh = cloneData(initialData);
     store.plans = fresh.plans;
     store.participants = fresh.participants;
     store.items = fresh.items;
     store.joinRequests = fresh.joinRequests;
+    store.expenses = fresh.expenses;
     void reply.send({ ok: true });
   });
 

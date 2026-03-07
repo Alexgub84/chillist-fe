@@ -43,6 +43,8 @@ export const planSchema = z.object({
   startDate: z.string().nullish(),
   endDate: z.string().nullish(),
   tags: z.array(z.string()).nullish(),
+  defaultLang: z.string().nullish(),
+  currency: z.string().nullish(),
   participantIds: z.array(z.string()).nullish(),
   participants: z.array(participantSummarySchema).nullish(),
   createdAt: z.string(),
@@ -76,6 +78,8 @@ export const planCreateWithOwnerSchema = z.object({
   startDate: z.string().datetime().nullish(),
   endDate: z.string().datetime().nullish(),
   tags: z.array(z.string()).nullish(),
+  defaultLang: z.string().max(10).optional(),
+  currency: z.string().max(10).optional(),
   owner: ownerBodySchema,
   participants: z.array(participantCreateSchema).optional(),
 });
@@ -89,6 +93,8 @@ export const planPatchSchema = z.object({
   startDate: z.string().datetime().nullish(),
   endDate: z.string().datetime().nullish(),
   tags: z.array(z.string()).nullish(),
+  defaultLang: z.string().max(10).nullish(),
+  currency: z.string().max(10).nullish(),
 });
 
 export const planPreviewSchema = z.object({

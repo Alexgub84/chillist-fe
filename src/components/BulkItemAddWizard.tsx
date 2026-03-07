@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import Modal from './shared/Modal';
 import { useLanguage } from '../contexts/useLanguage';
+import { usePlanContext } from '../hooks/usePlanContext';
 import type { ItemCategory } from '../core/schemas/item';
 import type { ItemCreate } from '../core/schemas/item';
 import {
@@ -45,6 +46,8 @@ export default function BulkItemAddWizard({
 }: BulkItemAddWizardProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const planCtx = usePlanContext();
+  const planLanguage = planCtx?.planLanguage ?? language;
 
   const defaultQuantity = useCallback(
     (item: CommonItemBase): number => {
@@ -86,7 +89,7 @@ export default function BulkItemAddWizard({
     setTimeout(reset, 200);
   }
 
-  const items = useMemo(() => getCommonItems(language), [language]);
+  const items = useMemo(() => getCommonItems(planLanguage), [planLanguage]);
 
   const subcategories = useMemo(() => {
     if (!category) return [];
@@ -416,6 +419,7 @@ function CategoryStep({ onSelect }: { onSelect: (cat: ItemCategory) => void }) {
       <div className="grid grid-cols-2 gap-3">
         <button
           type="button"
+          data-testid="bulk-cat-equipment"
           onClick={() => onSelect('equipment')}
           className="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-colors cursor-pointer"
         >
@@ -439,6 +443,7 @@ function CategoryStep({ onSelect }: { onSelect: (cat: ItemCategory) => void }) {
         </button>
         <button
           type="button"
+          data-testid="bulk-cat-food"
           onClick={() => onSelect('food')}
           className="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-gray-200 hover:border-green-400 hover:bg-green-50 transition-colors cursor-pointer"
         >
@@ -505,6 +510,7 @@ function SubcategoryStep({
             <button
               key={sub.name}
               type="button"
+              data-testid={`bulk-subcat-${sub.name.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => onSelect(sub.name)}
               className="w-full flex items-center justify-between gap-2 py-2.5 px-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-300 transition-colors text-start cursor-pointer"
             >

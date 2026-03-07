@@ -17,6 +17,7 @@ import { Route as CreatePlanRouteImport } from './routes/create-plan';
 import { Route as PlanPlanIdRouteImport } from './routes/plan.$planId';
 import { Route as ManageParticipantsPlanIdRouteImport } from './routes/manage-participants.$planId';
 import { Route as ItemsPlanIdRouteImport } from './routes/items.$planId';
+import { Route as ExpensesPlanIdRouteImport } from './routes/expenses.$planId';
 import { Route as AdminPlansRouteImport } from './routes/admin.plans';
 import { Route as AdminLastUpdatedRouteImport } from './routes/admin.last-updated';
 import { Route as InvitePlanIdInviteTokenRouteImport } from './routes/invite.$planId.$inviteToken';
@@ -89,6 +90,13 @@ const ItemsPlanIdRoute = ItemsPlanIdRouteImport.update({
 } as any).lazy(() =>
   import('./routes/items.$planId.lazy').then((d) => d.Route)
 );
+const ExpensesPlanIdRoute = ExpensesPlanIdRouteImport.update({
+  id: '/expenses/$planId',
+  path: '/expenses/$planId',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/expenses.$planId.lazy').then((d) => d.Route)
+);
 const AdminPlansRoute = AdminPlansRouteImport.update({
   id: '/admin/plans',
   path: '/admin/plans',
@@ -120,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/plans': typeof PlansLazyRoute;
   '/admin/last-updated': typeof AdminLastUpdatedRoute;
   '/admin/plans': typeof AdminPlansRoute;
+  '/expenses/$planId': typeof ExpensesPlanIdRoute;
   '/items/$planId': typeof ItemsPlanIdRoute;
   '/manage-participants/$planId': typeof ManageParticipantsPlanIdRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
@@ -136,6 +145,7 @@ export interface FileRoutesByTo {
   '/plans': typeof PlansLazyRoute;
   '/admin/last-updated': typeof AdminLastUpdatedRoute;
   '/admin/plans': typeof AdminPlansRoute;
+  '/expenses/$planId': typeof ExpensesPlanIdRoute;
   '/items/$planId': typeof ItemsPlanIdRoute;
   '/manage-participants/$planId': typeof ManageParticipantsPlanIdRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
@@ -153,6 +163,7 @@ export interface FileRoutesById {
   '/plans': typeof PlansLazyRoute;
   '/admin/last-updated': typeof AdminLastUpdatedRoute;
   '/admin/plans': typeof AdminPlansRoute;
+  '/expenses/$planId': typeof ExpensesPlanIdRoute;
   '/items/$planId': typeof ItemsPlanIdRoute;
   '/manage-participants/$planId': typeof ManageParticipantsPlanIdRoute;
   '/plan/$planId': typeof PlanPlanIdRoute;
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/plans'
     | '/admin/last-updated'
     | '/admin/plans'
+    | '/expenses/$planId'
     | '/items/$planId'
     | '/manage-participants/$planId'
     | '/plan/$planId'
@@ -187,6 +199,7 @@ export interface FileRouteTypes {
     | '/plans'
     | '/admin/last-updated'
     | '/admin/plans'
+    | '/expenses/$planId'
     | '/items/$planId'
     | '/manage-participants/$planId'
     | '/plan/$planId'
@@ -203,6 +216,7 @@ export interface FileRouteTypes {
     | '/plans'
     | '/admin/last-updated'
     | '/admin/plans'
+    | '/expenses/$planId'
     | '/items/$planId'
     | '/manage-participants/$planId'
     | '/plan/$planId'
@@ -220,6 +234,7 @@ export interface RootRouteChildren {
   PlansLazyRoute: typeof PlansLazyRoute;
   AdminLastUpdatedRoute: typeof AdminLastUpdatedRoute;
   AdminPlansRoute: typeof AdminPlansRoute;
+  ExpensesPlanIdRoute: typeof ExpensesPlanIdRoute;
   ItemsPlanIdRoute: typeof ItemsPlanIdRoute;
   ManageParticipantsPlanIdRoute: typeof ManageParticipantsPlanIdRoute;
   PlanPlanIdRoute: typeof PlanPlanIdRoute;
@@ -305,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItemsPlanIdRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/expenses/$planId': {
+      id: '/expenses/$planId';
+      path: '/expenses/$planId';
+      fullPath: '/expenses/$planId';
+      preLoaderRoute: typeof ExpensesPlanIdRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/admin/plans': {
       id: '/admin/plans';
       path: '/admin/plans';
@@ -340,6 +362,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlansLazyRoute: PlansLazyRoute,
   AdminLastUpdatedRoute: AdminLastUpdatedRoute,
   AdminPlansRoute: AdminPlansRoute,
+  ExpensesPlanIdRoute: ExpensesPlanIdRoute,
   ItemsPlanIdRoute: ItemsPlanIdRoute,
   ManageParticipantsPlanIdRoute: ManageParticipantsPlanIdRoute,
   PlanPlanIdRoute: PlanPlanIdRoute,

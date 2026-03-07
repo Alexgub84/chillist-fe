@@ -89,7 +89,8 @@ export default function ItemForm({
   const category = watch('category');
   const isEquipment = category === 'equipment';
 
-  const items = useMemo(() => getCommonItems(language), [language]);
+  const planLanguage = planCtx?.planLanguage ?? language;
+  const items = useMemo(() => getCommonItems(planLanguage), [planLanguage]);
   const enrichedItems = useMemo(() => getEnrichedItems(), []);
 
   const itemNames = useMemo(() => items.map((i) => i.name), [items]);
@@ -105,7 +106,7 @@ export default function ItemForm({
         isPersonal?: boolean;
       }
     >();
-    if (language === 'en') {
+    if (planLanguage === 'en') {
       for (const item of enrichedItems) {
         const entry = {
           category: item.category,
@@ -131,11 +132,11 @@ export default function ItemForm({
       }
     }
     return map;
-  }, [language, items, enrichedItems]);
+  }, [planLanguage, items, enrichedItems]);
 
   const searchIndex = useMemo(() => {
     const map = new Map<string, string[]>();
-    if (language === 'en') {
+    if (planLanguage === 'en') {
       for (const item of enrichedItems) {
         const terms = [
           item.name.toLowerCase(),
@@ -150,7 +151,7 @@ export default function ItemForm({
       }
     }
     return map;
-  }, [language, items, enrichedItems]);
+  }, [planLanguage, items, enrichedItems]);
 
   const filterFn = useCallback(
     (itemName: string, query: string) => {
