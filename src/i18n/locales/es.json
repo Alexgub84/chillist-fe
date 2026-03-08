@@ -461,6 +461,7 @@
     "addOwnerCancel": "Cancelar"
   },
   "invite": {
+    "inviteParticipants": "Invitar participantes",
     "copied": "¡Enlace de invitación copiado!",
     "copiedAfterCreate": "¡Participante agregado! Enlace de invitación copiado al portapapeles.",
     "copyLink": "Copiar enlace de invitación",
@@ -554,7 +555,10 @@
     "fairShare": "Parte justa por persona",
     "settled": "Saldado",
     "allSettled": "¡Todo saldado! Todos han pagado por igual.",
-    "transfersTitle": "Quién paga a quién"
+    "transfersTitle": "Quién paga a quién",
+    "expenseListTitle": "Todos los gastos",
+    "amountCopied": "¡Monto copiado!",
+    "copyTransfer": "\u200E\u2068{{from}}\u2069 paga a \u2068{{to}}\u2069: \u2068{{amount}} {{currency}}\u2069"
   },
   "admin": {
     "plansTitle": "Admin — Todos los planes",

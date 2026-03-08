@@ -320,6 +320,38 @@ function ExpensesContent({
                         <span className="ms-auto font-semibold text-gray-900">
                           {tr.amount.toFixed(2)} {planCurrency}
                         </span>
+                        <button
+                          type="button"
+                          data-testid={`copy-transfer-${idx}`}
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              t('expenses.copyTransfer', {
+                                from: getParticipantName(tr.from),
+                                to: getParticipantName(tr.to),
+                                amount: tr.amount.toFixed(2),
+                                currency: planCurrency,
+                              })
+                            );
+                            toast.success(t('expenses.amountCopied'));
+                          }}
+                          className="p-1 text-gray-300 hover:text-gray-500 transition-colors shrink-0"
+                          aria-label={t('expenses.amountCopied')}
+                        >
+                          <svg
+                            className="w-3.5 h-3.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -337,14 +369,39 @@ function ExpensesContent({
 
         {!isLoading && expenses.length === 0 && (
           <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center">
-            <p className="text-gray-500 text-sm sm:text-base">
+            <p className="text-gray-500 text-sm sm:text-base mb-4">
               {t('expenses.noExpenses')}
             </p>
+            <button
+              type="button"
+              data-testid="add-expense-empty-btn"
+              onClick={() => setAddModalOpen(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              {t('expenses.addExpense')}
+            </button>
           </div>
         )}
 
         {!isLoading && expenses.length > 0 && (
           <div className="space-y-3">
+            <h2 className="text-lg font-semibold text-gray-800">
+              {t('expenses.expenseListTitle')}
+            </h2>
             {expenses.map((expense) => {
               const editable = canEditExpense(expense);
               return (

@@ -44,9 +44,10 @@ export async function shareInviteLink(
   return copied ? 'copied' : 'failed';
 }
 
-export async function copyPlanUrl(): Promise<boolean> {
+export async function copyPlanUrl(url?: string): Promise<boolean> {
+  const href = url ?? window.location.href;
   try {
-    await navigator.clipboard.writeText(window.location.href);
+    await navigator.clipboard.writeText(href);
     return true;
   } catch (err) {
     console.warn(
@@ -57,20 +58,22 @@ export async function copyPlanUrl(): Promise<boolean> {
 }
 
 export async function sharePlanUrl(
-  planTitle: string
+  planTitle: string,
+  url?: string
 ): Promise<'shared' | 'copied' | 'failed'> {
+  const href = url ?? window.location.href;
   if (typeof navigator.share === 'function') {
     try {
       await navigator.share({
         title: i18n.t('invite.shareTitle'),
         text: i18n.t('invite.shareText', { title: planTitle }),
-        url: window.location.href,
+        url: href,
       });
       return 'shared';
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') return 'failed';
     }
   }
-  const copied = await copyPlanUrl();
+  const copied = await copyPlanUrl(href);
   return copied ? 'copied' : 'failed';
 }
