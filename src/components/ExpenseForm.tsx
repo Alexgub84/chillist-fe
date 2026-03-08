@@ -48,7 +48,11 @@ export default function ExpenseForm({
   const resolvedDefaults: ExpenseFormValues = {
     participantId:
       defaultValues?.participantId ??
-      (isOwner ? '' : (currentParticipantId ?? '')),
+      (participants.length === 1
+        ? participants[0].participantId
+        : isOwner
+          ? ''
+          : (currentParticipantId ?? '')),
     amount: defaultValues?.amount ?? ('' as unknown as number),
     description: defaultValues?.description ?? '',
     itemIds: defaultValues?.itemIds ?? [],
@@ -74,6 +78,7 @@ export default function ExpenseForm({
     return items.filter(
       (item) =>
         item.isAllParticipants ||
+        item.assignmentStatusList.length === 0 ||
         item.assignmentStatusList.some(
           (a) => a.participantId === selectedParticipantId
         )
@@ -87,6 +92,18 @@ export default function ExpenseForm({
       setValue('itemIds', [], { shouldDirty: true });
     }
   }, [selectedParticipantId, setValue]);
+
+  useEffect(() => {
+    if (
+      participants.length === 1 &&
+      canSelectParticipant &&
+      !selectedParticipantId
+    ) {
+      setValue('participantId', participants[0].participantId, {
+        shouldDirty: false,
+      });
+    }
+  }, [participants, canSelectParticipant, selectedParticipantId, setValue]);
 
   return (
     <form
@@ -152,19 +169,31 @@ export default function ExpenseForm({
         />
       </div>
 
-      {participantItems.length > 0 ? (
-        <ItemMultiSelect
-          items={participantItems}
-          selectedIds={selectedItemIds}
-          onChange={(ids) => setValue('itemIds', ids, { shouldDirty: true })}
-        />
-      ) : (
-        selectedParticipantId &&
-        items.length > 0 && (
-          <p className="text-sm text-gray-400 text-center py-2">
-            {t('expenses.noItemsForParticipant')}
-          </p>
-        )
+      {selectedParticipantId && (
+        <div>
+          {participantItems.length > 0 ? (
+            <ItemMultiSelect
+              items={participantItems}
+              selectedIds={selectedItemIds}
+              onChange={(ids) =>
+                setValue('itemIds', ids, { shouldDirty: true })
+              }
+            />
+          ) : (
+            <>
+              <FormLabel>{t('expenses.selectItems')}</FormLabel>
+              {items.length > 0 ? (
+                <p className="text-sm text-gray-400 py-2">
+                  {t('expenses.noItemsForParticipant')}
+                </p>
+              ) : (
+                <p className="text-sm text-gray-400 py-2">
+                  {t('expenses.noItemsInPlan')}
+                </p>
+              )}
+            </>
+          )}
+        </div>
       )}
 
       <div className="flex justify-end gap-3 pt-2">
@@ -202,7 +231,7 @@ function ItemMultiSelect({
   onChange: (ids: string[]) => void;
 }) {
   const { t } = useTranslation();
-  const [open, setOpen] = useState(selectedIds.length > 0);
+  const [open, setOpen] = useState(true);
   const [search, setSearch] = useState('');
 
   const filtered = useMemo(() => {
@@ -337,7 +366,7 @@ function ItemMultiSelect({
             {Array.from(grouped.entries()).map(([category, subcatMap]) => (
               <div key={category}>
                 <div className="px-3 py-1 text-xs font-semibold text-gray-500 uppercase bg-gray-50 sticky top-0 z-10">
-                  {t(`items.${category}`)}
+                  {t(`categories.${category}`)}
                 </div>
                 {Array.from(subcatMap.entries()).map(
                   ([subcategory, subcatItems]) => {

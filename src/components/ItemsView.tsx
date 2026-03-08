@@ -280,28 +280,21 @@ export default function ItemsView({
           </div>
         )}
 
-        {items.length === 0 && (
-          <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 text-center mb-4">
-            <p className="text-gray-500 text-sm sm:text-base">
-              {t('items.empty')}
-            </p>
-          </div>
-        )}
-
-        {items.length > 0 && (
-          <ItemsList
-            items={filteredItems}
-            participants={participants}
-            currentParticipantId={statusParticipantId}
-            listFilter={listFilter}
-            selfAssignParticipantId={myParticipantId}
-            canEditItem={canEditItem}
-            onEditItem={(itemId) => setItemModalId(itemId)}
-            onUpdateItem={handleUpdateItem}
-            onBulkAssign={onBulkAssign}
-            groupBySubcategory
-          />
-        )}
+        <ItemsList
+          items={items.length > 0 ? filteredItems : []}
+          participants={participants}
+          currentParticipantId={statusParticipantId}
+          listFilter={listFilter}
+          selfAssignParticipantId={myParticipantId}
+          canEditItem={canEditItem}
+          onEditItem={(itemId) => setItemModalId(itemId)}
+          onUpdateItem={handleUpdateItem}
+          onBulkAssign={onBulkAssign}
+          groupBySubcategory
+          onAddItems={
+            items.length === 0 ? () => setBulkAddOpen(true) : undefined
+          }
+        />
 
         <Modal
           open={!!itemModalId}

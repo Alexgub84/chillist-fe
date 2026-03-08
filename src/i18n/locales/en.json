@@ -484,6 +484,7 @@
   },
   "invite": {
     "inviteButton": "Invite",
+    "inviteParticipants": "Invite participants",
     "copied": "Invite link copied!",
     "copiedAfterCreate": "Participant added! Invite link copied to clipboard.",
     "copyLink": "Copy invite link",
@@ -577,7 +578,10 @@
     "fairShare": "Fair share per person",
     "settled": "Settled",
     "allSettled": "All settled! Everyone has paid equally.",
-    "transfersTitle": "Who pays whom"
+    "transfersTitle": "Who pays whom",
+    "expenseListTitle": "All Expenses",
+    "amountCopied": "Amount copied!",
+    "copyTransfer": "\u200E\u2068{{from}}\u2069 pays \u2068{{to}}\u2069: \u2068{{amount}} {{currency}}\u2069"
   },
   "admin": {
     "plansTitle": "Admin — All Plans",

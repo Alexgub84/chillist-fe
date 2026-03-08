@@ -205,7 +205,7 @@
     "saving": "שומר…",
     "cancel": "ביטול",
     "bulkAdd": "הוספה מרובה",
-    "bulkAddTitle": "הוספת פריטים מרובים",
+    "bulkAddTitle": "הוסף פריטים ",
     "bulkAddPickCategory": "מה מוסיפים?",
     "bulkAddPickSubcategory": "בחרו תת-קטגוריה",
     "bulkAddSelectItems": "בחרו פריטים",
@@ -484,6 +484,7 @@
   },
   "invite": {
     "inviteButton": "הזמנה",
+    "inviteParticipants": "הזמן משתתפים",
     "copied": "קישור הזמנה הועתק!",
     "copiedAfterCreate": "המשתתף נוסף! קישור ההזמנה הועתק ללוח.",
     "copyLink": "העתקת קישור הזמנה",
@@ -577,7 +578,10 @@
     "fairShare": "חלק שווה לאדם",
     "settled": "מסולק",
     "allSettled": "הכל מסולק! כולם שילמו באופן שווה.",
-    "transfersTitle": "מי משלם למי"
+    "transfersTitle": "מי משלם למי",
+    "expenseListTitle": "כל ההוצאות",
+    "amountCopied": "הסכום הועתק!",
+    "copyTransfer": "\u200F\u2068{{from}}\u2069 משלם ל\u2068{{to}}\u2069: \u2068{{amount}} {{currency}}\u2069"
   },
   "admin": {
     "plansTitle": "מנהל — כל התוכניות",
