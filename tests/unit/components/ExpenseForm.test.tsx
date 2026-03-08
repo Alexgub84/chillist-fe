@@ -373,10 +373,8 @@ describe('ExpenseForm', () => {
       ).toBeInTheDocument();
     });
 
-    it('expands item list and shows items grouped by subcategory', async () => {
+    it('shows items grouped by subcategory when expanded by default', () => {
       renderWithItems();
-      const user = userEvent.setup();
-      await user.click(screen.getByTestId('toggle-item-select'));
       expect(screen.getByText('Tent')).toBeInTheDocument();
       expect(screen.getByText('Water Bottles')).toBeInTheDocument();
       expect(screen.getByText('Shared Cooler')).toBeInTheDocument();
@@ -391,7 +389,6 @@ describe('ExpenseForm', () => {
     it('selects and deselects an item via checkbox', async () => {
       renderWithItems();
       const user = userEvent.setup();
-      await user.click(screen.getByTestId('toggle-item-select'));
 
       const tentLabel = screen.getByText('Tent').closest('label')!;
       const tentCheckbox = tentLabel.querySelector(
@@ -407,7 +404,6 @@ describe('ExpenseForm', () => {
     it('bulk-selects all items in a subcategory', async () => {
       renderWithItems();
       const user = userEvent.setup();
-      await user.click(screen.getByTestId('toggle-item-select'));
 
       const subcatLabel = screen.getByTestId('subcat-Venue Setup and Layout');
       const subcatCheckbox = subcatLabel.querySelector(
@@ -440,7 +436,6 @@ describe('ExpenseForm', () => {
       const user = userEvent.setup();
 
       await user.type(getAmountInput(), '50');
-      await user.click(screen.getByTestId('toggle-item-select'));
 
       const tentLabel = screen.getByText('Tent').closest('label')!;
       const tentCheckbox = tentLabel.querySelector(
@@ -476,7 +471,6 @@ describe('ExpenseForm', () => {
     it('filters items by search', async () => {
       renderWithItems();
       const user = userEvent.setup();
-      await user.click(screen.getByTestId('toggle-item-select'));
 
       const searchInput = screen.getByTestId('item-search-input');
       await user.type(searchInput, 'tent');
