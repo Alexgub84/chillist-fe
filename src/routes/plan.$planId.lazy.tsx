@@ -202,10 +202,30 @@ function PlanPage() {
   }
 
   async function handleEditPlan(
-    updates: import('../core/schemas/plan').PlanPatch
+    payload: import('../components/EditPlanForm').EditPlanSubmitPayload
   ) {
-    const success = await actions.updatePlanDetails(updates);
-    if (success) setShowEditPlanModal(false);
+    const success = await actions.updatePlanDetails(payload.planPatch);
+    if (!success) return;
+
+    if (!plan || isNotParticipantResponse(plan)) {
+      setShowEditPlanModal(false);
+      return;
+    }
+
+    const ownerId = plan.participants.find(
+      (p: { role: string }) => p.role === 'owner'
+    )?.participantId;
+    if (ownerId) {
+      await actions.updateParticipantPreferences(ownerId, {
+        adultsCount: payload.ownerPreferences.adultsCount ?? undefined,
+        kidsCount: payload.ownerPreferences.kidsCount ?? undefined,
+        foodPreferences: payload.ownerPreferences.foodPreferences ?? undefined,
+        allergies: payload.ownerPreferences.allergies ?? undefined,
+        notes: payload.ownerPreferences.notes ?? undefined,
+      });
+    }
+
+    setShowEditPlanModal(false);
   }
 
   async function handleTransferOwnership() {
@@ -327,6 +347,69 @@ function PlanPage() {
               isDeleting={actions.isDeletingPlan}
             />
           </CollapsibleSection>
+
+          <div
+            data-testid="headcount-section"
+            className="mt-4 sm:mt-6 bg-white rounded-xl shadow-sm p-4 sm:p-6"
+          >
+            <h2 className="text-base font-semibold text-gray-800 mb-3">
+              {t('plan.headcount')}
+            </h2>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-lg border border-blue-200 bg-blue-50/50 p-3">
+                <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                  {t('plan.reported')}
+                </p>
+                <div className="flex gap-4">
+                  <div>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {totalAdults}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {t('plan.reportedAdults')}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {totalKids}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {t('plan.reportedKids')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-gray-200 bg-gray-50/50 p-3">
+                <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                  {t('plan.estimated')}
+                </p>
+                <div className="flex gap-4">
+                  <div>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {plan.estimatedAdults ?? (
+                        <span className="text-gray-400">—</span>
+                      )}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {t('plan.estimatedAdults')}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {plan.estimatedKids ?? (
+                        <span className="text-gray-400">—</span>
+                      )}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {t('plan.estimatedKids')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="mt-4 sm:mt-6">
             <Forecast
@@ -580,6 +663,9 @@ function PlanPage() {
             <EditPlanForm
               key={showEditPlanModal ? 'open' : 'closed'}
               plan={plan}
+              ownerParticipant={
+                plan.participants.find((p) => p.role === 'owner') ?? null
+              }
               onSubmit={handleEditPlan}
               onCancel={() => setShowEditPlanModal(false)}
               isSubmitting={actions.isUpdatingPlan}

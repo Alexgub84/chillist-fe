@@ -34,6 +34,7 @@ interface BulkItemAddWizardProps {
   existingItems?: Map<string, string>;
   onCancel?: (itemIds: string[]) => Promise<void>;
   planPoints?: number;
+  inline?: boolean;
 }
 
 export default function BulkItemAddWizard({
@@ -43,6 +44,7 @@ export default function BulkItemAddWizard({
   existingItems,
   onCancel,
   planPoints,
+  inline,
 }: BulkItemAddWizardProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
@@ -346,6 +348,61 @@ export default function BulkItemAddWizard({
           ? t(`subcategories.${subcategory}`, subcategory)
           : t('items.bulkAddSelectItems');
 
+  const content = (
+    <div className={inline ? '' : 'px-4 sm:px-6 pb-4 sm:pb-6'}>
+      {step === 'category' && (
+        <CategoryStep
+          onSelect={(cat) => {
+            setCategory(cat);
+            setStep('subcategory');
+          }}
+        />
+      )}
+
+      {step === 'subcategory' && category && (
+        <SubcategoryStep
+          subcategories={subcategories}
+          onSelect={(sub) => {
+            setSubcategory(sub);
+            setStep('items');
+          }}
+          onBack={() => {
+            setStep('category');
+            setCategory(null);
+          }}
+        />
+      )}
+
+      {step === 'items' && (
+        <ItemsStep
+          filteredItems={filteredItems}
+          subcategoryItems={subcategoryItems}
+          selected={selected}
+          allFilteredSelected={allFilteredSelected}
+          search={search}
+          selectedCount={selectedCount}
+          hasWork={hasWork}
+          isSubmitting={isSubmitting}
+          getExistingItemId={getExistingItemId}
+          uncheckedExisting={uncheckedExisting}
+          onSearchChange={setSearch}
+          onAddCustom={addCustomItem}
+          onToggleItem={toggleItem}
+          onToggleSelectAll={toggleSelectAll}
+          onUpdateQuantity={updateQuantity}
+          onSubmit={handleSubmit}
+          onBack={() => {
+            setStep('subcategory');
+            setSubcategory(null);
+            setSearch('');
+          }}
+        />
+      )}
+    </div>
+  );
+
+  if (inline) return content;
+
   return (
     <Modal
       open={open}
@@ -354,56 +411,7 @@ export default function BulkItemAddWizard({
       testId="bulk-item-add-wizard"
       showCloseButton
     >
-      <div className="px-4 sm:px-6 pb-4 sm:pb-6">
-        {step === 'category' && (
-          <CategoryStep
-            onSelect={(cat) => {
-              setCategory(cat);
-              setStep('subcategory');
-            }}
-          />
-        )}
-
-        {step === 'subcategory' && category && (
-          <SubcategoryStep
-            subcategories={subcategories}
-            onSelect={(sub) => {
-              setSubcategory(sub);
-              setStep('items');
-            }}
-            onBack={() => {
-              setStep('category');
-              setCategory(null);
-            }}
-          />
-        )}
-
-        {step === 'items' && (
-          <ItemsStep
-            filteredItems={filteredItems}
-            subcategoryItems={subcategoryItems}
-            selected={selected}
-            allFilteredSelected={allFilteredSelected}
-            search={search}
-            selectedCount={selectedCount}
-            hasWork={hasWork}
-            isSubmitting={isSubmitting}
-            getExistingItemId={getExistingItemId}
-            uncheckedExisting={uncheckedExisting}
-            onSearchChange={setSearch}
-            onAddCustom={addCustomItem}
-            onToggleItem={toggleItem}
-            onToggleSelectAll={toggleSelectAll}
-            onUpdateQuantity={updateQuantity}
-            onSubmit={handleSubmit}
-            onBack={() => {
-              setStep('subcategory');
-              setSubcategory(null);
-              setSearch('');
-            }}
-          />
-        )}
-      </div>
+      {content}
     </Modal>
   );
 }

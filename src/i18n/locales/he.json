@@ -118,7 +118,15 @@
     "deleteCancel": "ביטול",
     "deleted": "התוכנית נמחקה",
     "deleting": "מוחק…",
-    "planDetails": "פרטי תוכנית"
+    "planDetails": "פרטי תוכנית",
+    "headcount": "ספירת משתתפים",
+    "reportedAdults": "מבוגרים מדווחים",
+    "reportedKids": "ילדים מדווחים",
+    "estimatedAdults": "מבוגרים משוערים",
+    "estimatedKids": "ילדים משוערים",
+    "reported": "מדווח",
+    "estimated": "משוער",
+    "notSet": "לא הוגדר"
   },
   "addParticipant": {
     "firstName": "שם פרטי *",
@@ -443,7 +451,15 @@
     "submit": "שמירת העדפות",
     "skip": "דלג לעת עתה",
     "updated": "ההעדפות נשמרו",
-    "rsvpLabel": "מגיעים?"
+    "rsvpLabel": "מגיעים?",
+    "ownerSectionTitle": "הקבוצה שלך",
+    "ownerSectionSubtitle": "כמה אנשים מגיעים איתך?",
+    "estimationSectionTitle": "משתתפים נוספים",
+    "estimationSectionSubtitle": "הערכה של כמה אנשים נוספים יצטרפו — עוזר לתכנן כמויות.",
+    "estimatedAdults": "מבוגרים משוערים",
+    "estimatedAdultsPlaceholder": "0",
+    "estimatedKids": "ילדים משוערים",
+    "estimatedKidsPlaceholder": "0"
   },
   "manageParticipants": {
     "title": "ניהול משתתפים",
@@ -582,6 +598,16 @@
     "expenseListTitle": "כל ההוצאות",
     "amountCopied": "הסכום הועתק!",
     "copyTransfer": "\u200F\u2068{{from}}\u2069 משלם ל\u2068{{to}}\u2069: \u2068{{amount}} {{currency}}\u2069"
+  },
+  "wizard": {
+    "step1Title": "פרטי תוכנית",
+    "step2Title": "העדפות",
+    "step3Title": "הוספת פריטים",
+    "next": "הבא",
+    "back": "חזרה",
+    "creating": "יוצר תוכנית…",
+    "skipItems": "דלג — עבור לתוכנית",
+    "locationPlaceholder": "חפש מקום…"
   },
   "admin": {
     "plansTitle": "מנהל — כל התוכניות",
