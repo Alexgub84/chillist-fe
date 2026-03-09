@@ -114,16 +114,17 @@ test.describe('Plan creation via UI', () => {
       .getByPlaceholder('Add details about your plan')
       .fill('Automated test plan');
 
-    await page.getByPlaceholder('First name').first().fill('Alex');
-    await page.getByPlaceholder('Last name').first().fill('Test');
-    await page.getByPlaceholder('Phone number').first().fill('555-0100');
-
     await page.getByLabel('One-day plan').check();
     await page.locator('input[type="date"]').fill('2026-07-15');
 
-    await page.getByRole('button', { name: /create plan/i }).click();
+    await page.getByRole('button', { name: /^next$/i }).click();
 
-    const skipBtn = page.getByRole('button', { name: /skip for now/i });
+    await expect(page.getByTestId('wizard-step2')).toBeVisible({
+      timeout: 10000,
+    });
+    await page.getByRole('button', { name: /^next$/i }).click();
+
+    const skipBtn = page.getByTestId('wizard-skip-items');
     await expect(skipBtn).toBeVisible({ timeout: 15000 });
     await skipBtn.scrollIntoViewIfNeeded();
     await skipBtn.click({ force: isMobile });
@@ -135,7 +136,7 @@ test.describe('Plan creation via UI', () => {
         timeout: 10000,
       }
     );
-    await expect(page.getByText('Alex Test').first()).toBeVisible();
+    await expect(page.getByText('Regular User').first()).toBeVisible();
   });
 });
 
@@ -307,21 +308,26 @@ test.describe('Edit Plan', () => {
     await expect(editBtn).toBeVisible();
     await editBtn.click();
 
-    const editForm = page.locator('form').last();
-    await expect(editForm).toBeVisible();
+    const step1Form = page.getByTestId('edit-wizard-step1');
+    await expect(step1Form).toBeVisible();
 
-    const titleInput = editForm.getByPlaceholder('Enter plan title');
+    const titleInput = step1Form.getByPlaceholder('Enter plan title');
     await expect(titleInput).toHaveValue('Original Trip Name');
     await titleInput.clear();
     await titleInput.fill('Updated Trip Name');
 
-    const submitBtn = editForm.getByRole('button', { name: /update plan/i });
+    await step1Form.getByRole('button', { name: /^next$/i }).click();
+
+    const step2Form = page.getByTestId('edit-wizard-step2');
+    await expect(step2Form).toBeVisible({ timeout: 5000 });
+
+    const submitBtn = step2Form.getByRole('button', { name: /update plan/i });
     await expect(submitBtn).toBeVisible();
     await Promise.all([
       page.waitForResponse((r) => r.request().method() === 'PATCH'),
       submitBtn.click(),
     ]);
-    await expect(editForm).toBeHidden({ timeout: 10000 });
+    await expect(step2Form).toBeHidden({ timeout: 10000 });
 
     await expect(page.getByTestId('plan-title')).toHaveText(
       'Updated Trip Name',

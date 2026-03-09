@@ -54,14 +54,12 @@ describe('CreatePlan - Navigation', () => {
   it('should navigate from plans list to create-plan page when user clicks Create New Plan', async () => {
     const user = userEvent.setup();
 
-    // Create router with real components
     const rootRoute = createRootRoute();
 
     const plansRoute = createRoute({
       getParentRoute: () => rootRoute,
       path: '/plans',
       component: () => {
-        // Use real PlansList component
         const plans = [
           {
             planId: 'plan-1',
@@ -106,20 +104,16 @@ describe('CreatePlan - Navigation', () => {
       expect(screen.getByText('Summer Picnic')).toBeInTheDocument();
     });
 
-    // Click the "Create New Plan" link
     const createLink = screen.getByText(/create new plan/i);
     await user.click(createLink);
 
-    // Verify navigation to create-plan page
     await waitFor(() => {
-      expect(screen.getByText(/first name/i)).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /create plan/i })
-      ).toBeInTheDocument();
+      expect(screen.getByTestId('wizard-step1')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument();
     });
   });
 
-  it('should display create plan form when navigating directly to /create-plan', async () => {
+  it('should display create plan wizard when navigating directly to /create-plan', async () => {
     const rootRoute = createRootRoute();
 
     const createPlanRoute = createRoute({
@@ -146,10 +140,8 @@ describe('CreatePlan - Navigation', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText(/first name/i)).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /create plan/i })
-      ).toBeInTheDocument();
+      expect(screen.getByTestId('wizard-step1')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument();
     });
   });
 });

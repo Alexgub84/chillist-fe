@@ -2854,6 +2854,10 @@ export interface components {
       defaultLang?: string | null;
       /** @description ISO 4217 currency code (e.g. USD, EUR, ILS) */
       currency?: string | null;
+      /** @description Estimated number of adult participants for this plan */
+      estimatedAdults?: number | null;
+      /** @description Estimated number of child participants for this plan */
+      estimatedKids?: number | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */
@@ -2899,6 +2903,10 @@ export interface components {
       defaultLang?: string;
       /** @description ISO 4217 currency code (e.g. USD, EUR, ILS) */
       currency?: string;
+      /** @description Estimated number of adult participants for this plan */
+      estimatedAdults?: number;
+      /** @description Estimated number of child participants for this plan */
+      estimatedKids?: number;
       owner: components['schemas']['def-9'];
       participants?: components['schemas']['def-21'][];
     };
@@ -2920,6 +2928,10 @@ export interface components {
       defaultLang?: string | null;
       /** @description ISO 4217 currency code (e.g. USD, EUR, ILS). Send null to clear. */
       currency?: string | null;
+      /** @description Estimated number of adult participants. Send null to clear. */
+      estimatedAdults?: number | null;
+      /** @description Estimated number of child participants. Send null to clear. */
+      estimatedKids?: number | null;
     };
     /** PlanIdParam */
     'def-12': {
@@ -3142,6 +3154,10 @@ export interface components {
       defaultLang?: string | null;
       /** @description ISO 4217 currency code (e.g. USD, EUR, ILS) */
       currency?: string | null;
+      /** @description Estimated number of adult participants for this plan */
+      estimatedAdults?: number | null;
+      /** @description Estimated number of child participants for this plan */
+      estimatedKids?: number | null;
       /** Format: date-time */
       createdAt: string;
       /** Format: date-time */

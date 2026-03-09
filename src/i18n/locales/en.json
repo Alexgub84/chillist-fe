@@ -118,7 +118,15 @@
     "deleteCancel": "Cancel",
     "deleted": "Plan deleted",
     "deleting": "Deleting…",
-    "planDetails": "Plan Details"
+    "planDetails": "Plan Details",
+    "headcount": "Headcount",
+    "reportedAdults": "Reported Adults",
+    "reportedKids": "Reported Kids",
+    "estimatedAdults": "Estimated Adults",
+    "estimatedKids": "Estimated Kids",
+    "reported": "Reported",
+    "estimated": "Estimated",
+    "notSet": "Not set"
   },
   "addParticipant": {
     "firstName": "First Name *",
@@ -443,7 +451,15 @@
     "submit": "Save Preferences",
     "skip": "Skip for now",
     "updated": "Preferences saved",
-    "rsvpLabel": "Are you coming?"
+    "rsvpLabel": "Are you coming?",
+    "ownerSectionTitle": "Your Group",
+    "ownerSectionSubtitle": "How many people are coming with you?",
+    "estimationSectionTitle": "Other Participants",
+    "estimationSectionSubtitle": "Estimate how many others will join — helps plan the right amounts.",
+    "estimatedAdults": "Estimated adults",
+    "estimatedAdultsPlaceholder": "0",
+    "estimatedKids": "Estimated kids",
+    "estimatedKidsPlaceholder": "0"
   },
   "manageParticipants": {
     "title": "Manage Participants",
@@ -582,6 +598,16 @@
     "expenseListTitle": "All Expenses",
     "amountCopied": "Amount copied!",
     "copyTransfer": "\u200E\u2068{{from}}\u2069 pays \u2068{{to}}\u2069: \u2068{{amount}} {{currency}}\u2069"
+  },
+  "wizard": {
+    "step1Title": "Plan Details",
+    "step2Title": "Preferences",
+    "step3Title": "Add Items",
+    "next": "Next",
+    "back": "Back",
+    "creating": "Creating plan…",
+    "skipItems": "Skip — go to plan",
+    "locationPlaceholder": "Search for a place…"
   },
   "admin": {
     "plansTitle": "Admin — All Plans",
