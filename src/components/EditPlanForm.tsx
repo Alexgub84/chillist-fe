@@ -1,15 +1,17 @@
-import { useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { v5 as uuidv5 } from 'uuid';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
 import {
   planStatusSchema,
   type PlanWithDetails,
   type PlanPatch,
 } from '../core/schemas/plan';
+import type { Participant } from '../core/schemas/participant';
 import {
   SUPPORTED_LANGUAGES,
   SUPPORTED_CURRENCIES,
@@ -20,8 +22,11 @@ import {
 } from '../contexts/language-context';
 import { FormLabel } from './shared/FormLabel';
 import { FormInput, FormTextarea, FormSelect } from './shared/FormInput';
+import PreferencesFields from './shared/PreferencesFields';
 import LocationAutocomplete from './LocationAutocomplete';
 import type { PlaceResult } from './LocationAutocomplete';
+
+type EditStep = 1 | 2;
 
 const locationFormSchema = z
   .object({
@@ -34,7 +39,7 @@ const locationFormSchema = z
   })
   .optional();
 
-const editPlanFormSchema = z
+const step1Schema = z
   .object({
     title: z.string().min(1, 'Title is required'),
     description: z.string().optional(),
@@ -69,11 +74,53 @@ const editPlanFormSchema = z
     path: ['startDateDate'],
   });
 
-type FormValues = z.infer<typeof editPlanFormSchema>;
+type Step1Values = z.infer<typeof step1Schema>;
+
+function buildStep2Schema(t: (key: string) => string) {
+  return z.object({
+    adultsCount: z.coerce
+      .number({ invalid_type_error: t('validation.adultsCountInvalid') })
+      .int()
+      .min(1, t('validation.adultsCountMin'))
+      .optional(),
+    kidsCount: z.coerce
+      .number({ invalid_type_error: t('validation.kidsCountInvalid') })
+      .int()
+      .min(0, t('validation.kidsCountMin'))
+      .optional(),
+    foodPreferences: z.string().optional(),
+    allergies: z.string().optional(),
+    notes: z.string().optional(),
+    estimatedAdults: z.coerce
+      .number({ invalid_type_error: t('validation.adultsCountInvalid') })
+      .int()
+      .min(0, t('validation.kidsCountMin'))
+      .optional(),
+    estimatedKids: z.coerce
+      .number({ invalid_type_error: t('validation.kidsCountInvalid') })
+      .int()
+      .min(0, t('validation.kidsCountMin'))
+      .optional(),
+  });
+}
+
+type Step2Values = z.infer<ReturnType<typeof buildStep2Schema>>;
+
+export interface EditPlanSubmitPayload {
+  planPatch: PlanPatch;
+  ownerPreferences: {
+    adultsCount?: number | null;
+    kidsCount?: number | null;
+    foodPreferences?: string | null;
+    allergies?: string | null;
+    notes?: string | null;
+  };
+}
 
 interface EditPlanFormProps {
   plan: PlanWithDetails;
-  onSubmit: (updates: PlanPatch) => void | Promise<void>;
+  ownerParticipant?: Participant | null;
+  onSubmit: (payload: EditPlanSubmitPayload) => void | Promise<void>;
   onCancel: () => void;
   isSubmitting?: boolean;
 }
@@ -94,14 +141,174 @@ function isSameDate(start?: string | null, end?: string | null): boolean {
   return start.slice(0, 10) === end.slice(0, 10);
 }
 
+const UUID_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+
+function makeDateTime(date?: string, time?: string) {
+  if (!date) return undefined;
+  const hhmm = time || '00:00';
+  return `${date}T${hhmm}:00Z`;
+}
+
+function hasLocationData(loc?: {
+  name?: string;
+  city?: string;
+  country?: string;
+  region?: string;
+  latitude?: number | null;
+  longitude?: number | null;
+}) {
+  if (!loc) return false;
+  return (
+    [loc.name, loc.city, loc.country, loc.region].some(
+      (v) => v && v.trim().length > 0
+    ) ||
+    (loc.latitude != null && loc.longitude != null)
+  );
+}
+
+function EditStepIndicator({ currentStep }: { currentStep: EditStep }) {
+  const { t } = useTranslation();
+  const steps = [
+    { num: 1, label: t('wizard.step1Title') },
+    { num: 2, label: t('wizard.step2Title') },
+  ];
+
+  return (
+    <div className="flex items-center justify-center gap-0 mb-5">
+      {steps.map((step, i) => (
+        <div key={step.num} className="flex items-center">
+          <div className="flex flex-col items-center">
+            <div
+              className={clsx(
+                'w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold transition-colors',
+                step.num === currentStep
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-500'
+              )}
+            >
+              {step.num}
+            </div>
+            <span
+              className={clsx(
+                'text-xs mt-1 font-medium',
+                step.num === currentStep ? 'text-blue-600' : 'text-gray-400'
+              )}
+            >
+              {step.label}
+            </span>
+          </div>
+          {i < steps.length - 1 && (
+            <div className="w-12 sm:w-16 h-0.5 mx-1 sm:mx-2 mb-5 bg-gray-200" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function EditPlanForm({
   plan,
+  ownerParticipant,
   onSubmit,
   onCancel,
   isSubmitting = false,
 }: EditPlanFormProps) {
-  const { t } = useTranslation();
+  const [step, setStep] = useState<EditStep>(1);
+  const [step1Data, setStep1Data] = useState<Step1Values | null>(null);
 
+  function handleStep1Next(values: Step1Values) {
+    setStep1Data(values);
+    setStep(2);
+  }
+
+  async function handleStep2Submit(values: Step2Values) {
+    const s1 = step1Data;
+    if (!s1) return;
+
+    const parseTags = (csv?: string) =>
+      csv
+        ? csv
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : undefined;
+
+    const planPatch: PlanPatch = {
+      title: s1.title,
+      description: s1.description || null,
+      status: s1.status,
+      defaultLang: s1.defaultLang ?? null,
+      currency: s1.currency ?? null,
+      startDate: s1.oneDay
+        ? makeDateTime(s1.singleDate, s1.singleStartTime)
+        : makeDateTime(s1.startDateDate, s1.startDateTime),
+      endDate: s1.oneDay
+        ? makeDateTime(s1.singleDate, s1.singleEndTime)
+        : makeDateTime(s1.endDateDate, s1.endDateTime),
+      tags: parseTags(s1.tagsCsv),
+      location: hasLocationData(s1.location)
+        ? {
+            ...s1.location,
+            locationId:
+              plan.location?.locationId ??
+              uuidv5(s1.location!.name || s1.title, UUID_NAMESPACE),
+            name: s1.location!.name || s1.title,
+          }
+        : null,
+      estimatedAdults: values.estimatedAdults ?? null,
+      estimatedKids: values.estimatedKids ?? null,
+    };
+
+    await onSubmit({
+      planPatch,
+      ownerPreferences: {
+        adultsCount: values.adultsCount ?? null,
+        kidsCount: values.kidsCount ?? null,
+        foodPreferences: values.foodPreferences || null,
+        allergies: values.allergies || null,
+        notes: values.notes || null,
+      },
+    });
+  }
+
+  return (
+    <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+      <EditStepIndicator currentStep={step} />
+
+      {step === 1 && (
+        <EditStep1Form
+          plan={plan}
+          defaultValues={step1Data}
+          onNext={handleStep1Next}
+          onCancel={onCancel}
+        />
+      )}
+
+      {step === 2 && (
+        <EditStep2Form
+          plan={plan}
+          ownerParticipant={ownerParticipant}
+          onSubmit={handleStep2Submit}
+          onBack={() => setStep(1)}
+          isSubmitting={isSubmitting}
+        />
+      )}
+    </div>
+  );
+}
+
+function EditStep1Form({
+  plan,
+  defaultValues,
+  onNext,
+  onCancel,
+}: {
+  plan: PlanWithDetails;
+  defaultValues: Step1Values | null;
+  onNext: (values: Step1Values) => void;
+  onCancel: () => void;
+}) {
+  const { t } = useTranslation();
   const oneDay = isSameDate(plan.startDate, plan.endDate);
 
   const {
@@ -110,9 +317,9 @@ export default function EditPlanForm({
     formState: { errors },
     watch,
     setValue,
-  } = useForm<FormValues>({
-    resolver: zodResolver(editPlanFormSchema),
-    defaultValues: {
+  } = useForm<Step1Values>({
+    resolver: zodResolver(step1Schema),
+    defaultValues: defaultValues ?? {
       title: plan.title,
       description: plan.description ?? '',
       status: plan.status,
@@ -166,74 +373,11 @@ export default function EditPlanForm({
     });
   }
 
-  const parseTags = (csv?: string) =>
-    csv
-      ? csv
-          .split(',')
-          .map((t) => t.trim())
-          .filter(Boolean)
-      : undefined;
-
-  const makeDateTime = (date?: string, time?: string) => {
-    if (!date) return undefined;
-    const hhmm = time || '00:00';
-    return `${date}T${hhmm}:00Z`;
-  };
-
-  const UUID_NAMESPACE = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-  const generateLocationId = (name: string) => {
-    return uuidv5(name, UUID_NAMESPACE);
-  };
-
-  const hasLocationData = (loc?: {
-    name?: string;
-    city?: string;
-    country?: string;
-    region?: string;
-    latitude?: number | null;
-    longitude?: number | null;
-  }) => {
-    if (!loc) return false;
-    return (
-      [loc.name, loc.city, loc.country, loc.region].some(
-        (v) => v && v.trim().length > 0
-      ) ||
-      (loc.latitude != null && loc.longitude != null)
-    );
-  };
-
-  async function handleFormSubmit(values: FormValues): Promise<void> {
-    const updates: PlanPatch = {
-      title: values.title,
-      description: values.description || null,
-      status: values.status,
-      defaultLang: values.defaultLang ?? null,
-      currency: values.currency ?? null,
-      startDate: values.oneDay
-        ? makeDateTime(values.singleDate, values.singleStartTime)
-        : makeDateTime(values.startDateDate, values.startDateTime),
-      endDate: values.oneDay
-        ? makeDateTime(values.singleDate, values.singleEndTime)
-        : makeDateTime(values.endDateDate, values.endDateTime),
-      tags: parseTags(values.tagsCsv),
-      location: hasLocationData(values.location)
-        ? {
-            ...values.location,
-            locationId:
-              plan.location?.locationId ??
-              generateLocationId(values.location!.name || values.title),
-            name: values.location!.name || values.title,
-          }
-        : null,
-    };
-
-    await onSubmit(updates);
-  }
-
   return (
     <form
-      onSubmit={handleSubmit(handleFormSubmit)}
-      className="px-4 sm:px-6 pb-4 sm:pb-6 space-y-5"
+      onSubmit={handleSubmit(onNext)}
+      className="space-y-5"
+      data-testid="edit-wizard-step1"
     >
       <div>
         <FormLabel>{t('planForm.title')}</FormLabel>
@@ -255,91 +399,24 @@ export default function EditPlanForm({
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div>
-          <FormLabel>{t('planForm.status')}</FormLabel>
-          <FormSelect {...register('status')}>
-            <option value="active">{t('planStatus.active')}</option>
-            <option value="draft">{t('planStatus.draft')}</option>
-            <option value="archived">{t('planStatus.archived')}</option>
-          </FormSelect>
-        </div>
-
-        <div>
-          <FormLabel>{t('planForm.defaultLang')}</FormLabel>
-          <FormSelect {...register('defaultLang')}>
-            {SUPPORTED_LANGUAGES.map((code) => (
-              <option key={code} value={code}>
-                {LANGUAGE_META[code].nativeLabel}
-              </option>
-            ))}
-          </FormSelect>
-        </div>
-
-        <div>
-          <FormLabel>{t('planForm.currency')}</FormLabel>
-          <FormSelect {...register('currency')}>
-            {SUPPORTED_CURRENCIES.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.symbol} {c.label}
-              </option>
-            ))}
-          </FormSelect>
-        </div>
+      <div className="relative">
+        <FormLabel>{t('planForm.locationLegend')}</FormLabel>
+        <FormInput
+          {...locationNameRest}
+          ref={(el) => {
+            locationNameFormRef(el);
+            locationNameRef.current = el;
+          }}
+          placeholder={t('wizard.locationPlaceholder')}
+          autoComplete="off"
+        />
+        <LocationAutocomplete
+          onPlaceSelect={handlePlaceSelect}
+          latitude={locationData?.latitude}
+          longitude={locationData?.longitude}
+          inputRef={locationNameRef}
+        />
       </div>
-
-      <fieldset className="border border-gray-200 rounded-lg p-4 sm:p-5">
-        <legend className="text-sm font-semibold text-gray-700 px-2 mb-3">
-          {t('planForm.locationLegend')}
-        </legend>
-        <div className="space-y-4">
-          <div className="relative">
-            <FormLabel>{t('planForm.locationName')}</FormLabel>
-            <FormInput
-              {...locationNameRest}
-              ref={(el) => {
-                locationNameFormRef(el);
-                locationNameRef.current = el;
-              }}
-              placeholder={t('planForm.locationNamePlaceholder')}
-              compact
-              autoComplete="off"
-            />
-            <LocationAutocomplete
-              onPlaceSelect={handlePlaceSelect}
-              latitude={locationData?.latitude}
-              longitude={locationData?.longitude}
-              inputRef={locationNameRef}
-            />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <FormLabel>{t('planForm.city')}</FormLabel>
-              <FormInput
-                {...register('location.city' as const)}
-                placeholder={t('planForm.cityPlaceholder')}
-                compact
-              />
-            </div>
-            <div>
-              <FormLabel>{t('planForm.country')}</FormLabel>
-              <FormInput
-                {...register('location.country' as const)}
-                placeholder={t('planForm.countryPlaceholder')}
-                compact
-              />
-            </div>
-          </div>
-          <div>
-            <FormLabel>{t('planForm.region')}</FormLabel>
-            <FormInput
-              {...register('location.region' as const)}
-              placeholder={t('planForm.regionPlaceholder')}
-              compact
-            />
-          </div>
-        </div>
-      </fieldset>
 
       <div className="space-y-4">
         <div className="flex items-center gap-3">
@@ -404,6 +481,37 @@ export default function EditPlanForm({
         )}
       </div>
 
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <FormLabel>{t('planForm.status')}</FormLabel>
+          <FormSelect {...register('status')}>
+            <option value="active">{t('planStatus.active')}</option>
+            <option value="draft">{t('planStatus.draft')}</option>
+            <option value="archived">{t('planStatus.archived')}</option>
+          </FormSelect>
+        </div>
+        <div>
+          <FormLabel>{t('planForm.defaultLang')}</FormLabel>
+          <FormSelect {...register('defaultLang')}>
+            {SUPPORTED_LANGUAGES.map((code) => (
+              <option key={code} value={code}>
+                {LANGUAGE_META[code].nativeLabel}
+              </option>
+            ))}
+          </FormSelect>
+        </div>
+        <div>
+          <FormLabel>{t('planForm.currency')}</FormLabel>
+          <FormSelect {...register('currency')}>
+            {SUPPORTED_CURRENCIES.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.symbol} {c.label}
+              </option>
+            ))}
+          </FormSelect>
+        </div>
+      </div>
+
       <div>
         <FormLabel>{t('planForm.tags')}</FormLabel>
         <FormInput
@@ -416,9 +524,125 @@ export default function EditPlanForm({
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors font-medium"
+          className="px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors font-medium text-sm"
         >
           {t('items.cancel')}
+        </button>
+        <button
+          type="submit"
+          className="flex-1 px-4 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors"
+        >
+          {t('wizard.next')}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+function EditStep2Form({
+  plan,
+  ownerParticipant,
+  onSubmit,
+  onBack,
+  isSubmitting,
+}: {
+  plan: PlanWithDetails;
+  ownerParticipant?: Participant | null;
+  onSubmit: (values: Step2Values) => void | Promise<void>;
+  onBack: () => void;
+  isSubmitting: boolean;
+}) {
+  const { t } = useTranslation();
+  const schema = useMemo(() => buildStep2Schema(t), [t]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Step2Values>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      adultsCount: ownerParticipant?.adultsCount ?? 1,
+      kidsCount: ownerParticipant?.kidsCount ?? undefined,
+      foodPreferences: ownerParticipant?.foodPreferences ?? '',
+      allergies: ownerParticipant?.allergies ?? '',
+      notes: ownerParticipant?.notes ?? '',
+      estimatedAdults: plan.estimatedAdults ?? undefined,
+      estimatedKids: plan.estimatedKids ?? undefined,
+    },
+  });
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-5"
+      data-testid="edit-wizard-step2"
+    >
+      <section className="rounded-lg border border-blue-200 bg-blue-50/50 p-4 sm:p-5 space-y-4">
+        <div>
+          <h3 className="text-base font-semibold text-gray-900">
+            {t('preferences.ownerSectionTitle')}
+          </h3>
+          <p className="text-sm text-gray-500 mt-0.5">
+            {t('preferences.ownerSectionSubtitle')}
+          </p>
+        </div>
+
+        <PreferencesFields register={register} errors={errors} compact />
+      </section>
+
+      <section className="rounded-lg border border-gray-200 bg-gray-50/50 p-4 sm:p-5 space-y-4">
+        <div>
+          <h3 className="text-base font-semibold text-gray-900">
+            {t('preferences.estimationSectionTitle')}
+          </h3>
+          <p className="text-sm text-gray-500 mt-0.5">
+            {t('preferences.estimationSectionSubtitle')}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <FormLabel>{t('preferences.estimatedAdults')}</FormLabel>
+            <FormInput
+              type="number"
+              min={0}
+              {...register('estimatedAdults')}
+              placeholder={t('preferences.estimatedAdultsPlaceholder')}
+              compact
+            />
+            {errors.estimatedAdults && (
+              <p className="text-sm text-red-600 mt-1">
+                {errors.estimatedAdults.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <FormLabel>{t('preferences.estimatedKids')}</FormLabel>
+            <FormInput
+              type="number"
+              min={0}
+              {...register('estimatedKids')}
+              placeholder={t('preferences.estimatedKidsPlaceholder')}
+              compact
+            />
+            {errors.estimatedKids && (
+              <p className="text-sm text-red-600 mt-1">
+                {errors.estimatedKids.message}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <div className="flex gap-3 pt-2">
+        <button
+          type="button"
+          onClick={onBack}
+          disabled={isSubmitting}
+          className="px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 disabled:opacity-50 transition-colors text-sm"
+        >
+          {t('wizard.back')}
         </button>
         <button
           type="submit"
