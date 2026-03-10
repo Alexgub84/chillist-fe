@@ -111,6 +111,40 @@ export default function BulkItemAddWizard({
       .map((sub) => ({ name: sub, count: countMap.get(sub) ?? 0 }));
   }, [category, items]);
 
+  const selectedCountBySubcategory = useMemo(() => {
+    if (!category) return new Map<string, number>();
+    const countMap = new Map<string, number>();
+    const counted = new Set<string>();
+
+    for (const item of items) {
+      if (item.category !== category || !item.subcategory) continue;
+      const isInSelected = selected.has(item.name);
+      const existingId = existingItems?.get(item.name.toLowerCase());
+      const isExisting =
+        existingId !== undefined && !uncheckedExisting.has(existingId);
+      if (isInSelected || isExisting) {
+        countMap.set(
+          item.subcategory,
+          (countMap.get(item.subcategory) ?? 0) + 1
+        );
+        counted.add(item.name);
+      }
+    }
+
+    for (const [name, sel] of selected) {
+      if (
+        sel.isCustom &&
+        sel.category === category &&
+        sel.subcategory &&
+        !counted.has(name)
+      ) {
+        countMap.set(sel.subcategory, (countMap.get(sel.subcategory) ?? 0) + 1);
+      }
+    }
+
+    return countMap;
+  }, [category, items, selected, existingItems, uncheckedExisting]);
+
   const subcategoryItems = useMemo(() => {
     if (!category || !subcategory) return [];
     return items.filter(
@@ -336,6 +370,39 @@ export default function BulkItemAddWizard({
     }
   }
 
+  const allNewFromSubcategory = useMemo(
+    () =>
+      subcategoryItems.filter(
+        (item) => !existingItems?.has(item.name.toLowerCase())
+      ),
+    [subcategoryItems, existingItems]
+  );
+
+  async function handleAddAll() {
+    if (allNewFromSubcategory.length === 0) return;
+    setIsSubmitting(true);
+    try {
+      const payloads: ItemCreate[] = allNewFromSubcategory.map((item) => ({
+        name: item.name,
+        category: item.category,
+        quantity: defaultQuantity(item),
+        unit: item.unit as ItemCreate['unit'],
+        subcategory: subcategory || null,
+        notes: null,
+      }));
+      await onAdd(payloads);
+      setStep('subcategory');
+      setSubcategory(null);
+      setSearch('');
+      setSelected(new Map());
+      setUncheckedExisting(new Set());
+    } catch {
+      // keep state for retry
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   const selectedCount =
     newItemsToAdd.length + (onCancel ? uncheckedExisting.size : 0);
 
@@ -362,6 +429,7 @@ export default function BulkItemAddWizard({
       {step === 'subcategory' && category && (
         <SubcategoryStep
           subcategories={subcategories}
+          selectedCountBySubcategory={selectedCountBySubcategory}
           onSelect={(sub) => {
             setSubcategory(sub);
             setStep('items');
@@ -383,6 +451,7 @@ export default function BulkItemAddWizard({
           selectedCount={selectedCount}
           hasWork={hasWork}
           isSubmitting={isSubmitting}
+          allNewCount={allNewFromSubcategory.length}
           getExistingItemId={getExistingItemId}
           uncheckedExisting={uncheckedExisting}
           onSearchChange={setSearch}
@@ -391,6 +460,7 @@ export default function BulkItemAddWizard({
           onToggleSelectAll={toggleSelectAll}
           onUpdateQuantity={updateQuantity}
           onSubmit={handleSubmit}
+          onAddAll={handleAddAll}
           onBack={() => {
             setStep('subcategory');
             setSubcategory(null);
@@ -480,10 +550,12 @@ function CategoryStep({ onSelect }: { onSelect: (cat: ItemCategory) => void }) {
 
 function SubcategoryStep({
   subcategories,
+  selectedCountBySubcategory,
   onSelect,
   onBack,
 }: {
   subcategories: { name: string; count: number }[];
+  selectedCountBySubcategory: Map<string, number>;
   onSelect: (sub: string) => void;
   onBack: () => void;
 }) {
@@ -514,22 +586,46 @@ function SubcategoryStep({
       </button>
       <div className="max-h-80 overflow-y-auto -mx-4 sm:-mx-6 px-4 sm:px-6">
         <div className="space-y-1.5">
-          {subcategories.map((sub) => (
-            <button
-              key={sub.name}
-              type="button"
-              data-testid={`bulk-subcat-${sub.name.toLowerCase().replace(/\s+/g, '-')}`}
-              onClick={() => onSelect(sub.name)}
-              className="w-full flex items-center justify-between gap-2 py-2.5 px-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-gray-300 transition-colors text-start cursor-pointer"
-            >
-              <span className="text-sm font-medium text-gray-800">
-                {t(`subcategories.${sub.name}`, sub.name)}
-              </span>
-              <span className="text-xs text-gray-400 shrink-0">
-                {t('items.bulkAddItemCount', { count: sub.count })}
-              </span>
-            </button>
-          ))}
+          {subcategories.map((sub) => {
+            const selCount = selectedCountBySubcategory.get(sub.name) ?? 0;
+            const hasSelected = selCount > 0;
+            return (
+              <button
+                key={sub.name}
+                type="button"
+                data-testid={`bulk-subcat-${sub.name.toLowerCase().replace(/\s+/g, '-')}`}
+                onClick={() => onSelect(sub.name)}
+                className={clsx(
+                  'w-full flex items-center justify-between gap-2 py-2.5 px-3 rounded-lg border transition-colors text-start cursor-pointer',
+                  hasSelected
+                    ? 'bg-green-50 border-green-200 hover:bg-green-100'
+                    : 'bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300'
+                )}
+              >
+                <span
+                  className={clsx(
+                    'text-sm font-medium',
+                    hasSelected ? 'text-green-800' : 'text-gray-800'
+                  )}
+                >
+                  {t(`subcategories.${sub.name}`, sub.name)}
+                </span>
+                <span
+                  className={clsx(
+                    'text-xs shrink-0',
+                    hasSelected ? 'text-green-600' : 'text-gray-400'
+                  )}
+                >
+                  {hasSelected
+                    ? t('items.bulkAddItemCountWithSelected', {
+                        selected: selCount,
+                        count: sub.count,
+                      })
+                    : t('items.bulkAddItemCount', { count: sub.count })}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -545,6 +641,7 @@ function ItemsStep({
   selectedCount,
   hasWork,
   isSubmitting,
+  allNewCount,
   getExistingItemId,
   uncheckedExisting,
   onSearchChange,
@@ -553,6 +650,7 @@ function ItemsStep({
   onToggleSelectAll,
   onUpdateQuantity,
   onSubmit,
+  onAddAll,
   onBack,
 }: {
   filteredItems: CommonItemBase[];
@@ -563,6 +661,7 @@ function ItemsStep({
   selectedCount: number;
   hasWork: boolean;
   isSubmitting: boolean;
+  allNewCount: number;
   getExistingItemId: (name: string) => string | undefined;
   uncheckedExisting: Set<string>;
   onSearchChange: (v: string) => void;
@@ -571,6 +670,7 @@ function ItemsStep({
   onToggleSelectAll: () => void;
   onUpdateQuantity: (name: string, delta: number) => void;
   onSubmit: () => void;
+  onAddAll: () => void;
   onBack: () => void;
 }) {
   const { t } = useTranslation();
@@ -793,20 +893,33 @@ function ItemsStep({
         })()}
       </div>
 
-      <button
-        type="button"
-        onClick={onSubmit}
-        disabled={!hasWork || isSubmitting}
-        className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 active:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
-      >
-        {isSubmitting
-          ? t('items.bulkAddAdding')
-          : selectedCount === 0
-            ? t('items.bulkAddNoneSelected')
-            : selectedCount === 1
-              ? t('items.bulkAddConfirmOne')
-              : t('items.bulkAddConfirm', { count: selectedCount })}
-      </button>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={onSubmit}
+          disabled={!hasWork || isSubmitting}
+          className="flex-1 px-4 py-2.5 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 active:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
+        >
+          {isSubmitting
+            ? t('items.bulkAddAdding')
+            : selectedCount === 0
+              ? t('items.bulkAddNoneSelected')
+              : selectedCount === 1
+                ? t('items.bulkAddConfirmOne')
+                : t('items.bulkAddConfirm', { count: selectedCount })}
+        </button>
+        {allNewCount > 0 && (
+          <button
+            type="button"
+            data-testid="bulk-add-all"
+            onClick={onAddAll}
+            disabled={isSubmitting}
+            className="px-4 py-2.5 text-sm font-semibold text-green-700 bg-green-50 border border-green-300 rounded-lg hover:bg-green-100 active:bg-green-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer shrink-0"
+          >
+            {t('items.bulkAddAll', { count: allNewCount })}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
