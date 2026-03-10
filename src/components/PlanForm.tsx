@@ -48,51 +48,30 @@ const participantRowSchema = z.object({
   contactEmail: z.string().optional(),
 });
 
-const createPlanFormSchema = z
-  .object({
-    title: z.string().min(1, 'Title is required'),
-    description: z.string().optional(),
-    status: planStatusSchema,
-    visibility: planVisibilitySchema,
-    ownerName: z.string().min(1, 'Owner name is required'),
-    ownerLastName: z.string().min(1, 'Owner last name is required'),
-    ownerPhoneCountry: z.string().optional(),
-    ownerPhone: z.string().min(1, 'Owner phone is required'),
-    ownerEmail: z.string().optional(),
-    tagsCsv: z.string().optional(),
-    participants: z.array(participantRowSchema).optional(),
-    oneDay: z.boolean().optional(),
-    singleDate: z
-      .string()
-      .min(1, 'Date is required')
-      .optional()
-      .or(z.literal('')),
-    singleStartTime: z.string().optional(),
-    singleEndTime: z.string().optional(),
-    startDateDate: z
-      .string()
-      .min(1, 'Start date is required')
-      .optional()
-      .or(z.literal('')),
-    startDateTime: z.string().optional(),
-    endDateDate: z.string().optional(),
-    endDateTime: z.string().optional(),
-    location: locationFormSchema,
-    defaultLang: z.string().max(10).optional(),
-    currency: z.string().max(10).optional(),
-  })
-  .refine((data) => !data.oneDay || !!data.singleDate, {
-    message: 'Date is required',
-    path: ['singleDate'],
-  })
-  .refine((data) => data.oneDay || !!data.startDateDate, {
-    message: 'Start date is required',
-    path: ['startDateDate'],
-  })
-  .refine((data) => data.oneDay || !!data.endDateDate, {
-    message: 'End date is required',
-    path: ['endDateDate'],
-  });
+const createPlanFormSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  description: z.string().optional(),
+  status: planStatusSchema,
+  visibility: planVisibilitySchema,
+  ownerName: z.string().min(1, 'Owner name is required'),
+  ownerLastName: z.string().min(1, 'Owner last name is required'),
+  ownerPhoneCountry: z.string().optional(),
+  ownerPhone: z.string().min(1, 'Owner phone is required'),
+  ownerEmail: z.string().optional(),
+  tagsCsv: z.string().optional(),
+  participants: z.array(participantRowSchema).optional(),
+  oneDay: z.boolean().optional(),
+  singleDate: z.string().optional().or(z.literal('')),
+  singleStartTime: z.string().optional(),
+  singleEndTime: z.string().optional(),
+  startDateDate: z.string().optional().or(z.literal('')),
+  startDateTime: z.string().optional(),
+  endDateDate: z.string().optional(),
+  endDateTime: z.string().optional(),
+  location: locationFormSchema,
+  defaultLang: z.string().max(10).optional(),
+  currency: z.string().max(10).optional(),
+});
 
 type FormValues = z.infer<typeof createPlanFormSchema>;
 

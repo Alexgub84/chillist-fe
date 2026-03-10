@@ -399,6 +399,79 @@ describe('Manage Participants route', () => {
     ).not.toBeInTheDocument();
   });
 
+  it('shows approve button but not reject button for rejected requests', async () => {
+    const { usePlan } = await import('../../../src/hooks/usePlan');
+    vi.mocked(usePlan).mockReturnValue({
+      data: buildPlan({
+        joinRequests: [buildJoinRequest({ status: 'rejected' })],
+      }),
+      isLoading: false,
+      error: null,
+    } as ReturnType<typeof usePlan>);
+
+    window.history.pushState({}, '', '/manage-participants/plan-1');
+
+    const router = createRouter({ routeTree });
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Bob Requester')).toBeInTheDocument();
+    });
+
+    expect(screen.getByText('Rejected')).toBeInTheDocument();
+    expect(
+      screen.getByTestId('approve-join-request-req-1')
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId('reject-join-request-req-1')
+    ).not.toBeInTheDocument();
+  });
+
+  it('calls updateJoinRequestStatus with approved when Approve is clicked on rejected request', async () => {
+    mockUpdateJoinRequestStatus.mockResolvedValue({});
+
+    const { usePlan } = await import('../../../src/hooks/usePlan');
+    vi.mocked(usePlan).mockReturnValue({
+      data: buildPlan({
+        joinRequests: [buildJoinRequest({ status: 'rejected' })],
+      }),
+      isLoading: false,
+      error: null,
+    } as ReturnType<typeof usePlan>);
+
+    window.history.pushState({}, '', '/manage-participants/plan-1');
+
+    const router = createRouter({ routeTree });
+    const user = userEvent.setup();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByTestId('approve-join-request-req-1')
+      ).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('approve-join-request-req-1'));
+
+    await waitFor(() => {
+      expect(mockUpdateJoinRequestStatus).toHaveBeenCalledWith(
+        'plan-1',
+        'req-1',
+        'approved'
+      );
+    });
+  });
+
   it('calls updateJoinRequestStatus with approved when Approve is clicked', async () => {
     mockUpdateJoinRequestStatus.mockResolvedValue({});
 
