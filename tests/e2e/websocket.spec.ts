@@ -121,17 +121,40 @@ test.describe('WebSocket — Graceful Degradation', () => {
 });
 
 test.describe('WebSocket — Connection Attempt', () => {
+  async function interceptWebSocketUrls(page: import('@playwright/test').Page) {
+    await page.addInitScript(() => {
+      (window as unknown as Record<string, string[]>).__wsUrls = [];
+      const OrigWS = window.WebSocket;
+      window.WebSocket = function (
+        url: string | URL,
+        protocols?: string | string[]
+      ) {
+        (window as unknown as Record<string, string[]>).__wsUrls.push(
+          String(url)
+        );
+        return new OrigWS(url, protocols);
+      } as unknown as typeof WebSocket;
+      window.WebSocket.prototype = OrigWS.prototype;
+      window.WebSocket.CONNECTING = OrigWS.CONNECTING;
+      window.WebSocket.OPEN = OrigWS.OPEN;
+      window.WebSocket.CLOSING = OrigWS.CLOSING;
+      window.WebSocket.CLOSED = OrigWS.CLOSED;
+    });
+  }
+
+  function getWsUrls(page: import('@playwright/test').Page) {
+    return page.evaluate(
+      () => (window as unknown as Record<string, string[]>).__wsUrls ?? []
+    );
+  }
+
   test('app attempts WebSocket connection to the correct URL when viewing a plan', async ({
     page,
   }) => {
+    await interceptWebSocketUrls(page);
     await injectUserSession(page);
     const plan = buildTestPlan();
     await mockPlanRoutes(page, plan);
-
-    const wsConnections: string[] = [];
-    page.on('websocket', (ws) => {
-      wsConnections.push(ws.url());
-    });
 
     await page.goto(`/plan/${plan.planId}`);
     await expect(page.getByTestId('plan-title').first()).toHaveText(
@@ -139,24 +162,26 @@ test.describe('WebSocket — Connection Attempt', () => {
       { timeout: 10000 }
     );
 
-    await page.waitForTimeout(2000);
+    await expect
+      .poll(() => getWsUrls(page), { timeout: 5000 })
+      .toEqual(
+        expect.arrayContaining([
+          expect.stringContaining(`/plans/${plan.planId}/ws`),
+        ])
+      );
 
-    const planWsUrl = wsConnections.find((url) =>
+    const urls = await getWsUrls(page);
+    const planWsUrl = urls.find((url) =>
       url.includes(`/plans/${plan.planId}/ws`)
     );
-    expect(planWsUrl).toBeDefined();
     expect(planWsUrl).toContain('token=');
   });
 
   test('app attempts WebSocket connection on items page', async ({ page }) => {
+    await interceptWebSocketUrls(page);
     await injectUserSession(page);
     const plan = buildTestPlan();
     await mockPlanRoutes(page, plan);
-
-    const wsConnections: string[] = [];
-    page.on('websocket', (ws) => {
-      wsConnections.push(ws.url());
-    });
 
     await page.goto(`/plan/${plan.planId}`);
     await expect(page.getByTestId('plan-title').first()).toHaveText(
@@ -168,11 +193,12 @@ test.describe('WebSocket — Connection Attempt', () => {
     await expect(page).toHaveURL(/\/items\//, { timeout: 10000 });
     await expect(page.getByText('Tent')).toBeVisible({ timeout: 10000 });
 
-    await page.waitForTimeout(2000);
-
-    const planWsUrls = wsConnections.filter((url) =>
-      url.includes(`/plans/${plan.planId}/ws`)
-    );
-    expect(planWsUrls.length).toBeGreaterThanOrEqual(1);
+    await expect
+      .poll(() => getWsUrls(page), { timeout: 5000 })
+      .toEqual(
+        expect.arrayContaining([
+          expect.stringContaining(`/plans/${plan.planId}/ws`),
+        ])
+      );
   });
 });
