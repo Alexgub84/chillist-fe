@@ -648,7 +648,7 @@ test.describe('Participant Preferences Access', () => {
     await expect(dialog.getByText('Guest Person')).toBeVisible();
 
     await page.getByTestId('transfer-ownership-confirm').click({ force: true });
-    await expect(dialog).toBeHidden({ timeout: 10000 });
+    await expect(dialog).not.toBeAttached({ timeout: 10000 });
     await expect(page.getByText('Added as owner successfully')).toBeVisible({
       timeout: 10000,
     });

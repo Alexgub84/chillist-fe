@@ -12,7 +12,7 @@ import { usePlan } from '../hooks/usePlan';
 import { useCreateParticipant } from '../hooks/useCreateParticipant';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
 import { updateJoinRequestStatus } from '../core/api';
-import { sharePlanUrl } from '../core/invite';
+import { sharePlanUrl, copyPlanUrl } from '../core/invite';
 import type { ParticipantCreate } from '../core/schemas/participant';
 import {
   isNotParticipantResponse,
@@ -195,6 +195,12 @@ function ManageParticipantsPage() {
     if (result === 'copied') toast.success(t('invite.copied'));
   }
 
+  async function handleCopyPlanUrl() {
+    const planUrl = `${window.location.origin}/plan/${planId}`;
+    const copied = await copyPlanUrl(planUrl);
+    if (copied) toast.success(t('invite.planUrlCopied'));
+  }
+
   return (
     <div className="w-full px-3 sm:px-0">
       <div className="max-w-4xl mx-auto">
@@ -223,6 +229,28 @@ function ManageParticipantsPage() {
             className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm"
           >
             {t('plan.addParticipant')}
+          </button>
+          <button
+            type="button"
+            data-testid="copy-plan-url-button"
+            onClick={handleCopyPlanUrl}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+              />
+            </svg>
+            {t('invite.copyPlanUrl')}
           </button>
           <button
             type="button"

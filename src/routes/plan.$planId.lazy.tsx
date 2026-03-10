@@ -41,7 +41,7 @@ import CollapsibleSection from '../components/shared/CollapsibleSection';
 import SectionLink from '../components/shared/SectionLink';
 import ListTabs from '../components/StatusFilter';
 import ParticipantFilter from '../components/ParticipantFilter';
-import { sharePlanUrl } from '../core/invite';
+import { sharePlanUrl, copyPlanUrl } from '../core/invite';
 import ParticipantDetails from '../components/ParticipantDetails';
 import BulkItemAddWizard from '../components/BulkItemAddWizard';
 import FloatingActions from '../components/shared/FloatingActions';
@@ -245,6 +245,11 @@ function PlanPage() {
     if (result === 'copied') toast.success(t('invite.copied'));
   }
 
+  async function handleCopyPlanUrl() {
+    const copied = await copyPlanUrl();
+    if (copied) toast.success(t('invite.planUrlCopied'));
+  }
+
   async function handleBulkAdd(payloads: ItemCreate[]) {
     const results = await Promise.allSettled(
       payloads.map((payload) => actions.createItem(payload))
@@ -300,28 +305,52 @@ function PlanPage() {
             >
               {t('plan.backToPlans')}
             </Link>
-            <button
-              type="button"
-              data-testid="invite-button"
-              onClick={handleSharePlanUrl}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors shrink-0"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                data-testid="copy-plan-url-button"
+                onClick={handleCopyPlanUrl}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors shrink-0"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                />
-              </svg>
-              {t('invite.inviteParticipants')}
-            </button>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  />
+                </svg>
+                {t('invite.copyPlanUrl')}
+              </button>
+              <button
+                type="button"
+                data-testid="invite-button"
+                onClick={handleSharePlanUrl}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-colors shrink-0"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                  />
+                </svg>
+                {t('invite.inviteParticipants')}
+              </button>
+            </div>
           </div>
 
           <h1
