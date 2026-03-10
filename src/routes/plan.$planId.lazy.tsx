@@ -50,6 +50,7 @@ import { useCreateExpense } from '../hooks/useCreateExpense';
 import ExpenseForm from '../components/ExpenseForm';
 import type { ExpenseFormValues } from '../components/ExpenseForm';
 import { usePlanContext } from '../hooks/usePlanContext';
+import { usePlanWebSocket } from '../hooks/usePlanWebSocket';
 import { getApiErrorMessage } from '../core/error-utils';
 import {
   aggregateParticipantCounts,
@@ -94,6 +95,7 @@ function PlanPage() {
   );
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
+  usePlanWebSocket(planId);
 
   const existingItems = useMemo(() => {
     if (!plan || isNotParticipantResponse(plan))

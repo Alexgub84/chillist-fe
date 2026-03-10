@@ -22,6 +22,7 @@ import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import { useQueryClient } from '@tanstack/react-query';
 import { useBulkAssign } from '../hooks/useBulkAssign';
 import { usePlanRole } from '../hooks/usePlanRole';
+import { usePlanWebSocket } from '../hooks/usePlanWebSocket';
 import {
   aggregateParticipantCounts,
   calculatePlanPoints,
@@ -59,6 +60,7 @@ function AuthItemsPage({ planId }: { planId: string }) {
   );
 
   useScrollRestore(`items-${planId}`, !isLoading && !!plan);
+  usePlanWebSocket(planId);
 
   if (isLoading) {
     return <div className="text-center py-10">{t('plan.loading')}</div>;
