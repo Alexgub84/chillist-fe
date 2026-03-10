@@ -39,40 +39,23 @@ const locationFormSchema = z
   })
   .optional();
 
-const step1Schema = z
-  .object({
-    title: z.string().min(1, 'Title is required'),
-    description: z.string().optional(),
-    status: planStatusSchema,
-    defaultLang: z.string().max(10).optional(),
-    currency: z.string().max(10).optional(),
-    tagsCsv: z.string().optional(),
-    oneDay: z.boolean().optional(),
-    singleDate: z
-      .string()
-      .min(1, 'Date is required')
-      .optional()
-      .or(z.literal('')),
-    singleStartTime: z.string().optional(),
-    singleEndTime: z.string().optional(),
-    startDateDate: z
-      .string()
-      .min(1, 'Start date is required')
-      .optional()
-      .or(z.literal('')),
-    startDateTime: z.string().optional(),
-    endDateDate: z.string().optional(),
-    endDateTime: z.string().optional(),
-    location: locationFormSchema,
-  })
-  .refine((data) => !data.oneDay || !!data.singleDate, {
-    message: 'Date is required',
-    path: ['singleDate'],
-  })
-  .refine((data) => data.oneDay || !!data.startDateDate, {
-    message: 'Start date is required',
-    path: ['startDateDate'],
-  });
+const step1Schema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  description: z.string().optional(),
+  status: planStatusSchema,
+  defaultLang: z.string().max(10).optional(),
+  currency: z.string().max(10).optional(),
+  tagsCsv: z.string().optional(),
+  oneDay: z.boolean().optional(),
+  singleDate: z.string().optional().or(z.literal('')),
+  singleStartTime: z.string().optional(),
+  singleEndTime: z.string().optional(),
+  startDateDate: z.string().optional().or(z.literal('')),
+  startDateTime: z.string().optional(),
+  endDateDate: z.string().optional(),
+  endDateTime: z.string().optional(),
+  location: locationFormSchema,
+});
 
 type Step1Values = z.infer<typeof step1Schema>;
 

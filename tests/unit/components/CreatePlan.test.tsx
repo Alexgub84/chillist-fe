@@ -83,69 +83,39 @@ describe('CreatePlan - PlanForm', () => {
       expect(handleSubmit).not.toHaveBeenCalled();
     });
 
-    it('should show error when date is missing in one-day mode', async () => {
+    it('should submit successfully without dates in one-day mode', async () => {
       const user = userEvent.setup();
       renderForm();
 
-      await user.type(getInputByLabel(/title/i), 'Test Plan');
+      await user.type(getInputByLabel(/title/i), 'No Date Plan');
       await fillOwnerFields(user);
+      await user.click(getInputByLabel(/one-day plan/i));
 
-      const oneDayCheckbox = getInputByLabel(/one-day plan/i);
-      await user.click(oneDayCheckbox);
-
-      const submitButton = screen.getByRole('button', {
-        name: /create plan/i,
-      });
-      await user.click(submitButton);
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
 
       await waitFor(() => {
-        expect(screen.getByText(/date is required/i)).toBeInTheDocument();
+        expect(handleSubmit).toHaveBeenCalledTimes(1);
+        const payload = handleSubmit.mock.calls[0][0];
+        expect(payload.startDate).toBeUndefined();
+        expect(payload.endDate).toBeUndefined();
       });
-
-      expect(handleSubmit).not.toHaveBeenCalled();
     });
 
-    it('should show error when start date is missing in multi-day mode', async () => {
+    it('should submit successfully without dates in multi-day mode', async () => {
       const user = userEvent.setup();
       renderForm();
 
-      await user.type(getInputByLabel(/title/i), 'Test Plan');
+      await user.type(getInputByLabel(/title/i), 'No Date Plan');
       await fillOwnerFields(user);
 
-      const submitButton = screen.getByRole('button', {
-        name: /create plan/i,
-      });
-      await user.click(submitButton);
+      await user.click(screen.getByRole('button', { name: /create plan/i }));
 
       await waitFor(() => {
-        expect(screen.getByText(/start date is required/i)).toBeInTheDocument();
+        expect(handleSubmit).toHaveBeenCalledTimes(1);
+        const payload = handleSubmit.mock.calls[0][0];
+        expect(payload.startDate).toBeUndefined();
+        expect(payload.endDate).toBeUndefined();
       });
-
-      expect(handleSubmit).not.toHaveBeenCalled();
-    });
-
-    it('should show error when end date is missing in multi-day mode', async () => {
-      const user = userEvent.setup();
-      renderForm();
-
-      await user.type(getInputByLabel(/title/i), 'Test Plan');
-      await fillOwnerFields(user);
-
-      const startDateInput = getInputByLabel(/start date/i);
-      await user.type(startDateInput, '2025-12-20');
-      const endDateInput = getInputByLabel(/end date/i);
-      await user.clear(endDateInput);
-
-      const submitButton = screen.getByRole('button', {
-        name: /create plan/i,
-      });
-      await user.click(submitButton);
-
-      await waitFor(() => {
-        expect(screen.getByText(/end date is required/i)).toBeInTheDocument();
-      });
-
-      expect(handleSubmit).not.toHaveBeenCalled();
     });
   });
 
@@ -186,20 +156,20 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(oneDayCheckbox);
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
         expect(screen.getByText(/start time/i)).toBeInTheDocument();
         expect(screen.getByText(/end time/i)).toBeInTheDocument();
-        expect(screen.queryByText(/start date \*/i)).not.toBeInTheDocument();
-        expect(screen.queryByText(/end date \*/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/^start date$/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/^end date$/i)).not.toBeInTheDocument();
       });
     });
 
     it('should show multi-day date fields when one-day is unchecked', () => {
       renderForm();
 
-      expect(screen.getByText(/start date \*/i)).toBeInTheDocument();
-      expect(screen.getByText(/end date \*/i)).toBeInTheDocument();
-      expect(screen.queryByText(/^date \*$/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/^start date$/i)).toBeInTheDocument();
+      expect(screen.getByText(/^end date$/i)).toBeInTheDocument();
+      expect(screen.queryByText(/^date$/i)).not.toBeInTheDocument();
     });
   });
 
@@ -215,10 +185,10 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
 
-      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+      await user.type(getInputByLabel(/^date$/i), '2025-12-20');
       fireEvent.change(getInputByLabel(/start time/i), {
         target: { value: '10:00' },
       });
@@ -328,9 +298,9 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
-      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+      await user.type(getInputByLabel(/^date$/i), '2025-12-20');
 
       const addButton = screen.getByText(/\+ add participant/i);
       await user.click(addButton);
@@ -387,10 +357,10 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
 
-      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+      await user.type(getInputByLabel(/^date$/i), '2025-12-20');
 
       await user.click(screen.getByRole('button', { name: /create plan/i }));
 
@@ -410,10 +380,10 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
 
-      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+      await user.type(getInputByLabel(/^date$/i), '2025-12-20');
 
       await user.type(
         screen.getByPlaceholderText(/location name/i),
@@ -449,10 +419,10 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
 
-      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+      await user.type(getInputByLabel(/^date$/i), '2025-12-20');
 
       await user.type(screen.getByPlaceholderText(/^city$/i), 'Miami');
 
@@ -482,10 +452,10 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
 
-      await user.type(getInputByLabel(/^date \*$/i), '2025-12-20');
+      await user.type(getInputByLabel(/^date$/i), '2025-12-20');
 
       await user.click(screen.getByRole('button', { name: /create plan/i }));
 
@@ -550,10 +520,10 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
 
-      await user.type(getInputByLabel(/^date \*$/i), '2026-03-15');
+      await user.type(getInputByLabel(/^date$/i), '2026-03-15');
 
       await user.click(screen.getByRole('button', { name: /create plan/i }));
 
@@ -585,10 +555,10 @@ describe('CreatePlan - PlanForm', () => {
       await user.click(getInputByLabel(/one-day plan/i));
 
       await waitFor(() => {
-        expect(screen.getByText(/^date \*$/i)).toBeInTheDocument();
+        expect(screen.getByText(/^date$/i)).toBeInTheDocument();
       });
 
-      await user.type(getInputByLabel(/^date \*$/i), '2026-03-15');
+      await user.type(getInputByLabel(/^date$/i), '2026-03-15');
 
       await user.click(screen.getByRole('button', { name: /create plan/i }));
 
