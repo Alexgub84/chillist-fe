@@ -438,7 +438,7 @@ function JoinRequestCard({
             </div>
           </div>
         </div>
-        {req.status === 'pending' && (
+        {(req.status === 'pending' || req.status === 'rejected') && (
           <div className="flex gap-2 shrink-0">
             <button
               type="button"
@@ -449,15 +449,17 @@ function JoinRequestCard({
             >
               {t('manageParticipants.approveRequest')}
             </button>
-            <button
-              type="button"
-              data-testid={`reject-join-request-${req.requestId}`}
-              disabled={isPending}
-              onClick={() => onReject(req.requestId)}
-              className="px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {t('manageParticipants.rejectRequest')}
-            </button>
+            {req.status === 'pending' && (
+              <button
+                type="button"
+                data-testid={`reject-join-request-${req.requestId}`}
+                disabled={isPending}
+                onClick={() => onReject(req.requestId)}
+                className="px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-lg hover:bg-red-700 active:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {t('manageParticipants.rejectRequest')}
+              </button>
+            )}
           </div>
         )}
       </div>
