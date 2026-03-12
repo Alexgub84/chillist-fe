@@ -394,7 +394,9 @@
     "adultsCountInvalid": "נא להזין מספר תקין",
     "adultsCountMin": "לפחות מבוגר אחד",
     "kidsCountInvalid": "נא להזין מספר תקין",
-    "kidsCountMin": "לא יכול להיות שלילי"
+    "kidsCountMin": "לא יכול להיות שלילי",
+    "phoneInvalid": "מספר טלפון לא תקין",
+    "phoneInvalidBE": "מספר טלפון לא תקין — נא לבדוק את המספר ואת קידומת המדינה"
   },
   "unitGroups": {
     "weight": "משקל",

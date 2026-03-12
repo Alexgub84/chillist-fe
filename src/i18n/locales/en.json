@@ -394,7 +394,9 @@
     "adultsCountInvalid": "Please enter a valid number",
     "adultsCountMin": "At least 1 adult",
     "kidsCountInvalid": "Please enter a valid number",
-    "kidsCountMin": "Cannot be negative"
+    "kidsCountMin": "Cannot be negative",
+    "phoneInvalid": "Invalid phone number format",
+    "phoneInvalidBE": "Invalid phone number — please check the number and country code"
   },
   "unitGroups": {
     "weight": "Weight",

@@ -637,7 +637,7 @@ describe('mock server', () => {
         payload: {
           name: 'Charlie',
           lastName: 'Joiner',
-          contactPhone: '555-7777',
+          contactPhone: '+17775557777',
         },
       });
       expect(response.statusCode).toBe(201);
@@ -670,7 +670,7 @@ describe('mock server', () => {
         payload: {
           name: 'Dave',
           lastName: 'Joiner',
-          contactPhone: '555-8888',
+          contactPhone: '+17775558888',
         },
       });
       const { requestId } = createRes.json();
@@ -710,7 +710,7 @@ describe('mock server', () => {
         payload: {
           name: 'Eve',
           lastName: 'Joiner',
-          contactPhone: '555-9999',
+          contactPhone: '+17775559999',
         },
       });
       const { requestId } = createRes.json();
@@ -749,7 +749,7 @@ describe('mock server', () => {
         payload: {
           name: 'Frank',
           lastName: 'Joiner',
-          contactPhone: '555-1111',
+          contactPhone: '+17775551111',
         },
       });
       const { requestId } = createRes.json();

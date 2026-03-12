@@ -15,7 +15,7 @@ import {
   parseExistingPhone,
   updateUserProfile,
 } from '../core/profile-utils';
-import { combinePhone } from '../data/country-codes';
+import { combinePhone, isValidE164 } from '../data/country-codes';
 import type { NotParticipantResponse } from '../core/schemas/plan';
 import type { JoinRequest } from '../core/schemas/join-request';
 import ProfileFields from './shared/ProfileFields';
@@ -183,6 +183,7 @@ function JoinRequestForm({ planId }: { planId: string }) {
     handleSubmit,
     watch,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<JoinRequestFormValues>({
     resolver: zodResolver(schema),
@@ -201,12 +202,20 @@ function JoinRequestForm({ planId }: { planId: string }) {
   });
 
   async function onSubmit(values: JoinRequestFormValues) {
+    const normalizedPhone = combinePhone(values.phoneCountry, values.phone);
+    if (normalizedPhone && !isValidE164(normalizedPhone)) {
+      setError('phone', {
+        message: t('validation.phoneInvalid'),
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       await createJoinRequest(planId, {
         name: values.firstName.trim(),
         lastName: values.lastName.trim(),
-        contactPhone: combinePhone(values.phoneCountry, values.phone),
+        contactPhone: normalizedPhone,
         contactEmail: values.email?.trim() || undefined,
         adultsCount: values.adultsCount,
         kidsCount: values.kidsCount,
@@ -230,6 +239,17 @@ function JoinRequestForm({ planId }: { planId: string }) {
       console.error(
         `[RequestToJoinPage] createJoinRequest failed — planId="${planId}". Error: ${err instanceof Error ? err.message : String(err)}`
       );
+      if (
+        err instanceof Error &&
+        'status' in err &&
+        (err as { status: number }).status === 400 &&
+        err.message.toLowerCase().includes('phone')
+      ) {
+        setError('phone', {
+          message: t('validation.phoneInvalidBE'),
+        });
+        return;
+      }
       const { title, message } = getApiErrorMessage(
         err instanceof Error ? err : new Error(String(err))
       );

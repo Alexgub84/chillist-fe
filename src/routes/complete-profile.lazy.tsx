@@ -12,6 +12,7 @@ import {
   updateUserProfile,
 } from '../core/profile-utils';
 import ProfileFields from '../components/shared/ProfileFields';
+import { combinePhone, isValidE164 } from '../data/country-codes';
 
 const profileSchema = z.object({
   firstName: z.string().max(100).optional().or(z.literal('')),
@@ -57,6 +58,7 @@ function CompleteProfileForm({
     handleSubmit,
     watch,
     setValue,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<ProfileForm>({
     resolver: zodResolver(profileSchema),
@@ -70,6 +72,17 @@ function CompleteProfileForm({
   });
 
   async function onSubmit(values: ProfileForm) {
+    const normalizedPhone = combinePhone(
+      values.phoneCountry,
+      values.phone ?? ''
+    );
+    if (normalizedPhone && !isValidE164(normalizedPhone)) {
+      setError('phone', {
+        message: t('validation.phoneInvalid'),
+      });
+      return;
+    }
+
     const result = await updateUserProfile({
       firstName: values.firstName,
       lastName: values.lastName,

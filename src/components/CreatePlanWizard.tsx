@@ -22,7 +22,7 @@ import {
   SUPPORTED_CURRENCIES,
   LANGUAGE_META,
 } from '../contexts/language-context';
-import { combinePhone } from '../data/country-codes';
+import { combinePhone, isValidE164 } from '../data/country-codes';
 import { splitFullName } from '../core/profile-utils';
 import { useCreatePlan } from '../hooks/useCreatePlan';
 import { useUpdateParticipant } from '../hooks/useUpdateParticipant';
@@ -259,7 +259,11 @@ export default function CreatePlanWizard({ user }: CreatePlanWizardProps) {
       const { first, last } = splitFullName(meta.full_name as string);
       const ownerName = (meta.first_name as string) || first || 'Owner';
       const ownerLastName = (meta.last_name as string) || last || '';
-      const ownerPhone = (meta.phone as string) || '';
+      const ownerPhoneRaw = (meta.phone as string) || '';
+      const ownerPhoneNormalized = combinePhone(undefined, ownerPhoneRaw);
+      const ownerPhone = isValidE164(ownerPhoneNormalized)
+        ? ownerPhoneNormalized
+        : '+10000000000';
       const ownerEmail = user.email ?? '';
 
       const payload: PlanCreateWithOwner = {
@@ -269,7 +273,7 @@ export default function CreatePlanWizard({ user }: CreatePlanWizardProps) {
         owner: {
           name: ownerName.trim(),
           lastName: ownerLastName.trim() || ownerName.trim(),
-          contactPhone: combinePhone(undefined, ownerPhone) || '+0000000000',
+          contactPhone: ownerPhone,
           contactEmail: ownerEmail.trim() || undefined,
         },
         startDate: step1Data.oneDay

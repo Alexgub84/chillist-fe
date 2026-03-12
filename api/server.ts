@@ -73,10 +73,17 @@ const planPatchSchema = z.object({
 const participantCreateRoleSchema = z.enum(['participant', 'viewer']);
 const participantPatchRoleSchema = z.enum(['participant', 'viewer', 'owner']);
 
+const E164_REGEX = /^\+[1-9]\d{6,14}$/;
+const e164Phone = z
+  .string()
+  .min(1)
+  .max(50)
+  .regex(E164_REGEX, 'contactPhone must be valid E.164 format');
+
 const participantCreateSchema = z.object({
   name: z.string().min(1).max(255),
   lastName: z.string().min(1).max(255),
-  contactPhone: z.string().min(1).max(50),
+  contactPhone: e164Phone,
   displayName: z.string().min(1).max(255).optional(),
   role: participantCreateRoleSchema.optional(),
   avatarUrl: z.string().optional(),
@@ -91,7 +98,7 @@ const participantCreateSchema = z.object({
 const participantPatchSchema = z.object({
   name: z.string().min(1).max(255).optional(),
   lastName: z.string().min(1).max(255).optional(),
-  contactPhone: z.string().min(1).max(50).optional(),
+  contactPhone: e164Phone.optional(),
   displayName: z.string().max(255).nullable().optional(),
   role: participantPatchRoleSchema.optional(),
   avatarUrl: z.string().nullable().optional(),
@@ -106,7 +113,7 @@ const participantPatchSchema = z.object({
 const ownerBodySchema = z.object({
   name: z.string().min(1).max(255),
   lastName: z.string().min(1).max(255),
-  contactPhone: z.string().min(1).max(50),
+  contactPhone: e164Phone,
   displayName: z.string().min(1).max(255).optional(),
   avatarUrl: z.string().optional(),
   contactEmail: z.string().max(255).optional(),
@@ -1115,13 +1122,18 @@ export async function buildServer(
         return;
       }
 
+      const rawPhone = String(body.contactPhone ?? '');
+      if (rawPhone && !E164_REGEX.test(rawPhone)) {
+        throw new HttpError('contactPhone must be valid E.164 format', 400);
+      }
+
       const joinRequest: JoinRequestRecord = {
         requestId: randomUUID(),
         planId: request.params.planId,
         supabaseUserId: jwtUserId,
         name: String(body.name ?? ''),
         lastName: String(body.lastName ?? ''),
-        contactPhone: String(body.contactPhone ?? ''),
+        contactPhone: rawPhone,
         contactEmail: (body.contactEmail as string) ?? null,
         displayName: (body.displayName as string) ?? null,
         adultsCount: (body.adultsCount as number) ?? null,

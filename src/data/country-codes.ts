@@ -40,14 +40,35 @@ export function getDefaultCountryByLanguage(lang: string): string {
   return '';
 }
 
+export const E164_REGEX = /^\+[1-9]\d{6,14}$/;
+
+export function isValidE164(phone: string): boolean {
+  return E164_REGEX.test(phone);
+}
+
+export function normalizePhone(
+  countryCode: string | undefined,
+  rawLocal: string
+): string {
+  const cleaned = rawLocal.replace(/[\s\-().]/g, '').trim();
+  if (!cleaned) return '';
+
+  if (cleaned.startsWith('+')) {
+    return cleaned;
+  }
+
+  const dialCode = getDialCode(countryCode ?? '');
+  if (!dialCode) return cleaned;
+
+  const withoutLeadingZero = cleaned.replace(/^0+/, '');
+  return `${dialCode}${withoutLeadingZero}`;
+}
+
 export function combinePhone(
   countryCode: string | undefined,
   localNumber: string
 ): string {
-  const trimmed = localNumber.trim();
-  if (!trimmed) return '';
-  const dialCode = getDialCode(countryCode ?? '');
-  return dialCode ? `${dialCode}${trimmed}` : trimmed;
+  return normalizePhone(countryCode, localNumber);
 }
 
 export const countryCodes: CountryCode[] = [

@@ -1,0 +1,100 @@
+---
+description: Workspace rules - docs repo is source of truth for all rules and documentation
+alwaysApply: true
+---
+
+# Workspace Scope
+
+This is the FRONTEND repo (chillist-fe). Only modify files inside this repo.
+NEVER modify files in chillist-be or any other sibling repo from this workspace.
+If a task requires backend changes, stop and tell the user to switch to the backend repo.
+
+The ONE exception: you MAY read and write files in /Users/alexguberman/Projects/chillist/chillist-docs/ (the shared docs repo) to read rules/docs and update dev-lessons, guides, specs, or rules when needed.
+
+# Issue Creation
+
+When asked to create GitHub issues: see `../chillist-docs/guides/issue-management.md`.
+
+# Git Safety (NEVER BREAK THESE)
+
+- NEVER push directly to `main` or `staging`. Always create a feature branch.
+- **NEVER use `--no-verify`** (or `-n`) on `git push` or `git commit` without the user's explicit permission. If pre-push hooks fail, fix the underlying issue or ask the user first.
+- NEVER commit without creating a branch first: `git checkout -b feat/<name>`
+- **Before every push**, sync with main to prevent PR conflicts:
+  `git fetch origin main && git merge origin/main`
+  Resolve any conflicts, run validation, then push.
+
+# Git Workflow (strict steps)
+
+1. **Branch + Commit (Cascade):** When the user says "commit" or approves changes, create a feature branch (if not already on one) and commit. Include all relevant doc updates (see "Updating Documentation" below) in the same commit or as a follow-up commit before telling the user it's ready.
+2. **Push (User):** The user runs `git push` themselves. Cascade does NOT push.
+3. **PR (Cascade):** After the user pushes, Cascade creates the PR with `gh pr create`.
+
+If the user says "commit and push" or "commit to branch", only do step 1 (branch + commit). Do NOT push. Tell the user the branch is ready to push.
+
+# Formatting (MANDATORY after every file write)
+
+- **After EVERY file creation or modification**, immediately run `npx prettier --write <file>` on that file.
+- This applies to ALL files: source code, test files, config files — no exceptions.
+- The Write tool bypasses VS Code's format-on-save, so Prettier must be run manually every time.
+- When writing multiple files in a batch, format them all in a single `prettier --write` call afterward.
+
+# Completion and Review Protocol (MANDATORY)
+
+- **NEVER commit or push** until the user explicitly approves.
+- When implementation is done: run validation (typecheck, lint, tests), then tell the user "Done — ready for your review and testing."
+- **Wait for the user** to review the changes, test locally, and confirm everything works.
+- Only after the user says it's approved (e.g., "looks good", "commit", "push it"), proceed with git commit and branch creation.
+- Cascade does NOT push — the user pushes. After the user pushes, Cascade creates the PR.
+- This applies to BOTH the frontend repo (chillist-fe) and the docs repo (chillist-docs).
+
+# How to Start Every Task
+
+Before writing any code, FIRST use the Read tool on ALL of these files.
+IMPORTANT: Use ABSOLUTE paths (the Read tool does not resolve relative paths).
+
+1. /Users/alexguberman/Projects/chillist/chillist-docs/rules/common.md (git workflow, planning, code standards, security)
+2. /Users/alexguberman/Projects/chillist/chillist-docs/rules/frontend.md (clsx, TanStack Router, OpenAPI sync, testing)
+3. /Users/alexguberman/Projects/chillist/chillist-docs/guides/frontend.md (setup, scripts, mock server, API layer, CI/CD)
+4. /Users/alexguberman/Projects/chillist/chillist-docs/specs/mvp-v1.md (product requirements, entities, API endpoints)
+5. /Users/alexguberman/Projects/chillist/chillist-docs/dev-lessons/frontend.md (past bugs - check before debugging)
+
+If ANY file returns "not found", STOP and tell the user — do not silently skip.
+
+Read the docs FIRST, then explore the specific files in this repo that are relevant to the task.
+Do NOT scan the entire codebase upfront - only look at files directly related to the work.
+
+# Updating Documentation (MANDATORY on every fix or feature)
+
+After EVERY bug fix or feature implementation, you MUST update the relevant docs before considering the task complete:
+
+1. **Current Status** (/Users/alexguberman/Projects/chillist/chillist-docs/specs/current-status.md) — ALWAYS update when:
+   - A feature is added, changed, or removed
+   - A new UI behavior or user flow is introduced
+   - Keep "Working Features", "User Flows", and "Technical Overview" sections accurate
+
+2. **Specs** (/Users/alexguberman/Projects/chillist/chillist-docs/specs/mvp-v1.md) — ALWAYS update when:
+   - A feature is added, changed, or removed
+   - A new UI behavior is introduced (e.g., scroll restoration, filters, animations)
+   - Mark completed features as done, add new ones that were built
+
+3. **Dev lessons** (/Users/alexguberman/Projects/chillist/chillist-docs/dev-lessons/frontend.md) — ALWAYS update when:
+   - A bug was fixed (what went wrong, root cause, solution)
+   - A non-obvious technical decision was made (e.g., sessionStorage over React state)
+   - A gotcha was discovered (e.g., CI=1 breaking local Playwright runs)
+
+4. **Rules** (/Users/alexguberman/Projects/chillist/chillist-docs/rules/frontend.md) — Update when:
+   - A fix implies a pattern that should be followed going forward
+   - A new convention is established (e.g., data attributes for scroll tracking)
+
+# Element Selection in Tests
+
+**Always use `data-testid` for testable elements.** Add `data-testid` (or `testId` prop on Modal, etc.) on buttons, links, dialogs, forms. In tests, prefer `getByTestId` over `getByText`/`getByRole`/`getByLabel` — test IDs are stable across i18n, layout changes, and Headless UI transitions.
+
+5. **Guides** (/Users/alexguberman/Projects/chillist/chillist-docs/guides/frontend.md) — Update when:
+   - Setup steps, scripts, or dev workflow changed
+   - New tools or dependencies were added
+
+Do NOT skip this step. If the docs repo files don't exist yet, tell the user.
+
+**After updating docs files, do NOT commit or push automatically.** Follow the Completion and Review Protocol above — tell the user the docs are updated and wait for approval before committing.
