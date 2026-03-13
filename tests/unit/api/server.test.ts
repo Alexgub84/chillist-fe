@@ -637,7 +637,7 @@ describe('mock server', () => {
         payload: {
           name: 'Charlie',
           lastName: 'Joiner',
-          contactPhone: '555-7777',
+          contactPhone: '+17775557777',
         },
       });
       expect(response.statusCode).toBe(201);
@@ -670,7 +670,7 @@ describe('mock server', () => {
         payload: {
           name: 'Dave',
           lastName: 'Joiner',
-          contactPhone: '555-8888',
+          contactPhone: '+17775558888',
         },
       });
       const { requestId } = createRes.json();
@@ -710,7 +710,7 @@ describe('mock server', () => {
         payload: {
           name: 'Eve',
           lastName: 'Joiner',
-          contactPhone: '555-9999',
+          contactPhone: '+17775559999',
         },
       });
       const { requestId } = createRes.json();
@@ -749,7 +749,7 @@ describe('mock server', () => {
         payload: {
           name: 'Frank',
           lastName: 'Joiner',
-          contactPhone: '555-1111',
+          contactPhone: '+17775551111',
         },
       });
       const { requestId } = createRes.json();
@@ -789,6 +789,78 @@ describe('mock server', () => {
         url: '/plans/plan-1/join-requests/nonexistent-id',
         headers: { authorization: `Bearer ${token}` },
         payload: { status: 'approved' },
+      });
+      expect(response.statusCode).toBe(404);
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('POST /plans/:planId/send-list succeeds with valid E.164 phone', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'some-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/send-list',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { phone: '+972501234567' },
+      });
+      expect(response.statusCode).toBe(200);
+      const body = response.json();
+      expect(body.sent).toBe(true);
+      expect(body.messageId).toBeDefined();
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('POST /plans/:planId/send-list returns 400 for invalid phone', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'some-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/send-list',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { phone: '0501234567' },
+      });
+      expect(response.statusCode).toBe(400);
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('POST /plans/:planId/send-list returns 404 for unknown plan', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'some-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/nonexistent/send-list',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { phone: '+972501234567' },
       });
       expect(response.statusCode).toBe(404);
     } finally {

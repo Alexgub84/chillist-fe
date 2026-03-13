@@ -9,6 +9,7 @@ import { PhoneInput } from './PhoneInput';
 import {
   combinePhone,
   getDefaultCountryByLanguage,
+  isValidE164,
 } from '../data/country-codes';
 import { useLanguage } from '../contexts/useLanguage';
 
@@ -41,6 +42,7 @@ export function AddParticipantForm({
     handleSubmit,
     watch,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<AddParticipantFormValues>({
     resolver: zodResolver(addParticipantSchema),
@@ -54,12 +56,35 @@ export function AddParticipantForm({
   });
 
   async function handleFormSubmit(values: AddParticipantFormValues) {
-    await onSubmit({
-      name: values.name.trim(),
-      lastName: values.lastName.trim(),
-      contactPhone: combinePhone(values.phoneCountry, values.contactPhone),
-      contactEmail: values.contactEmail?.trim() || undefined,
-    });
+    const normalized = combinePhone(values.phoneCountry, values.contactPhone);
+    if (normalized && !isValidE164(normalized)) {
+      setError('contactPhone', {
+        message: t('validation.phoneInvalid'),
+      });
+      return;
+    }
+
+    try {
+      await onSubmit({
+        name: values.name.trim(),
+        lastName: values.lastName.trim(),
+        contactPhone: normalized,
+        contactEmail: values.contactEmail?.trim() || undefined,
+      });
+    } catch (err) {
+      if (
+        err instanceof Error &&
+        'status' in err &&
+        (err as { status: number }).status === 400 &&
+        err.message.toLowerCase().includes('phone')
+      ) {
+        setError('contactPhone', {
+          message: t('validation.phoneInvalidBE'),
+        });
+        return;
+      }
+      throw err;
+    }
   }
 
   return (

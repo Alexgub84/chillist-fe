@@ -469,7 +469,7 @@ test.describe('Manage Participants route', () => {
 
     await dialog.getByPlaceholder('First name').fill('Jane');
     await dialog.getByPlaceholder('Last name').fill('Doe');
-    await dialog.getByPlaceholder('Phone number').fill('555-1234');
+    await dialog.getByPlaceholder('Phone number').fill('+15551234567');
     await dialog.getByPlaceholder('Email (optional)').fill('jane@test.com');
 
     const submitBtn = dialog.getByRole('button', { name: /add participant/i });

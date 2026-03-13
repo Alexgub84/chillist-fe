@@ -244,7 +244,21 @@
     "bulkAssignAll": "הקצה הכל",
     "bulkAssignOnlyUnassigned": "רק לא מוקצים",
     "allParticipants": "כל המשתתפים",
-    "assignToAll": "הקצה לכל המשתתפים"
+    "assignToAll": "הקצאה לכל המשתתפים"
+  },
+  "sendList": {
+    "button": "שליחה בוואטסאפ",
+    "sendTo": "שליחת רשימה",
+    "sendToAll": "שליחת רשימה לכולם",
+    "sendToMe": "שליחת רשימה אליי",
+    "sending": "שולח…",
+    "success": "הרשימה נשלחה ל{{name}} בוואטסאפ!",
+    "successMe": "הרשימה נשלחה לוואטסאפ שלך!",
+    "successAll": "הרשימה נשלחה ל-{{count}} מתוך {{total}} משתתפים",
+    "error": "שליחת הרשימה ל{{name}} נכשלה",
+    "errorMe": "שליחת הרשימה נכשלה. נסו שנית.",
+    "noPhone": "ל{{name}} אין מספר טלפון",
+    "noPhoneMe": "אין מספר טלפון בפרופיל שלך"
   },
   "categories": {
     "equipment": "ציוד",
@@ -339,9 +353,9 @@
     "not_sure": "לא בטוח"
   },
   "inviteStatus": {
-    "pending": "ממתין",
-    "invited": "הוזמן",
-    "accepted": "התקבל"
+    "pending": "לא נשלח",
+    "invited": "נשלח",
+    "accepted": "הצטרף"
   },
   "errors": {
     "somethingWentWrong": "משהו השתבש",
@@ -394,7 +408,9 @@
     "adultsCountInvalid": "נא להזין מספר תקין",
     "adultsCountMin": "לפחות מבוגר אחד",
     "kidsCountInvalid": "נא להזין מספר תקין",
-    "kidsCountMin": "לא יכול להיות שלילי"
+    "kidsCountMin": "לא יכול להיות שלילי",
+    "phoneInvalid": "מספר טלפון לא תקין",
+    "phoneInvalidBE": "מספר טלפון לא תקין — נא לבדוק את המספר ואת קידומת המדינה"
   },
   "unitGroups": {
     "weight": "משקל",

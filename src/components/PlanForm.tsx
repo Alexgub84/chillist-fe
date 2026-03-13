@@ -24,6 +24,7 @@ import {
   combinePhone,
   detectCountryFromPhone,
   getDefaultCountryByLanguage,
+  isValidE164,
 } from '../data/country-codes';
 import { PhoneInput } from './PhoneInput';
 import LocationAutocomplete from './LocationAutocomplete';
@@ -130,6 +131,7 @@ export default function PlanForm({
     formState: { errors },
     watch,
     setValue,
+    setError,
   } = useForm<FormValues>({
     resolver: zodResolver(createPlanFormSchema),
     defaultValues: {
@@ -341,16 +343,39 @@ export default function PlanForm({
   };
 
   async function handleFormSubmit(values: FormValues): Promise<void> {
-    const participants = (values.participants ?? [])
-      .filter(
-        (p) => p.name.trim() || p.lastName.trim() || p.contactPhone.trim()
-      )
-      .map((p) => ({
-        name: p.name.trim(),
-        lastName: p.lastName.trim(),
-        contactPhone: combinePhone(p.phoneCountry, p.contactPhone),
-        contactEmail: p.contactEmail?.trim() || undefined,
-      }));
+    const ownerPhoneNormalized = combinePhone(
+      values.ownerPhoneCountry,
+      values.ownerPhone
+    );
+    if (ownerPhoneNormalized && !isValidE164(ownerPhoneNormalized)) {
+      setError('ownerPhone', {
+        message: t('validation.phoneInvalid'),
+      });
+      return;
+    }
+
+    const participantRows = (values.participants ?? []).filter(
+      (p) => p.name.trim() || p.lastName.trim() || p.contactPhone.trim()
+    );
+    for (let i = 0; i < participantRows.length; i++) {
+      const normalized = combinePhone(
+        participantRows[i].phoneCountry,
+        participantRows[i].contactPhone
+      );
+      if (normalized && !isValidE164(normalized)) {
+        setError(`participants.${i}.contactPhone`, {
+          message: t('validation.phoneInvalid'),
+        });
+        return;
+      }
+    }
+
+    const participants = participantRows.map((p) => ({
+      name: p.name.trim(),
+      lastName: p.lastName.trim(),
+      contactPhone: combinePhone(p.phoneCountry, p.contactPhone),
+      contactEmail: p.contactEmail?.trim() || undefined,
+    }));
 
     const payload: PlanCreateWithOwner = {
       title: values.title,
@@ -359,7 +384,7 @@ export default function PlanForm({
       owner: {
         name: values.ownerName.trim(),
         lastName: values.ownerLastName.trim(),
-        contactPhone: combinePhone(values.ownerPhoneCountry, values.ownerPhone),
+        contactPhone: ownerPhoneNormalized,
         contactEmail: values.ownerEmail?.trim() || undefined,
       },
       participants: participants.length > 0 ? participants : undefined,

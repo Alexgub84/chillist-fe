@@ -102,7 +102,7 @@ async function seedPlanWithParticipant(
       owner: {
         name: 'Seed',
         lastName: 'Owner',
-        contactPhone: '+0000000000',
+        contactPhone: '+10000000000',
       },
     },
   });

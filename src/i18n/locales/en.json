@@ -246,6 +246,20 @@
     "allParticipants": "All participants",
     "assignToAll": "Assign to all participants"
   },
+  "sendList": {
+    "button": "Send via WhatsApp",
+    "sendTo": "Send list",
+    "sendToAll": "Send list to all",
+    "sendToMe": "Send list to me",
+    "sending": "Sending…",
+    "success": "List sent to {{name}} via WhatsApp!",
+    "successMe": "List sent to your WhatsApp!",
+    "successAll": "List sent to {{count}} of {{total}} participants",
+    "error": "Failed to send list to {{name}}",
+    "errorMe": "Failed to send list. Please try again.",
+    "noPhone": "{{name}} has no phone number",
+    "noPhoneMe": "Your profile has no phone number"
+  },
   "categories": {
     "equipment": "Equipment",
     "food": "Food",
@@ -339,9 +353,9 @@
     "not_sure": "Not sure"
   },
   "inviteStatus": {
-    "pending": "Pending",
-    "invited": "Invited",
-    "accepted": "Accepted"
+    "pending": "Not sent",
+    "invited": "Sent",
+    "accepted": "Joined"
   },
   "errors": {
     "somethingWentWrong": "Something went wrong",
@@ -394,7 +408,9 @@
     "adultsCountInvalid": "Please enter a valid number",
     "adultsCountMin": "At least 1 adult",
     "kidsCountInvalid": "Please enter a valid number",
-    "kidsCountMin": "Cannot be negative"
+    "kidsCountMin": "Cannot be negative",
+    "phoneInvalid": "Invalid phone number format",
+    "phoneInvalidBE": "Invalid phone number — please check the number and country code"
   },
   "unitGroups": {
     "weight": "Weight",
