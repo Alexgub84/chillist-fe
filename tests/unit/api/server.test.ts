@@ -795,4 +795,76 @@ describe('mock server', () => {
       await server.close();
     }
   });
+
+  it('POST /plans/:planId/send-list succeeds with valid E.164 phone', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'some-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/send-list',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { phone: '+972501234567' },
+      });
+      expect(response.statusCode).toBe(200);
+      const body = response.json();
+      expect(body.sent).toBe(true);
+      expect(body.messageId).toBeDefined();
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('POST /plans/:planId/send-list returns 400 for invalid phone', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'some-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/plan-1/send-list',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { phone: '0501234567' },
+      });
+      expect(response.statusCode).toBe(400);
+    } finally {
+      await server.close();
+    }
+  });
+
+  it('POST /plans/:planId/send-list returns 404 for unknown plan', async () => {
+    const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
+    const payload = btoa(JSON.stringify({ sub: 'some-user' }));
+    const token = `${header}.${payload}.mock-signature`;
+
+    const server = await buildServer({
+      initialData: createTestData(),
+      persist: false,
+      logger: false,
+    });
+    try {
+      const response = await server.inject({
+        method: 'POST',
+        url: '/plans/nonexistent/send-list',
+        headers: { authorization: `Bearer ${token}` },
+        payload: { phone: '+972501234567' },
+      });
+      expect(response.statusCode).toBe(404);
+    } finally {
+      await server.close();
+    }
+  });
 });

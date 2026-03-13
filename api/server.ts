@@ -1337,6 +1337,27 @@ export async function buildServer(
     }
   );
 
+  // --- Send List (WhatsApp) ---
+
+  app.post<{ Params: { planId: string } }>(
+    '/plans/:planId/send-list',
+    async (request, reply) => {
+      requireJwt(request.headers.authorization as string | undefined);
+      ensurePlan(store, request.params.planId);
+      const body = request.body as Record<string, unknown>;
+      const phone = String(body.phone ?? '');
+
+      if (!phone || !E164_REGEX.test(phone)) {
+        throw new HttpError('phone must be valid E.164 format', 400);
+      }
+
+      void reply.send({
+        sent: true,
+        messageId: `mock-msg-${randomUUID().slice(0, 8)}`,
+      });
+    }
+  );
+
   app.post('/_reset', async (_request, reply) => {
     const fresh = cloneData(initialData);
     store.plans = fresh.plans;

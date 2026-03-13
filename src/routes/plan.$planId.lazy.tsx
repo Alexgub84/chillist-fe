@@ -45,6 +45,7 @@ import { sharePlanUrl, copyPlanUrl } from '../core/invite';
 import ParticipantDetails from '../components/ParticipantDetails';
 import BulkItemAddWizard from '../components/BulkItemAddWizard';
 import FloatingActions from '../components/shared/FloatingActions';
+import { sendList } from '../core/api';
 import PlanProvider from '../contexts/PlanProvider';
 import { useCreateExpense } from '../hooks/useCreateExpense';
 import ExpenseForm from '../components/ExpenseForm';
@@ -82,6 +83,7 @@ function PlanPage() {
   const [itemModalId, setItemModalId] = useState<string | null>(null);
   const [bulkAddOpen, setBulkAddOpen] = useState(false);
   const [addExpenseOpen, setAddExpenseOpen] = useState(false);
+  const [isSendingList, setIsSendingList] = useState(false);
   const [editingParticipantId, setEditingParticipantId] = useState<
     string | null
   >(null);
@@ -234,6 +236,77 @@ function PlanPage() {
     if (!transferTargetParticipantId) return;
     await actions.transferPlanOwnership(transferTargetParticipantId);
     setTransferTargetParticipantId(null);
+  }
+
+  async function handleSendList(participantId: string) {
+    if (!plan || isNotParticipantResponse(plan)) return;
+    const participant = plan.participants.find(
+      (p) => p.participantId === participantId
+    );
+    if (!participant) return;
+    const name = participant.displayName || participant.name;
+    if (!participant.contactPhone) {
+      toast.error(t('sendList.noPhone', { name }));
+      return;
+    }
+    setIsSendingList(true);
+    try {
+      const result = await sendList(planId, participant.contactPhone);
+      if (result.sent) {
+        toast.success(t('sendList.success', { name }));
+      } else {
+        toast.error(t('sendList.error', { name }));
+      }
+    } catch {
+      toast.error(t('sendList.error', { name }));
+    } finally {
+      setIsSendingList(false);
+    }
+  }
+
+  async function handleSendListToMe() {
+    if (!currentParticipant) return;
+    if (!currentParticipant.contactPhone) {
+      toast.error(t('sendList.noPhoneMe'));
+      return;
+    }
+    setIsSendingList(true);
+    try {
+      const result = await sendList(planId, currentParticipant.contactPhone);
+      if (result.sent) {
+        toast.success(t('sendList.successMe'));
+      } else {
+        toast.error(t('sendList.errorMe'));
+      }
+    } catch {
+      toast.error(t('sendList.errorMe'));
+    } finally {
+      setIsSendingList(false);
+    }
+  }
+
+  async function handleSendListAll() {
+    if (!plan || isNotParticipantResponse(plan)) return;
+    const withPhone = plan.participants.filter((p) => p.contactPhone);
+    if (withPhone.length === 0) return;
+
+    setIsSendingList(true);
+    let successCount = 0;
+    for (const p of withPhone) {
+      try {
+        const result = await sendList(planId, p.contactPhone);
+        if (result.sent) successCount++;
+      } catch {
+        // continue to next participant
+      }
+    }
+    setIsSendingList(false);
+    toast.success(
+      t('sendList.successAll', {
+        count: successCount,
+        total: withPhone.length,
+      })
+    );
   }
 
   async function handleSharePlanUrl() {
@@ -466,6 +539,20 @@ function PlanPage() {
                 onMakeOwner={
                   isOwner ? setTransferTargetParticipantId : undefined
                 }
+                onSendList={
+                  isOwner && plan.items.length > 0 ? handleSendList : undefined
+                }
+                onSendListAll={
+                  isOwner && plan.items.length > 0
+                    ? handleSendListAll
+                    : undefined
+                }
+                onSendListToMe={
+                  !isOwner && plan.items.length > 0
+                    ? handleSendListToMe
+                    : undefined
+                }
+                isSendingList={isSendingList}
               />
             </div>
           )}

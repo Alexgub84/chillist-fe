@@ -2789,6 +2789,96 @@ export interface paths {
     };
     trace?: never;
   };
+  '/plans/{planId}/send-list': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Send the item list for a plan via WhatsApp
+     * @description Sends a formatted item list for the specified plan to the given phone number via WhatsApp. Items are grouped by category and include name, quantity, and unit. The message language (English or Hebrew) is determined by the plan defaultLang setting. The phone number must be in E.164 format. Requires JWT authentication. Caller must be a participant of the plan.
+     */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          planId: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['def-67'];
+        };
+      };
+      responses: {
+        /** @description Message sent successfully */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-68'];
+          };
+        };
+        /** @description Bad request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Authentication required */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Forbidden — not a participant of this plan */
+        403: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Plan not found */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+        /** @description Internal server error */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': components['schemas']['def-0'];
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2882,6 +2972,10 @@ export interface components {
     'def-9': {
       name: string;
       lastName: string;
+      /**
+       * @description Plan owner phone number in E.164 format. Used for WhatsApp notifications (e.g. join request alerts).
+       * @example +972501234567
+       */
       contactPhone: string;
       displayName?: string;
       avatarUrl?: string;
@@ -3091,6 +3185,10 @@ export interface components {
     'def-21': {
       name: string;
       lastName: string;
+      /**
+       * @description Phone number in E.164 format. A WhatsApp invitation with a deep link to the plan will be sent to this number on creation.
+       * @example +972501234567
+       */
       contactPhone: string;
       displayName?: string;
       /** @enum {string} */
@@ -3107,6 +3205,10 @@ export interface components {
     'def-22': {
       name?: string;
       lastName?: string;
+      /**
+       * @description Phone number in E.164 format.
+       * @example +972501234567
+       */
       contactPhone?: string;
       displayName?: string | null;
       /** @enum {string} */
@@ -3231,6 +3333,10 @@ export interface components {
     'def-33': {
       name: string;
       lastName: string;
+      /**
+       * @description Phone number in E.164 format. When a join request is created, a WhatsApp notification is sent to the plan owner.
+       * @example +972501234567
+       */
       contactPhone: string;
       displayName?: string;
       contactEmail?: string;
@@ -3588,6 +3694,29 @@ export interface components {
     /** DeleteExpenseResponse */
     'def-66': {
       ok: boolean;
+    };
+    /**
+     * SendListBody
+     * @description Request body for sending a plan item list via WhatsApp.
+     */
+    'def-67': {
+      /**
+       * @description Recipient phone number in E.164 format (e.g. +972501234567). The formatted item list for the plan will be sent to this number via WhatsApp.
+       * @example +972501234567
+       */
+      phone: string;
+    };
+    /**
+     * SendListResponse
+     * @description Response after attempting to send an item list via WhatsApp.
+     */
+    'def-68': {
+      /** @description Whether the WhatsApp message was successfully queued for delivery. */
+      sent: boolean;
+      /** @description Unique message ID returned by the WhatsApp provider. Present only when sent is true. */
+      messageId?: string;
+      /** @description Error description from the WhatsApp provider. Present only when sent is false. */
+      error?: string;
     };
   };
   responses: never;

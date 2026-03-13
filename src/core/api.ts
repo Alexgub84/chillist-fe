@@ -556,6 +556,27 @@ export async function deleteExpense(expenseId: string): Promise<void> {
   });
 }
 
+// --- Send List ---
+
+const sendListResponseSchema = z.object({
+  sent: z.boolean(),
+  messageId: z.string().optional(),
+  error: z.string().optional(),
+});
+
+export type SendListResponse = z.infer<typeof sendListResponseSchema>;
+
+export async function sendList(
+  planId: string,
+  phone: string
+): Promise<SendListResponse> {
+  const data = await request<unknown>(`/plans/${planId}/send-list`, {
+    method: 'POST',
+    body: JSON.stringify({ phone }),
+  });
+  return sendListResponseSchema.parse(data);
+}
+
 // --- Auth ---
 
 import { authMeResponseSchema, type AuthMeResponse } from './auth-api';
