@@ -126,7 +126,8 @@
     "estimatedKids": "ילדים משוערים",
     "reported": "מדווח",
     "estimated": "משוער",
-    "notSet": "לא הוגדר"
+    "notSet": "לא הוגדר",
+    "pendingJoinApproval": "בקשת ההצטרפות שלך ממתינה לאישור."
   },
   "addParticipant": {
     "firstName": "שם פרטי *",

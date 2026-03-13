@@ -117,7 +117,8 @@
     "deleteConfirm": "Eliminar",
     "deleteCancel": "Cancelar",
     "deleted": "Plan eliminado",
-    "deleting": "Eliminando…"
+    "deleting": "Eliminando…",
+    "pendingJoinApproval": "Tu solicitud de unión está pendiente de aprobación."
   },
   "addParticipant": {
     "firstName": "Nombre *",

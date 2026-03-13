@@ -22,7 +22,10 @@ import type { ItemCreate, ItemPatch } from '../core/schemas/item';
 import { useQueryClient } from '@tanstack/react-query';
 import { useBulkAssign } from '../hooks/useBulkAssign';
 import { usePlanRole } from '../hooks/usePlanRole';
-import { usePlanWebSocket } from '../hooks/usePlanWebSocket';
+import {
+  usePlanWebSocket,
+  WS_CLOSE_PENDING_JOIN,
+} from '../hooks/usePlanWebSocket';
 import {
   aggregateParticipantCounts,
   calculatePlanPoints,
@@ -60,7 +63,8 @@ function AuthItemsPage({ planId }: { planId: string }) {
   );
 
   useScrollRestore(`items-${planId}`, !isLoading && !!plan);
-  usePlanWebSocket(planId);
+  const { wsCloseCode } = usePlanWebSocket(planId);
+  const isPendingJoin = wsCloseCode === WS_CLOSE_PENDING_JOIN;
 
   if (isLoading) {
     return <div className="text-center py-10">{t('plan.loading')}</div>;
@@ -83,28 +87,38 @@ function AuthItemsPage({ planId }: { planId: string }) {
   });
 
   return (
-    <ItemsView
-      planId={planId}
-      planTitle={plan.title}
-      items={plan.items}
-      participants={plan.participants}
-      isGuest={false}
-      selfParticipantId={
-        isOwner ? undefined : currentParticipant?.participantId
-      }
-      backLink={{ kind: 'plan', planId }}
-      onCreateItem={async (payload) => {
-        await createItem.mutateAsync(payload);
-      }}
-      onUpdateItem={async (itemId, updates) => {
-        await updateItemMutation.mutateAsync({ itemId, updates });
-      }}
-      onBulkAssign={(ids, pid) =>
-        bulkAssign.mutate({ itemIds: ids, participantId: pid })
-      }
-      isCreating={createItem.isPending}
-      planPoints={planPointsValue}
-    />
+    <>
+      {isPendingJoin && (
+        <div
+          data-testid="pending-join-banner"
+          className="mx-3 sm:mx-auto max-w-4xl mb-4 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-800"
+        >
+          {t('plan.pendingJoinApproval')}
+        </div>
+      )}
+      <ItemsView
+        planId={planId}
+        planTitle={plan.title}
+        items={plan.items}
+        participants={plan.participants}
+        isGuest={false}
+        selfParticipantId={
+          isOwner ? undefined : currentParticipant?.participantId
+        }
+        backLink={{ kind: 'plan', planId }}
+        onCreateItem={async (payload) => {
+          await createItem.mutateAsync(payload);
+        }}
+        onUpdateItem={async (itemId, updates) => {
+          await updateItemMutation.mutateAsync({ itemId, updates });
+        }}
+        onBulkAssign={(ids, pid) =>
+          bulkAssign.mutate({ itemIds: ids, participantId: pid })
+        }
+        isCreating={createItem.isPending}
+        planPoints={planPointsValue}
+      />
+    </>
   );
 }
 

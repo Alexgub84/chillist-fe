@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../lib/supabase';
 
-const AUTH_FAILURE_CODES = new Set([4001, 4003]);
+const NO_RETRY_CODES = new Set([4001, 4003, 4004, 4005]);
+export const WS_CLOSE_PENDING_JOIN = 4005;
 const MAX_RECONNECT_DELAY_MS = 30_000;
 const BASE_RECONNECT_DELAY_MS = 1_000;
 
@@ -18,12 +19,15 @@ async function getAccessToken(): Promise<string | undefined> {
   return session?.access_token;
 }
 
-export function usePlanWebSocket(planId: string): void {
+export function usePlanWebSocket(planId: string): {
+  wsCloseCode: number | null;
+} {
   const queryClient = useQueryClient();
   const wsRef = useRef<WebSocket | null>(null);
   const reconnectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const attemptRef = useRef(0);
   const unmountedRef = useRef(false);
+  const [wsCloseCode, setWsCloseCode] = useState<number | null>(null);
 
   useEffect(() => {
     unmountedRef.current = false;
@@ -45,6 +49,7 @@ export function usePlanWebSocket(planId: string): void {
 
       ws.onopen = () => {
         attemptRef.current = 0;
+        setWsCloseCode(null);
         console.info(`[WS] Connected to plan ${planId}`);
       };
 
@@ -68,9 +73,11 @@ export function usePlanWebSocket(planId: string): void {
 
         if (unmountedRef.current) return;
 
-        if (AUTH_FAILURE_CODES.has(event.code)) {
+        setWsCloseCode(event.code);
+
+        if (NO_RETRY_CODES.has(event.code)) {
           console.warn(
-            `[WS] Auth error (code: ${event.code}) — not reconnecting`
+            `[WS] Permanent close (code: ${event.code}) — not reconnecting`
           );
           return;
         }
@@ -112,4 +119,6 @@ export function usePlanWebSocket(planId: string): void {
       }
     };
   }, [planId, queryClient]);
+
+  return { wsCloseCode };
 }

@@ -51,7 +51,10 @@ import { useCreateExpense } from '../hooks/useCreateExpense';
 import ExpenseForm from '../components/ExpenseForm';
 import type { ExpenseFormValues } from '../components/ExpenseForm';
 import { usePlanContext } from '../hooks/usePlanContext';
-import { usePlanWebSocket } from '../hooks/usePlanWebSocket';
+import {
+  usePlanWebSocket,
+  WS_CLOSE_PENDING_JOIN,
+} from '../hooks/usePlanWebSocket';
 import { getApiErrorMessage } from '../core/error-utils';
 import {
   aggregateParticipantCounts,
@@ -97,7 +100,8 @@ function PlanPage() {
   );
 
   useScrollRestore(`plan-${planId}`, !isLoading && !!plan);
-  usePlanWebSocket(planId);
+  const { wsCloseCode } = usePlanWebSocket(planId);
+  const isPendingJoin = wsCloseCode === WS_CLOSE_PENDING_JOIN;
 
   const existingItems = useMemo(() => {
     if (!plan || isNotParticipantResponse(plan))
@@ -436,6 +440,15 @@ function PlanPage() {
           >
             {plan.title}
           </h1>
+
+          {isPendingJoin && (
+            <div
+              data-testid="pending-join-banner"
+              className="mb-4 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-800"
+            >
+              {t('plan.pendingJoinApproval')}
+            </div>
+          )}
 
           <CollapsibleSection
             title={

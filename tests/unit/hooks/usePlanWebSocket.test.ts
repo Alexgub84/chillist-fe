@@ -198,7 +198,76 @@ describe('usePlanWebSocket', () => {
     expect(mockInstances).toHaveLength(1);
   });
 
-  it('reconnects with exponential backoff on unexpected close', async () => {
+  it('does NOT reconnect on close code 4004 (no access)', async () => {
+    const { wrapper } = createWrapper();
+
+    renderHook(() => usePlanWebSocket('plan-123'), { wrapper });
+    await act(() => vi.runAllTimersAsync());
+
+    simulateOpen(mockInstances[0]);
+    simulateClose(mockInstances[0], 4004, 'Plan not found');
+
+    await act(() => vi.advanceTimersByTimeAsync(5000));
+
+    expect(mockInstances).toHaveLength(1);
+  });
+
+  it('does NOT reconnect on close code 4005 (pending join request)', async () => {
+    const { wrapper } = createWrapper();
+
+    renderHook(() => usePlanWebSocket('plan-123'), { wrapper });
+    await act(() => vi.runAllTimersAsync());
+
+    simulateOpen(mockInstances[0]);
+    simulateClose(mockInstances[0], 4005, 'Pending join request');
+
+    await act(() => vi.advanceTimersByTimeAsync(5000));
+
+    expect(mockInstances).toHaveLength(1);
+  });
+
+  it('exposes wsCloseCode after close event', async () => {
+    const { wrapper } = createWrapper();
+
+    const { result } = renderHook(() => usePlanWebSocket('plan-123'), {
+      wrapper,
+    });
+    await act(() => vi.runAllTimersAsync());
+
+    expect(result.current.wsCloseCode).toBeNull();
+
+    simulateOpen(mockInstances[0]);
+    await act(() => {
+      simulateClose(mockInstances[0], 4005, 'Pending join request');
+    });
+
+    expect(result.current.wsCloseCode).toBe(4005);
+  });
+
+  it('resets wsCloseCode on successful reconnect', async () => {
+    const { wrapper } = createWrapper();
+
+    const { result } = renderHook(() => usePlanWebSocket('plan-123'), {
+      wrapper,
+    });
+    await act(() => vi.runAllTimersAsync());
+
+    simulateOpen(mockInstances[0]);
+    await act(() => {
+      simulateClose(mockInstances[0], 1006);
+    });
+
+    expect(result.current.wsCloseCode).toBe(1006);
+
+    await act(() => vi.advanceTimersByTimeAsync(1000));
+    await act(() => {
+      simulateOpen(mockInstances[1]);
+    });
+
+    expect(result.current.wsCloseCode).toBeNull();
+  });
+
+  it('reconnects on transient close (1006) with exponential backoff', async () => {
     const { wrapper } = createWrapper();
 
     renderHook(() => usePlanWebSocket('plan-123'), { wrapper });

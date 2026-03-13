@@ -126,7 +126,8 @@
     "estimatedKids": "Estimated Kids",
     "reported": "Reported",
     "estimated": "Estimated",
-    "notSet": "Not set"
+    "notSet": "Not set",
+    "pendingJoinApproval": "Your join request is pending approval."
   },
   "addParticipant": {
     "firstName": "First Name *",
