@@ -626,7 +626,8 @@
     "next": "Next",
     "back": "Back",
     "creating": "Creating plan…",
-    "skipItems": "Skip — go to plan",
+    "addAtLeastOneItem": "Add at least one item to create your plan",
+    "createPlan": "Create Plan",
     "locationPlaceholder": "Search for a place…"
   },
   "admin": {

@@ -702,8 +702,8 @@ export default function PlanForm({
           </div>
 
           {oneDay ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
-              <div className="col-span-2 sm:col-span-1">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
+              <div>
                 <FormLabel>{t('planForm.date')}</FormLabel>
                 <FormInput type="date" {...register('singleDate')} compact />
                 {errors.singleDate && (
@@ -730,7 +730,7 @@ export default function PlanForm({
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 bg-blue-50 p-3 sm:p-4 rounded-lg">
               <div>
                 <FormLabel>{t('planForm.startDate')}</FormLabel>
                 <FormInput type="date" {...register('startDateDate')} compact />

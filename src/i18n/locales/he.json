@@ -626,7 +626,8 @@
     "next": "הבא",
     "back": "חזרה",
     "creating": "יוצר תוכנית…",
-    "skipItems": "דלג — עבור לתוכנית",
+    "addAtLeastOneItem": "הוסיפו לפחות פריט אחד כדי ליצור את התוכנית",
+    "createPlan": "צור תוכנית",
     "locationPlaceholder": "חפש מקום…"
   },
   "admin": {

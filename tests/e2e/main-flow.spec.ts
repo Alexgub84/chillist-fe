@@ -124,10 +124,29 @@ test.describe('Plan creation via UI', () => {
     });
     await page.getByRole('button', { name: /^next$/i }).click();
 
-    const skipBtn = page.getByTestId('wizard-skip-items');
-    await expect(skipBtn).toBeVisible({ timeout: 15000 });
-    await skipBtn.scrollIntoViewIfNeeded();
-    await skipBtn.click({ force: isMobile });
+    await expect(page.getByTestId('wizard-step3')).toBeVisible({
+      timeout: 15000,
+    });
+    await expect(page.getByTestId('wizard-add-item-hint')).toBeVisible();
+
+    const equipmentBtn = page.getByTestId('bulk-cat-equipment');
+    await expect(equipmentBtn).toBeVisible({ timeout: 10000 });
+    await equipmentBtn.click();
+
+    const subcatBtn = page.getByTestId('bulk-subcat-venue-setup-and-layout');
+    await expect(subcatBtn).toBeVisible({ timeout: 10000 });
+    await subcatBtn.click();
+
+    const tentItem = page.getByTestId('bulk-item-tent');
+    await expect(tentItem).toBeVisible({ timeout: 5000 });
+    await tentItem.click();
+
+    await page.locator('button', { hasText: /add 1/i }).click();
+
+    const createPlanBtn = page.getByTestId('wizard-create-plan');
+    await expect(createPlanBtn).toBeVisible({ timeout: 15000 });
+    await createPlanBtn.scrollIntoViewIfNeeded();
+    await createPlanBtn.click({ force: isMobile });
 
     await expect(page).toHaveURL(/\/plan\//, { timeout: 15000 });
     await expect(page.getByTestId('plan-title').first()).toHaveText(

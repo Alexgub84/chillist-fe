@@ -383,11 +383,7 @@ export default function CreatePlanWizard({ user }: CreatePlanWizardProps) {
         )}
 
         {step === 3 && createdPlan && (
-          <Step3Items
-            onAdd={handleBulkItemsAdd}
-            onSkip={navigateToPlan}
-            onDone={navigateToPlan}
-          />
+          <Step3Items onAdd={handleBulkItemsAdd} onDone={navigateToPlan} />
         )}
       </div>
     </div>
@@ -851,27 +847,47 @@ function Step2Form({
 
 function Step3Items({
   onAdd,
-  onSkip,
   onDone,
 }: {
   onAdd: (items: ItemCreate[]) => Promise<void>;
-  onSkip: () => void;
   onDone: () => void;
 }) {
   const { t } = useTranslation();
+  const [itemsAdded, setItemsAdded] = useState(0);
+
+  async function handleAdd(items: ItemCreate[]) {
+    await onAdd(items);
+    setItemsAdded((prev) => prev + items.length);
+  }
 
   return (
     <div data-testid="wizard-step3">
-      <BulkItemAddWizard open={true} onClose={onDone} onAdd={onAdd} inline />
+      <BulkItemAddWizard
+        open={true}
+        onClose={() => {
+          if (itemsAdded > 0) onDone();
+        }}
+        onAdd={handleAdd}
+        inline
+      />
       <div className="mt-4">
-        <button
-          type="button"
-          onClick={onSkip}
-          className="w-full px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors text-sm"
-          data-testid="wizard-skip-items"
-        >
-          {t('wizard.skipItems')}
-        </button>
+        {itemsAdded === 0 ? (
+          <p
+            className="text-center text-sm text-gray-500"
+            data-testid="wizard-add-item-hint"
+          >
+            {t('wizard.addAtLeastOneItem')}
+          </p>
+        ) : (
+          <button
+            type="button"
+            onClick={onDone}
+            className="w-full px-4 py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm"
+            data-testid="wizard-create-plan"
+          >
+            {t('wizard.createPlan')}
+          </button>
+        )}
       </div>
     </div>
   );
